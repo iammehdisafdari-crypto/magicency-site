@@ -23,8 +23,9 @@ export const translations = {
       titleLine1: 'Connected ',
       italicWord1: 'growth systems',
       titleLine2: 'built for ',
-      italicWord2: 'scale.',
-      headline: 'Connected growth systems built for scale.',
+      italicWord2: 'scale',
+      titleLine2Suffix: ' by MAGICENCY',
+      headline: 'Connected growth systems built for scale by MAGICENCY',
       statement: {
         line1: 'Connected growth systems',
         line2: 'unifying strategy, creative, performance,',

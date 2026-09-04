@@ -56,6 +56,7 @@ export default function Hero({ isLoaded = true }) {
               >
                 {t.hero.titleLine2}
                 <em className="italic-serif-word">{t.hero.italicWord2}</em>
+                {t.hero.titleLine2Suffix}
               </motion.span>
             </span>
           </h1>
