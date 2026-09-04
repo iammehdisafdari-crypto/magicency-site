@@ -1,0 +1,294 @@
+.brand-intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background-color: #040508;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+  transition: opacity 400ms cubic-bezier(0.16, 1, 0.3, 1), transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.brand-intro-overlay.phase-transition {
+  opacity: 0.15;
+  transform: scale(1.04);
+  pointer-events: none;
+}
+
+.brand-intro-overlay.phase-done {
+  opacity: 0;
+  transform: scale(1.08);
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.intro-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Background Atmosphere */
+.intro-grid-backdrop {
+  position: absolute;
+  inset: 0;
+  background-size: 64px 64px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+  opacity: 0.6;
+}
+
+.intro-core-glow {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, rgba(255, 85, 0, 0.22) 0%, rgba(255, 60, 0, 0.06) 45%, transparent 70%);
+  filter: blur(40px);
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 800ms ease-out, transform 800ms ease-out;
+}
+
+.phase-formation .intro-core-glow,
+.phase-identity .intro-core-glow,
+.phase-transition .intro-core-glow {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* Phase 01: Signal Elements */
+.intro-signal-system {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.signal-crosshair-h {
+  position: absolute;
+  width: 240px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 85, 0, 0.8), transparent);
+  opacity: 0;
+  transform: scaleX(0.2);
+  animation: signalLineExpand 1.2s ease-out forwards;
+}
+
+.signal-crosshair-v {
+  position: absolute;
+  height: 240px;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(255, 85, 0, 0.8), transparent);
+  opacity: 0;
+  transform: scaleY(0.2);
+  animation: signalLineExpand 1.2s ease-out forwards;
+}
+
+@keyframes signalLineExpand {
+  0% { opacity: 0; transform: scale(0.1); }
+  40% { opacity: 0.9; transform: scale(1); }
+  100% { opacity: 0.2; transform: scale(1.4); }
+}
+
+.signal-radar-ring {
+  position: absolute;
+  border: 1px solid rgba(255, 85, 0, 0.4);
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(0.2);
+}
+
+.signal-radar-ring.ring-1 {
+  width: 120px;
+  height: 120px;
+  animation: ringPulse 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.signal-radar-ring.ring-2 {
+  width: 220px;
+  height: 220px;
+  animation: ringPulse 1.6s cubic-bezier(0.16, 1, 0.3, 1) 200ms forwards;
+}
+
+@keyframes ringPulse {
+  0% { opacity: 0; transform: scale(0.2); }
+  50% { opacity: 0.8; }
+  100% { opacity: 0; transform: scale(1.6); }
+}
+
+/* Phase 02 & 03: Identity Wrapper */
+.intro-identity-wrapper {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.intro-monogram-box {
+  position: relative;
+  width: 76px;
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.intro-svg-logo {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 16px rgba(255, 85, 0, 0.5));
+}
+
+/* Corner Alignment Brackets */
+.corner-bracket {
+  stroke: rgba(255, 255, 255, 0.4);
+  stroke-width: 1.5;
+  stroke-linecap: square;
+  transition: all 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: center;
+}
+
+.phase-signal .corner-bracket {
+  stroke-dasharray: 40;
+  stroke-dashoffset: 40;
+}
+
+.phase-formation .corner-bracket,
+.phase-identity .corner-bracket,
+.phase-transition .corner-bracket {
+  stroke: #FF6600;
+  stroke-dashoffset: 0;
+}
+
+/* Delta Shape (Monogram) */
+.delta-shape {
+  fill: url(#introGrad);
+  opacity: 0;
+  transform: scale(0.7);
+  transform-origin: 40px 40px;
+  transition: all 700ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.delta-core-dot {
+  fill: #FFFFFF;
+  opacity: 0;
+  transition: opacity 400ms ease-out 200ms;
+}
+
+.phase-identity .delta-shape,
+.phase-transition .delta-shape {
+  opacity: 1;
+  transform: scale(1);
+  fill: #FF5500;
+}
+
+.phase-identity .delta-core-dot,
+.phase-transition .delta-core-dot {
+  opacity: 1;
+}
+
+.intro-spark-beacon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  box-shadow: 0 0 20px #FF5500, 0 0 40px #FF5500;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  animation: sparkFlash 1.6s ease-out forwards;
+}
+
+@keyframes sparkFlash {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+  40% { opacity: 1; transform: translate(-50%, -50%) scale(1.4); }
+  70% { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; }
+}
+
+/* Typography Block */
+.intro-typography-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: all 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.phase-identity .intro-typography-block,
+.phase-transition .intro-typography-block {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.intro-brand-title {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: 0.28em;
+  color: #FFFFFF;
+  text-indent: 0.28em;
+  text-shadow: 0 0 24px rgba(255, 255, 255, 0.3);
+}
+
+.intro-brand-line {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.line-segment {
+  width: 24px;
+  height: 1px;
+  background: rgba(255, 85, 0, 0.5);
+}
+
+.intro-brand-sub {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+  color: #FF7722;
+  font-weight: 600;
+}
+
+/* Skip Button */
+.intro-skip-btn {
+  position: absolute;
+  bottom: 32px;
+  right: 32px;
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-full);
+  color: rgba(255, 255, 255, 0.6);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  transition: all var(--transition-fast);
+}
+
+.intro-skip-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #FFFFFF;
+  border-color: #FF5500;
+}

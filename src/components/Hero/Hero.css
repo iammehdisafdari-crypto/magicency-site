@@ -1,0 +1,398 @@
+/* =========================================================
+   MAGICENCY HERO — EXACT VIVID MOTION DESKTOP & MOBILE AESTHETIC
+   ========================================================= */
+
+.vm-hero-section {
+  position: relative;
+  width: 100%;
+  background-color: #060709;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* Interactive Canvas strictly confined to Hero section */
+.vm-liquid-fire-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Subtle Architectural Grid strictly inside Hero */
+.vm-hero-grid-subtle {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-size: 80px 80px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  z-index: 2;
+}
+
+/* =========================================================
+   01. FIRST VIEWPORT (100svh ON DESKTOP & LAPTOP)
+   Exact match to the desktop reference screenshot
+   ========================================================= */
+.vm-hero-first-viewport {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media (min-width: 920px) {
+  .vm-hero-first-viewport {
+    height: 100svh;
+    min-height: 100svh;
+    max-height: 100svh;
+    padding: clamp(90px, 14vh, 130px) clamp(24px, 4.5vw, 64px) clamp(16px, 2.5vh, 28px);
+  }
+}
+
+.vm-hero-headline-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  max-width: 980px;
+}
+
+.vm-hero-giant-title {
+  font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  font-size: clamp(3.8rem, 7.8vw, 7.5rem);
+  font-weight: 400;
+  line-height: 0.94;
+  letter-spacing: -0.03em;
+  color: #FFFFFF;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
+}
+
+[dir="rtl"] .vm-hero-giant-title {
+  font-family: var(--font-persian, 'Vazirmatn', sans-serif);
+  font-size: clamp(2.8rem, 5.8vw, 5.5rem);
+  letter-spacing: 0;
+  line-height: 1.25;
+  font-weight: 800;
+}
+
+.title-row {
+  display: block;
+}
+
+/* Italic serif emphasis matching Vivid Motion's "studio" and "growth" */
+.italic-serif-word {
+  font-style: italic;
+  font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  font-weight: 400;
+  color: #FFFFFF;
+  padding-left: 0.08em;
+  padding-right: 0.06em;
+}
+
+[dir="rtl"] .italic-serif-word {
+  font-family: var(--font-persian, 'Vazirmatn', sans-serif);
+  font-style: normal;
+  font-weight: 900;
+  background: linear-gradient(135deg, #FFFFFF 30%, #FF7722 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Bottom Clients & Partners Marquee */
+.vm-hero-clients-bar {
+  width: 100%;
+  padding-top: clamp(14px, 2vh, 24px);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  position: relative;
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+
+.vm-clients-marquee {
+  display: flex;
+  width: max-content;
+  overflow: hidden;
+  user-select: none;
+}
+
+.vm-clients-track {
+  display: flex;
+  align-items: center;
+  gap: clamp(32px, 4.8vw, 64px);
+  padding-right: clamp(32px, 4.8vw, 64px);
+  animation: marqueeScroll 26s linear infinite;
+  will-change: transform;
+}
+
+[dir="rtl"] .vm-clients-track {
+  animation-direction: reverse;
+}
+
+@keyframes marqueeScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.vm-client-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.72;
+  transition: opacity 200ms ease, transform 200ms ease;
+  white-space: nowrap;
+}
+
+.vm-client-item:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.vm-client-logo-text {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: clamp(0.85rem, 1.1vw, 1.15rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #E2E8F0;
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   02. BELOW-THE-FOLD SHOWREEL CARD & STATEMENT
+   ========================================================= */
+.vm-hero-extended-container {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 1400px;
+  margin-inline: auto;
+  padding: clamp(36px, 5vh, 64px) clamp(20px, 3.5vw, 64px) 0;
+  box-sizing: border-box;
+}
+
+.vm-showreel-card-wrapper {
+  width: 100%;
+  margin-bottom: clamp(24px, 3.5vh, 44px);
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.vm-showreel-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  max-height: 640px;
+  background-color: #0B0D12;
+  border-radius: clamp(18px, 2.5vw, 32px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+  box-shadow: 0 30px 80px -15px rgba(0, 0, 0, 0.95),
+              0 0 40px rgba(255, 85, 0, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 280ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 280ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.vm-showreel-card:hover {
+  border-color: rgba(255, 85, 0, 0.45);
+  box-shadow: 0 35px 90px -15px rgba(0, 0, 0, 0.98),
+              0 0 50px rgba(255, 85, 0, 0.25);
+  transform: translateY(-2px);
+}
+
+.vm-showreel-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.vm-showreel-card:hover .vm-showreel-img {
+  transform: scale(1.03);
+}
+
+.vm-showreel-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.45) 100%);
+  pointer-events: none;
+}
+
+/* Interactive Floating "Play reel" Pill Button */
+.vm-showreel-play-btn {
+  position: absolute;
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 22px;
+  background: rgba(10, 12, 17, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: var(--radius-full, 9999px);
+  color: #FFFFFF;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.85),
+              0 0 24px rgba(255, 85, 0, 0.3);
+  transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.vm-showreel-card:hover .vm-showreel-play-btn {
+  background: rgba(18, 20, 28, 0.95);
+  border-color: #FF5500;
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.95),
+              0 0 36px rgba(255, 85, 0, 0.55);
+  transform: scale(1.06);
+}
+
+.vm-play-text {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: clamp(0.85rem, 1vw, 1rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+[dir="rtl"] .vm-play-text {
+  font-family: var(--font-persian, 'Vazirmatn', sans-serif);
+  font-size: 0.95rem;
+}
+
+.vm-play-icon-circle {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FF6600, #FF3300);
+  box-shadow: 0 0 12px rgba(255, 85, 0, 0.6);
+  transition: transform 200ms ease;
+}
+
+.vm-showreel-card:hover .vm-play-icon-circle {
+  transform: scale(1.1);
+}
+
+.vm-play-triangle {
+  margin-left: 2px;
+}
+
+[dir="rtl"] .vm-play-triangle {
+  margin-left: 0;
+  margin-right: 2px;
+  transform: scaleX(-1);
+}
+
+/* Large Editorial Typographic Statement */
+.vm-hero-statement-section {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.vm-editorial-statement-text {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: clamp(1.8rem, 3.8vw, 3.1rem);
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: -0.025em;
+  color: #FFFFFF;
+  max-width: 1160px;
+  margin: 0;
+  margin-bottom: clamp(32px, 5vh, 56px);
+}
+
+[dir="rtl"] .vm-editorial-statement-text {
+  font-family: var(--font-persian, 'Vazirmatn', sans-serif);
+  font-size: clamp(1.5rem, 3.2vw, 2.6rem);
+  line-height: 1.55;
+  letter-spacing: 0;
+  font-weight: 600;
+}
+
+/* =========================================================
+   MOBILE RESPONSIVE RULES (BELOW 920PX)
+   ========================================================= */
+@media (max-width: 919px) {
+  .vm-hero-first-viewport {
+    height: auto;
+    min-height: auto;
+    max-height: none;
+    padding: 76px 16px 12px;
+  }
+
+  .vm-hero-headline-container {
+    padding-top: 12px;
+    padding-bottom: 8px;
+  }
+
+  .vm-hero-giant-title {
+    font-size: clamp(2.6rem, 11.5vw, 3.6rem);
+    line-height: 0.96;
+    letter-spacing: -0.025em;
+  }
+
+  .vm-hero-clients-bar {
+    margin-top: 14px;
+    margin-bottom: 20px;
+    padding-top: 16px;
+  }
+
+  .vm-clients-track {
+    gap: 24px;
+    padding-right: 24px;
+    animation-duration: 20s;
+  }
+
+  .vm-client-logo-text {
+    font-size: 0.76rem;
+  }
+
+  .vm-hero-extended-container {
+    padding: 0 16px;
+  }
+
+  .vm-showreel-card-wrapper {
+    margin-bottom: 24px;
+  }
+
+  .vm-showreel-card {
+    border-radius: 18px;
+    aspect-ratio: 16 / 10;
+  }
+
+  .vm-showreel-play-btn {
+    padding: 8px 16px;
+    gap: 8px;
+  }
+
+  .vm-play-text {
+    font-size: 0.78rem;
+  }
+
+  .vm-play-icon-circle {
+    width: 22px;
+    height: 22px;
+  }
+
+  .vm-editorial-statement-text {
+    font-size: clamp(1.35rem, 6.2vw, 1.85rem);
+    line-height: 1.22;
+    margin-bottom: 40px;
+  }
+}

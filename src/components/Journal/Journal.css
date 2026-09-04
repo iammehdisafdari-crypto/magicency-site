@@ -1,0 +1,508 @@
+/* =========================================================
+   MAGICENCY JOURNAL — EXACT VIVID MOTION RECREATION
+   Editorial structure, In Focus cards, minimal nav & cursor preview
+   ========================================================= */
+
+.vm-journal-section {
+  position: relative;
+  width: 100%;
+  background-color: #060709;
+  color: #FFFFFF;
+  padding-top: clamp(60px, 8vh, 110px);
+  padding-bottom: 0px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.vm-journal-container {
+  max-width: 1400px;
+  margin-inline: auto;
+  padding: 0 clamp(20px, 3.5vw, 64px);
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   01. HERO / INTRO
+   ========================================================= */
+.journal-heading-block {
+  margin-bottom: clamp(52px, 8.5vh, 96px);
+}
+
+.journal-badge-label {
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.journal-badge-text {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #FF5500;
+  text-transform: uppercase;
+}
+
+.journal-main-headline {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: clamp(2.3rem, 4.8vw, 4.8rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: #FFFFFF;
+  margin: 0;
+  max-width: 1080px;
+}
+
+[dir="rtl"] .journal-main-headline {
+  font-family: var(--font-persian, 'Vazirmatn', sans-serif);
+  font-size: clamp(2rem, 3.8vw, 3.6rem);
+  line-height: 1.35;
+}
+
+/* =========================================================
+   02. IN FOCUS (FEATURED EDITORIAL CARDS)
+   ========================================================= */
+.journal-featured-section {
+  margin-bottom: clamp(64px, 10vh, 110px);
+}
+
+.journal-featured-heading {
+  margin-bottom: clamp(24px, 3.5vh, 36px);
+}
+
+.journal-featured-heading .u-text-heading-xs {
+  font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  font-size: clamp(1.45rem, 2.2vw, 1.95rem);
+  font-weight: 400;
+  color: #8E93A0;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+[dir="rtl"] .journal-featured-heading .u-text-heading-xs {
+  font-family: var(--font-persian, 'Vazirmatn', sans-serif);
+  font-weight: 700;
+  font-size: 1.35rem;
+}
+
+.journal-featured-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(24px, 3vw, 36px);
+}
+
+@media (min-width: 900px) {
+  .journal-featured-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.journal-featured-card {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  group: pointer;
+}
+
+.journal-featured-card-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: clamp(12px, 1.8vw, 18px);
+  overflow: hidden;
+  background-color: #0B0D12;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.95);
+  margin-bottom: 20px;
+}
+
+.journal-featured-card-media-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.journal-featured-card:hover .journal-featured-card-media-img {
+  transform: scale(1.05);
+}
+
+.journal-featured-media-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 35%, rgba(0, 0, 0, 0.4) 100%);
+  pointer-events: none;
+}
+
+.journal-featured-num-tag {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: rgba(10, 12, 17, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+[dir="rtl"] .journal-featured-num-tag {
+  right: auto;
+  left: 14px;
+}
+
+.journal-featured-card-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.journal-featured-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #FF5500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.journal-card-dot {
+  color: #555A68;
+}
+
+.journal-card-time {
+  color: #8E93A0;
+}
+
+.journal-featured-card-title {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: clamp(1.15rem, 1.4vw, 1.35rem);
+  font-weight: 600;
+  line-height: 1.32;
+  color: #FFFFFF;
+  margin: 0 0 16px;
+  transition: color 200ms ease;
+}
+
+[dir="rtl"] .journal-featured-card-title {
+  font-family: var(--font-persian, 'Vazirmatn', sans-serif);
+  font-size: 1.15rem;
+  line-height: 1.5;
+}
+
+.journal-featured-card:hover .journal-featured-card-title {
+  color: #FF6600;
+}
+
+.journal-featured-card-date {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #727787;
+  text-transform: uppercase;
+}
+
+.journal-card-arrow {
+  color: #8E93A0;
+  transition: transform 220ms ease, color 220ms ease;
+}
+
+.journal-featured-card:hover .journal-card-arrow {
+  color: #FF5500;
+  transform: translate(2px, -2px);
+}
+
+[dir="rtl"] .journal-featured-card:hover .journal-card-arrow {
+  transform: translate(-2px, -2px) scaleX(-1);
+}
+
+/* =========================================================
+   03. MINIMAL EDITORIAL FILTER BAR
+   ========================================================= */
+.journal-nav {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: clamp(32px, 5vh, 48px);
+}
+
+.journal-nav-track {
+  display: flex;
+  align-items: center;
+  gap: clamp(24px, 3.5vw, 44px);
+  padding: 18px 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.journal-nav-track::-webkit-scrollbar {
+  display: none;
+}
+
+.journal-nav-link {
+  background: none;
+  border: none;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #707584;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 4px 0;
+  position: relative;
+  transition: color 200ms ease;
+  white-space: nowrap;
+}
+
+[dir="rtl"] .journal-nav-link {
+  font-family: var(--font-persian, 'Vazirmatn', sans-serif);
+  font-size: 0.85rem;
+}
+
+.journal-nav-link:hover {
+  color: #FFFFFF;
+}
+
+.journal-nav-link.is-active {
+  color: #FFFFFF;
+}
+
+.journal-nav-link.is-active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #FF5500;
+}
+
+/* =========================================================
+   04. EDITORIAL ARTICLE LIST WITH SIGNATURE HOVER
+   ========================================================= */
+.journal-list-wrapper {
+  width: 100%;
+}
+
+.journal-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.journal-list-item {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  padding: clamp(20px, 3vh, 32px) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  position: relative;
+  transition: all 250ms ease;
+  outline: none;
+}
+
+@media (min-width: 900px) {
+  .journal-list-item {
+    grid-template-columns: 65% 35%;
+    align-items: center;
+    gap: 24px;
+  }
+}
+
+.journal-list-item-overview {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 2.5vw, 36px);
+}
+
+.journal-list-item-num {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #FF5500;
+  flex-shrink: 0;
+}
+
+.journal-list-item-title-text {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: clamp(1.2rem, 1.8vw, 1.65rem);
+  font-weight: 600;
+  line-height: 1.25;
+  color: #E2E8F0;
+  margin: 0;
+  transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1), color 250ms ease;
+}
+
+[dir="rtl"] .journal-list-item-title-text {
+  font-family: var(--font-persian, 'Vazirmatn', sans-serif);
+  font-size: clamp(1.1rem, 1.6vw, 1.45rem);
+}
+
+.journal-list-item-meta {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: clamp(16px, 2vw, 28px);
+}
+
+.journal-list-item-cat {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #8E93A0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+[dir="rtl"] .journal-list-item-cat {
+  font-family: var(--font-persian, 'Vazirmatn', sans-serif);
+}
+
+.journal-list-item-date-text {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.74rem;
+  font-weight: 500;
+  color: #616675;
+  text-transform: uppercase;
+}
+
+.journal-list-item-arrow {
+  color: #616675;
+  transition: transform 220ms ease, color 220ms ease;
+  flex-shrink: 0;
+}
+
+/* Hover State on Desktop */
+@media (min-width: 992px) {
+  .journal-list:hover .journal-list-item {
+    opacity: 0.45;
+  }
+
+  .journal-list-item:hover {
+    opacity: 1 !important;
+    border-bottom-color: rgba(255, 85, 0, 0.4);
+  }
+
+  .journal-list-item:hover .journal-list-item-title-text {
+    color: #FFFFFF;
+    transform: translateX(10px);
+  }
+
+  [dir="rtl"] .journal-list-item:hover .journal-list-item-title-text {
+    transform: translateX(-10px);
+  }
+
+  .journal-list-item:hover .journal-list-item-arrow {
+    color: #FF5500;
+    transform: translate(3px, -3px);
+  }
+
+  [dir="rtl"] .journal-list-item:hover .journal-list-item-arrow {
+    transform: translate(-3px, -3px) scaleX(-1);
+  }
+}
+
+/* Mobile Expanded Image */
+.journal-mobile-expanded-media {
+  overflow: hidden;
+  width: 100%;
+  margin-top: 14px;
+  border-radius: 12px;
+}
+
+.journal-mobile-img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  display: block;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* =========================================================
+   05. SIGNATURE FLOATING CURSOR-FOLLOWING PREVIEW IMAGE
+   ========================================================= */
+.journal-floating-cursor-preview {
+  position: fixed;
+  pointer-events: none;
+  z-index: 999;
+  width: 280px;
+  aspect-ratio: 16 / 10;
+  transform: translate(-50%, -115%);
+}
+
+.journal-floating-img-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.95),
+              0 0 30px rgba(255, 85, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background-color: #0B0D12;
+}
+
+.journal-floating-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.journal-floating-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 40%, rgba(0, 0, 0, 0.45) 100%);
+  pointer-events: none;
+}
+
+.journal-floating-caption {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  padding: 4px 10px;
+  background: rgba(10, 12, 17, 0.85);
+  backdrop-filter: blur(12px);
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #FF5500;
+}
+
+[dir="rtl"] .journal-floating-caption {
+  left: auto;
+  right: 10px;
+}
+
+/* =========================================================
+   ACCESSIBILITY: PREFERS-REDUCED-MOTION
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  .journal-floating-cursor-preview {
+    display: none !important;
+  }
+
+  .journal-featured-card-media-img {
+    transition: none !important;
+  }
+
+  .journal-list-item-title-text {
+    transition: none !important;
+  }
+}

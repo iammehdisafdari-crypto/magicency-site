@@ -1,0 +1,922 @@
+/* =========================================================
+   MAGICENCY SECTION 02: MARKETING ECOSYSTEM (ACTIVITY WALL)
+   VISUAL-FIRST MEDIA-DRIVEN CINEMATIC EXPERIENCE
+   ========================================================= */
+
+.growth-narrative-section {
+  position: relative;
+  height: 500vh;
+  background-color: #030508;
+  color: #FFFFFF;
+  box-sizing: border-box;
+}
+
+/* Pinned Sticky Experience Viewport */
+.narrative-sticky-viewport {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  max-height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #030508;
+  box-sizing: border-box;
+  padding: 14px var(--space-6) 20px;
+}
+
+/* Atmospheric Layer 1: Ambient Void & Tactical Matrix */
+.narrative-ambient-void {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse 90% 60% at 50% 35%, rgba(255, 85, 0, 0.06) 0%, transparent 70%),
+    radial-gradient(circle at 85% 85%, rgba(14, 25, 44, 0.45) 0%, transparent 60%),
+    #030508;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.narrative-grain-layer {
+  position: absolute;
+  inset: 0;
+  opacity: 0.035;
+  pointer-events: none;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.35) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.35) 1px, transparent 1px);
+  background-size: 48px 48px;
+  z-index: 2;
+}
+
+/* Global Progress Line */
+.narrative-progress-bar-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.06);
+  z-index: 120;
+}
+
+.narrative-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #FF6600, #FFAA33);
+  box-shadow: 0 0 14px #FF5500;
+}
+
+/* =========================================================
+   TOP HUD: CONTROLS, STEPPER & TELEMETRY
+   ========================================================= */
+.narrative-top-hud {
+  position: relative;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 8px 18px;
+  background: rgba(10, 14, 24, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  max-width: 1260px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.hud-left-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hud-badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #FF5500;
+  box-shadow: 0 0 10px #FF5500;
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+.hud-system-title {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #CBD5E1;
+}
+
+/* Interactive 6-Stage Stepper */
+.hud-stage-stepper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(0, 0, 0, 0.45);
+  padding: 3px 5px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.stage-step-pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border: none;
+  background: transparent;
+  color: #94A3B8;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: var(--radius-full);
+  transition: all 180ms ease;
+}
+
+.stage-step-pill:hover {
+  color: #FFFFFF;
+}
+
+.stage-step-pill.active {
+  color: #FFFFFF;
+  font-weight: 800;
+}
+
+.stage-step-pill.past {
+  color: #E2E8F0;
+}
+
+.step-num {
+  font-size: 0.65rem;
+  opacity: 0.7;
+}
+
+.stage-step-pill.active .step-num {
+  color: #FF7722;
+  opacity: 1;
+}
+
+.step-active-indicator {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 85, 0, 0.22);
+  border: 1px solid rgba(255, 85, 0, 0.65);
+  border-radius: var(--radius-full);
+  box-shadow: 0 0 16px rgba(255, 85, 0, 0.4);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.hud-right-telemetry {
+  display: flex;
+  align-items: center;
+}
+
+.hud-status-badge {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #FFAA33;
+  background: rgba(255, 85, 0, 0.08);
+  border: 1px solid rgba(255, 85, 0, 0.28);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   PRIMARY VISUAL ENVIRONMENT: THE MARKETING ACTIVITY WALL
+   ========================================================= */
+.narrative-media-wall-stage {
+  position: relative;
+  width: 100%;
+  max-width: 1340px;
+  height: clamp(380px, 58vh, 580px);
+  margin: 0 auto;
+  border-radius: 28px;
+  background: linear-gradient(175deg, rgba(14, 18, 28, 0.7) 0%, rgba(5, 7, 12, 0.9) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 
+    0 30px 80px rgba(0, 0, 0, 0.9),
+    inset 0 1px 1px rgba(255, 255, 255, 0.14);
+  overflow: hidden;
+  z-index: 10;
+  transition: transform 140ms ease-out;
+}
+
+/* SVG Connection Bus Overlay */
+.media-connections-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.pulse-leak-line {
+  animation: pulseLeak 1.2s infinite ease-in-out;
+}
+
+@keyframes pulseLeak {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+.synchronized-pipeline-path {
+  filter: drop-shadow(0 0 8px #FF5500);
+}
+
+/* =========================================================
+   MEDIA ECOSYSTEM OBJECTS (The Real Visual Heroes)
+   ========================================================= */
+.media-ecosystem-object {
+  position: absolute;
+  cursor: pointer;
+  outline: none;
+  transform-origin: center center;
+  transition: box-shadow 200ms ease;
+}
+
+.media-inner-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: rgba(13, 17, 26, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 
+    0 18px 45px rgba(0, 0, 0, 0.75),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(14px);
+  transition: all 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.media-ecosystem-object:hover .media-inner-card {
+  border-color: rgba(255, 85, 0, 0.6);
+  box-shadow: 
+    0 24px 60px rgba(0, 0, 0, 0.9),
+    0 0 25px rgba(255, 85, 0, 0.25);
+  transform: translateY(-3px);
+}
+
+/* Chrome Header Bar on Media */
+.media-chrome-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  background: rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.media-chrome-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.media-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #10B981;
+  box-shadow: 0 0 6px #10B981;
+}
+
+.media-tag-name {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 800;
+  color: #94A3B8;
+  letter-spacing: 0.06em;
+}
+
+.media-metric-badge {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #FFAA33;
+  background: rgba(255, 170, 51, 0.1);
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+/* Image Visual Wrapper */
+.media-image-wrapper {
+  position: relative;
+  width: 100%;
+  background-color: #05070B;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.media-actual-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  transition: transform 300ms ease;
+}
+
+.media-ecosystem-object:hover .media-actual-img {
+  transform: scale(1.03);
+}
+
+.media-glare-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Art-Directed Interface Mockup Content */
+.media-ui-card-content {
+  padding: 14px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: radial-gradient(circle at 80% 20%, rgba(255, 85, 0, 0.08) 0%, transparent 60%);
+}
+
+.ui-card-headline {
+  font-family: var(--font-display);
+  font-size: 0.84rem;
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+.ui-card-details {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: #94A3B8;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.ui-card-metric-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.metric-pill {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #10B981;
+}
+
+.status-pill {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 800;
+  color: #CBD5E1;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* Footer Bar on Media */
+.media-footer-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  background: rgba(5, 7, 12, 0.75);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.media-title-text {
+  font-family: var(--font-display);
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #E2E8F0;
+}
+
+.media-sub-text {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: #94A3B8;
+}
+
+/* Stage 03: Friction Alert Banner */
+.media-friction-badge {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(239, 68, 68, 0.94);
+  color: #FFFFFF;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 800;
+  box-shadow: 0 4px 16px rgba(239, 68, 68, 0.6);
+  z-index: 25;
+  animation: frictionPulse 1.4s infinite ease-in-out;
+}
+
+@keyframes frictionPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+.badge-exclamation {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  color: #EF4444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 900;
+}
+
+.media-has-alert .media-inner-card {
+  border-color: rgba(239, 68, 68, 0.6);
+  box-shadow: 0 0 24px rgba(239, 68, 68, 0.28);
+}
+
+/* Stage 04: Diagnostic Measurement Calipers */
+.media-diagnostic-caliper {
+  position: absolute;
+  inset: -4px;
+  pointer-events: none;
+  z-index: 30;
+}
+
+.caliper-corner {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-color: #38BDF8;
+  border-style: solid;
+}
+
+.caliper-corner.tl { top: 0; left: 0; border-width: 2px 0 0 2px; }
+.caliper-corner.tr { top: 0; right: 0; border-width: 2px 2px 0 0; }
+.caliper-corner.bl { bottom: 0; left: 0; border-width: 0 0 2px 2px; }
+.caliper-corner.br { bottom: 0; right: 0; border-width: 0 2px 2px 0; }
+
+.caliper-tag {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #0284C7;
+  color: #FFFFFF;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 900;
+  padding: 1px 8px;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.media-diagnosed .media-inner-card {
+  border-color: rgba(56, 189, 248, 0.6);
+  box-shadow: 0 0 30px rgba(56, 189, 248, 0.3);
+}
+
+.media-connected .media-inner-card {
+  border-color: rgba(255, 136, 51, 0.45);
+}
+
+/* =========================================================
+   SYNCHRONIZED FLYWHEEL METER (Stages 05 & 06)
+   ========================================================= */
+.synchronized-flywheel-meter {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(10, 14, 24, 0.94);
+  border: 1px solid rgba(255, 136, 51, 0.5);
+  border-radius: 20px;
+  padding: 10px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.9), 0 0 30px rgba(255, 85, 0, 0.25);
+  backdrop-filter: blur(16px);
+  z-index: 35;
+}
+
+.meter-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: #FF9944;
+}
+
+.pulse-emerald {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #10B981;
+  box-shadow: 0 0 10px #10B981;
+}
+
+.meter-stats-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.meter-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 700;
+  color: #94A3B8;
+  letter-spacing: 0.05em;
+}
+
+.stat-val {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 900;
+}
+
+.stat-gold { color: #FFAA33; }
+.stat-emerald { color: #10B981; }
+.stat-cyan { color: #38BDF8; }
+
+.meter-divider {
+  width: 1px;
+  height: 22px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* =========================================================
+   BOTTOM EDITORIAL NARRATOR (Concise, Supporting Copy)
+   ========================================================= */
+.narrative-bottom-narrator {
+  position: relative;
+  z-index: 30;
+  max-width: 920px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 130px;
+}
+
+.narrator-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.narrator-header-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 2px;
+}
+
+.narrator-phase-code {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #FF5500;
+}
+
+.narrator-stage-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #CBD5E1;
+  letter-spacing: 0.08em;
+}
+
+.narrator-alert-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #94A3B8;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 2px 10px;
+  border-radius: var(--radius-full);
+}
+
+.narrator-main-headline {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 1.05rem + 1.1vw, 2rem);
+  font-weight: 900;
+  color: #FFFFFF;
+  margin: 0;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+[dir="rtl"] .narrator-main-headline {
+  font-size: clamp(1.35rem, 1.1rem + 1.1vw, 2.1rem);
+  letter-spacing: 0;
+}
+
+.narrator-sub-description {
+  font-size: clamp(0.85rem, 0.78rem + 0.2vw, 0.96rem);
+  color: var(--text-secondary);
+  max-width: 720px;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Stage 06 Final Climax Insight Block */
+.climax-insight-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.climax-giant-statement {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 1.2rem + 2.2vw, 3rem);
+  font-weight: 900;
+  color: #FFFFFF;
+  line-height: 1.18;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+[dir="rtl"] .climax-giant-statement {
+  font-size: clamp(1.75rem, 1.25rem + 2.3vw, 3.1rem);
+  letter-spacing: 0;
+}
+
+.statement-system-highlight {
+  color: #FF5500;
+  text-shadow: 0 0 32px rgba(255, 85, 0, 0.6);
+}
+
+.climax-sub-description {
+  font-size: clamp(0.88rem, 0.8rem + 0.25vw, 1.02rem);
+  color: var(--text-secondary);
+  max-width: 680px;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.climax-action-row {
+  margin-top: 6px;
+}
+
+.climax-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 28px;
+  background: linear-gradient(135deg, #FF6600 0%, #FF3300 100%);
+  color: #FFFFFF;
+  border-radius: var(--radius-full);
+  font-size: 0.92rem;
+  font-weight: 700;
+  box-shadow: 0 6px 24px rgba(255, 68, 0, 0.45), 0 0 32px rgba(255, 85, 0, 0.3);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.climax-cta-btn:hover {
+  background: linear-gradient(135deg, #FF7711 0%, #FF4400 100%);
+  box-shadow: 0 8px 32px rgba(255, 85, 0, 0.65);
+  transform: translateY(-2px);
+}
+
+.cta-arrow-char {
+  transition: transform 200ms ease;
+}
+
+.climax-cta-btn:hover .cta-arrow-char {
+  transform: translateX(4px);
+}
+
+[dir="rtl"] .climax-cta-btn:hover .cta-arrow-char {
+  transform: translateX(-4px);
+}
+
+.narrator-scroll-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--text-tertiary);
+  margin-top: 6px;
+  letter-spacing: 0.06em;
+}
+
+.scroll-indicator-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #FF5500;
+  animation: bounceDot 1.6s infinite ease-in-out;
+}
+
+@keyframes bounceDot {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+/* =========================================================
+   RESPONSIVE BREAKPOINTS (TABLET & MOBILE)
+   ========================================================= */
+@media (max-width: 900px) {
+  .narrative-top-hud {
+    padding: 8px 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hud-right-telemetry {
+    display: none;
+  }
+
+  .narrative-media-wall-stage {
+    height: clamp(340px, 52vh, 460px);
+  }
+
+  .synchronized-flywheel-meter {
+    padding: 8px 16px;
+    bottom: 10px;
+  }
+
+  .meter-stats-row {
+    gap: 12px;
+  }
+
+  .stat-val {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .narrative-sticky-viewport {
+    padding: calc(58px + 6px) 10px 10px;
+  }
+
+  .hud-left-brand {
+    display: none;
+  }
+
+  .hud-stage-stepper {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .stage-step-pill {
+    padding: 3px 5px;
+    font-size: 0.62rem;
+  }
+
+  .stage-step-pill .step-name {
+    display: none;
+  }
+
+  .narrative-media-wall-stage {
+    height: clamp(260px, 44vh, 340px);
+    border-radius: 16px;
+    margin: 0 auto;
+  }
+
+  .media-chrome-header {
+    padding: 3px 6px;
+  }
+
+  .media-tag-name {
+    font-size: 0.52rem;
+  }
+
+  .media-metric-badge {
+    font-size: 0.54rem;
+  }
+
+  .media-footer-bar {
+    padding: 3px 6px;
+  }
+
+  .media-title-text {
+    font-size: 0.64rem;
+  }
+
+  .media-sub-text {
+    display: none;
+  }
+
+  .synchronized-flywheel-meter {
+    width: 95%;
+    padding: 6px 8px;
+    bottom: 8px;
+  }
+
+  .meter-badge {
+    font-size: 0.55rem;
+  }
+
+  .stat-label {
+    font-size: 0.5rem;
+  }
+
+  .stat-val {
+    font-size: 0.78rem;
+  }
+
+  .meter-divider {
+    height: 16px;
+  }
+
+  .narrative-bottom-narrator {
+    min-height: 80px;
+    padding: 2px 0;
+  }
+
+  .narrator-main-headline {
+    font-size: clamp(1.05rem, 0.95rem + 0.5vw, 1.35rem);
+    line-height: 1.25;
+  }
+
+  .narrator-sub-description {
+    font-size: 0.72rem;
+    line-height: 1.35;
+  }
+
+  .climax-giant-statement {
+    font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.7rem);
+    line-height: 1.2;
+  }
+
+  .climax-sub-description {
+    font-size: 0.74rem;
+    line-height: 1.35;
+  }
+
+  .climax-cta-btn {
+    padding: 7px 18px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Reduced Motion Compliance */
+@media (prefers-reduced-motion: reduce) {
+  .narrative-media-wall-stage,
+  .media-ecosystem-object {
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .hud-badge-dot,
+  .media-status-dot,
+  .media-friction-badge,
+  .scroll-indicator-dot {
+    animation: none !important;
+  }
+}

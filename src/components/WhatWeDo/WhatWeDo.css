@@ -1,0 +1,461 @@
+/* =========================================================
+   MAGICENCY WHAT WE DO — EXACT VIVID MOTION ARCHITECTURE
+   ========================================================= */
+
+.vm-exact-wwd-section {
+  position: relative;
+  width: 100%;
+  background-color: #060709;
+  color: #FFFFFF;
+  padding-top: clamp(80px, 12vh, 140px);
+  padding-bottom: clamp(90px, 14vh, 160px);
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.vm-wwd-main-container {
+  max-width: 1400px;
+  margin-inline: auto;
+  padding: 0 clamp(20px, 3.5vw, 64px);
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   01. INTRO BLOCK (EXACT VIVID MOTION: wwd-intro grid)
+   ========================================================= */
+.wwd-intro.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  padding-bottom: clamp(40px, 7vh, 72px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+@media (min-width: 992px) {
+  .wwd-intro.grid {
+    grid-template-columns: 260px 1fr;
+    gap: clamp(32px, 5vw, 80px);
+    align-items: start;
+  }
+}
+
+.wwd-intro-heading .u-text-heading-xs {
+  font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  font-size: clamp(1.5rem, 2.3vw, 2.1rem);
+  font-weight: 400;
+  color: #8E93A0;
+  letter-spacing: -0.01em;
+  margin: 0;
+  line-height: 1.1;
+}
+
+[dir="rtl"] .wwd-intro-heading .u-text-heading-xs {
+  font-family: var(--font-persian, 'Vazirmatn', sans-serif);
+  font-weight: 700;
+  font-size: 1.4rem;
+}
+
+.wwd-intro-description .u-text-heading-sm {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: clamp(1.55rem, 3.1vw, 2.65rem);
+  font-weight: 500;
+  line-height: 1.24;
+  letter-spacing: -0.025em;
+  color: #FFFFFF;
+  margin: 0;
+  max-width: 1020px;
+}
+
+[dir="rtl"] .wwd-intro-description .u-text-heading-sm {
+  font-family: var(--font-persian, 'Vazirmatn', sans-serif);
+  font-size: clamp(1.4rem, 2.7vw, 2.3rem);
+  line-height: 1.55;
+  letter-spacing: 0;
+  font-weight: 600;
+}
+
+/* =========================================================
+   02. THREE NUMBERED GROUPS (wwd-list mt-32)
+   ========================================================= */
+.wwd-list.mt-32 {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.wwd-list-item {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: clamp(64px, 10vh, 110px);
+  position: relative;
+  transition: opacity 350ms ease;
+}
+
+.wwd-list-item.is-inactive-item {
+  opacity: 0.65;
+}
+
+.wwd-list-item.is-active-item {
+  opacity: 1;
+}
+
+/* Header: 01, 02, 03 + Title */
+.wwd-list-item-header.grid {
+  padding: clamp(36px, 5.5vh, 60px) 0 clamp(24px, 3.5vh, 40px);
+  display: flex;
+  align-items: baseline;
+  gap: clamp(24px, 3.5vw, 56px);
+}
+
+.wwd-list-item-no {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: clamp(2.8rem, 5.5vw, 5.5rem);
+  font-weight: 400;
+  color: #FF5500;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+[dir="rtl"] .wwd-list-item-no {
+  font-family: var(--font-persian, 'Vazirmatn', sans-serif);
+  font-weight: 800;
+}
+
+.wwd-list-item-title {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: clamp(2.3rem, 4.8vw, 4.8rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+[dir="rtl"] .wwd-list-item-title {
+  font-family: var(--font-persian, 'Vazirmatn', sans-serif);
+  font-size: clamp(2rem, 3.8vw, 3.6rem);
+}
+
+/* Two-column Body: Left Visual Showcase, Right Services Set */
+.wwd-item-body-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+@media (min-width: 992px) {
+  .wwd-item-body-layout {
+    grid-template-columns: 44% 56%;
+    gap: clamp(36px, 5vw, 80px);
+    align-items: start;
+  }
+}
+
+/* Left Visual Column */
+.wwd-item-visual-column {
+  width: 100%;
+}
+
+@media (min-width: 992px) {
+  .wwd-sticky-visual-wrapper {
+    position: sticky;
+    top: 110px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+}
+
+.wwd-visual-media-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: clamp(14px, 2vw, 22px);
+  overflow: hidden;
+  background-color: #0B0D12;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.95);
+}
+
+.wwd-visual-media-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.wwd-visual-media-frame:hover .wwd-visual-media-img {
+  transform: scale(1.03);
+}
+
+.wwd-visual-media-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 35%, rgba(0, 0, 0, 0.45) 100%);
+  pointer-events: none;
+}
+
+.wwd-visual-caption {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(10, 12, 17, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: var(--radius-full, 9999px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #FFFFFF;
+}
+
+[dir="rtl"] .wwd-visual-caption {
+  left: auto;
+  right: 14px;
+}
+
+.wwd-caption-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #FF5500;
+  box-shadow: 0 0 8px #FF5500;
+}
+
+.wwd-pillar-summary-text {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: clamp(0.95rem, 1.15vw, 1.12rem);
+  font-weight: 400;
+  line-height: 1.5;
+  color: #9CA3AF;
+  margin: 0;
+}
+
+[dir="rtl"] .wwd-pillar-summary-text {
+  font-family: var(--font-persian, 'Vazirmatn', sans-serif);
+}
+
+/* =========================================================
+   RIGHT COLUMN: SERVICES SET WITH VIVID MOTION HOVER MARQUEE
+   ========================================================= */
+.wwd-list-item-set {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.wwd-list-item-set-row.grid {
+  position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  cursor: default;
+  transition: background-color 220ms ease;
+}
+
+.wwd-list-item-set-row:last-child {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.wwd-list-item-set-row-cell {
+  padding: clamp(14px, 2vh, 20px) clamp(16px, 2vw, 24px);
+  display: flex;
+  align-items: center;
+}
+
+.wwd-list-item-set-row-label {
+  font-family: var(--font-mono, monospace);
+  font-size: clamp(0.85rem, 1vw, 1.05rem);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #D1D5DB;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: opacity 200ms ease;
+}
+
+[dir="rtl"] .wwd-list-item-set-row-label {
+  font-family: var(--font-persian, 'Vazirmatn', sans-serif);
+  letter-spacing: 0;
+  font-size: 0.95rem;
+}
+
+.wwd-row-counter {
+  color: #FF5500;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+/* Hover State: Background flips to high-contrast white with black text marquee */
+@media (min-width: 992px) {
+  .wwd-list-item-set-row.grid:hover {
+    background-color: #FFFFFF;
+  }
+
+  .wwd-list-item-set-row.grid:hover .wwd-list-item-set-row-label {
+    opacity: 0;
+  }
+}
+
+.wwd-list-item-set-row-cell-hover {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.22s ease;
+  color: #000000;
+  pointer-events: none;
+  z-index: 2;
+}
+
+@media (min-width: 992px) {
+  .wwd-list-item-set-row.grid:hover .wwd-list-item-set-row-cell-hover {
+    opacity: 1;
+  }
+
+  .wwd-list-item-set-row.grid:hover .track {
+    animation-play-state: running;
+  }
+}
+
+.track {
+  display: inline-flex;
+  align-items: center;
+  animation: marquee-horizontal 26s linear infinite paused;
+  will-change: transform;
+}
+
+.track-group {
+  display: inline-flex;
+  align-items: center;
+  column-gap: 1.5rem;
+  padding: 0 0.75rem;
+  flex: 0 0 auto;
+}
+
+.wwd-list-item-set-row-label-hover {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: clamp(1rem, 1.3vw, 1.25rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  white-space: nowrap;
+  line-height: 1;
+  color: #000000;
+  letter-spacing: 0.04em;
+}
+
+[dir="rtl"] .wwd-list-item-set-row-label-hover {
+  font-family: var(--font-persian, 'Vazirmatn', sans-serif);
+  letter-spacing: 0;
+}
+
+.wwd-list-item-set-row-label-icon-hover {
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FF5500;
+  flex-shrink: 0;
+}
+
+@keyframes marquee-horizontal {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* =========================================================
+   03. VIVID MOTION SIGNATURE IMAGE TRAIL OVERLAY
+   ========================================================= */
+.wwd-trail-wrapper {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  overflow: hidden;
+}
+
+.wwd-trail-pool-img-container {
+  position: fixed;
+  width: 220px;
+  aspect-ratio: 4 / 3;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.85),
+              0 0 24px rgba(255, 85, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  pointer-events: none;
+  background-color: #0B0D12;
+}
+
+.wwd-trail-inner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* =========================================================
+   04. MOBILE RESPONSIVE BEHAVIOR (BELOW 992PX)
+   ========================================================= */
+@media (max-width: 991px) {
+  .wwd-trail-wrapper {
+    display: none !important;
+  }
+
+  .wwd-list-item-set-row-cell-hover {
+    display: none !important;
+  }
+
+  .vm-exact-wwd-section {
+    padding-top: 64px;
+    padding-bottom: 72px;
+  }
+
+  .wwd-list-item {
+    padding-bottom: 48px;
+  }
+
+  .wwd-list-item-header.grid {
+    padding: 28px 0 20px;
+    gap: 16px;
+  }
+
+  .wwd-list-item-no {
+    font-size: 2.5rem;
+  }
+
+  .wwd-list-item-title {
+    font-size: clamp(1.85rem, 7.5vw, 2.6rem);
+  }
+
+  .wwd-item-body-layout {
+    gap: 20px;
+  }
+
+  .wwd-visual-media-frame {
+    aspect-ratio: 16 / 10;
+    border-radius: 16px;
+  }
+
+  .wwd-list-item-set-row-cell {
+    padding: 12px 14px;
+  }
+
+  .wwd-list-item-set-row-label {
+    font-size: 0.82rem;
+  }
+}

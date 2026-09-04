@@ -1,0 +1,246 @@
+/* =========================================================
+   MAGICENCY SECTION 09 — FINAL CTA: THE NEXT MOVE
+   Cinematic Focal Convergence Experience
+   ========================================================= */
+
+.final-cta-section {
+  position: relative;
+  min-height: 85vh;
+  background-color: #050505;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(60px, 10vh, 120px) var(--space-4) clamp(40px, 6vh, 80px);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Background Ambient Convergence */
+.cta-ambient-converge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 900px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(255, 85, 0, 0.12) 0%, rgba(20, 24, 36, 0.05) 50%, rgba(5, 5, 5, 0) 80%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.cta-focal-orb {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(255, 85, 0, 0.18) 0%, rgba(255, 136, 51, 0.04) 40%, transparent 70%);
+  filter: blur(40px);
+  pointer-events: none;
+  transition: transform 120ms ease-out;
+  z-index: 2;
+}
+
+.cta-convergence-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Content Deck */
+.final-cta-container {
+  position: relative;
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  z-index: 10;
+  gap: clamp(16px, 2.5vh, 28px);
+}
+
+.cta-eyebrow-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 16px;
+  background: rgba(255, 85, 0, 0.08);
+  border: 1px solid rgba(255, 85, 0, 0.35);
+  border-radius: var(--radius-full);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #FF8833;
+}
+
+.cta-main-headline {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 1.6rem + 3.2vw, 4.6rem);
+  font-weight: 900;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  color: #FFFFFF;
+  margin: 0;
+  max-width: 860px;
+}
+
+[dir="rtl"] .cta-main-headline {
+  letter-spacing: 0;
+  line-height: 1.3;
+  font-size: clamp(2rem, 1.5rem + 2.8vw, 4.2rem);
+}
+
+.cta-subheadline {
+  font-size: clamp(0.95rem, 0.85rem + 0.3vw, 1.2rem);
+  color: var(--text-secondary);
+  margin: 0;
+  max-width: 580px;
+  line-height: 1.6;
+}
+
+/* Dominant Action Button */
+.cta-focal-action {
+  margin: clamp(12px, 2vh, 20px) 0;
+}
+
+.cta-primary-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: clamp(14px, 1.8vh, 18px) clamp(32px, 3vw, 48px);
+  background: linear-gradient(135deg, #FF6600 0%, #FF3300 100%);
+  color: #FFFFFF;
+  border-radius: var(--radius-full);
+  font-family: var(--font-display);
+  font-size: clamp(0.95rem, 0.85rem + 0.3vw, 1.15rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  border: none;
+  cursor: pointer;
+  box-shadow: 
+    0 12px 36px rgba(255, 68, 0, 0.45),
+    0 0 24px rgba(255, 85, 0, 0.25);
+  transition: all var(--transition-fast);
+  overflow: hidden;
+  min-height: 48px;
+  min-width: 48px;
+}
+
+.cta-primary-btn:hover {
+  background: linear-gradient(135deg, #FF7711 0%, #FF4400 100%);
+  box-shadow: 
+    0 16px 44px rgba(255, 85, 0, 0.65),
+    0 0 36px rgba(255, 85, 0, 0.4);
+  transform: translateY(-3px) scale(1.02);
+}
+
+.cta-primary-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.btn-arrow {
+  font-size: 1.1rem;
+  transition: transform 200ms ease;
+}
+
+.cta-primary-btn:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+[dir="rtl"] .cta-primary-btn:hover .btn-arrow {
+  transform: translateX(-4px);
+}
+
+.btn-shimmer {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.2) 50%,
+    transparent 60%
+  );
+  transform: rotate(30deg);
+  animation: shimmerSweep 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes shimmerSweep {
+  0% { transform: translateX(-100%) rotate(30deg); }
+  50%, 100% { transform: translateX(100%) rotate(30deg); }
+}
+
+/* Final Memorable Statement */
+.cta-final-statement {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-top: clamp(8px, 1.5vh, 16px);
+}
+
+.statement-line {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 0.95rem + 0.6vw, 1.6rem);
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.statement-dim {
+  color: #64748B;
+}
+
+.statement-highlight {
+  color: #FFFFFF;
+  text-shadow: 0 0 24px rgba(255, 85, 0, 0.4);
+}
+
+/* Terminal Signoff Badge */
+.cta-terminal-signoff {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 700;
+  color: #475569;
+  letter-spacing: 0.06em;
+  margin-top: clamp(16px, 3vh, 32px);
+  padding: 4px 14px;
+  background: rgba(14, 18, 26, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-full);
+}
+
+.signoff-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #00F59B;
+  box-shadow: 0 0 6px #00F59B;
+}
+
+/* =========================================================
+   RESPONSIVE BREAKPOINTS
+   ========================================================= */
+@media (max-width: 768px) {
+  .final-cta-section {
+    min-height: 70vh;
+    padding: 60px var(--space-4) 40px;
+  }
+
+  .cta-primary-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

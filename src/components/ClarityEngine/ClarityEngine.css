@@ -1,0 +1,316 @@
+/* =========================================================
+   MAGICENCY CLARITY ENGINE (SIGNATURE INTERACTION)
+   ========================================================= */
+
+.clarity-engine-section {
+  position: relative;
+  height: 380vh;
+  background-color: #050505;
+  color: #FFFFFF;
+  box-sizing: border-box;
+}
+
+/* Pinned Sticky Viewport */
+.clarity-sticky-viewport {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #050505;
+  box-sizing: border-box;
+  padding: calc(58px + 12px) var(--space-4) 24px;
+}
+
+/* Atmospheric Darkness & Grid */
+.clarity-ambient-void {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, #0E1119 0%, #050505 85%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.clarity-crosshair-layer {
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: 
+    radial-gradient(rgba(255, 255, 255, 0.4) 1px, transparent 1px),
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 32px 32px, 160px 160px, 160px 160px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Phase Status Badge */
+.clarity-phase-badge-pill {
+  position: absolute;
+  top: calc(58px + 16px);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 16px;
+  background: rgba(255, 85, 0, 0.08);
+  border: 1px solid rgba(255, 85, 0, 0.35);
+  border-radius: var(--radius-full);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #FF8833;
+  z-index: 30;
+  backdrop-filter: blur(10px);
+}
+
+.phase-pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #FF5500;
+  box-shadow: 0 0 8px #FF5500;
+}
+
+/* =========================================================
+   STAGE 1 & 2: ANAMORPHIC SHARDS FIELD
+   ========================================================= */
+.anamorphic-shards-field {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.shattered-text-particle {
+  position: absolute;
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 1.8rem + 3vw, 5.5rem);
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.18);
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.shard-1 { color: rgba(255, 85, 0, 0.3); }
+.shard-2 { color: rgba(255, 255, 255, 0.25); }
+.shard-3 { color: rgba(255, 85, 0, 0.25); }
+.shard-4 { color: rgba(255, 255, 255, 0.2); }
+
+/* =========================================================
+   STAGE 3: THE MONUMENTAL CRYSTALLIZED STATEMENT
+   ========================================================= */
+.crystallized-statement-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 1080px;
+  z-index: 20;
+  box-sizing: border-box;
+}
+
+.clarity-eyebrow-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #94A3B8;
+  margin-bottom: 12px;
+}
+
+.spark-icon {
+  color: #FF5500;
+}
+
+.clarity-monumental-headline {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 2rem + 4.5vw, 6.2rem);
+  font-weight: 900;
+  line-height: 1.05;
+  color: #FFFFFF;
+  letter-spacing: -0.04em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-transform: uppercase;
+  margin: 0 0 16px;
+}
+
+[dir="rtl"] .clarity-monumental-headline {
+  font-size: clamp(2.4rem, 1.8rem + 3.8vw, 5.2rem);
+  letter-spacing: 0;
+  line-height: 1.25;
+}
+
+.headline-part {
+  display: block;
+}
+
+.headline-part.amber-crystallized {
+  color: #FF5500;
+  text-shadow: 0 0 36px rgba(255, 85, 0, 0.7), 0 0 72px rgba(255, 85, 0, 0.4);
+}
+
+.clarity-subheadline-p {
+  font-size: clamp(0.92rem, 0.84rem + 0.3vw, 1.15rem);
+  color: var(--text-secondary);
+  max-width: 680px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* =========================================================
+   STAGE 4: THE 8-STAGE DECISION SEQUENCE & OPTICAL PRISM
+   ========================================================= */
+.decision-sequence-prism-deck {
+  position: relative;
+  width: 100%;
+  max-width: 1160px;
+  margin-top: clamp(16px, 2.5vh, 28px);
+  z-index: 25;
+}
+
+.decision-sequence-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(10px, 1.4vw, 18px);
+}
+
+@media (max-width: 900px) {
+  .decision-sequence-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+}
+
+.decision-node-card {
+  position: relative;
+  background: linear-gradient(155deg, #12141C 0%, #08090C 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: clamp(12px, 1.6vh, 18px) clamp(14px, 1.8vw, 20px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+  transition: all 250ms ease;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: right;
+  box-sizing: border-box;
+}
+
+[dir="ltr"] .decision-node-card {
+  text-align: left;
+}
+
+.decision-node-card:hover,
+.decision-node-card.is-hovered {
+  border-color: #FF5500;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.9), 0 0 24px rgba(255, 85, 0, 0.25);
+  transform: translateY(-3px);
+}
+
+.node-top-code {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.node-code-num {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #FF5500;
+}
+
+.node-step-badge {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #FFFFFF;
+}
+
+.node-desc-text {
+  font-size: clamp(0.72rem, 0.66rem + 0.14vw, 0.82rem);
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.decision-node-card:hover .node-desc-text {
+  color: #E2E8F0;
+}
+
+.clarity-cta-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(14px, 2vh, 24px);
+}
+
+.clarity-btn-orange {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  background: linear-gradient(135deg, #FF6600 0%, #FF3300 100%);
+  color: #FFFFFF;
+  border-radius: var(--radius-full);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  box-shadow: 0 6px 20px rgba(255, 68, 0, 0.4);
+  transition: all var(--transition-fast);
+  border: none;
+  cursor: pointer;
+}
+
+.clarity-btn-orange:hover {
+  background: linear-gradient(135deg, #FF7711 0%, #FF4400 100%);
+  box-shadow: 0 8px 28px rgba(255, 85, 0, 0.6);
+  transform: translateY(-2px);
+}
+
+.btn-arrow-icon {
+  transition: transform 200ms ease;
+}
+
+.clarity-btn-orange:hover .btn-arrow-icon {
+  transform: translateX(4px);
+}
+
+[dir="rtl"] .clarity-btn-orange:hover .btn-arrow-icon {
+  transform: translateX(-4px);
+}
+
+/* =========================================================
+   RESPONSIVE BREAKPOINTS
+   ========================================================= */
+@media (max-width: 768px) {
+  .clarity-engine-section {
+    height: 320vh;
+  }
+
+  .decision-sequence-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .decision-node-card {
+    padding: 10px 12px;
+  }
+}

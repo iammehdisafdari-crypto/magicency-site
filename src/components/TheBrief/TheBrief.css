@@ -1,0 +1,580 @@
+/* =========================================================
+   MAGICENCY SECTION 09 — THE BRIEF
+   Concept: “DON’T CONTACT US. START SOMEWHERE.”
+   ========================================================= */
+
+.the-brief-section {
+  position: relative;
+  min-height: 90vh;
+  background-color: #050505;
+  color: #FFFFFF;
+  padding: clamp(50px, 7vh, 90px) 0 clamp(40px, 5vh, 70px);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Atmospheric Background */
+.brief-ambient-radial {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 900px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(255, 85, 0, 0.09) 0%, rgba(14, 18, 28, 0.05) 55%, rgba(5, 5, 5, 0) 80%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.brief-grid-mesh {
+  position: absolute;
+  inset: 0;
+  opacity: 0.025;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.25) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.25) 1px, transparent 1px);
+  background-size: 56px 56px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.brief-outer-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(14px, 2vh, 24px);
+  z-index: 5;
+}
+
+/* =========================================================
+   1. SECTION HEADER
+   ========================================================= */
+.brief-header-deck {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 12px;
+}
+
+.brief-eyebrow-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 12px;
+  background: rgba(255, 85, 0, 0.08);
+  border: 1px solid rgba(255, 85, 0, 0.35);
+  border-radius: var(--radius-full);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #FF8833;
+}
+
+.brief-subeyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  color: #64748B;
+  letter-spacing: 0.06em;
+}
+
+/* =========================================================
+   2. THE SYSTEM REMEMBERS: SNAPSHOT CHIPS BAR
+   ========================================================= */
+.brief-snapshot-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(14, 18, 28, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-full);
+  padding: 6px 16px;
+  flex-wrap: wrap;
+}
+
+.snapshot-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #94A3B8;
+  letter-spacing: 0.05em;
+}
+
+.snapshot-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #FF5500;
+  box-shadow: 0 0 6px #FF5500;
+}
+
+.snapshot-chips-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.snapshot-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all 200ms ease;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+}
+
+.snapshot-chip:hover {
+  background: rgba(255, 85, 0, 0.12);
+  border-color: rgba(255, 85, 0, 0.4);
+}
+
+.snapshot-chip.chip-active {
+  border-color: #FF5500;
+  background: rgba(255, 85, 0, 0.16);
+}
+
+.chip-step-tag {
+  color: #64748B;
+  font-weight: 700;
+}
+
+.chip-value {
+  color: #FFFFFF;
+  font-weight: 800;
+}
+
+/* =========================================================
+   3. INTERACTIVE 2-COLUMN STAGE
+   ========================================================= */
+.brief-interactive-stage {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 20px;
+  min-height: clamp(380px, 54vh, 480px);
+  align-items: stretch;
+}
+
+/* LEFT: Decision Panel */
+.brief-decision-panel {
+  position: relative;
+  background: linear-gradient(155deg, #10131E 0%, #07080D 100%);
+  border: 1px solid rgba(255, 85, 0, 0.28);
+  border-radius: 20px;
+  padding: clamp(18px, 2.5vh, 26px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 
+    0 24px 70px rgba(0, 0, 0, 0.92),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1);
+}
+
+.step-content-deck {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 1.6vh, 16px);
+  width: 100%;
+}
+
+.step-badge-indicator {
+  display: inline-flex;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 800;
+  color: #FF5500;
+  letter-spacing: 0.08em;
+}
+
+.step-main-question {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 1.05rem + 0.6vw, 1.7rem);
+  font-weight: 900;
+  color: #FFFFFF;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.step-sub-instruction {
+  font-size: 0.76rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* Decision Cards Grid */
+.options-interactive-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.decision-option-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: rgba(18, 22, 34, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 12px;
+  padding: 10px 14px;
+  text-align: right;
+  cursor: pointer;
+  transition: all 180ms ease;
+  min-height: 44px;
+}
+
+[dir="ltr"] .decision-option-card {
+  text-align: left;
+}
+
+.decision-option-card:hover {
+  background: rgba(28, 34, 52, 0.9);
+  border-color: rgba(255, 85, 0, 0.45);
+  transform: translateY(-1px);
+}
+
+.decision-option-card.is-selected {
+  background: rgba(255, 85, 0, 0.12);
+  border-color: #FF5500;
+  box-shadow: 0 0 16px rgba(255, 85, 0, 0.2);
+}
+
+.opt-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.opt-radio-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1.5px solid #64748B;
+  transition: all 180ms ease;
+}
+
+.decision-option-card.is-selected .opt-radio-dot {
+  background: #FF5500;
+  border-color: #FF5500;
+  box-shadow: 0 0 6px #FF5500;
+}
+
+.opt-title {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+.opt-context {
+  font-size: 0.68rem;
+  color: #94A3B8;
+  margin: 0;
+  flex-grow: 1;
+  line-height: 1.35;
+}
+
+.opt-action-arrow {
+  color: #64748B;
+  font-size: 0.8rem;
+  transition: transform 180ms ease, color 180ms ease;
+  flex-shrink: 0;
+}
+
+.decision-option-card:hover .opt-action-arrow {
+  color: #FF5500;
+  transform: translateX(isRTL ? -3px : 3px);
+}
+
+/* Complete State (Step 4) */
+.complete-deck {
+  text-align: right;
+  gap: 14px;
+}
+
+[dir="ltr"] .complete-deck {
+  text-align: left;
+}
+
+.complete-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  background: rgba(0, 245, 155, 0.1);
+  border: 1px solid rgba(0, 245, 155, 0.35);
+  border-radius: var(--radius-full);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 800;
+  color: #00F59B;
+  width: fit-content;
+}
+
+.complete-headline {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 1.2rem + 0.8vw, 2rem);
+  font-weight: 900;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.complete-sub {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.brief-summary-card {
+  background: rgba(14, 18, 28, 0.85);
+  border: 1px solid rgba(255, 85, 0, 0.3);
+  border-radius: 14px;
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.summary-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+}
+
+.s-label {
+  color: #64748B;
+  font-weight: 700;
+}
+
+.s-val {
+  color: #FFAA55;
+  font-weight: 800;
+}
+
+.complete-actions-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.brief-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  background: linear-gradient(135deg, #FF6600 0%, #FF3300 100%);
+  color: #FFFFFF;
+  border-radius: var(--radius-full);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 800;
+  box-shadow: 0 8px 24px rgba(255, 68, 0, 0.45);
+  transition: all var(--transition-fast);
+  border: none;
+  cursor: pointer;
+  min-height: 46px;
+}
+
+.brief-submit-btn:hover {
+  background: linear-gradient(135deg, #FF7711 0%, #FF4400 100%);
+  box-shadow: 0 10px 32px rgba(255, 85, 0, 0.65);
+  transform: translateY(-2px);
+}
+
+.brief-reset-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #94A3B8;
+  padding: 10px 18px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 180ms ease;
+  min-height: 46px;
+}
+
+.brief-reset-btn:hover {
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+/* RIGHT: Visual Canvas Frame */
+.brief-visual-canvas {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.canvas-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #090B10;
+  border: 1px solid rgba(255, 85, 0, 0.3);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 
+    0 24px 70px rgba(0, 0, 0, 0.92),
+    0 0 24px rgba(255, 85, 0, 0.08);
+}
+
+.canvas-deliverable-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 300ms ease;
+}
+
+.canvas-glass-vignette {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 40%),
+              linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+.canvas-meta-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(8, 10, 16, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(8px);
+  z-index: 8;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 800;
+  color: #E2E8F0;
+  letter-spacing: 0.05em;
+}
+
+[dir="rtl"] .canvas-meta-badge {
+  left: auto;
+  right: 12px;
+}
+
+.badge-pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  box-shadow: 0 0 8px currentColor;
+}
+
+.canvas-status-footer {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  background: rgba(14, 18, 28, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  z-index: 8;
+}
+
+[dir="rtl"] .canvas-status-footer {
+  left: auto;
+  right: 12px;
+}
+
+.status-label {
+  color: #64748B;
+  font-weight: 700;
+}
+
+.status-val {
+  color: #FFAA55;
+  font-weight: 800;
+}
+
+/* =========================================================
+   4. FINAL BRAND RESOLUTION
+   ========================================================= */
+.brief-final-resolution {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 14px;
+  margin-top: 8px;
+}
+
+.resolution-statement {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: clamp(0.95rem, 0.85rem + 0.3vw, 1.25rem);
+  font-weight: 800;
+}
+
+.res-dim {
+  color: #64748B;
+}
+
+.res-bold {
+  color: #FFFFFF;
+}
+
+.resolution-signoff {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: #475569;
+  letter-spacing: 0.06em;
+}
+
+/* =========================================================
+   RESPONSIVE BREAKPOINTS
+   ========================================================= */
+@media (max-width: 860px) {
+  .brief-interactive-stage {
+    grid-template-columns: 1fr;
+  }
+
+  .brief-visual-canvas {
+    height: 220px;
+  }
+
+  .decision-option-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .brief-final-resolution {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+  }
+}

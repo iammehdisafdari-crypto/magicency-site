@@ -1,0 +1,321 @@
+/* =========================================================
+   MAGICENCY GROWTH SHIFT — SCROLL-DRIVEN TRANSFORMATION
+   ========================================================= */
+
+.growth-shift-section {
+  position: relative;
+  height: 400vh;
+  background-color: #050505;
+  color: #FFFFFF;
+  box-sizing: border-box;
+}
+
+/* Pinned Sticky Viewport */
+.shift-sticky-viewport {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #050505;
+  box-sizing: border-box;
+  padding: calc(58px + 12px) var(--space-4) 24px;
+}
+
+/* Atmospheric Backdrop */
+.shift-ambient-void {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, #10131B 0%, #050505 85%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.shift-grid-lines {
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Eyebrow Pill */
+.shift-eyebrow-pill {
+  position: absolute;
+  top: calc(58px + 16px);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 16px;
+  background: rgba(255, 85, 0, 0.08);
+  border: 1px solid rgba(255, 85, 0, 0.35);
+  border-radius: var(--radius-full);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #FF8833;
+  z-index: 30;
+  backdrop-filter: blur(10px);
+}
+
+.shift-pill-dot {
+  color: #FF5500;
+}
+
+/* =========================================================
+   STAGE 01 & 02: ASSUMPTION EQUATION & FRICTION SPLIT
+   ========================================================= */
+.shift-assumption-equation {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 15;
+  pointer-events: none;
+  padding: 0 var(--space-4);
+  box-sizing: border-box;
+}
+
+.equation-terms-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(16px, 3vw, 40px);
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.term-block {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 1.8rem + 4.2vw, 5.8rem);
+  font-weight: 900;
+  color: #FFFFFF;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+[dir="rtl"] .term-block {
+  font-size: clamp(2.3rem, 1.7rem + 3.8vw, 5.2rem);
+  letter-spacing: 0;
+}
+
+.operator-block {
+  font-family: var(--font-mono);
+  font-size: clamp(2.8rem, 2rem + 5vw, 6.4rem);
+  font-weight: 900;
+  color: #FF5500;
+  text-shadow: 0 0 28px rgba(255, 85, 0, 0.6);
+  display: inline-block;
+}
+
+.friction-leak-banner {
+  margin-top: clamp(24px, 4vh, 48px);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 20px;
+  background: rgba(255, 85, 0, 0.1);
+  border: 1px solid rgba(255, 85, 0, 0.4);
+  border-radius: var(--radius-full);
+  font-family: var(--font-mono);
+  font-size: clamp(0.72rem, 0.66rem + 0.16vw, 0.84rem);
+  font-weight: 700;
+  color: #FF8833;
+  letter-spacing: 0.05em;
+  box-shadow: 0 0 24px rgba(255, 85, 0, 0.2);
+}
+
+.friction-pulse-icon {
+  font-size: 0.95rem;
+}
+
+/* =========================================================
+   STAGE 03: THE 4-VARIABLE REFRAME MATRIX
+   ========================================================= */
+.shift-reframe-matrix {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  padding: 0 var(--space-4);
+  box-sizing: border-box;
+}
+
+.reframe-variables-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(10px, 1.8vw, 24px);
+  flex-wrap: wrap;
+  max-width: 1060px;
+}
+
+.reframe-var-node {
+  background: linear-gradient(155deg, #151824 0%, #0B0D12 100%);
+  border: 1px solid rgba(255, 85, 0, 0.35);
+  border-radius: 18px;
+  padding: clamp(16px, 2.2vh, 26px) clamp(20px, 2.5vw, 32px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 85, 0, 0.1);
+}
+
+.var-num {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #FF5500;
+}
+
+.var-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 0.95rem + 0.4vw, 1.5rem);
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+.reframe-plus-op {
+  font-family: var(--font-mono);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #64748B;
+}
+
+.reframe-formula-tag {
+  margin-top: clamp(24px, 4vh, 40px);
+  font-family: var(--font-mono);
+  font-size: clamp(0.82rem, 0.75rem + 0.2vw, 0.98rem);
+  font-weight: 700;
+  color: #00F59B;
+  letter-spacing: 0.06em;
+  background: rgba(0, 245, 155, 0.08);
+  border: 1px solid rgba(0, 245, 155, 0.3);
+  padding: 6px 18px;
+  border-radius: var(--radius-full);
+}
+
+/* =========================================================
+   STAGE 04 & 05: THE MONUMENTAL RESOLUTION
+   ========================================================= */
+.shift-resolution-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 1040px;
+  z-index: 25;
+}
+
+.resolution-giant-headline {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 2.2rem + 4.5vw, 6.2rem);
+  font-weight: 900;
+  line-height: 1.05;
+  color: #FFFFFF;
+  letter-spacing: -0.04em;
+  margin: 0 0 clamp(16px, 2.5vh, 28px);
+  text-transform: uppercase;
+}
+
+[dir="rtl"] .resolution-giant-headline {
+  font-size: clamp(2.5rem, 1.9rem + 3.8vw, 5.4rem);
+  letter-spacing: 0;
+  line-height: 1.25;
+}
+
+.res-line {
+  display: block;
+}
+
+.res-line.res-highlight {
+  color: #FF5500;
+  text-shadow: 0 0 36px rgba(255, 85, 0, 0.7), 0 0 72px rgba(255, 85, 0, 0.4);
+}
+
+.resolution-sub-text {
+  font-size: clamp(0.95rem, 0.85rem + 0.3vw, 1.2rem);
+  color: var(--text-secondary);
+  max-width: 680px;
+  line-height: 1.6;
+  margin: 0 0 clamp(24px, 4vh, 44px);
+}
+
+.resolution-cta-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.shift-btn-orange {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: clamp(12px, 1.6vh, 16px) clamp(26px, 2.4vw, 38px);
+  background: linear-gradient(135deg, #FF6600 0%, #FF3300 100%);
+  color: #FFFFFF;
+  border-radius: var(--radius-full);
+  font-family: var(--font-display);
+  font-size: clamp(0.88rem, 0.8rem + 0.25vw, 1.05rem);
+  font-weight: 700;
+  box-shadow: 0 8px 28px rgba(255, 68, 0, 0.45);
+  transition: all var(--transition-fast);
+  border: none;
+  cursor: pointer;
+}
+
+.shift-btn-orange:hover {
+  background: linear-gradient(135deg, #FF7711 0%, #FF4400 100%);
+  box-shadow: 0 10px 36px rgba(255, 85, 0, 0.65);
+  transform: translateY(-2px);
+}
+
+.btn-arrow-char {
+  transition: transform 200ms ease;
+}
+
+.shift-btn-orange:hover .btn-arrow-char {
+  transform: translateX(4px);
+}
+
+[dir="rtl"] .shift-btn-orange:hover .btn-arrow-char {
+  transform: translateX(-4px);
+}
+
+/* =========================================================
+   RESPONSIVE BREAKPOINTS
+   ========================================================= */
+@media (max-width: 768px) {
+  .growth-shift-section {
+    height: 340vh;
+  }
+
+  .reframe-variables-grid {
+    gap: 8px;
+  }
+
+  .reframe-var-node {
+    padding: 12px 16px;
+  }
+
+  .reframe-plus-op {
+    font-size: 1.2rem;
+  }
+}
