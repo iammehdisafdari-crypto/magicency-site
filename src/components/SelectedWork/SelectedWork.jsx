@@ -1,12 +1,14 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
+import { useRouter } from '../../context/RouterContext';
 import { ArrowRight, ArrowLeft } from 'lucide-react';
 import { RevealLabel, EASING } from '../motion';
 import './SelectedWork.css';
 
 export default function SelectedWork() {
   const { t, isRTL, setIsModalOpen } = useLanguage();
+  const { navigate } = useRouter();
   const containerRef = useRef(null);
 
   const workData = t.featuredWork || {
@@ -336,7 +338,7 @@ export default function SelectedWork() {
             >
               <motion.button
                 type="button"
-                onClick={() => setIsModalOpen(true)}
+                onClick={() => navigate('/work')}
                 className="vm-showcase-cta-btn btn-motion"
                 aria-label={workData.seeAllWork}
                 whileHover={{ y: -2 }}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
+import { useRouter } from '../../context/RouterContext';
 import { X, ArrowRight, ArrowLeft } from 'lucide-react';
 import ScrambleText from './ScrambleText';
 import { EASING, DURATION } from '../motion';
@@ -18,13 +19,14 @@ const GridDotsIcon = () => (
 
 // Asterisk Icon matching Desktop Reference Image 1: "✱ START A PROJECT"
 const AsteriskIcon = () => (
-  <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" className="vm-btn-asterisk-icon">
-    <path d="M7.984 15.02c-.468 0-.883-.16-1.244-.479-.362-.34-.543-.787-.543-1.34 0-.362.043-.67.128-.926.106-.276.276-.659.51-1.148.234-.447.415-.851.543-1.213.149-.383.255-.819.319-1.308-.447.298-.798.596-1.053.894-.234.298-.5.67-.798 1.117-.234.362-.457.66-.67.894-.191.234-.447.447-.766.638-.319.191-.628.287-.926.287-.319 0-.617-.085-.894-.255-.276-.17-.5-.394-.67-.67-.17-.276-.255-.574-.255-.894 0-.319.074-.617.223-.894.17-.276.415-.5.734-.67.276-.17.564-.276.862-.319.319-.064.723-.106 1.213-.128.617-.043 1.106-.096 1.468-.16.383-.064.787-.202 1.213-.415-.468-.213-.915-.351-1.34-.415-.404-.085-.851-.138-1.34-.16-.511-.043-.904-.085-1.181-.128-.276-.064-.574-.181-.894-.351-.319-.191-.564-.425-.734-.702-.149-.276-.223-.564-.223-.862 0-.34.085-.649.255-.926.17-.255.394-.468.67-.638.276-.17.574-.255.894-.255.276 0 .585.085.926.255.298.191.543.415.734.67.213.234.436.543.67.926.34.511.628.915.862 1.213.255.276.596.564 1.021.862-.043-.532-.138-.99-.287-1.372-.149-.404-.34-.83-.574-1.277-.213-.447-.372-.809-.479-1.085-.106-.276-.16-.596-.16-.957 0-.553.181-1 .543-1.34.362-.34.777-.51 1.245-.51.468 0 .883.17 1.245.51.383.34.574.787.574 1.34 0 .362-.053.702-.16 1.021-.106.298-.266.638-.479 1.021-.234.468-.425.894-.574 1.277-.128.383-.213.84-.255 1.372.425-.298.766-.606 1.021-.926.255-.319.521-.713.798-1.181.064-.085.17-.245.319-.479.17-.255.34-.468.511-.638.17-.17.362-.319.574-.447.383-.17.702-.255.957-.255.319 0 .617.085.894.255.276.17.5.383.67.638.17.34.255.649.255.926 0 .298-.085.585-.255.862-.149.276-.383.51-.702.702-.34.191-.681.319-1.021.383-.34.064-.745.106-1.213.128-.489.021-.926.074-1.309.16-.383.064-.787.191-1.213.383.425.191.809.319 1.149.383.362.064.84.117 1.436.16.468.021.872.064 1.213.128.34.064.659.181.957.351.319.17.553.394.702.67.17.276.255.574.255.894 0 .255-.085.553-.255.894-.17.276-.394.5-.67.67-.276.17-.574.255-.894.255-.276 0-.596-.096-.957-.287-.298-.17-.553-.372-.766-.606-.191-.234-.404-.543-.638-.926-.298-.447-.574-.819-.83-.1.117-.234.298-.564.596-.99.894.085.83.362 1.681.83 2.553.213.383.372.734.479 1.053.106.298.16.628.16.99 0 .553-.191 1-.574 1.34-.362.34-.777.51-1.245.51z" />
+  <svg viewBox="0 0 24 24" fill="none" width="20" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M12 2V22M2 12H22M4.929 4.929L19.071 19.071M4.929 19.071L19.071 4.929" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
   </svg>
 );
 
 export default function Header() {
   const { t, lang, toggleLanguage, setIsModalOpen, isRTL } = useLanguage();
+  const { navigate, isWorkPage, isApproachPage, isCapabilitiesPage, isBlogPage, isAboutPage } = useRouter();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedItemId, setSelectedItemId] = useState(null);
@@ -62,6 +64,66 @@ export default function Header() {
       setIsMenuOpen(false);
     }
 
+    if (itemId === 'work') {
+      if (isWorkPage) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        navigate('/work');
+      }
+      return;
+    }
+
+    if (itemId === 'capabilities') {
+      if (isCapabilitiesPage) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        navigate('/capabilities');
+      }
+      return;
+    }
+
+    if (itemId === 'approach') {
+      if (isApproachPage) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        navigate('/approach');
+      }
+      return;
+    }
+
+    if (itemId === 'about') {
+      if (isAboutPage) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        navigate('/about');
+      }
+      return;
+    }
+
+    if (itemId === 'journal' || itemId === 'blog') {
+      if (isBlogPage) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        navigate('/blog');
+      }
+      return;
+    }
+
+    if (isWorkPage || isApproachPage || isCapabilitiesPage || isBlogPage || isAboutPage) {
+      navigate('/');
+      setTimeout(() => {
+        if (targetId === '#hero' || targetId === '#') {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          const elem = document.querySelector(targetId);
+          if (elem) {
+            elem.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      }, 60);
+      return;
+    }
+
     if (targetId === '#hero' || targetId === '#') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
@@ -77,7 +139,7 @@ export default function Header() {
     { id: 'capabilities', label: t.nav.capabilities, href: '#capabilities', number: '02' },
     { id: 'approach', label: t.nav.approach, href: '#approach', number: '03' },
     { id: 'about', label: t.nav.about, href: '#about', number: '04' },
-    { id: 'journal', label: t.journal?.badge || 'JOURNAL', href: '#journal', number: '05' }
+    { id: 'journal', label: t.journal?.badge || 'Blog', href: '#journal', number: '05' }
   ];
 
   return (
@@ -89,13 +151,17 @@ export default function Header() {
               LEFT: BRAND WORDMARK (MAGICENCY®)
               ========================================================= */}
           <motion.a 
-            href="#hero" 
+            href="/" 
             className="vm-brand" 
             aria-label="Magicency Home"
             onClick={(e) => {
               e.preventDefault();
               if (isMenuOpen) setIsMenuOpen(false);
-              window.scrollTo({ top: 0, behavior: 'smooth' });
+              if (isWorkPage || isApproachPage || isCapabilitiesPage || isBlogPage || isAboutPage) {
+                navigate('/');
+              } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
             }}
             whileHover={{ opacity: 0.88 }}
             transition={{ duration: 0.2, ease: EASING.SECONDARY }}
@@ -287,11 +353,8 @@ export default function Header() {
                     <span className="vm-menu-sidebar-heading">
                       {lang === 'fa' ? 'ارتباط مستقیم' : 'CONTACT'}
                     </span>
-                    <a href="mailto:hi@magicency.com" className="vm-menu-contact-link">
-                      hi@magicency.com
-                    </a>
-                    <a href="mailto:growth@magicency.com" className="vm-menu-contact-link">
-                      growth@magicency.com
+                    <a href="mailto:itsmehdisafdari@gmail.com" className="vm-menu-contact-link">
+                      itsmehdisafdari@gmail.com
                     </a>
                   </div>
                 </motion.div>

@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { ABOUT_DATA } from '../data/aboutData';
 
 const LanguageContext = createContext();
 
@@ -234,7 +235,7 @@ export const translations = {
       ]
     },
     journal: {
-      badge: 'JOURNAL',
+      badge: 'Blog',
       headline: 'Ideas between growth and technology.',
       inFocusLabel: 'In focus',
       allArticlesLabel: 'All Articles',
@@ -277,8 +278,7 @@ export const translations = {
       ctaLine2: "Let's build what moves it forward.",
       startProject: 'Start a Project',
       locations: [
-        { city: 'New York', email: 'hi@magicency.com' },
-        { city: 'Dubai / London', email: 'growth@magicency.com' }
+        { city: 'Manager', email: 'itsmehdisafdari@gmail.com' }
       ],
       socials: [
         { name: 'X', url: 'https://x.com' },
@@ -388,7 +388,7 @@ export const translations = {
         cta: 'Build Your Growth System'
       }
     },
-    capabilities: {
+    legacyCapabilities: {
       eyebrow: 'CAPABILITIES',
       headline: "We don't just market.\nWe build growth systems.",
       supporting: 'From strategy and creative to acquisition, experimentation and analytics — every capability is connected to one objective: sustainable growth.',
@@ -654,47 +654,7 @@ export const translations = {
         }
       ]
     },
-    about: {
-      eyebrow: '08 / BEHIND THE SYSTEM',
-      headline: 'There are people behind the system.',
-      subheadline: 'Strategy means little without human conviction. Behind every line of code, conversion test, and strategic architecture are practitioners who obsess over real commercial impact.',
-      portraitMeta: {
-        role: 'GROWTH ARCHITECT & STRATEGIST',
-        badge: '08 / HUMAN LAYER // CONVICTION'
-      },
-      principles: [
-        {
-          num: '01',
-          code: 'THINK DEEPLY',
-          title: 'We don’t start with channels.',
-          desc: 'We start with understanding market mechanics, audience psychology, and unit economics before spending a dollar.'
-        },
-        {
-          num: '02',
-          code: 'BUILD WITH INTENT',
-          title: 'Strategy means nothing if it cannot become real.',
-          desc: 'High-conviction digital products, landing systems, and creative campaigns built to perform immediately.'
-        },
-        {
-          num: '03',
-          code: 'MEASURE WHAT MATTERS',
-          title: 'Activity is not the same as progress.',
-          desc: 'We track deterministic revenue signals and CAC compression, ignoring vanity metrics and noisy dashboards.'
-        },
-        {
-          num: '04',
-          code: 'COMPOUND THE LEARNING',
-          title: 'Every experiment makes the next decision better.',
-          desc: 'Closed-loop data systems that turn tactical findings into permanent compounding competitive advantages.'
-        }
-      ],
-      whyMoment: {
-        eyebrow: 'WHY MAGICENCY',
-        line1: 'We don’t add more noise.',
-        line2: 'We build what moves the business forward.',
-        desc: 'A dedicated growth partnership designed for founders and leadership teams who demand systemic, measurable momentum.'
-      }
-    },
+    about: ABOUT_DATA.en,
     theBrief: {
       eyebrow: '09 / THE BRIEF',
       subeyebrow: 'DON’T CONTACT US. START SOMEWHERE.',
@@ -863,6 +823,262 @@ export const translations = {
       disclaimer: 'We review every inquiry directly. Strictly confidential.',
       successTitle: 'Conversation Initiated',
       successMessage: 'Thank you. A senior growth partner will review your business context and reach out directly.'
+    },
+    projectDiscovery: {
+      eyebrow: '01 / 08',
+      title: 'START A PROJECT',
+      steps: {
+        step1: {
+          id: 'about',
+          number: '01',
+          title: 'ABOUT YOU',
+          fields: {
+            name: 'Full Name',
+            company: 'Company',
+            role: 'Role',
+            email: 'Work Email'
+          }
+        },
+        step2: {
+          id: 'challenge',
+          number: '02',
+          title: 'THE CHALLENGE',
+          options: [
+            { id: 'grow', label: 'GROW FASTER', desc: 'Acquisition velocity & scaling' },
+            { id: 'reposition', label: 'REPOSITION', desc: 'Brand narrative & market clarity' },
+            { id: 'build', label: 'BUILD NEW', desc: 'Web applications & products' },
+            { id: 'fix', label: 'FIX ISSUES', desc: 'Conversion recovery & audits' }
+          ]
+        },
+        step3: {
+          id: 'needs',
+          number: '03',
+          title: 'WHAT YOU NEED',
+          options: [
+            'Strategy & Growth',
+            'Performance & Creative',
+            'Technology, AI & Automation',
+            'Not sure, need a diagnostic audit'
+          ]
+        },
+        step4: {
+          id: 'timeline',
+          number: '04',
+          title: 'TIMELINE',
+          options: [
+            'As soon as possible',
+            'Within 1-2 months',
+            'Within 3-6 months',
+            'Just exploring options'
+          ]
+        },
+        step5: {
+          id: 'investment',
+          number: '05',
+          title: 'INVESTMENT',
+          options: [
+            'Under $5k',
+            '$5k - $10k',
+            '$10k - $25k',
+            '$25k+'
+          ]
+        },
+        step6: {
+          id: 'brief',
+          number: '06',
+          title: 'PROJECT BRIEF',
+          placeholder: 'Tell us a bit more about what you are trying to achieve...'
+        },
+        step7: {
+          id: 'review',
+          number: '07',
+          title: 'REVIEW',
+          summaryTitle: 'Your inputs',
+          submitBtn: 'SUBMIT BRIEF'
+        },
+        step8: {
+          id: 'sent',
+          number: '08',
+          title: 'SENT',
+          successTitle: 'Brief Received.',
+          successMessage: 'Our strategic team will review your context and reach out shortly.'
+        }
+      },
+      controls: {
+        next: 'NEXT',
+        prev: 'PREV',
+        close: 'CLOSE'
+      }
+    },
+    approach: {
+      pageMeta: {
+        title: 'Approach // How Magicency Thinks // MAGICENCY®',
+        description: 'We understand the business first. Then we engineer the system that makes it grow.'
+      },
+      hero: {
+        eyebrow: 'APPROACH',
+        headlineLine1: "We don't start",
+        headlineLine2: "with the answer.",
+        subline: 'We start with what needs to change.',
+        metaphor: 'CHAOS → CONNECTION → CLARITY'
+      },
+      deconstruction: {
+        badge: '01 / DIAGNOSIS',
+        title: 'From Request to Problem',
+        requestPrompt: 'THE REQUEST',
+        requestQuote: '“I need a new website.”',
+        subtext: 'We deconstruct the request to uncover what actually needs to change.',
+        revealedTitle: 'THE REAL PROBLEM',
+        problems: [
+          {
+            id: 'positioning',
+            title: 'Positioning',
+            desc: 'The brand is not communicating clear commercial value.'
+          },
+          {
+            id: 'experience',
+            title: 'Experience',
+            desc: 'The customer journey has high friction and low resonance.'
+          },
+          {
+            id: 'conversion',
+            title: 'Conversion',
+            desc: 'Traffic enters leaky pages with no systematic proof architecture.'
+          },
+          {
+            id: 'acquisition',
+            title: 'Acquisition',
+            desc: 'Channels are isolated without compounding retention loops.'
+          }
+        ]
+      },
+      systemNetwork: {
+        badge: '02 / THE SYSTEM',
+        headline: 'Nothing works in isolation.',
+        subheadline: 'When marketing fails, it is because disciplines are disconnected. We engineer a living circuit.',
+        centralNode: 'BUSINESS',
+        nodes: [
+          { id: 'strategy', label: 'STRATEGY', micro: 'Direction.' },
+          { id: 'creative', label: 'CREATIVE', micro: 'Meaning.' },
+          { id: 'digital', label: 'DIGITAL', micro: 'Experience.' },
+          { id: 'acquisition', label: 'ACQUISITION', micro: 'Demand.' },
+          { id: 'measurement', label: 'MEASUREMENT', micro: 'Learning.' }
+        ],
+        loopReturn: 'MEASUREMENT → INSIGHT → STRATEGY'
+      },
+      shift: {
+        badge: '03 / THE SHIFT',
+        headline: 'From Isolated Actions to Connected Growth',
+        subheadline: 'Tactics reset to zero after each campaign. Systems build permanent compounding momentum.',
+        tacticsTitle: 'TACTICS',
+        tacticsSubtitle: 'Isolated Actions',
+        tacticsItems: ['Campaign', 'Website', 'Content', 'Ads'],
+        systemTitle: 'SYSTEM',
+        systemSubtitle: 'Connected Growth',
+        systemItems: ['Strategy', 'Creative', 'Digital', 'Acquisition', 'Measurement']
+      },
+      compounding: {
+        badge: '04 / COMPOUNDING',
+        headline: 'Why we think in systems.',
+        axiom: 'Better decisions create better systems.\nBetter systems create better growth.',
+        subtext: 'Every cycle makes the next cycle stronger.',
+        steps: [
+          '1 DECISION',
+          'DECISION + LEARNING',
+          'DECISION + LEARNING + DATA',
+          'DECISION + LEARNING + DATA + EXPERIENCE',
+          'COMPOUNDING SCALE'
+        ]
+      },
+      closing: {
+        statement: "Growth isn't a collection of tactics.\nIt's a system of better decisions.",
+        ctaButton: 'START A PROJECT'
+      }
+    },
+    capabilities: {
+      pageMeta: {
+        title: 'Capabilities // What We Can Build // MAGICENCY®',
+        description: 'What we can build when the pieces connect. Strategy, creative, digital and growth engineered as one system.'
+      },
+      hero: {
+        eyebrow: 'CAPABILITIES',
+        headlineLine1: 'What we can build',
+        headlineLine2: 'when the pieces connect.',
+        subline: 'Strategy, creative, digital and growth — engineered as one system.',
+        metaphor: 'COMPONENTS ≠ SERVICES // CAPABILITIES = SYSTEM'
+      },
+      system: {
+        badge: '01 / ARCHITECTURE',
+        title: 'The Capability System',
+        subtext: 'Every capability becomes significantly more powerful when connected.',
+        instruction: 'SELECT A DOMAIN TO REVEAL ITS INTERNAL COMPONENTS',
+        connectedTo: 'CONNECTS TO'
+      },
+      builder: {
+        badge: '02 / ASSEMBLY',
+        title: 'Build the System',
+        subtext: 'We do not sell packages. We snap capabilities together to solve concrete commercial challenges.',
+        challengeLabel: 'SELECT COMMERCIAL CHALLENGE',
+        builtLabel: 'SYSTEM ASSEMBLED'
+      },
+      depth: {
+        badge: '03 / DEPTH',
+        title: 'Capability Depth',
+        subtext: 'High-conviction components engineered for commercial velocity.'
+      },
+      outcome: {
+        badge: '04 / TRANSFORMATION',
+        title: 'From Capability to Outcome',
+        subtext: 'Our value is not the isolated service — it is the permanent compounding system created by combining them.'
+      },
+      closing: {
+        eyebrow: 'GET STARTED',
+        statementLine1: "Don't know which capability you need?",
+        statementLine2: "That's exactly where we start.",
+        ctaButton: 'START A PROJECT'
+      }
+    },
+    blog: {
+      pageMeta: {
+        title: 'Blog // Editorial Publication // MAGICENCY®',
+        description: 'Ideas worth thinking about. Strategy, creativity, digital and growth from the perspective of people building them.'
+      },
+      hero: {
+        eyebrow: 'INSIGHTS // VOL. 04',
+        headlineLine1: 'Ideas worth',
+        headlineLine2: 'thinking about.',
+        subline: 'Strategy, creativity, digital and growth — from the perspective of people building them.',
+        searchPlaceholder: 'Search insights, essays, or field notes...'
+      },
+      featured: {
+        badge: 'FEATURED STORY',
+        readArticle: 'READ ARTICLE'
+      },
+      stream: {
+        badge: 'EDITORIAL ARCHIVE',
+        title: 'All Publications',
+        readArticle: 'READ ARTICLE',
+        noResults: 'No insights found matching your query.'
+      },
+      pov: {
+        badge: 'EDITORIAL CREED',
+        headline: "We don't publish to fill a calendar.",
+        subline: 'We publish what we are learning, questioning and seeing in the real commercial world.'
+      },
+      newsletter: {
+        badge: 'DISPATCH',
+        headline: 'Stay curious.',
+        subline: 'New thinking on strategy, digital, creativity and growth.',
+        placeholder: 'ENTER YOUR EMAIL',
+        button: 'SUBSCRIBE',
+        successMsg: 'Thank you for subscribing to Magicency Dispatches.'
+      },
+      reader: {
+        close: 'CLOSE',
+        backToBlog: '← BACK TO ALL INSIGHTS',
+        keyTakeaways: 'KEY TAKEAWAYS',
+        relatedArticles: 'RELATED INSIGHTS'
+      }
     }
   },
   fa: {
@@ -1129,7 +1345,7 @@ export const translations = {
       ]
     },
     journal: {
-      badge: 'ژورنال',
+      badge: 'Blog',
       headline: 'ایده‌ها و بینش‌های میان رشد، خلق ارزش و فناوری.',
       inFocusLabel: 'مقالات برگزیده',
       allArticlesLabel: 'همه مقالات',
@@ -1172,8 +1388,7 @@ export const translations = {
       ctaLine2: 'بیایید آنچه را که کسب‌وکارتان را به جلو می‌برد بسازیم.',
       startProject: 'شروع پروژه',
       locations: [
-        { city: 'نیویورک', email: 'hi@magicency.com' },
-        { city: 'دبی / لندن', email: 'growth@magicency.com' }
+        { city: 'واحد مدیریت', email: 'itsmehdisafdari@gmail.com' }
       ],
       socials: [
         { name: 'X', url: 'https://x.com' },
@@ -1185,7 +1400,7 @@ export const translations = {
       nav: [
         { label: 'پروژه‌ها', href: '#work' },
         { label: 'قابلیت‌ها', href: '#capabilities' },
-        { label: 'ژورنال', href: '#journal' },
+        { label: 'Blog', href: '#journal' },
         { label: 'درباره ما', href: '#about' }
       ],
       legal: [
@@ -1283,7 +1498,7 @@ export const translations = {
         cta: 'طراحی سیستم رشد اختصاصی شما'
       }
     },
-    capabilities: {
+    legacyCapabilities: {
       eyebrow: 'توانمندی‌های سیستم رشد',
       headline: 'ما فقط تبلیغ نمی‌کنیم؛\nما سیستم‌های رشد می‌سازیم.',
       supporting: 'از استراتژی و خلاقیت تا جذب، آزمایش‌های مداوم و تحلیل داده — هر توانمندی به یک هدف مشترک متصل است: رشد پایدار و مقیاس‌پذیر.',
@@ -1549,47 +1764,7 @@ export const translations = {
         }
       ]
     },
-    about: {
-      eyebrow: '۰۸ / پشت پرده سیستم',
-      headline: 'پشت این سیستم، انسان‌هایی با تفکر و باور قاطع ایستاده‌اند.',
-      subheadline: 'استراتژی بدون تعهد و تفکر انسانی معنایی ندارد. پشت هر خط کد، تست تبدیل و معماری رشد، متخصصانی هستند که با وسواس روی اثرگذاری تجاری واقعی تمرکز دارند.',
-      portraitMeta: {
-        role: 'معمار ارشد رشد و استراتژیست',
-        badge: '۰۸ / لایه انسانی // تعهد عملیاتی'
-      },
-      principles: [
-        {
-          num: '۰۱',
-          code: 'تفکر عمیق',
-          title: 'ما کار را با کانال‌های تبلیغاتی شروع نمی‌کنیم.',
-          desc: 'ما پیش از خرج کردن حتی یک ریال، از درک عمیق رفتار بازار، روانشناسی مخاطب و اقتصاد واحد آغاز می‌کنیم.'
-        },
-        {
-          num: '۰۲',
-          code: 'ساخت هدفمند',
-          title: 'استراتژی اگر به چیزی ملموس تبدیل نشود، بی‌ارزش است.',
-          desc: 'تولید دارایی‌های دیجیتال، پلتفرم‌های پربازده و کمپین‌های خلاق با هدف اثرگذاری آنی و پایدار.'
-        },
-        {
-          num: '۰۳',
-          code: 'سنجش واقعیت',
-          title: 'شلوغ بودن به معنای پیشرفت بیزنس نیست.',
-          desc: 'ردیابی سیگنال‌های قطعی درآمد و کاهش مستمر هزینه جذب، به دور از متریک‌های توخالی و گزارش‌های پرزرق‌وبرق.'
-        },
-        {
-          num: '۰۴',
-          code: 'انباشت یادگیری',
-          title: 'هر آزمایش تصمیم بعدی را هوشمندانه‌تر می‌سازد.',
-          desc: 'سیستم بازخورد بسته‌ای که دستاوردهای مقطعی را به مزیت‌های رقابتی پایدار و تصاعدی تبدیل می‌کند.'
-        }
-      ],
-      whyMoment: {
-        eyebrow: 'چرا مجیکنسـی؟',
-        line1: 'ما به نویز بازار اضافه نمی‌کنیم؛',
-        line2: 'ما چیزی را می‌سازیم که کسب‌وکار را به جلو حرکت می‌دهد.',
-        desc: 'یک همکاری استراتژیک برای بنیان‌گذاران و مدیرانی که به دنبال رشد سیستماتیک، شفاف و مقیاس‌پذیر هستند.'
-      }
-    },
+    about: ABOUT_DATA.fa,
     theBrief: {
       eyebrow: '۰۹ / بریف اختصاصی رشد',
       subeyebrow: 'فرم تماس پر نکنید؛ از یک تصمیم استراتژیک شروع کنید.',
@@ -1758,6 +1933,262 @@ export const translations = {
       disclaimer: 'اطلاعات شما کاملاً محرمانه بررسی خواهد شد.',
       successTitle: 'درخواست شما ثبت شد',
       successMessage: 'با سپاس. کارشناسان ارشد استراتژی مجیکنسـی پس از بررسی اولیه بیزنس شما، جهت هماهنگی تماس خواهند گرفت.'
+    },
+    projectDiscovery: {
+      eyebrow: '۰۱ / ۰۸',
+      title: 'شروع پروژه',
+      steps: {
+        step1: {
+          id: 'about',
+          number: '۰۱',
+          title: 'درباره شما',
+          fields: {
+            name: 'نام و نام خانوادگی',
+            company: 'نام شرکت',
+            role: 'سمت شغلی',
+            email: 'ایمیل کاری'
+          }
+        },
+        step2: {
+          id: 'challenge',
+          number: '۰۲',
+          title: 'چالش اصلی',
+          options: [
+            { id: 'grow', label: 'رشد سریع‌تر', desc: 'شتاب‌دهی به جذب مشتری و مقیاس‌پذیری' },
+            { id: 'reposition', label: 'تغییر جایگاه', desc: 'بازطراحی هویت برند و شفافیت پیام' },
+            { id: 'build', label: 'ساخت محصول جدید', desc: 'توسعه وب‌سایت، اپلیکیشن و محصول دیجیتال' },
+            { id: 'fix', label: 'رفع مشکلات فعلی', desc: 'عارضه‌یابی و بهبود نرخ تبدیل' }
+          ]
+        },
+        step3: {
+          id: 'needs',
+          number: '۰۳',
+          title: 'نیاز شما',
+          options: [
+            'استراتژی و رشد',
+            'پرفورمنس مارکتینگ و تولید محتوا',
+            'تکنولوژی، هوش مصنوعی و اتوماسیون',
+            'مطمئن نیستم، نیاز به بررسی دارم'
+          ]
+        },
+        step4: {
+          id: 'timeline',
+          number: '۰۴',
+          title: 'زمان‌بندی',
+          options: [
+            'در سریع‌ترین زمان ممکن',
+            'طی ۱ تا ۲ ماه آینده',
+            'طی ۳ تا ۶ ماه آینده',
+            'فقط در حال بررسی هستم'
+          ]
+        },
+        step5: {
+          id: 'investment',
+          number: '۰۵',
+          title: 'بودجه تقریبی',
+          options: [
+            'کمتر از ۵۰ میلیون تومان',
+            '۵۰ تا ۲۰۰ میلیون تومان',
+            '۲۰۰ تا ۵۰۰ میلیون تومان',
+            'بیشتر از ۵۰۰ میلیون تومان'
+          ]
+        },
+        step6: {
+          id: 'brief',
+          number: '۰۶',
+          title: 'خلاصه پروژه',
+          placeholder: 'کمی بیشتر در مورد هدفی که می‌خواهید به آن برسید بنویسید...'
+        },
+        step7: {
+          id: 'review',
+          number: '۰۷',
+          title: 'مروری بر اطلاعات',
+          summaryTitle: 'اطلاعات وارد شده',
+          submitBtn: 'ارسال درخواست'
+        },
+        step8: {
+          id: 'sent',
+          number: '۰۸',
+          title: 'ارسال شد',
+          successTitle: 'درخواست شما ثبت شد.',
+          successMessage: 'تیم استراتژی ما درخواست شما را بررسی کرده و به زودی با شما تماس خواهد گرفت.'
+        }
+      },
+      controls: {
+        next: 'مرحله بعد',
+        prev: 'مرحله قبل',
+        close: 'بستن'
+      }
+    },
+    approach: {
+      pageMeta: {
+        title: 'رویکرد ما // تفکر و سیستم رشد // مجیکنسـی (MAGICENCY®)',
+        description: 'ما اول کسب‌وکار را عمیقاً می‌فهمیم، سپس سیستمی را مهندسی می‌کنیم که باعث رشد آن شود.'
+      },
+      hero: {
+        eyebrow: 'رویکرد ما',
+        headlineLine1: 'ما با پاسخ',
+        headlineLine2: 'شروع نمی‌کنیم.',
+        subline: 'با فهمیدن اینکه چه چیزی باید تغییر کند شروع می‌کنیم.',
+        metaphor: 'هرج‌ومرج ← پیوند ← شفافیت'
+      },
+      deconstruction: {
+        badge: '۰۱ / عارضه‌یابی',
+        title: 'از درخواست تا صورت‌مسئله',
+        requestPrompt: 'درخواست اولیه',
+        requestQuote: '«ما به یک وبسایت جدید نیاز داریم.»',
+        subtext: 'ما درخواست را کالبدشکافی می‌کنیم تا ریشه اصلی تحول را کشف کنیم.',
+        revealedTitle: 'مسئله واقعی',
+        problems: [
+          {
+            id: 'positioning',
+            title: 'جایگاه‌یابی',
+            desc: 'برند ارزش تجاری خود را به درستی و وضوح منتقل نمی‌کند.'
+          },
+          {
+            id: 'experience',
+            title: 'تجربه کاربر',
+            desc: 'مسیر تعامل مشتری دارای اصطکاک بالا و کشش اندک است.'
+          },
+          {
+            id: 'conversion',
+            title: 'نرخ تبدیل',
+            desc: 'ترافیک وارد صفحاتی فاقد معماری سیستماتیک اثبات ارزش می‌شود.'
+          },
+          {
+            id: 'acquisition',
+            title: 'جذب مخاطب',
+            desc: 'کانال‌ها جزیره‌ای هستند و چرخه‌های رشد بازگشتی شکل نگرفته است.'
+          }
+        ]
+      },
+      systemNetwork: {
+        badge: '۰۲ / سیستم',
+        headline: 'هیچ چیزی در انزوا کار نمی‌کند.',
+        subheadline: 'وقتی بازاریابی شکست می‌خورد، به این دلیل است که دیسیپلین‌ها متصل نیستند. ما یک مدار زنده مهندسی می‌کنیم.',
+        centralNode: 'کسب‌وکار',
+        nodes: [
+          { id: 'strategy', label: 'استراتژی', micro: 'جهت و مسیر.' },
+          { id: 'creative', label: 'خلاقیت', micro: 'معنا و هویت.' },
+          { id: 'digital', label: 'دیجیتال', micro: 'تجربه تعاملی.' },
+          { id: 'acquisition', label: 'جذب مخاطب', micro: 'کشش و تقاضا.' },
+          { id: 'measurement', label: 'سنجش و داده', micro: 'یادگیری تجربی.' }
+        ],
+        loopReturn: 'سنجش داده‌ها ← بینش تحلیلی ← استراتژی بعدی'
+      },
+      shift: {
+        badge: '۰۳ / گذار بنیادی',
+        headline: 'از اقدامات جزیره‌ای تا رشد پیوسته و متصل',
+        subheadline: 'تاکتیک‌ها پس از هر کمپین به نقطه صفر بازمی‌گردند. سیستم‌ها شتابی مرکب و دائمی می‌سازند.',
+        tacticsTitle: 'تاکتیک‌ها',
+        tacticsSubtitle: 'اقدامات جزیره‌ای',
+        tacticsItems: ['کمپین', 'وبسایت', 'محتوا', 'تبلیغات'],
+        systemTitle: 'سیستم',
+        systemSubtitle: 'رشد پیوسته',
+        systemItems: ['استراتژی', 'خلاقیت', 'دیجیتال', 'جذب مخاطب', 'سنجش داده']
+      },
+      compounding: {
+        badge: '۰۴ / رشد تصاعدی',
+        headline: 'چرا به شکل سیستم فکر می‌کنیم.',
+        axiom: 'تصمیم‌های بهتر، سیستم‌های قوی‌تر می‌سازند.\nسیستم‌های قوی‌تر، رشد تصاعدی خلق می‌کنند.',
+        subtext: 'هر چرخه، چرخه بعدی را هوشمندانه‌تر و قدرتمندتر می‌کند.',
+        steps: [
+          '۱ تصمیم استراتژیک',
+          'تصمیم + یادگیری',
+          'تصمیم + یادگیری + داده',
+          'تصمیم + یادگیری + داده + تجربه',
+          'مقیاس تصاعدی مرکب'
+        ]
+      },
+      closing: {
+        statement: 'رشد، مجموعه‌ای از تاکتیک‌های پراکنده نیست.\nرشد، سیستمِ اتخاذ تصمیم‌های بهتر است.',
+        ctaButton: 'شروع پروژه'
+      }
+    },
+    capabilities: {
+      pageMeta: {
+        title: 'توانمندی‌ها // آنچه می‌سازیم // مجیکنسـی (MAGICENCY®)',
+        description: 'آنچه می‌سازیم وقتی اجزا به هم متصل می‌شوند. استراتژی، خلاقیت، دیجیتال و رشد — مهندسی‌شده در قالب یک سیستم واحد.'
+      },
+      hero: {
+        eyebrow: 'توانمندی‌ها',
+        headlineLine1: 'آنچه می‌سازیم',
+        headlineLine2: 'وقتی اجزا به هم متصل می‌شوند.',
+        subline: 'استراتژی، خلاقیت، دیجیتال و رشد — مهندسی‌شده در قالب یک سیستم واحد.',
+        metaphor: 'توانمندی ≠ خدمات جزیره‌ای // توانمندی = اجزای یک سیستم'
+      },
+      system: {
+        badge: '۰۱ / معماری سیستم',
+        title: 'سیستم جامع توانمندی‌ها',
+        subtext: 'هر توانمندی زمانی که در یک مدار متصل قرار می‌گیرد، قدرتی چندبرابر پیدا می‌کند.',
+        instruction: 'یک حوزه را انتخاب کنید تا اجزای درونی و اتصالات آن آشکار شوند',
+        connectedTo: 'اتصال به حوزه‌های'
+      },
+      builder: {
+        badge: '۰۲ / اتصال اجزا',
+        title: 'مهندسی ترکیب سیستم',
+        subtext: 'ما پکیج‌های کلیشه‌ای نمی‌فروشیم. توانمندی‌ها را برای حل چالش‌های واقعی کسب‌وکار به هم متصل می‌کنیم.',
+        challengeLabel: 'انتخاب چالش تجاری',
+        builtLabel: 'سیستم یکپارچه‌شده'
+      },
+      depth: {
+        badge: '۰۳ / عمق توانمندی‌ها',
+        title: 'کالبدشکافی توانمندی‌ها',
+        subtext: 'اجزای با پرفورمنس بالا که برای سرعت‌بخشی به رشد تجاری مهندسی شده‌اند.'
+      },
+      outcome: {
+        badge: '۰۴ / تحول ساختاری',
+        title: 'از توانمندی تا دستاورد تجاری',
+        subtext: 'ارزش مجیکنسـی در خدمات تکه‌تکه نیست؛ در سیستم پایداری است که از هم‌افزایی آن‌ها ساخته می‌شود.'
+      },
+      closing: {
+        eyebrow: 'شروع همکاری',
+        statementLine1: 'نمی‌دانید به کدام توانمندی نیاز دارید؟',
+        statementLine2: 'ما دقیقاً از همین نقطه شروع می‌کنیم.',
+        ctaButton: 'شروع پروژه'
+      }
+    },
+    blog: {
+      pageMeta: {
+        title: 'دیدگاه‌ها و مقالات // نشریه تحلیلی // مجیکنسـی (MAGICENCY®)',
+        description: 'ایده‌هایی که ارزش اندیشیدن دارند. استراتژی، خلاقیت، دیجیتال و رشد از زاویه دید مهندسان آن‌ها.'
+      },
+      hero: {
+        eyebrow: 'بینش و دیدگاه // دوره چهارم',
+        headlineLine1: 'ایده‌هایی که ارزش',
+        headlineLine2: 'اندیشیدن دارند.',
+        subline: 'استراتژی، خلاقیت، دیجیتال و رشد — از زاویه دید مهندسانی که آن‌ها را می‌سازند.',
+        searchPlaceholder: 'جستجو در دیدگاه‌ها، جستارها و یادداشت‌ها...'
+      },
+      featured: {
+        badge: 'مقاله برگزیده سردبیر',
+        readArticle: 'مطالعه مقاله'
+      },
+      stream: {
+        badge: 'آرشیو نشریه',
+        title: 'تمام مقالات و بینش‌ها',
+        readArticle: 'مطالعه مقاله',
+        noResults: 'مقاله‌ای مطابق با عبارت جستجوی شما یافت نشد.'
+      },
+      pov: {
+        badge: 'مانیفست انتشار',
+        headline: 'ما برای پر کردن تقویم محتوایی منتشر نمی‌کنیم.',
+        subline: 'ما آموخته‌ها، پرسش‌ها و مشاهدات تجربی در دنیای واقعی کسب‌وکار را به اشتراک می‌گذاریم.'
+      },
+      newsletter: {
+        badge: 'خبرنامه سردبیری',
+        headline: 'کنجکاو بمانید.',
+        subline: 'دیدگاه‌های تازه پیرامون استراتژی، دیجیتال، خلاقیت و مدل‌های رشد.',
+        placeholder: 'ایمیل خود را وارد کنید',
+        button: 'عضویت در خبرنامه',
+        successMsg: 'با تشکر! عضویت شما در خبرنامه تحلیلی مجیکنسـی با موفقیت ثبت شد.'
+      },
+      reader: {
+        close: 'بستن',
+        backToBlog: '← بازگشت به تمام مقالات',
+        keyTakeaways: 'نکات کلیدی و راهبردی',
+        relatedArticles: 'دیدگاه‌های مرتبط'
+      }
     }
   }
 };

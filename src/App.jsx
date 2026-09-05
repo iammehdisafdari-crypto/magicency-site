@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
+import { RouterProvider, useRouter } from './context/RouterContext';
 import BrandIntro from './components/Intro/BrandIntro';
 import Header from './components/Header/Header';
 import Hero from './components/Hero/Hero';
@@ -8,11 +9,17 @@ import ProblemInsight from './components/ProblemInsight/ProblemInsight';
 import WhatWeDo from './components/WhatWeDo/WhatWeDo';
 import Journal from './components/Journal/Journal';
 import Footer from './components/Footer/Footer';
-import GrowthProtocolModal from './components/Modal/GrowthProtocolModal';
+import ProjectDiscovery from './components/ProjectDiscovery/ProjectDiscovery';
+import WorkPage from './components/Work/WorkPage';
+import ApproachPage from './components/Approach/ApproachPage';
+import CapabilitiesPage from './components/Capabilities/CapabilitiesPage';
+import BlogPage from './components/Blog/BlogPage';
+import AboutPage from './components/About/AboutPage';
 import './styles/global.css';
 
 function MainApp() {
   const { isRTL } = useLanguage();
+  const { isWorkPage, isApproachPage, isCapabilitiesPage, isBlogPage, isAboutPage } = useRouter();
   const [introFinished, setIntroFinished] = useState(false);
 
   return (
@@ -28,27 +35,41 @@ function MainApp() {
 
       {/* Main Experience Flow */}
       <main className="main-content-flow">
-        {/* Phase 01: Hero Section (Vivid Motion Architecture + Mouse Fire Effect) */}
-        <Hero isLoaded={introFinished} />
+        {isWorkPage ? (
+          <WorkPage />
+        ) : isApproachPage ? (
+          <ApproachPage />
+        ) : isCapabilitiesPage ? (
+          <CapabilitiesPage />
+        ) : isBlogPage ? (
+          <BlogPage />
+        ) : isAboutPage ? (
+          <AboutPage />
+        ) : (
+          <>
+            {/* Phase 01: Hero Section (Vivid Motion Architecture + Mouse Fire Effect) */}
+            <Hero isLoaded={introFinished} />
 
-        {/* Phase 02: Featured Work (Sticky Scroll Showcase + 4 Projects + See All Work CTA) */}
-        <SelectedWork />
+            {/* Phase 02: Featured Work (Sticky Scroll Showcase + 4 Projects + See All Work CTA) */}
+            <SelectedWork />
 
-        {/* Phase 03: Problem / Insight Narrative (Sticky-Scroll 4-Beat System Architecture) */}
-        <ProblemInsight />
+            {/* Phase 03: Problem / Insight Narrative (Sticky-Scroll 4-Beat System Architecture) */}
+            <ProblemInsight />
 
-        {/* Phase 04: What We Do / Capabilities (3-Pillar Capability Architecture) */}
-        <WhatWeDo />
+            {/* Phase 04: What We Do / Capabilities (3-Pillar Capability Architecture) */}
+            <WhatWeDo />
 
-        {/* Phase 05: Journal / Insights (Exact Vivid Motion Recreation) */}
-        <Journal />
+            {/* Phase 05: Journal / Insights (Exact Vivid Motion Recreation) */}
+            <Journal />
+          </>
+        )}
       </main>
 
       {/* Cinematic Closing Frame Footer */}
       <Footer />
 
       {/* Interactive Growth Protocol Modal */}
-      <GrowthProtocolModal />
+      <ProjectDiscovery />
     </div>
   );
 }
@@ -56,7 +77,10 @@ function MainApp() {
 export default function App() {
   return (
     <LanguageProvider>
-      <MainApp />
+      <RouterProvider>
+        <MainApp />
+      </RouterProvider>
     </LanguageProvider>
   );
 }
+

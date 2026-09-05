@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
+import { useRouter } from '../../context/RouterContext';
 import ScrambleText from '../Header/ScrambleText';
 import { FluidCursor } from '../effects';
 import { Reveal, Stagger, maskedLineVariants, editorialVariants, buttonMotion } from '../motion';
@@ -15,13 +16,13 @@ const ArrowIcon = () => (
 
 export default function Footer() {
   const { t, isRTL, setIsModalOpen } = useLanguage();
+  const { navigate, isWorkPage } = useRouter();
   const f = t.footer || {
     ctaLine1: 'Have a growth problem worth solving?',
     ctaLine2: "Let's build what moves it forward.",
     startProject: 'Start a Project',
     locations: [
-      { city: 'New York', email: 'hi@magicency.com' },
-      { city: 'Dubai / London', email: 'growth@magicency.com' }
+      { city: 'Manager', email: 'itsmehdisafdari@gmail.com' }
     ],
     socials: [
       { name: 'X', url: 'https://x.com' },
@@ -33,7 +34,7 @@ export default function Footer() {
     nav: [
       { label: 'WORK', href: '#work' },
       { label: 'CAPABILITIES', href: '#capabilities' },
-      { label: 'JOURNAL', href: '#journal' },
+      { label: 'Blog', href: '#journal' },
       { label: 'ABOUT', href: '#about' }
     ],
     legal: [
@@ -160,7 +161,46 @@ export default function Footer() {
             {f.nav.map((item, idx) => (
               <motion.a
                 key={idx}
-                href={item.href}
+                href={
+                  item.href === '#work' ? '/work' :
+                  item.href === '#capabilities' ? '/capabilities' :
+                  item.href === '#approach' ? '/approach' :
+                  item.href === '#about' ? '/about' :
+                  item.href === '#journal' || item.label.toLowerCase() === 'blog' ? '/blog' : item.href
+                }
+                onClick={(e) => {
+                  if (item.href === '#work') {
+                    e.preventDefault();
+                    navigate('/work');
+                    return;
+                  }
+                  if (item.href === '#capabilities') {
+                    e.preventDefault();
+                    navigate('/capabilities');
+                    return;
+                  }
+                  if (item.href === '#approach') {
+                    e.preventDefault();
+                    navigate('/approach');
+                    return;
+                  }
+                  if (item.href === '#about') {
+                    e.preventDefault();
+                    navigate('/about');
+                    return;
+                  }
+                  if (item.href === '#journal' || item.label.toLowerCase() === 'blog') {
+                    e.preventDefault();
+                    navigate('/blog');
+                    return;
+                  }
+                  e.preventDefault();
+                  navigate('/');
+                  setTimeout(() => {
+                    const elem = document.querySelector(item.href);
+                    if (elem) elem.scrollIntoView({ behavior: 'smooth' });
+                  }, 60);
+                }}
                 variants={editorialVariants}
                 className="footer-useful-social-link footer-nav-item"
               >

@@ -25,7 +25,7 @@ export default function Journal() {
   }, []);
 
   const journalData = t.journal || {
-    badge: 'JOURNAL',
+    badge: 'Blog',
     headline: 'Ideas between growth and technology.',
     inFocusLabel: 'In focus',
     filters: ['ALL', 'STRATEGY', 'PERFORMANCE', 'CREATIVE', 'TECHNOLOGY', 'AI'],
