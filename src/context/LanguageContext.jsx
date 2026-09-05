@@ -20,12 +20,12 @@ export const translations = {
     hero: {
       category: 'CONNECTED GROWTH ARCHITECTURE',
       badge: '✦ CONNECTED GROWTH ARCHITECTURE',
-      titleLine1: 'Connected ',
-      italicWord1: 'growth systems',
-      titleLine2: 'built for ',
-      italicWord2: 'scale',
-      titleLine2Suffix: ' by MAGICENCY',
-      headline: 'Connected growth systems built for scale by MAGICENCY',
+      titleLine1: "We don't just execute ",
+      italicWord1: 'marketing.',
+      titleLine2: 'We engineer ',
+      italicWord2: 'growth systems.',
+      titleLine2Suffix: '',
+      headline: "We don't just execute marketing. We engineer growth systems.",
       statement: {
         line1: 'Connected growth systems',
         line2: 'unifying strategy, creative, performance,',
@@ -38,7 +38,19 @@ export const translations = {
       primaryCta: 'Start a Project',
       secondaryCta: 'Explore Approach',
       clients: [
-        'Meta', 'Mastercard', 'FC Barcelona', 'Dribbble', 'IMMUTA', 'CISCO', 'SKECHERS', 'Triple Whale', 'SOUNDCLOUD', 'AWS', 'STRIPE'
+        'tamir online',
+        'atrash store',
+        'classino',
+        'respina',
+        'Itbfx',
+        'Maryam Majidinejad',
+        'browja',
+        'Elysium Toys',
+        'Wine Amphorae',
+        'codeyad',
+        'silvermotor',
+        'ordibeheshbook',
+        'photoafshin'
       ],
       telemetry: {
         status: 'GROWTH SYSTEM: ACTIVE',
@@ -104,6 +116,56 @@ export const translations = {
           alt: 'Vault Bank Fintech & Motion',
           color: '#EAB308'
         }
+      ]
+    },
+    problemInsight: {
+      badge: 'THE CORE PREMISE',
+      sectionIndex: '03',
+      sectionLabel: 'PROBLEM // INSIGHT',
+      beats: [
+        {
+          id: 'problem',
+          num: '01',
+          tag: 'THE PROBLEM',
+          headline: 'More content. More campaigns. More channels.',
+          insight: 'But more activity does not necessarily create more growth.',
+          status: 'STATE: DISPERSED ACTIVITY',
+          metric: 'HIGH NOISE // ZERO COMPOUNDING'
+        },
+        {
+          id: 'insight',
+          num: '02',
+          tag: 'THE INSIGHT',
+          headline: "Growth doesn't come from isolated marketing actions.",
+          insight: 'It comes from connecting the right decisions together.',
+          status: 'STATE: CONVERGING SIGNALS',
+          metric: 'DISCONNECTED SILOS → SHARED AXIS'
+        },
+        {
+          id: 'system',
+          num: '03',
+          tag: 'THE SYSTEM',
+          headline: 'Strategy → Creative → Digital → Acquisition → Measurement',
+          insight: 'A synchronized architecture moving as one continuous pipeline.',
+          status: 'STATE: SYNCHRONIZED PIPELINE',
+          metric: 'CLOSED-LOOP ATTRIBUTION & FLOW'
+        },
+        {
+          id: 'outcome',
+          num: '04',
+          tag: 'THE OUTCOME',
+          headline: 'When everything compounds together, marketing becomes a growth engine.',
+          insight: 'Deterministic scale. Compounding velocity. Zero wasted energy.',
+          status: 'STATE: COMPOUNDING FLYWHEEL',
+          metric: 'AUTONOMOUS GROWTH ARCHITECTURE'
+        }
+      ],
+      nodes: [
+        { id: 'strategy', num: '01', label: 'STRATEGY', sub: 'DIRECTION' },
+        { id: 'creative', num: '02', label: 'CREATIVE', sub: 'ATTENTION' },
+        { id: 'digital', num: '03', label: 'DIGITAL', sub: 'CONVERSION' },
+        { id: 'acquisition', num: '04', label: 'ACQUISITION', sub: 'SCALE' },
+        { id: 'measurement', num: '05', label: 'MEASUREMENT', sub: 'FEEDBACK' }
       ]
     },
     whatWeDo: {
@@ -820,11 +882,12 @@ export const translations = {
     hero: {
       category: 'معماری یکپارچه رشد و تحول دیجیتال',
       badge: '✦ معماری یکپارچه سیستم‌های رشد',
-      titleLine1: 'معماری ',
-      italicWord1: 'یکپارچه رشد؛',
-      titleLine2: 'مهندسی ',
-      italicWord2: 'مقیاس‌پذیری پایدار.',
-      headline: 'معماری یکپارچه رشد؛ مهندسی مقیاس‌پذیری پایدار.',
+      titleLine1: 'ما فقط بازاریابی را\u00A0',
+      italicWord1: 'اجرا نمیکنیم.',
+      titleLine2: 'ما سیستمهای رشد را\u00A0',
+      italicWord2: 'مهندسی میکنیم.',
+      titleLine2Suffix: '',
+      headline: 'ما فقط بازاریابی را اجرا نمیکنیم. ما سیستمهای رشد را مهندسی میکنیم.',
       statement: {
         line1: 'ما سیستم‌های یکپارچه رشد خلق می‌کنیم؛',
         line2: 'همگام‌سازی استراتژی، خلاقیت، پرفورمنس،',
@@ -838,7 +901,19 @@ export const translations = {
       primaryCta: 'شروع پروژه',
       secondaryCta: 'بررسی متدولوژی',
       clients: [
-        'Meta', 'Mastercard', 'FC Barcelona', 'Dribbble', 'IMMUTA', 'CISCO', 'SKECHERS', 'Triple Whale', 'SOUNDCLOUD', 'AWS', 'STRIPE'
+        'tamir online',
+        'atrash store',
+        'classino',
+        'respina',
+        'Itbfx',
+        'Maryam Majidinejad',
+        'browja',
+        'Elysium Toys',
+        'Wine Amphorae',
+        'codeyad',
+        'silvermotor',
+        'ordibeheshbook',
+        'photoafshin'
       ],
       telemetry: {
         status: 'سیستم رشد: فعال و یکپارچه',
@@ -936,6 +1011,56 @@ export const translations = {
           alt: 'سیستم موشن و کارت‌های والت بنک',
           color: '#EAB308'
         }
+      ]
+    },
+    problemInsight: {
+      badge: 'فرضیه بنیادین',
+      sectionIndex: '۰۳',
+      sectionLabel: 'مسئله // نگرش',
+      beats: [
+        {
+          id: 'problem',
+          num: '۰۱',
+          tag: 'مسئله اصلی',
+          headline: 'محتوای بیشتر. کمپین‌های بیشتر. کانال‌های بیشتر.',
+          insight: 'اما فعالیت بیشتر لزوماً رشد بیشتری خلق نمی‌کند.',
+          status: 'وضعیت: اقدامات پراکنده و جزیره‌ای',
+          metric: 'تلاش مضاعف // عدم هم‌افزایی'
+        },
+        {
+          id: 'insight',
+          num: '۰۲',
+          tag: 'نگرش کلیدی',
+          headline: 'رشد از اقدامات پراکنده و جزیره‌ای حاصل نمی‌شود.',
+          insight: 'رشد حاصل همگام‌سازی و اتصال تصمیم‌های درست به یکدیگر است.',
+          status: 'وضعیت: همگرایی سیگنال‌ها',
+          metric: 'عبور از سیلوها به یک محور واحد'
+        },
+        {
+          id: 'system',
+          num: '۰۳',
+          tag: 'معماری سیستم',
+          headline: 'استراتژی ← خلاقیت ← دیجیتال ← جذب ← سنجش داده‌ها',
+          insight: 'یک معماری یکپارچه که مانند جریانی پیوسته و بدون اتلاف عمل می‌کند.',
+          status: 'وضعیت: خط لوله همگام‌سازی‌شده',
+          metric: 'جریان پیوسته و بدون نشتی تبدیل'
+        },
+        {
+          id: 'outcome',
+          num: '۰۴',
+          tag: 'نتیجه و دستاورد',
+          headline: 'وقتی همه اجزا هم‌افزا شوند، بازاریابی به یک موتور رشد تبدیل می‌شود.',
+          insight: 'مقیاس‌پذیری قابل پیش‌بینی، شتاب فزاینده و صفر درصد اتلاف انرژی.',
+          status: 'وضعیت: چرخه رشد خودافزا',
+          metric: 'معماری رشد تصاعدی و پایدار'
+        }
+      ],
+      nodes: [
+        { id: 'strategy', num: '۰۱', label: 'استراتژی', sub: 'جهت‌گیری' },
+        { id: 'creative', num: '۰۲', label: 'خلاقیت', sub: 'تمایز و اثرگذاری' },
+        { id: 'digital', num: '۰۳', label: 'دیجیتال', sub: 'تجربه و تبدیل' },
+        { id: 'acquisition', num: '۰۴', label: 'جذب مخاطب', sub: 'ترافیک هدفمند' },
+        { id: 'measurement', num: '۰۵', label: 'سنجش داده', sub: 'اتریبیوشن و بازخورد' }
       ]
     },
     whatWeDo: {

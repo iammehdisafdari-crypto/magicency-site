@@ -34,6 +34,8 @@ export default function SelectedWork() {
     restDelta: 0.001
   });
 
+  const progressWidth = useTransform(smoothProgress, [0, 1], ['0%', '100%']);
+
   const [activeIndex, setActiveIndex] = useState(0);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
@@ -48,11 +50,11 @@ export default function SelectedWork() {
   // Update active index in sync with smooth scroll progress
   useEffect(() => {
     const unsubscribe = smoothProgress.on('change', (val) => {
-      if (val < 0.24) {
+      if (val < 0.22) {
         setActiveIndex(0); // 01 Branding
-      } else if (val < 0.50) {
+      } else if (val < 0.48) {
         setActiveIndex(1); // 02 Web
-      } else if (val < 0.76) {
+      } else if (val < 0.74) {
         setActiveIndex(2); // 03 Mobile
       } else {
         setActiveIndex(3); // 04 Motion
@@ -61,29 +63,30 @@ export default function SelectedWork() {
     return () => unsubscribe();
   }, [smoothProgress]);
 
+  // Layered Cinematic Card Transitions (Depth Stacking)
   // Card 0 Physics (Branding)
-  const card0Y = useTransform(smoothProgress, [0, 0.20, 0.28], ['0%', '0%', '-100%']);
-  const card0Opacity = useTransform(smoothProgress, [0, 0.20, 0.28], [1, 1, 0]);
-  const card0Scale = useTransform(smoothProgress, [0, 0.20, 0.28], [1, 1, 0.95]);
+  const card0Y = useTransform(smoothProgress, [0, 0.18, 0.26], ['0%', '0%', '-18%']);
+  const card0Opacity = useTransform(smoothProgress, [0, 0.18, 0.26], [1, 1, 0]);
+  const card0Scale = useTransform(smoothProgress, [0, 0.18, 0.26], [1, 1, 0.92]);
 
   // Card 1 Physics (Web)
-  const card1Y = useTransform(smoothProgress, [0.20, 0.28, 0.46, 0.54], ['100%', '0%', '0%', '-100%']);
-  const card1Opacity = useTransform(smoothProgress, [0.20, 0.27, 0.47, 0.54], [0, 1, 1, 0]);
-  const card1Scale = useTransform(smoothProgress, [0.20, 0.28, 0.46, 0.54], [0.95, 1, 1, 0.95]);
+  const card1Y = useTransform(smoothProgress, [0.18, 0.26, 0.44, 0.52], ['100%', '0%', '0%', '-18%']);
+  const card1Opacity = useTransform(smoothProgress, [0.18, 0.25, 0.45, 0.52], [0, 1, 1, 0]);
+  const card1Scale = useTransform(smoothProgress, [0.18, 0.26, 0.44, 0.52], [0.92, 1, 1, 0.92]);
 
   // Card 2 Physics (Mobile)
-  const card2Y = useTransform(smoothProgress, [0.46, 0.54, 0.72, 0.80], ['100%', '0%', '0%', '-100%']);
-  const card2Opacity = useTransform(smoothProgress, [0.46, 0.53, 0.73, 0.80], [0, 1, 1, 0]);
-  const card2Scale = useTransform(smoothProgress, [0.46, 0.54, 0.72, 0.80], [0.95, 1, 1, 0.95]);
+  const card2Y = useTransform(smoothProgress, [0.44, 0.52, 0.70, 0.78], ['100%', '0%', '0%', '-18%']);
+  const card2Opacity = useTransform(smoothProgress, [0.44, 0.51, 0.71, 0.78], [0, 1, 1, 0]);
+  const card2Scale = useTransform(smoothProgress, [0.44, 0.52, 0.70, 0.78], [0.92, 1, 1, 0.92]);
 
   // Card 3 Physics (Motion — Final)
-  const card3Y = useTransform(smoothProgress, [0.72, 0.80, 1.0], ['100%', '0%', '0%']);
-  const card3Opacity = useTransform(smoothProgress, [0.72, 0.79, 1.0], [0, 1, 1]);
-  const card3Scale = useTransform(smoothProgress, [0.72, 0.80, 1.0], [0.95, 1, 1]);
+  const card3Y = useTransform(smoothProgress, [0.70, 0.78, 1.0], ['100%', '0%', '0%']);
+  const card3Opacity = useTransform(smoothProgress, [0.70, 0.77, 1.0], [0, 1, 1]);
+  const card3Scale = useTransform(smoothProgress, [0.70, 0.78, 1.0], [0.92, 1, 1]);
 
-  // Full-width CTA button (appears seamlessly with Card 4)
-  const ctaOpacity = useTransform(smoothProgress, [0.78, 0.86], [0, 1]);
-  const ctaY = useTransform(smoothProgress, [0.78, 0.86], [20, 0]);
+  // Full-width CTA button (appears smoothly with Card 4 at 0.74 - 0.84)
+  const ctaOpacity = useTransform(smoothProgress, [0.74, 0.84], [0, 1]);
+  const ctaY = useTransform(smoothProgress, [0.74, 0.84], [16, 0]);
 
   const cardsMotion = [
     { y: card0Y, opacity: card0Opacity, scale: card0Scale },
@@ -155,11 +158,85 @@ export default function SelectedWork() {
     <section ref={containerRef} id="work" className="vm-showcase-scroll-section">
       {/* Pinned Sticky Showcase Viewport */}
       <div className="vm-showcase-sticky-viewport">
+        
+        {/* =========================================================
+            MOBILE HUD HEADER (< 920PX)
+            Sleek Progress Track & Step Counter (01 / 04)
+            ========================================================= */}
+        <div className="vm-showcase-mobile-header">
+          <div className="vm-mobile-header-top">
+            <span className="vm-mobile-eyebrow">{workData.eyebrow}</span>
+            <div className="vm-mobile-counter">
+              <span className="vm-counter-current">{activeProject.num}</span>
+              <span className="vm-counter-divider">/</span>
+              <span className="vm-counter-total">04</span>
+            </div>
+          </div>
+          <div className="vm-mobile-progress-track">
+            <motion.div 
+              className="vm-mobile-progress-fill" 
+              style={{ width: progressWidth }} 
+            />
+          </div>
+        </div>
+
+        {/* =========================================================
+            MOBILE METADATA BAR (< 920PX)
+            Category Title + Client Badge in unified horizontal flow
+            ========================================================= */}
+        <div className="vm-showcase-mobile-meta-bar">
+          <div className="vm-mobile-title-display">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`mobile-title-${activeProject.id}`}
+                initial={{ y: 14, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -14, opacity: 0 }}
+                transition={{ duration: 0.35, ease: EASING.PRIMARY }}
+                className="vm-mobile-title-inner"
+              >
+                <h2 className="vm-showcase-category-heading">
+                  <span className="vm-category-base">{activeProject.category}</span>
+                  {activeProject.categoryItalic && (
+                    <em className="italic-serif-word">{activeProject.categoryItalic}</em>
+                  )}
+                </h2>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          <div className="vm-mobile-client-badge-area">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`mobile-client-${activeProject.id}`}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.28, ease: EASING.SECONDARY }}
+                className="vm-showcase-client-badge"
+              >
+                <div 
+                  className="vm-client-badge-icon"
+                  style={{ background: activeProject.color || '#FF5500' }}
+                >
+                  {renderClientIcon(activeProject)}
+                </div>
+                <div className="vm-client-badge-meta">
+                  <span className="client-tag-label">{activeProject.clientTag || 'CLIENT'}</span>
+                  <span className="client-brand-title">{activeProject.client}</span>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
+
+        {/* =========================================================
+            DESKTOP TWO-COLUMN CONTAINER (>= 920PX)
+            Left: Editorial Category & Client | Right: Scroll Stage
+            ========================================================= */}
         <div className="vm-showcase-container">
           
-          {/* =========================================================
-              LEFT COLUMN: CATEGORY TITLE & CLIENT BADGE (~35% DESKTOP)
-              ========================================================= */}
+          {/* Left Column Desktop */}
           <div className="vm-showcase-left">
             {/* Small Eyebrow */}
             <RevealLabel as="span" className="vm-showcase-eyebrow">{workData.eyebrow}</RevealLabel>
@@ -167,7 +244,7 @@ export default function SelectedWork() {
             {/* Giant Editorial Category Heading */}
             <div className="vm-showcase-title-display">
               <AnimatePresence mode="wait">
-                <div key={activeProject.id} className="motion-line-mask" style={{ overflow: 'hidden', padding: '6px 0', margin: '-6px 0' }}>
+                <div key={activeProject.id} className="motion-line-mask vm-showcase-title-mask">
                   <motion.div
                     initial={{ y: '100%', opacity: 0 }}
                     animate={{ y: '0%', opacity: 1 }}
@@ -176,7 +253,7 @@ export default function SelectedWork() {
                     className="vm-showcase-title-inner"
                   >
                     <h2 className="vm-showcase-category-heading">
-                      {activeProject.category}
+                      <span className="vm-category-base">{activeProject.category}</span>
                       {activeProject.categoryItalic && (
                         <em className="italic-serif-word">{activeProject.categoryItalic}</em>
                       )}
@@ -212,9 +289,7 @@ export default function SelectedWork() {
             </div>
           </div>
 
-          {/* =========================================================
-              RIGHT COLUMN: SCROLL-DRIVEN PHYSICAL MEDIA SHOWCASE (~65%)
-              ========================================================= */}
+          {/* Right Column Stage (Desktop & Mobile Shared Stage) */}
           <div className="vm-showcase-right">
             <div className="vm-showcase-cards-wrapper">
               {projects.map((proj, idx) => {
@@ -238,16 +313,20 @@ export default function SelectedWork() {
                         loading={idx === 0 ? 'eager' : 'lazy'}
                       />
                       <div className="vm-showcase-overlay" />
+
+                      {/* Mobile In-Card Floating Pill */}
+                      <div className="vm-card-corner-badge">
+                        <span className="vm-corner-num">{proj.num}</span>
+                        <span className="vm-corner-dot" style={{ backgroundColor: proj.color || '#FF5500' }} />
+                        <span className="vm-corner-client">{proj.client}</span>
+                      </div>
                     </div>
                   </motion.div>
                 );
               })}
             </div>
 
-            {/* =========================================================
-                FULL-WIDTH RADIANT "SEE ALL WORK →" BUTTON
-                (Matching exact card width and style in 4th screenshot)
-                ========================================================= */}
+            {/* Full-width "SEE ALL WORK →" Button */}
             <motion.div
               className="vm-showcase-cta-bar"
               style={{

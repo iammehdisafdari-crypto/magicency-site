@@ -6,7 +6,7 @@
 .vm-showcase-scroll-section {
   position: relative;
   width: 100%;
-  height: 320vh; /* Smooth, controlled scroll distance for 4 transitions */
+  height: 280vh; /* Smooth, responsive scroll distance for 4 transitions */
   background-color: #060709;
   box-sizing: border-box;
 }
@@ -27,7 +27,14 @@
   box-sizing: border-box;
 }
 
-/* Two-Column Desktop Layout (~35% Left / ~65% Right) */
+/* Hidden on Desktop */
+.vm-showcase-mobile-header,
+.vm-showcase-mobile-meta-bar,
+.vm-card-corner-badge {
+  display: none;
+}
+
+/* Two-Column Desktop Layout (~38% Left / ~62% Right) */
 .vm-showcase-container {
   width: 100%;
   max-width: 1400px;
@@ -35,13 +42,13 @@
   padding: 0 clamp(20px, 3.5vw, 64px);
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: 34% 66%;
-  gap: clamp(32px, 4.5vw, 76px);
+  grid-template-columns: 38% 62%;
+  gap: clamp(28px, 4vw, 64px);
   align-items: center;
 }
 
 /* =========================================================
-   LEFT COLUMN (~35%): EYEBROW, CATEGORY HEADING & CLIENT BADGE
+   LEFT COLUMN (~38%): EYEBROW, CATEGORY HEADING & CLIENT BADGE
    ========================================================= */
 .vm-showcase-left {
   display: flex;
@@ -64,11 +71,20 @@
   font-size: 1rem;
 }
 
-/* Giant Category Headline (Instrument Serif) */
+/* Giant Category Headline */
 .vm-showcase-title-display {
   flex: 1;
   display: flex;
   align-items: center;
+  min-width: 0;
+}
+
+.vm-showcase-title-mask {
+  overflow: hidden;
+  padding: 0.35em 0.25em;
+  margin: -0.35em -0.25em;
+  display: block;
+  max-width: 100%;
 }
 
 .vm-showcase-title-inner {
@@ -76,34 +92,51 @@
 }
 
 .vm-showcase-category-heading {
-  font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
-  font-size: clamp(3.8rem, 6vw, 6.6rem);
-  font-weight: 400;
-  line-height: 1.04;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: clamp(3rem, 4.8vw, 5.8rem);
+  font-weight: 500;
+  line-height: 1.16;
   letter-spacing: -0.03em;
   color: #FFFFFF;
   margin: 0;
-  padding: 2px 0;
+  padding: 0.08em 0;
+  white-space: nowrap;
+  word-break: keep-all;
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: nowrap;
 }
 
 [dir="rtl"] .vm-showcase-category-heading {
   font-family: var(--font-persian, 'Vazirmatn', sans-serif);
-  font-size: clamp(2.8rem, 4.5vw, 4.8rem);
-  line-height: 1.25;
+  font-size: clamp(2.4rem, 4vw, 4.4rem);
+  line-height: 1.32;
   font-weight: 800;
+  padding: 0.08em 0;
+  white-space: nowrap;
+  word-break: keep-all;
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: nowrap;
 }
 
+.vm-showcase-category-heading .italic-serif-word,
 .italic-serif-word {
   font-style: italic;
   font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
   font-weight: 400;
   color: #FFFFFF;
+  display: inline-block;
+  padding-right: 0.14em;
+  white-space: nowrap;
 }
 
+[dir="rtl"] .vm-showcase-category-heading .italic-serif-word,
 [dir="rtl"] .italic-serif-word {
-  font-family: var(--font-persian, 'Vazirmatn', sans-serif);
+  font-family: var(--font-persian, 'Vazirmatn', sans-serif) !important;
   font-style: normal;
   font-weight: 900;
+  padding-right: 0;
 }
 
 /* Client Badge (Bottom Left) */
@@ -151,8 +184,18 @@
   color: #FFFFFF;
 }
 
+[dir="rtl"] .client-tag-label {
+  font-family: var(--font-persian, sans-serif);
+  letter-spacing: 0;
+}
+
 [dir="rtl"] .client-brand-title {
   font-family: var(--font-persian, 'Vazirmatn', sans-serif);
+}
+
+[dir="rtl"] .vm-client-badge-meta {
+  text-align: right;
+  align-items: flex-start;
 }
 
 /* =========================================================
@@ -266,70 +309,341 @@
 }
 
 /* =========================================================
-   MOBILE RESPONSIVE BEHAVIOR (BELOW 920PX)
-   Stacked vertical composition: CATEGORY ↓ IMAGE ↓ NEXT
+   MOBILE & TABLET RESPONSIVE BEHAVIOR (BELOW 920PX)
+   Cinematic Scroll-Driven Stage: HUD Header → Project Card → Full-Viewport Focus
    ========================================================= */
 @media (max-width: 919px) {
   .vm-showcase-scroll-section {
-    height: 320vh; /* Smooth, deliberate vertical scroll rhythm for 4 transitions on mobile */
+    height: 300vh; /* Luxurious scroll runway for 4 distinct project phases */
   }
 
   .vm-showcase-sticky-viewport {
-    align-items: flex-start;
-    padding-top: calc(var(--header-height, 64px) + env(safe-area-inset-top, 0px) + 16px);
-    padding-bottom: 20px;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: calc(64px + env(safe-area-inset-top, 0px) + clamp(8px, 1.6vh, 16px));
+    padding-bottom: clamp(14px, 2.2vh, 22px);
+    padding-left: clamp(16px, 4vw, 24px);
+    padding-right: clamp(16px, 4vw, 24px);
+    flex-direction: column;
     box-sizing: border-box;
+    overflow: hidden;
   }
 
+  /* Mobile Top HUD Header (Eyebrow + 01/04 Counter + Progress Track) */
+  .vm-showcase-mobile-header {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 6px;
+    flex-shrink: 0;
+    margin-bottom: clamp(6px, 1vh, 10px);
+  }
+
+  .vm-mobile-header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .vm-mobile-eyebrow {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #8E929E;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  [dir="rtl"] .vm-mobile-eyebrow {
+    font-family: var(--font-persian, 'Vazirmatn', sans-serif);
+    font-size: 0.84rem;
+    letter-spacing: 0;
+  }
+
+  .vm-mobile-counter {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 100px;
+    padding: 2px 9px;
+  }
+
+  .vm-counter-current {
+    color: #FF7722;
+    font-weight: 800;
+  }
+
+  .vm-counter-divider {
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  .vm-counter-total {
+    color: #8E929E;
+  }
+
+  .vm-mobile-progress-track {
+    width: 100%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .vm-mobile-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #FF5500, #FF8800);
+    border-radius: 2px;
+    will-change: width;
+  }
+
+  [dir="rtl"] .vm-mobile-progress-fill {
+    background: linear-gradient(270deg, #FF5500, #FF8800);
+  }
+
+  /* Mobile Active Project Metadata Bar */
+  .vm-showcase-mobile-meta-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 12px;
+    flex-shrink: 0;
+    margin-bottom: clamp(6px, 1.2vh, 12px);
+  }
+
+  .vm-mobile-title-display {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .vm-mobile-title-inner {
+    width: 100%;
+  }
+
+  .vm-mobile-title-inner .vm-showcase-category-heading {
+    font-size: clamp(1.45rem, 5.2vw, 1.95rem);
+    line-height: 1.15;
+    padding: 0;
+    margin: 0;
+    color: #FFFFFF;
+    display: inline-flex;
+    align-items: baseline;
+    flex-wrap: nowrap;
+  }
+
+  [dir="rtl"] .vm-mobile-title-inner .vm-showcase-category-heading {
+    font-size: clamp(1.35rem, 5vw, 1.85rem);
+    line-height: 1.25;
+  }
+
+  .vm-mobile-client-badge-area {
+    flex-shrink: 0;
+  }
+
+  .vm-showcase-client-badge {
+    gap: 10px;
+  }
+
+  .vm-client-badge-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+  }
+
+  .vm-client-badge-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .client-tag-label {
+    font-size: 0.60rem;
+    letter-spacing: 0.08em;
+  }
+
+  .client-brand-title {
+    font-size: 0.88rem;
+    white-space: nowrap;
+  }
+
+  /* Shared Container on Mobile */
   .vm-showcase-container {
-    grid-template-columns: 1fr;
-    gap: 16px;
-    padding: 0 16px;
-    align-content: start;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+    padding: 0;
+    max-width: none;
+    gap: 0;
   }
 
   .vm-showcase-left {
-    height: auto;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    justify-content: space-between;
-    padding-bottom: 6px;
-  }
-
-  .vm-showcase-eyebrow {
     display: none;
   }
 
-  .vm-showcase-title-display {
-    flex: 0 0 auto;
+  .vm-showcase-right {
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
   }
 
-  .vm-showcase-category-heading {
-    font-size: clamp(2.15rem, 8.8vw, 3.1rem);
-    line-height: 1.06;
-    padding: 2px 0;
-  }
-
-  .vm-showcase-client-badge-area {
-    flex: 0 0 auto;
-  }
-
+  /* Main Cinematic Mobile Stage (Dominates Viewport) */
   .vm-showcase-cards-wrapper {
-    aspect-ratio: 16 / 10;
-    max-height: 42vh;
-    border-radius: 18px;
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+    max-height: clamp(340px, 58vh, 520px);
+    aspect-ratio: auto;
+    border-radius: clamp(16px, 3.8vw, 22px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 20px 60px -10px rgba(0, 0, 0, 0.95);
+    position: relative;
+    overflow: hidden;
+    background: #080A0E;
+  }
+
+  .vm-showcase-card-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    will-change: transform, opacity;
+  }
+
+  .vm-showcase-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .vm-showcase-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    user-select: none;
+  }
+
+  /* In-Card Glass Corner Badge (Mobile Depth Marker) */
+  .vm-card-corner-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background: rgba(10, 12, 16, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 100px;
+    padding: 4px 10px;
+    z-index: 5;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  }
+
+  [dir="rtl"] .vm-card-corner-badge {
+    right: auto;
+    left: 12px;
+  }
+
+  .vm-corner-num {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    letter-spacing: 0.06em;
+  }
+
+  .vm-corner-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+  }
+
+  .vm-corner-client {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #E2E8F0;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  [dir="rtl"] .vm-corner-client {
+    font-family: var(--font-persian, 'Vazirmatn', sans-serif);
+    text-transform: none;
+    font-size: 0.76rem;
+  }
+
+  /* Bottom Action Bar */
+  .vm-showcase-cta-bar {
+    width: 100%;
+    margin-top: clamp(8px, 1.4vh, 12px);
+    flex-shrink: 0;
   }
 
   .vm-showcase-cta-btn {
-    height: 52px;
-    font-size: 0.85rem;
+    height: clamp(48px, 6vh, 54px);
+    font-size: 0.88rem;
   }
 }
 
 @media (max-width: 480px) {
   .vm-showcase-sticky-viewport {
-    padding-top: calc(60px + env(safe-area-inset-top, 0px) + 14px);
+    padding-top: calc(60px + env(safe-area-inset-top, 0px) + 6px);
+    padding-bottom: 12px;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .vm-showcase-cards-wrapper {
+    max-height: clamp(300px, 54vh, 440px);
+  }
+
+  .vm-mobile-title-inner .vm-showcase-category-heading {
+    font-size: clamp(1.3rem, 5.8vw, 1.65rem);
+  }
+
+  [dir="rtl"] .vm-mobile-title-inner .vm-showcase-category-heading {
+    font-size: clamp(1.22rem, 5.4vw, 1.55rem);
+  }
+
+  .vm-showcase-client-badge {
+    gap: 8px;
+  }
+
+  .vm-client-badge-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+  }
+
+  .vm-client-badge-icon svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .client-tag-label {
+    font-size: 0.55rem;
+  }
+
+  .client-brand-title {
+    font-size: 0.80rem;
   }
 }
 

@@ -4,6 +4,7 @@ import BrandIntro from './components/Intro/BrandIntro';
 import Header from './components/Header/Header';
 import Hero from './components/Hero/Hero';
 import SelectedWork from './components/SelectedWork/SelectedWork';
+import ProblemInsight from './components/ProblemInsight/ProblemInsight';
 import WhatWeDo from './components/WhatWeDo/WhatWeDo';
 import Journal from './components/Journal/Journal';
 import Footer from './components/Footer/Footer';
@@ -33,10 +34,13 @@ function MainApp() {
         {/* Phase 02: Featured Work (Sticky Scroll Showcase + 4 Projects + See All Work CTA) */}
         <SelectedWork />
 
-        {/* Phase 03: What We Do / Capabilities (3-Pillar Capability Architecture) */}
+        {/* Phase 03: Problem / Insight Narrative (Sticky-Scroll 4-Beat System Architecture) */}
+        <ProblemInsight />
+
+        {/* Phase 04: What We Do / Capabilities (3-Pillar Capability Architecture) */}
         <WhatWeDo />
 
-        {/* Phase 04: Journal / Insights (Exact Vivid Motion Recreation) */}
+        {/* Phase 05: Journal / Insights (Exact Vivid Motion Recreation) */}
         <Journal />
       </main>
 
