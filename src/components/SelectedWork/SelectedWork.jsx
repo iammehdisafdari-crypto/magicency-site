@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 import { ArrowRight, ArrowLeft } from 'lucide-react';
+import { RevealLabel, EASING } from '../motion';
 import './SelectedWork.css';
 
 export default function SelectedWork() {
@@ -44,45 +45,45 @@ export default function SelectedWork() {
     return () => mediaQuery.removeEventListener('change', handler);
   }, []);
 
-  // Update active index in sync with scroll progress
+  // Update active index in sync with smooth scroll progress
   useEffect(() => {
-    const unsubscribe = scrollYProgress.on('change', (val) => {
-      if (val < 0.27) {
-        setActiveIndex(0);
-      } else if (val < 0.57) {
-        setActiveIndex(1);
-      } else if (val < 0.83) {
-        setActiveIndex(2);
+    const unsubscribe = smoothProgress.on('change', (val) => {
+      if (val < 0.24) {
+        setActiveIndex(0); // 01 Branding
+      } else if (val < 0.50) {
+        setActiveIndex(1); // 02 Web
+      } else if (val < 0.76) {
+        setActiveIndex(2); // 03 Mobile
       } else {
-        setActiveIndex(3);
+        setActiveIndex(3); // 04 Motion
       }
     });
     return () => unsubscribe();
-  }, [scrollYProgress]);
+  }, [smoothProgress]);
 
-  // Card 0 Physics
-  const card0Y = useTransform(smoothProgress, [0, 0.22, 0.32], ['0%', '0%', '-100%']);
-  const card0Opacity = useTransform(smoothProgress, [0, 0.22, 0.32], [1, 1, 0]);
-  const card0Scale = useTransform(smoothProgress, [0, 0.22, 0.32], [1, 1, 0.95]);
+  // Card 0 Physics (Branding)
+  const card0Y = useTransform(smoothProgress, [0, 0.20, 0.28], ['0%', '0%', '-100%']);
+  const card0Opacity = useTransform(smoothProgress, [0, 0.20, 0.28], [1, 1, 0]);
+  const card0Scale = useTransform(smoothProgress, [0, 0.20, 0.28], [1, 1, 0.95]);
 
-  // Card 1 Physics
-  const card1Y = useTransform(smoothProgress, [0.22, 0.32, 0.52, 0.62], ['100%', '0%', '0%', '-100%']);
-  const card1Opacity = useTransform(smoothProgress, [0.22, 0.30, 0.54, 0.62], [0, 1, 1, 0]);
-  const card1Scale = useTransform(smoothProgress, [0.22, 0.32, 0.52, 0.62], [0.95, 1, 1, 0.95]);
+  // Card 1 Physics (Web)
+  const card1Y = useTransform(smoothProgress, [0.20, 0.28, 0.46, 0.54], ['100%', '0%', '0%', '-100%']);
+  const card1Opacity = useTransform(smoothProgress, [0.20, 0.27, 0.47, 0.54], [0, 1, 1, 0]);
+  const card1Scale = useTransform(smoothProgress, [0.20, 0.28, 0.46, 0.54], [0.95, 1, 1, 0.95]);
 
-  // Card 2 Physics
-  const card2Y = useTransform(smoothProgress, [0.52, 0.62, 0.78, 0.88], ['100%', '0%', '0%', '-100%']);
-  const card2Opacity = useTransform(smoothProgress, [0.52, 0.60, 0.80, 0.88], [0, 1, 1, 0]);
-  const card2Scale = useTransform(smoothProgress, [0.52, 0.62, 0.78, 0.88], [0.95, 1, 1, 0.95]);
+  // Card 2 Physics (Mobile)
+  const card2Y = useTransform(smoothProgress, [0.46, 0.54, 0.72, 0.80], ['100%', '0%', '0%', '-100%']);
+  const card2Opacity = useTransform(smoothProgress, [0.46, 0.53, 0.73, 0.80], [0, 1, 1, 0]);
+  const card2Scale = useTransform(smoothProgress, [0.46, 0.54, 0.72, 0.80], [0.95, 1, 1, 0.95]);
 
-  // Card 3 Physics (Final)
-  const card3Y = useTransform(smoothProgress, [0.78, 0.88, 1.0], ['100%', '0%', '0%']);
-  const card3Opacity = useTransform(smoothProgress, [0.78, 0.86, 1.0], [0, 1, 1]);
-  const card3Scale = useTransform(smoothProgress, [0.78, 0.88, 1.0], [0.95, 1, 1]);
+  // Card 3 Physics (Motion — Final)
+  const card3Y = useTransform(smoothProgress, [0.72, 0.80, 1.0], ['100%', '0%', '0%']);
+  const card3Opacity = useTransform(smoothProgress, [0.72, 0.79, 1.0], [0, 1, 1]);
+  const card3Scale = useTransform(smoothProgress, [0.72, 0.80, 1.0], [0.95, 1, 1]);
 
   // Full-width CTA button (appears seamlessly with Card 4)
-  const ctaOpacity = useTransform(smoothProgress, [0.84, 0.92], [0, 1]);
-  const ctaY = useTransform(smoothProgress, [0.84, 0.92], [24, 0]);
+  const ctaOpacity = useTransform(smoothProgress, [0.78, 0.86], [0, 1]);
+  const ctaY = useTransform(smoothProgress, [0.78, 0.86], [20, 0]);
 
   const cardsMotion = [
     { y: card0Y, opacity: card0Opacity, scale: card0Scale },
@@ -161,26 +162,27 @@ export default function SelectedWork() {
               ========================================================= */}
           <div className="vm-showcase-left">
             {/* Small Eyebrow */}
-            <span className="vm-showcase-eyebrow">{workData.eyebrow}</span>
+            <RevealLabel as="span" className="vm-showcase-eyebrow">{workData.eyebrow}</RevealLabel>
 
             {/* Giant Editorial Category Heading */}
             <div className="vm-showcase-title-display">
               <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeProject.id}
-                  initial={{ opacity: 0, y: 22 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -22 }}
-                  transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
-                  className="vm-showcase-title-inner"
-                >
-                  <h2 className="vm-showcase-category-heading">
-                    {activeProject.category}
-                    {activeProject.categoryItalic && (
-                      <em className="italic-serif-word">{activeProject.categoryItalic}</em>
-                    )}
-                  </h2>
-                </motion.div>
+                <div key={activeProject.id} className="motion-line-mask" style={{ overflow: 'hidden', padding: '6px 0', margin: '-6px 0' }}>
+                  <motion.div
+                    initial={{ y: '100%', opacity: 0 }}
+                    animate={{ y: '0%', opacity: 1 }}
+                    exit={{ y: '-100%', opacity: 0 }}
+                    transition={{ duration: 0.45, ease: EASING.PRIMARY }}
+                    className="vm-showcase-title-inner"
+                  >
+                    <h2 className="vm-showcase-category-heading">
+                      {activeProject.category}
+                      {activeProject.categoryItalic && (
+                        <em className="italic-serif-word">{activeProject.categoryItalic}</em>
+                      )}
+                    </h2>
+                  </motion.div>
+                </div>
               </AnimatePresence>
             </div>
 
@@ -189,10 +191,10 @@ export default function SelectedWork() {
               <AnimatePresence mode="wait">
                 <motion.div
                   key={`client-${activeProject.id}`}
-                  initial={{ opacity: 0, y: 14 }}
+                  initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -14 }}
-                  transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+                  exit={{ opacity: 0, y: -12 }}
+                  transition={{ duration: 0.35, ease: EASING.SECONDARY }}
                   className="vm-showcase-client-badge"
                 >
                   <div 
@@ -256,14 +258,14 @@ export default function SelectedWork() {
               <motion.button
                 type="button"
                 onClick={() => setIsModalOpen(true)}
-                className="vm-showcase-cta-btn"
+                className="vm-showcase-cta-btn btn-motion"
                 aria-label={workData.seeAllWork}
-                whileHover={{ scale: 1.015 }}
+                whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.985 }}
-                transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.25, ease: EASING.SECONDARY }}
               >
                 <span className="cta-text">{workData.seeAllWork}</span>
-                <span className="cta-arrow">
+                <span className="cta-arrow btn-icon-arrow">
                   {isRTL ? <ArrowLeft size={18} /> : <ArrowRight size={18} />}
                 </span>
               </motion.button>

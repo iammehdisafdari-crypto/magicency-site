@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
-import { Reveal, ImageReveal, Parallax, EASING } from '../motion';
+import { Reveal, RevealHeading, RevealStatement, RevealBody, ImageReveal, Parallax, EASING } from '../motion';
 import './WhatWeDo.css';
 
 // SVG Asterisk Icon matching Vivid Motion brand marker
@@ -84,7 +84,7 @@ export default function WhatWeDo() {
   };
 
   return (
-    <section id="capabilities" className="shared-section pt-32 vm-exact-wwd-section">
+    <section id="capabilities" className="shared-section vm-exact-wwd-section">
       <div className="container vm-wwd-main-container">
         
         {/* =========================================================
@@ -92,16 +92,14 @@ export default function WhatWeDo() {
             ========================================================= */}
         <div className="wwd-intro grid">
           <div className="wwd-intro-heading">
-            <Reveal delay={0.0}>
-              <h2 className="u-text-heading-xs">{data.heading || 'What we do'}</h2>
-            </Reveal>
+            <RevealHeading as="h2" className="u-text-heading-xs" delay={0.0}>
+              {data.heading || 'What we do'}
+            </RevealHeading>
           </div>
           <div className="wwd-intro-description">
-            <Reveal delay={0.08} y={20}>
-              <p className="u-text-heading-sm leading-none">
-                {data.introStatement}
-              </p>
-            </Reveal>
+            <RevealStatement as="p" className="u-text-heading-sm leading-none" delay={0.12}>
+              {data.introStatement}
+            </RevealStatement>
           </div>
         </div>
 
@@ -123,13 +121,11 @@ export default function WhatWeDo() {
                 className={`wwd-list-item ${isActive ? 'is-active-item' : 'is-inactive-item'}`}
                 onMouseMove={(e) => handleMouseMoveGroup(e, groupIdx)}
               >
-                {/* Header: Number + Massive Category Title */}
-                <Reveal delay={0.05}>
-                  <div className="wwd-list-item-header grid">
-                    <div className="wwd-list-item-no">{pillar.number}</div>
-                    <h3 className="wwd-list-item-title">{pillar.title}</h3>
-                  </div>
-                </Reveal>
+                {/* Header: Number + Category Title */}
+                <div className="wwd-list-item-header grid">
+                  <div className="wwd-list-item-no">{pillar.number}</div>
+                  <h3 className="wwd-list-item-title">{pillar.title}</h3>
+                </div>
 
                 {/* Two-Column Editorial Composition: Left Visual Showcase, Right Services Set */}
                 <div className="wwd-item-body-layout">
@@ -143,7 +139,7 @@ export default function WhatWeDo() {
                           alt={pillar.title}
                           className="wwd-visual-media-frame"
                           imageClassName="wwd-visual-media-img"
-                          delay={0.1}
+                          delay={0.22}
                         >
                           <div className="wwd-visual-media-frame">
                             <img
@@ -160,11 +156,9 @@ export default function WhatWeDo() {
                           </div>
                         </ImageReveal>
                       </Parallax>
-                      <Reveal delay={0.15}>
-                        <p className="wwd-pillar-summary-text">
-                          {pillar.description}
-                        </p>
-                      </Reveal>
+                      <RevealBody as="p" className="wwd-pillar-summary-text" delay={0.16}>
+                        {pillar.description}
+                      </RevealBody>
                     </div>
                   </div>
 

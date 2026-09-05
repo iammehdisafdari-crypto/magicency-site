@@ -1,7 +1,15 @@
-export { default as motionConfig, EASING, DURATION, STAGGER } from './motionConfig';
+export { default as motionConfig, EASING, DURATION, STAGGER, VIEWPORT } from './motionConfig';
 export * from './variants';
+export { default as RevealHeading } from './RevealHeading';
+export { default as RevealLine } from './RevealLine';
+export { default as RevealBody } from './RevealBody';
+export { default as RevealLabel } from './RevealLabel';
+export { default as RevealStatement } from './RevealStatement';
+export { default as ScrollReveal } from './ScrollReveal';
+export { default as RevealText } from './RevealText';
 export { default as TextReveal } from './TextReveal';
 export { default as Reveal } from './Reveal';
 export { default as ImageReveal } from './ImageReveal';
 export { default as Stagger } from './Stagger';
 export { default as Parallax } from './Parallax';
+export { default as ScrollLinkedText } from './ScrollLinkedText';

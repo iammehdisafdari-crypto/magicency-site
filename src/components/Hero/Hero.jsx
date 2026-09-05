@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 import { Play } from 'lucide-react';
-import LiquidFireCanvas from './LiquidFireCanvas';
+import { FluidCursor } from '../effects';
 import ShowreelModal from './ShowreelModal';
-import { EASING, DURATION, Reveal, ImageReveal, Parallax, maskedLineVariants, editorialVariants } from '../motion';
+import { EASING, DURATION, Reveal, ImageReveal, Parallax, RevealStatement, maskedLineVariants, editorialVariants } from '../motion';
 import './Hero.css';
 
 export default function Hero({ isLoaded = true }) {
@@ -17,11 +17,11 @@ export default function Hero({ isLoaded = true }) {
 
   return (
     <section id="hero" className="vm-hero-section">
-      {/* Interactive Liquid Fire Canvas following the mouse */}
-      <LiquidFireCanvas />
-
-      {/* Atmospheric Subtle Grid Overlay */}
+      {/* 01. Atmospheric Subtle Grid Overlay (Hero Background) */}
       <div className="vm-hero-grid-subtle" aria-hidden="true" />
+
+      {/* 02. Scoped WebGL Fluid Simulation Cursor Effect (#B82E0C) */}
+      <FluidCursor intensity={0.5} className="vm-hero-fluid-canvas" />
 
       {/* =========================================================
           01. FIRST VIEWPORT (100svh ON DESKTOP & LAPTOP)
@@ -32,13 +32,13 @@ export default function Hero({ isLoaded = true }) {
         <div className="vm-hero-headline-container">
           <h1 className="vm-hero-giant-title">
             {/* Row 1 Masked Reveal */}
-            <span className="title-row row-1 motion-text-mask" style={{ overflow: 'hidden', display: 'block' }}>
+            <span className="title-row row-1 motion-line-mask">
               <motion.span
                 style={{ display: 'inline-block', willChange: 'transform, opacity' }}
                 variants={maskedLineVariants}
                 initial="hidden"
                 animate={isLoaded ? 'visible' : 'hidden'}
-                custom={{ delay: 0.0, duration: DURATION.HERO_HEADLINE }}
+                custom={{ delay: 0.08, duration: DURATION.HEADLINE }}
               >
                 {t.hero.titleLine1}
                 <em className="italic-serif-word">{t.hero.italicWord1}</em>
@@ -46,13 +46,13 @@ export default function Hero({ isLoaded = true }) {
             </span>
 
             {/* Row 2 Masked Reveal */}
-            <span className="title-row row-2 motion-text-mask" style={{ overflow: 'hidden', display: 'block' }}>
+            <span className="title-row row-2 motion-line-mask">
               <motion.span
                 style={{ display: 'inline-block', willChange: 'transform, opacity' }}
                 variants={maskedLineVariants}
                 initial="hidden"
                 animate={isLoaded ? 'visible' : 'hidden'}
-                custom={{ delay: 0.12, duration: DURATION.HERO_HEADLINE }}
+                custom={{ delay: 0.15, duration: DURATION.HEADLINE }}
               >
                 {t.hero.titleLine2}
                 <em className="italic-serif-word">{t.hero.italicWord2}</em>
@@ -69,7 +69,7 @@ export default function Hero({ isLoaded = true }) {
           variants={editorialVariants}
           initial="hidden"
           animate={isLoaded ? 'visible' : 'hidden'}
-          custom={{ delay: 0.28, duration: 0.7 }}
+          custom={{ delay: 0.32, duration: DURATION.BODY, y: 16 }}
         >
           <div className="vm-clients-marquee">
             <div className="vm-clients-track">
@@ -91,52 +91,68 @@ export default function Hero({ isLoaded = true }) {
       </div>
 
       {/* =========================================================
-          02. BELOW-THE-FOLD SHOWREEL CARD & EDITORIAL STATEMENT
+          02. FULL-BLEED / EDGE-TO-EDGE PLAY REEL SHOWCASE
+          Spans 100% viewport width without card borders, padding or margins
+          ========================================================= */}
+      <div 
+        className="vm-showreel-fullbleed-wrapper"
+        onClick={() => setIsReelOpen(true)}
+        role="button"
+        tabIndex={0}
+        aria-label="Play Magicency Showreel"
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            setIsReelOpen(true);
+          }
+        }}
+      >
+        <motion.div 
+          className="vm-showreel-fullbleed-frame"
+          initial={{ opacity: 0, scale: 1.02 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: DURATION.IMAGE, ease: EASING.CINEMATIC }}
+        >
+          <img 
+            src="/reel-preview.jpg" 
+            alt="Magicency Growth Showreel Preview" 
+            className="vm-showreel-img"
+            loading="eager"
+          />
+          <div className="vm-showreel-overlay" />
+          
+          {/* Interactive Floating "Play reel" Button */}
+          <motion.div 
+            className="vm-showreel-play-btn btn-motion"
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ delay: 0.2, duration: DURATION.CTA, ease: EASING.SECONDARY }}
+            whileHover={{ scale: 1.04, y: -2 }}
+            whileTap={{ scale: 0.96 }}
+          >
+            <span className="vm-play-text">{t.hero.playReel}</span>
+            <div className="vm-play-icon-circle">
+              <Play size={12} fill="#FFFFFF" className="vm-play-triangle" />
+            </div>
+          </motion.div>
+        </motion.div>
+      </div>
+
+      {/* =========================================================
+          03. STRONG MAGICENCY BRAND STATEMENT DIRECTLY BELOW PLAY REEL
           ========================================================= */}
       <div className="vm-hero-extended-container">
-        {/* Cinematic Showreel Card with Interactive "Play reel" Option */}
-        <div 
-          className="vm-showreel-card-wrapper"
-          onClick={() => setIsReelOpen(true)}
-          role="button"
-          tabIndex={0}
-          aria-label="Play Magicency Showreel"
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              setIsReelOpen(true);
-            }
-          }}
-        >
-          <div className="vm-showreel-card">
-            <img 
-              src="/reel-preview.jpg" 
-              alt="Magicency Growth Showreel Preview" 
-              className="vm-showreel-img"
-              loading="eager"
-            />
-            <div className="vm-showreel-overlay" />
-            
-            {/* Interactive Floating "Play reel" Button */}
-            <motion.div 
-              className="vm-showreel-play-btn"
-              whileHover={{ scale: 1.06 }}
-              whileTap={{ scale: 0.94 }}
-              transition={{ duration: 0.2, ease: EASING.SECONDARY }}
-            >
-              <span className="vm-play-text">{t.hero.playReel}</span>
-              <div className="vm-play-icon-circle">
-                <Play size={12} fill="#FFFFFF" className="vm-play-triangle" />
-              </div>
-            </motion.div>
-          </div>
-        </div>
-
-        {/* Large Editorial Typographic Statement */}
         <div className="vm-hero-statement-section">
-          <p className="vm-editorial-statement-text">
-            {t.hero.editorialStatement}
-          </p>
+          <RevealStatement 
+            className="vm-editorial-statement-text"
+            delay={0.08}
+            duration={0.8}
+            stagger={0.06}
+          >
+            {t.hero.brandStatement || t.hero.editorialStatement}
+          </RevealStatement>
         </div>
       </div>
 

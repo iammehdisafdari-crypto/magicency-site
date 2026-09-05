@@ -258,26 +258,36 @@
    04. MONUMENTAL WORDMARK (footer-end)
    ========================================================= */
 .footer-end {
-  padding-top: clamp(48px, 7vh, 88px);
+  padding-top: clamp(40px, 6vh, 80px);
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+  overflow: visible;
+  box-sizing: border-box;
+  padding-inline: clamp(12px, 2.5vw, 36px);
+}
+
+.footer-end-reveal {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  overflow: visible;
 }
 
 .footer-logo-wordmark {
   font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
-  font-size: clamp(3.8rem, 14.5vw, 15.5rem);
+  font-size: clamp(2.4rem, 12vw, 13.5rem);
   font-weight: 900;
-  line-height: 0.85;
-  letter-spacing: -0.05em;
+  line-height: 0.88;
+  letter-spacing: -0.04em;
   color: rgba(255, 255, 255, 0.94);
   width: 100%;
   text-align: center;
   user-select: none;
   transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform;
+  white-space: nowrap;
 }
 
 /* =========================================================

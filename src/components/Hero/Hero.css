@@ -6,21 +6,11 @@
   position: relative;
   width: 100%;
   background-color: #060709;
-  overflow-x: hidden;
+  overflow: hidden;
   box-sizing: border-box;
 }
 
-/* Interactive Canvas strictly confined to Hero section */
-.vm-liquid-fire-canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Subtle Architectural Grid strictly inside Hero */
+/* Subtle Architectural Grid strictly behind FluidCursor */
 .vm-hero-grid-subtle {
   position: absolute;
   inset: 0;
@@ -29,6 +19,17 @@
   background-image: 
     linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  z-index: 1;
+}
+
+/* Interactive Canvas strictly confined to Hero section */
+.vm-hero-fluid-canvas,
+.vm-liquid-fire-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
   z-index: 2;
 }
 
@@ -113,6 +114,7 @@
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   overflow: hidden;
   position: relative;
+  direction: ltr; /* Ensure deterministic continuous flow for international brand logos in both LTR & RTL */
   mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
   -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
 }
@@ -122,6 +124,7 @@
   width: max-content;
   overflow: hidden;
   user-select: none;
+  direction: ltr;
 }
 
 .vm-clients-track {
@@ -131,10 +134,6 @@
   padding-right: clamp(32px, 4.8vw, 64px);
   animation: marqueeScroll 26s linear infinite;
   will-change: transform;
-}
-
-[dir="rtl"] .vm-clients-track {
-  animation-direction: reverse;
 }
 
 @keyframes marqueeScroll {
@@ -170,49 +169,42 @@
 }
 
 /* =========================================================
-   02. BELOW-THE-FOLD SHOWREEL CARD & STATEMENT
+   02. FULL-BLEED / EDGE-TO-EDGE PLAY REEL SHOWCASE
+   True 100% Viewport Width, edge-to-edge without cards, borders or gutters
    ========================================================= */
-.vm-hero-extended-container {
+.vm-showreel-fullbleed-wrapper {
   position: relative;
   z-index: 3;
   width: 100%;
-  max-width: 1400px;
-  margin-inline: auto;
-  padding: clamp(36px, 5vh, 64px) clamp(20px, 3.5vw, 64px) 0;
-  box-sizing: border-box;
-}
-
-.vm-showreel-card-wrapper {
-  width: 100%;
-  margin-bottom: clamp(24px, 3.5vh, 44px);
-  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
   cursor: pointer;
+  box-sizing: border-box;
 }
 
-.vm-showreel-card {
+.vm-showreel-fullbleed-frame {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 10;
-  max-height: 640px;
+  aspect-ratio: 21 / 9;
+  min-height: 320px;
+  max-height: 75vh;
   background-color: #0B0D12;
-  border-radius: clamp(18px, 2.5vw, 32px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0;
+  border: none;
   overflow: hidden;
-  box-shadow: 0 30px 80px -15px rgba(0, 0, 0, 0.95),
-              0 0 40px rgba(255, 85, 0, 0.12);
+  box-shadow: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: border-color 280ms cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 280ms cubic-bezier(0.16, 1, 0.3, 1),
-              transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
+  margin: 0;
+  padding: 0;
 }
 
-.vm-showreel-card:hover {
-  border-color: rgba(255, 85, 0, 0.45);
-  box-shadow: 0 35px 90px -15px rgba(0, 0, 0, 0.98),
-              0 0 50px rgba(255, 85, 0, 0.25);
-  transform: translateY(-2px);
+@media (max-width: 920px) {
+  .vm-showreel-fullbleed-frame {
+    aspect-ratio: 16 / 9;
+    min-height: 240px;
+  }
 }
 
 .vm-showreel-img {
@@ -220,18 +212,29 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.vm-showreel-card:hover .vm-showreel-img {
+.vm-showreel-fullbleed-wrapper:hover .vm-showreel-img {
   transform: scale(1.03);
 }
 
 .vm-showreel-overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.45) 100%);
+  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.5) 100%);
   pointer-events: none;
+}
+
+/* Container for statement below Play Reel */
+.vm-hero-extended-container {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 1400px;
+  margin-inline: auto;
+  padding: clamp(36px, 6vh, 64px) clamp(20px, 3.5vw, 64px) 0;
+  box-sizing: border-box;
 }
 
 /* Interactive Floating "Play reel" Pill Button */
@@ -307,60 +310,75 @@
 
 .vm-editorial-statement-text {
   font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
-  font-size: clamp(1.8rem, 3.8vw, 3.1rem);
+  font-size: clamp(1.65rem, 3.2vw, 2.75rem);
   font-weight: 400;
-  line-height: 1.18;
+  line-height: 1.22;
   letter-spacing: -0.025em;
   color: #FFFFFF;
-  max-width: 1160px;
+  max-width: 1080px;
   margin: 0;
-  margin-bottom: clamp(32px, 5vh, 56px);
+  margin-bottom: clamp(20px, 3vh, 32px);
 }
 
 [dir="rtl"] .vm-editorial-statement-text {
   font-family: var(--font-persian, 'Vazirmatn', sans-serif);
-  font-size: clamp(1.5rem, 3.2vw, 2.6rem);
-  line-height: 1.55;
+  font-size: clamp(1.4rem, 2.8vw, 2.4rem);
+  line-height: 1.5;
   letter-spacing: 0;
   font-weight: 600;
 }
 
 /* =========================================================
    MOBILE RESPONSIVE RULES (BELOW 920PX)
+   Optimized Initial Mobile Viewport (Hero + Play Reel + Statement)
    ========================================================= */
 @media (max-width: 919px) {
+  .vm-hero-section {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding-bottom: clamp(16px, 2.5vh, 24px);
+  }
+
   .vm-hero-first-viewport {
     height: auto;
     min-height: auto;
     max-height: none;
-    padding: 76px 16px 12px;
+    padding: clamp(62px, 8.5vh, 72px) 16px 6px;
   }
 
   .vm-hero-headline-container {
-    padding-top: 12px;
-    padding-bottom: 8px;
+    padding-top: 4px;
+    padding-bottom: 4px;
   }
 
   .vm-hero-giant-title {
-    font-size: clamp(2.6rem, 11.5vw, 3.6rem);
+    font-size: clamp(2.35rem, 10.2vw, 3.3rem);
     line-height: 0.96;
     letter-spacing: -0.025em;
   }
 
+  [dir="rtl"] .vm-hero-giant-title {
+    font-size: clamp(2rem, 8.5vw, 2.75rem);
+    line-height: 1.22;
+  }
+
   .vm-hero-clients-bar {
-    margin-top: 14px;
-    margin-bottom: 20px;
-    padding-top: 16px;
+    margin-top: 8px;
+    margin-bottom: 12px;
+    padding-top: 10px;
   }
 
   .vm-clients-track {
-    gap: 24px;
-    padding-right: 24px;
+    gap: 20px;
+    padding-right: 20px;
     animation-duration: 20s;
   }
 
   .vm-client-logo-text {
-    font-size: 0.76rem;
+    font-size: 0.72rem;
   }
 
   .vm-hero-extended-container {
@@ -368,31 +386,40 @@
   }
 
   .vm-showreel-card-wrapper {
-    margin-bottom: 24px;
+    margin-bottom: 14px;
   }
 
   .vm-showreel-card {
-    border-radius: 18px;
-    aspect-ratio: 16 / 10;
+    border-radius: 16px;
+    aspect-ratio: 16 / 9.5;
+    max-height: 220px;
   }
 
   .vm-showreel-play-btn {
-    padding: 8px 16px;
-    gap: 8px;
+    padding: 7px 15px;
+    gap: 7px;
   }
 
   .vm-play-text {
-    font-size: 0.78rem;
+    font-size: 0.75rem;
   }
 
   .vm-play-icon-circle {
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
   }
 
   .vm-editorial-statement-text {
-    font-size: clamp(1.35rem, 6.2vw, 1.85rem);
-    line-height: 1.22;
-    margin-bottom: 40px;
+    font-size: clamp(1.1rem, 4.6vw, 1.38rem);
+    line-height: 1.32;
+    letter-spacing: -0.015em;
+    max-width: 42ch;
+    margin-bottom: clamp(16px, 2.5vh, 22px);
+  }
+
+  [dir="rtl"] .vm-editorial-statement-text {
+    font-size: clamp(1.02rem, 4.2vw, 1.28rem);
+    line-height: 1.55;
+    letter-spacing: 0;
   }
 }

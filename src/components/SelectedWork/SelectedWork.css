@@ -79,10 +79,11 @@
   font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
   font-size: clamp(3.8rem, 6vw, 6.6rem);
   font-weight: 400;
-  line-height: 0.92;
+  line-height: 1.04;
   letter-spacing: -0.03em;
   color: #FFFFFF;
   margin: 0;
+  padding: 2px 0;
 }
 
 [dir="rtl"] .vm-showcase-category-heading {
@@ -270,14 +271,21 @@
    ========================================================= */
 @media (max-width: 919px) {
   .vm-showcase-scroll-section {
-    height: 320vh; /* Smooth vertical scroll on mobile */
+    height: 320vh; /* Smooth, deliberate vertical scroll rhythm for 4 transitions on mobile */
+  }
+
+  .vm-showcase-sticky-viewport {
+    align-items: flex-start;
+    padding-top: calc(var(--header-height, 64px) + env(safe-area-inset-top, 0px) + 16px);
+    padding-bottom: 20px;
+    box-sizing: border-box;
   }
 
   .vm-showcase-container {
     grid-template-columns: 1fr;
     gap: 16px;
     padding: 0 16px;
-    align-content: center;
+    align-content: start;
   }
 
   .vm-showcase-left {
@@ -298,8 +306,9 @@
   }
 
   .vm-showcase-category-heading {
-    font-size: clamp(2.4rem, 9.5vw, 3.4rem);
-    line-height: 0.95;
+    font-size: clamp(2.15rem, 8.8vw, 3.1rem);
+    line-height: 1.06;
+    padding: 2px 0;
   }
 
   .vm-showcase-client-badge-area {
@@ -308,13 +317,19 @@
 
   .vm-showcase-cards-wrapper {
     aspect-ratio: 16 / 10;
-    max-height: 48vh;
+    max-height: 42vh;
     border-radius: 18px;
   }
 
   .vm-showcase-cta-btn {
     height: 52px;
     font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .vm-showcase-sticky-viewport {
+    padding-top: calc(60px + env(safe-area-inset-top, 0px) + 14px);
   }
 }
 

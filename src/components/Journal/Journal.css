@@ -8,7 +8,7 @@
   width: 100%;
   background-color: #060709;
   color: #FFFFFF;
-  padding-top: clamp(60px, 8vh, 110px);
+  padding-top: clamp(36px, 5.5vh, 64px);
   padding-bottom: 0px;
   box-sizing: border-box;
   overflow-x: hidden;
@@ -25,7 +25,7 @@
    01. HERO / INTRO
    ========================================================= */
 .journal-heading-block {
-  margin-bottom: clamp(52px, 8.5vh, 96px);
+  margin-bottom: clamp(32px, 4.5vh, 52px);
 }
 
 .journal-badge-label {
@@ -63,7 +63,7 @@
    02. IN FOCUS (FEATURED EDITORIAL CARDS)
    ========================================================= */
 .journal-featured-section {
-  margin-bottom: clamp(64px, 10vh, 110px);
+  margin-bottom: clamp(40px, 6vh, 64px);
 }
 
 .journal-featured-heading {
@@ -488,6 +488,24 @@
 [dir="rtl"] .journal-floating-caption {
   left: auto;
   right: 10px;
+}
+
+/* =========================================================
+   MOBILE RESPONSIVE REFINEMENTS (BELOW 900PX)
+   ========================================================= */
+@media (max-width: 900px) {
+  .vm-journal-section {
+    padding-top: 32px;
+    padding-bottom: 36px;
+  }
+
+  .journal-heading-block {
+    margin-bottom: 24px;
+  }
+
+  .journal-featured-section {
+    margin-bottom: 32px;
+  }
 }
 
 /* =========================================================

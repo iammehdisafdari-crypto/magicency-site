@@ -31,8 +31,8 @@ export const translations = {
         line2: 'unifying strategy, creative, performance,',
         line3: 'technology, and AI automation.'
       },
-      subheadline: 'We build connected growth systems that unify strategy, creative experimentation, performance marketing, technology, and AI automation to help ambitious businesses scale.',
-      editorialStatement: "We design, build and grow brands and digital products for the world's biggest companies and boldest new ones",
+      brandStatement: 'We unify strategy, design, technology, and performance to build digital experiences and scalable growth systems that move ambitious brands forward.',
+      editorialStatement: 'We unify strategy, design, technology, and performance to build digital experiences and scalable growth systems that move ambitious brands forward.',
       playReel: 'Play reel',
       reelDuration: '01:42 SHOWREEL',
       primaryCta: 'Start a Project',
@@ -831,7 +831,8 @@ export const translations = {
         line3: 'فناوری و اتوماسیون هوشمند.'
       },
       subheadline: 'مجیکنسـی سیستم‌های متصل رشد را طراحی می‌کند — همگام‌سازی استراتژی جذب، آزمایش‌های پرسرعت خلاقانه، پرفورمنس مارکتینگ و اتوماسیون هوشمند برای رشد تصاعدی کسب‌وکارها.',
-      editorialStatement: 'ما سیستم‌های متصل رشد را طراحی، پیاده‌سازی و مقیاس‌پذیر می‌کنیم برای بزرگ‌ترین برندهای جهان و پیشروترین کسب‌وکارهای نوین.',
+      brandStatement: 'ما با همگام‌سازی استراتژی، طراحی، فناوری و پرفورمنس، تجربیات دیجیتال و سیستم‌های مقیاس‌پذیر رشد را برای برندهای پیشرو مهندسی می‌کنیم.',
+      editorialStatement: 'ما با همگام‌سازی استراتژی، طراحی، فناوری و پرفورمنس، تجربیات دیجیتال و سیستم‌های مقیاس‌پذیر رشد را برای برندهای پیشرو مهندسی می‌کنیم.',
       playReel: 'مشاهده شو‌ریل',
       reelDuration: '۰۱:۴۲ شو‌ریل',
       primaryCta: 'شروع پروژه',

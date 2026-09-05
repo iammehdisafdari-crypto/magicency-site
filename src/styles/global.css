@@ -203,3 +203,70 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text-tertiary);
   font-size: 0.7rem;
 }
+
+/* =========================================
+   CINEMATIC TYPOGRAPHY MOTION UTILITIES
+   ========================================= */
+.motion-line-mask {
+  display: block;
+  overflow: hidden;
+  line-height: inherit;
+  vertical-align: bottom;
+}
+
+.reveal-heading-root,
+.reveal-statement-root {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Micro-interactions: Buttons & Icons */
+.btn-motion {
+  transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-motion:hover {
+  transform: translateY(-2px);
+}
+
+.btn-motion:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.btn-motion .btn-icon-arrow,
+.btn-motion svg {
+  transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-motion:hover .btn-icon-arrow,
+.btn-motion:hover svg {
+  transform: translateX(4px);
+}
+
+[dir="rtl"] .btn-motion:hover .btn-icon-arrow,
+[dir="rtl"] .btn-motion:hover svg {
+  transform: translateX(-4px);
+}
+
+/* Accessible Reduced-Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .motion-line-mask {
+    overflow: visible !important;
+  }
+
+  .scroll-reveal-content {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  .btn-motion:hover {
+    transform: none !important;
+  }
+}

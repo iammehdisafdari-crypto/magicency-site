@@ -1,6 +1,6 @@
 /* =========================================================
-   MAGICENCY HEADER — EXACT VIVID MOTION AESTHETIC
-   Clean, responsive, editorial header architecture
+   MAGICENCY HEADER — EXACT VIVID MOTION AESTHETIC & INTERACTION
+   Desktop Reference Image 1 & Mobile Reference Image 2
    ========================================================= */
 
 .vm-header {
@@ -8,31 +8,35 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: var(--z-header, 100);
-  height: 64px;
+  z-index: 100;
+  height: calc(72px + env(safe-area-inset-top, 0px));
   display: flex;
   align-items: center;
-  padding: 0 clamp(16px, 3.2vw, 48px);
-  background: #050505;
-  overflow: hidden;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: env(safe-area-inset-top, 0px) clamp(20px, 4.5vw, 64px) 0;
+  background: transparent;
+  box-sizing: border-box;
   transition: background-color 280ms cubic-bezier(0.16, 1, 0.3, 1),
               backdrop-filter 280ms cubic-bezier(0.16, 1, 0.3, 1),
               border-color 280ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .vm-header.is-scrolled {
-  background: rgba(5, 5, 5, 0.92);
+  background: rgba(6, 7, 9, 0.90);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.vm-header.is-menu-active {
+  background: #050608;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .vm-header-inner {
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: var(--max-width, 1440px);
+  max-width: 1400px;
   margin-inline: auto;
   display: flex;
   align-items: center;
@@ -41,7 +45,7 @@
 }
 
 /* =========================================================
-   BRAND LOGO (MAGICENCY®)
+   01. BRAND WORDMARK (MAGICENCY®)
    ========================================================= */
 .vm-brand {
   display: inline-flex;
@@ -49,11 +53,12 @@
   gap: 2px;
   text-decoration: none;
   flex-shrink: 0;
+  cursor: pointer;
 }
 
 .vm-brand-text {
   font-family: var(--font-display, 'Plus Jakarta Sans', sans-serif);
-  font-size: clamp(1.1rem, 1.4vw, 1.35rem);
+  font-size: clamp(1.15rem, 1.4vw, 1.35rem);
   font-weight: 700;
   letter-spacing: -0.01em;
   color: #FFFFFF;
@@ -62,6 +67,7 @@
 [dir="rtl"] .vm-brand-text {
   font-family: var(--font-persian, 'Vazirmatn', sans-serif);
   font-size: 1.25rem;
+  letter-spacing: 0;
 }
 
 .vm-brand-registered {
@@ -73,156 +79,583 @@
 }
 
 /* =========================================================
-   RIGHT NAVIGATION GROUP
+   02. DESKTOP NAVIGATION (MATCHING REFERENCE IMAGE 1)
    ========================================================= */
-.vm-header-right-group {
-  display: flex;
-  align-items: center;
-  gap: clamp(10px, 1.8vw, 28px);
-}
-
-.vm-nav {
+.vm-header-desktop-right {
   display: none;
   align-items: center;
-  gap: clamp(12px, 1.6vw, 24px);
+  gap: clamp(14px, 2vw, 32px);
 }
 
-@media (min-width: 820px) {
-  .vm-nav {
+@media (min-width: 921px) {
+  .vm-header-desktop-right {
     display: flex;
   }
 }
 
-.vm-nav-link {
-  font-family: var(--font-sans);
+.vm-desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 1.8vw, 26px);
+}
+
+.vm-desktop-nav-link {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
   font-size: 0.74rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   color: #C3C7D0;
   text-decoration: none;
-  transition: color 200ms ease;
   white-space: nowrap;
   display: inline-flex;
   align-items: center;
+  transition: color 200ms ease;
 }
 
-.scramble-text-node {
-  display: inline-block;
-  font-family: inherit;
-}
-
-.vm-nav-link:hover {
+.vm-desktop-nav-link:hover {
   color: #FFFFFF;
 }
 
-[dir="rtl"] .vm-nav-link {
+[dir="rtl"] .vm-desktop-nav-link {
   font-family: var(--font-persian, 'Vazirmatn', sans-serif);
   font-size: 0.82rem;
   letter-spacing: 0;
 }
 
-/* =========================================================
-   LANGUAGE SWITCHER PILL
-   ========================================================= */
-.vm-lang-pill {
+/* Desktop Language Switcher Pill */
+.vm-desktop-lang-pill {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
   padding: 6px 12px;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: var(--radius-full, 9999px);
+  border-radius: 9999px;
   color: #E2E8F0;
   cursor: pointer;
   transition: all 200ms cubic-bezier(0.16, 1, 0.3, 1);
   white-space: nowrap;
 }
 
-.vm-lang-pill:hover {
+.vm-desktop-lang-pill:hover {
   background: rgba(255, 255, 255, 0.12);
   border-color: rgba(255, 255, 255, 0.25);
   color: #FFFFFF;
 }
 
-.vm-lang-icon {
-  color: #FF7722;
-  flex-shrink: 0;
-}
-
-.vm-lang-label {
-  font-family: var(--font-sans);
+.vm-desktop-lang-code {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
   font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
+  font-weight: 700;
+  letter-spacing: 0.06em;
 }
 
-[dir="rtl"] .vm-lang-label {
-  font-family: var(--font-persian, 'Vazirmatn', sans-serif);
-  letter-spacing: 0;
-  font-size: 0.76rem;
-}
-
-/* =========================================================
-   PRIMARY ASTERISK ACTION BUTTON (* START A PROJECT)
-   ========================================================= */
-.vm-start-project-btn {
+/* Primary Pill Button (* START A PROJECT - Exact Image 1) */
+.vm-start-project-pill-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 7px 18px;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  padding: 8px 18px;
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: var(--radius-full, 9999px);
+  border-radius: 9999px;
   color: #FFFFFF;
   cursor: pointer;
-  transition: all 220ms cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  transition: all 240ms cubic-bezier(0.16, 1, 0.3, 1);
   white-space: nowrap;
 }
 
-.vm-start-project-btn:hover {
+.vm-start-project-pill-btn:hover {
   background: rgba(255, 255, 255, 0.14);
-  border-color: rgba(255, 85, 0, 0.5);
-  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.6),
-              0 0 16px rgba(255, 85, 0, 0.25);
-  transform: translateY(-1px);
+  border-color: rgba(255, 85, 0, 0.45);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6),
+              0 0 16px rgba(255, 85, 0, 0.22);
 }
 
-.vm-btn-asterisk {
+.vm-pill-asterisk {
   color: #FF5500;
-  font-size: 0.95rem;
-  line-height: 1;
-  text-shadow: 0 0 8px rgba(255, 85, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: transform 250ms ease;
 }
 
-.vm-start-project-btn:hover .vm-btn-asterisk {
+.vm-start-project-pill-btn:hover .vm-pill-asterisk {
   transform: rotate(45deg);
 }
 
-.vm-btn-label {
-  font-family: var(--font-sans);
+.vm-pill-label {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
   font-size: 0.74rem;
   font-weight: 700;
   letter-spacing: 0.06em;
 }
 
-[dir="rtl"] .vm-btn-label {
+[dir="rtl"] .vm-pill-label {
   font-family: var(--font-persian, 'Vazirmatn', sans-serif);
   letter-spacing: 0;
   font-size: 0.82rem;
 }
 
-@media (max-width: 540px) {
-  .vm-start-project-btn {
-    padding: 6px 12px;
-    gap: 6px;
+/* =========================================================
+   03. MOBILE HEADER CONTROLS (MATCHING REFERENCE IMAGE 2)
+   [ FA / EN ]  [ HOME :: ]
+   ========================================================= */
+.vm-header-mobile-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+@media (min-width: 921px) {
+  .vm-header-mobile-right {
+    display: none;
   }
-  .vm-btn-label {
-    font-size: 0.7rem;
+}
+
+/* Mobile Language Selector Pill */
+.vm-mobile-lang-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  height: 38px;
+  padding: 0 12px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 9999px;
+  color: #E2E8F0;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: all 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.vm-mobile-lang-btn:hover,
+.vm-mobile-lang-btn:active {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #FFFFFF;
+}
+
+.vm-mobile-lang-text {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+/* Mobile Home Button [ HOME :: ] (Exact match to Reference Image 2) */
+.vm-mobile-home-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 44px;
+  min-height: 44px;
+  height: 38px;
+  padding: 0 16px;
+  background: #101217;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 9999px;
+  color: #FFFFFF;
+  cursor: pointer;
+  box-sizing: border-box;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+  transition: all 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.vm-mobile-home-btn:hover,
+.vm-mobile-home-btn:active {
+  background: #171922;
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+}
+
+.vm-mobile-home-btn.is-open {
+  background: rgba(255, 85, 0, 0.18);
+  border-color: #FF5500;
+  color: #FFFFFF;
+}
+
+.vm-home-btn-label {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+[dir="rtl"] .vm-home-btn-label {
+  font-family: var(--font-persian, 'Vazirmatn', sans-serif);
+  letter-spacing: 0;
+  font-size: 0.8rem;
+}
+
+.vm-home-btn-icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #E2E8F0;
+}
+
+.vm-mobile-home-btn:hover .vm-home-btn-icon-box {
+  color: #FFFFFF;
+}
+
+.vm-home-dots-icon {
+  display: block;
+}
+
+/* =========================================================
+   04. SPATIAL FULLSCREEN NAVIGATION MENU OVERLAY
+   Inspired by Vivid Motion Navigation Interaction
+   ========================================================= */
+.vm-menu-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100svh;
+  height: 100dvh;
+  z-index: 99;
+  background-color: #050608;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  user-select: none;
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* Atmospheric Grid & Radial Glow inside Menu */
+.vm-menu-grid-backdrop {
+  position: absolute;
+  inset: 0;
+  background-size: 80px 80px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.vm-menu-radial-glow {
+  position: absolute;
+  bottom: 10%;
+  right: 15%;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 85, 0, 0.06) 0%, transparent 70%);
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.vm-menu-content-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1400px;
+  margin-inline: auto;
+  padding: 0 clamp(20px, 4.5vw, 64px);
+  padding-top: calc(84px + env(safe-area-inset-top, 0px));
+  padding-bottom: calc(28px + env(safe-area-inset-bottom, 0px));
+  min-height: 100svh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+/* Body Grid inside Menu */
+.vm-menu-body-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  padding: clamp(36px, 6vh, 64px) 0;
+}
+
+@media (min-width: 920px) {
+  .vm-menu-body-grid {
+    grid-template-columns: 1.6fr 1fr;
+    gap: 80px;
+    align-items: flex-start;
+  }
+}
+
+/* Navigation List */
+.vm-menu-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 1.6vh, 20px);
+}
+
+.vm-menu-nav-item-mask {
+  overflow: hidden;
+  display: block;
+}
+
+.vm-menu-nav-link {
+  display: inline-flex;
+  align-items: baseline;
+  gap: clamp(12px, 2vw, 24px);
+  text-decoration: none;
+  padding: 6px 0;
+  transition: transform 220ms ease;
+}
+
+.vm-menu-item-num {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: clamp(0.75rem, 1.1vw, 0.95rem);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.vm-menu-item-text {
+  font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+  transition: color 240ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 240ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[dir="rtl"] .vm-menu-item-text {
+  font-family: var(--font-persian, 'Vazirmatn', sans-serif);
+  font-weight: 700;
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  letter-spacing: 0;
+}
+
+.vm-menu-item-arrow {
+  color: #FF5500;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 240ms cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+}
+
+[dir="rtl"] .vm-menu-item-arrow {
+  transform: translateX(10px);
+}
+
+.vm-menu-nav-link:hover .vm-menu-item-text {
+  color: #FF6600;
+  transform: translateX(6px);
+}
+
+[dir="rtl"] .vm-menu-nav-link:hover .vm-menu-item-text {
+  transform: translateX(-6px);
+}
+
+.vm-menu-nav-link:hover .vm-menu-item-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Secondary Column inside Menu */
+.vm-menu-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding-top: 12px;
+}
+
+.vm-menu-sidebar-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.vm-menu-sidebar-heading {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.45);
+  text-transform: uppercase;
+}
+
+[dir="rtl"] .vm-menu-sidebar-heading {
+  font-family: var(--font-persian, 'Vazirmatn', sans-serif);
+  letter-spacing: 0;
+}
+
+.vm-menu-cta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 22px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+  color: #FFFFFF;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  width: fit-content;
+  transition: all 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
+}
+
+[dir="rtl"] .vm-menu-cta-pill {
+  font-family: var(--font-persian, 'Vazirmatn', sans-serif);
+  letter-spacing: 0;
+}
+
+.vm-menu-cta-pill:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: #FF5500;
+  box-shadow: 0 6px 24px rgba(255, 85, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+.vm-menu-contact-link {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 1.05rem;
+  color: #E2E8F0;
+  text-decoration: none;
+  transition: color 200ms ease;
+}
+
+.vm-menu-contact-link:hover {
+  color: #FF5500;
+}
+
+.vm-menu-meta-text {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}
+
+/* Bottom Footer Bar inside Menu */
+.vm-menu-bottom-bar {
+  padding: 24px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+@media (min-width: 640px) {
+  .vm-menu-bottom-bar {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.vm-menu-copyright {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.74rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.vm-menu-socials {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.vm-menu-socials a {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.vm-menu-socials a:hover {
+  color: #FFFFFF;
+}
+
+/* =========================================================
+   05. SAFE-AREA & RESPONSIVE REFINEMENTS
+   ========================================================= */
+@media (max-width: 920px) {
+  .vm-header {
+    height: calc(64px + env(safe-area-inset-top, 0px));
+    padding: env(safe-area-inset-top, 0px) 18px 0;
+  }
+  
+  .vm-menu-content-container {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: calc(76px + env(safe-area-inset-top, 0px));
+    padding-bottom: calc(28px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .vm-menu-body-grid {
+    gap: 28px;
+    padding: 12px 0 24px;
+  }
+  
+  .vm-menu-item-text {
+    font-size: clamp(1.85rem, 5vw, 2.6rem);
+    line-height: 1.15;
+  }
+}
+
+@media (max-width: 480px) {
+  .vm-header {
+    height: calc(60px + env(safe-area-inset-top, 0px));
+    padding: env(safe-area-inset-top, 0px) 16px 0;
+  }
+
+  .vm-brand-text {
+    font-size: 1.15rem;
+  }
+
+  .vm-mobile-home-btn {
+    padding: 0 14px;
+  }
+
+  .vm-home-btn-label {
+    font-size: 0.72rem;
+  }
+
+  .vm-menu-content-container {
+    padding-left: 18px;
+    padding-right: 18px;
+    padding-top: calc(72px + env(safe-area-inset-top, 0px));
+    padding-bottom: calc(28px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .vm-menu-body-grid {
+    gap: 20px;
+    padding: 8px 0 20px;
+  }
+
+  .vm-menu-nav-list {
+    gap: 8px;
+  }
+
+  .vm-menu-item-text {
+    font-size: clamp(1.65rem, 6.5vw, 2.05rem);
+    line-height: 1.15;
+  }
+
+  .vm-menu-sidebar {
+    gap: 18px;
+    padding-top: 4px;
   }
 }

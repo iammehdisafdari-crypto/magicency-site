@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 import ScrambleText from '../Header/ScrambleText';
-import FluidCursorBackground from '../Common/FluidCursorBackground';
+import { FluidCursor } from '../effects';
 import { Reveal, Stagger, maskedLineVariants, editorialVariants, buttonMotion } from '../motion';
 import './Footer.css';
 
@@ -59,8 +59,8 @@ export default function Footer() {
 
   return (
     <footer ref={footerRef} className="footer vm-footer-root" aria-label="Magicency Experience Footer">
-      {/* Reusable WebGL Fluid Cursor Layer (Restricted strictly to Footer) */}
-      <FluidCursorBackground className="footer-fluid-bg" />
+      {/* Reusable WebGL Fluid Cursor Layer (#B82E0C Monochromatic) */}
+      <FluidCursor intensity={0.8} className="footer-fluid-bg" />
       <div className="liquid-ether-fade bottom" aria-hidden="true" />
 
       <div className="container vm-footer-inner-container">
@@ -70,36 +70,49 @@ export default function Footer() {
             Masked Editorial Reveal
             ========================================================= */}
         <div className="footer-contact">
-          <motion.h3 
-            className="footer-contact-heading"
-            initial={{ opacity: 0, y: 22 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.05 }}
-            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <span className="footer-contact-heading-ghost">
-              {f.ctaLine1 || 'Have a growth problem worth solving?'}
+          <h3 className="footer-contact-heading">
+            <span className="motion-line-mask" style={{ overflow: 'hidden', display: 'block' }}>
+              <motion.span
+                style={{ display: 'inline-block', willChange: 'transform, opacity' }}
+                variants={maskedLineVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.2 }}
+                custom={{ delay: 0.0, duration: 0.8 }}
+                className="footer-contact-heading-ghost"
+              >
+                {f.ctaLine1 || 'Have a growth problem worth solving?'}
+              </motion.span>
             </span>
-            <span className="text-foreground">
-              {f.ctaLine2 || "Let's build what moves it forward."}
+            <span className="motion-line-mask" style={{ overflow: 'hidden', display: 'block' }}>
+              <motion.span
+                style={{ display: 'inline-block', willChange: 'transform, opacity' }}
+                variants={maskedLineVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.2 }}
+                custom={{ delay: 0.08, duration: 0.8 }}
+                className="text-foreground"
+              >
+                {f.ctaLine2 || "Let's build what moves it forward."}
+              </motion.span>
             </span>
-          </motion.h3>
+          </h3>
 
           <motion.button
             type="button"
             onClick={() => setIsModalOpen(true)}
-            className="btn is-lg is-brand footer-cta-btn"
+            className="btn is-lg is-brand footer-cta-btn btn-motion"
             aria-label={f.startProject}
-            variants={buttonMotion}
-            initial="rest"
-            whileHover="whileHover"
-            whileTap="whileTap"
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
           >
             <div className="btn-text-wrapper">
               <span className="btn-label-text">{f.startProject}</span>
             </div>
             <div className="icon">
-              <div className="icon-svg">
+              <div className="icon-svg btn-icon-arrow">
                 <ArrowIcon />
               </div>
             </div>
@@ -164,26 +177,27 @@ export default function Footer() {
           </Reveal>
         </div>
 
-        {/* =========================================================
-            04. MONUMENTAL WORDMARK (EXACT VIVID MOTION: footer-end)
-            ========================================================= */}
-        <div
-          className="footer-end"
-          onMouseMove={handleWordmarkMouseMove}
-          onMouseLeave={handleWordmarkMouseLeave}
-        >
-          <Reveal delay={0.1} duration={0.9}>
-            <div
-              className="footer-logo-wordmark"
-              style={{
-                transform: `translate(${wordmarkOffset.x}px, ${wordmarkOffset.y}px)`
-              }}
-            >
-              MAGICENCY
-            </div>
-          </Reveal>
-        </div>
+      </div>
 
+      {/* =========================================================
+          04. MONUMENTAL WORDMARK (EXACT VIVID MOTION: footer-end)
+          Full-width, unconstrained by inner container max-width
+          ========================================================= */}
+      <div
+        className="footer-end"
+        onMouseMove={handleWordmarkMouseMove}
+        onMouseLeave={handleWordmarkMouseLeave}
+      >
+        <Reveal delay={0.1} duration={0.9} className="footer-end-reveal">
+          <div
+            className="footer-logo-wordmark"
+            style={{
+              transform: `translate(${wordmarkOffset.x}px, ${wordmarkOffset.y}px)`
+            }}
+          >
+            MAGICENCY
+          </div>
+        </Reveal>
       </div>
     </footer>
   );

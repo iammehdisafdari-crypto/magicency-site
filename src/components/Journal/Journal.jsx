@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useSpring } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 import { ArrowUpRight } from 'lucide-react';
-import { Reveal, Stagger, EASING, editorialVariants } from '../motion';
+import { Reveal, RevealHeading, RevealLabel, RevealBody, Stagger, EASING, editorialVariants } from '../motion';
 import './Journal.css';
 
 export default function Journal() {
@@ -97,22 +97,22 @@ export default function Journal() {
         {/* =========================================================
             01. JOURNAL HERO / INTRO
             ========================================================= */}
-        <Reveal delay={0.0} className="journal-heading-block">
-          <div className="journal-badge-label">
+        <div className="journal-heading-block">
+          <RevealLabel as="div" className="journal-badge-label" delay={0.0}>
             <span className="journal-badge-text">{journalData.badge}</span>
-          </div>
-          <h2 className="journal-main-headline">
+          </RevealLabel>
+          <RevealHeading as="h2" className="journal-main-headline" delay={0.06}>
             {journalData.headline}
-          </h2>
-        </Reveal>
+          </RevealHeading>
+        </div>
 
         {/* =========================================================
             02. IN FOCUS (FEATURED EDITORIAL CARDS)
             ========================================================= */}
         <div className="journal-featured-section">
-          <Reveal delay={0.05} className="journal-featured-heading">
+          <RevealLabel as="div" className="journal-featured-heading" delay={0.08}>
             <h3 className="u-text-heading-xs">{journalData.inFocusLabel}</h3>
-          </Reveal>
+          </RevealLabel>
 
           <Stagger stagger={0.08} delay={0.1} className="journal-featured-grid">
             {articles.map((art) => (
