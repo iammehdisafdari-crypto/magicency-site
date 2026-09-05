@@ -452,16 +452,42 @@
   transform: translateX(10px);
 }
 
-.vm-menu-nav-link:hover .vm-menu-item-text {
+/* Mouse hover preview (Fine pointer desktop only) */
+@media (hover: hover) and (pointer: fine) {
+  .vm-menu-nav-link:hover .vm-menu-item-text {
+    color: #FF6600;
+    transform: translateX(6px);
+  }
+
+  [dir="rtl"] .vm-menu-nav-link:hover .vm-menu-item-text {
+    transform: translateX(-6px);
+  }
+
+  .vm-menu-nav-link:hover .vm-menu-item-num {
+    color: #FF5500;
+  }
+
+  .vm-menu-nav-link:hover .vm-menu-item-arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Active / Selected state (Triggered explicitly upon user tap/selection) */
+.vm-menu-nav-link.is-selected .vm-menu-item-text {
   color: #FF6600;
   transform: translateX(6px);
 }
 
-[dir="rtl"] .vm-menu-nav-link:hover .vm-menu-item-text {
+[dir="rtl"] .vm-menu-nav-link.is-selected .vm-menu-item-text {
   transform: translateX(-6px);
 }
 
-.vm-menu-nav-link:hover .vm-menu-item-arrow {
+.vm-menu-nav-link.is-selected .vm-menu-item-num {
+  color: #FF5500;
+}
+
+.vm-menu-nav-link.is-selected .vm-menu-item-arrow {
   opacity: 1;
   transform: translateX(0);
 }

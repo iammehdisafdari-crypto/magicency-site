@@ -27,6 +27,7 @@ export default function Header() {
   const { t, lang, toggleLanguage, setIsModalOpen, isRTL } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [selectedItemId, setSelectedItemId] = useState(null);
   const menuRef = useRef(null);
 
   useEffect(() => {
@@ -37,11 +38,10 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Lock body scroll during menu open without layout jump
+  // Lock body scroll during menu open without layout jump or viewport scroll reset
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
-      document.documentElement.style.overflow = 'hidden';
       const handleKeyDown = (e) => {
         if (e.key === 'Escape') {
           setIsMenuOpen(false);
@@ -51,23 +51,35 @@ export default function Header() {
       return () => {
         window.removeEventListener('keydown', handleKeyDown);
         document.body.style.overflow = '';
-        document.documentElement.style.overflow = '';
       };
     } else {
       document.body.style.overflow = '';
-      document.documentElement.style.overflow = '';
+      setSelectedItemId(null);
     }
   }, [isMenuOpen]);
 
-  const handleNavClick = (e, targetId) => {
+  const handleNavClick = (e, targetId, itemId) => {
     e.preventDefault();
-    setIsMenuOpen(false);
-    const elem = document.querySelector(targetId);
-    if (elem) {
-      setTimeout(() => {
-        elem.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
+    if (itemId) {
+      setSelectedItemId(itemId);
     }
+
+    // Allow user to see the satisfying tap animation before closing
+    setTimeout(() => {
+      setIsMenuOpen(false);
+      
+      // Smooth scroll after unlocking
+      setTimeout(() => {
+        if (targetId === '#hero' || targetId === '#') {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          return;
+        }
+        const elem = document.querySelector(targetId);
+        if (elem) {
+          elem.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 50);
+    }, 200);
   };
 
   const navItems = [
@@ -91,7 +103,9 @@ export default function Header() {
             className="vm-brand" 
             aria-label="Magicency Home"
             onClick={(e) => {
+              e.preventDefault();
               if (isMenuOpen) setIsMenuOpen(false);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
             whileHover={{ opacity: 0.88 }}
             transition={{ duration: 0.2, ease: EASING.SECONDARY }}
@@ -111,7 +125,7 @@ export default function Header() {
                   key={item.id}
                   href={item.href} 
                   className="vm-desktop-nav-link" 
-                  onClick={(e) => handleNavClick(e, item.href)}
+                  onClick={(e) => handleNavClick(e, item.href, item.id)}
                 >
                   <ScrambleText text={item.label.toUpperCase()} />
                 </a>
@@ -155,7 +169,7 @@ export default function Header() {
               [ FA / EN ]  [ HOME :: ]
               ========================================================= */}
           <div className="vm-header-mobile-right">
-            {/* Mobile Language Selector (Positioned next to Home icon) */}
+            {/* Mobile Language Selector */}
             <motion.button 
               type="button"
               onClick={toggleLanguage} 
@@ -169,10 +183,18 @@ export default function Header() {
               <span className="vm-mobile-lang-text">{lang === 'en' ? 'FA' : 'EN'}</span>
             </motion.button>
 
-            {/* Mobile Home / Menu Trigger Button [ HOME :: ] */}
+            {/* Mobile Menu Trigger Button */}
             <motion.button
               type="button"
-              onClick={() => setIsMenuOpen((prev) => !prev)}
+              onClick={() => {
+                setIsMenuOpen((prev) => {
+                  const nextState = !prev;
+                  if (nextState) {
+                    setSelectedItemId(null);
+                  }
+                  return nextState;
+                });
+              }}
               className={`vm-mobile-home-btn ${isMenuOpen ? 'is-open' : ''}`}
               aria-label={isMenuOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
               aria-expanded={isMenuOpen}
@@ -181,7 +203,7 @@ export default function Header() {
               transition={{ duration: 0.2, ease: EASING.SECONDARY }}
             >
               <span className="vm-home-btn-label">
-                {isMenuOpen ? (lang === 'fa' ? 'بستن' : 'CLOSE') : (lang === 'fa' ? 'خانه' : 'HOME')}
+                {isMenuOpen ? (lang === 'fa' ? 'بستن' : 'CLOSE') : (lang === 'fa' ? 'منو' : 'MENU')}
               </span>
               <span className="vm-home-btn-icon-box">
                 {isMenuOpen ? <X size={14} /> : <GridDotsIcon />}
@@ -207,7 +229,7 @@ export default function Header() {
             initial={{ opacity: 0, clipPath: 'inset(0% 0% 100% 0%)' }}
             animate={{ opacity: 1, clipPath: 'inset(0% 0% 0% 0%)' }}
             exit={{ opacity: 0, clipPath: 'inset(0% 0% 100% 0%)' }}
-            transition={{ duration: 0.48, ease: EASING.PRIMARY }}
+            transition={{ duration: 0.45, ease: EASING.PRIMARY }}
           >
             {/* Atmospheric Background Grid strictly inside overlay */}
             <div className="vm-menu-grid-backdrop" aria-hidden="true" />
@@ -215,7 +237,6 @@ export default function Header() {
 
             {/* Inner Content Container */}
             <div className="vm-menu-content-container">
-
 
               {/* Main Menu Grid: Large Links on Left, Studio Details on Right */}
               <div className="vm-menu-body-grid">
@@ -226,14 +247,14 @@ export default function Header() {
                     <div key={item.id} className="vm-menu-nav-item-mask">
                       <motion.a
                         href={item.href}
-                        className="vm-menu-nav-link"
-                        onClick={(e) => handleNavClick(e, item.href)}
+                        className={`vm-menu-nav-link ${selectedItemId === item.id ? 'is-selected' : ''}`}
+                        onClick={(e) => handleNavClick(e, item.href, item.id)}
                         initial={{ y: '110%', opacity: 0 }}
                         animate={{ y: '0%', opacity: 1 }}
                         exit={{ y: '-70%', opacity: 0 }}
                         transition={{ 
                           duration: 0.45, 
-                          delay: 0.1 + idx * 0.05, 
+                          delay: 0.08 + idx * 0.04, 
                           ease: EASING.MOMENTUM 
                         }}
                       >
@@ -253,7 +274,7 @@ export default function Header() {
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 12 }}
-                  transition={{ duration: 0.38, delay: 0.36, ease: EASING.PRIMARY }}
+                  transition={{ duration: 0.38, delay: 0.32, ease: EASING.PRIMARY }}
                 >
                   <div className="vm-menu-sidebar-section">
                     <span className="vm-menu-sidebar-heading">
@@ -283,13 +304,6 @@ export default function Header() {
                       growth@magicency.com
                     </a>
                   </div>
-
-                  <div className="vm-menu-sidebar-section">
-                    <span className="vm-menu-sidebar-heading">
-                      {lang === 'fa' ? 'دفاتر' : 'HUBS'}
-                    </span>
-                    <p className="vm-menu-meta-text">New York • London • Dubai</p>
-                  </div>
                 </motion.div>
 
               </div>
@@ -300,7 +314,7 @@ export default function Header() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.3, delay: 0.4 }}
+                transition={{ duration: 0.3, delay: 0.36 }}
               >
                 <span className="vm-menu-copyright">© 2026 MAGICENCY®</span>
                 <div className="vm-menu-socials">
