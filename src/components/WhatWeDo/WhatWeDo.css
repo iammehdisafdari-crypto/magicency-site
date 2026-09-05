@@ -113,31 +113,37 @@
 
 /* Header: 01, 02, 03 + Title */
 .wwd-list-item-header.grid {
-  padding: clamp(20px, 3vh, 36px) 0 clamp(18px, 2.8vh, 32px);
+  padding: clamp(24px, 3.5vh, 40px) 0 clamp(20px, 3vh, 32px);
   display: flex;
   align-items: baseline;
-  gap: clamp(24px, 3.5vw, 56px);
+  gap: clamp(20px, 3vw, 44px);
 }
 
 .wwd-list-item-no {
   font-family: 'Instrument Serif', Georgia, serif;
-  font-size: clamp(2.8rem, 5.5vw, 5.5rem);
+  font-size: clamp(2.8rem, 5.5vw, 5.2rem);
   font-weight: 400;
   color: #FF5500;
   line-height: 1;
   flex-shrink: 0;
+  display: inline-flex;
+  align-items: baseline;
+  min-width: clamp(56px, 5.2vw, 84px);
+  letter-spacing: -0.02em;
 }
 
 [dir="rtl"] .wwd-list-item-no {
   font-family: var(--font-persian, 'Vazirmatn', sans-serif);
   font-weight: 800;
+  letter-spacing: 0;
+  min-width: clamp(56px, 5.2vw, 84px);
 }
 
 .wwd-list-item-title {
   font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
   font-size: clamp(2.3rem, 4.8vw, 4.8rem);
   font-weight: 700;
-  line-height: 1;
+  line-height: 1.1;
   letter-spacing: -0.03em;
   color: #FFFFFF;
   margin: 0;
@@ -146,6 +152,7 @@
 [dir="rtl"] .wwd-list-item-title {
   font-family: var(--font-persian, 'Vazirmatn', sans-serif);
   font-size: clamp(2rem, 3.8vw, 3.6rem);
+  line-height: 1.25;
 }
 
 /* Two-column Body: Left Visual Showcase, Right Services Set */
@@ -168,13 +175,16 @@
   width: 100%;
 }
 
+.wwd-sticky-visual-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
 @media (min-width: 992px) {
   .wwd-sticky-visual-wrapper {
     position: sticky;
     top: 110px;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
   }
 }
 
@@ -245,13 +255,18 @@
   font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
   font-size: clamp(0.95rem, 1.15vw, 1.12rem);
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 1.65;
   color: #9CA3AF;
   margin: 0;
+  margin-top: clamp(20px, 2.6vh, 28px);
+  padding: 0;
+  max-width: 48ch;
 }
 
 [dir="rtl"] .wwd-pillar-summary-text {
   font-family: var(--font-persian, 'Vazirmatn', sans-serif);
+  line-height: 1.78;
+  letter-spacing: 0;
 }
 
 /* =========================================================
@@ -444,12 +459,17 @@
   }
 
   .wwd-list-item-header.grid {
-    padding: 16px 0 14px;
-    gap: 14px;
+    padding: clamp(18px, 2.5vh, 26px) 0 clamp(16px, 2.2vh, 22px);
+    gap: clamp(16px, 3.5vw, 24px);
   }
 
   .wwd-list-item-no {
-    font-size: 2.5rem;
+    font-size: clamp(2.2rem, 6.5vw, 2.8rem);
+    min-width: clamp(42px, 8.5vw, 54px);
+  }
+
+  [dir="rtl"] .wwd-list-item-no {
+    min-width: clamp(42px, 8.5vw, 54px);
   }
 
   .wwd-list-item-title {
@@ -463,6 +483,12 @@
   .wwd-visual-media-frame {
     aspect-ratio: 16 / 10;
     border-radius: 16px;
+  }
+
+  .wwd-pillar-summary-text {
+    margin-top: clamp(16px, 2.4vh, 22px);
+    line-height: 1.7;
+    max-width: 100%;
   }
 
   .wwd-list-item-set-row-cell {

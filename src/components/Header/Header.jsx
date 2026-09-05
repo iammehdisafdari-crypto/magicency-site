@@ -38,24 +38,19 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Lock body scroll during menu open without layout jump or viewport scroll reset
+  // Keyboard accessibility: Escape key closes menu
   useEffect(() => {
-    if (isMenuOpen) {
-      document.body.style.overflow = 'hidden';
-      const handleKeyDown = (e) => {
-        if (e.key === 'Escape') {
-          setIsMenuOpen(false);
-        }
-      };
-      window.addEventListener('keydown', handleKeyDown);
-      return () => {
-        window.removeEventListener('keydown', handleKeyDown);
-        document.body.style.overflow = '';
-      };
-    } else {
-      document.body.style.overflow = '';
+    if (!isMenuOpen) {
       setSelectedItemId(null);
+      return;
     }
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setIsMenuOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isMenuOpen]);
 
   const handleNavClick = (e, targetId, itemId) => {
@@ -63,23 +58,18 @@ export default function Header() {
     if (itemId) {
       setSelectedItemId(itemId);
     }
-
-    // Allow user to see the satisfying tap animation before closing
-    setTimeout(() => {
+    if (isMenuOpen) {
       setIsMenuOpen(false);
-      
-      // Smooth scroll after unlocking
-      setTimeout(() => {
-        if (targetId === '#hero' || targetId === '#') {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-          return;
-        }
-        const elem = document.querySelector(targetId);
-        if (elem) {
-          elem.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 50);
-    }, 200);
+    }
+
+    if (targetId === '#hero' || targetId === '#') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    const elem = document.querySelector(targetId);
+    if (elem) {
+      elem.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   const navItems = [
