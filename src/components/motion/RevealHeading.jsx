@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import React from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 import { maskedLineVariants } from './variants';
 import { DURATION, STAGGER, VIEWPORT } from './motionConfig';
 
@@ -21,15 +21,8 @@ export default function RevealHeading({
   viewport = VIEWPORT,
   trigger
 }) {
-  const [reducedMotion, setReducedMotion] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setReducedMotion(mq.matches);
-    const handler = (e) => setReducedMotion(e.matches);
-    mq.addEventListener('change', handler);
-    return () => mq.removeEventListener('change', handler);
-  }, []);
+  const shouldReduceMotion = useReducedMotion();
+  const reducedMotion = Boolean(shouldReduceMotion);
 
   // Normalize children into an array of lines if string with \n or array
   const lines = Array.isArray(children)

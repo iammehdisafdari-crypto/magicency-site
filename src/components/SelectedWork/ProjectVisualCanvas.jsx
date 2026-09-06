@@ -60,6 +60,8 @@ const PROJECT_MEDIA = {
   }
 };
 
+const toWebp = (url) => (url ? url.replace(/\.(jpg|jpeg|png)$/, '.webp') : url);
+
 export default function ProjectVisualCanvas({ type, accent }) {
   const media = PROJECT_MEDIA[type] || PROJECT_MEDIA.fintech;
 
@@ -67,13 +69,16 @@ export default function ProjectVisualCanvas({ type, accent }) {
     <div className={`project-case-study-visual ${type}-composition`}>
       {/* Primary Hero Deliverable */}
       <div className="case-primary-media-wrap">
-        <img
-          src={media.primary.src}
-          alt={media.primary.alt}
-          className="case-primary-img"
-          loading="lazy"
-          decoding="async"
-        />
+        <picture>
+          <source srcSet={toWebp(media.primary.src)} type="image/webp" />
+          <img
+            src={media.primary.src}
+            alt={media.primary.alt}
+            className="case-primary-img"
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
         <div className="media-glass-vignette" />
         
         {/* Deliverable Badge */}
@@ -85,13 +90,16 @@ export default function ProjectVisualCanvas({ type, accent }) {
 
       {/* Secondary Overlapping Deliverable (Mobile / Creative / Telemetry) */}
       <div className="case-secondary-media-wrap">
-        <img
-          src={media.secondary.src}
-          alt={media.secondary.alt}
-          className="case-secondary-img"
-          loading="lazy"
-          decoding="async"
-        />
+        <picture>
+          <source srcSet={toWebp(media.secondary.src)} type="image/webp" />
+          <img
+            src={media.secondary.src}
+            alt={media.secondary.alt}
+            className="case-secondary-img"
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
         <div className="media-glass-vignette" />
 
         <div className="media-tag-pill secondary-tag">

@@ -3,6 +3,8 @@ import { motion, useScroll, useSpring, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 import './GrowthSystemNarrative.css';
 
+const toWebp = (url) => (url ? url.replace(/\.(jpg|jpeg|png)$/, '.webp') : url);
+
 // 6 Visual Media Objects with Stage Transformation Coordinates
 const MEDIA_OBJECTS = [
   {
@@ -428,12 +430,16 @@ export default function GrowthSystemNarrative() {
                   {/* Visual Content (Image / Interface / Card) */}
                   {obj.type === 'image' ? (
                     <div className="media-image-wrapper">
-                      <img 
-                        src={obj.src} 
-                        alt={isRTL ? obj.titleFa : obj.titleEn} 
-                        className="media-actual-img"
-                        loading="eager"
-                      />
+                      <picture>
+                        <source srcSet={toWebp(obj.src)} type="image/webp" />
+                        <img 
+                          src={obj.src} 
+                          alt={isRTL ? obj.titleFa : obj.titleEn} 
+                          className="media-actual-img"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      </picture>
                       {/* Subtle Glass Glare */}
                       <div className="media-glare-overlay" />
                     </div>

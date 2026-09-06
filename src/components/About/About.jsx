@@ -3,6 +3,8 @@ import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 import './About.css';
 
+const toWebp = (url) => (url ? url.replace(/\.(jpg|jpeg|png)$/, '.webp') : url);
+
 export default function About() {
   const { t, isRTL } = useLanguage();
   const containerRef = useRef(null);
@@ -32,7 +34,7 @@ export default function About() {
       else if (v < 0.60) idx = 2;
       else if (v < 0.80) idx = 3;
       else idx = 4;
-      setActiveStageIdx(idx);
+      setActiveStageIdx((prev) => (prev !== idx ? idx : prev));
     });
     return () => unsubscribe();
   }, [smoothProgress]);
@@ -105,12 +107,16 @@ export default function About() {
           {/* LEFT: Authentic Editorial Portrait Anchor */}
           <div className="about-portrait-anchor">
             <div className="portrait-image-frame">
-              <img 
-                src="/assets/about/portrait.jpg" 
-                alt="Magicency Growth Architect & Creative Strategist" 
-                className="portrait-img" 
-                loading="lazy" 
-              />
+              <picture>
+                <source srcSet={toWebp("/assets/about/portrait.jpg")} type="image/webp" />
+                <img 
+                  src="/assets/about/portrait.jpg" 
+                  alt="Magicency Growth Architect & Creative Strategist" 
+                  className="portrait-img" 
+                  loading="lazy" 
+                  decoding="async"
+                />
+              </picture>
               <div className="portrait-glass-vignette" />
               <div className="portrait-meta-badge">
                 <span className="dot-warm-amber" />
@@ -172,12 +178,16 @@ export default function About() {
                   {principles[0].desc}
                 </p>
                 <div className="artifact-snippet-preview">
-                  <img 
-                    src="/assets/about/workspace.jpg" 
-                    alt="Magicency Market Research & ICP Behavioral Map" 
-                    className="snippet-img" 
-                    loading="lazy" 
-                  />
+                  <picture>
+                    <source srcSet={toWebp("/assets/about/workspace.jpg")} type="image/webp" />
+                    <img 
+                      src="/assets/about/workspace.jpg" 
+                      alt="Magicency Market Research & ICP Behavioral Map" 
+                      className="snippet-img" 
+                      loading="lazy" 
+                      decoding="async"
+                    />
+                  </picture>
                   <div className="snippet-overlay-tag">RESEARCH DOSSIER & UNIT ECONOMICS</div>
                 </div>
               </motion.div>
@@ -237,12 +247,16 @@ export default function About() {
                   {principles[3].desc}
                 </p>
                 <div className="artifact-snippet-preview">
-                  <img 
-                    src="/assets/capabilities/growth_systems.jpg" 
-                    alt="Magicency Closed-Loop Growth Feedback Engine" 
-                    className="snippet-img" 
-                    loading="lazy" 
-                  />
+                  <picture>
+                    <source srcSet={toWebp("/assets/capabilities/growth_systems.jpg")} type="image/webp" />
+                    <img 
+                      src="/assets/capabilities/growth_systems.jpg" 
+                      alt="Magicency Closed-Loop Growth Feedback Engine" 
+                      className="snippet-img" 
+                      loading="lazy" 
+                      decoding="async"
+                    />
+                  </picture>
                   <div className="snippet-overlay-tag">CLOSED-LOOP EXPERIMENTATION REPOSITORIES</div>
                 </div>
               </motion.div>

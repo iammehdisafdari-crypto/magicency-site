@@ -29,12 +29,16 @@ export default function FeaturedStory({ article, onSelectArticle }) {
           {/* Media Column */}
           <div className="featured-media-container">
             <div className="featured-image-crop">
-              <img
-                src={article.coverImage || '/journal-1.jpg'}
-                alt={title}
-                className="featured-img"
-                loading="eager"
-              />
+              <picture>
+                <source srcSet={(article.coverImage || '/journal-1.jpg').replace(/\.(jpg|jpeg|png)$/, '.webp')} type="image/webp" />
+                <img
+                  src={article.coverImage || '/journal-1.jpg'}
+                  alt={title}
+                  className="featured-img"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
               <div className="featured-media-overlay" />
               <div className="featured-hud-badge">
                 <span className="hud-pulse" />

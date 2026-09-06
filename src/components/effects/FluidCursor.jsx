@@ -396,9 +396,8 @@ export default function FluidCursor({
         width = entries[0].contentRect.width;
         height = entries[0].contentRect.height;
       } else {
-        const rect = getRect();
-        width = rect.width;
-        height = rect.height;
+        width = container.clientWidth || window.innerWidth;
+        height = container.clientHeight || window.innerHeight;
       }
       const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
       const pixelWidth = Math.max(1, Math.floor(width * dpr));
@@ -460,12 +459,13 @@ export default function FluidCursor({
       lastActiveTime: performance.now()
     };
 
-    // IntersectionObserver to pause simulation when offscreen
+    // IntersectionObserver & Visibility to pause simulation when offscreen or tab hidden
     let isVisible = true;
+    let isTabVisible = document.visibilityState !== 'hidden';
     let isRunning = false;
 
     const startLoop = () => {
-      if (!isRunning && isVisible) {
+      if (!isRunning && isVisible && isTabVisible) {
         isRunning = true;
         lastTime = performance.now();
         animId = requestAnimationFrame(step);
@@ -479,10 +479,20 @@ export default function FluidCursor({
       }
     };
 
+    const handleVisibilityChange = () => {
+      isTabVisible = document.visibilityState !== 'hidden';
+      if (isTabVisible && isVisible) {
+        startLoop();
+      } else {
+        stopLoop();
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
     const visibilityObserver = new IntersectionObserver((entries) => {
       const entry = entries[0];
       isVisible = Boolean(entry && entry.isIntersecting);
-      if (isVisible) {
+      if (isVisible && isTabVisible) {
         startLoop();
       } else {
         stopLoop();
@@ -638,6 +648,7 @@ export default function FluidCursor({
 
     // Cleanup resources
     return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       visibilityObserver.disconnect();
       resizeObserver.disconnect();
       window.removeEventListener('scroll', invalidateRect);

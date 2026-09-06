@@ -436,11 +436,13 @@
    ========================================================= */
 .journal-floating-cursor-preview {
   position: fixed;
+  top: 0;
+  left: 0;
   pointer-events: none;
   z-index: 999;
   width: 280px;
   aspect-ratio: 16 / 10;
-  transform: translate(-50%, -115%);
+  will-change: transform;
 }
 
 .journal-floating-img-frame {

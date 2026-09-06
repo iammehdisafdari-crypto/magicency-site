@@ -3,6 +3,8 @@ import { motion, useScroll, useSpring, useTransform, AnimatePresence } from 'fra
 import { useLanguage } from '../../context/LanguageContext';
 import './Proof.css';
 
+const toWebp = (url) => (url ? url.replace(/\.(jpg|jpeg|png)$/, '.webp') : url);
+
 export default function Proof() {
   const { t, isRTL } = useLanguage();
   const containerRef = useRef(null);
@@ -32,7 +34,7 @@ export default function Proof() {
       else if (v < 0.60) idx = 2;
       else if (v < 0.80) idx = 3;
       else idx = 4;
-      setActiveStateIdx(idx);
+      setActiveStateIdx((prev) => (prev !== idx ? idx : prev));
     });
     return () => unsubscribe();
   }, [smoothProgress]);
@@ -108,12 +110,16 @@ export default function Proof() {
               className="proof-canvas-card work-canvas"
             >
               <div className="work-primary-frame">
-                <img 
-                  src="/assets/work/velox_primary.jpg" 
-                  alt="Velox Financial Desktop Platform Deliverable"
-                  className="proof-img" 
-                  loading="lazy" 
-                />
+                <picture>
+                  <source srcSet={toWebp("/assets/work/velox_primary.jpg")} type="image/webp" />
+                  <img 
+                    src="/assets/work/velox_primary.jpg" 
+                    alt="Velox Financial Desktop Platform Deliverable"
+                    className="proof-img" 
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </picture>
                 <div className="proof-glass-vignette" />
                 <div className="proof-meta-tag primary-tag">
                   <span className="dot-green" />
@@ -123,12 +129,16 @@ export default function Proof() {
 
               {/* Floating Mobile Execution Layer */}
               <div className="work-secondary-frame">
-                <img 
-                  src="/assets/work/velox_secondary.jpg" 
-                  alt="Velox Financial Mobile 1-Tap Execution App"
-                  className="proof-img" 
-                  loading="lazy" 
-                />
+                <picture>
+                  <source srcSet={toWebp("/assets/work/velox_secondary.jpg")} type="image/webp" />
+                  <img 
+                    src="/assets/work/velox_secondary.jpg" 
+                    alt="Velox Financial Mobile 1-Tap Execution App"
+                    className="proof-img" 
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </picture>
                 <div className="proof-glass-vignette" />
                 <div className="proof-meta-tag">
                   <span>MOBILE FLOW DELIVERABLE</span>
@@ -159,12 +169,16 @@ export default function Proof() {
               className="proof-canvas-card signals-canvas"
             >
               <div className="signals-backdrop-frame">
-                <img 
-                  src="/assets/ecosystem/analytics_dashboard.jpg" 
-                  alt="Velox Financial Live Telemetry and Attribution Engine"
-                  className="proof-img blur-img" 
-                  loading="lazy" 
-                />
+                <picture>
+                  <source srcSet={toWebp("/assets/ecosystem/analytics_dashboard.jpg")} type="image/webp" />
+                  <img 
+                    src="/assets/ecosystem/analytics_dashboard.jpg" 
+                    alt="Velox Financial Live Telemetry and Attribution Engine"
+                    className="proof-img blur-img" 
+                    loading="lazy" 
+                    decoding="async"
+                  />
+                </picture>
                 <div className="signals-overlay-gradient" />
               </div>
 
@@ -204,12 +218,16 @@ export default function Proof() {
             >
               {/* After: Synchronized Magicency Operating System (Base Layer) */}
               <div className="transform-layer after-layer">
-                <img 
-                  src="/assets/work/velox_primary.jpg" 
-                  alt="After: Magicency High-Intent Synchronized Conversion Architecture"
-                  className="proof-img" 
-                  loading="lazy" 
-                />
+                <picture>
+                  <source srcSet={toWebp("/assets/work/velox_primary.jpg")} type="image/webp" />
+                  <img 
+                    src="/assets/work/velox_primary.jpg" 
+                    alt="After: Magicency High-Intent Synchronized Conversion Architecture"
+                    className="proof-img" 
+                    loading="lazy" 
+                    decoding="async"
+                  />
+                </picture>
                 <div className="transform-badge after-badge">
                   <span className="dot-green" />
                   <span>{states[2].afterLabel}</span>
@@ -225,12 +243,16 @@ export default function Proof() {
                     : `polygon(0% 0%, ${splitMaskX.get()}% 0%, ${splitMaskX.get()}% 100%, 0% 100%)`
                 }}
               >
-                <img 
-                  src="/assets/ecosystem/landing_page.jpg" 
-                  alt="Before: Baseline Fragmented Marketing Funnel"
-                  className="proof-img desaturate-img" 
-                  loading="lazy" 
-                />
+                <picture>
+                  <source srcSet={toWebp("/assets/ecosystem/landing_page.jpg")} type="image/webp" />
+                  <img 
+                    src="/assets/ecosystem/landing_page.jpg" 
+                    alt="Before: Baseline Fragmented Marketing Funnel"
+                    className="proof-img desaturate-img" 
+                    loading="lazy" 
+                    decoding="async"
+                  />
+                </picture>
                 <div className="transform-badge before-badge">
                   <span className="dot-red" />
                   <span>{states[2].beforeLabel}</span>
@@ -297,12 +319,16 @@ export default function Proof() {
               className="proof-canvas-card trust-canvas"
             >
               <div className="trust-backdrop-visual">
-                <img 
-                  src="/assets/work/velox_primary.jpg" 
-                  alt="Velox Financial Case Study Evidence Background"
-                  className="proof-img deep-dark-img" 
-                  loading="lazy" 
-                />
+                <picture>
+                  <source srcSet={toWebp("/assets/work/velox_primary.jpg")} type="image/webp" />
+                  <img 
+                    src="/assets/work/velox_primary.jpg" 
+                    alt="Velox Financial Case Study Evidence Background"
+                    className="proof-img deep-dark-img" 
+                    loading="lazy" 
+                    decoding="async"
+                  />
+                </picture>
               </div>
 
               <div className="trust-content-deck">

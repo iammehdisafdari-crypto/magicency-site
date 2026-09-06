@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 import { useRouter } from '../../context/RouterContext';
@@ -48,6 +48,22 @@ export default function Footer() {
   const wordmarkRef = useRef(null);
   const wordmarkAnimIdRef = useRef(null);
   const cachedWordmarkRect = useRef(null);
+  const [shouldLoadFluid, setShouldLoadFluid] = useState(false);
+
+  useEffect(() => {
+    if (!footerRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoadFluid(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '400px' }
+    );
+    observer.observe(footerRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   const handleWordmarkMouseMove = (e) => {
     if (!cachedWordmarkRect.current) {
@@ -81,7 +97,7 @@ export default function Footer() {
   return (
     <footer ref={footerRef} className="footer vm-footer-root" aria-label="Magicency Experience Footer">
       {/* Reusable WebGL Fluid Cursor Layer (#B82E0C Monochromatic) */}
-      <FluidCursor intensity={0.8} className="footer-fluid-bg" />
+      {shouldLoadFluid && <FluidCursor intensity={0.8} className="footer-fluid-bg" />}
       <div className="liquid-ether-fade bottom" aria-hidden="true" />
 
       <div className="container vm-footer-inner-container">

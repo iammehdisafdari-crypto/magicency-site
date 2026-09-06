@@ -270,3 +270,17 @@ h1, h2, h3, h4, h5, h6 {
     transform: none !important;
   }
 }
+
+/* =========================================
+   PERFORMANCE: CONTENT CONTAINMENT
+   Skips layout and paint for deep offscreen sections during initial load
+   ========================================= */
+.vm-journal-section {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 900px;
+}
+
+.vm-footer-root {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 650px;
+}

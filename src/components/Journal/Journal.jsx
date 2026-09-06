@@ -5,6 +5,8 @@ import { ArrowUpRight } from 'lucide-react';
 import { Reveal, RevealHeading, RevealLabel, RevealBody, Stagger, EASING, editorialVariants } from '../motion';
 import './Journal.css';
 
+const toWebp = (url) => (url ? url.replace(/\.(jpg|jpeg|png)$/, '.webp') : url);
+
 export default function Journal() {
   const { t, isRTL } = useLanguage();
   const [activeFilter, setActiveFilter] = useState('ALL');
@@ -126,12 +128,16 @@ export default function Journal() {
                 onClick={() => handleRowClick(art.id)}
               >
                 <div className="journal-featured-card-media">
-                  <img
-                    src={art.image}
-                    alt={art.alt}
-                    className="journal-featured-card-media-img"
-                    loading="lazy"
-                  />
+                  <picture>
+                    <source srcSet={toWebp(art.image)} type="image/webp" />
+                    <img
+                      src={art.image}
+                      alt={art.alt}
+                      className="journal-featured-card-media-img"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </picture>
                   <div className="journal-featured-media-overlay" />
                   <span className="journal-featured-num-tag">{art.number}</span>
                 </div>
@@ -224,7 +230,10 @@ export default function Journal() {
                           exit={{ height: 0, opacity: 0 }}
                           transition={{ duration: 0.35, ease: EASING.SECONDARY }}
                         >
-                          <img src={art.image} alt={art.alt} className="journal-mobile-img" />
+                          <picture>
+                            <source srcSet={toWebp(art.image)} type="image/webp" />
+                            <img src={art.image} alt={art.alt} className="journal-mobile-img" loading="lazy" decoding="async" />
+                          </picture>
                         </motion.div>
                       )}
                     </AnimatePresence>
@@ -247,8 +256,10 @@ export default function Journal() {
             <motion.div
               className="journal-floating-cursor-preview"
               style={{
-                left: mouseX,
-                top: mouseY
+                x: mouseX,
+                y: mouseY,
+                translateX: '-50%',
+                translateY: '-115%'
               }}
               initial={{
                 opacity: 0,
@@ -271,11 +282,16 @@ export default function Journal() {
               }}
             >
               <div className="journal-floating-img-frame">
-                <img
-                  src={hoveredArticle.image}
-                  alt={hoveredArticle.title}
-                  className="journal-floating-img"
-                />
+                <picture>
+                  <source srcSet={toWebp(hoveredArticle.image)} type="image/webp" />
+                  <img
+                    src={hoveredArticle.image}
+                    alt={hoveredArticle.title}
+                    className="journal-floating-img"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </picture>
                 <div className="journal-floating-img-overlay" />
                 <div className="journal-floating-caption">
                   <span className="journal-floating-tag">{hoveredArticle.category}</span>

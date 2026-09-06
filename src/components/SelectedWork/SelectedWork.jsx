@@ -6,6 +6,8 @@ import { ArrowRight, ArrowLeft } from 'lucide-react';
 import { RevealLabel, EASING } from '../motion';
 import './SelectedWork.css';
 
+const toWebp = (url) => (url ? url.replace(/\.(jpg|jpeg|png)$/, '.webp') : url);
+
 export default function SelectedWork() {
   const { t, isRTL, setIsModalOpen } = useLanguage();
   const { navigate } = useRouter();
@@ -145,7 +147,10 @@ export default function SelectedWork() {
                 <h3>{proj.category}{proj.categoryItalic}</h3>
                 <p>{proj.clientTag}: {proj.client}</p>
               </div>
-              <img src={proj.image} alt={proj.alt} className="vm-fallback-img" />
+              <picture>
+                <source srcSet={toWebp(proj.image)} type="image/webp" />
+                <img src={proj.image} alt={proj.alt} className="vm-fallback-img" loading="lazy" decoding="async" />
+              </picture>
             </div>
           ))}
           <button type="button" onClick={() => setIsModalOpen(true)} className="vm-showcase-cta-btn">
@@ -308,12 +313,16 @@ export default function SelectedWork() {
                     }}
                   >
                     <div className="vm-showcase-card-inner">
-                      <img
-                        src={proj.image}
-                        alt={proj.alt || proj.client}
-                        className="vm-showcase-img"
-                        loading={idx === 0 ? 'eager' : 'lazy'}
-                      />
+                      <picture>
+                        <source srcSet={toWebp(proj.image)} type="image/webp" />
+                        <img
+                          src={proj.image}
+                          alt={proj.alt || proj.client}
+                          className="vm-showcase-img"
+                          loading={idx === 0 ? 'eager' : 'lazy'}
+                          decoding="async"
+                        />
+                      </picture>
                       <div className="vm-showcase-overlay" />
 
                       {/* Mobile In-Card Floating Pill */}

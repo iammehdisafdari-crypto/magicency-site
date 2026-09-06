@@ -1,5 +1,5 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform, useSpring, useReducedMotion } from 'framer-motion';
 
 /**
  * =========================================================
@@ -16,15 +16,8 @@ export default function ScrollReveal({
   endY = -20
 }) {
   const ref = useRef(null);
-  const [reducedMotion, setReducedMotion] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setReducedMotion(mq.matches);
-    const handler = (e) => setReducedMotion(e.matches);
-    mq.addEventListener('change', handler);
-    return () => mq.removeEventListener('change', handler);
-  }, []);
+  const shouldReduceMotion = useReducedMotion();
+  const reducedMotion = Boolean(shouldReduceMotion);
 
   const { scrollYProgress } = useScroll({
     target: ref,

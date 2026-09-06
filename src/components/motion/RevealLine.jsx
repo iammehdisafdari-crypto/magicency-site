@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import React from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 import { maskedLineVariants } from './variants';
 import { DURATION, VIEWPORT } from './motionConfig';
 
@@ -18,15 +18,8 @@ export default function RevealLine({
   viewport = VIEWPORT,
   trigger
 }) {
-  const [reducedMotion, setReducedMotion] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setReducedMotion(mq.matches);
-    const handler = (e) => setReducedMotion(e.matches);
-    mq.addEventListener('change', handler);
-    return () => mq.removeEventListener('change', handler);
-  }, []);
+  const shouldReduceMotion = useReducedMotion();
+  const reducedMotion = Boolean(shouldReduceMotion);
 
   const isControlled = typeof trigger === 'boolean';
 

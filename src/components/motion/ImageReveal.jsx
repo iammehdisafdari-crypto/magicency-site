@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import React from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 import { cinematicImageVariants } from './variants';
 import { DURATION, VIEWPORT } from './motionConfig';
+
+const toWebp = (url) => (url ? url.replace(/\.(jpg|jpeg|png)$/, '.webp') : url);
 
 /**
  * =========================================================
@@ -21,23 +23,24 @@ export default function ImageReveal({
   viewport = VIEWPORT,
   trigger
 }) {
-  const [reducedMotion, setReducedMotion] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setReducedMotion(mq.matches);
-    const handler = (e) => setReducedMotion(e.matches);
-    mq.addEventListener('change', handler);
-    return () => mq.removeEventListener('change', handler);
-  }, []);
-
+  const shouldReduceMotion = useReducedMotion();
+  const reducedMotion = Boolean(shouldReduceMotion);
   const isControlled = typeof trigger === 'boolean';
 
   if (reducedMotion) {
     if (src) {
       return (
         <div className={`motion-image-static ${className}`}>
-          <img src={src} alt={alt} className={`motion-image-inner ${imageClassName}`} />
+          <picture>
+            <source srcSet={toWebp(src)} type="image/webp" />
+            <img
+              src={src}
+              alt={alt}
+              className={`motion-image-inner ${imageClassName}`}
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
         </div>
       );
     }
@@ -59,12 +62,17 @@ export default function ImageReveal({
       custom={{ delay, duration }}
     >
       {src ? (
-        <img
-          src={src}
-          alt={alt}
-          className={`motion-image-inner ${imageClassName}`}
-          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-        />
+        <picture>
+          <source srcSet={toWebp(src)} type="image/webp" />
+          <img
+            src={src}
+            alt={alt}
+            className={`motion-image-inner ${imageClassName}`}
+            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
       ) : (
         children
       )}

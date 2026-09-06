@@ -4,6 +4,8 @@ import { useLanguage } from '../../context/LanguageContext';
 import { Reveal, RevealHeading, RevealStatement, RevealBody, ImageReveal, Parallax, EASING } from '../motion';
 import './WhatWeDo.css';
 
+const toWebp = (url) => (url ? url.replace(/\.(jpg|jpeg|png)$/, '.webp') : url);
+
 // SVG Asterisk Icon matching Vivid Motion brand marker
 const AsteriskIcon = () => (
   <svg viewBox="0 0 16 16" fill="currentColor" width="14" height="14" aria-hidden="true">
@@ -247,7 +249,10 @@ export default function WhatWeDo() {
                 ease: EASING.CINEMATIC
               }}
             >
-              <img src={item.src} alt="" className="wwd-trail-inner-img" />
+              <picture>
+                <source srcSet={toWebp(item.src)} type="image/webp" />
+                <img src={item.src} alt="" className="wwd-trail-inner-img" loading="lazy" decoding="async" />
+              </picture>
             </motion.div>
           ))}
         </AnimatePresence>

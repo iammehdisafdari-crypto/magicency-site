@@ -39,6 +39,8 @@ const CAPABILITY_IMAGES = {
   }
 };
 
+const toWebp = (url) => (url ? url.replace(/\.(jpg|jpeg|png)$/, '.webp') : url);
+
 export default function CapabilityVisual({ type, isDominant }) {
   const asset = CAPABILITY_IMAGES[type] || CAPABILITY_IMAGES.strategy;
 
@@ -46,13 +48,16 @@ export default function CapabilityVisual({ type, isDominant }) {
     <div className={`capability-hero-visual-frame ${isDominant ? 'visual-is-dominant' : ''}`}>
       {/* High-Fidelity Hero Image */}
       <div className="cap-image-viewport">
-        <img
-          src={asset.src}
-          alt={asset.alt}
-          className="cap-editorial-img"
-          loading="lazy"
-          decoding="async"
-        />
+        <picture>
+          <source srcSet={toWebp(asset.src)} type="image/webp" />
+          <img
+            src={asset.src}
+            alt={asset.alt}
+            className="cap-editorial-img"
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
 
         {/* Cinematic Glare & Vignette Overlay */}
         <div className="cap-vignette-overlay" />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 import { FluidCursor } from '../effects';
@@ -7,6 +7,23 @@ import './Hero.css';
 
 export default function Hero({ isLoaded = true }) {
   const { t } = useLanguage();
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+  const reelRef = useRef(null);
+
+  useEffect(() => {
+    if (!reelRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoadVideo(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '200px' }
+    );
+    observer.observe(reelRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   const clients = t.hero.clients || [
     'tamir online',
@@ -104,15 +121,30 @@ export default function Hero({ isLoaded = true }) {
           100% full-width of the viewport, responsive 16:9 aspect ratio
           Clean cinematic presentation: title, byline, portrait and badge hidden
           ========================================================= */}
-      <div className="vm-showreel-fullbleed-wrapper">
+      <div ref={reelRef} className="vm-showreel-fullbleed-wrapper">
         <div className="vm-showreel-vimeo-container">
-          <iframe
-            src="https://player.vimeo.com/video/1224224238?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479&dnt=1&playsinline=1"
-            className="vm-showreel-vimeo-iframe"
-            title="Magicency Showreel"
-            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-            allowFullScreen
-          />
+          {shouldLoadVideo ? (
+            <iframe
+              src="https://player.vimeo.com/video/1224224238?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479&dnt=1&playsinline=1"
+              className="vm-showreel-vimeo-iframe"
+              title="Magicency Showreel"
+              loading="lazy"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+              allowFullScreen
+            />
+          ) : (
+            <picture>
+              <source srcSet="/reel-preview.webp" type="image/webp" />
+              <img
+                src="/reel-preview.jpg"
+                alt="Magicency Showreel Preview"
+                className="vm-showreel-vimeo-iframe"
+                style={{ objectFit: 'cover', opacity: 0.85 }}
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
+          )}
         </div>
       </div>
     </section>

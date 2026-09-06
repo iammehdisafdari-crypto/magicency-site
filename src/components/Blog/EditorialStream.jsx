@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 
+const toWebp = (url) => (url ? url.replace(/\.(jpg|jpeg|png)$/, '.webp') : url);
+
 export default function EditorialStream({ articles, onSelectArticle }) {
   const { t, isRTL } = useLanguage();
   const s = t.blog?.stream || {};
@@ -89,7 +91,10 @@ export default function EditorialStream({ articles, onSelectArticle }) {
 
                     {/* Mobile Inline Media Thumbnail */}
                     <div className="item-mobile-thumb" aria-hidden="true">
-                      <img src={art.coverImage || '/journal-1.jpg'} alt="" loading="lazy" />
+                      <picture>
+                        <source srcSet={toWebp(art.coverImage || '/journal-1.jpg')} type="image/webp" />
+                        <img src={art.coverImage || '/journal-1.jpg'} alt="" loading="lazy" decoding="async" />
+                      </picture>
                     </div>
                   </motion.div>
                 );
@@ -109,11 +114,16 @@ export default function EditorialStream({ articles, onSelectArticle }) {
                     transition={{ duration: 0.25 }}
                   >
                     <div className="preview-img-crop">
-                      <img
-                        src={hoveredArticle.coverImage || '/journal-1.jpg'}
-                        alt=""
-                        className="preview-img"
-                      />
+                      <picture>
+                        <source srcSet={toWebp(hoveredArticle.coverImage || '/journal-1.jpg')} type="image/webp" />
+                        <img
+                          src={hoveredArticle.coverImage || '/journal-1.jpg'}
+                          alt=""
+                          className="preview-img"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      </picture>
                       <div className="preview-gradient-scrim" />
                       <div className="preview-floating-hud">
                         <span className="hud-dot" />
