@@ -51,7 +51,7 @@ export default function WorkIndex({ projects }) {
 
       {/* Editorial Project Rows */}
       <div className="work-index-list" role="feed" aria-label="Project Index">
-        <AnimatePresence mode="popLayout">
+        <AnimatePresence>
           {projects.map((proj, idx) => {
             const isHovered = hoveredProject?.id === proj.id;
             const isMobileActive = activeMobileId === proj.id;
@@ -59,7 +59,6 @@ export default function WorkIndex({ projects }) {
             return (
               <motion.article
                 key={proj.id}
-                layout
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.98 }}
