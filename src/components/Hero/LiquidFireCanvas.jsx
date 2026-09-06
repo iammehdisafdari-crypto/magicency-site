@@ -7,7 +7,8 @@ export default function LiquidFireCanvas() {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
-    let animationFrameId;
+    let animationFrameId = null;
+    let isVisible = true;
 
     const parent = canvas.parentElement || document.getElementById('hero');
 
@@ -19,6 +20,15 @@ export default function LiquidFireCanvas() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
       }
+      cachedRect = null;
+    };
+
+    let cachedRect = null;
+    const getRect = () => {
+      if (!cachedRect) {
+        cachedRect = canvas.getBoundingClientRect();
+      }
+      return cachedRect;
     };
 
     updateDimensions();
@@ -49,7 +59,7 @@ export default function LiquidFireCanvas() {
     };
 
     const handleMouseMove = (e) => {
-      const rect = canvas.getBoundingClientRect();
+      const rect = getRect();
       const isInside = (
         e.clientY >= rect.top &&
         e.clientY <= rect.bottom &&
@@ -92,7 +102,7 @@ export default function LiquidFireCanvas() {
 
     const handleTouchMove = (e) => {
       if (e.touches.length > 0) {
-        const rect = canvas.getBoundingClientRect();
+        const rect = getRect();
         const touch = e.touches[0];
         const isInside = (
           touch.clientY >= rect.top &&
@@ -108,92 +118,99 @@ export default function LiquidFireCanvas() {
       }
     };
 
-    window.addEventListener('resize', handleResize);
+    const invalidateRect = () => {
+      cachedRect = null;
+    };
+
+    window.addEventListener('resize', handleResize, { passive: true });
+    window.addEventListener('scroll', invalidateRect, { passive: true });
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
     window.addEventListener('touchmove', handleTouchMove, { passive: true });
 
     let time = 0;
 
     const render = () => {
+      if (!isVisible) {
+        animationFrameId = null;
+        return;
+      }
+
       time += 0.015;
 
       // Smooth interpolation for fluid liquid motion
-      mouse.x += (mouse.targetX - mouse.x) * 0.06;
-      mouse.y += (mouse.targetY - mouse.y) * 0.06;
+      mouse.x += (mouse.targetX - mouse.x) * 0.065;
+      mouse.y += (mouse.targetY - mouse.y) * 0.065;
 
-      // Add gentle organic breathing motion even when idle
-      const idleOffsetX = Math.sin(time * 0.8) * 45 + Math.cos(time * 1.2) * 25;
-      const idleOffsetY = Math.cos(time * 0.7) * 35 + Math.sin(time * 1.1) * 20;
-
-      const fireCoreX = mouse.x + idleOffsetX;
-      const fireCoreY = mouse.y + idleOffsetY;
-
-      // Clear strictly within canvas bounds
       ctx.clearRect(0, 0, width, height);
 
-      // 1. Large Ambient Deep Fire Aura (Outer Glow)
-      const outerRadius = Math.max(width, height) * 0.55;
-      const outerGrad = ctx.createRadialGradient(
-        fireCoreX, fireCoreY, 10,
-        fireCoreX, fireCoreY, outerRadius
+      // =========================================================
+      // LAYER 1: Deep Amber Sub-glow (Foundation heat)
+      // =========================================================
+      const baseGrad = ctx.createRadialGradient(
+        mouse.x, mouse.y, 0,
+        mouse.x, mouse.y, Math.max(width * 0.4, 300)
       );
-      outerGrad.addColorStop(0, 'rgba(255, 60, 0, 0.22)');
-      outerGrad.addColorStop(0.25, 'rgba(210, 45, 0, 0.12)');
-      outerGrad.addColorStop(0.55, 'rgba(120, 25, 0, 0.05)');
-      outerGrad.addColorStop(1, 'rgba(6, 7, 9, 0)');
+      baseGrad.addColorStop(0, 'rgba(255, 68, 0, 0.18)');
+      baseGrad.addColorStop(0.35, 'rgba(224, 48, 0, 0.08)');
+      baseGrad.addColorStop(0.7, 'rgba(180, 20, 0, 0.02)');
+      baseGrad.addColorStop(1, 'transparent');
 
-      ctx.fillStyle = outerGrad;
+      ctx.fillStyle = baseGrad;
       ctx.fillRect(0, 0, width, height);
 
-      // 2. Mid Heat Core Flame (Luminous Amber / Fire)
-      const midRadius = Math.min(width, height) * 0.42;
-      const midGrad = ctx.createRadialGradient(
-        fireCoreX, fireCoreY, 5,
-        fireCoreX, fireCoreY, midRadius
-      );
-      midGrad.addColorStop(0, 'rgba(255, 110, 20, 0.35)');
-      midGrad.addColorStop(0.3, 'rgba(255, 75, 0, 0.2)');
-      midGrad.addColorStop(0.7, 'rgba(180, 40, 0, 0.05)');
-      midGrad.addColorStop(1, 'rgba(6, 7, 9, 0)');
+      // =========================================================
+      // LAYER 2: Organic Liquid Metablobs (Turbulent flame physics)
+      // =========================================================
+      const blobCount = 4;
+      for (let i = 0; i < blobCount; i++) {
+        const angle = time * (0.8 + i * 0.25) + (i * Math.PI / 2);
+        const orbitRadius = 35 + i * 22 + Math.sin(time * 1.2 + i) * 15;
+        const bx = mouse.x + Math.cos(angle) * orbitRadius;
+        const by = mouse.y + Math.sin(angle * 1.3) * (orbitRadius * 0.6) - (i * 12);
+        const radius = 60 + i * 25 + Math.cos(time * 1.5 + i) * 15;
 
-      ctx.fillStyle = midGrad;
+        const blobGrad = ctx.createRadialGradient(bx, by, 0, bx, by, radius);
+        if (i === 0) {
+          blobGrad.addColorStop(0, 'rgba(255, 120, 30, 0.28)');
+          blobGrad.addColorStop(0.5, 'rgba(255, 60, 0, 0.12)');
+          blobGrad.addColorStop(1, 'transparent');
+        } else if (i === 1) {
+          blobGrad.addColorStop(0, 'rgba(255, 80, 0, 0.22)');
+          blobGrad.addColorStop(0.6, 'rgba(200, 30, 0, 0.07)');
+          blobGrad.addColorStop(1, 'transparent');
+        } else {
+          blobGrad.addColorStop(0, 'rgba(255, 160, 50, 0.15)');
+          blobGrad.addColorStop(0.5, 'rgba(255, 50, 0, 0.05)');
+          blobGrad.addColorStop(1, 'transparent');
+        }
+
+        ctx.fillStyle = blobGrad;
+        ctx.beginPath();
+        ctx.arc(bx, by, radius, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // =========================================================
+      // LAYER 3: Core Incandescent Heat (High-intensity radiant center)
+      // =========================================================
+      const coreRadius = 45 + Math.sin(time * 3) * 8;
+      const coreGrad = ctx.createRadialGradient(
+        mouse.x, mouse.y, 0,
+        mouse.x, mouse.y, coreRadius
+      );
+      coreGrad.addColorStop(0, 'rgba(255, 220, 150, 0.35)');
+      coreGrad.addColorStop(0.3, 'rgba(255, 110, 20, 0.25)');
+      coreGrad.addColorStop(0.8, 'rgba(255, 40, 0, 0.08)');
+      coreGrad.addColorStop(1, 'transparent');
+
+      ctx.fillStyle = coreGrad;
       ctx.beginPath();
-      ctx.arc(fireCoreX, fireCoreY, midRadius, 0, Math.PI * 2);
+      ctx.arc(mouse.x, mouse.y, coreRadius, 0, Math.PI * 2);
       ctx.fill();
 
-      // 3. Intense Inner Fire Plasma Hotspot
-      const innerRadius = 140;
-      const innerGrad = ctx.createRadialGradient(
-        fireCoreX, fireCoreY, 0,
-        fireCoreX, fireCoreY, innerRadius
-      );
-      innerGrad.addColorStop(0, 'rgba(255, 180, 60, 0.45)');
-      innerGrad.addColorStop(0.35, 'rgba(255, 95, 10, 0.25)');
-      innerGrad.addColorStop(0.75, 'rgba(255, 45, 0, 0.08)');
-      innerGrad.addColorStop(1, 'transparent');
-
-      ctx.fillStyle = innerGrad;
-      ctx.beginPath();
-      ctx.arc(fireCoreX, fireCoreY, innerRadius, 0, Math.PI * 2);
-      ctx.fill();
-
-      // 4. Secondary organic flame tongue (drifting upward)
-      const tongueX = fireCoreX + Math.sin(time * 2) * 30;
-      const tongueY = fireCoreY - 60 + Math.cos(time * 1.5) * 20;
-      const tongueGrad = ctx.createRadialGradient(
-        tongueX, tongueY, 0,
-        tongueX, tongueY, 110
-      );
-      tongueGrad.addColorStop(0, 'rgba(255, 140, 30, 0.28)');
-      tongueGrad.addColorStop(0.5, 'rgba(255, 60, 0, 0.12)');
-      tongueGrad.addColorStop(1, 'transparent');
-
-      ctx.fillStyle = tongueGrad;
-      ctx.beginPath();
-      ctx.arc(tongueX, tongueY, 110, 0, Math.PI * 2);
-      ctx.fill();
-
-      // 5. Update & Draw Rising Embers
+      // =========================================================
+      // LAYER 4: Dynamic Ember Particles (Rising velocity sparks)
+      // =========================================================
       for (let i = particles.length - 1; i >= 0; i--) {
         const p = particles[i];
         p.x += p.vx;
@@ -220,13 +237,29 @@ export default function LiquidFireCanvas() {
       animationFrameId = requestAnimationFrame(render);
     };
 
-    render();
+    // IntersectionObserver to pause rendering when Hero is offscreen
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          isVisible = entry.isIntersecting;
+          if (isVisible && !animationFrameId) {
+            animationFrameId = requestAnimationFrame(render);
+          }
+        });
+      },
+      { threshold: 0 }
+    );
+    observer.observe(canvas);
+
+    animationFrameId = requestAnimationFrame(render);
 
     return () => {
+      observer.disconnect();
       window.removeEventListener('resize', handleResize);
+      window.removeEventListener('scroll', invalidateRect);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('touchmove', handleTouchMove);
-      cancelAnimationFrame(animationFrameId);
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
     };
   }, []);
 

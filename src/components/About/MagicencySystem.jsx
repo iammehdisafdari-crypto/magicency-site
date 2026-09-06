@@ -23,27 +23,33 @@ export default function MagicencySystem() {
   const visualY = useTransform(scrollYProgress, [0, 0.85, 0.98], [0, 0, 48]);
   const visualScale = useTransform(scrollYProgress, [0, 0.85, 0.98], [1, 1, 0.94]);
 
-  // Synchronize active stage index precisely with scroll position
+  // Synchronize active stage index efficiently using IntersectionObserver (zero scroll layout thrashing)
   useEffect(() => {
-    const handleScroll = () => {
-      if (!stageRefs.current || stageRefs.current.length === 0) return;
-      const triggerLine = window.innerHeight * 0.42;
+    if (!stageRefs.current || stageRefs.current.length === 0) return;
 
-      let currentIdx = 0;
-      stageRefs.current.forEach((el, idx) => {
-        if (!el) return;
-        const rect = el.getBoundingClientRect();
-        if (rect.top <= triggerLine) {
-          currentIdx = idx;
-        }
-      });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = Number(entry.target.dataset.stageIndex);
+            if (!isNaN(idx)) {
+              setActiveStageIdx((prev) => (prev !== idx ? idx : prev));
+            }
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: '-30% 0px -40% 0px',
+        threshold: 0
+      }
+    );
 
-      setActiveStageIdx(currentIdx);
-    };
+    stageRefs.current.forEach((el) => {
+      if (el) observer.observe(el);
+    });
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => observer.disconnect();
   }, [stages.length]);
 
   const activeStage = stages[activeStageIdx] || stages[0];
@@ -103,13 +109,6 @@ export default function MagicencySystem() {
                       <stop offset="0%" stopColor="#FF5500" stopOpacity="0.9" />
                       <stop offset="100%" stopColor="#FF8833" stopOpacity="0.3" />
                     </linearGradient>
-                    <filter id="laserBlur" x="-20%" y="-20%" width="140%" height="140%">
-                      <feGaussianBlur stdDeviation="3" result="blur" />
-                      <feMerge>
-                        <feMergeNode in="blur" />
-                        <feMergeNode in="SourceGraphic" />
-                      </feMerge>
-                    </filter>
                   </defs>
 
                   {/* Progressive Background Geometry Layers */}
@@ -117,15 +116,14 @@ export default function MagicencySystem() {
                   <circle cx="250" cy="250" r="160" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="1" strokeDasharray="3 4" />
                   <circle cx="250" cy="250" r="100" fill="none" stroke={activeStageIdx >= 2 ? 'rgba(255,85,0,0.3)' : 'rgba(255,255,255,0.05)'} strokeWidth="1.2" />
 
-                  {/* Central Compounding Nexus Node */}
+                  {/* Central Compounding Nexus Node (GPU accelerated without SVG filter) */}
                   <circle 
                     cx="250" 
                     cy="250" 
                     r={30 + activeStageIdx * 6} 
-                    fill="rgba(255, 85, 0, 0.12)" 
+                    fill="rgba(255, 85, 0, 0.14)" 
                     stroke="#FF5500" 
                     strokeWidth="1.5"
-                    filter="url(#laserBlur)"
                     className="nexus-core-pulse"
                   />
                   <circle cx="250" cy="250" r="5" fill="#FFFFFF" />

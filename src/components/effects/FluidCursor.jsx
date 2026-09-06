@@ -377,22 +377,44 @@ export default function FluidCursor({
     let curl = createFBO(SIM_RESOLUTION, SIM_RESOLUTION, internalFormat, format, type, gl.NEAREST);
     let pressure = createDoubleFBO(SIM_RESOLUTION, SIM_RESOLUTION, internalFormat, format, type, gl.NEAREST);
 
-    // Resize Handler
-    const updateSize = () => {
-      const rect = container.getBoundingClientRect();
-      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-      const width = Math.max(1, Math.floor(rect.width * dpr));
-      const height = Math.max(1, Math.floor(rect.height * dpr));
+    let cachedRect = null;
+    const getRect = () => {
+      if (!cachedRect) {
+        cachedRect = container.getBoundingClientRect();
+      }
+      return cachedRect;
+    };
+    const invalidateRect = () => {
+      cachedRect = null;
+    };
 
-      if (canvas.width !== width || canvas.height !== height) {
-        canvas.width = width;
-        canvas.height = height;
+    // Resize Handler
+    const updateSize = (entries) => {
+      invalidateRect();
+      let width, height;
+      if (entries && entries[0] && entries[0].contentRect) {
+        width = entries[0].contentRect.width;
+        height = entries[0].contentRect.height;
+      } else {
+        const rect = getRect();
+        width = rect.width;
+        height = rect.height;
+      }
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      const pixelWidth = Math.max(1, Math.floor(width * dpr));
+      const pixelHeight = Math.max(1, Math.floor(height * dpr));
+
+      if (canvas.width !== pixelWidth || canvas.height !== pixelHeight) {
+        canvas.width = pixelWidth;
+        canvas.height = pixelHeight;
       }
     };
 
     updateSize();
     const resizeObserver = new ResizeObserver(updateSize);
     resizeObserver.observe(container);
+    window.addEventListener('scroll', invalidateRect, { passive: true });
+    window.addEventListener('resize', invalidateRect, { passive: true });
 
     // Blit helper
     function blit(target) {
@@ -438,8 +460,38 @@ export default function FluidCursor({
       lastActiveTime: performance.now()
     };
 
+    // IntersectionObserver to pause simulation when offscreen
+    let isVisible = true;
+    let isRunning = false;
+
+    const startLoop = () => {
+      if (!isRunning && isVisible) {
+        isRunning = true;
+        lastTime = performance.now();
+        animId = requestAnimationFrame(step);
+      }
+    };
+
+    const stopLoop = () => {
+      if (isRunning) {
+        isRunning = false;
+        cancelAnimationFrame(animId);
+      }
+    };
+
+    const visibilityObserver = new IntersectionObserver((entries) => {
+      const entry = entries[0];
+      isVisible = Boolean(entry && entry.isIntersecting);
+      if (isVisible) {
+        startLoop();
+      } else {
+        stopLoop();
+      }
+    }, { threshold: 0 });
+    visibilityObserver.observe(container);
+
     const handleMouseMove = (e) => {
-      const rect = container.getBoundingClientRect();
+      const rect = getRect();
       const isInside = (
         e.clientX >= rect.left &&
         e.clientX <= rect.right &&
@@ -469,6 +521,7 @@ export default function FluidCursor({
       if (speed > 0.01) {
         mouse.lastActiveTime = performance.now();
         splat(x, y, dx, dy);
+        startLoop();
       }
 
       mouse.prevX = x;
@@ -483,6 +536,11 @@ export default function FluidCursor({
     const monoColorUniform = [184 / 255, 46 / 255, 12 / 255];
 
     function step(currentTime) {
+      if (!isVisible) {
+        isRunning = false;
+        return;
+      }
+
       const dt = Math.min((currentTime - lastTime) / 1000, 0.016);
       lastTime = currentTime;
 
@@ -566,22 +624,26 @@ export default function FluidCursor({
         gl.uniform3fv(gl.getUniformLocation(displayProg, 'uMonochromeColor'), monoColorUniform);
         gl.uniform1f(gl.getUniformLocation(displayProg, 'uIntensityMultiplier'), intensity);
         blit(null);
+
+        animId = requestAnimationFrame(step);
       } else {
-        // Clear canvas when completely idle/dissipated
+        // Clear canvas once and stop loop until new activity
         gl.clearColor(0, 0, 0, 0);
         gl.clear(gl.COLOR_BUFFER_BIT);
+        isRunning = false;
       }
-
-      animId = requestAnimationFrame(step);
     }
 
-    animId = requestAnimationFrame(step);
+    startLoop();
 
     // Cleanup resources
     return () => {
+      visibilityObserver.disconnect();
       resizeObserver.disconnect();
+      window.removeEventListener('scroll', invalidateRect);
+      window.removeEventListener('resize', invalidateRect);
       window.removeEventListener('mousemove', handleMouseMove);
-      cancelAnimationFrame(animId);
+      stopLoop();
 
       // Clean WebGL buffers and textures
       gl.deleteBuffer(quadBuffer);

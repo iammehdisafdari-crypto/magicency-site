@@ -20,14 +20,38 @@ export default function FinalCTA() {
   const convergenceGlow = useTransform(scrollYProgress, [0.2, 0.8], [0.3, 1]);
 
   // Subtle interactive pointer position tracking on desktop
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const orbRef = useRef(null);
+  const orbAnimIdRef = useRef(null);
+  const cachedRect = useRef(null);
 
   const handleMouseMove = (e) => {
     if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
+    if (!cachedRect.current) {
+      cachedRect.current = containerRef.current.getBoundingClientRect();
+    }
+    const rect = cachedRect.current;
     const x = ((e.clientX - rect.left) / rect.width - 0.5) * 30;
     const y = ((e.clientY - rect.top) / rect.height - 0.5) * 30;
-    setMousePos({ x, y });
+
+    if (!orbAnimIdRef.current) {
+      orbAnimIdRef.current = requestAnimationFrame(() => {
+        if (orbRef.current) {
+          orbRef.current.style.transform = `translate3d(calc(-50% + ${x}px), calc(-50% + ${y}px), 0)`;
+        }
+        orbAnimIdRef.current = null;
+      });
+    }
+  };
+
+  const handleMouseLeave = () => {
+    cachedRect.current = null;
+    if (orbAnimIdRef.current) {
+      cancelAnimationFrame(orbAnimIdRef.current);
+      orbAnimIdRef.current = null;
+    }
+    if (orbRef.current) {
+      orbRef.current.style.transform = 'translate3d(-50%, -50%, 0)';
+    }
   };
 
   return (
@@ -36,14 +60,16 @@ export default function FinalCTA() {
       id="next-move"
       className="final-cta-section"
       onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
       aria-label="Section 9: The Next Move"
     >
       {/* Background Cinematic Convergence Atmosphere */}
       <div className="cta-ambient-converge" aria-hidden="true" />
       <div 
+        ref={orbRef}
         className="cta-focal-orb" 
         style={{
-          transform: `translate(calc(-50% + ${mousePos.x}px), calc(-50% + ${mousePos.y}px))`
+          willChange: 'transform'
         }}
         aria-hidden="true" 
       />

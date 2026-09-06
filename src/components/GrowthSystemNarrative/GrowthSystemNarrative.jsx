@@ -178,8 +178,10 @@ export default function GrowthSystemNarrative() {
 
   const [activeStageIndex, setActiveStageIndex] = useState(0);
   const [hoveredMedia, setHoveredMedia] = useState(null);
-  const [mouseOffset, setMouseOffset] = useState({ x: 0, y: 0 });
   const [isMobile, setIsMobile] = useState(false);
+  const stageWallRef = useRef(null);
+  const wallAnimIdRef = useRef(null);
+  const cachedViewportRect = useRef(null);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -212,7 +214,7 @@ export default function GrowthSystemNarrative() {
       else if (v < 0.74) idx = 3;
       else if (v < 0.88) idx = 4;
       else idx = 5;
-      setActiveStageIndex(idx);
+      setActiveStageIndex((prev) => (prev !== idx ? idx : prev));
     });
     return () => unsubscribe();
   }, [smoothProgress]);
@@ -226,13 +228,36 @@ export default function GrowthSystemNarrative() {
     window.scrollTo({ top, behavior: 'smooth' });
   };
 
-  // Parallax mouse tracker
+  // Parallax mouse tracker with geometry caching and rAF transform
   const handleMouseMove = useCallback((e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
+    if (isMobile) return;
+    if (!cachedViewportRect.current) {
+      cachedViewportRect.current = e.currentTarget.getBoundingClientRect();
+    }
+    const rect = cachedViewportRect.current;
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
-    setMouseOffset({ x, y });
-  }, []);
+
+    if (!wallAnimIdRef.current) {
+      wallAnimIdRef.current = requestAnimationFrame(() => {
+        if (stageWallRef.current) {
+          stageWallRef.current.style.transform = `perspective(1200px) rotateX(${y * -3}deg) rotateY(${x * 3}deg)`;
+        }
+        wallAnimIdRef.current = null;
+      });
+    }
+  }, [isMobile]);
+
+  const handleMouseLeave = useCallback(() => {
+    cachedViewportRect.current = null;
+    if (wallAnimIdRef.current) {
+      cancelAnimationFrame(wallAnimIdRef.current);
+      wallAnimIdRef.current = null;
+    }
+    if (stageWallRef.current && !isMobile) {
+      stageWallRef.current.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg)';
+    }
+  }, [isMobile]);
 
   const currentStage = stages[activeStageIndex] || stages[0];
 
@@ -247,6 +272,7 @@ export default function GrowthSystemNarrative() {
       <div 
         className="narrative-sticky-viewport"
         onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
       >
         {/* Cinematic Atmospheric Void */}
         <div className="narrative-ambient-void" />
@@ -306,9 +332,10 @@ export default function GrowthSystemNarrative() {
             PRIMARY HERO VISUAL: THE MARKETING ACTIVITY WALL (Media Ecosystem)
             ========================================================= */}
         <div 
+          ref={stageWallRef}
           className="narrative-media-wall-stage"
           style={{
-            transform: isMobile ? 'none' : `perspective(1200px) rotateX(${mouseOffset.y * -3}deg) rotateY(${mouseOffset.x * 3}deg)`
+            willChange: isMobile ? 'auto' : 'transform'
           }}
         >
           {/* Supporting Connection Paths (Overlay Lines Between Media) */}

@@ -34,22 +34,33 @@ export default function WhatWeDo() {
     ['/whatwedo-3.jpg', '/project-4.jpg', '/whatwedo-1.jpg']
   ];
 
-  // Scroll Spy to keep the current capability pillar actively highlighted
+  // Scroll Spy using IntersectionObserver to eliminate forced reflow and scroll polling
   useEffect(() => {
-    const handleScroll = () => {
-      const trigger = window.innerHeight * 0.45;
-      itemRefs.current.forEach((el, index) => {
-        if (!el) return;
-        const rect = el.getBoundingClientRect();
-        if (rect.top <= trigger && rect.bottom >= trigger) {
-          setActiveGroupIndex(index);
-        }
-      });
-    };
+    if (!itemRefs.current || itemRefs.current.length === 0) return;
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = itemRefs.current.indexOf(entry.target);
+            if (index !== -1) {
+              setActiveGroupIndex((prev) => (prev !== index ? index : prev));
+            }
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: '-35% 0px -45% 0px',
+        threshold: 0.1
+      }
+    );
+
+    itemRefs.current.forEach((el) => {
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
   }, [pillars.length]);
 
   // Handle cursor movement inside a capability group to spawn trailing images

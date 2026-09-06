@@ -167,15 +167,42 @@ export default function ApproachHero() {
           ctx.fill();
         }
       });
-
-      animationFrameId = requestAnimationFrame(render);
     };
 
-    render();
+    let isVisible = true;
+    let isRunning = false;
+
+    const startLoop = () => {
+      if (!isRunning && isVisible) {
+        isRunning = true;
+        animationFrameId = requestAnimationFrame(render);
+      }
+    };
+
+    const stopLoop = () => {
+      if (isRunning) {
+        isRunning = false;
+        cancelAnimationFrame(animationFrameId);
+      }
+    };
+
+    const visibilityObserver = new IntersectionObserver((entries) => {
+      const entry = entries[0];
+      isVisible = Boolean(entry && entry.isIntersecting);
+      if (isVisible) {
+        startLoop();
+      } else {
+        stopLoop();
+      }
+    }, { threshold: 0 });
+    visibilityObserver.observe(canvas);
+
+    startLoop();
 
     return () => {
+      visibilityObserver.disconnect();
       window.removeEventListener('resize', handleResize);
-      cancelAnimationFrame(animationFrameId);
+      stopLoop();
     };
   }, [activePhaseIndex]);
 

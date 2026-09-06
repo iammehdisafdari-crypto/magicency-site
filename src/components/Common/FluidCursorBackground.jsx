@@ -377,9 +377,22 @@ export default function FluidCursorBackground({ className = '' }) {
 
     initFBOs();
 
+    // Geometry Caching
+    let cachedRect = null;
+    const getRect = () => {
+      if (!cachedRect) {
+        cachedRect = parent.getBoundingClientRect();
+      }
+      return cachedRect;
+    };
+    const invalidateRect = () => {
+      cachedRect = null;
+    };
+
     // Resize Handler
     const updateSize = () => {
-      const rect = parent.getBoundingClientRect();
+      invalidateRect();
+      const rect = getRect();
       const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
       const width = Math.max(1, Math.floor(rect.width * dpr));
       const height = Math.max(1, Math.floor(rect.height * dpr));
@@ -392,6 +405,7 @@ export default function FluidCursorBackground({ className = '' }) {
 
     updateSize();
     window.addEventListener('resize', updateSize);
+    window.addEventListener('scroll', invalidateRect, { passive: true });
 
     // Blit helper to draw a fullscreen quad with current program
     function blit(target) {
@@ -438,8 +452,38 @@ export default function FluidCursorBackground({ className = '' }) {
       lastActiveTime: performance.now()
     };
 
+    // IntersectionObserver to pause simulation when offscreen
+    let isVisible = true;
+    let isRunning = false;
+
+    const startLoop = () => {
+      if (!isRunning && isVisible) {
+        isRunning = true;
+        lastTime = performance.now();
+        animId = requestAnimationFrame(step);
+      }
+    };
+
+    const stopLoop = () => {
+      if (isRunning) {
+        isRunning = false;
+        cancelAnimationFrame(animId);
+      }
+    };
+
+    const visibilityObserver = new IntersectionObserver((entries) => {
+      const entry = entries[0];
+      isVisible = Boolean(entry && entry.isIntersecting);
+      if (isVisible) {
+        startLoop();
+      } else {
+        stopLoop();
+      }
+    }, { threshold: 0 });
+    visibilityObserver.observe(parent);
+
     const handleMouseMove = (e) => {
-      const rect = parent.getBoundingClientRect();
+      const rect = getRect();
       const isInside = (
         e.clientX >= rect.left &&
         e.clientX <= rect.right &&
@@ -478,6 +522,7 @@ export default function FluidCursorBackground({ className = '' }) {
         ];
 
         splat(x, y, dx, dy, color);
+        startLoop();
       }
 
       mouse.x = x;
@@ -494,6 +539,11 @@ export default function FluidCursorBackground({ className = '' }) {
     let lastTime = performance.now();
 
     function step(currentTime) {
+      if (!isVisible) {
+        isRunning = false;
+        return;
+      }
+
       const dt = Math.min((currentTime - lastTime) / 1000, 0.016);
       lastTime = currentTime;
 
@@ -578,22 +628,25 @@ export default function FluidCursorBackground({ className = '' }) {
         gl.uniform3fv(gl.getUniformLocation(displayProg, 'uDeepColor'), CONFIG.DEEP_COLOR);
         gl.uniform3fv(gl.getUniformLocation(displayProg, 'uCoreColor'), CONFIG.CORE_COLOR);
         blit(null);
+
+        animId = requestAnimationFrame(step);
       } else {
-        // Clear canvas when completely dissipated
+        // Clear canvas once and stop loop until new activity
         gl.clearColor(0, 0, 0, 0);
         gl.clear(gl.COLOR_BUFFER_BIT);
+        isRunning = false;
       }
-
-      animId = requestAnimationFrame(step);
     }
 
-    animId = requestAnimationFrame(step);
+    startLoop();
 
     // Cleanup resources
     return () => {
+      visibilityObserver.disconnect();
       window.removeEventListener('resize', updateSize);
+      window.removeEventListener('scroll', invalidateRect);
       window.removeEventListener('mousemove', handleMouseMove);
-      cancelAnimationFrame(animId);
+      stopLoop();
     };
   }, []);
 

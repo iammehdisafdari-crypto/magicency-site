@@ -45,17 +45,37 @@ export default function Footer() {
   };
 
   const footerRef = useRef(null);
-  const [wordmarkOffset, setWordmarkOffset] = useState({ x: 0, y: 0 });
+  const wordmarkRef = useRef(null);
+  const wordmarkAnimIdRef = useRef(null);
+  const cachedWordmarkRect = useRef(null);
 
   const handleWordmarkMouseMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
+    if (!cachedWordmarkRect.current) {
+      cachedWordmarkRect.current = e.currentTarget.getBoundingClientRect();
+    }
+    const rect = cachedWordmarkRect.current;
     const x = ((e.clientX - rect.left) / rect.width - 0.5) * 18;
     const y = ((e.clientY - rect.top) / rect.height - 0.5) * 10;
-    setWordmarkOffset({ x, y });
+
+    if (!wordmarkAnimIdRef.current) {
+      wordmarkAnimIdRef.current = requestAnimationFrame(() => {
+        if (wordmarkRef.current) {
+          wordmarkRef.current.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+        }
+        wordmarkAnimIdRef.current = null;
+      });
+    }
   };
 
   const handleWordmarkMouseLeave = () => {
-    setWordmarkOffset({ x: 0, y: 0 });
+    cachedWordmarkRect.current = null;
+    if (wordmarkAnimIdRef.current) {
+      cancelAnimationFrame(wordmarkAnimIdRef.current);
+      wordmarkAnimIdRef.current = null;
+    }
+    if (wordmarkRef.current) {
+      wordmarkRef.current.style.transform = 'translate3d(0px, 0px, 0)';
+    }
   };
 
   return (
@@ -230,9 +250,10 @@ export default function Footer() {
       >
         <Reveal delay={0.1} duration={0.9} className="footer-end-reveal">
           <div
+            ref={wordmarkRef}
             className="footer-logo-wordmark"
             style={{
-              transform: `translate(${wordmarkOffset.x}px, ${wordmarkOffset.y}px)`
+              willChange: 'transform'
             }}
           >
             MAGICENCY

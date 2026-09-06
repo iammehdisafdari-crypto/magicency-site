@@ -32,8 +32,20 @@ export default function GrowthEngineCanvas() {
     let prevMouseX = 0;
     let prevMouseY = 0;
 
+    let cachedRect = null;
+    const getRect = () => {
+      if (!cachedRect) {
+        cachedRect = canvas.getBoundingClientRect();
+      }
+      return cachedRect;
+    };
+    const invalidateRect = () => {
+      cachedRect = null;
+    };
+
     const handleResize = () => {
-      const rect = canvas.getBoundingClientRect();
+      invalidateRect();
+      const rect = getRect();
       width = rect.width;
       height = rect.height;
       dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -43,10 +55,11 @@ export default function GrowthEngineCanvas() {
     };
 
     handleResize();
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', handleResize, { passive: true });
+    window.addEventListener('scroll', invalidateRect, { passive: true });
 
     const handleMouseMove = (e) => {
-      const rect = canvas.getBoundingClientRect();
+      const rect = getRect();
       mouse.targetX = e.clientX - rect.left;
       mouse.targetY = e.clientY - rect.top;
       mouse.hovered = true;
@@ -58,7 +71,7 @@ export default function GrowthEngineCanvas() {
       mouse.targetY = height / 2;
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     document.addEventListener('mouseleave', handleMouseLeave);
 
     // Node & Particle System
@@ -364,11 +377,27 @@ export default function GrowthEngineCanvas() {
       animationFrameId = requestAnimationFrame(render);
     };
 
-    render();
+    let isVisible = true;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          isVisible = entry.isIntersecting;
+          if (isVisible && !animationFrameId) {
+            animationFrameId = requestAnimationFrame(render);
+          }
+        });
+      },
+      { threshold: 0 }
+    );
+    observer.observe(canvas);
+
+    animationFrameId = requestAnimationFrame(render);
 
     return () => {
-      cancelAnimationFrame(animationFrameId);
+      observer.disconnect();
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', handleResize);
+      window.removeEventListener('scroll', invalidateRect);
       window.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseleave', handleMouseLeave);
     };
