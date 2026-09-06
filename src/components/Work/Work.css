@@ -165,7 +165,7 @@
   font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
   font-size: clamp(2.8rem, 5.8vw, 5.6rem);
   font-weight: 700;
-  line-height: 1.15;
+  line-height: 1.2;
   letter-spacing: -0.03em;
   margin: 0;
   color: #FFFFFF;
@@ -181,11 +181,13 @@
 
 .work-hero-title-line {
   overflow: hidden;
-  padding-bottom: 0.08em;
+  padding-bottom: 0.25em;
+  margin-bottom: -0.22em;
 }
 
 .work-hero-line-inner {
   display: block;
+  padding-bottom: 0.15em;
 }
 
 .text-gradient-amber {

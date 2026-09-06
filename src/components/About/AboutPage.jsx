@@ -1,10 +1,15 @@
 import React, { useEffect } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
+import ScrollProgress from './ScrollProgress';
+import SectionNavigator from './SectionNavigator';
 import AboutHero from './AboutHero';
-import WhyWeExist from './WhyWeExist';
-import ManifestoBeliefs from './ManifestoBeliefs';
+import BeliefSection from './BeliefSection';
+import MagicencySystem from './MagicencySystem';
+import CapabilitiesInteractive from './CapabilitiesInteractive';
+import ApproachNarrative from './ApproachNarrative';
+import ProofSection from './ProofSection';
 import PeopleBehindSystem from './PeopleBehindSystem';
-import VendorVsPartner from './VendorVsPartner';
+import FAQSection from './FAQSection';
 import AmbitionCTA from './AmbitionCTA';
 import './AboutPage.css';
 
@@ -12,36 +17,49 @@ export default function AboutPage() {
   const { lang, isRTL } = useLanguage();
 
   useEffect(() => {
-    // Scroll to top on page mount
     window.scrollTo(0, 0);
 
-    // Set page document title
     document.title = lang === 'fa'
-      ? 'درباره ما // چرایی وجود مجیکنسـی (MAGICENCY®)'
-      : 'Why Magicency Exists // About MAGICENCY®';
+      ? 'درباره ما // چرایی وجود و سیستم رشد مجیکنسـی (MAGICENCY®)'
+      : 'About MAGICENCY® // Connected Growth Systems & Performance Architecture';
   }, [lang]);
 
   return (
     <article className={`about-page-root ${isRTL ? 'is-rtl' : 'is-ltr'}`}>
-      {/* Visual Grain Background */}
+      {/* 00. Global Scroll Progress Tracker */}
+      <ScrollProgress />
+
+      {/* 00. Sticky Desktop Section Navigator */}
+      <SectionNavigator />
+
+      {/* Ambient Grain Background */}
       <div className="about-bg-grain" aria-hidden="true" />
 
-      {/* 01. Minimal Cinematic Hero */}
+      {/* 01 — WHO WE ARE */}
       <AboutHero />
 
-      {/* 02. Why Magicency Exists (Fragments → ONE SYSTEM) */}
-      <WhyWeExist />
+      {/* 02 — THE BELIEF */}
+      <BeliefSection />
 
-      {/* 03. What We Believe (Visual Manifesto) */}
-      <ManifestoBeliefs />
+      {/* 03 — THE MAGICENCY SYSTEM */}
+      <MagicencySystem />
 
-      {/* 04. The People Behind the System (Authentic Human Layer & Disciplines) */}
+      {/* 04 — WHAT WE BRING (CAPABILITIES) */}
+      <CapabilitiesInteractive />
+
+      {/* 05 — OUR APPROACH */}
+      <ApproachNarrative />
+
+      {/* 06 — PROOF */}
+      <ProofSection />
+
+      {/* 07 — THE PEOPLE */}
       <PeopleBehindSystem />
 
-      {/* 05. How We Show Up (Vendor vs Strategic Partner) */}
-      <VendorVsPartner />
+      {/* 08 — FAQ */}
+      <FAQSection />
 
-      {/* 06. The Ambition & Final CTA (Closed-Loop Visual & Project Discovery Trigger) */}
+      {/* 09 — FINAL CTA */}
       <AmbitionCTA />
     </article>
   );
