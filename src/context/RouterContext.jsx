@@ -6,8 +6,9 @@ const RouterContext = createContext({
   isWorkPage: false
 });
 
-export function RouterProvider({ children }) {
+export function RouterProvider({ children, initialPath }) {
   const getNormalizedPath = () => {
+    if (initialPath) return initialPath.replace(/\/$/, '') || '/';
     if (typeof window === 'undefined') return '/';
     const path = window.location.pathname.replace(/\/$/, '') || '/';
     return path;
@@ -16,6 +17,7 @@ export function RouterProvider({ children }) {
   const [currentPath, setCurrentPath] = useState(getNormalizedPath);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
     const handlePopState = () => {
       setCurrentPath(getNormalizedPath());
     };

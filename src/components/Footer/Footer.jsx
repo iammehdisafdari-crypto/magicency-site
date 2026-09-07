@@ -26,10 +26,11 @@ export default function Footer() {
       { name: 'Behance', url: 'https://behance.net' }
     ],
     nav: [
-      { label: 'WORK', href: '#work' },
-      { label: 'CAPABILITIES', href: '#capabilities' },
-      { label: 'Blog', href: '#journal' },
-      { label: 'ABOUT', href: '#about' }
+      { label: 'WORK', href: '/work' },
+      { label: 'CAPABILITIES', href: '/capabilities' },
+      { label: 'APPROACH', href: '/approach' },
+      { label: 'ABOUT', href: '/about' },
+      { label: 'BLOG', href: '/blog' }
     ],
     legal: [
       { label: 'Privacy Policy', href: '#privacy' },
@@ -141,45 +142,40 @@ export default function Footer() {
             {f.nav.map((item, idx) => (
               <motion.a
                 key={idx}
-                href={
-                  item.href === '#work' ? '/work' :
-                  item.href === '#capabilities' ? '/capabilities' :
-                  item.href === '#approach' ? '/approach' :
-                  item.href === '#about' ? '/about' :
-                  item.href === '#journal' || item.label.toLowerCase() === 'blog' ? '/blog' : item.href
-                }
+                href={item.href}
                 onClick={(e) => {
-                  if (item.href === '#work') {
-                    e.preventDefault();
-                    navigate('/work');
-                    return;
-                  }
-                  if (item.href === '#capabilities') {
-                    e.preventDefault();
-                    navigate('/capabilities');
-                    return;
-                  }
-                  if (item.href === '#approach') {
-                    e.preventDefault();
-                    navigate('/approach');
-                    return;
-                  }
-                  if (item.href === '#about') {
-                    e.preventDefault();
-                    navigate('/about');
-                    return;
-                  }
-                  if (item.href === '#journal' || item.label.toLowerCase() === 'blog') {
-                    e.preventDefault();
-                    navigate('/blog');
-                    return;
-                  }
                   e.preventDefault();
-                  navigate('/');
-                  setTimeout(() => {
+                  if (item.href === '/work') {
+                    if (isWorkPage) window.scrollTo({ top: 0, behavior: 'smooth' });
+                    else navigate('/work');
+                    return;
+                  }
+                  if (item.href === '/capabilities') {
+                    if (isCapabilitiesPage) window.scrollTo({ top: 0, behavior: 'smooth' });
+                    else navigate('/capabilities');
+                    return;
+                  }
+                  if (item.href === '/approach') {
+                    if (isApproachPage) window.scrollTo({ top: 0, behavior: 'smooth' });
+                    else navigate('/approach');
+                    return;
+                  }
+                  if (item.href === '/about') {
+                    if (isAboutPage) window.scrollTo({ top: 0, behavior: 'smooth' });
+                    else navigate('/about');
+                    return;
+                  }
+                  if (item.href === '/blog') {
+                    if (isBlogPage) window.scrollTo({ top: 0, behavior: 'smooth' });
+                    else navigate('/blog');
+                    return;
+                  }
+                  if (item.href.startsWith('#')) {
                     const elem = document.querySelector(item.href);
                     if (elem) elem.scrollIntoView({ behavior: 'smooth' });
-                  }, 60);
+                    return;
+                  }
+                  navigate(item.href);
                 }}
                 variants={editorialVariants}
                 className="footer-useful-social-link footer-nav-item"

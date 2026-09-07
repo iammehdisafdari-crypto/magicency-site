@@ -18,11 +18,18 @@ export default function BlogPage() {
 
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [activeArticle, setActiveArticle] = useState(null);
+  const [activeArticle, setActiveArticle] = useState(() => {
+    if (blogArticleSlug) {
+      return BLOG_ARTICLES.find((a) => a.slug === blogArticleSlug) || null;
+    }
+    return null;
+  });
 
   // Set document title and scroll to top on mount
   useEffect(() => {
-    window.scrollTo(0, 0);
+    if (typeof window !== 'undefined') {
+      window.scrollTo(0, 0);
+    }
     document.title = pageMeta.title || (
       lang === 'fa'
         ? 'دیدگاه‌ها و مقالات // نشریه تحلیلی // مجیکنسـی (MAGICENCY®)'
@@ -30,13 +37,15 @@ export default function BlogPage() {
     );
   }, [lang, pageMeta.title]);
 
-  // Deep-link to article if slug exists in URL
+  // Deep-link to article if slug changes in URL
   useEffect(() => {
     if (blogArticleSlug) {
       const match = BLOG_ARTICLES.find((a) => a.slug === blogArticleSlug);
       if (match) {
         setActiveArticle(match);
       }
+    } else {
+      setActiveArticle(null);
     }
   }, [blogArticleSlug]);
 

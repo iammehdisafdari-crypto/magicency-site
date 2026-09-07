@@ -583,44 +583,53 @@
    ========================================================= */
 @media (max-width: 767px) {
   .pi-scroll-section {
-    height: auto;
     position: relative;
-    padding-top: clamp(24px, 4vh, 40px);
-    padding-bottom: clamp(32px, 5vh, 52px);
+    height: 320vh;
     isolation: isolate;
     z-index: 1;
   }
 
   .pi-sticky-viewport {
-    position: relative;
-    top: auto;
-    height: auto;
-    overflow: visible;
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
   }
 
   .pi-container {
-    height: auto;
-    max-height: none;
-    padding-top: 0;
-    padding-bottom: 0;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    max-height: 100svh;
+    padding-top: calc(var(--header-height, 56px) + 6px);
+    padding-bottom: 12px;
     padding-inline: 16px;
-    justify-content: flex-start;
-    gap: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 8px;
     box-sizing: border-box;
   }
 
   .pi-top-hud {
     padding-bottom: 6px;
+    flex-shrink: 0;
   }
 
   .pi-content-grid {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 8px;
+    flex: 1;
+    min-height: 0;
+    justify-content: space-between;
     width: 100%;
-    height: auto;
-    min-height: auto;
-    justify-content: flex-start;
   }
 
   .pi-text-col {
@@ -638,18 +647,18 @@
   }
 
   .pi-headline {
-    font-size: clamp(1.2rem, 4.8vw, 1.55rem);
+    font-size: clamp(1.15rem, 4.4vw, 1.45rem);
     line-height: 1.25;
   }
 
   [dir="rtl"] .pi-headline {
-    font-size: clamp(1.15rem, 4.4vw, 1.45rem);
-    line-height: 1.35;
+    font-size: clamp(1.1rem, 4.2vw, 1.35rem);
+    line-height: 1.32;
   }
 
   .pi-insight-text {
-    font-size: 0.82rem;
-    line-height: 1.45;
+    font-size: 0.80rem;
+    line-height: 1.42;
     margin-top: 4px;
     max-width: 100%;
   }
@@ -669,20 +678,22 @@
   }
 
   .pi-visual-col {
-    flex: none;
-    min-height: auto;
+    flex: 1;
+    min-height: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
+    position: relative;
   }
 
   .pi-visual-container {
     width: 100%;
-    max-width: 360px;
-    max-height: none;
+    max-width: 340px;
+    max-height: min(48svh, 340px);
     aspect-ratio: 380 / 400;
     margin-inline: auto;
+    position: relative;
   }
 
   .pi-node-module {

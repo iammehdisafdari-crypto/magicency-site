@@ -287,10 +287,11 @@ export const translations = {
         { name: 'Behance', url: 'https://behance.net' }
       ],
       nav: [
-        { label: 'WORK', href: '#work' },
-        { label: 'CAPABILITIES', href: '#capabilities' },
-        { label: 'APPROACH', href: '#approach' },
-        { label: 'ABOUT', href: '#about' }
+        { label: 'WORK', href: '/work' },
+        { label: 'CAPABILITIES', href: '/capabilities' },
+        { label: 'APPROACH', href: '/approach' },
+        { label: 'ABOUT', href: '/about' },
+        { label: 'BLOG', href: '/blog' }
       ],
       legal: [
         { label: 'Privacy Policy', href: '#privacy' },
@@ -1397,10 +1398,11 @@ export const translations = {
         { name: 'Behance', url: 'https://behance.net' }
       ],
       nav: [
-        { label: 'پروژه‌ها', href: '#work' },
-        { label: 'قابلیت‌ها', href: '#capabilities' },
-        { label: 'Blog', href: '#journal' },
-        { label: 'درباره ما', href: '#about' }
+        { label: 'پروژه‌ها', href: '/work' },
+        { label: 'قابلیت‌ها', href: '/capabilities' },
+        { label: 'متدولوژی ما', href: '/approach' },
+        { label: 'درباره ما', href: '/about' },
+        { label: 'بلاگ', href: '/blog' }
       ],
       legal: [
         { label: 'حریم خصوصی', href: '#privacy' },
@@ -2192,12 +2194,13 @@ export const translations = {
   }
 };
 
-export const LanguageProvider = ({ children }) => {
-  const [lang, setLang] = useState('en');
+export const LanguageProvider = ({ children, initialLang }) => {
+  const [lang, setLang] = useState(initialLang || 'en');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeNode, setActiveNode] = useState(null);
 
   useEffect(() => {
+    if (typeof document === 'undefined') return;
     document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
     document.documentElement.lang = lang;
   }, [lang]);

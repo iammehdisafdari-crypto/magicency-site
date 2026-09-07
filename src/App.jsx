@@ -10,20 +10,23 @@ import WhatWeDo from './components/WhatWeDo/WhatWeDo';
 import Journal from './components/Journal/Journal';
 import FinalCTA from './components/FinalCTA/FinalCTA';
 import Footer from './components/Footer/Footer';
-import './styles/global.css';
 
-// Code-split subpages and discovery modal to shrink initial bundle size and speed up initial compile/parse
-const WorkPage = lazy(() => import('./components/Work/WorkPage'));
-const ApproachPage = lazy(() => import('./components/Approach/ApproachPage'));
-const CapabilitiesPage = lazy(() => import('./components/Capabilities/CapabilitiesPage'));
-const BlogPage = lazy(() => import('./components/Blog/BlogPage'));
-const AboutPage = lazy(() => import('./components/About/AboutPage'));
+// Static imports for page components ensure synchronous SSR rendering for search bots
+import WorkPage from './components/Work/WorkPage';
+import ApproachPage from './components/Approach/ApproachPage';
+import CapabilitiesPage from './components/Capabilities/CapabilitiesPage';
+import BlogPage from './components/Blog/BlogPage';
+import AboutPage from './components/About/AboutPage';
+
+// Lazy load user-triggered modal dialogs
 const ProjectDiscovery = lazy(() => import('./components/ProjectDiscovery/ProjectDiscovery'));
+
+import './styles/global.css';
 
 function MainApp() {
   const { isRTL, isModalOpen } = useLanguage();
   const { isWorkPage, isApproachPage, isCapabilitiesPage, isBlogPage, isAboutPage } = useRouter();
-  const [introFinished, setIntroFinished] = useState(false);
+  const [introFinished, setIntroFinished] = useState(() => typeof window === 'undefined');
 
   return (
     <div className={`magicency-app-root ${introFinished ? 'app-loaded' : 'app-loading'}`}>
@@ -38,39 +41,37 @@ function MainApp() {
 
       {/* Main Experience Flow */}
       <main className="main-content-flow">
-        <Suspense fallback={null}>
-          {isWorkPage ? (
-            <WorkPage />
-          ) : isApproachPage ? (
-            <ApproachPage />
-          ) : isCapabilitiesPage ? (
-            <CapabilitiesPage />
-          ) : isBlogPage ? (
-            <BlogPage />
-          ) : isAboutPage ? (
-            <AboutPage />
-          ) : (
-            <>
-              {/* Phase 01: Hero Section (Vivid Motion Architecture + Mouse Fire Effect) */}
-              <Hero isLoaded={introFinished} />
+        {isWorkPage ? (
+          <WorkPage />
+        ) : isApproachPage ? (
+          <ApproachPage />
+        ) : isCapabilitiesPage ? (
+          <CapabilitiesPage />
+        ) : isBlogPage ? (
+          <BlogPage />
+        ) : isAboutPage ? (
+          <AboutPage />
+        ) : (
+          <>
+            {/* Phase 01: Hero Section (Vivid Motion Architecture + Mouse Fire Effect) */}
+            <Hero isLoaded={introFinished} />
 
-              {/* Phase 02: Featured Work (Sticky Scroll Showcase + 4 Projects + See All Work CTA) */}
-              <SelectedWork />
+            {/* Phase 02: Featured Work (Sticky Scroll Showcase + 4 Projects + See All Work CTA) */}
+            <SelectedWork />
 
-              {/* Phase 03: Problem / Insight Narrative (Sticky-Scroll 4-Beat System Architecture) */}
-              <ProblemInsight />
+            {/* Phase 03: Problem / Insight Narrative (Sticky-Scroll 4-Beat System Architecture) */}
+            <ProblemInsight />
 
-              {/* Phase 04: What We Do / Capabilities (3-Pillar Capability Architecture) */}
-              <WhatWeDo />
+            {/* Phase 04: What We Do / Capabilities (3-Pillar Capability Architecture) */}
+            <WhatWeDo />
 
-              {/* Phase 05: Journal / Insights (Exact Vivid Motion Recreation) */}
-              <Journal />
+            {/* Phase 05: Journal / Insights (Exact Vivid Motion Recreation) */}
+            <Journal />
 
-              {/* Phase 06: Final Editorial Conversion Statement */}
-              <FinalCTA />
-            </>
-          )}
-        </Suspense>
+            {/* Phase 06: Final Editorial Conversion Statement */}
+            <FinalCTA />
+          </>
+        )}
       </main>
 
       {/* Cinematic Closing Frame Footer */}
@@ -86,13 +87,12 @@ function MainApp() {
   );
 }
 
-export default function App() {
+export default function App({ initialPath, initialLang } = {}) {
   return (
-    <LanguageProvider>
-      <RouterProvider>
+    <LanguageProvider initialLang={initialLang}>
+      <RouterProvider initialPath={initialPath}>
         <MainApp />
       </RouterProvider>
     </LanguageProvider>
   );
 }
-

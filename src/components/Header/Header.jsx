@@ -63,7 +63,7 @@ export default function Header() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isMenuOpen]);
 
-  const handleNavClick = (e, targetId, itemId) => {
+  const handleNavClick = (e, targetHref, itemId) => {
     e.preventDefault();
     if (itemId) {
       setSelectedItemId(itemId);
@@ -72,7 +72,7 @@ export default function Header() {
       setIsMenuOpen(false);
     }
 
-    if (itemId === 'work') {
+    if (itemId === 'work' || targetHref === '/work') {
       if (isWorkPage) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
@@ -81,7 +81,7 @@ export default function Header() {
       return;
     }
 
-    if (itemId === 'capabilities') {
+    if (itemId === 'capabilities' || targetHref === '/capabilities') {
       if (isCapabilitiesPage) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
@@ -90,7 +90,7 @@ export default function Header() {
       return;
     }
 
-    if (itemId === 'approach') {
+    if (itemId === 'approach' || targetHref === '/approach') {
       if (isApproachPage) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
@@ -99,7 +99,7 @@ export default function Header() {
       return;
     }
 
-    if (itemId === 'about') {
+    if (itemId === 'about' || targetHref === '/about') {
       if (isAboutPage) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
@@ -108,7 +108,7 @@ export default function Header() {
       return;
     }
 
-    if (itemId === 'journal' || itemId === 'blog') {
+    if (itemId === 'journal' || itemId === 'blog' || targetHref === '/blog') {
       if (isBlogPage) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
@@ -117,37 +117,29 @@ export default function Header() {
       return;
     }
 
-    if (isWorkPage || isApproachPage || isCapabilitiesPage || isBlogPage || isAboutPage) {
-      navigate('/');
-      setTimeout(() => {
-        if (targetId === '#hero' || targetId === '#') {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else {
-          const elem = document.querySelector(targetId);
-          if (elem) {
-            elem.scrollIntoView({ behavior: 'smooth' });
-          }
-        }
-      }, 60);
+    if (targetHref === '/' || targetHref === '#hero' || targetHref === '#') {
+      if (isWorkPage || isApproachPage || isCapabilitiesPage || isBlogPage || isAboutPage) {
+        navigate('/');
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
       return;
     }
 
-    if (targetId === '#hero' || targetId === '#') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      return;
-    }
-    const elem = document.querySelector(targetId);
-    if (elem) {
-      elem.scrollIntoView({ behavior: 'smooth' });
+    if (targetHref.startsWith('#')) {
+      const elem = document.querySelector(targetHref);
+      if (elem) {
+        elem.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
   const navItems = [
-    { id: 'work', label: t.nav.work, href: '#work', number: '01' },
-    { id: 'capabilities', label: t.nav.capabilities, href: '#capabilities', number: '02' },
-    { id: 'approach', label: t.nav.approach, href: '#approach', number: '03' },
-    { id: 'about', label: t.nav.about, href: '#about', number: '04' },
-    { id: 'journal', label: t.journal?.badge || 'Blog', href: '#journal', number: '05' }
+    { id: 'work', label: t.nav.work, href: '/work', number: '01' },
+    { id: 'capabilities', label: t.nav.capabilities, href: '/capabilities', number: '02' },
+    { id: 'approach', label: t.nav.approach, href: '/approach', number: '03' },
+    { id: 'about', label: t.nav.about, href: '/about', number: '04' },
+    { id: 'journal', label: t.journal?.badge || 'Blog', href: '/blog', number: '05' }
   ];
 
   return (

@@ -101,15 +101,11 @@ export default function ProblemInsight() {
   // Calculate active narrative beat based on smooth scroll
   useEffect(() => {
     const unsubscribe = smoothProgress.on('change', (val) => {
-      if (typeof window !== 'undefined' && window.innerWidth < 768) {
-        return;
-      }
-
-      if (val < 0.26) {
+      if (val < 0.24) {
         setActiveBeatIndex(0);
-      } else if (val < 0.52) {
+      } else if (val < 0.48) {
         setActiveBeatIndex(1);
-      } else if (val < 0.78) {
+      } else if (val < 0.72) {
         setActiveBeatIndex(2);
       } else {
         setActiveBeatIndex(3);
