@@ -162,6 +162,21 @@
   flex-shrink: 0;
 }
 
+.vm-client-badge-icon.is-logo {
+  background: #FFFFFF !important;
+  padding: 3px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.vm-client-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  user-select: none;
+}
+
 .vm-client-badge-meta {
   display: flex;
   flex-direction: column;

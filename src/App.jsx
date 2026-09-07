@@ -8,6 +8,7 @@ import SelectedWork from './components/SelectedWork/SelectedWork';
 import ProblemInsight from './components/ProblemInsight/ProblemInsight';
 import WhatWeDo from './components/WhatWeDo/WhatWeDo';
 import Journal from './components/Journal/Journal';
+import FinalCTA from './components/FinalCTA/FinalCTA';
 import Footer from './components/Footer/Footer';
 import './styles/global.css';
 
@@ -20,7 +21,7 @@ const AboutPage = lazy(() => import('./components/About/AboutPage'));
 const ProjectDiscovery = lazy(() => import('./components/ProjectDiscovery/ProjectDiscovery'));
 
 function MainApp() {
-  const { isRTL } = useLanguage();
+  const { isRTL, isModalOpen } = useLanguage();
   const { isWorkPage, isApproachPage, isCapabilitiesPage, isBlogPage, isAboutPage } = useRouter();
   const [introFinished, setIntroFinished] = useState(false);
 
@@ -64,6 +65,9 @@ function MainApp() {
 
               {/* Phase 05: Journal / Insights (Exact Vivid Motion Recreation) */}
               <Journal />
+
+              {/* Phase 06: Final Editorial Conversion Statement */}
+              <FinalCTA />
             </>
           )}
         </Suspense>
@@ -73,9 +77,11 @@ function MainApp() {
       <Footer />
 
       {/* Interactive Growth Protocol Modal */}
-      <Suspense fallback={null}>
-        <ProjectDiscovery />
-      </Suspense>
+      {isModalOpen && (
+        <Suspense fallback={null}>
+          <ProjectDiscovery />
+        </Suspense>
+      )}
     </div>
   );
 }

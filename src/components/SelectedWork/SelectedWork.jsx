@@ -7,7 +7,10 @@ import { RevealLabel, EASING } from '../motion';
 import { useDeferredTarget } from '../motion/useDeferredTarget';
 import './SelectedWork.css';
 
-const toWebp = (url) => (url ? url.replace(/\.(jpg|jpeg|png)$/, '.webp') : url);
+const toWebp = (url) => {
+  if (!url || url.endsWith('.webp') || url.includes('client')) return null;
+  return url.replace(/\.(jpg|jpeg|png)$/, '.webp');
+};
 
 export default function SelectedWork() {
   const { t, isRTL, setIsModalOpen } = useLanguage();
@@ -18,8 +21,8 @@ export default function SelectedWork() {
     eyebrow: 'Featured work',
     seeAllWork: 'SEE ALL WORK',
     projects: [
-      { id: 'branding', num: '01', category: 'Brand', categoryItalic: 'ing', client: 'Vakeso', clientTag: 'CLIENT', image: '/project-1.jpg', alt: 'Vakeso Branding', color: '#FF5500' },
-      { id: 'web', num: '02', category: 'Web', categoryItalic: '', client: 'SoundCloud', clientTag: 'CLIENT', image: '/project-2.jpg', alt: 'SoundCloud Web', color: '#FF5500' },
+      { id: 'branding', num: '01', category: 'Brand', categoryItalic: 'ing', client: 'atrash store', clientTag: 'CLIENT', image: '/branding-client.png', alt: 'atrash store Branding', color: '#E3C280' },
+      { id: 'web', num: '02', category: 'Web', categoryItalic: '', client: 'GR8 Real Estate', clientTag: 'CLIENT', image: '/web-client.png', alt: 'GR8 Real Estate Web', color: '#C68B59' },
       { id: 'mobile', num: '03', category: 'Mob', categoryItalic: 'ile', client: 'Sona', clientTag: 'CLIENT', image: '/project-3.jpg', alt: 'Sona Mobile', color: '#A855F7' },
       { id: 'motion', num: '04', category: 'Mo', categoryItalic: 'tion', client: 'Vault Bank', clientTag: 'CLIENT', image: '/project-4.jpg', alt: 'Vault Bank Motion', color: '#EAB308' }
     ]
@@ -108,17 +111,24 @@ export default function SelectedWork() {
   const renderClientIcon = (proj) => {
     if (proj.id === 'branding') {
       return (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.5">
-          <path d="M4 6L12 20L20 6" />
-          <path d="M8 6L12 14L16 6" />
-        </svg>
+        <img
+          src="/branding-client.png"
+          alt={proj.client || 'atrash store'}
+          className="vm-client-logo-img"
+          loading="lazy"
+          decoding="async"
+        />
       );
     }
     if (proj.id === 'web') {
       return (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="#FFFFFF">
-          <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" />
-        </svg>
+        <img
+          src="/web-client.png"
+          alt={proj.client || 'GR8 Real Estate'}
+          className="vm-client-logo-img"
+          loading="lazy"
+          decoding="async"
+        />
       );
     }
     if (proj.id === 'mobile') {
@@ -151,7 +161,7 @@ export default function SelectedWork() {
                 <p>{proj.clientTag}: {proj.client}</p>
               </div>
               <picture>
-                <source srcSet={toWebp(proj.image)} type="image/webp" />
+                {toWebp(proj.image) && <source srcSet={toWebp(proj.image)} type="image/webp" />}
                 <img src={proj.image} alt={proj.alt} className="vm-fallback-img" loading="lazy" decoding="async" />
               </picture>
             </div>
@@ -226,8 +236,8 @@ export default function SelectedWork() {
                 className="vm-showcase-client-badge"
               >
                 <div 
-                  className="vm-client-badge-icon"
-                  style={{ background: activeProject.color || '#FF5500' }}
+                  className={`vm-client-badge-icon ${(activeProject.id === 'branding' || activeProject.id === 'web') ? 'is-logo' : ''}`}
+                  style={{ background: (activeProject.id === 'branding' || activeProject.id === 'web') ? '#FFFFFF' : (activeProject.color || '#FF5500') }}
                 >
                   {renderClientIcon(activeProject)}
                 </div>
@@ -285,8 +295,8 @@ export default function SelectedWork() {
                   className="vm-showcase-client-badge"
                 >
                   <div 
-                    className="vm-client-badge-icon"
-                    style={{ background: activeProject.color || '#FF5500' }}
+                    className={`vm-client-badge-icon ${(activeProject.id === 'branding' || activeProject.id === 'web') ? 'is-logo' : ''}`}
+                    style={{ background: (activeProject.id === 'branding' || activeProject.id === 'web') ? '#FFFFFF' : (activeProject.color || '#FF5500') }}
                   >
                     {renderClientIcon(activeProject)}
                   </div>
@@ -317,7 +327,7 @@ export default function SelectedWork() {
                   >
                     <div className="vm-showcase-card-inner">
                       <picture>
-                        <source srcSet={toWebp(proj.image)} type="image/webp" />
+                        {toWebp(proj.image) && <source srcSet={toWebp(proj.image)} type="image/webp" />}
                         <img
                           src={proj.image}
                           alt={proj.alt || proj.client}

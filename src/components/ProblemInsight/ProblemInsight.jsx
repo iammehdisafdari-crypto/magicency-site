@@ -11,6 +11,7 @@ export default function ProblemInsight() {
   const containerRef = useRef(null);
   const [activeBeatIndex, setActiveBeatIndex] = useState(0);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [shouldLoadVisual, setShouldLoadVisual] = useState(false);
 
   const data = t.problemInsight || {
     badge: 'THE CORE PREMISE',
@@ -57,6 +58,23 @@ export default function ProblemInsight() {
   };
 
   const beats = data.beats;
+
+  useEffect(() => {
+    if (!containerRef.current || shouldLoadVisual) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoadVisual(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '400px' }
+    );
+
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, [shouldLoadVisual]);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -200,13 +218,15 @@ export default function ProblemInsight() {
 
             {/* Right Column: Single Evolving System Object */}
             <div className="pi-visual-col">
-              <React.Suspense fallback={null}>
-                <ProblemInsightVisual 
-                  activeBeat={activeBeatIndex} 
-                  isRTL={isRTL} 
-                  nodesData={data.nodes}
-                />
-              </React.Suspense>
+              {shouldLoadVisual && (
+                <React.Suspense fallback={null}>
+                  <ProblemInsightVisual 
+                    activeBeat={activeBeatIndex} 
+                    isRTL={isRTL} 
+                    nodesData={data.nodes}
+                  />
+                </React.Suspense>
+              )}
             </div>
           </div>
         </div>

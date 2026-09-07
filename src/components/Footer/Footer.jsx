@@ -3,20 +3,13 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 import { useRouter } from '../../context/RouterContext';
 import ScrambleText from '../Header/ScrambleText';
-import { Reveal, Stagger, maskedLineVariants, editorialVariants, buttonMotion } from '../motion';
+import { Reveal, Stagger, editorialVariants } from '../motion';
 import './Footer.css';
 
 const FluidCursor = React.lazy(() => import('../effects/FluidCursor'));
 
-// Signature Arrow Icon from Vivid Motion Button Reference
-const ArrowIcon = () => (
-  <svg viewBox="0 0 16 16" fill="none" width="16" height="16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <path d="M1.57605 8.632V7.384H9.56005C9.91205 7.384 10.2214 7.40534 10.4881 7.448C10.7547 7.49067 11.0481 7.55467 11.3681 7.64001C11.9014 7.77867 12.3707 7.84801 12.7761 7.84801V7.8C12.0721 7.54401 11.4907 7.26667 11.0321 6.968C10.5734 6.66934 10.2107 6.376 9.94405 6.088C9.67738 5.78934 9.38938 5.416 9.08005 4.968L10.392 3.88C10.936 4.91467 11.496 5.69334 12.0721 6.216C12.6481 6.73867 13.4321 7.20267 14.4241 7.608V8.408C13.4427 8.81334 12.6587 9.27734 12.0721 9.8C11.496 10.3227 10.936 11.096 10.392 12.12L9.08005 11.048C9.38938 10.6 9.67738 10.232 9.94405 9.94401C10.2107 9.64534 10.5734 9.34667 11.0321 9.048C11.4907 8.74934 12.0721 8.47201 12.7761 8.21601V8.168C12.3814 8.168 11.9067 8.23734 11.352 8.37601C11.0321 8.46134 10.7387 8.52534 10.472 8.568C10.2054 8.61067 9.90138 8.632 9.56005 8.632H1.57605Z" fill="currentColor"/>
-  </svg>
-);
-
 export default function Footer() {
-  const { t, isRTL, setIsModalOpen } = useLanguage();
+  const { t, isRTL } = useLanguage();
   const { navigate, isWorkPage } = useRouter();
   const f = t.footer || {
     ctaLine1: 'Have a growth problem worth solving?',
@@ -108,61 +101,7 @@ export default function Footer() {
       <div className="container vm-footer-inner-container">
         
         {/* =========================================================
-            01. MAIN CTA (EXACT VIVID MOTION: footer-contact)
-            Masked Editorial Reveal
-            ========================================================= */}
-        <div className="footer-contact">
-          <h3 className="footer-contact-heading">
-            <span className="motion-line-mask" style={{ overflow: 'hidden', display: 'block' }}>
-              <motion.span
-                style={{ display: 'inline-block', willChange: 'transform, opacity' }}
-                variants={maskedLineVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.2 }}
-                custom={{ delay: 0.0, duration: 0.8 }}
-                className="footer-contact-heading-ghost"
-              >
-                {f.ctaLine1 || 'Have a growth problem worth solving?'}
-              </motion.span>
-            </span>
-            <span className="motion-line-mask" style={{ overflow: 'hidden', display: 'block' }}>
-              <motion.span
-                style={{ display: 'inline-block', willChange: 'transform, opacity' }}
-                variants={maskedLineVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.2 }}
-                custom={{ delay: 0.08, duration: 0.8 }}
-                className="text-foreground"
-              >
-                {f.ctaLine2 || "Let's build what moves it forward."}
-              </motion.span>
-            </span>
-          </h3>
-
-          <motion.button
-            type="button"
-            onClick={() => setIsModalOpen(true)}
-            className="btn is-lg is-brand footer-cta-btn btn-motion"
-            aria-label={f.startProject}
-            whileHover={{ y: -2 }}
-            whileTap={{ scale: 0.98 }}
-            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <div className="btn-text-wrapper">
-              <span className="btn-label-text">{f.startProject}</span>
-            </div>
-            <div className="icon">
-              <div className="icon-svg btn-icon-arrow">
-                <ArrowIcon />
-              </div>
-            </div>
-          </motion.button>
-        </div>
-
-        {/* =========================================================
-            02. DIRECT CONTACT / LOCATIONS (footer-emails grid)
+            01. DIRECT CONTACT / LOCATIONS (footer-emails grid)
             ========================================================= */}
         <div className="footer-emails grid">
           <Stagger stagger={0.08} delay={0.1} className="footer-emails-block">

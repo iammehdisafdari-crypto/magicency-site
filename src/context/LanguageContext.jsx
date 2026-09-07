@@ -77,22 +77,22 @@ export const translations = {
           num: '01',
           category: 'Brand',
           categoryItalic: 'ing',
-          client: 'Vakeso',
+          client: 'atrash store',
           clientTag: 'CLIENT',
-          image: '/project-1.jpg',
-          alt: 'Vakeso Branding & Identity Design',
-          color: '#FF5500'
+          image: '/branding-client.png',
+          alt: 'atrash store Branding & Identity Design',
+          color: '#E3C280'
         },
         {
           id: 'web',
           num: '02',
           category: 'Web',
           categoryItalic: '',
-          client: 'SoundCloud',
+          client: 'GR8 Real Estate',
           clientTag: 'CLIENT',
-          image: '/project-2.jpg',
-          alt: 'SoundCloud Worldwide Web Platform',
-          color: '#FF5500'
+          image: '/web-client.png',
+          alt: 'GR8 Real Estate Worldwide Web Platform',
+          color: '#C68B59'
         },
         {
           id: 'mobile',
@@ -1187,22 +1187,22 @@ export const translations = {
           num: '۰۱',
           category: 'برند',
           categoryItalic: 'ینگ',
-          client: 'Vakeso',
+          client: 'atrash store',
           clientTag: 'کارفرما',
-          image: '/project-1.jpg',
-          alt: 'هویت بصری و برندینگ واکسو',
-          color: '#FF5500'
+          image: '/branding-client.png',
+          alt: 'هویت بصری و برندینگ atrash store',
+          color: '#E3C280'
         },
         {
           id: 'web',
           num: '۰۲',
           category: 'وب و پلتفرم',
           categoryItalic: '',
-          client: 'SoundCloud',
+          client: 'GR8 Real Estate',
           clientTag: 'کارفرما',
-          image: '/project-2.jpg',
-          alt: 'پلتفرم جهانی وب ساندکلاد',
-          color: '#FF5500'
+          image: '/web-client.png',
+          alt: 'پلتفرم جهانی وب GR8 Real Estate',
+          color: '#C68B59'
         },
         {
           id: 'mobile',

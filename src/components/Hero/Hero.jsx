@@ -9,7 +9,51 @@ const FluidCursor = React.lazy(() => import('../effects/FluidCursor'));
 export default function Hero({ isLoaded = true }) {
   const { t } = useLanguage();
   const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+  const [shouldLoadFluid, setShouldLoadFluid] = useState(false);
   const reelRef = useRef(null);
+
+  useEffect(() => {
+    // 1. Accessibility & Mobile/Touch Detection:
+    // Do NOT import or mount on mobile, touch, coarse-pointer, or reduced motion devices
+    if (typeof window === 'undefined') return;
+
+    const isReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+    const isTouchOrMobile = (
+      window.innerWidth < 992 ||
+      'ontouchstart' in window ||
+      (navigator.maxTouchPoints && navigator.maxTouchPoints > 0) ||
+      (window.matchMedia && window.matchMedia('(pointer: coarse)').matches)
+    );
+
+    if (isReducedMotion || isTouchOrMobile) return;
+
+    // 2. Desktop: Defer initialization until after initial Hero render / isLoaded or idle or first pointer movement
+    let idleId = null;
+    const activate = () => {
+      setShouldLoadFluid(true);
+      window.removeEventListener('pointermove', activate);
+      if (idleId && 'cancelIdleCallback' in window) {
+        window.cancelIdleCallback(idleId);
+      }
+    };
+
+    if (isLoaded) {
+      if ('requestIdleCallback' in window) {
+        idleId = window.requestIdleCallback(activate, { timeout: 2000 });
+      } else {
+        activate();
+      }
+    } else {
+      window.addEventListener('pointermove', activate, { once: true, passive: true });
+    }
+
+    return () => {
+      window.removeEventListener('pointermove', activate);
+      if (idleId && 'cancelIdleCallback' in window) {
+        window.cancelIdleCallback(idleId);
+      }
+    };
+  }, [isLoaded]);
 
   useEffect(() => {
     if (!reelRef.current) return;
@@ -54,9 +98,11 @@ export default function Hero({ isLoaded = true }) {
         <div className="vm-hero-grid-subtle" aria-hidden="true" />
 
         {/* Scoped WebGL Fluid Simulation Cursor Effect strictly confined to Hero first viewport */}
-        <React.Suspense fallback={null}>
-          <FluidCursor intensity={0.5} className="vm-hero-fluid-canvas" />
-        </React.Suspense>
+        {shouldLoadFluid && (
+          <React.Suspense fallback={null}>
+            <FluidCursor intensity={0.5} className="vm-hero-fluid-canvas" />
+          </React.Suspense>
+        )}
 
         <div className="vm-hero-headline-container">
           <h1 className="vm-hero-giant-title">
