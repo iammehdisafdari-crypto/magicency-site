@@ -1,4 +1,4 @@
-import React, { useState, Suspense, lazy } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import { RouterProvider, useRouter } from './context/RouterContext';
 import BrandIntro from './components/Intro/BrandIntro';
@@ -20,6 +20,7 @@ import AboutPage from './components/About/AboutPage';
 
 // Lazy load user-triggered modal dialogs
 const ProjectDiscovery = lazy(() => import('./components/ProjectDiscovery/ProjectDiscovery'));
+import { initGA } from './utils/analytics';
 
 import './styles/global.css';
 
@@ -28,8 +29,15 @@ function MainApp() {
   const { isWorkPage, isApproachPage, isCapabilitiesPage, isBlogPage, isAboutPage } = useRouter();
   const [introFinished, setIntroFinished] = useState(() => typeof window === 'undefined');
 
+  useEffect(() => {
+    initGA();
+  }, []);
+
   return (
     <div className={`magicency-app-root ${introFinished ? 'app-loaded' : 'app-loading'}`}>
+      {/* Screen Reader Skip Navigation Link */}
+      <a href="#main" className="skip-to-content">Skip to content</a>
+
       {/* Cinematic Brand Intro Preloader */}
       <BrandIntro onComplete={() => setIntroFinished(true)} />
 
@@ -40,7 +48,7 @@ function MainApp() {
       <Header />
 
       {/* Main Experience Flow */}
-      <main className="main-content-flow">
+      <main id="main" className="main-content-flow">
         {isWorkPage ? (
           <WorkPage />
         ) : isApproachPage ? (

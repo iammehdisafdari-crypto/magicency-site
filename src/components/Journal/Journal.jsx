@@ -92,6 +92,7 @@ export default function Journal() {
       id="journal" 
       ref={containerRef} 
       className="shared-section vm-journal-section"
+      aria-label="Journal and Strategic Insights"
       onMouseMove={handleMouseMove}
     >
       <div className="container vm-journal-container">
@@ -134,6 +135,8 @@ export default function Journal() {
                       src={art.image}
                       alt={art.alt}
                       className="journal-featured-card-media-img"
+                      width="600"
+                      height="400"
                       loading="lazy"
                       decoding="async"
                     />
@@ -232,7 +235,7 @@ export default function Journal() {
                         >
                           <picture>
                             <source srcSet={toWebp(art.image)} type="image/webp" />
-                            <img src={art.image} alt={art.alt} className="journal-mobile-img" loading="lazy" decoding="async" />
+                            <img src={art.image} alt={art.alt} className="journal-mobile-img" width="600" height="400" loading="lazy" decoding="async" />
                           </picture>
                         </motion.div>
                       )}
@@ -288,6 +291,8 @@ export default function Journal() {
                     src={hoveredArticle.image}
                     alt={hoveredArticle.title}
                     className="journal-floating-img"
+                    width="400"
+                    height="260"
                     loading="lazy"
                     decoding="async"
                   />

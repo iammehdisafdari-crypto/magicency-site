@@ -97,7 +97,7 @@ export default function WhatWeDo() {
   };
 
   return (
-    <section id="capabilities" className="shared-section vm-exact-wwd-section">
+    <section id="capabilities" className="shared-section vm-exact-wwd-section" aria-label="What We Do — Capabilities">
       <div className="container vm-wwd-main-container">
         
         {/* =========================================================
@@ -159,7 +159,10 @@ export default function WhatWeDo() {
                               src={currentVisual}
                               alt={pillar.title}
                               className="wwd-visual-media-img"
+                              width="800"
+                              height="600"
                               loading="lazy"
+                              decoding="async"
                             />
                             <div className="wwd-visual-media-overlay" />
                             <div className="wwd-visual-caption">
@@ -251,7 +254,7 @@ export default function WhatWeDo() {
             >
               <picture>
                 <source srcSet={toWebp(item.src)} type="image/webp" />
-                <img src={item.src} alt="" className="wwd-trail-inner-img" loading="lazy" decoding="async" />
+                <img src={item.src} alt="" className="wwd-trail-inner-img" width="160" height="200" loading="lazy" decoding="async" />
               </picture>
             </motion.div>
           ))}

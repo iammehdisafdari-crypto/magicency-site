@@ -115,6 +115,8 @@ export default function SelectedWork() {
           src="/branding-client.png"
           alt={proj.client || 'atrash store'}
           className="vm-client-logo-img"
+          width="32"
+          height="32"
           loading="lazy"
           decoding="async"
         />
@@ -126,6 +128,8 @@ export default function SelectedWork() {
           src="/web-client.png"
           alt={proj.client || 'GR8 Real Estate'}
           className="vm-client-logo-img"
+          width="32"
+          height="32"
           loading="lazy"
           decoding="async"
         />
@@ -151,7 +155,7 @@ export default function SelectedWork() {
   if (prefersReducedMotion) {
     // Accessible fallback: regular document flow
     return (
-      <section id="work" className="vm-showcase-fallback">
+      <section id="work" className="vm-showcase-fallback" aria-label="Selected Client Work">
         <div className="vm-showcase-container">
           <h2 className="vm-fallback-title">{workData.eyebrow}</h2>
           {projects.map((proj) => (
@@ -162,7 +166,7 @@ export default function SelectedWork() {
               </div>
               <picture>
                 {toWebp(proj.image) && <source srcSet={toWebp(proj.image)} type="image/webp" />}
-                <img src={proj.image} alt={proj.alt} className="vm-fallback-img" loading="lazy" decoding="async" />
+                <img src={proj.image} alt={proj.alt} className="vm-fallback-img" width="800" height="500" loading="lazy" decoding="async" />
               </picture>
             </div>
           ))}
@@ -175,7 +179,7 @@ export default function SelectedWork() {
   }
 
   return (
-    <section ref={containerRef} id="work" className="vm-showcase-scroll-section">
+    <section ref={containerRef} id="work" className="vm-showcase-scroll-section" aria-label="Selected Client Work Portfolio">
       {/* Pinned Sticky Showcase Viewport */}
       <div className="vm-showcase-sticky-viewport">
         
@@ -332,6 +336,8 @@ export default function SelectedWork() {
                           src={proj.image}
                           alt={proj.alt || proj.client}
                           className="vm-showcase-img"
+                          width="800"
+                          height="500"
                           loading={idx === 0 ? 'eager' : 'lazy'}
                           decoding="async"
                         />

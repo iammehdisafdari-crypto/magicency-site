@@ -4,6 +4,7 @@ import { useLanguage } from '../../context/LanguageContext';
 import { useRouter } from '../../context/RouterContext';
 import { X, ArrowRight, ArrowLeft } from 'lucide-react';
 import ScrambleText from './ScrambleText';
+import { trackCtaClick, trackLanguageSwitch, trackContactClick, trackOutboundClick } from '../../utils/analytics';
 import { EASING, DURATION } from '../motion';
 import './Header.css';
 
@@ -191,7 +192,10 @@ export default function Header() {
             {/* Desktop Language Switcher */}
             <motion.button 
               type="button"
-              onClick={toggleLanguage} 
+              onClick={() => {
+                trackLanguageSwitch(lang === 'en' ? 'fa' : 'en');
+                toggleLanguage();
+              }} 
               className="vm-desktop-lang-pill"
               aria-label={lang === 'en' ? 'Switch to Persian' : 'Switch to English'}
               title={lang === 'en' ? 'تغییر به فارسی' : 'Switch to English'}
@@ -205,7 +209,10 @@ export default function Header() {
             {/* Desktop Primary Pill Button (* START A PROJECT) */}
             <motion.button
               type="button"
-              onClick={() => setIsModalOpen(true)}
+              onClick={() => {
+                trackCtaClick('start_project', 'header_desktop');
+                setIsModalOpen(true);
+              }}
               className="vm-start-project-pill-btn"
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.98 }}
@@ -228,7 +235,10 @@ export default function Header() {
             {/* Mobile Language Selector */}
             <motion.button 
               type="button"
-              onClick={toggleLanguage} 
+              onClick={() => {
+                trackLanguageSwitch(lang === 'en' ? 'fa' : 'en');
+                toggleLanguage();
+              }} 
               className="vm-mobile-lang-btn"
               aria-label={lang === 'en' ? 'Switch to Persian' : 'Switch to English'}
               title={lang === 'en' ? 'تغییر به فارسی' : 'Switch to English'}
@@ -339,6 +349,7 @@ export default function Header() {
                     <button
                       type="button"
                       onClick={() => {
+                        trackCtaClick('start_project', 'header_mobile_menu');
                         setIsMenuOpen(false);
                         setIsModalOpen(true);
                       }}
@@ -353,7 +364,11 @@ export default function Header() {
                     <span className="vm-menu-sidebar-heading">
                       {lang === 'fa' ? 'ارتباط مستقیم' : 'CONTACT'}
                     </span>
-                    <a href="mailto:itsmehdisafdari@gmail.com" className="vm-menu-contact-link">
+                    <a
+                      href="mailto:itsmehdisafdari@gmail.com"
+                      className="vm-menu-contact-link"
+                      onClick={() => trackContactClick('email', 'header_mobile_menu')}
+                    >
                       itsmehdisafdari@gmail.com
                     </a>
                   </div>
@@ -371,10 +386,10 @@ export default function Header() {
               >
                 <span className="vm-menu-copyright">© 2026 MAGICENCY®</span>
                 <div className="vm-menu-socials">
-                  <a href="https://x.com" target="_blank" rel="noopener noreferrer">X</a>
-                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
-                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                  <a href="https://dribbble.com" target="_blank" rel="noopener noreferrer">Dribbble</a>
+                  <a href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="Visit Magicency on X (Twitter)" onClick={() => trackOutboundClick('https://x.com', 'x')}>X</a>
+                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Visit Magicency on Instagram" onClick={() => trackOutboundClick('https://instagram.com', 'instagram')}>Instagram</a>
+                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="Visit Magicency on LinkedIn" onClick={() => trackOutboundClick('https://linkedin.com', 'linkedin')}>LinkedIn</a>
+                  <a href="https://dribbble.com" target="_blank" rel="noopener noreferrer" aria-label="Visit Magicency on Dribbble" onClick={() => trackOutboundClick('https://dribbble.com', 'dribbble')}>Dribbble</a>
                 </div>
               </motion.div>
 

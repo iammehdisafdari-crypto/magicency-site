@@ -120,7 +120,7 @@ export default function ProblemInsight() {
   // Accessible Reduced Motion Fallback
   if (prefersReducedMotion) {
     return (
-      <section id="insight" className="pi-section-fallback">
+      <section id="insight" className="pi-section-fallback" aria-label="Strategic Problem Insight">
         <div className="pi-container">
           <header className="pi-fallback-header">
             <span className="pi-hud-badge">{data.badge}</span>
@@ -143,7 +143,7 @@ export default function ProblemInsight() {
   }
 
   return (
-    <section ref={containerRef} id="insight" className="pi-scroll-section">
+    <section ref={containerRef} id="insight" className="pi-scroll-section" aria-label="Strategic Problem Insight Interactive Architecture">
       {/* Sticky Pinned Stage */}
       <div className="pi-sticky-viewport">
         {/* Background Atmosphere Layers */}

@@ -108,7 +108,7 @@ export default function ArticleReaderModal({ article, onClose, onSelectArticle }
           {/* Monumental Hero Media Crop */}
           {article.coverImage && (
             <div className="article-doc-media">
-              <img src={article.coverImage} alt={title} className="doc-hero-img" />
+              <img src={article.coverImage} alt={title} className="doc-hero-img" width="1200" height="630" loading="eager" decoding="async" />
               <div className="doc-media-caption">
                 <span>MAGICENCY EDITORIAL ARCHIVE // {article.number}</span>
               </div>

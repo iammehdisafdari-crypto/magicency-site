@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 import { X, ArrowRight, ArrowLeft, CheckCircle2 } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { trackLeadStart, trackLeadSubmit } from '../../utils/analytics';
 import './ProjectDiscovery.css';
 
 export default function ProjectDiscovery() {
@@ -32,9 +33,10 @@ export default function ProjectDiscovery() {
     if (isModalOpen) {
       window.addEventListener('keydown', handleKeyDown);
       document.body.style.overflow = 'hidden';
-      // Reset state on open
+      // Reset state on open and track lead start
       setStep(1);
       setDirection(1);
+      trackLeadStart('project_discovery_modal');
     } else {
       document.body.style.overflow = '';
     }
@@ -64,7 +66,11 @@ export default function ProjectDiscovery() {
   };
 
   const handleSubmit = () => {
-    // Simulate submission
+    trackLeadSubmit({
+      timeline: formData.timeline,
+      investment: formData.investment
+    });
+    // Advance to step 8 (success state)
     setDirection(1);
     setStep(8);
     confetti({

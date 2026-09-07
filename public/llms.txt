@@ -1,0 +1,28 @@
+# Magicency
+
+> Magicency is a growth architecture and performance marketing intelligence studio. We engineer connected growth systems uniting business strategy, creative conviction, digital experience design, algorithmic media acquisition, and deterministic attribution telemetry.
+
+## Core Capabilities
+- [Strategy & Growth](https://magicency.ir/capabilities): Market diagnosis, positioning moats, unit economics alignment, go-to-market architecture.
+- [Creative & Performance](https://magicency.ir/capabilities): High-velocity narrative testing, psychological hooks, editorial UI/UX, conversion rate optimization (CRO).
+- [Technology, AI & Automation](https://magicency.ir/capabilities): Headless digital flagships, CRM telemetry, custom automation engines, attribution pipelines.
+
+## Portfolio & Selected Work
+- [Velox Financial](https://magicency.ir/work): Institutional wealth platform & 1-tap algorithmic onboarding architecture (-70% friction, +148% LTV).
+- [Lumina Luxury](https://magicency.ir/work): Direct-to-consumer luxury apparel flagship & narrative testing loops (4.8X ROAS).
+- [Synapse AI](https://magicency.ir/work): Category reframing to Automated Enterprise Decision Intelligence (+210% pipeline velocity).
+- [Nexus Health](https://magicency.ir/work): Server-side event streaming & patient retention architecture.
+- [Vakeso Architecture](https://magicency.ir/work): Spatial editorial publication for international private commissions.
+
+## Publications & Essays
+- [Why more marketing doesn't always create more growth](https://magicency.ir/blog/more-marketing-not-more-growth): An analysis of why scaling a broken conversion architecture accelerates capital loss.
+- [More content isn't fixing your marketing problem](https://magicency.ir/blog/more-content-is-not-fixing-problem): The content treadmill trap and conviction over cadence.
+- [Your website may not have a design problem — it has a conviction problem](https://magicency.ir/blog/website-has-conviction-problem): Why aesthetic gloss without sharp commercial proof fails to convert.
+- [Why campaigns keep resetting your growth to zero](https://magicency.ir/blog/why-campaigns-reset-growth): Replacing tactical spikes with permanent retention flywheels.
+- [AI can produce more creative. That doesn't mean you need more creative](https://magicency.ir/blog/ai-creative-volume-fallacy): Why discernment and strategic taste are the ultimate moats in the generative era.
+- [SEO traffic is not the same thing as commercial growth](https://magicency.ir/blog/seo-traffic-vs-commercial-growth): Why ranking volume without commercial intent produces zero EBITDA.
+
+## Organization & Inquiries
+- Official Website: https://magicency.ir
+- Founder / Strategic Lead: Mehdi Safdari
+- Direct Inquiries: itsmehdisafdari@gmail.com

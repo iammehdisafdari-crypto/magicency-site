@@ -4,6 +4,7 @@ import { useLanguage } from '../../context/LanguageContext';
 import { useRouter } from '../../context/RouterContext';
 import ScrambleText from '../Header/ScrambleText';
 import { Reveal, Stagger, editorialVariants } from '../motion';
+import { trackContactClick, trackOutboundClick } from '../../utils/analytics';
 import './Footer.css';
 
 const FluidCursor = React.lazy(() => import('../effects/FluidCursor'));
@@ -109,7 +110,11 @@ export default function Footer() {
             {f.locations.map((loc, idx) => (
               <motion.div key={idx} variants={editorialVariants} className="footer-emails-block-group">
                 <div className="footer-location-name">{loc.city}</div>
-                <a href={`mailto:${loc.email}`} className="footer-email-link">
+                <a
+                  href={`mailto:${loc.email}`}
+                  className="footer-email-link"
+                  onClick={() => trackContactClick('email', 'footer')}
+                >
                   {loc.email}
                 </a>
               </motion.div>
@@ -129,6 +134,8 @@ export default function Footer() {
                 href={soc.url}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={`Visit Magicency on ${soc.name}`}
+                onClick={() => trackOutboundClick(soc.url, soc.name)}
                 variants={editorialVariants}
                 className="footer-useful-social-link"
               >

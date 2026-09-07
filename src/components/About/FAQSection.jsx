@@ -42,7 +42,7 @@ export default function FAQSection() {
         </div>
 
         {/* Accordion List */}
-        <div className="faq-accordion-list" role="tablist">
+        <div className="faq-accordion-list" aria-label="FAQ Accordion">
           {items.map((item, idx) => {
             const isOpen = openId === item.id;
             return (

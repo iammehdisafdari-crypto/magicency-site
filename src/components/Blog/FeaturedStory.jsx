@@ -35,6 +35,8 @@ export default function FeaturedStory({ article, onSelectArticle }) {
                   src={article.coverImage || '/journal-1.jpg'}
                   alt={title}
                   className="featured-img"
+                  width="800"
+                  height="500"
                   loading="lazy"
                   decoding="async"
                 />

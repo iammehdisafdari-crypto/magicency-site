@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { trackPageView } from '../utils/analytics';
 
 const RouterContext = createContext({
   currentPath: '/',
@@ -25,6 +26,11 @@ export function RouterProvider({ children, initialPath }) {
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    trackPageView(currentPath, document.title);
+  }, [currentPath]);
 
   const navigate = useCallback((to, options = { scrollToTop: true }) => {
     if (typeof window === 'undefined') return;

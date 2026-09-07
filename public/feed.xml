@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Magicency — Strategic Insights &amp; Growth Architecture</title>
+    <link>https://magicency.ir/blog</link>
+    <description>Curated essays, field notes, and architectural analyses exploring the intersection of business strategy, creative conviction, digital experience, and compounding growth systems.</description>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 07 Sep 2026 00:00:00 GMT</lastBuildDate>
+    <atom:link href="https://magicency.ir/feed.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Why more marketing doesn't always create more growth</title>
+      <link>https://magicency.ir/blog/more-marketing-not-more-growth</link>
+      <guid>https://magicency.ir/blog/more-marketing-not-more-growth</guid>
+      <pubDate>Mon, 01 Sep 2026 00:00:00 GMT</pubDate>
+      <description>When companies hit a growth ceiling, the default reaction is to increase spend, launch more ads, and publish more content. But scaling a broken system only accelerates exhaustion.</description>
+      <author>itsmehdisafdari@gmail.com (Mehdi Safdari)</author>
+    </item>
+
+    <item>
+      <title>More content isn't fixing your marketing problem</title>
+      <link>https://magicency.ir/blog/more-content-is-not-fixing-problem</link>
+      <guid>https://magicency.ir/blog/more-content-is-not-fixing-problem</guid>
+      <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
+      <description>When organic engagement stalls, marketing teams default to publishing more frequently. But content without strategic point of view is merely digital clutter.</description>
+      <author>itsmehdisafdari@gmail.com (Magicency Creative Studio)</author>
+    </item>
+
+    <item>
+      <title>Your website may not have a design problem — it has a conviction problem</title>
+      <link>https://magicency.ir/blog/website-has-conviction-problem</link>
+      <guid>https://magicency.ir/blog/website-has-conviction-problem</guid>
+      <pubDate>Wed, 01 Jul 2026 00:00:00 GMT</pubDate>
+      <description>Many redesigns obsess over trendy animations and aesthetic gloss while failing to articulate why the business deserves to win. Pretty interfaces cannot rescue timid positioning.</description>
+      <author>itsmehdisafdari@gmail.com (Magicency Digital Architecture)</author>
+    </item>
+
+    <item>
+      <title>Why campaigns keep resetting your growth to zero</title>
+      <link>https://magicency.ir/blog/why-campaigns-reset-growth</link>
+      <guid>https://magicency.ir/blog/why-campaigns-reset-growth</guid>
+      <pubDate>Mon, 01 Jun 2026 00:00:00 GMT</pubDate>
+      <description>Campaign-dependent businesses live on an adrenaline drip. When media budgets pause, acquisition evaporates. Here is how to engineer permanent retention flywheels.</description>
+      <author>itsmehdisafdari@gmail.com (Magicency Performance Lab)</author>
+    </item>
+
+    <item>
+      <title>AI can produce more creative. That doesn't mean you need more creative</title>
+      <link>https://magicency.ir/blog/ai-creative-volume-fallacy</link>
+      <guid>https://magicency.ir/blog/ai-creative-volume-fallacy</guid>
+      <pubDate>Fri, 01 May 2026 00:00:00 GMT</pubDate>
+      <description>Generative tools have reduced the marginal cost of content creation to near zero. But when everyone can generate thousands of assets instantly, discernment becomes the only moat.</description>
+      <author>itsmehdisafdari@gmail.com (Mehdi Safdari)</author>
+    </item>
+
+    <item>
+      <title>SEO traffic is not the same thing as commercial growth</title>
+      <link>https://magicency.ir/blog/seo-traffic-vs-commercial-growth</link>
+      <guid>https://magicency.ir/blog/seo-traffic-vs-commercial-growth</guid>
+      <pubDate>Wed, 01 Apr 2026 00:00:00 GMT</pubDate>
+      <description>Rankings and impressions look great on monthly agency reports. But if organic visitors never convert into high-margin clients, search becomes an expensive vanity project.</description>
+      <author>itsmehdisafdari@gmail.com (Magicency Strategy Group)</author>
+    </item>
+  </channel>
+</rss>

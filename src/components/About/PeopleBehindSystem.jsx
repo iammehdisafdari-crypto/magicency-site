@@ -47,7 +47,10 @@ export default function PeopleBehindSystem() {
                   src={leadMember.image} 
                   alt={leadMember.alt || leadMember.name} 
                   className="portrait-photo"
+                  width="600"
+                  height="750"
                   loading="lazy"
+                  decoding="async"
                 />
                 <div className="portrait-vignette" />
                 <div className="portrait-badge-overlay">
@@ -74,7 +77,10 @@ export default function PeopleBehindSystem() {
                   src={workspace.image} 
                   alt="Magicency Strategic Systems Workspace" 
                   className="workspace-photo"
+                  width="600"
+                  height="750"
                   loading="lazy"
+                  decoding="async"
                 />
                 <div className="workspace-vignette" />
                 <div className="workspace-caption-overlay">

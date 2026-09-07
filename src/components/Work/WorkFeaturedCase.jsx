@@ -47,7 +47,10 @@ export default function WorkFeaturedCase() {
               src={flagship.media.primary} 
               alt={flagship.client[lang] || flagship.client.en}
               className="work-featured-image"
+              width="1280"
+              height="720"
               loading="eager"
+              decoding="async"
             />
             <div className="work-featured-media-overlay" />
 

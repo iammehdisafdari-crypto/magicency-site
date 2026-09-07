@@ -87,7 +87,7 @@ export default function Hero({ isLoaded = true }) {
   ];
 
   return (
-    <section id="hero" className="vm-hero-section">
+    <section id="hero" className="vm-hero-section" aria-label="Hero and Showreel Presentation">
       {/* =========================================================
           01. FIRST VIEWPORT (100svh ON DESKTOP & LAPTOP)
           Exact match to the desktop reference screenshot
@@ -188,8 +188,11 @@ export default function Hero({ isLoaded = true }) {
                 src="/reel-preview.jpg"
                 alt="Magicency Showreel Preview"
                 className="vm-showreel-vimeo-iframe"
+                width="1280"
+                height="720"
                 style={{ objectFit: 'cover', opacity: 0.85 }}
-                loading="lazy"
+                loading="eager"
+                fetchpriority="high"
                 decoding="async"
               />
             </picture>

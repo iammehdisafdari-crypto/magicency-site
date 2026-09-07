@@ -113,6 +113,8 @@ export default function About() {
                   src="/assets/about/portrait.jpg" 
                   alt="Magicency Growth Architect & Creative Strategist" 
                   className="portrait-img" 
+                  width="600"
+                  height="750"
                   loading="lazy" 
                   decoding="async"
                 />
@@ -184,6 +186,8 @@ export default function About() {
                       src="/assets/about/workspace.jpg" 
                       alt="Magicency Market Research & ICP Behavioral Map" 
                       className="snippet-img" 
+                      width="600"
+                      height="400"
                       loading="lazy" 
                       decoding="async"
                     />
@@ -253,6 +257,8 @@ export default function About() {
                       src="/assets/capabilities/growth_systems.jpg" 
                       alt="Magicency Closed-Loop Growth Feedback Engine" 
                       className="snippet-img" 
+                      width="600"
+                      height="400"
                       loading="lazy" 
                       decoding="async"
                     />

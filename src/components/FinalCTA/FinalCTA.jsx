@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLanguage } from '../../context/LanguageContext';
+import { trackCtaClick } from '../../utils/analytics';
 import './FinalCTA.css';
 
 export default function FinalCTA() {
@@ -18,7 +19,7 @@ export default function FinalCTA() {
 
   return (
     <section 
-      id="next-move" 
+      id="contact" 
       className="final-cta-section" 
       aria-label={content.headline}
       dir={isRTL ? 'rtl' : 'ltr'}
@@ -44,6 +45,7 @@ export default function FinalCTA() {
             href="#contact"
             onClick={(e) => {
               e.preventDefault();
+              trackCtaClick('start_project', 'final_cta_section');
               setIsModalOpen(true);
             }}
             className="final-cta-btn"

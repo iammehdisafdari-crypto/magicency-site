@@ -161,7 +161,10 @@ export default function WorkIndex({ projects }) {
                       src={proj.media.primary} 
                       alt={proj.client[lang] || proj.client.en} 
                       className="row-mobile-media-img"
+                      width="600"
+                      height="400"
                       loading="lazy"
+                      decoding="async"
                     />
                     <div className="row-mobile-media-badge">
                       <span>{lang === 'fa' ? proj.media.badgeFa : proj.media.badgeEn}</span>
@@ -194,6 +197,10 @@ export default function WorkIndex({ projects }) {
                   src={hoveredProject.media.primary}
                   alt={hoveredProject.client[lang] || hoveredProject.client.en}
                   className="floating-preview-img"
+                  width="480"
+                  height="320"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div className="floating-preview-overlay" />
                 <div className="floating-preview-caption">

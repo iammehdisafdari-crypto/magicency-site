@@ -93,7 +93,7 @@ export default function EditorialStream({ articles, onSelectArticle }) {
                     <div className="item-mobile-thumb" aria-hidden="true">
                       <picture>
                         <source srcSet={toWebp(art.coverImage || '/journal-1.jpg')} type="image/webp" />
-                        <img src={art.coverImage || '/journal-1.jpg'} alt="" loading="lazy" decoding="async" />
+                        <img src={art.coverImage || '/journal-1.jpg'} alt="" width="200" height="120" loading="lazy" decoding="async" />
                       </picture>
                     </div>
                   </motion.div>
@@ -120,6 +120,8 @@ export default function EditorialStream({ articles, onSelectArticle }) {
                           src={hoveredArticle.coverImage || '/journal-1.jpg'}
                           alt=""
                           className="preview-img"
+                          width="480"
+                          height="300"
                           loading="lazy"
                           decoding="async"
                         />
