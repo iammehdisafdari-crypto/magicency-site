@@ -4,6 +4,7 @@ import { useLanguage } from '../../context/LanguageContext';
 import { useRouter } from '../../context/RouterContext';
 import { ArrowRight, ArrowLeft } from 'lucide-react';
 import { RevealLabel, EASING } from '../motion';
+import { useDeferredTarget } from '../motion/useDeferredTarget';
 import './SelectedWork.css';
 
 const toWebp = (url) => (url ? url.replace(/\.(jpg|jpeg|png)$/, '.webp') : url);
@@ -26,9 +27,11 @@ export default function SelectedWork() {
 
   const projects = workData.projects;
 
+  const targetRef = useDeferredTarget(containerRef);
+
   // Track scroll progress through this section
   const { scrollYProgress } = useScroll({
-    target: containerRef,
+    target: targetRef,
     offset: ['start start', 'end end']
   });
 

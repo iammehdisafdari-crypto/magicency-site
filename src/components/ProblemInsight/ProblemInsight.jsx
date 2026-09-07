@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 import ProblemInsightVisual from './ProblemInsightVisual';
+import { useDeferredTarget } from '../motion/useDeferredTarget';
 import './ProblemInsight.css';
 
 export default function ProblemInsight() {
@@ -64,9 +65,11 @@ export default function ProblemInsight() {
     return () => mediaQuery.removeEventListener('change', handler);
   }, []);
 
+  const targetRef = useDeferredTarget(containerRef);
+
   // Track scroll progress through this section (300vh total track)
   const { scrollYProgress } = useScroll({
-    target: containerRef,
+    target: targetRef,
     offset: ['start start', 'end end']
   });
 

@@ -1,18 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useSpring, useTransform, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
+import { useDeferredTarget } from '../motion/useDeferredTarget';
 import OperatingSystemReactor from './OperatingSystemReactor';
 import './GrowthOperatingSystem.css';
 
 export default function GrowthOperatingSystem() {
   const { t, setIsModalOpen, isRTL } = useLanguage();
   const containerRef = useRef(null);
+  const targetRef = useDeferredTarget(containerRef);
   const osData = t.growthOS;
   const states = osData.states;
 
   // Single source of truth: Scroll progress across 500vh
   const { scrollYProgress } = useScroll({
-    target: containerRef,
+    target: targetRef,
     offset: ["start start", "end end"]
   });
 

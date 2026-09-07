@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { motion, useScroll, useSpring, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
+import { useDeferredTarget } from '../motion/useDeferredTarget';
 import './GrowthSystemNarrative.css';
 
 const toWebp = (url) => (url ? url.replace(/\.(jpg|jpeg|png)$/, '.webp') : url);
@@ -194,9 +195,11 @@ export default function GrowthSystemNarrative() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  const targetRef = useDeferredTarget(containerRef);
+
   // Track overall scroll progress through 500vh
   const { scrollYProgress } = useScroll({
-    target: containerRef,
+    target: targetRef,
     offset: ['start start', 'end end']
   });
 

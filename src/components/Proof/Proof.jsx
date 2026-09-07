@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useSpring, useTransform, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
+import { useDeferredTarget } from '../motion/useDeferredTarget';
 import './Proof.css';
 
 const toWebp = (url) => (url ? url.replace(/\.(jpg|jpeg|png)$/, '.webp') : url);
@@ -8,12 +9,13 @@ const toWebp = (url) => (url ? url.replace(/\.(jpg|jpeg|png)$/, '.webp') : url);
 export default function Proof() {
   const { t, isRTL } = useLanguage();
   const containerRef = useRef(null);
+  const targetRef = useDeferredTarget(containerRef);
   const proofData = t.proof;
   const states = proofData.states;
 
   // Single source of truth: Scroll progress across 500vh
   const { scrollYProgress } = useScroll({
-    target: containerRef,
+    target: targetRef,
     offset: ["start start", "end end"]
   });
 

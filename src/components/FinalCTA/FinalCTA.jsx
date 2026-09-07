@@ -1,16 +1,18 @@
 import React, { useState, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
+import { useDeferredTarget } from '../motion/useDeferredTarget';
 import './FinalCTA.css';
 
 export default function FinalCTA() {
   const { t, isRTL, setIsModalOpen } = useLanguage();
   const containerRef = useRef(null);
+  const targetRef = useDeferredTarget(containerRef);
   const data = t.finalCta;
 
   // Track scroll arrival
   const { scrollYProgress } = useScroll({
-    target: containerRef,
+    target: targetRef,
     offset: ["start end", "end end"]
   });
 
