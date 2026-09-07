@@ -583,21 +583,29 @@
    ========================================================= */
 @media (max-width: 767px) {
   .pi-scroll-section {
-    height: 250vh;
+    height: auto;
+    position: relative;
+    padding-top: clamp(24px, 4vh, 40px);
+    padding-bottom: clamp(32px, 5vh, 52px);
+    isolation: isolate;
+    z-index: 1;
   }
 
   .pi-sticky-viewport {
-    height: 100svh;
+    position: relative;
+    top: auto;
+    height: auto;
+    overflow: visible;
   }
 
   .pi-container {
-    height: 100%;
-    max-height: 100svh;
-    padding-top: calc(var(--header-height, 56px) + 8px);
-    padding-bottom: 12px;
+    height: auto;
+    max-height: none;
+    padding-top: 0;
+    padding-bottom: 0;
     padding-inline: 16px;
     justify-content: flex-start;
-    gap: 8px;
+    gap: 16px;
     box-sizing: border-box;
   }
 
@@ -608,9 +616,10 @@
   .pi-content-grid {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    flex: 1;
-    min-height: 0;
+    gap: 16px;
+    width: 100%;
+    height: auto;
+    min-height: auto;
     justify-content: flex-start;
   }
 
@@ -660,8 +669,8 @@
   }
 
   .pi-visual-col {
-    flex: 1;
-    min-height: 0;
+    flex: none;
+    min-height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -671,7 +680,7 @@
   .pi-visual-container {
     width: 100%;
     max-width: 360px;
-    max-height: 52vh;
+    max-height: none;
     aspect-ratio: 380 / 400;
     margin-inline: auto;
   }
