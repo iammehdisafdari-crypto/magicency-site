@@ -1,0 +1,48 @@
+# ==============================================================================
+# MAGICENCY® APACHE / LITESPEED PRODUCTION CONFIGURATION
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 01. CRITICAL SECURITY: BLOCK ACCESS TO .ENV AND ALL DOTFILES
+# ------------------------------------------------------------------------------
+# Deny access to all hidden files and directories (.env, .git, etc.)
+<FilesMatch "^\.">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Explicit block for any variation of .env files
+<FilesMatch "(^|/)\.env">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# ------------------------------------------------------------------------------
+# 02. ENFORCE HTTP TO HTTPS 301 REDIRECTION
+# ------------------------------------------------------------------------------
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Redirect non-HTTPS traffic to HTTPS with 301 permanent redirect
+    RewriteCond %{HTTPS} off
+    RewriteCond %{HTTP:X-Forwarded-Proto} !https
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # Pre-rendered directory/HTML fallback
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.html [L]
+</IfModule>
+
+# Disable directory browsing
+Options -Indexes
