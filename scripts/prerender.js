@@ -309,11 +309,36 @@ async function prerender() {
 
   console.log(`🚀 [Prerender] Pre-rendering ${ROUTES.length} routes with custom SEO metadata...`);
 
+  // Discover route-specific CSS chunks from client build
+  const assetFiles = fs.existsSync(path.resolve(distDir, 'assets'))
+    ? fs.readdirSync(path.resolve(distDir, 'assets'))
+    : [];
+
+  const pageCssMap = {
+    '/work': assetFiles.find((f) => f.startsWith('WorkPage-') && f.endsWith('.css')),
+    '/about': assetFiles.find((f) => f.startsWith('AboutPage-') && f.endsWith('.css')),
+    '/capabilities': assetFiles.find((f) => f.startsWith('CapabilitiesPage-') && f.endsWith('.css')),
+    '/approach': assetFiles.find((f) => f.startsWith('ApproachPage-') && f.endsWith('.css')),
+    '/blog': assetFiles.find((f) => f.startsWith('BlogPage-') && f.endsWith('.css'))
+  };
+
   for (const route of ROUTES) {
     const { appHtml } = render(route, 'en');
     const meta = getRouteMetadata(route);
 
     let html = baseTemplate;
+
+    // Inject route-specific CSS if applicable
+    let matchedCss = null;
+    if (route === '/work') matchedCss = pageCssMap['/work'];
+    else if (route === '/about') matchedCss = pageCssMap['/about'];
+    else if (route === '/capabilities') matchedCss = pageCssMap['/capabilities'];
+    else if (route === '/approach') matchedCss = pageCssMap['/approach'];
+    else if (route.startsWith('/blog')) matchedCss = pageCssMap['/blog'];
+
+    if (matchedCss) {
+      html = html.replace('</head>', `    <link rel="stylesheet" href="/assets/${matchedCss}" />\n  </head>`);
+    }
 
     // 1. Update Title
     html = html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${meta.title}</title>`);

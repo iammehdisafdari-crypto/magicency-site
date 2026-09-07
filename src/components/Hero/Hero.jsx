@@ -1,16 +1,15 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 import { DURATION, maskedLineVariants, editorialVariants } from '../motion';
+import LazyVimeoPlayer from '../Common/LazyVimeoPlayer';
 import './Hero.css';
 
 const FluidCursor = React.lazy(() => import('../effects/FluidCursor'));
 
 export default function Hero({ isLoaded = true }) {
   const { t } = useLanguage();
-  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
   const [shouldLoadFluid, setShouldLoadFluid] = useState(false);
-  const reelRef = useRef(null);
 
   useEffect(() => {
     // 1. Accessibility & Mobile/Touch Detection:
@@ -54,21 +53,6 @@ export default function Hero({ isLoaded = true }) {
       }
     };
   }, [isLoaded]);
-
-  useEffect(() => {
-    if (!reelRef.current) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setShouldLoadVideo(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: '200px' }
-    );
-    observer.observe(reelRef.current);
-    return () => observer.disconnect();
-  }, []);
 
   const clients = t.hero.clients || [
     'tamir online',
@@ -167,37 +151,15 @@ export default function Hero({ isLoaded = true }) {
 
       {/* =========================================================
           02. FULL-BLEED / EDGE-TO-EDGE VIMEO VIDEO EMBED
-          100% full-width of the viewport, responsive 16:9 aspect ratio
-          Clean cinematic presentation: title, byline, portrait and badge hidden
+          Lazy-loaded facade: Zero JS on initial page load
           ========================================================= */}
-      <div ref={reelRef} className="vm-showreel-fullbleed-wrapper">
-        <div className="vm-showreel-vimeo-container">
-          {shouldLoadVideo ? (
-            <iframe
-              src="https://player.vimeo.com/video/1224224238?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479&dnt=1&playsinline=1"
-              className="vm-showreel-vimeo-iframe"
-              title="Magicency Showreel"
-              loading="lazy"
-              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-              allowFullScreen
-            />
-          ) : (
-            <picture>
-              <source srcSet="/reel-preview.webp" type="image/webp" />
-              <img
-                src="/reel-preview.jpg"
-                alt="Magicency Showreel Preview"
-                className="vm-showreel-vimeo-iframe"
-                width="1280"
-                height="720"
-                style={{ objectFit: 'cover', opacity: 0.85 }}
-                loading="eager"
-                fetchpriority="high"
-                decoding="async"
-              />
-            </picture>
-          )}
-        </div>
+      <div className="vm-showreel-fullbleed-wrapper">
+        <LazyVimeoPlayer
+          videoId="1224224238"
+          title="Magicency Showreel"
+          posterWebp="/reel-preview.webp"
+          posterJpg="/reel-preview.jpg"
+        />
       </div>
     </section>
   );

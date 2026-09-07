@@ -8,7 +8,7 @@ import { useDeferredTarget } from '../motion/useDeferredTarget';
 import './SelectedWork.css';
 
 const toWebp = (url) => {
-  if (!url || url.endsWith('.webp') || url.includes('client')) return null;
+  if (!url || url.endsWith('.webp')) return null;
   return url.replace(/\.(jpg|jpeg|png)$/, '.webp');
 };
 
@@ -111,28 +111,34 @@ export default function SelectedWork() {
   const renderClientIcon = (proj) => {
     if (proj.id === 'branding') {
       return (
-        <img
-          src="/branding-client.png"
-          alt={proj.client || 'atrash store'}
-          className="vm-client-logo-img"
-          width="32"
-          height="32"
-          loading="lazy"
-          decoding="async"
-        />
+        <picture>
+          <source srcSet="/branding-client.webp" type="image/webp" />
+          <img
+            src="/branding-client.png"
+            alt={proj.client || 'atrash store'}
+            className="vm-client-logo-img"
+            width="32"
+            height="32"
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
       );
     }
     if (proj.id === 'web') {
       return (
-        <img
-          src="/web-client.png"
-          alt={proj.client || 'GR8 Real Estate'}
-          className="vm-client-logo-img"
-          width="32"
-          height="32"
-          loading="lazy"
-          decoding="async"
-        />
+        <picture>
+          <source srcSet="/web-client.webp" type="image/webp" />
+          <img
+            src="/web-client.png"
+            alt={proj.client || 'GR8 Real Estate'}
+            className="vm-client-logo-img"
+            width="32"
+            height="32"
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
       );
     }
     if (proj.id === 'mobile') {
