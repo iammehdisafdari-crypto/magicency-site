@@ -1,9 +1,10 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
-import ProblemInsightVisual from './ProblemInsightVisual';
 import { useDeferredTarget } from '../motion/useDeferredTarget';
 import './ProblemInsight.css';
+
+const ProblemInsightVisual = React.lazy(() => import('./ProblemInsightVisual'));
 
 export default function ProblemInsight() {
   const { t, isRTL } = useLanguage();
@@ -199,11 +200,13 @@ export default function ProblemInsight() {
 
             {/* Right Column: Single Evolving System Object */}
             <div className="pi-visual-col">
-              <ProblemInsightVisual 
-                activeBeat={activeBeatIndex} 
-                isRTL={isRTL} 
-                nodesData={data.nodes}
-              />
+              <React.Suspense fallback={null}>
+                <ProblemInsightVisual 
+                  activeBeat={activeBeatIndex} 
+                  isRTL={isRTL} 
+                  nodesData={data.nodes}
+                />
+              </React.Suspense>
             </div>
           </div>
         </div>

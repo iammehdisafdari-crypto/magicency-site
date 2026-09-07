@@ -3,9 +3,10 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 import { useRouter } from '../../context/RouterContext';
 import ScrambleText from '../Header/ScrambleText';
-import { FluidCursor } from '../effects';
 import { Reveal, Stagger, maskedLineVariants, editorialVariants, buttonMotion } from '../motion';
 import './Footer.css';
+
+const FluidCursor = React.lazy(() => import('../effects/FluidCursor'));
 
 // Signature Arrow Icon from Vivid Motion Button Reference
 const ArrowIcon = () => (
@@ -97,7 +98,11 @@ export default function Footer() {
   return (
     <footer ref={footerRef} className="footer vm-footer-root" aria-label="Magicency Experience Footer">
       {/* Reusable WebGL Fluid Cursor Layer (#B82E0C Monochromatic) */}
-      {shouldLoadFluid && <FluidCursor intensity={0.8} className="footer-fluid-bg" />}
+      {shouldLoadFluid && (
+        <React.Suspense fallback={null}>
+          <FluidCursor intensity={0.8} className="footer-fluid-bg" />
+        </React.Suspense>
+      )}
       <div className="liquid-ether-fade bottom" aria-hidden="true" />
 
       <div className="container vm-footer-inner-container">

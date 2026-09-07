@@ -409,7 +409,6 @@ export default function FluidCursor({
       }
     };
 
-    updateSize();
     const resizeObserver = new ResizeObserver(updateSize);
     resizeObserver.observe(container);
     window.addEventListener('scroll', invalidateRect, { passive: true });

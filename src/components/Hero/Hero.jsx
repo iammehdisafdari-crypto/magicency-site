@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
-import { FluidCursor } from '../effects';
 import { DURATION, maskedLineVariants, editorialVariants } from '../motion';
 import './Hero.css';
+
+const FluidCursor = React.lazy(() => import('../effects/FluidCursor'));
 
 export default function Hero({ isLoaded = true }) {
   const { t } = useLanguage();
@@ -53,7 +54,9 @@ export default function Hero({ isLoaded = true }) {
         <div className="vm-hero-grid-subtle" aria-hidden="true" />
 
         {/* Scoped WebGL Fluid Simulation Cursor Effect strictly confined to Hero first viewport */}
-        <FluidCursor intensity={0.5} className="vm-hero-fluid-canvas" />
+        <React.Suspense fallback={null}>
+          <FluidCursor intensity={0.5} className="vm-hero-fluid-canvas" />
+        </React.Suspense>
 
         <div className="vm-hero-headline-container">
           <h1 className="vm-hero-giant-title">

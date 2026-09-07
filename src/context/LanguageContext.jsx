@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { ABOUT_DATA } from '../data/aboutData';
 
 const LanguageContext = createContext();
 
@@ -654,7 +653,7 @@ export const translations = {
         }
       ]
     },
-    about: ABOUT_DATA.en,
+    about: {},
     theBrief: {
       eyebrow: '09 / THE BRIEF',
       subeyebrow: 'DON’T CONTACT US. START SOMEWHERE.',
@@ -1764,7 +1763,7 @@ export const translations = {
         }
       ]
     },
-    about: ABOUT_DATA.fa,
+    about: {},
     theBrief: {
       eyebrow: '۰۹ / بریف اختصاصی رشد',
       subeyebrow: 'فرم تماس پر نکنید؛ از یک تصمیم استراتژیک شروع کنید.',

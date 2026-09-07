@@ -25,34 +25,32 @@ export default function BrandIntro({ onComplete }) {
       return;
     }
 
-    // Failsafe timeout: 5.8s
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
+    // Failsafe timeout
     const failsafe = setTimeout(() => {
       handleComplete();
-    }, 5800);
+    }, isMobile ? 1800 : 5800);
 
-    // Timed Cinematic Sequence (~5.2 seconds total, +3 seconds richer as requested)
-    // Phase 1: Signal (0ms) - Subtle point and expanding sonar fields
-    
-    // Phase 2: Formation (1200ms) - Vector convergence and geometric scaffolding
+    // Timed Cinematic Sequence
+    // Mobile: 1.3s total sequence for responsive mobile LCP
+    // Desktop: ~5.2s total rich cinematic sequence
     const tFormation = setTimeout(() => {
       setPhase('formation');
-    }, 1200);
+    }, isMobile ? 250 : 1200);
 
-    // Phase 3: Identity (2800ms) - Brand crest crystallization and typography reveal
     const tIdentity = setTimeout(() => {
       setPhase('identity');
-    }, 2800);
+    }, isMobile ? 600 : 2800);
 
-    // Phase 4: Transition (4500ms) - Seamless optical bloom into Hero
     const tTransition = setTimeout(() => {
       setPhase('transition');
       onComplete?.();
-    }, 4500);
+    }, isMobile ? 1000 : 4500);
 
-    // Phase 5: Complete (5100ms)
     const tDone = setTimeout(() => {
       handleComplete();
-    }, 5100);
+    }, isMobile ? 1300 : 5100);
 
     return () => {
       clearTimeout(failsafe);
