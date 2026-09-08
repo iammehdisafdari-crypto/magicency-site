@@ -53,15 +53,17 @@ export function RouterProvider({ children, initialPath }) {
     }
   }, []);
 
+  const isHomePage = currentPath === '/' || currentPath === '';
   const isWorkPage = currentPath === '/work' || currentPath.startsWith('/work/');
   const isApproachPage = currentPath === '/approach' || currentPath.startsWith('/approach/');
   const isCapabilitiesPage = currentPath === '/capabilities' || currentPath.startsWith('/capabilities/');
   const isBlogPage = currentPath === '/blog' || currentPath.startsWith('/blog/');
   const isAboutPage = currentPath === '/about' || currentPath.startsWith('/about/');
   const blogArticleSlug = currentPath.startsWith('/blog/') ? currentPath.replace(/^\/blog\//, '').replace(/\/$/, '') : null;
+  const isNotFound = currentPath === '/404' || (!isHomePage && !isWorkPage && !isApproachPage && !isCapabilitiesPage && !isBlogPage && !isAboutPage);
 
   return (
-    <RouterContext.Provider value={{ currentPath, navigate, isWorkPage, isApproachPage, isCapabilitiesPage, isBlogPage, isAboutPage, blogArticleSlug }}>
+    <RouterContext.Provider value={{ currentPath, navigate, isHomePage, isWorkPage, isApproachPage, isCapabilitiesPage, isBlogPage, isAboutPage, blogArticleSlug, isNotFound }}>
       {children}
     </RouterContext.Provider>
   );

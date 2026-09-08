@@ -16,6 +16,8 @@ export default function ImageReveal({
   children,
   src,
   alt = '',
+  width,
+  height,
   className = '',
   imageClassName = '',
   delay = 0,
@@ -36,6 +38,8 @@ export default function ImageReveal({
             <img
               src={src}
               alt={alt}
+              width={width}
+              height={height}
               className={`motion-image-inner ${imageClassName}`}
               loading="lazy"
               decoding="async"
@@ -67,6 +71,8 @@ export default function ImageReveal({
           <img
             src={src}
             alt={alt}
+            width={width}
+            height={height}
             className={`motion-image-inner ${imageClassName}`}
             style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
             loading="lazy"

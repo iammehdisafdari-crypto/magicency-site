@@ -150,6 +150,8 @@ export default function WhatWeDo() {
                         <ImageReveal
                           src={currentVisual}
                           alt={pillar.title}
+                          width="1376"
+                          height="768"
                           className="wwd-visual-media-frame"
                           imageClassName="wwd-visual-media-img"
                           delay={0.22}
@@ -159,8 +161,8 @@ export default function WhatWeDo() {
                               src={currentVisual}
                               alt={pillar.title}
                               className="wwd-visual-media-img"
-                              width="800"
-                              height="600"
+                              width="1376"
+                              height="768"
                               loading="lazy"
                               decoding="async"
                             />
@@ -254,7 +256,20 @@ export default function WhatWeDo() {
             >
               <picture>
                 <source srcSet={toWebp(item.src)} type="image/webp" />
-                <img src={item.src} alt="" className="wwd-trail-inner-img" width="160" height="200" loading="lazy" decoding="async" />
+                <img
+                  src={item.src}
+                  alt={
+                    item.src.includes('whatwedo-1') ? 'Magicency Strategy & Growth Architecture' :
+                    item.src.includes('whatwedo-2') ? 'Magicency Creative Conviction & Brand Systems' :
+                    item.src.includes('whatwedo-3') ? 'Magicency Technology & AI Automation' :
+                    'Magicency Connected Growth Work'
+                  }
+                  className="wwd-trail-inner-img"
+                  width="160"
+                  height="200"
+                  loading="lazy"
+                  decoding="async"
+                />
               </picture>
             </motion.div>
           ))}

@@ -319,7 +319,8 @@ async function prerender() {
     '/about': assetFiles.find((f) => f.startsWith('AboutPage-') && f.endsWith('.css')),
     '/capabilities': assetFiles.find((f) => f.startsWith('CapabilitiesPage-') && f.endsWith('.css')),
     '/approach': assetFiles.find((f) => f.startsWith('ApproachPage-') && f.endsWith('.css')),
-    '/blog': assetFiles.find((f) => f.startsWith('BlogPage-') && f.endsWith('.css'))
+    '/blog': assetFiles.find((f) => f.startsWith('BlogPage-') && f.endsWith('.css')),
+    '/404': assetFiles.find((f) => f.startsWith('NotFoundPage-') && f.endsWith('.css'))
   };
 
   for (const route of ROUTES) {
@@ -335,6 +336,7 @@ async function prerender() {
     else if (route === '/capabilities') matchedCss = pageCssMap['/capabilities'];
     else if (route === '/approach') matchedCss = pageCssMap['/approach'];
     else if (route.startsWith('/blog')) matchedCss = pageCssMap['/blog'];
+    else if (route === '/404') matchedCss = pageCssMap['/404'];
 
     if (matchedCss) {
       html = html.replace('</head>', `    <link rel="stylesheet" href="/assets/${matchedCss}" />\n  </head>`);

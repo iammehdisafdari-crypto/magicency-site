@@ -181,7 +181,8 @@ export const ABOUT_DATA = {
           role: 'Defining where to play and how to win defensibly.',
           deliverables: ['Positioning Moats', 'Unit Economics Alignment', 'Go-To-Market Architecture', 'Audience Psychology'],
           proofTag: 'SYNAPSE AI // Category Reframing',
-          previewImage: '/project-1.jpg'
+          previewImage: '/project-1.jpg',
+          alt: 'Business & Brand Positioning Architecture — Synapse AI Category Reframing Case Study'
         },
         {
           num: '02',
@@ -190,7 +191,8 @@ export const ABOUT_DATA = {
           role: 'Crafting signature brand worlds that command respect and convert.',
           deliverables: ['Design Systems', 'Editorial Campaigns', 'Motion Language', 'High-Impact Brand Identities'],
           proofTag: 'LUMINA LUXURY // Editorial D2C Flagship',
-          previewImage: '/assets/work/lumina_primary.jpg'
+          previewImage: '/assets/work/lumina_primary.jpg',
+          alt: 'Editorial Art Direction & Design — Lumina Luxury Editorial D2C Flagship'
         },
         {
           num: '03',
@@ -199,7 +201,8 @@ export const ABOUT_DATA = {
           role: 'Engineered media investment focused strictly on customer lifetime value.',
           deliverables: ['High-Intent CRO Funnels', 'Algorithmic Media Buying', 'Inbound Content Engines', 'Friction Elimination'],
           proofTag: 'VELOX FINANCIAL // -70% Friction Flow',
-          previewImage: '/assets/work/velox_primary.jpg'
+          previewImage: '/assets/work/velox_primary.jpg',
+          alt: 'High-Velocity Acquisition & High-Intent CRO — Velox Financial Trading Platform'
         },
         {
           num: '04',
@@ -208,7 +211,8 @@ export const ABOUT_DATA = {
           role: 'Zero-compromise digital engineering built for speed, feel, and conversion.',
           deliverables: ['Headless Web Platforms', 'Interactive Product Demos', 'Tactile Motion Systems', 'Full Accessibility Parity'],
           proofTag: 'VAKESO // Spatial Digital Monograph',
-          previewImage: '/project-2.jpg'
+          previewImage: '/project-2.jpg',
+          alt: 'Flagship Digital Platforms & Engineering — Vakeso Architecture Spatial Monograph'
         },
         {
           num: '05',
@@ -217,7 +221,8 @@ export const ABOUT_DATA = {
           role: 'Server-side tracking infrastructure that turns user actions into operational certainty.',
           deliverables: ['First-Party Event Streaming', 'Multi-Touch Attribution', 'Cohort Retention Modeling', 'Behavioral Funnel Telemetry'],
           proofTag: 'NEXUS HEALTH // Server-Side Retention Loops',
-          previewImage: '/assets/work/nexus_primary.jpg'
+          previewImage: '/assets/work/nexus_primary.jpg',
+          alt: 'Telemetry & Attribution Engines — Nexus Health Retention Telemetry'
         }
       ]
     },
@@ -567,7 +572,8 @@ export const ABOUT_DATA = {
           role: 'تعیین قلمرو رقابتی و چگونگی پیروزی پایدار در بازار.',
           deliverables: ['خندق‌های جایگاه‌یابی', 'هماهنگی اقتصاد واحد', 'معماری ورود به بازار', 'روانشناسی تصمیم مخاطب'],
           proofTag: 'سیناپس هوش مصنوعی // بازتعریف دسته‌بندی',
-          previewImage: '/project-1.jpg'
+          previewImage: '/project-1.jpg',
+          alt: 'معماری جایگاه‌یابی برند و کسب‌وکار — کیس‌استادی بازتعریف هوش مصنوعی سیناپس'
         },
         {
           num: '۰۲',
@@ -576,7 +582,8 @@ export const ABOUT_DATA = {
           role: 'خلق جهان‌های بصری اصیل که توجه بازار را معطوف کرده و اعتماد می‌سازند.',
           deliverables: ['دیزاین سیستم‌های جامع', 'کمپین‌های ادیتوریال', 'زبان موشن و انیمیشن', 'هویت‌های بصری ماندگار'],
           proofTag: 'برند لومینا // فروشگاه پرچمدار ادیتوریال',
-          previewImage: '/assets/work/lumina_primary.jpg'
+          previewImage: '/assets/work/lumina_primary.jpg',
+          alt: 'مدیریت هنری و طراحی ادیتوریال — فروشگاه پرچمدار لومینا'
         },
         {
           num: '۰۳',
@@ -585,7 +592,8 @@ export const ABOUT_DATA = {
           role: 'مدیریت الگوریتمی بودجه تبلیغاتی با تمرکز ویژه بر بازگشت سرمایه و ارزش مشتری.',
           deliverables: ['قیف‌های تبدیل با قصد خرید بالا', 'تبلیغات داده‌محور', 'موتورهای ارگانیک ورودی', 'حذف اصطکاک مسیر خرید'],
           proofTag: 'فین‌تک ولوکس // کاهش ۷۰٪ اصطکاک',
-          previewImage: '/assets/work/velox_primary.jpg'
+          previewImage: '/assets/work/velox_primary.jpg',
+          alt: 'سیستم جذب و بهینه‌سازی نرخ تبدیل — پلتفرم معاملاتی فین‌تک ولوکس'
         },
         {
           num: '۰۴',
@@ -594,7 +602,8 @@ export const ABOUT_DATA = {
           role: 'مهندسی بدون سازش وب برای سرعت، حس کاربری روان و حداکثر تبدیل.',
           deliverables: ['پلتفرم‌های وب Headless', 'دموهای تعاملی محصول', 'میکرو-انیمیشن‌های شناور', 'دسترسی‌پذیری کامل استانداردهای مدرن'],
           proofTag: 'استودیو واکیسو // مونوگراف فضایی وب',
-          previewImage: '/project-2.jpg'
+          previewImage: '/project-2.jpg',
+          alt: 'پلتفرم‌های دیجیتال پرچمدار و مهندسی نرم‌افزار — مونوگراف فضایی واکیسو'
         },
         {
           num: '۰۵',
@@ -603,7 +612,8 @@ export const ABOUT_DATA = {
           role: 'زیرساخت ثبت داده‌های سمت سرور برای تبدیل رفتار کاربران به قطعیت عملیاتی.',
           deliverables: ['جریان اختصاصی رویدادهای سرور', 'مدل اتریبیوشن چندنقطه‌ای', 'مدل‌سازی وفاداری کوهورت‌ها', 'تله‌متری رفتاری قیف'],
           proofTag: 'نکسوس سلامت // تله‌متری و حلقه‌های مراقبت',
-          previewImage: '/assets/work/nexus_primary.jpg'
+          previewImage: '/assets/work/nexus_primary.jpg',
+          alt: 'موتورهای تله‌متری و رهگیری داده سمت سرور — نکسوس سلامت'
         }
       ]
     },

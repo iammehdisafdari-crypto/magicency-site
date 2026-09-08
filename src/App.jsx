@@ -17,6 +17,7 @@ const ApproachPage = lazy(() => import('./components/Approach/ApproachPage'));
 const CapabilitiesPage = lazy(() => import('./components/Capabilities/CapabilitiesPage'));
 const BlogPage = lazy(() => import('./components/Blog/BlogPage'));
 const AboutPage = lazy(() => import('./components/About/AboutPage'));
+const NotFoundPage = lazy(() => import('./components/NotFound/NotFoundPage'));
 
 // Lazy load user-triggered modal dialogs
 const ProjectDiscovery = lazy(() => import('./components/ProjectDiscovery/ProjectDiscovery'));
@@ -26,7 +27,7 @@ import './styles/global.css';
 
 function MainApp() {
   const { isRTL, isModalOpen } = useLanguage();
-  const { isWorkPage, isApproachPage, isCapabilitiesPage, isBlogPage, isAboutPage } = useRouter();
+  const { isWorkPage, isApproachPage, isCapabilitiesPage, isBlogPage, isAboutPage, isNotFound } = useRouter();
   const [introFinished, setIntroFinished] = useState(() => typeof window === 'undefined');
 
   useEffect(() => {
@@ -50,7 +51,9 @@ function MainApp() {
       {/* Main Experience Flow */}
       <main id="main" className="main-content-flow">
         <Suspense fallback={null}>
-          {isWorkPage ? (
+          {isNotFound ? (
+            <NotFoundPage />
+          ) : isWorkPage ? (
             <WorkPage />
           ) : isApproachPage ? (
             <ApproachPage />

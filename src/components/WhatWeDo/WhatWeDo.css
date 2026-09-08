@@ -104,7 +104,7 @@
 }
 
 .wwd-list-item.is-inactive-item {
-  opacity: 0.55;
+  opacity: 0.78;
   transform: scale(0.99) translateY(0);
 }
 
@@ -304,7 +304,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #D1D5DB;
+  color: #E5E7EB;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -318,9 +318,18 @@
 }
 
 .wwd-row-counter {
-  color: #FF5500;
+  color: #FFA066;
   font-size: 0.76rem;
   font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.is-inactive-item .wwd-row-counter {
+  color: #FFB07A;
+}
+
+.is-inactive-item .wwd-list-item-set-row-label {
+  color: #F3F4F6;
 }
 
 /* Hover State: Background flips to high-contrast white with black text marquee */

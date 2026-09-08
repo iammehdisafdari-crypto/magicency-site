@@ -1,11 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
+import { useRouter } from '../../context/RouterContext';
 import { EASING } from '../motion';
 
 export default function BlogHero({ searchQuery, setSearchQuery }) {
   const { t, isRTL } = useLanguage();
+  const { blogArticleSlug } = useRouter();
   const hero = t.blog?.hero || {};
+  const HeadingTag = blogArticleSlug ? 'h2' : 'h1';
 
   return (
     <section className="blog-hero-section" aria-label="Blog Editorial Hero">
@@ -32,7 +35,7 @@ export default function BlogHero({ searchQuery, setSearchQuery }) {
 
         {/* Main Editorial Headline */}
         <div className="blog-headline-wrap">
-          <h1 className="blog-hero-title">
+          <HeadingTag className="blog-hero-title">
             <div className="hero-mask">
               <motion.span
                 className="hero-line"
@@ -53,7 +56,7 @@ export default function BlogHero({ searchQuery, setSearchQuery }) {
                 {hero.headlineLine2}
               </motion.span>
             </div>
-          </h1>
+          </HeadingTag>
 
           {/* Subline */}
           <motion.div

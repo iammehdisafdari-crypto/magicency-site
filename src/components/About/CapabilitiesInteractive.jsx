@@ -94,9 +94,12 @@ export default function CapabilitiesInteractive() {
                 <div className="preview-image-frame">
                   <img 
                     src={activeItem.previewImage} 
-                    alt={activeItem.name}
+                    alt={activeItem.alt || `${activeItem.name} — ${activeItem.proofTag}`}
                     className="preview-media-img"
+                    width="1376"
+                    height="768"
                     loading="lazy"
+                    decoding="async"
                   />
                   <div className="preview-scrim" />
                   
