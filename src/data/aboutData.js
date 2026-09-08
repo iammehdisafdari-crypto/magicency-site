@@ -1,3 +1,5 @@
+import { PROJECTS_DATA } from './projectsData';
+
 /**
  * MAGICENCY ABOUT DATA — 9-CHAPTER EDITORIAL ARCHITECTURE
  * 
@@ -178,51 +180,56 @@ export const ABOUT_DATA = {
           num: '01',
           code: 'STRATEGY',
           name: 'Business & Brand Positioning',
-          role: 'Defining where to play and how to win defensibly.',
-          deliverables: ['Positioning Moats', 'Unit Economics Alignment', 'Go-To-Market Architecture', 'Audience Psychology'],
-          proofTag: 'SYNAPSE AI // Category Reframing',
-          previewImage: '/project-1.jpg',
-          alt: 'Business & Brand Positioning Architecture — Synapse AI Category Reframing Case Study'
+          role: 'Defining high-conviction market positioning and transforming credibility into an acquisition system.',
+          deliverables: PROJECTS_DATA[4].services.en,
+          proofTag: 'ZARIN REAL ESTATE // Investment Positioning',
+          previewImage: PROJECTS_DATA[4].media.primary,
+          alt: 'Zarin Real Estate — High-Intent Dubai Investment Positioning Case Study',
+          slug: PROJECTS_DATA[4].slug
         },
         {
           num: '02',
           code: 'CREATIVE',
           name: 'Editorial Art Direction & Design',
-          role: 'Crafting signature brand worlds that command respect and convert.',
-          deliverables: ['Design Systems', 'Editorial Campaigns', 'Motion Language', 'High-Impact Brand Identities'],
-          proofTag: 'LUMINA LUXURY // Editorial D2C Flagship',
-          previewImage: '/assets/work/lumina_primary.jpg',
-          alt: 'Editorial Art Direction & Design — Lumina Luxury Editorial D2C Flagship'
+          role: 'Crafting signature brand worlds and heritage digital platforms that command respect and convert.',
+          deliverables: PROJECTS_DATA[3].services.en,
+          proofTag: 'WINE AMPHORAE // Luxury Digital Flagship',
+          previewImage: PROJECTS_DATA[3].media.primary,
+          alt: 'Wine Amphorae — Luxury Italian Terracotta Digital Flagship Case Study',
+          slug: PROJECTS_DATA[3].slug
         },
         {
           num: '03',
           code: 'PERFORMANCE',
-          name: 'High-Velocity Acquisition',
-          role: 'Engineered media investment focused strictly on customer lifetime value.',
-          deliverables: ['High-Intent CRO Funnels', 'Algorithmic Media Buying', 'Inbound Content Engines', 'Friction Elimination'],
-          proofTag: 'VELOX FINANCIAL // -70% Friction Flow',
-          previewImage: '/assets/work/velox_primary.jpg',
-          alt: 'High-Velocity Acquisition & High-Intent CRO — Velox Financial Trading Platform'
+          name: 'High-Velocity Acquisition & ROAS',
+          role: 'Engineered algorithmic media buying focused strictly on sustainable unit economics and profitable scale.',
+          deliverables: PROJECTS_DATA[1].services.en,
+          proofTag: 'ATRASH STORE // Audited ROAS 11 Engine',
+          previewImage: PROJECTS_DATA[1].media.primary,
+          alt: 'Atrash Store — Google Ads Performance Max ROAS 11 Case Study',
+          slug: PROJECTS_DATA[1].slug
         },
         {
           num: '04',
           code: 'TECHNOLOGY',
-          name: 'Flagship Digital Platforms',
-          role: 'Zero-compromise digital engineering built for speed, feel, and conversion.',
-          deliverables: ['Headless Web Platforms', 'Interactive Product Demos', 'Tactile Motion Systems', 'Full Accessibility Parity'],
-          proofTag: 'VAKESO // Spatial Digital Monograph',
-          previewImage: '/project-2.jpg',
-          alt: 'Flagship Digital Platforms & Engineering — Vakeso Architecture Spatial Monograph'
+          name: 'Inbound Search Infrastructure',
+          role: 'High-throughput intent capture engineering built for speed, call tracking, and multi-city scale.',
+          deliverables: PROJECTS_DATA[2].services.en,
+          proofTag: 'TAMIR ONLINE // 1.28M Impressions & 134K Clicks',
+          previewImage: PROJECTS_DATA[2].media.primary,
+          alt: 'Tamir Online — Search Ads Lead Gen & 1.28M Impressions Case Study',
+          slug: PROJECTS_DATA[2].slug
         },
         {
           num: '05',
           code: 'DATA & FEEDBACK',
-          name: 'Telemetry & Attribution Engines',
-          role: 'Server-side tracking infrastructure that turns user actions into operational certainty.',
-          deliverables: ['First-Party Event Streaming', 'Multi-Touch Attribution', 'Cohort Retention Modeling', 'Behavioral Funnel Telemetry'],
-          proofTag: 'NEXUS HEALTH // Server-Side Retention Loops',
-          previewImage: '/assets/work/nexus_primary.jpg',
-          alt: 'Telemetry & Attribution Engines — Nexus Health Retention Telemetry'
+          name: 'Telemetry & Organic Growth Engine',
+          role: 'Server-side tracking infrastructure and programmatic index architecture that drives compounding traffic.',
+          deliverables: PROJECTS_DATA[0].services.en,
+          proofTag: 'GOOGLE SEARCH CONSOLE // 84.1K Verified Clicks',
+          previewImage: PROJECTS_DATA[0].media.primary,
+          alt: 'Enterprise Search & Intent Engine — Programmatic SEO & 84.1K Click Scale Case Study',
+          slug: PROJECTS_DATA[0].slug
         }
       ]
     },
@@ -569,51 +576,56 @@ export const ABOUT_DATA = {
           num: '۰۱',
           code: 'استراتژی',
           name: 'استراتژی کسب‌وکار و جایگاه‌یابی برند',
-          role: 'تعیین قلمرو رقابتی و چگونگی پیروزی پایدار در بازار.',
-          deliverables: ['خندق‌های جایگاه‌یابی', 'هماهنگی اقتصاد واحد', 'معماری ورود به بازار', 'روانشناسی تصمیم مخاطب'],
-          proofTag: 'سیناپس هوش مصنوعی // بازتعریف دسته‌بندی',
-          previewImage: '/project-1.jpg',
-          alt: 'معماری جایگاه‌یابی برند و کسب‌وکار — کیس‌استادی بازتعریف هوش مصنوعی سیناپس'
+          role: 'تعیین قلمرو رقابتی برند و تبدیل سال‌ها تجربه و اعتبار به سیستم منسجم جذب سرمایه‌گذار.',
+          deliverables: PROJECTS_DATA[4].services.fa,
+          proofTag: 'املاک زرین دبی // جایگاه‌یابی استراتژیک سرمایه‌گذاری',
+          previewImage: PROJECTS_DATA[4].media.primary,
+          alt: 'املاک زرین دبی — جایگاه‌یابی استراتژیک سرمایه‌گذاری و سیستم جذب لید ملکی',
+          slug: PROJECTS_DATA[4].slug
         },
         {
           num: '۰۲',
           code: 'خلاقیت',
           name: 'آرت دایرکشن و سیستم‌های دیزاین',
-          role: 'خلق جهان‌های بصری اصیل که توجه بازار را معطوف کرده و اعتماد می‌سازند.',
-          deliverables: ['دیزاین سیستم‌های جامع', 'کمپین‌های ادیتوریال', 'زبان موشن و انیمیشن', 'هویت‌های بصری ماندگار'],
-          proofTag: 'برند لومینا // فروشگاه پرچمدار ادیتوریال',
-          previewImage: '/assets/work/lumina_primary.jpg',
-          alt: 'مدیریت هنری و طراحی ادیتوریال — فروشگاه پرچمدار لومینا'
+          role: 'خلق جهان‌های بصری اصیل و پلتفرم‌های پرچمدار دیجیتال که اعتماد عمیق و پرستیژ ماندگار می‌سازند.',
+          deliverables: PROJECTS_DATA[3].services.fa,
+          proofTag: 'واین آمفورا // پلتفرم پرچمدار لوکس',
+          previewImage: PROJECTS_DATA[3].media.primary,
+          alt: 'واین آمفورا — طراحی وب‌سایت لوکس، تجربه کاربری برندینگ و پلتفرم دیجیتال آمفورا',
+          slug: PROJECTS_DATA[3].slug
         },
         {
           num: '۰۳',
           code: 'پرفورمنس',
-          name: 'جذب شتابان و بهینه‌سازی تبدیل (CRO)',
-          role: 'مدیریت الگوریتمی بودجه تبلیغاتی با تمرکز ویژه بر بازگشت سرمایه و ارزش مشتری.',
-          deliverables: ['قیف‌های تبدیل با قصد خرید بالا', 'تبلیغات داده‌محور', 'موتورهای ارگانیک ورودی', 'حذف اصطکاک مسیر خرید'],
-          proofTag: 'فین‌تک ولوکس // کاهش ۷۰٪ اصطکاک',
-          previewImage: '/assets/work/velox_primary.jpg',
-          alt: 'سیستم جذب و بهینه‌سازی نرخ تبدیل — پلتفرم معاملاتی فین‌تک ولوکس'
+          name: 'جذب شتابان و بهینه‌سازی نرخ تبدیل (CRO)',
+          role: 'مدیریت الگوریتمی بودجه تبلیغاتی با تمرکز ویژه بر بازگشت سرمایه، بهینه‌سازی نرخ تبدیل و سودآوری.',
+          deliverables: PROJECTS_DATA[1].services.fa,
+          proofTag: 'عطرش استور // موتور تبلیغات با ROAS 11',
+          previewImage: PROJECTS_DATA[1].media.primary,
+          alt: 'عطرش استور — موتور تبلیغات Performance Max با ROAS 11 و جذب مقیاس‌پذیر',
+          slug: PROJECTS_DATA[1].slug
         },
         {
           num: '۰۴',
           code: 'فناوری',
-          name: 'پلتفرم‌های دیجیتال پرچمدار',
-          role: 'مهندسی بدون سازش وب برای سرعت، حس کاربری روان و حداکثر تبدیل.',
-          deliverables: ['پلتفرم‌های وب Headless', 'دموهای تعاملی محصول', 'میکرو-انیمیشن‌های شناور', 'دسترسی‌پذیری کامل استانداردهای مدرن'],
-          proofTag: 'استودیو واکیسو // مونوگراف فضایی وب',
-          previewImage: '/project-2.jpg',
-          alt: 'پلتفرم‌های دیجیتال پرچمدار و مهندسی نرم‌افزار — مونوگراف فضایی واکیسو'
+          name: 'زیرساخت جذب تقاضا و مقیاس‌پذیری ورودی',
+          role: 'مهندسی فنی جذب ورودی با حجم بالا، کال ترکینگ بی‌درنگ و پوشش خدمات در مقیاس چند شهر.',
+          deliverables: PROJECTS_DATA[2].services.fa,
+          proofTag: 'تعمیر آنلاین // ۱.۲۸ میلیون ایمپرشن و ۱۳۴ هزار کلیک',
+          previewImage: PROJECTS_DATA[2].media.primary,
+          alt: 'تعمیر آنلاین — موتور لید جنریشن گوگل ادز با ۱.۲۸ میلیون ایمپرشن و ۱۳۴ هزار کلیک',
+          slug: PROJECTS_DATA[2].slug
         },
         {
           num: '۰۵',
           code: 'داده و تله‌متری',
-          name: 'موتورهای رهگیری و اتریبیوشن',
-          role: 'زیرساخت ثبت داده‌های سمت سرور برای تبدیل رفتار کاربران به قطعیت عملیاتی.',
-          deliverables: ['جریان اختصاصی رویدادهای سرور', 'مدل اتریبیوشن چندنقطه‌ای', 'مدل‌سازی وفاداری کوهورت‌ها', 'تله‌متری رفتاری قیف'],
-          proofTag: 'نکسوس سلامت // تله‌متری و حلقه‌های مراقبت',
-          previewImage: '/assets/work/nexus_primary.jpg',
-          alt: 'موتورهای تله‌متری و رهگیری داده سمت سرور — نکسوس سلامت'
+          name: 'موتورهای رهگیری، اتریبیوشن و سئو سازمانی',
+          role: 'زیرساخت ثبت داده‌های سمت سرور و معماری فنی سئو ساخت‌یافته برای ایجاد رشد ارگانیک مرکب و مدافع‌پذیر.',
+          deliverables: PROJECTS_DATA[0].services.fa,
+          proofTag: 'سرچ کنسول گوگل // ۸۴.۱ هزار کلیک ارگانیک',
+          previewImage: PROJECTS_DATA[0].media.primary,
+          alt: 'موتور رشد ارگانیک و سئو سازمانی — معماری سئو تکنیکال و مهندسی رشد با ۸۴.۱ هزار کلیک',
+          slug: PROJECTS_DATA[0].slug
         }
       ]
     },

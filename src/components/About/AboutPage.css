@@ -1374,6 +1374,42 @@
   color: #FF8844;
 }
 
+.mobile-proof-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: #FF8844;
+  font-family: monospace;
+  font-size: 0.72rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-align: left;
+  transition: color 0.2s ease;
+}
+
+.is-rtl .mobile-proof-btn {
+  text-align: right;
+}
+
+.mobile-proof-btn:hover {
+  color: #FF5500;
+}
+
+.mobile-proof-arrow {
+  transition: transform 0.2s ease;
+}
+
+.mobile-proof-btn:hover .mobile-proof-arrow {
+  transform: translate(2px, -2px);
+}
+
+.is-rtl .mobile-proof-btn:hover .mobile-proof-arrow {
+  transform: translate(-2px, -2px);
+}
+
 /* =========================================================
    CHAPTER 05: OUR APPROACH — WORKFLOW PATH
    ========================================================= */

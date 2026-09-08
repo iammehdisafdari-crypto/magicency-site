@@ -23,8 +23,8 @@ export default function SelectedWork() {
     projects: [
       { id: 'branding', num: '01', category: 'Brand', categoryItalic: 'ing', client: 'atrash store', clientTag: 'CLIENT', image: '/branding-client.png', alt: 'atrash store Branding', color: '#E3C280' },
       { id: 'web', num: '02', category: 'Web', categoryItalic: '', client: 'GR8 Real Estate', clientTag: 'CLIENT', image: '/web-client.png', alt: 'GR8 Real Estate Web', color: '#C68B59' },
-      { id: 'mobile', num: '03', category: 'Mob', categoryItalic: 'ile', client: 'Sona', clientTag: 'CLIENT', image: '/project-3.jpg', alt: 'Sona Mobile', color: '#A855F7' },
-      { id: 'motion', num: '04', category: 'Mo', categoryItalic: 'tion', client: 'Vault Bank', clientTag: 'CLIENT', image: '/project-4.jpg', alt: 'Vault Bank Motion', color: '#EAB308' }
+      { id: 'mobile', num: '03', category: 'Strat', categoryItalic: 'egy', client: 'Zarin Real Estate', clientTag: 'CLIENT', image: '/zarin-strategy.png', alt: 'Zarin Real Estate Strategy', color: '#C5A059' },
+      { id: 'motion', num: '04', category: 'Performance', categoryItalic: ' Achievements', client: 'Klasino', clientTag: 'CLIENT', image: '/performance-achievements.png', alt: 'Klasino Performance Achievements', color: '#0066FF' }
     ]
   };
 
@@ -143,18 +143,33 @@ export default function SelectedWork() {
     }
     if (proj.id === 'mobile') {
       return (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.5">
-          <circle cx="12" cy="12" r="9" />
-          <circle cx="12" cy="12" r="5" />
-          <circle cx="12" cy="12" r="1.5" fill="#FFFFFF" />
-        </svg>
+        <picture>
+          <source srcSet="/zarin-client.webp" type="image/webp" />
+          <img
+            src="/zarin-client.png"
+            alt={proj.client || 'Zarin Real Estate'}
+            className="vm-client-logo-img"
+            width="32"
+            height="32"
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
       );
     }
     return (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.5">
-        <path d="M5 14L12 7L19 14" />
-        <path d="M5 19L12 12L19 19" />
-      </svg>
+      <picture>
+        <source srcSet="/klasino-client.webp" type="image/webp" />
+        <img
+          src="/klasino-client.png"
+          alt={proj.client || 'Klasino'}
+          className="vm-client-logo-img"
+          width="32"
+          height="32"
+          loading="lazy"
+          decoding="async"
+        />
+      </picture>
     );
   };
 
@@ -246,8 +261,8 @@ export default function SelectedWork() {
                 className="vm-showcase-client-badge"
               >
                 <div 
-                  className={`vm-client-badge-icon ${(activeProject.id === 'branding' || activeProject.id === 'web') ? 'is-logo' : ''}`}
-                  style={{ background: (activeProject.id === 'branding' || activeProject.id === 'web') ? '#FFFFFF' : (activeProject.color || '#FF5500') }}
+                  className={`vm-client-badge-icon is-logo ${activeProject.id === 'mobile' ? 'is-dark' : ''}`}
+                  style={{ background: activeProject.id === 'mobile' ? '#1D1D1D' : '#FFFFFF' }}
                 >
                   {renderClientIcon(activeProject)}
                 </div>
@@ -305,8 +320,8 @@ export default function SelectedWork() {
                   className="vm-showcase-client-badge"
                 >
                   <div 
-                    className={`vm-client-badge-icon ${(activeProject.id === 'branding' || activeProject.id === 'web') ? 'is-logo' : ''}`}
-                    style={{ background: (activeProject.id === 'branding' || activeProject.id === 'web') ? '#FFFFFF' : (activeProject.color || '#FF5500') }}
+                    className={`vm-client-badge-icon is-logo ${activeProject.id === 'mobile' ? 'is-dark' : ''}`}
+                    style={{ background: activeProject.id === 'mobile' ? '#1D1D1D' : '#FFFFFF' }}
                   >
                     {renderClientIcon(activeProject)}
                   </div>

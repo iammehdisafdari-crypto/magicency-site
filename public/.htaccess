@@ -71,6 +71,10 @@
     RewriteRule ^\.env - [R=404,L,NC]
     RewriteRule ^\.git - [R=404,L,NC]
 
+    # 301 Permanent Redirect www to non-www
+    RewriteCond %{HTTP_HOST} ^www\.magicency\.ir$ [NC]
+    RewriteRule ^(.*)$ https://magicency.ir/$1 [L,R=301]
+
     # Redirect non-HTTPS traffic to HTTPS with 301 permanent redirect
     RewriteCond %{HTTPS} off
     RewriteCond %{HTTP:X-Forwarded-Proto} !https

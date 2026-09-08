@@ -1,6 +1,7 @@
 /**
  * MAGICENCY® EDITORIAL PUBLICATION DATA ARCHITECTURE
- * Curated bilingual thought-leadership articles, categories, and editorial principles.
+ * Curated bilingual thought-leadership articles, categories, editorial principles,
+ * and contextual internal linking references for keyword architecture authority.
  */
 
 export const BLOG_CATEGORIES = [
@@ -66,10 +67,10 @@ export const BLOG_ARTICLES = [
     authorEn: 'Magicency Editorial',
     authorFa: 'تحریریه مجیکانسی',
     coverImage: '/journal-1.jpg',
-    titleEn: "Why more marketing doesn't always create more growth.",
-    titleFa: 'چرا بازاریابی بیشتر همیشه رشد بیشتر خلق نمی‌کند.',
-    excerptEn: 'When companies hit a growth ceiling, the default reaction is to increase spend, launch more ads, and publish more content. But scaling a broken system only accelerates exhaustion.',
-    excerptFa: 'هنگامی که کسب‌وکارها به سقف رشد برخورد می‌کنند، واکنش غریزی افزایش بودجه و لانچ تبلیغات بیشتر است؛ اما مقیاس‌گذاری یک سیستم معیوب، صرفاً سرعت هدررفت سرمایه را چندبرابر می‌کند.',
+    titleEn: 'More Marketing vs More Growth: The Diminishing Returns of Spend',
+    titleFa: 'چرا افزایش بازاریابی رشد نمی‌آورد: تحلیل بازده نزولی بودجه',
+    excerptEn: 'When companies hit a growth ceiling, the default reaction is to increase spend, launch more ads, and publish more content. But scaling a broken conversion architecture only accelerates capital exhaustion.',
+    excerptFa: 'هنگامی که کسب‌وکارها به سقف رشد برخورد می‌کنند، واکنش غریزی افزایش بودجه و لانچ تبلیغات بیشتر است؛ اما مقیاس‌گذاری یک معماری تبدیل نشتی‌دار، صرفاً سرعت هدررفت سرمایه را چندبرابر می‌کند.',
     pullQuoteEn: 'Scaling a broken conversion architecture does not produce scale. It produces expensive chaos.',
     pullQuoteFa: 'مقیاس‌گذاری یک معماری تبدیل نشتی‌دار، رشد خلق نمی‌کند؛ بلکه هرج‌ومرجی گران‌قیمت می‌آفریند.',
     contentEn: [
@@ -109,6 +110,29 @@ export const BLOG_ARTICLES = [
       'حجم تبلیغات بدون جایگاه‌یابی شفاف، آلودگی صوتی تولید می‌کند نه قدرت تجاری.',
       'افزایش ۱۰ درصدی در نرخ تبدیل، سریع‌تر از افزایش ۵۰ درصدی بودجه تبلیغات رشد ایجاد می‌کند.',
       'سیستم‌های مداربسته رشد، با گذشت زمان خندق رقابتی کسب‌وکار را عمیق‌تر می‌سازند.'
+    ],
+    strategicReferences: [
+      {
+        url: '/approach',
+        labelEn: 'Growth Operating System Methodology',
+        labelFa: 'متدولوژی سیستم‌عامل رشد',
+        contextEn: 'How diagnostic frameworks uncover root conversion bottlenecks',
+        contextFa: 'چگونه چارچوب‌های عارضه‌یابی ریشه‌های نشتی تبدیل را کشف می‌کنند'
+      },
+      {
+        url: '/capabilities',
+        labelEn: 'Integrated Marketing Capabilities',
+        labelFa: 'توانمندی‌های یکپارچه بازاریابی',
+        contextEn: 'Explore our unified execution disciplines across creative and data',
+        contextFa: 'آشنایی با دیسیپلین‌های اجرایی یکپارچه در خلاقیت و داده'
+      },
+      {
+        url: '/',
+        labelEn: 'Growth Marketing Agency Model',
+        labelFa: 'مدل آژانس بازاریابی رشد',
+        contextEn: 'Partnering on connected growth systems that compound over time',
+        contextFa: 'همکاری بر پایه سیستم‌های متصل رشد با ارزش تصاعدی'
+      }
     ]
   },
   {
@@ -130,16 +154,16 @@ export const BLOG_ARTICLES = [
     authorEn: 'Magicency Editorial',
     authorFa: 'تحریریه مجیکانسی',
     coverImage: '/journal-2.jpg',
-    titleEn: "More content isn't fixing your marketing problem.",
-    titleFa: 'تولید محتوای بیشتر مشکل بازاریابی شما را حل نمی‌کند.',
-    excerptEn: 'When organic engagement stalls, marketing teams default to publishing more frequently. But content without strategic point of view is merely digital clutter.',
+    titleEn: 'Content Strategy vs Brand Narrative: Escaping the Volume Trap',
+    titleFa: 'استراتژی محتوا در برابر روایت برند: رهایی از تله افزایش حجم',
+    excerptEn: 'When organic engagement stalls, marketing teams default to publishing more frequently. But content without strategic point of view and category conviction is merely digital clutter.',
     excerptFa: 'وقتی نرخ تعامل ارگانیک افت می‌کند، تیم‌ها انتشار محتوا را فشرده‌تر می‌کنند. اما محتوای بدون زاویه دید و نگرش اختصاصی، تنها انباشت سر و صدا در فضای وب است.',
     pullQuoteEn: 'If your perspective is indistinguishable from your category, no publishing cadence will generate authority.',
     pullQuoteFa: 'اگر زاویه دید شما از متوسط بازار غیرقابل تشخیص باشد، هیچ تکراری نمی‌تواند مرجعیت بسازد.',
     contentEn: [
       {
         heading: 'The Content Treadmill Trap',
-        text: 'Brands exhaust creative teams producing daily posts that generate transient vanity impressions but zero commercial conviction. The marketplace does not suffer from a deficit of content; it suffers from an acute deficit of original perspective.'
+        text: 'Brands exhaust creative teams producing daily posts that generate transient vanity impressions but zero commercial conviction. The marketplace does not suffer from a deficit of content; it suffers from an acute deficit of original perspective and distinct brand narrative.'
       },
       {
         heading: 'Conviction Over Cadence',
@@ -149,7 +173,7 @@ export const BLOG_ARTICLES = [
     contentFa: [
       {
         heading: 'تله تردمیل تولید محتوا',
-        text: 'برندها تیم‌های خلاقه خود را با تولید روزانه محتواهایی که لایک‌های زودگذر دارند اما منجر به اعتماد تجاری نمی‌شوند فرسوده می‌کنند. بازار از کمبود محتوا رنج نمی‌برد؛ بلکه دچار قحطی دیدگاه‌های دست‌اول و اصیل است.'
+        text: 'برندها تیم‌های خلاقه خود را با تولید روزانه محتواهایی که لایک‌های زودگذر دارند اما منجر به اعتماد تجاری نمی‌شوند فرسوده می‌کنند. بازار از کمبود محتوا رنج نمی‌برد؛ بلکه دچار قحطی دیدگاه‌های دست‌اول و روایت اصیل برند است.'
       },
       {
         heading: 'اقتدار به جای تکرار مکانیکی',
@@ -161,8 +185,24 @@ export const BLOG_ARTICLES = [
       'Authority stems from what you dare to question, not what you summarize.'
     ],
     keyTakeawaysFa: [
-      'به جای خوراک دادن به الگوریتم، موضع خود را در صنعت مشخص کنید.',
+      'به جای خوراک دادن به الگوریتم، موضع و روایت خود را در صنعت مشخص کنید.',
       'مرجعیت برند از جرات زیر سوال بردن اصول سنتی شکل می‌گیرد.'
+    ],
+    strategicReferences: [
+      {
+        url: '/capabilities',
+        labelEn: 'Brand Conviction & Creative Direction',
+        labelFa: 'ایمان به برند و دایرکشن خلاقه',
+        contextEn: 'Crafting signature brand worlds that command market authority',
+        contextFa: 'خلق جهان‌های ادراکی اختصاصی برند که اقتدار تجاری می‌آورند'
+      },
+      {
+        url: '/work',
+        labelEn: 'Brand Transformation Case Studies',
+        labelFa: 'پرونده‌های تحول برند و نتایج تجاری',
+        contextEn: 'How category reframing unlocked commercial momentum',
+        contextFa: 'چگونه بازتعریف جایگاه برند شتاب تجاری ایجاد کرد'
+      }
     ]
   },
   {
@@ -184,8 +224,8 @@ export const BLOG_ARTICLES = [
     authorEn: 'Magicency Editorial',
     authorFa: 'تحریریه مجیکانسی',
     coverImage: '/journal-3.jpg',
-    titleEn: "Your website may not have a design problem — it has a conviction problem.",
-    titleFa: 'وبسایت شما مشکل طراحی ندارد؛ مشکل فقدان ایمان و شفافیت دارد.',
+    titleEn: 'Website Positioning vs Web Design: Why Redesigns Fail to Convert',
+    titleFa: 'مشکل جایگاه‌یابی در برابر طراحی وب: چرا وبسایت‌های زیبا نمی‌فروشند',
     excerptEn: 'Many redesigns obsess over trendy animations and aesthetic gloss while failing to articulate why the business deserves to win. Pretty interfaces cannot rescue timid positioning.',
     excerptFa: 'بسیاری از بازطراحی‌ها درگیر ترندهای ظاهری می‌شوند اما در انتقال اینکه چرا کسب‌وکار شایسته انتخاب است شکست می‌خورند. زیبایی ظاهری نمی‌تواند ضعف جایگاه‌یابی را پنهان کند.',
     pullQuoteEn: 'Design is commercial proof architecture. If the logic is hollow, visual polish only amplifies the void.',
@@ -193,7 +233,7 @@ export const BLOG_ARTICLES = [
     contentEn: [
       {
         heading: 'The Redesign Mirage',
-        text: 'A business experiences slumping sales and commissions a website redesign. The agency delivers a modern layout with subtle micro-interactions. Three months post-launch, conversion rates remain flat. Why? Because the core narrative remained unchanged.'
+        text: 'A business experiences slumping sales and commissions a website redesign. The agency delivers a modern layout with subtle micro-interactions. Three months post-launch, conversion rates remain flat. Why? Because the core narrative and positioning remained unchanged.'
       },
       {
         heading: 'Architecture of Commercial Proof',
@@ -217,6 +257,22 @@ export const BLOG_ARTICLES = [
     keyTakeawaysFa: [
       'هرگز یک پلتفرم دیجیتال را بدون بازنگری در تز تجاری آن بازطراحی نکنید.',
       'تجربه کاربری روان باید در خدمت وضوح بی‌چون‌وچرای ارزش برند باشد.'
+    ],
+    strategicReferences: [
+      {
+        url: '/capabilities',
+        labelEn: 'Digital Platforms & Conversion Architecture',
+        labelFa: 'معماری پلتفرم‌های دیجیتال و نرخ تبدیل',
+        contextEn: 'Building digital interfaces as instruments of commercial proof',
+        contextFa: 'ساخت رابط‌های دیجیتال به‌عنوان ابزارهای اثبات تجاری'
+      },
+      {
+        url: '/work',
+        labelEn: 'Flagship Digital Platform Case Studies',
+        labelFa: 'مطالعات موردی پلتفرم‌های شاخص دیجیتال',
+        contextEn: 'Measurable reductions in customer drop-off and friction',
+        contextFa: 'کاهش مستند اصطکاک و ریزش مشتری در پلتفرم‌های لایو'
+      }
     ]
   },
   {
@@ -238,16 +294,16 @@ export const BLOG_ARTICLES = [
     authorEn: 'Magicency Editorial',
     authorFa: 'تحریریه مجیکانسی',
     coverImage: '/project-1.jpg',
-    titleEn: 'Why campaigns keep resetting your growth to zero.',
-    titleFa: 'چرا کمپین‌ها رشد شما را پس از پایان بودجه به نقطه صفر بازمی‌گردانند.',
-    excerptEn: 'Campaign-dependent businesses live on an adrenaline drip. When media budgets pause, acquisition evaporates. Here is how to engineer permanent retention flywheels.',
-    excerptFa: 'کسب‌وکارهای وابسته به کمپین روی سرم آدرنالین زندگی می‌کنند. با توقف بودجه تبلیغات، جذب مشتری محو می‌شود. راهکار، ساخت فلای‌ویل‌های بازگشتی است.',
+    titleEn: 'Campaign Dependency & Retention: How to Stop Resetting Growth to Zero',
+    titleFa: 'وابستگی به کمپین و چرخه حفظ مشتری: ساخت سیستم‌های رشد ماندگار',
+    excerptEn: 'Campaign-dependent businesses live on an adrenaline drip. When media budgets pause, acquisition evaporates. Here is how to engineer permanent retention flywheels and durable growth.',
+    excerptFa: 'کسب‌وکارهای وابسته به کمپین روی سرم آدرنالین زندگی می‌کنند. با توقف بودجه تبلیغات، جذب مشتری محو می‌شود. راهکار، ساخت فلای‌ویل‌های بازگشتی و حفظ مشتری است.',
     pullQuoteEn: 'Campaigns are tactical spikes. Systems build compounding momentum that outlives the budget.',
     pullQuoteFa: 'کمپین‌ها قله‌های مقطعی‌اند؛ اما سیستم‌ها شتابی تصاعدی خلق می‌کنند که فراتر از شارژ بودجه زنده می‌ماند.',
     contentEn: [
       {
         heading: 'The Adrenaline Drip Trap',
-        text: 'Traditional agency models encourage continuous campaign launches because it bills billable hours. But for the business, it creates extreme financial volatility. Once the paid media switch is flipped off, traffic drops to zero.'
+        text: 'Traditional agency models encourage continuous campaign launches because it bills billable hours. But for the business, it creates extreme financial volatility. Once the paid media switch is flipped off, traffic and revenue drop to zero.'
       },
       {
         heading: 'Building Compounding Growth Engines',
@@ -271,6 +327,22 @@ export const BLOG_ARTICLES = [
     keyTakeawaysFa: [
       'بودجه را از هدررفت صرف در تبلیغات به سمت ساخت دارایی‌های دیجیتال ماندگار سوق دهید.',
       'پایداری رشد کسب‌وکار خود را با وضعیت آن پس از توقف ۳۰ روزه تبلیغات بسنجید.'
+    ],
+    strategicReferences: [
+      {
+        url: '/approach',
+        labelEn: 'Compounding Growth Operating System',
+        labelFa: 'سیستم‌عامل رشد تصاعدی و مرکب',
+        contextEn: 'Shifting from short-lived spikes to permanent inbound flywheels',
+        contextFa: 'گذار از جهش‌های مقطعی به سمت چرخه‌های پایدار جذب ارگانیک'
+      },
+      {
+        url: '/work',
+        labelEn: 'Client Retention & CAC Reduction Results',
+        labelFa: 'شاخص‌های حفظ مشتری و کاهش هزینه جذب',
+        contextEn: 'Empirical data on retention-driven lifetime value scaling',
+        contextFa: 'داده‌های تجربی در افزایش ارزش طول عمر مشتری با تمرکز بر ریتنشن'
+      }
     ]
   },
   {
@@ -292,10 +364,10 @@ export const BLOG_ARTICLES = [
     authorEn: 'Magicency Editorial',
     authorFa: 'تحریریه مجیکانسی',
     coverImage: '/project-2.jpg',
-    titleEn: "AI can produce more creative. That doesn't mean you need more creative.",
-    titleFa: 'هوش مصنوعی می‌تواند خروجی نامحدود بسازد؛ اما شما به محتوای بیشتر نیاز ندارید.',
-    excerptEn: 'Generative tools have reduced the marginal cost of content creation to near zero. But when everyone can generate thousands of assets instantly, discernment becomes the only moat.',
-    excerptFa: 'ابزارهای هوش مصنوعی هزینه تولید محتوا را به صفر رسانده‌اند. اما وقتی همه می‌توانند هزاران طرح در ثانیه بسازند، قدرت تشخیص و سلیقه استراتژیک تنها خندق رقابتی باقی‌مانده است.',
+    titleEn: 'AI Creative Volume vs Creative Effectiveness: Why Taste Is The Moat',
+    titleFa: 'محدودیت خلاقیت هوش مصنوعی در برابر اثربخشی: چرا سلیقه تنها خندق است',
+    excerptEn: 'Generative tools have reduced the marginal cost of content creation to near zero. But when everyone can generate thousands of assets instantly, discernment and creative effectiveness become the only defensible moats.',
+    excerptFa: 'ابزارهای هوش مصنوعی هزینه تولید محتوا را به صفر رسانده‌اند. اما وقتی همه می‌توانند هزاران طرح در ثانیه بسازند، قدرت تشخیص، سلیقه و اثربخشی خلاقیت تنها خندق رقابتی باقی‌مانده است.',
     pullQuoteEn: 'When creation becomes frictionless, editing and taste become the ultimate competitive advantage.',
     pullQuoteFa: 'وقتی تولید بدون اصطکاک و بی‌نهایت شد، قدرت گزینش، حذف و سلیقه به بالاترین مزیت رقابتی تبدیل می‌شود.',
     contentEn: [
@@ -325,6 +397,22 @@ export const BLOG_ARTICLES = [
     keyTakeawaysFa: [
       'از هوش مصنوعی برای سرعت تحلیل داده و زیرساخت استفاده کنید، نه برای پر کردن اینترنت از مطالب بی‌هویت.',
       'سلیقه متمایز، انضباط و گزینش استراتژیک باارزش‌تر از خروجی‌های نامحدود هستند.'
+    ],
+    strategicReferences: [
+      {
+        url: '/capabilities',
+        labelEn: 'High-Performance Creative Systems',
+        labelFa: 'سیستم‌های خلاقیت با پرفورمنس بالا',
+        contextEn: 'Combining computational automation with uncompromising human craft',
+        contextFa: 'ترکیب اتوماسیون محاسباتی با ظرافت و سلیقه انسانی'
+      },
+      {
+        url: '/',
+        labelEn: 'Connected Growth Systems Architecture',
+        labelFa: 'معماری سیستم‌های متصل رشد',
+        contextEn: 'Uniting creative velocity with deterministic performance loops',
+        contextFa: 'همگام‌سازی سرعت خلاقانه با مدارهای قطعی بازخورد پرفورمنس'
+      }
     ]
   },
   {
@@ -346,8 +434,8 @@ export const BLOG_ARTICLES = [
     authorEn: 'Magicency Editorial',
     authorFa: 'تحریریه مجیکانسی',
     coverImage: '/project-3.jpg',
-    titleEn: 'SEO traffic is not the same thing as commercial growth.',
-    titleFa: 'ترافیک سئو با رشد تجاری و درآمد سودآور یکسان نیست.',
+    titleEn: 'SEO Traffic vs Commercial Growth: The Commercial Intent Discipline',
+    titleFa: 'ترافیک ارگانیک در برابر رشد تجاری: دیسیپلین تمرکز بر تمایل خرید',
     excerptEn: 'Rankings and impressions look great on monthly agency reports. But if organic visitors never convert into high-margin clients, search becomes an expensive vanity project.',
     excerptFa: 'رتبه‌ها و ورودی‌های سئو در گزارش‌های ماهیانه چشم‌نوازند؛ اما اگر بازدیدکنندگان ارگانیک تبدیل به مشتریان سودآور نشوند، سئو صرفاً پروژه‌ای تجملی و پرهزینه است.',
     pullQuoteEn: 'Ranking for keywords is a technical exercise. Converting intent into pipeline is an economic discipline.',
@@ -379,6 +467,22 @@ export const BLOG_ARTICLES = [
     keyTakeawaysFa: [
       'گزارش‌دهی ایمپرشن را متوقف کنید؛ میزان سود و لیدهای ایجادشده از سرچ را بسنجید.',
       'محتواهای ارگانیک را پیرامون تصمیم‌گیری‌های خریدار طراحی کنید نه تعاریف ابتدایی.'
+    ],
+    strategicReferences: [
+      {
+        url: '/approach',
+        labelEn: 'Closed-Loop Telemetry & Attribution Methodology',
+        labelFa: 'متدولوژی تله‌متری و انتساب مداربسته',
+        contextEn: 'Tracking pipeline velocity instead of vanity session counts',
+        contextFa: 'رهگیری سرعت خط لوله فروش به‌جای شمردن بازدیدهای بی‌ارزش'
+      },
+      {
+        url: '/work',
+        labelEn: 'Enterprise B2B Growth Case Studies',
+        labelFa: 'مطالعات موردی رشد سازمانی B2B',
+        contextEn: 'High-intent acquisition converting traffic into enterprise EBITDA',
+        contextFa: 'جذب هدفمند با تبدیل ترافیک جستجو به درآمد و سود عملیاتی'
+      }
     ]
   }
 ];

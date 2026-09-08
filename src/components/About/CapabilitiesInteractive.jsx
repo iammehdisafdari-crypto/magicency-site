@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
+import { useRouter } from '../../context/RouterContext';
 import { ABOUT_DATA } from '../../data/aboutData';
 import { ArrowUpRight, ChevronDown } from 'lucide-react';
 
 export default function CapabilitiesInteractive() {
   const { lang, isRTL } = useLanguage();
+  const { navigate } = useRouter();
   const data = ABOUT_DATA[lang]?.capabilities || ABOUT_DATA.en.capabilities;
   const items = data.items || [];
   
@@ -51,13 +53,19 @@ export default function CapabilitiesInteractive() {
             {items.map((item, idx) => {
               const isHovered = hoveredIdx === idx;
               return (
-                <div
+                <a
                   key={item.num}
-                  role="listitem"
-                  tabIndex={0}
+                  href={item.slug ? `/work#${item.slug}` : undefined}
                   onMouseEnter={() => setHoveredIdx(idx)}
                   onFocus={() => setHoveredIdx(idx)}
+                  onClick={(e) => {
+                    if (item.slug) {
+                      e.preventDefault();
+                      navigate(`/work#${item.slug}`);
+                    }
+                  }}
                   className={`capability-list-row ${isHovered ? 'is-active' : ''}`}
+                  style={{ cursor: item.slug ? 'pointer' : 'default', textDecoration: 'none', color: 'inherit' }}
                 >
                   <div className="row-left-content">
                     <span className="row-num">{item.num}</span>
@@ -74,7 +82,7 @@ export default function CapabilitiesInteractive() {
                     </span>
                   </div>
                   <div className="row-bottom-rule" aria-hidden="true" />
-                </div>
+                </a>
               );
             })}
           </div>
@@ -91,7 +99,18 @@ export default function CapabilitiesInteractive() {
                 className="preview-canvas-card"
               >
                 {/* Visual Preview Image Frame */}
-                <div className="preview-image-frame">
+                <a 
+                  href={activeItem.slug ? `/work#${activeItem.slug}` : undefined}
+                  className="preview-image-frame"
+                  onClick={(e) => {
+                    if (activeItem.slug) {
+                      e.preventDefault();
+                      navigate(`/work#${activeItem.slug}`);
+                    }
+                  }}
+                  style={{ cursor: activeItem.slug ? 'pointer' : 'default', display: 'block', textDecoration: 'none' }}
+                  aria-label={`View ${activeItem.proofTag} on Work`}
+                >
                   <img 
                     src={activeItem.previewImage} 
                     alt={activeItem.alt || `${activeItem.name} — ${activeItem.proofTag}`}
@@ -108,7 +127,7 @@ export default function CapabilitiesInteractive() {
                     <span className="proof-spark">✦</span>
                     <span>{activeItem.proofTag}</span>
                   </div>
-                </div>
+                </a>
 
                 {/* Metadata & Deliverables */}
                 <div className="preview-card-body">
@@ -166,7 +185,21 @@ export default function CapabilitiesInteractive() {
                       </div>
                     </div>
                     <div className="mobile-proof-tag">
-                      <span>✦ {item.proofTag}</span>
+                      <a 
+                        href={item.slug ? `/work#${item.slug}` : undefined}
+                        onClick={(e) => {
+                          if (item.slug) {
+                            e.preventDefault();
+                            navigate(`/work#${item.slug}`);
+                          }
+                        }} 
+                        className="mobile-proof-btn"
+                        aria-label={item.proofTag}
+                        style={{ textDecoration: 'none', color: 'inherit' }}
+                      >
+                        <span>✦ {item.proofTag}</span>
+                        <ArrowUpRight size={14} className="mobile-proof-arrow" />
+                      </a>
                     </div>
                   </div>
                 )}

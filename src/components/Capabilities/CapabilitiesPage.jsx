@@ -19,8 +19,8 @@ export default function CapabilitiesPage() {
     // Dynamic document title
     document.title = pageMeta.title || (
       lang === 'fa'
-        ? 'توانمندی‌ها // آنچه می‌سازیم // مجیکنسـی (MAGICENCY®)'
-        : 'Capabilities // What We Can Build // MAGICENCY®'
+        ? 'توانمندی‌های یکپارچه بازاریابی // آنچه می‌سازیم // مجیکنسـی (MAGICENCY®)'
+        : 'Integrated Marketing Capabilities // What We Build // MAGICENCY®'
     );
   }, [lang, pageMeta.title]);
 

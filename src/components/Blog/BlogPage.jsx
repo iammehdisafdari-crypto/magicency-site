@@ -42,8 +42,8 @@ export default function BlogPage() {
     }
     document.title = pageMeta.title || (
       lang === 'fa'
-        ? 'دیدگاه‌ها و مقالات // نشریه تحلیلی // مجیکنسـی (MAGICENCY®)'
-        : 'Blog // Editorial Publication // MAGICENCY®'
+        ? 'بینش‌های بازاریابی رشد // مقالات و دیدگاه‌ها // مجیکنسـی (MAGICENCY®)'
+        : 'Growth Marketing Insights // Editorial Publication // MAGICENCY®'
     );
   }, [lang, pageMeta.title]);
 

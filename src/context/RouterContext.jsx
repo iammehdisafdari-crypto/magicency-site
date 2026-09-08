@@ -44,11 +44,21 @@ export function RouterProvider({ children, initialPath }) {
       return;
     }
 
-    if (window.location.pathname !== to) {
+    const [pathPart, hashPart] = to.split('#');
+    const targetPath = pathPart.replace(/\/$/, '') || '/';
+    const currentPathNormalized = window.location.pathname.replace(/\/$/, '') || '/';
+
+    if (currentPathNormalized !== targetPath) {
       window.history.pushState({}, '', to);
-      setCurrentPath(to.replace(/\/$/, '') || '/');
-      if (options.scrollToTop) {
+      setCurrentPath(targetPath);
+      if (!hashPart && options.scrollToTop) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    } else if (hashPart) {
+      window.history.pushState({}, '', to);
+      const elem = document.getElementById(hashPart);
+      if (elem) {
+        elem.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
   }, []);

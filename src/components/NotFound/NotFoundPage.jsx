@@ -15,6 +15,17 @@ export default function NotFoundPage() {
     document.title = lang === 'fa'
       ? 'صفحه پیدا نشد (۴۰۴) // مجیکنسـی (MAGICENCY®)'
       : 'Page Not Found (404) // MAGICENCY®';
+
+    const robotsMeta = document.querySelector('meta[name="robots"]');
+    const prevRobots = robotsMeta ? robotsMeta.getAttribute('content') : null;
+    if (robotsMeta) {
+      robotsMeta.setAttribute('content', 'noindex, follow');
+    }
+    return () => {
+      if (robotsMeta && prevRobots) {
+        robotsMeta.setAttribute('content', prevRobots);
+      }
+    };
   }, [lang]);
 
   return (

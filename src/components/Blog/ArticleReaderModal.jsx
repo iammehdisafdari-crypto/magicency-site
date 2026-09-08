@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
+import { useRouter } from '../../context/RouterContext';
 import { BLOG_ARTICLES } from '../../data/blogData';
 
 export default function ArticleReaderModal({ article, onClose, onSelectArticle }) {
   const { t, isRTL } = useLanguage();
+  const { navigate } = useRouter();
   const r = t.blog?.reader || {};
   const [scrollProgress, setScrollProgress] = useState(0);
 
@@ -22,6 +24,17 @@ export default function ArticleReaderModal({ article, onClose, onSelectArticle }
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [onClose]);
+
+  useEffect(() => {
+    if (article) {
+      const prevTitle = document.title;
+      const articleTitle = isRTL ? article.titleFa : article.titleEn;
+      document.title = `${articleTitle} | Magicency`;
+      return () => {
+        document.title = prevTitle;
+      };
+    }
+  }, [article, isRTL]);
 
   if (!article) return null;
 
@@ -41,6 +54,7 @@ export default function ArticleReaderModal({ article, onClose, onSelectArticle }
   const pullQuote = isRTL ? article.pullQuoteFa : article.pullQuoteEn;
   const content = isRTL ? article.contentFa : article.contentEn;
   const keyTakeaways = isRTL ? article.keyTakeawaysFa : article.keyTakeawaysEn;
+  const strategicReferences = article.strategicReferences || [];
 
   // Intelligent related articles: prioritize same category, fill up to 3 articles
   const relatedArticles = (() => {
@@ -151,6 +165,39 @@ export default function ArticleReaderModal({ article, onClose, onSelectArticle }
               </div>
             )}
           </div>
+
+          {/* Strategic Architecture Contextual References */}
+          {strategicReferences.length > 0 && (
+            <div className="article-strategic-references">
+              <h3 className="strategic-references-title">
+                {isRTL ? 'پیوندها و مراجع راهبردی' : 'STRATEGIC ARCHITECTURE REFERENCES'}
+              </h3>
+              <div className="strategic-references-list">
+                {strategicReferences.map((ref, idx) => {
+                  const refLabel = isRTL ? ref.labelFa : ref.labelEn;
+                  const refContext = isRTL ? ref.contextFa : ref.contextEn;
+                  return (
+                    <a
+                      key={idx}
+                      href={ref.url}
+                      className="strategic-ref-card"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        onClose();
+                        if (navigate) navigate(ref.url);
+                      }}
+                    >
+                      <div className="strategic-ref-content">
+                        <span className="strategic-ref-label">{refLabel}</span>
+                        <span className="strategic-ref-context">{refContext}</span>
+                      </div>
+                      <span className="strategic-ref-arrow">{isRTL ? '←' : '→'}</span>
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
+          )}
 
           {/* Related Articles Footer */}
           {relatedArticles.length > 0 && (

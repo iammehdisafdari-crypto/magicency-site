@@ -20,8 +20,8 @@ export default function AboutPage() {
     window.scrollTo(0, 0);
 
     document.title = lang === 'fa'
-      ? 'درباره ما // چرایی وجود و سیستم رشد مجیکنسـی (MAGICENCY®)'
-      : 'About MAGICENCY® // Connected Growth Systems & Performance Architecture';
+      ? 'درباره مجیکنسـی // داستان برند، فلسفه و بنیان‌گذار'
+      : 'About Magicency // Studio, Philosophy & Founder';
   }, [lang]);
 
   return (

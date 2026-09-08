@@ -542,6 +542,177 @@
   margin: 0;
 }
 
+/* =========================================================
+   03.A GOOGLE SEARCH CONSOLE PERFORMANCE METRICS HUD
+   ========================================================= */
+.work-featured-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(12px, 1.8vw, 20px);
+  width: 100%;
+}
+
+@media (max-width: 992px) {
+  .work-featured-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 540px) {
+  .work-featured-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.featured-metric-card {
+  position: relative;
+  background: rgba(18, 18, 22, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 12px;
+  padding: clamp(16px, 2vw, 22px);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.featured-metric-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.featured-metric-card.highlight-blue {
+  border-color: rgba(59, 130, 246, 0.38);
+  background: linear-gradient(145deg, rgba(59, 130, 246, 0.12) 0%, rgba(18, 18, 22, 0.8) 100%);
+  box-shadow: 0 4px 24px rgba(59, 130, 246, 0.1);
+}
+
+.featured-metric-card.highlight-purple {
+  border-color: rgba(139, 92, 246, 0.38);
+  background: linear-gradient(145deg, rgba(139, 92, 246, 0.12) 0%, rgba(18, 18, 22, 0.8) 100%);
+  box-shadow: 0 4px 24px rgba(139, 92, 246, 0.1);
+}
+
+.metric-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.metric-label-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.metric-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.28);
+  flex-shrink: 0;
+}
+
+.metric-status-dot.blue {
+  background: #3B82F6;
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.8);
+}
+
+.metric-status-dot.purple {
+  background: #8B5CF6;
+  box-shadow: 0 0 8px rgba(139, 92, 246, 0.8);
+}
+
+.metric-label {
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #B0B0B8;
+}
+
+.work-page-root.is-rtl .metric-label {
+  font-family: var(--font-persian, 'Vazirmatn', sans-serif) !important;
+  letter-spacing: 0 !important;
+  font-weight: 700;
+}
+
+.metric-badge-indicator {
+  font-size: 0.65rem;
+  letter-spacing: 0.04em;
+  padding: 3px 7px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #A0A0A8;
+  font-family: var(--font-mono, monospace);
+  font-weight: 500;
+}
+
+.metric-value-wrap {
+  display: flex;
+  align-items: baseline;
+  padding: 4px 0;
+}
+
+.metric-number {
+  font-size: clamp(2rem, 3.2vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1;
+  color: #FFFFFF;
+  font-variant-numeric: tabular-nums;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  letter-spacing: -0.02em;
+}
+
+.work-page-root.is-rtl .metric-number {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  direction: ltr;
+}
+
+.metric-context {
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: #8E8E96;
+}
+
+.work-page-root.is-rtl .metric-context {
+  font-family: var(--font-persian, 'Vazirmatn', sans-serif) !important;
+}
+
+.work-featured-timeline-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 999px;
+  width: fit-content;
+}
+
+.timeline-badge-pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #3B82F6;
+  box-shadow: 0 0 8px #3B82F6;
+}
+
+.timeline-label {
+  font-size: 0.74rem;
+  letter-spacing: 0.06em;
+  color: #A0A0A8;
+  font-weight: 500;
+}
+
+.work-page-root.is-rtl .timeline-label {
+  font-family: var(--font-persian, 'Vazirmatn', sans-serif) !important;
+  letter-spacing: 0 !important;
+}
+
 .work-featured-media-stage {
   position: relative;
   width: 100%;

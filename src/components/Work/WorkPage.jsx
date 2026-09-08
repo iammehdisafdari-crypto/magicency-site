@@ -15,12 +15,24 @@ export default function WorkPage() {
   const [activeCategory, setActiveCategory] = useState('all');
 
   useEffect(() => {
-    // Scroll to top on mount
-    window.scrollTo(0, 0);
+    // Check if hash exists in URL (e.g. from About navigation)
+    const hash = window.location.hash;
+    if (hash) {
+      const targetId = hash.replace('#', '');
+      const timer = setTimeout(() => {
+        const elem = document.getElementById(targetId);
+        if (elem) {
+          elem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 120);
+      return () => clearTimeout(timer);
+    } else {
+      window.scrollTo(0, 0);
+    }
     // Dynamic document title
     document.title = lang === 'fa' 
-      ? 'آرشیو پروژه‌ها و سیستم‌های رشد // مجیکنسـی (MAGICENCY®)' 
-      : 'Work & Growth Systems // MAGICENCY®';
+      ? 'مطالعات موردی و نتایج پروژه‌ها // پرونده‌های رشد // مجیکنسـی (MAGICENCY®)' 
+      : 'Growth Case Studies // Client Results & Proof // MAGICENCY®';
   }, [lang]);
 
   // Filter projects by challenge category

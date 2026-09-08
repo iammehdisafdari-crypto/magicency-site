@@ -19,8 +19,8 @@ export default function ApproachPage() {
     // Dynamic document title
     document.title = pageMeta.title || (
       lang === 'fa' 
-        ? 'رویکرد ما // تفکر و سیستم رشد // مجیکنسـی (MAGICENCY®)' 
-        : 'Approach // How Magicency Thinks // MAGICENCY®'
+        ? 'سیستم‌عامل و متدولوژی رشد // رویکرد ما // مجیکنسـی (MAGICENCY®)' 
+        : 'Growth Operating System // Our Methodology // MAGICENCY®'
     );
   }, [lang, pageMeta.title]);
 

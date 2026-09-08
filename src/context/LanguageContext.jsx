@@ -97,24 +97,24 @@ export const translations = {
         {
           id: 'mobile',
           num: '03',
-          category: 'Mob',
-          categoryItalic: 'ile',
-          client: 'Sona',
+          category: 'Strat',
+          categoryItalic: 'egy',
+          client: 'Zarin Real Estate',
           clientTag: 'CLIENT',
-          image: '/project-3.jpg',
-          alt: 'Sona AI Mobile Product',
-          color: '#A855F7'
+          image: '/zarin-strategy.png',
+          alt: 'Zarin Real Estate Strategy Case Study',
+          color: '#C5A059'
         },
         {
           id: 'motion',
           num: '04',
-          category: 'Mo',
-          categoryItalic: 'tion',
-          client: 'Vault Bank',
+          category: 'Performance',
+          categoryItalic: ' Achievements',
+          client: 'Klasino',
           clientTag: 'CLIENT',
-          image: '/project-4.jpg',
-          alt: 'Vault Bank Fintech & Motion',
-          color: '#EAB308'
+          image: '/performance-achievements.png',
+          alt: 'Klasino Performance Achievements Case Study',
+          color: '#0066FF'
         }
       ]
     },
@@ -915,82 +915,82 @@ export const translations = {
     },
     approach: {
       pageMeta: {
-        title: 'Approach // How Magicency Thinks // MAGICENCY®',
-        description: 'We understand the business first. Then we engineer the system that makes it grow.'
+        title: 'Growth Operating System // Our Methodology // MAGICENCY®',
+        description: 'Our growth operating system, diagnostic methodology, and closed-loop decision framework engineered for scalable commercial velocity.'
       },
       hero: {
-        eyebrow: 'APPROACH',
+        eyebrow: 'GROWTH OPERATING SYSTEM // METHODOLOGY',
         headlineLine1: "We don't start",
         headlineLine2: "with the answer.",
-        subline: 'We start with what needs to change.',
+        subline: 'A disciplined diagnostic methodology and growth operating system that transforms commercial trajectory.',
         metaphor: 'CHAOS → CONNECTION → CLARITY'
       },
       deconstruction: {
         badge: '01 / DIAGNOSIS',
         title: 'From Request to Problem',
-        requestPrompt: 'THE REQUEST',
-        requestQuote: '“I need a new website.”',
-        subtext: 'We deconstruct the request to uncover what actually needs to change.',
-        revealedTitle: 'THE REAL PROBLEM',
+        requestPrompt: 'THE INCOMING REQUEST',
+        requestQuote: '“We need a new website.”',
+        subtext: 'We take the request apart to find the actual commercial pivot point.',
+        revealedTitle: 'WHAT THE BUSINESS ACTUALLY NEEDS',
         problems: [
           {
             id: 'positioning',
             title: 'Positioning',
-            desc: 'The brand is not communicating clear commercial value.'
+            desc: 'The market doesn’t know why this brand deserves to win.'
           },
           {
             id: 'experience',
             title: 'Experience',
-            desc: 'The customer journey has high friction and low resonance.'
+            desc: 'The customer journey has high friction and low conviction.'
           },
           {
             id: 'conversion',
             title: 'Conversion',
-            desc: 'Traffic enters leaky pages with no systematic proof architecture.'
+            desc: 'Traffic enters pages that fail to make an irrefutable commercial case.'
           },
           {
             id: 'acquisition',
             title: 'Acquisition',
-            desc: 'Channels are isolated without compounding retention loops.'
+            desc: 'Channels are operating in silos without a compounding feedback loop.'
           }
         ]
       },
       systemNetwork: {
         badge: '02 / THE SYSTEM',
         headline: 'Nothing works in isolation.',
-        subheadline: 'When marketing fails, it is because disciplines are disconnected. We engineer a living circuit.',
+        subheadline: 'When marketing fails, it’s because the pieces aren’t connected. We engineer a living feedback loop.',
         centralNode: 'BUSINESS',
         nodes: [
-          { id: 'strategy', label: 'STRATEGY', micro: 'Direction.' },
-          { id: 'creative', label: 'CREATIVE', micro: 'Meaning.' },
-          { id: 'digital', label: 'DIGITAL', micro: 'Experience.' },
-          { id: 'acquisition', label: 'ACQUISITION', micro: 'Demand.' },
-          { id: 'measurement', label: 'MEASUREMENT', micro: 'Learning.' }
+          { id: 'strategy', label: 'STRATEGY', micro: 'Direction & moats.' },
+          { id: 'creative', label: 'CREATIVE', micro: 'Meaning & resonance.' },
+          { id: 'digital', label: 'DIGITAL', micro: 'Experience & interface.' },
+          { id: 'acquisition', label: 'ACQUISITION', micro: 'Demand & pipeline.' },
+          { id: 'measurement', label: 'MEASUREMENT', micro: 'Attribution & telemetry.' }
         ],
-        loopReturn: 'MEASUREMENT → INSIGHT → STRATEGY'
+        loopReturn: 'MEASUREMENT → INTELLIGENCE → STRATEGY'
       },
       shift: {
         badge: '03 / THE SHIFT',
-        headline: 'From Isolated Actions to Connected Growth',
-        subheadline: 'Tactics reset to zero after each campaign. Systems build permanent compounding momentum.',
+        headline: 'From Disconnected Tactics to a Living System',
+        subheadline: 'Tactics reset to zero when the campaign ends. Systems compound value with every transaction.',
         tacticsTitle: 'TACTICS',
-        tacticsSubtitle: 'Isolated Actions',
-        tacticsItems: ['Campaign', 'Website', 'Content', 'Ads'],
+        tacticsSubtitle: 'DISCONNECTED EFFORTS',
+        tacticsItems: ['Campaign', 'Website', 'Content', 'Paid Ads'],
         systemTitle: 'SYSTEM',
-        systemSubtitle: 'Connected Growth',
-        systemItems: ['Strategy', 'Creative', 'Digital', 'Acquisition', 'Measurement']
+        systemSubtitle: 'COMPOUNDING VALUE',
+        systemItems: ['Strategy', 'Creative', 'Digital', 'Acquisition', 'Telemetry']
       },
       compounding: {
         badge: '04 / COMPOUNDING',
         headline: 'Why we think in systems.',
-        axiom: 'Better decisions create better systems.\nBetter systems create better growth.',
-        subtext: 'Every cycle makes the next cycle stronger.',
+        axiom: 'Better decisions build stronger systems.\nStronger systems build compounding growth.',
+        subtext: 'Every cycle makes the next cycle smarter, faster, and more capital efficient.',
         steps: [
-          '1 DECISION',
+          '1 STRATEGIC DECISION',
           'DECISION + LEARNING',
           'DECISION + LEARNING + DATA',
           'DECISION + LEARNING + DATA + EXPERIENCE',
-          'COMPOUNDING SCALE'
+          'COMPOUNDING MOMENTUM'
         ]
       },
       closing: {
@@ -1000,14 +1000,14 @@ export const translations = {
     },
     capabilities: {
       pageMeta: {
-        title: 'Capabilities // What We Can Build // MAGICENCY®',
-        description: 'What we can build when the pieces connect. Strategy, creative, digital and growth engineered as one system.'
+        title: 'Integrated Marketing Capabilities // What We Build // MAGICENCY®',
+        description: 'Explore our integrated marketing capabilities: commercial strategy, high-conviction creative, full-stack digital platforms, and conversion architecture.'
       },
       hero: {
-        eyebrow: 'CAPABILITIES',
+        eyebrow: 'INTEGRATED MARKETING CAPABILITIES',
         headlineLine1: 'What we can build',
         headlineLine2: 'when the pieces connect.',
-        subline: 'Strategy, creative, digital and growth — engineered as one system.',
+        subline: 'Strategy, high-conviction creative, digital platforms, and conversion architecture — integrated capabilities engineered as one system.',
         metaphor: 'COMPONENTS ≠ SERVICES // CAPABILITIES = SYSTEM'
       },
       system: {
@@ -1043,11 +1043,11 @@ export const translations = {
     },
     blog: {
       pageMeta: {
-        title: 'Blog // Editorial Publication // MAGICENCY®',
-        description: 'Ideas worth thinking about. Strategy, creativity, digital and growth from the perspective of people building them.'
+        title: 'Growth Marketing Insights // Editorial Publication // MAGICENCY®',
+        description: 'Field notes, empirical frameworks, and growth marketing insights on brand conviction, retention flywheels, and conversion architecture.'
       },
       hero: {
-        eyebrow: 'INSIGHTS // VOL. 04',
+        eyebrow: 'GROWTH MARKETING INSIGHTS // VOL. 04',
         headlineLine1: 'Ideas worth',
         headlineLine2: 'thinking about.',
         subline: 'Strategy, creativity, digital and growth — from the perspective of people building them.',
@@ -1211,24 +1211,24 @@ export const translations = {
         {
           id: 'mobile',
           num: '۰۳',
-          category: 'محصول ',
-          categoryItalic: 'موبایل',
-          client: 'Sona AI',
+          category: 'استراتژی',
+          categoryItalic: '',
+          client: 'Zarin Real Estate',
           clientTag: 'کارفرما',
-          image: '/project-3.jpg',
-          alt: 'اپلیکیشن هوش مصنوعی سونا',
-          color: '#A855F7'
+          image: '/zarin-strategy.png',
+          alt: 'کیس استادی استراتژی املاک زرین دبی',
+          color: '#C5A059'
         },
         {
           id: 'motion',
           num: '۰۴',
-          category: 'موشن و ',
-          categoryItalic: 'فین‌تک',
-          client: 'Vault Bank',
+          category: 'دستاوردهای',
+          categoryItalic: ' عملکرد',
+          client: 'کلاسینو',
           clientTag: 'کارفرما',
-          image: '/project-4.jpg',
-          alt: 'سیستم موشن و کارت‌های والت بنک',
-          color: '#EAB308'
+          image: '/performance-achievements.png',
+          alt: 'کیس استادی دستاوردهای عملکرد کلاسینو',
+          color: '#0066FF'
         }
       ]
     },
@@ -2029,14 +2029,14 @@ export const translations = {
     },
     approach: {
       pageMeta: {
-        title: 'رویکرد ما // تفکر و سیستم رشد // مجیکنسـی (MAGICENCY®)',
-        description: 'ما اول کسب‌وکار را عمیقاً می‌فهمیم، سپس سیستمی را مهندسی می‌کنیم که باعث رشد آن شود.'
+        title: 'سیستم‌عامل و متدولوژی رشد // رویکرد ما // مجیکنسـی (MAGICENCY®)',
+        description: 'سیستم‌عامل رشد، متدولوژی عارضه‌یابی و چارچوب تصمیم‌گیری مداربسته برای تحول پایدار کسب‌وکار.'
       },
       hero: {
-        eyebrow: 'رویکرد ما',
+        eyebrow: 'سیستم‌عامل و متدولوژی رشد',
         headlineLine1: 'ما با پاسخ',
         headlineLine2: 'شروع نمی‌کنیم.',
-        subline: 'با فهمیدن اینکه چه چیزی باید تغییر کند شروع می‌کنیم.',
+        subline: 'یک متدولوژی منضبط و سیستم‌عامل رشد که مسیر تجاری کسب‌وکار را متحول می‌کند.',
         metaphor: 'هرج‌ومرج ← پیوند ← شفافیت'
       },
       deconstruction: {
@@ -2114,14 +2114,14 @@ export const translations = {
     },
     capabilities: {
       pageMeta: {
-        title: 'توانمندی‌ها // آنچه می‌سازیم // مجیکنسـی (MAGICENCY®)',
-        description: 'آنچه می‌سازیم وقتی اجزا به هم متصل می‌شوند. استراتژی، خلاقیت، دیجیتال و رشد — مهندسی‌شده در قالب یک سیستم واحد.'
+        title: 'توانمندی‌های یکپارچه بازاریابی // آنچه می‌سازیم // مجیکنسـی (MAGICENCY®)',
+        description: 'کالبدشکافی توانمندی‌های یکپارچه بازاریابی: استراتژی تجاری، خلاقیت متقاعدکننده، پلتفرم‌های دیجیتال و معماری تبدیل.'
       },
       hero: {
-        eyebrow: 'توانمندی‌ها',
+        eyebrow: 'توانمندی‌های یکپارچه بازاریابی',
         headlineLine1: 'آنچه می‌سازیم',
         headlineLine2: 'وقتی اجزا به هم متصل می‌شوند.',
-        subline: 'استراتژی، خلاقیت، دیجیتال و رشد — مهندسی‌شده در قالب یک سیستم واحد.',
+        subline: 'استراتژی تجاری، خلاقیت برند، مهندسی پلتفرم‌های دیجیتال و نرخ تبدیل — در قالب یک معماری یکپارچه.',
         metaphor: 'توانمندی ≠ خدمات جزیره‌ای // توانمندی = اجزای یک سیستم'
       },
       system: {
@@ -2157,11 +2157,11 @@ export const translations = {
     },
     blog: {
       pageMeta: {
-        title: 'دیدگاه‌ها و مقالات // نشریه تحلیلی // مجیکنسـی (MAGICENCY®)',
-        description: 'ایده‌هایی که ارزش اندیشیدن دارند. استراتژی، خلاقیت، دیجیتال و رشد از زاویه دید مهندسان آن‌ها.'
+        title: 'بینش‌های بازاریابی رشد // نشریه تحلیلی // مجیکنسـی (MAGICENCY®)',
+        description: 'جستارهای تحلیلی، بینش‌های بازاریابی رشد، معماری تبدیل، فلای‌ویل‌های حفظ مشتری و بازاریابی عصر هوش مصنوعی.'
       },
       hero: {
-        eyebrow: 'بینش و دیدگاه // دوره چهارم',
+        eyebrow: 'بینش‌های بازاریابی رشد // دوره چهارم',
         headlineLine1: 'ایده‌هایی که ارزش',
         headlineLine2: 'اندیشیدن دارند.',
         subline: 'استراتژی، خلاقیت، دیجیتال و رشد — از زاویه دید مهندسانی که آن‌ها را می‌سازند.',

@@ -59,6 +59,7 @@ export default function WorkIndex({ projects }) {
             return (
               <motion.article
                 key={proj.id}
+                id={proj.slug}
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.98 }}

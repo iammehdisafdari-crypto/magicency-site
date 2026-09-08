@@ -11,47 +11,47 @@ const ssrOutDir = path.resolve(rootDir, 'dist-ssr');
 // Known blog articles metadata
 const BLOG_METADATA = {
   'more-marketing-not-more-growth': {
-    title: "Why More Marketing Doesn't Create More Growth | Magicency",
-    desc: 'Why increasing ad spend and publishing cadence fails to fix a broken conversion architecture, and how closed feedback loops engineer durable scale.',
+    title: 'More Marketing vs More Growth: Diminishing Returns in Marketing | Magicency',
+    desc: 'Why increasing ad spend and publishing volume fails when conversion architecture is broken, and how identifying growth bottlenecks engineers durable scale.',
     cover: '/journal-1.jpg',
     date: '2026-09-01',
     author: 'Magicency Editorial',
     readTime: '8 MIN READ'
   },
   'more-content-is-not-fixing-problem': {
-    title: "More Content Isn't Fixing Your Marketing Problem | Magicency",
-    desc: 'Why publishing more content without category conviction creates noise rather than authority, and how original perspective commands market power.',
+    title: 'Content Strategy vs Brand Narrative: Escaping the Volume Trap | Magicency',
+    desc: 'Why publishing more content without category conviction creates noise rather than authority, and how an authentic brand narrative commands market power.',
     cover: '/journal-2.jpg',
     date: '2026-08-15',
     author: 'Magicency Editorial',
     readTime: '6 MIN READ'
   },
   'website-has-conviction-problem': {
-    title: 'Your Website Has a Conviction Problem, Not Design | Magicency',
-    desc: 'Why website redesigns fail when focused only on aesthetic trends, and how digital interfaces must act as architectural instruments of commercial proof.',
+    title: 'Website Positioning vs Web Design: Why Redesigns Fail to Convert | Magicency',
+    desc: 'Why aesthetic redesigns fail when strategic positioning is unclear, and how digital interfaces must act as architectural instruments of commercial proof.',
     cover: '/journal-3.jpg',
     date: '2026-07-20',
     author: 'Magicency Editorial',
     readTime: '5 MIN READ'
   },
   'why-campaigns-reset-growth': {
-    title: 'Why Campaigns Keep Resetting Your Growth to Zero | Magicency',
-    desc: 'Why campaign-dependent businesses face extreme financial volatility, and how to engineer permanent inbound moats and compounding retention flywheels.',
+    title: 'Campaign Dependency & Retention: How to Stop Resetting Growth to Zero | Magicency',
+    desc: 'Why campaign-dependent businesses face financial volatility when media budgets pause, and how engineering compounding retention flywheels builds durable growth.',
     cover: '/project-1.jpg',
     date: '2026-06-10',
     author: 'Magicency Editorial',
     readTime: '7 MIN READ'
   },
   'ai-creative-volume-fallacy': {
-    title: 'The AI Creative Volume Fallacy: Why Taste Is The Moat | Magicency',
-    desc: 'Why zero-marginal-cost generative AI makes volume a commodity, and why strategic discernment, human taste, and positioning remain the only defensible moats.',
+    title: 'AI Creative Volume vs Creative Effectiveness: Why Taste Is The Moat | Magicency',
+    desc: 'Why zero-marginal-cost generative AI makes creative volume a commodity, and why strategic discernment, human taste, and positioning remain the only true moats.',
     cover: '/project-2.jpg',
     date: '2026-05-04',
     author: 'Magicency Editorial',
     readTime: '5 MIN READ'
   },
   'seo-traffic-vs-commercial-growth': {
-    title: 'SEO Traffic vs Commercial Growth: The Intent Discipline | Magicency',
+    title: 'SEO Traffic vs Commercial Growth: The Commercial Intent Discipline | Magicency',
     desc: 'Why ranking for generic definitions fails to generate enterprise EBITDA, and how high-conviction decision frameworks build profitable inbound pipeline.',
     cover: '/project-3.jpg',
     date: '2026-04-18',
@@ -85,31 +85,64 @@ function getRouteMetadata(route) {
         ogType: 'article',
         ogImage: `${baseCanonical}${meta.cover}`,
         ogImageAlt: meta.title,
+        articleMeta: {
+          publishedTime: meta.date,
+          modifiedTime: '2026-09-08',
+          author: 'Magicency Editorial',
+          section: 'Growth Marketing'
+        },
         jsonLd: {
           '@context': 'https://schema.org',
-          '@type': 'BlogPosting',
-          'mainEntityOfPage': {
-            '@type': 'WebPage',
-            '@id': `${baseCanonical}/blog/${slug}`
-          },
-          'headline': meta.title,
-          'description': meta.desc,
-          'image': `${baseCanonical}${meta.cover}`,
-          'datePublished': meta.date,
-          'dateModified': '2026-09-07',
-          'author': {
-            '@type': 'Organization',
-            'name': 'Magicency Editorial',
-            'url': 'https://magicency.ir'
-          },
-          'publisher': {
-            '@type': 'Organization',
-            'name': 'Magicency',
-            'logo': {
-              '@type': 'ImageObject',
-              'url': 'https://magicency.ir/apple-touch-icon.png'
+          '@graph': [
+            {
+              '@type': 'BlogPosting',
+              'mainEntityOfPage': {
+                '@type': 'WebPage',
+                '@id': `${baseCanonical}/blog/${slug}`
+              },
+              'headline': meta.title,
+              'description': meta.desc,
+              'image': `${baseCanonical}${meta.cover}`,
+              'datePublished': meta.date,
+              'dateModified': '2026-09-08',
+              'author': {
+                '@type': 'Organization',
+                'name': 'Magicency Editorial',
+                'url': 'https://magicency.ir'
+              },
+              'publisher': {
+                '@type': 'Organization',
+                'name': 'Magicency',
+                'logo': {
+                  '@type': 'ImageObject',
+                  'url': 'https://magicency.ir/apple-touch-icon.png'
+                }
+              }
+            },
+            {
+              '@type': 'BreadcrumbList',
+              'itemListElement': [
+                {
+                  '@type': 'ListItem',
+                  'position': 1,
+                  'name': 'Home',
+                  'item': 'https://magicency.ir/'
+                },
+                {
+                  '@type': 'ListItem',
+                  'position': 2,
+                  'name': 'Blog',
+                  'item': 'https://magicency.ir/blog'
+                },
+                {
+                  '@type': 'ListItem',
+                  'position': 3,
+                  'name': meta.title,
+                  'item': `${baseCanonical}/blog/${slug}`
+                }
+              ]
             }
-          }
+          ]
         }
       };
     }
@@ -118,37 +151,63 @@ function getRouteMetadata(route) {
   switch (route) {
     case '/work':
       return {
-        title: 'Selected Works & Flagship Growth Case Studies | Magicency',
-        desc: "Explore Magicency's curated index of high-growth brand case studies, technical digital platforms, conversion architecture, and market-tested creative systems.",
+        title: 'Growth Case Studies & Client Results | Magicency',
+        desc: "Explore Magicency's curated index of growth case studies, client results, conversion architecture, and market-tested creative systems.",
         canonical: `${baseCanonical}/work`,
         ogType: 'website',
         ogImage: `${baseCanonical}/og-image.png`,
-        ogImageAlt: 'Magicency Curated Case Studies and Selected Work',
+        ogImageAlt: 'Magicency Growth Case Studies & Client Results',
         jsonLd: {
           '@context': 'https://schema.org',
-          '@type': 'ItemList',
-          'name': 'Magicency Flagship Case Studies',
-          'description': 'Curated portfolio of growth systems and technical digital platforms.',
-          'itemListElement': [
+          '@graph': [
             {
-              '@type': 'ListItem',
-              'position': 1,
-              'name': 'Atrash Store — Visual Identity & Scalable Commerce System'
+              '@type': 'ItemList',
+              'name': 'Magicency Growth Case Studies & Client Results',
+              'description': 'Curated portfolio of growth case studies, client results, and technical digital platforms.',
+              'itemListElement': [
+                {
+                  '@type': 'ListItem',
+                  'position': 1,
+                  'name': 'Enterprise Search Engine — 84.1K Organic Clicks & 5.18M Impressions Architecture'
+                },
+                {
+                  '@type': 'ListItem',
+                  'position': 2,
+                  'name': 'Atrash Store — Google Ads Performance Max Engine & ROAS 11 Scalable Acquisition'
+                },
+                {
+                  '@type': 'ListItem',
+                  'position': 3,
+                  'name': 'Tamir Online — Google Ads Lead Gen Engine & 23.42% CTR Peak Acquisition'
+                },
+                {
+                  '@type': 'ListItem',
+                  'position': 4,
+                  'name': 'Wine Amphorae — Heritage Brand Modernization & Digital Flagship Website Design'
+                },
+                {
+                  '@type': 'ListItem',
+                  'position': 5,
+                  'name': 'Zarin Real Estate Dubai — Strategic Positioning & High-Intent Investment Growth System'
+                }
+              ]
             },
             {
-              '@type': 'ListItem',
-              'position': 2,
-              'name': 'GR8 Real Estate — High-Value Lead Capture & Architectural Platform'
-            },
-            {
-              '@type': 'ListItem',
-              'position': 3,
-              'name': 'Elysium Toys — Global Luxury Brand Expansion & Performance Engine'
-            },
-            {
-              '@type': 'ListItem',
-              'position': 4,
-              'name': 'Wine Amphorae — Heritage Brand Modernization & Digital Flagship'
+              '@type': 'BreadcrumbList',
+              'itemListElement': [
+                {
+                  '@type': 'ListItem',
+                  'position': 1,
+                  'name': 'Home',
+                  'item': 'https://magicency.ir/'
+                },
+                {
+                  '@type': 'ListItem',
+                  'position': 2,
+                  'name': 'Work',
+                  'item': 'https://magicency.ir/work'
+                }
+              ]
             }
           ]
         }
@@ -156,86 +215,136 @@ function getRouteMetadata(route) {
 
     case '/capabilities':
       return {
-        title: 'Integrated Growth Disciplines & Capabilities | Magicency',
-        desc: 'Discover our integrated disciplines: commercial strategy, high-conviction creative, full-stack digital platforms, and compounding growth operating systems.',
+        title: 'Integrated Marketing Capabilities & Services | Magicency',
+        desc: "Explore Magicency's integrated marketing capabilities: commercial strategy, high-conviction creative, full-stack digital platforms, and conversion architecture.",
         canonical: `${baseCanonical}/capabilities`,
         ogType: 'website',
         ogImage: `${baseCanonical}/og-image.png`,
-        ogImageAlt: 'Magicency Integrated Growth Disciplines',
+        ogImageAlt: 'Magicency Integrated Marketing Capabilities',
         jsonLd: {
           '@context': 'https://schema.org',
-          '@type': 'Service',
-          'name': 'Magicency Connected Growth Disciplines',
-          'provider': {
-            '@type': 'Organization',
-            'name': 'Magicency',
-            'url': 'https://magicency.ir/'
-          },
-          'hasOfferCatalog': {
-            '@type': 'OfferCatalog',
-            'name': 'Strategic Growth Offerings',
-            'itemListElement': [
-              { '@type': 'Offer', 'itemOffered': { '@type': 'Service', 'name': 'Strategy & Commercial Architecture' } },
-              { '@type': 'Offer', 'itemOffered': { '@type': 'Service', 'name': 'Brand Conviction & High-Performance Creative' } },
-              { '@type': 'Offer', 'itemOffered': { '@type': 'Service', 'name': 'Digital Platforms & Conversion Architecture' } },
-              { '@type': 'Offer', 'itemOffered': { '@type': 'Service', 'name': 'Compounding Performance & AI Automation' } }
-            ]
-          }
+          '@graph': [
+            {
+              '@type': 'Service',
+              'name': 'Magicency Integrated Marketing Capabilities',
+              'provider': {
+                '@type': 'Organization',
+                'name': 'Magicency',
+                'url': 'https://magicency.ir/'
+              },
+              'hasOfferCatalog': {
+                '@type': 'OfferCatalog',
+                'name': 'Strategic Marketing Capabilities & Offerings',
+                'itemListElement': [
+                  { '@type': 'Offer', 'itemOffered': { '@type': 'Service', 'name': 'Strategy & Commercial Architecture' } },
+                  { '@type': 'Offer', 'itemOffered': { '@type': 'Service', 'name': 'Brand Conviction & High-Performance Creative' } },
+                  { '@type': 'Offer', 'itemOffered': { '@type': 'Service', 'name': 'Digital Platforms & Conversion Architecture' } },
+                  { '@type': 'Offer', 'itemOffered': { '@type': 'Service', 'name': 'Compounding Performance & AI Automation' } }
+                ]
+              }
+            },
+            {
+              '@type': 'BreadcrumbList',
+              'itemListElement': [
+                {
+                  '@type': 'ListItem',
+                  'position': 1,
+                  'name': 'Home',
+                  'item': 'https://magicency.ir/'
+                },
+                {
+                  '@type': 'ListItem',
+                  'position': 2,
+                  'name': 'Capabilities',
+                  'item': 'https://magicency.ir/capabilities'
+                }
+              ]
+            }
+          ]
         }
       };
 
     case '/approach':
       return {
-        title: 'The Magicency Method: Growth as an Operating System | Magicency',
-        desc: 'Why linear marketing resets growth and how our interconnected system of diagnosis, feedback loops, and compounding conviction transforms commercial trajectory.',
+        title: 'Growth Operating System & Growth Methodology | Magicency',
+        desc: 'Why linear marketing resets growth and how our growth operating system, diagnostic methodology, and closed-loop decision framework transform commercial trajectory.',
         canonical: `${baseCanonical}/approach`,
         ogType: 'website',
         ogImage: `${baseCanonical}/og-image.png`,
-        ogImageAlt: 'The Magicency Method & Operating System',
+        ogImageAlt: 'The Magicency Growth Operating System & Methodology',
         jsonLd: {
           '@context': 'https://schema.org',
-          '@type': 'WebPage',
-          'name': 'The Magicency Method & Operating System',
-          'description': 'Why linear marketing resets growth and how connected operating systems create permanent commercial velocity.',
-          'url': `${baseCanonical}/approach`
+          '@graph': [
+            {
+              '@type': 'WebPage',
+              'name': 'The Magicency Growth Operating System & Methodology',
+              'description': 'Why linear marketing resets growth and how our growth operating system and diagnostic methodology create permanent commercial velocity.',
+              'url': `${baseCanonical}/approach`
+            },
+            {
+              '@type': 'BreadcrumbList',
+              'itemListElement': [
+                {
+                  '@type': 'ListItem',
+                  'position': 1,
+                  'name': 'Home',
+                  'item': 'https://magicency.ir/'
+                },
+                {
+                  '@type': 'ListItem',
+                  'position': 2,
+                  'name': 'Approach',
+                  'item': 'https://magicency.ir/approach'
+                }
+              ]
+            }
+          ]
         }
       };
 
     case '/about':
       return {
-        title: 'About Magicency: The People & Philosophy Behind the System',
-        desc: 'Magicency is a strategic growth studio founded by Mehdi Safdari, uniting disciplined engineering and creative conviction into high-impact growth architecture.',
+        title: 'About Magicency — Studio, Philosophy & Founder Mehdi Safdari',
+        desc: 'Learn about Magicency: who we are, our studio philosophy, and founder Mehdi Safdari uniting disciplined engineering and creative conviction.',
         canonical: `${baseCanonical}/about`,
         ogType: 'website',
         ogImage: `${baseCanonical}/og-image.png`,
         ogImageAlt: 'About Magicency Studio & Leadership',
         jsonLd: {
           '@context': 'https://schema.org',
-          '@type': 'FAQPage',
-          'mainEntity': [
+          '@graph': [
             {
-              '@type': 'Question',
-              'name': 'How is Magicency different from a traditional marketing agency?',
-              'acceptedAnswer': {
-                '@type': 'Answer',
-                'text': 'Traditional agencies sell disconnected deliverables and billable hours. Magicency acts as an embedded strategic partner engineering interconnected systems uniting positioning, creative, and engineering.'
+              '@type': 'AboutPage',
+              'name': 'About Magicency',
+              'description': 'Learn about Magicency: who we are, our studio philosophy, and founder Mehdi Safdari uniting disciplined engineering and creative conviction.',
+              'url': `${baseCanonical}/about`,
+              'mainEntity': {
+                '@type': 'Organization',
+                'name': 'Magicency',
+                'url': 'https://magicency.ir/',
+                'founder': {
+                  '@type': 'Person',
+                  'name': 'Mehdi Safdari',
+                  'jobTitle': 'Founder & Strategic Lead'
+                }
               }
             },
             {
-              '@type': 'Question',
-              'name': 'What stages of business do you partner with?',
-              'acceptedAnswer': {
-                '@type': 'Answer',
-                'text': 'We partner with ambitious founders, funded scale-ups, and established category leaders whose current marketing architecture has hit a plateau.'
-              }
-            },
-            {
-              '@type': 'Question',
-              'name': 'How does an engagement typically start?',
-              'acceptedAnswer': {
-                '@type': 'Answer',
-                'text': 'Every collaboration begins with our Diagnostic & Architecture Protocol — a deep-dive commercial audit of your positioning, conversion metrics, and acquisition unit economics.'
-              }
+              '@type': 'BreadcrumbList',
+              'itemListElement': [
+                {
+                  '@type': 'ListItem',
+                  'position': 1,
+                  'name': 'Home',
+                  'item': 'https://magicency.ir/'
+                },
+                {
+                  '@type': 'ListItem',
+                  'position': 2,
+                  'name': 'About',
+                  'item': 'https://magicency.ir/about'
+                }
+              ]
             }
           ]
         }
@@ -243,18 +352,39 @@ function getRouteMetadata(route) {
 
     case '/blog':
       return {
-        title: 'Strategic Essays & Growth Intelligence Journal | Magicency',
-        desc: 'Provocative thinking, strategic frameworks, and deep-dive essays on brand conviction, unit economics, conversion architecture, and AI-era marketing.',
+        title: 'Growth Marketing Insights & Strategic Essays | Magicency',
+        desc: 'Explore strategic essays, field notes, and growth marketing insights on positioning, retention flywheels, conversion architecture, and AI-era marketing.',
         canonical: `${baseCanonical}/blog`,
         ogType: 'website',
         ogImage: `${baseCanonical}/og-image.png`,
-        ogImageAlt: 'Magicency Journal of Growth Intelligence',
+        ogImageAlt: 'Magicency Journal of Growth Marketing Insights',
         jsonLd: {
           '@context': 'https://schema.org',
-          '@type': 'CollectionPage',
-          'name': 'Magicency Strategic Essays & Field Notes',
-          'description': 'Strategic essays and empirical frameworks on commercial growth and performance architecture.',
-          'url': `${baseCanonical}/blog`
+          '@graph': [
+            {
+              '@type': 'CollectionPage',
+              'name': 'Magicency Growth Marketing Insights',
+              'description': 'Strategic essays and empirical frameworks on commercial growth and performance architecture.',
+              'url': `${baseCanonical}/blog`
+            },
+            {
+              '@type': 'BreadcrumbList',
+              'itemListElement': [
+                {
+                  '@type': 'ListItem',
+                  'position': 1,
+                  'name': 'Home',
+                  'item': 'https://magicency.ir/'
+                },
+                {
+                  '@type': 'ListItem',
+                  'position': 2,
+                  'name': 'Blog',
+                  'item': 'https://magicency.ir/blog'
+                }
+              ]
+            }
+          ]
         }
       };
 
@@ -262,7 +392,8 @@ function getRouteMetadata(route) {
       return {
         title: 'Page Not Found (404) | Magicency',
         desc: "The requested page could not be found. Return to Magicency's homepage to explore our connected growth systems and strategic work.",
-        canonical: `${baseCanonical}/`,
+        canonical: null,
+        robots: 'noindex, follow',
         ogType: 'website',
         ogImage: `${baseCanonical}/og-image.png`,
         ogImageAlt: 'Magicency 404',
@@ -272,12 +403,12 @@ function getRouteMetadata(route) {
     case '/':
     default:
       return {
-        title: 'Magicency — Performance & Growth Marketing Intelligence',
-        desc: 'Magicency engineers connected growth systems uniting strategy, creative conviction, digital experience, and compounding performance architecture.',
+        title: 'Magicency — Growth Marketing Agency & Connected Growth Systems',
+        desc: 'Magicency is a growth marketing agency engineering connected growth systems that unite commercial strategy, high-conviction creative, and conversion architecture.',
         canonical: `${baseCanonical}/`,
         ogType: 'website',
         ogImage: `${baseCanonical}/og-image.png`,
-        ogImageAlt: 'Magicency — Connected Growth Systems & Performance Architecture',
+        ogImageAlt: 'Magicency — Growth Marketing Agency & Connected Growth Systems',
         jsonLd: null // already in base template
       };
   }
@@ -348,14 +479,33 @@ async function prerender() {
     // 2. Update Meta Description
     html = html.replace(/<meta name="description" content="[^"]*"/i, `<meta name="description" content="${meta.desc}"`);
 
-    // 3. Update Canonical Link
-    html = html.replace(/<link rel="canonical" href="[^"]*"/i, `<link rel="canonical" href="${meta.canonical}"`);
+    // 3. Update Robots & Canonical Link
+    if (meta.robots) {
+      html = html.replace(/<meta name="robots" content="[^"]*"/i, `<meta name="robots" content="${meta.robots}"`);
+    } else {
+      html = html.replace(/<meta name="robots" content="[^"]*"/i, `<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"`);
+    }
+
+    if (meta.canonical) {
+      html = html.replace(/<link rel="canonical" href="[^"]*"/i, `<link rel="canonical" href="${meta.canonical}"`);
+    } else {
+      html = html.replace(/\s*<link rel="canonical" href="[^"]*"\s*\/?>/i, '');
+    }
 
     // 4. Update Open Graph tags
     html = html.replace(/<meta property="og:type" content="[^"]*"/i, `<meta property="og:type" content="${meta.ogType}"`);
+    if (meta.ogType === 'article' && meta.articleMeta) {
+      const articleMetaTags = [
+        `    <meta property="article:published_time" content="${meta.articleMeta.publishedTime}" />`,
+        `    <meta property="article:modified_time" content="${meta.articleMeta.modifiedTime}" />`,
+        `    <meta property="article:author" content="${meta.articleMeta.author}" />`,
+        `    <meta property="article:section" content="${meta.articleMeta.section}" />`
+      ].join('\n');
+      html = html.replace(new RegExp(`<meta property="og:type" content="${meta.ogType}"[^>]*>`, 'i'), `<meta property="og:type" content="${meta.ogType}" />\n${articleMetaTags}`);
+    }
     html = html.replace(/<meta property="og:title" content="[^"]*"/i, `<meta property="og:title" content="${meta.title}"`);
     html = html.replace(/<meta property="og:description" content="[^"]*"/i, `<meta property="og:description" content="${meta.desc}"`);
-    html = html.replace(/<meta property="og:url" content="[^"]*"/i, `<meta property="og:url" content="${meta.canonical}"`);
+    html = html.replace(/<meta property="og:url" content="[^"]*"/i, `<meta property="og:url" content="${meta.canonical || 'https://magicency.ir/404'}"`);
     html = html.replace(/<meta property="og:image" content="[^"]*"/i, `<meta property="og:image" content="${meta.ogImage}"`);
     html = html.replace(/<meta property="og:image:secure_url" content="[^"]*"/i, `<meta property="og:image:secure_url" content="${meta.ogImage}"`);
     html = html.replace(/<meta property="og:image:alt" content="[^"]*"/i, `<meta property="og:image:alt" content="${meta.ogImageAlt}"`);

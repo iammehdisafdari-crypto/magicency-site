@@ -112,238 +112,280 @@ export const SELECTIVITY_DATA = {
 
 export const PROJECTS_DATA = [
   {
-    id: 'velox-financial',
-    slug: 'velox-financial',
+    id: 'organic-growth-engine',
+    slug: 'organic-growth-engine',
     featured: true,
     num: '01',
     numFa: '۰۱',
-    year: '2026',
-    challengeCategory: '02-experience',
+    year: '2024 - 2025',
+    challengeCategory: '04-acquisition',
     client: {
-      en: 'VELOX FINANCIAL',
-      fa: 'فین‌تک ولوکس (VELOX)'
+      en: 'ENTERPRISE SEARCH & INTENT ENGINE',
+      fa: 'موتور رشد ارگانیک و سئو سازمانی'
     },
     title: {
-      en: 'Algorithmic Onboarding & Wealth Infrastructure',
-      fa: 'موتور الگوریتمی ثبت‌نام و پلتفرم معاملاتی'
+      en: 'Programmatic Search Architecture & 84.1K Organic Click Scale',
+      fa: 'معماری سئو تکنیکال و مهندسی رشد تصاعدی با ۸۴.۱ هزار کلیک ارگانیک'
     },
     industry: {
-      en: 'Fintech & Wealth Infrastructure',
-      fa: 'زیرساخت فین‌تک و مدیریت دارایی'
+      en: 'Enterprise SEO & Search Infrastructure',
+      fa: 'زیرساخت سئو سازمانی و معماری جذب ارگانیک'
+    },
+    metrics: [
+      {
+        id: 'clicks',
+        value: '84.1K',
+        label: { en: 'Total Clicks', fa: 'مجموع کلیک‌های ارگانیک' },
+        subtext: { en: '12-Month Organic Search Volume', fa: 'کلیک ورودی از نتایج گوگل' },
+        variant: 'blue',
+        checked: true
+      },
+      {
+        id: 'impressions',
+        value: '5.18M',
+        label: { en: 'Total Impressions', fa: 'مجموع ایمپرشن جستجو' },
+        subtext: { en: 'Organic Search Footprint', fa: 'دیده شدن در نتایج هدفمند' },
+        variant: 'purple',
+        checked: true
+      },
+      {
+        id: 'ctr',
+        value: '1.6%',
+        label: { en: 'Average CTR', fa: 'میانگین CTR ارگانیک' },
+        subtext: { en: 'High-Intent SERP Snippets', fa: 'نرخ کلیک صفحات فرود' },
+        variant: 'neutral',
+        checked: false
+      },
+      {
+        id: 'position',
+        value: '17.6',
+        label: { en: 'Average Position', fa: 'میانگین رتبه در نتایج' },
+        subtext: { en: 'Compounding SERP Authority', fa: 'میانگین جایگاه در رتبه‌بندی' },
+        variant: 'neutral',
+        checked: false
+      }
+    ],
+    timeline: {
+      en: '12-Month Compounding Window (04/04/2024 – 03/04/2025)',
+      fa: 'دوره ۱۲ ماهه رشد تصاعدی (۱۴۰۳/۰۱/۱۶ – ۱۴۰۴/۰۱/۱۴)'
     },
     challenge: {
-      en: 'A high-frequency trading platform struggling with onboarding friction: 62% drop-off before initial deposit and severe UX fragmentation between desktop and mobile environments.',
-      fa: 'پلتفرم پیشرفته معاملاتی با ریزش ۶۲ درصدی کاربران در فرآیند احراز هویت اولیه و عدم پیوستگی تجربه کاربر بین نسخه‌های وب و اپلیکیشن موبایل.'
+      en: 'An enterprise platform held back by stagnant organic visibility: severe crawl-budget bloat, keyword cannibalization across core pages, and an unsustainable reliance on rising paid ad spend.',
+      fa: 'پلتفرمی با توقف رشد ارگانیک و وابستگی پرهزینه به تبلیغات کلیکی: قفل شدن بودجه خزش (Crawl Budget)، هم‌خواری کلمات کلیدی (Cannibalization) و ریزش ترافیک در کوئری‌های با نرخ تبدیل بالا.'
     },
     theMove: {
-      en: 'Re-architected the entire account creation lifecycle into an instant 3-step verification flow with real-time biometric validation and deterministic attribution telemetry.',
-      fa: 'بازطراحی صفر تا صد چرخه ثبت‌نام به یک فرآیند ۳ مرحله‌ای آنی با احراز هویت هوشمند و یکپارچه‌سازی تله‌متری جذب.'
+      en: 'Architected a programmatic search engine: resolved technical index traps, mapped distinct intent clusters, deployed dynamic internal link graph modeling, and built compounding content hubs.',
+      fa: 'طراحی و پیاده‌سازی معماری سئو ساخت‌یافته: رفع موانع فنی ایندکسینگ، مدل‌سازی خوشه‌های اینتنت (Search Intent)، بهینه‌سازی گراف پیوند داخلی و باز کردن مسیر رشد تصاعدی در سرچ کنسول.'
     },
     services: {
-      en: ['Product Architecture', 'Frictionless Onboarding', 'High-Intent CRO', 'Performance Infrastructure'],
-      fa: ['معماری محصول دیجیتال', 'ساده‌سازی آنبردینگ', 'بهینه‌سازی نرخ تبدیل', 'زیرساخت پرفورمنس']
+      en: ['Search Intent Mapping', 'Technical Indexing Architecture', 'Dynamic Link Graphing', 'Organic Growth Engine'],
+      fa: ['نگاشت دقیق سرچ اینتنت', 'معماری فنی ایندکسینگ', 'گراف لینک‌سازی داخلی', 'موتور رشد ارگانیک']
     },
     outcome: {
-      en: 'Created a unified digital operating system that compressed onboarding friction by 70%, unlocking instant liquidity deposits and compounding active trader retention.',
-      fa: 'ایجاد سیستم یکپارچه معاملاتی، کاهش ۷۰ درصدی زمان ثبت‌نام و تبدیل کاربران جدید به معامله‌گران فعال با وفاداری بلندمدت.'
+      en: 'Scaled from a flat baseline to 84.1K qualified clicks and 5.18M search impressions over 12 months with a 1.6% CTR and 17.6 average position, transforming organic search into an autonomous, compounding acquisition engine.',
+      fa: 'جهش از خط مبنا به ۸۴.۱ هزار کلیک ارگانیک و ۵.۱۸ میلیون ایمپرشن در طول ۱۲ ماه با میانگین CTR معادل ۱.۶٪ و رتبه ۱۷.۶، و تبدیل جستجوی ارگانیک به یک مزیت رقابتی پایدار بدون هزینه تبلیغات.'
     },
     qualitativeHighlights: {
-      en: ['Seamless Instant Onboarding', 'Zero-Latency Verification', 'Unified Web & Mobile Architecture'],
-      fa: ['آنبردینگ بدون اصطکاک', 'احراز هویت بدون تأخیر', 'معماری یکپارچه وب و اپ']
+      en: ['84.1K Verified Organic Clicks', '5.18M Google Impressions Moat', 'Compounding 12-Month Flywheel'],
+      fa: ['۸۴.۱ هزار کلیک ارگانیک تأییدشده', '۵.۱۸ میلیون ایمپرشن در نتایج جستجو', 'چرخه ورودی پایدار بدون تبلیغ']
     },
     media: {
       primary: '/assets/work/velox_primary.jpg',
       secondary: '/assets/work/velox_secondary.jpg',
-      badgeEn: 'DESKTOP PLATFORM UI',
-      badgeFa: 'معماری پلتفرم وب'
+      badgeEn: 'GOOGLE SEARCH CONSOLE // AUDITED 12-MO DATA',
+      badgeFa: 'داده‌های مستند سرچ کنسول گوگل // ۱۲ ماهه'
+    },
+    footerNote: {
+      en: 'Engineered programmatic SEO architecture, crawl optimization & 84.1K click compounding scale.',
+      fa: 'مهندسی معماری سئو، بهینه‌سازی بودجه خزش و ثبت ۵.۱۸ میلیون ایمپرشن و ۸۴.۱ هزار کلیک ارگانیک در سرچ کنسول.'
     }
   },
   {
-    id: 'lumina-luxury',
-    slug: 'lumina-luxury',
+    id: 'atrash-store',
+    slug: 'atrash-store',
     featured: false,
     num: '02',
     numFa: '۰۲',
-    year: '2025 - 2026',
-    challengeCategory: '03-demand',
+    year: '2023 - 2024',
+    challengeCategory: '04-acquisition',
     client: {
-      en: 'LUMINA LUXURY',
-      fa: 'برند لومینا (LUMINA)'
+      en: 'ATRASH STORE',
+      fa: 'عطرش استور (ATRASH STORE)'
     },
     title: {
-      en: 'High-Velocity Narrative & Direct-to-Consumer Engine',
-      fa: 'موتور هویت روایی و فروش مستقیم به مشتری'
+      en: 'Google Ads PMax Engine: ROAS 11 & Scalable Micro-CPC Acquisition',
+      fa: 'موتور تبلیغات Performance Max با ROAS 11 و جذب مقیاس‌پذیر با هزینه حداقلی'
     },
     industry: {
-      en: 'Direct-to-Consumer // Luxury Apparel',
-      fa: 'پوشاک لوکس و خرده‌فروشی D2C'
+      en: 'E-Commerce & High-ROAS Paid Acquisition',
+      fa: 'تجارت الکترونیک و پرفورمنس مارکتینگ (Google Ads)'
     },
     challenge: {
-      en: 'A heritage apparel atelier trapped in traditional retail wholesale, lacking direct consumer ownership, scalable digital brand storytelling, and predictable VIP client retention.',
-      fa: 'برند اصیل پوشاک که در الگوهای سنتی عمده‌فروشی متوقف شده بود و فاقد کانال مستقیم ارتباط با مشتری، روایت دیجیتال و تکرار خرید بود.'
+      en: 'An e-commerce brand trapped in expensive and unprofitable paid ad campaigns, low conversion attribution, and an inability to scale ad spend profitably.',
+      fa: 'فروشگاه آنلاینی که با هزینه‌های سنگین تبلیغات کلیکی، کمپین‌های زیان‌ده، نرخ تبدیل پایین و ناتوانی در افزایش مقیاس بودجه تبلیغاتی دست‌وپنجه نرم می‌کرد.'
     },
     theMove: {
-      en: 'Engineered an editorial direct-to-consumer digital flagship backed by dynamic video lookbooks, psychological storytelling hooks, and automated VIP client retention cycles.',
-      fa: 'طراحی و پیاده‌سازی فروشگاه دیجیتال پرچمدار، تولید لوک‌بوک‌های ویدیویی سینمایی و اتوماسیون چرخه‌های وفاداری مشتریان VIP.'
+      en: 'Re-architected Google Ads into algorithmic Performance Max clusters, deployed custom real-time conversion telemetry, and optimized machine-learning bidding for high-intent purchases.',
+      fa: 'مهندسی صفر تا صد کمپین‌های Performance Max در گوگل ادز، اتصال سیستم تله‌متری و مانیتورینگ اختصاصی ردیابی تبدیل، و بهینه‌سازی هوشمند الگوریتم‌های بیدینگ روی خریدهای واقعی.'
     },
     services: {
-      en: ['Brand Positioning', 'Editorial Art Direction', 'Creative Hook Testing', 'D2C Flagship Architecture'],
-      fa: ['استراتژی جایگاه برند', 'مدیریت هنری و محتوا', 'سناریونویسی تبلیغات', 'معماری پلتفرم D2C']
+      en: ['Performance Max Architecture', 'Google Ads Telemetry', 'ROAS Optimization', 'Real-Time Monitoring'],
+      fa: ['معماری Performance Max', 'تله‌متری گوگل ادز', 'بهینه‌سازی نرخ بازگشت (ROAS)', 'مانیتورینگ اختصاصی تبدیل']
     },
     outcome: {
-      en: 'Direct consumer relationship unlocked, elevating customer lifetime loyalty and establishing an autonomous digital revenue channel independent of wholesale middlemen.',
-      fa: 'شکل‌گیری کانال مستقیم و مستقل فروش، ارتقای پیوستگی مخاطبان لوکس و ایجاد جریان درآمدی پایدار بدون وابستگی به واسطه‌ها.'
+      en: 'Generated ROAS 11 with 1.22K purchases at just €104 total cost (€0.00 micro-CPC) in 14 days, alongside 74K impressions, 8.5K clicks, and 452 conversions in a 1-week sprint.',
+      fa: 'دستیابی به بازگشت سرمایه تبلیغاتی خیره‌کننده (ROAS 11) با ثبت ۱۲۲۰ خرید تنها با ۱۰۴ یورو هزینه در ۱۴ روز، در کنار ۷۴ هزار ایمپرشن و ۴۵۲ تبدیل در یک اسپرینت هفتگی.'
     },
     qualitativeHighlights: {
-      en: ['Direct Consumer Ownership', 'Compounding VIP Repeat Rate', 'Editorial Visual System'],
-      fa: ['مالکیت مستقیم مخاطب', 'نرخ بالای خرید مجدد VIP', 'سیستم بصری اختصاصی']
+      en: ['ROAS 11 & 1.22K Purchases (€104 Cost)', '74K Impressions with 11.49% CTR', 'Custom Conversion Monitoring System'],
+      fa: ['دستیابی به ROAS 11 و ۱۲۲۰ خرید با ۱۰۴ یورو', '۷۴ هزار ایمپرشن با CTR استثنایی ۱۱.۴۹٪', 'پلتفرم مانیتورینگ و رهگیری اختصاصی']
     },
     media: {
-      primary: '/assets/work/lumina_primary.jpg',
-      secondary: '/assets/work/lumina_secondary.jpg',
-      badgeEn: 'EDITORIAL CAMPAIGN & D2C FLAGSHIP',
-      badgeFa: 'لوک‌بوک ادیتوریال و فروشگاه D2C'
+      primary: '/assets/work/atrash_primary.png',
+      secondary: '/assets/work/atrash_secondary.png',
+      badgeEn: 'GOOGLE ADS PMAX // AUDITED ROAS 11',
+      badgeFa: 'گوگل ادز پرفورمنس مکس // ROAS 11 تأییدشده'
     }
   },
   {
-    id: 'synapse-ai',
-    slug: 'synapse-ai',
+    id: 'tamir-online',
+    slug: 'tamir-online',
     featured: false,
     num: '03',
     numFa: '۰۳',
-    year: '2026',
-    challengeCategory: '01-position',
+    year: '2024 - 2025',
+    challengeCategory: '04-acquisition',
     client: {
-      en: 'SYNAPSE AI',
-      fa: 'سیناپس هوش مصنوعی (SYNAPSE)'
+      en: 'TAMIR ONLINE',
+      fa: 'تعمیر آنلاین (TAMIR ONLINE)'
     },
     title: {
-      en: 'Category Creation & Enterprise Growth Architecture',
-      fa: 'خلق دسته‌بندی جدید و زیرساخت جذب سازمانی'
+      en: 'Search Ads Lead Gen Engine: 1.28M Impressions, 134K Clicks & 23.42% Peak CTR',
+      fa: 'موتور لید جنریشن گوگل ادز: ۱.۲۸ میلیون ایمپرشن، ۱۳۴ هزار کلیک و رکورد CTR معادل ۲۳.۴۲٪'
     },
     industry: {
-      en: 'Enterprise B2B SaaS // Machine Intelligence',
-      fa: 'نرم‌افزار ابری سازمانی و هوش مصنوعی B2B'
+      en: 'On-Demand Home Services // High-Volume Lead Gen',
+      fa: 'خدمات آنلاین و تعمیرات لوازم خانگی // لید جنریشن مقیاس بالا'
     },
     challenge: {
-      en: 'Positioned vaguely as a generic AI tool, resulting in low executive buyer comprehension, bloated 9-month sales cycles, and high friction in demo scheduling.',
-      fa: 'جایگاه‌یابی مبهم به عنوان ابزار هوش مصنوعی عمومی که منجر به سردرگمی مدیران ارشد، چرخه طولانی ۹ ماهه فروش و نرخ پایین دمو می‌شد.'
+      en: 'A high-demand appliance repair platform struggling with aggressive CPC bidding inflation, low ad click-through rates, and unpredictable lead acquisition costs in a hyper-competitive market.',
+      fa: 'پلتفرم خدمات تعمیرات آنلاین در بازاری با رقابت شدید، افزایش سرسام‌آور هزینه هر کلیک (CPC)، نرخ پایین کلیک تبلیغات و هزینه‌های غیرقابل پیش‌بینی در جذب لید و مشتری.'
     },
     theMove: {
-      en: 'Reframed the company around "Automated Enterprise Decision Intelligence", built an interactive live demo simulator, and restructured the inbound pipeline for enterprise accounts.',
-      fa: 'بازتعریف جایگاه برند حول «زیرساخت تصمیم‌گیری سازمانی»، توسعه شبیه‌ساز زنده دمو و مهندسی مجدد پایپ‌لاین فروش B2B.'
+      en: 'Restructured high-intent search campaigns around real-time urgent user queries, built frictionless form-submission tracking, and optimized geo-bidding to achieve a breakthrough 23.42% peak CTR.',
+      fa: 'مهندسی کمپین‌های متمرکز بر جستجوهای فوری و با قصد بالای کاربران، ردیابی بی‌درنگ فرم‌های ثبت سفارش و بهینه‌سازی بیدینگ جغرافیایی که به ثبت نرخ کلیک (CTR) فوق‌العاده ۲۳.۴۲٪ انجامید.'
     },
     services: {
-      en: ['Category Strategy', 'Executive Messaging', 'Interactive Product Tour', 'Account-Based Pipeline'],
-      fa: ['استراتژی خلق دسته‌بندی', 'پیام‌رسانی در سطح مدیران', 'تور تعاملی محصول', 'پایپ‌لاین فروش سازمانی']
+      en: ['High-Intent Google Ads', 'Lead Funnel CRO', 'Dynamic Geo-Bidding', 'Telemetry Tracking'],
+      fa: ['کمپین‌های جستجوی فوری', 'بهینه‌سازی نرخ تبدیل فرم', 'بیدینگ هوشمند منطقه‌ای', 'تله‌متری لید جنریشن']
     },
     outcome: {
-      en: 'Shifted commercial conversations from tactical tool debates to high-level strategic infrastructure deployments, cutting sales cycle friction dramatically.',
-      fa: 'تغییر جنس جلسات فروش از ابزار ساده به زیرساخت حیاتی سازمانی و کاهش چشمگیر اصطکاک چرخه فروش.'
+      en: 'Delivered 1.28M impressions, 134K qualified clicks, and 9.03K verified repair lead forms over 1 year (6.67% conversion rate), with seasonal high-intent campaigns hitting a staggering 23.42% CTR.',
+      fa: 'ثبت ۱.۲۸ میلیون ایمپرشن، ۱۳۴ هزار کلیک هدفمند و ۹,۰۳۰ فرم ثبت درخواست در یک سال با نرخ تبدیل ۶.۶۷٪، همراه با ثبت رکورد شگفت‌انگیز CTR معادل ۲۳.۴۲٪ در کمپین‌های هدفمند.'
     },
     qualitativeHighlights: {
-      en: ['Defensible Category Leadership', 'Executive-Level Clarity', 'Interactive Simulation Funnel'],
-      fa: ['رهبری دسته‌بندی بازار', 'وضوح در سطح مدیران ارشد', 'قیف تعاملی شبیه‌ساز']
+      en: ['1.28M Impressions & 134K Clicks', '9.03K Form Submissions (6.67% Conv)', 'Peak 23.42% Search Ad CTR'],
+      fa: ['۱.۲۸ میلیون ایمپرشن و ۱۳۴ هزار کلیک', '۹,۰۳۰ فرم ثبت درخواست (تبدیل ۶.۶۷٪)', 'رکورد استثنایی CTR معادل ۲۳.۴۲٪']
     },
     media: {
-      primary: '/assets/work/synapse_primary.jpg',
-      secondary: '/assets/work/synapse_secondary.jpg',
-      badgeEn: 'CRO DEMO FUNNEL LAB',
-      badgeFa: 'شبیه‌ساز تعاملی و قیف دمو'
+      primary: '/assets/work/tamir_online_primary.png',
+      secondary: '/assets/work/tamir_online_secondary.png',
+      badgeEn: 'GOOGLE ADS // 1.28M IMPRESSIONS & 9K LEADS',
+      badgeFa: 'گوگل ادز // ۱.۲۸ میلیون ایمپرشن و ۹ هزار لید'
     }
   },
   {
-    id: 'nexus-health',
-    slug: 'nexus-health',
+    id: 'wine-amphorae',
+    slug: 'wine-amphorae',
     featured: false,
     num: '04',
     numFa: '۰۴',
-    year: '2025 - 2026',
-    challengeCategory: '05-system',
+    year: '2024 - 2025',
+    challengeCategory: '02-experience',
     client: {
-      en: 'NEXUS HEALTH',
-      fa: 'نکسوس سلامت (NEXUS)'
+      en: 'WINE AMPHORAE',
+      fa: 'واین آمفورا (WINE AMPHORAE)'
     },
     title: {
-      en: 'Telemetry Engine & Patient Care Loop Architecture',
-      fa: 'موتور تله‌متری و مدل‌سازی سفر بیمار'
+      en: 'Heritage Terracotta Vessel Platform: Luxury Italian Website Design & Experience',
+      fa: 'طراحی وب‌سایت لوکس، تجربه کاربری برندینگ و پلتفرم دیجیتال آمفورای ایتالیایی'
     },
     industry: {
-      en: 'Digital Health & Telemedicine',
-      fa: 'سلامت دیجیتال و پزشکی از راه دور'
+      en: 'Artisanal Terracotta & Winemaking Heritage // Luxury Website Design',
+      fa: 'صنایع دست‌ساز و سفالگری باستانی ایتالیا // طراحی وب‌سایت لوکس'
     },
     challenge: {
-      en: 'Fragmented patient acquisition data, unreliable third-party ad tracking, and severe drop-offs between initial symptom consultation and care plan adherence.',
-      fa: 'انقطاع داده‌های جذب بیمار، ردیابی غیرقابل اعتماد تبلیغات و افت شدید میان مشاوره اولیه و ادامه درمان.'
+      en: 'A prestigious Italian artisanal amphora atelier whose digital presence failed to reflect the centuries-old heritage, tactile material luxury, and technical excellence of their handcrafted wine vessels.',
+      fa: 'برند اصیل ایتالیایی سازنده ظروف سفالی باستانی که پلتفرم دیجیتال آن توانایی انتقال ارزش‌های لوکس دست‌ساز، میراث تاریخی و عمق مهندسی محصول را به خریداران و تولیدکنندگان بین‌المللی نداشت.'
     },
     theMove: {
-      en: 'Deployed HIPAA-compliant server-side event streaming, multi-touch patient journey modeling, and automated retention check-ins based on clinical milestones.',
-      fa: 'پیاده‌سازی تله‌متری اختصاصی سمت سرور مطابق استاندارد سلامت، مدل‌سازی سفر بیمار و اتوماسیون تعاملات پیگیری درمان.'
+      en: 'Designed an immersive editorial digital flagship featuring sculptural vessel presentation, rich Italian craft storytelling, multi-language internationalization, and seamless direct inquiry pathways.',
+      fa: 'طراحی و پیاده‌سازی پلتفرم دیجیتال پرچمدار با فضاسازی ادیتوریال و سینمایی ظروف، ساختار بصری مینیمال و متریال‌محور، سیستم چندزبانه و ایجاد مسیر اختصاصی ثبت سفارش و مشاوره بین‌المللی.'
     },
     services: {
-      en: ['Server-Side Telemetry', 'Patient Journey UX', 'Retention Infrastructure', 'Attribution Intelligence'],
-      fa: ['تله‌متری سمت سرور', 'تجربه کاربری سفر بیمار', 'زیرساخت حفظ و تکرار', 'مدل اتریبیوشن داده']
+      en: ['Bespoke Website Design', 'Editorial Art Direction', 'Luxury UX Architecture', 'International Inbound Flow'],
+      fa: ['طراحی اختصاصی وب‌سایت', 'مدیریت هنری و ادیتوریال', 'معماری تجربه کاربری لوکس', 'مسیر ثبت سفارش بین‌المللی']
     },
     outcome: {
-      en: 'Total visibility across the patient lifecycle, turning scattered traffic into a predictable, clinical-grade patient care engine.',
-      fa: 'دید کامل روی تمام چرخه حیات بیمار و تبدیل ترافیک پراکنده به یک موتور منظم و پایدار خدمت‌رسانی پزشکی.'
+      en: 'Transformed the digital presence into an international cultural showpiece, elevating brand perception across global viticulture markets and unlocking high-value direct inquiries from luxury wineries.',
+      fa: 'تبدیل هویت دیجیتال به یک اثر هنری متمایز در بازار اروپا، ارتقای جایگاه ادراکی برند به عنوان پیشگام این حوزه و جذب سفارشات مستقیم و با ارزش بالا از تولیدکنندگان بین‌المللی.'
     },
     qualitativeHighlights: {
-      en: ['Deterministic Server Tracking', 'Closed-Loop Care Retention', 'Full Lifecycle Visibility'],
-      fa: ['ردیابی قطعی سرور', 'حلقه‌های پیوسته مراقبت', 'شفافیت کامل چرخه درمان']
+      en: ['Immersive Luxury Visual System', 'Multilingual International UI', 'High-Ticket Inbound Pathways'],
+      fa: ['طراحی بصری ادیتوریال و سینمایی', 'رابط کاربری چندزبانه بین‌المللی', 'مسیر مستقیم پذیرش سفارشات فاخر']
     },
     media: {
-      primary: '/assets/work/nexus_primary.jpg',
-      secondary: '/assets/work/nexus_secondary.jpg',
-      badgeEn: 'TELEMETRY ATTRIBUTION ENGINE',
-      badgeFa: 'موتور تله‌متری و رهگیری داده'
+      primary: '/assets/work/wine_amphorae_primary.png',
+      secondary: '/assets/work/wine_amphorae_secondary.png',
+      badgeEn: 'LUXURY DIGITAL FLAGSHIP // ITALIAN HERITAGE',
+      badgeFa: 'طراحی پلتفرم لوکس وب // واین آمفورا'
     }
   },
   {
-    id: 'vakeso-identity',
-    slug: 'vakeso-identity',
+    id: 'zarin-real-estate',
+    slug: 'zarin-real-estate',
     featured: false,
     num: '05',
     numFa: '۰۵',
-    year: '2025',
-    challengeCategory: '04-acquisition',
+    year: '2025 - 2026',
+    challengeCategory: '01-position',
     client: {
-      en: 'VAKESO ARCHITECTURE',
-      fa: 'استودیو معماری واکیسو (VAKESO)'
+      en: 'ZARIN REAL ESTATE DUBAI',
+      fa: 'املاک زرین دبی (ZARIN REAL ESTATE)'
     },
     title: {
-      en: 'Monolithic Spatial Identity & Inbound Commission Architecture',
-      fa: 'هویت یکپارچه برند و سیستم جذب سفارشات فاخر'
+      en: 'Turning Experience into a Growth Engine: High-Intent Dubai Real Estate Advisory',
+      fa: 'تبدیل اعتبار و تجربه به سیستم رشد: جایگاه‌یابی و جذب سرمایه‌گذاران ملک در دبی'
     },
     industry: {
-      en: 'Spatial Design & Architecture Practice',
-      fa: 'طراحی معماری و استودیو فضاسازی'
+      en: 'Dubai Real Estate Investment & Wealth Advisory',
+      fa: 'سرمایه‌گذاری املاک دبی و مشاوره تخصصی دارایی'
     },
     challenge: {
-      en: 'An elite architecture practice whose digital surface was silent and disorganized, failing to attract international developers and high-value private commissions.',
-      fa: 'استودیوی نخبه معماری که پلتفرم دیجیتال آن توان انتقال عمق مهندسی فضاها و جذب کارفرمایان و پروژه‌های شاخص بین‌المللی را نداشت.'
+      en: 'Years of proven Dubai market credibility trapped in unstructured ad hoc referrals: high lead volume with low qualification, price-shopper friction, and lack of a cohesive digital trust system.',
+      fa: 'سال‌ها اعتبار و سابقه موفق در بازار املاک دبی که به سیستم منسجم رشد تبدیل نشده بود: لیدهای بدون پالایش، تمرکز صرف مخاطب روی قیمت و فقدان فرآیند اعتمادسازی برای تصمیم‌گیری کلان سرمایه‌گذار.'
     },
     theMove: {
-      en: 'Constructed a monumental digital publication with tactile spatial typography, monolithic project folios, and direct commission inquiry pathways.',
-      fa: 'خلق پلتفرم دیجیتال ادیتوریال با ساختار تایپوگرافی حجمی، پرونده‌های مفصل پروژه‌ها و مسیر مستقیم پذیرش سفارش پروژه‌های فاخر.'
+      en: 'Re-positioned the brand from generic property broker to "Trusted Investment Partner": engineered an educational decision journey, high-intent lead qualification filters, and a cross-channel trust architecture.',
+      fa: 'تغییر جایگاه برند از «فروشنده ملک» به «شریک امین سرمایه‌گذاری در دبی»: طراحی سفر تصمیم‌گیری شفاف، فیلتر لیدهای واجد شرایط (Qualified Leads) و ساخت معماری اعتماد چندکاناله.'
     },
     services: {
-      en: ['Brand Identity', 'Spatial Portfolio Architecture', 'Monolithic Typography', 'Editorial Interaction'],
-      fa: ['هویت برند', 'معماری دیجیتال پورتفولیو', 'تایپوگرافی مونوگرام', 'تعاملات ادیتوریال']
+      en: ['Investment Positioning', 'Lead Qualification UX', 'Trust Architecture', 'Full-Funnel Content System'],
+      fa: ['جایگاه‌یابی استراتژیک برند', 'پالایش هوشمند لید (Lead Qualification)', 'معماری اعتمادسازی دیجیتال', 'سیستم محتوای تصمیم‌ساز']
     },
     outcome: {
-      en: 'Elevated positioning that instantly filters for high-value architectural commissions and establishes the practice as an international cultural institution.',
-      fa: 'ارتقای سطح ادراکی برند، جذب کارفرمایان رده‌بالا و تثبیت جایگاه استودیو به عنوان مرجع فرهنگی طراحی.'
+      en: 'Shifted buyer mindset from "What is the price?" to strategic advisory conversations, filtering for high-conviction investors and constructing an autonomous multi-stage acquisition and retention system.',
+      fa: 'گذر از سؤال سطحی «قیمت چنده؟» به جلسات مشاوره استراتژیک سرمایه‌گذاری، جذب سرمایه‌گذاران با پتانسیل واقعی و ایجاد چرخه پایدار جذب تا معامله و خدمات پس از خرید در دبی.'
     },
     qualitativeHighlights: {
-      en: ['Tactile Material Aesthetics', 'Monolithic Grid System', 'High-Tier Commission Filtering'],
-      fa: ['زیبایی‌شناسی متریال‌محور', 'گرید یکپارچه مونوکروم', 'پالایش هوشمند سفارشات']
+      en: ['From Property Seller to Investment Partner', 'High-Conviction Lead Qualification', 'Integrated Multi-Channel Trust System'],
+      fa: ['تبدیل برند به شریک امین سرمایه‌گذاری', 'پالایش لیدهای آماده خرید (Qualified Leads)', 'سیستم یکپارچه اعتماد و همراهی سرمایه‌گذار']
     },
     media: {
-      primary: '/project-1.jpg',
-      secondary: '/project-2.jpg',
-      badgeEn: 'SPATIAL DIGITAL MONOGRAPH',
-      badgeFa: 'مونوگراف فضایی ادیتوریال'
+      primary: '/assets/work/zarin_primary.png',
+      secondary: '/assets/work/zarin_secondary.png',
+      badgeEn: 'INVESTMENT ADVISORY // DUBAI REAL ESTATE',
+      badgeFa: 'سیستم رشد و جذب سرمایه‌گذاری املاک دبی'
     }
   }
 ];

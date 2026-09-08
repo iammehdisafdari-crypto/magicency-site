@@ -1285,6 +1285,89 @@
   flex-shrink: 0;
 }
 
+/* Strategic Architecture Internal Links */
+.article-strategic-references {
+  margin-top: 3.5rem;
+  padding-top: 2rem;
+  border-top: 1px dashed rgba(255, 255, 255, 0.12);
+  text-align: start;
+}
+
+.strategic-references-title {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #ffaa44;
+  margin: 0 0 1.25rem 0;
+  text-transform: uppercase;
+}
+
+.strategic-references-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.strategic-ref-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  padding: 1.1rem 1.35rem;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.strategic-ref-card:hover {
+  background: rgba(255, 85, 0, 0.06);
+  border-color: rgba(255, 85, 0, 0.35);
+  transform: translateY(-2px);
+}
+
+.strategic-ref-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.strategic-ref-label {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #ffffff;
+  transition: color 0.2s ease;
+}
+
+.strategic-ref-card:hover .strategic-ref-label {
+  color: #ff7722;
+}
+
+.strategic-ref-context {
+  font-size: 0.82rem;
+  color: #8f92a1;
+  line-height: 1.45;
+}
+
+.strategic-ref-arrow {
+  color: #777788;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: transform 0.2s ease, color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.strategic-ref-card:hover .strategic-ref-arrow {
+  color: #ff5500;
+  transform: translateX(4px);
+}
+
+.blog-page-root.is-rtl .strategic-ref-card:hover .strategic-ref-arrow {
+  transform: translateX(-4px);
+}
+
 /* Related Articles in Reader */
 .article-related-footer {
   margin-top: 4.5rem;
