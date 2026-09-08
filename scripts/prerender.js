@@ -526,18 +526,25 @@ async function prerender() {
     html = html.replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`);
 
     // 8. Determine Output Path
-    let outputPath;
     if (route === '/') {
-      outputPath = path.resolve(distDir, 'index.html');
+      const outputPath = path.resolve(distDir, 'index.html');
+      fs.writeFileSync(outputPath, html, 'utf-8');
     } else if (route === '/404') {
-      outputPath = path.resolve(distDir, '404.html');
+      const outputPath = path.resolve(distDir, '404.html');
+      fs.writeFileSync(outputPath, html, 'utf-8');
     } else {
       const routeClean = route.replace(/^\//, '');
-      outputPath = path.resolve(distDir, routeClean, 'index.html');
-    }
+      const dirOutputPath = path.resolve(distDir, routeClean, 'index.html');
+      const cleanHtmlOutputPath = path.resolve(distDir, `${routeClean}.html`);
 
-    fs.mkdirSync(path.dirname(outputPath), { recursive: true });
-    fs.writeFileSync(outputPath, html, 'utf-8');
+      // Write directory index (for /route/ requests)
+      fs.mkdirSync(path.dirname(dirOutputPath), { recursive: true });
+      fs.writeFileSync(dirOutputPath, html, 'utf-8');
+
+      // Also write clean .html file (for /route requests without trailing slash - serves direct 200 OK without 307 redirect)
+      fs.mkdirSync(path.dirname(cleanHtmlOutputPath), { recursive: true });
+      fs.writeFileSync(cleanHtmlOutputPath, html, 'utf-8');
+    }
 
     // Count words and H1 tags for verification
     const wordCount = (appHtml.replace(/<[^>]*>/g, ' ').match(/\S+/g) || []).length;
