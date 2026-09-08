@@ -4,7 +4,7 @@
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=(), payment=(), usb=()
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob: https: https://www.google-analytics.com https://*.google-analytics.com; media-src 'self' https://player.vimeo.com https://*.vimeocdn.com; frame-src 'self' https://player.vimeo.com; connect-src 'self' https://player.vimeo.com https://*.vimeo.com https://*.vimeocdn.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://analytics.google.com https://stats.g.doubleclick.net; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests;
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob: https: https://www.google-analytics.com https://*.google-analytics.com; media-src 'self' https://player.vimeo.com https://*.vimeocdn.com; frame-src 'self' https://player.vimeo.com https://www.googletagmanager.com; connect-src 'self' https://player.vimeo.com https://*.vimeo.com https://*.vimeocdn.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://analytics.google.com https://stats.g.doubleclick.net; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests;
 
 /.env*
   X-Robots-Tag: noindex, nofollow
