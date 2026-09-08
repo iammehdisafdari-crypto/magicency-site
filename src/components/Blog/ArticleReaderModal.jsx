@@ -42,8 +42,12 @@ export default function ArticleReaderModal({ article, onClose, onSelectArticle }
   const content = isRTL ? article.contentFa : article.contentEn;
   const keyTakeaways = isRTL ? article.keyTakeawaysFa : article.keyTakeawaysEn;
 
-  // Filter related articles from same category or different articles
-  const relatedArticles = BLOG_ARTICLES.filter((a) => a.id !== article.id).slice(0, 2);
+  // Intelligent related articles: prioritize same category, fill up to 3 articles
+  const relatedArticles = (() => {
+    const sameCat = BLOG_ARTICLES.filter((a) => a.id !== article.id && a.category === article.category);
+    const otherCat = BLOG_ARTICLES.filter((a) => a.id !== article.id && a.category !== article.category);
+    return [...sameCat, ...otherCat].slice(0, 3);
+  })();
 
   return (
     <div className="article-reader-overlay" role="dialog" aria-modal="true" aria-label={title}>
@@ -101,7 +105,7 @@ export default function ArticleReaderModal({ article, onClose, onSelectArticle }
 
             <div className="article-author-row">
               <span className="author-bullet" />
-              <span className="author-name">{author}</span>
+              <span className="author-name">{isRTL ? `به قلم: ${author}` : `By ${author}`}</span>
             </div>
           </header>
 
@@ -151,16 +155,18 @@ export default function ArticleReaderModal({ article, onClose, onSelectArticle }
           {/* Related Articles Footer */}
           {relatedArticles.length > 0 && (
             <footer className="article-related-footer">
-              <h3 className="related-title">{r.relatedArticles || 'RELATED INSIGHTS'}</h3>
+              <h3 className="related-title">{r.relatedArticles || (isRTL ? 'مقالات مرتبط' : 'RELATED INSIGHTS')}</h3>
               <div className="related-articles-grid">
                 {relatedArticles.map((rel) => {
                   const relTitle = isRTL ? rel.titleFa : rel.titleEn;
                   const relCat = isRTL ? rel.categoryLabelFa : rel.categoryLabelEn;
                   return (
-                    <div
+                    <a
                       key={rel.id}
+                      href={`/blog/${rel.slug}`}
                       className="related-article-card"
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.preventDefault();
                         onSelectArticle(rel);
                         const viewport = document.querySelector('.reader-scroll-viewport');
                         if (viewport) viewport.scrollTo({ top: 0, behavior: 'smooth' });
@@ -169,7 +175,7 @@ export default function ArticleReaderModal({ article, onClose, onSelectArticle }
                       <span className="related-cat">{relCat}</span>
                       <h4 className="related-name">{relTitle}</h4>
                       <span className="related-arrow">→</span>
-                    </div>
+                    </a>
                   );
                 })}
               </div>

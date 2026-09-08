@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useSpring } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
+import { useRouter } from '../../context/RouterContext';
 import { ArrowUpRight } from 'lucide-react';
 import { Reveal, RevealHeading, RevealLabel, RevealBody, Stagger, EASING, editorialVariants } from '../motion';
 import './Journal.css';
@@ -9,6 +10,7 @@ const toWebp = (url) => (url ? url.replace(/\.(jpg|jpeg|png)$/, '.webp') : url);
 
 export default function Journal() {
   const { t, isRTL } = useLanguage();
+  const { navigate } = useRouter();
   const [activeFilter, setActiveFilter] = useState('ALL');
   const [hoveredArticle, setHoveredArticle] = useState(null);
   const [expandedMobileArticle, setExpandedMobileArticle] = useState(null);
@@ -34,6 +36,7 @@ export default function Journal() {
     featuredArticles: [
       {
         id: 'article-1',
+        slug: 'more-marketing-not-more-growth',
         number: '01',
         title: 'Why Growth Problems Are Rarely Marketing Problems',
         category: 'STRATEGY',
@@ -44,6 +47,7 @@ export default function Journal() {
       },
       {
         id: 'article-2',
+        slug: 'more-content-is-not-fixing-problem',
         number: '02',
         title: 'From Traffic to Systems: Designing a Better Conversion Engine',
         category: 'PERFORMANCE',
@@ -54,6 +58,7 @@ export default function Journal() {
       },
       {
         id: 'article-3',
+        slug: 'ai-creative-volume-fallacy',
         number: '03',
         title: 'Where AI Actually Creates Leverage in Modern Marketing',
         category: 'AI & TECHNOLOGY',
@@ -119,14 +124,22 @@ export default function Journal() {
 
           <Stagger stagger={0.08} delay={0.1} className="journal-featured-grid">
             {articles.map((art) => (
-              <motion.article 
+              <motion.a 
                 key={art.id} 
+                href={`/blog/${art.slug || 'more-marketing-not-more-growth'}`}
                 className="journal-featured-card"
                 variants={editorialVariants}
                 whileHover={{ y: -4, transition: { duration: 0.25, ease: EASING.SECONDARY } }}
                 onMouseEnter={() => !isTouchDevice && setHoveredArticle(art)}
                 onMouseLeave={() => !isTouchDevice && setHoveredArticle(null)}
-                onClick={() => handleRowClick(art.id)}
+                onClick={(e) => {
+                  if (isTouchDevice) {
+                    handleRowClick(art.id);
+                  } else {
+                    e.preventDefault();
+                    if (navigate) navigate(`/blog/${art.slug || 'more-marketing-not-more-growth'}`);
+                  }
+                }}
               >
                 <div className="journal-featured-card-media">
                   <picture>
@@ -159,7 +172,7 @@ export default function Journal() {
                     <ArrowUpRight size={15} className="journal-card-arrow" />
                   </div>
                 </div>
-              </motion.article>
+              </motion.a>
             ))}
           </Stagger>
         </div>
@@ -192,20 +205,28 @@ export default function Journal() {
               const isExpandedMobile = expandedMobileArticle === art.id;
 
               return (
-                <motion.div
+                <motion.a
                   key={art.id}
+                  href={`/blog/${art.slug || 'more-marketing-not-more-growth'}`}
                   className={`journal-list-item ${isHovered ? 'is-hovered' : ''} ${isExpandedMobile ? 'is-expanded-mobile' : ''}`}
                   variants={editorialVariants}
                   onMouseEnter={() => !isTouchDevice && setHoveredArticle(art)}
                   onMouseLeave={() => !isTouchDevice && setHoveredArticle(null)}
-                  onClick={() => handleRowClick(art.id)}
+                  onClick={(e) => {
+                    if (isTouchDevice) {
+                      e.preventDefault();
+                      handleRowClick(art.id);
+                    } else {
+                      e.preventDefault();
+                      if (navigate) navigate(`/blog/${art.slug || 'more-marketing-not-more-growth'}`);
+                    }
+                  }}
                   tabIndex={0}
-                  role="button"
                   aria-label={art.title}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
                       e.preventDefault();
-                      handleRowClick(art.id);
+                      if (navigate) navigate(`/blog/${art.slug || 'more-marketing-not-more-growth'}`);
                     }
                   }}
                 >
@@ -241,10 +262,27 @@ export default function Journal() {
                       )}
                     </AnimatePresence>
                   )}
-                </motion.div>
+                </motion.a>
               );
             })}
           </Stagger>
+        </div>
+
+        {/* =========================================================
+            05. EXPLORE ALL INSIGHTS CTA LINK
+            ========================================================= */}
+        <div className="journal-footer-action">
+          <a
+            href="/blog"
+            className="journal-explore-all-btn"
+            onClick={(e) => {
+              e.preventDefault();
+              if (navigate) navigate('/blog');
+            }}
+          >
+            <span>{isRTL ? 'مشاهده همه دیدگاه‌ها و مقالات' : 'EXPLORE ALL INSIGHTS'}</span>
+            <span className="journal-btn-arrow" aria-hidden="true">{isRTL ? '←' : '→'}</span>
+          </a>
         </div>
 
       </div>

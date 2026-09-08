@@ -242,6 +242,7 @@ export const translations = {
       featuredArticles: [
         {
           id: 'article-1',
+          slug: 'more-marketing-not-more-growth',
           number: '01',
           title: 'Why Growth Problems Are Rarely Marketing Problems',
           category: 'STRATEGY',
@@ -252,6 +253,7 @@ export const translations = {
         },
         {
           id: 'article-2',
+          slug: 'more-content-is-not-fixing-problem',
           number: '02',
           title: 'From Traffic to Systems: Designing a Better Conversion Engine',
           category: 'PERFORMANCE',
@@ -262,6 +264,7 @@ export const translations = {
         },
         {
           id: 'article-3',
+          slug: 'ai-creative-volume-fallacy',
           number: '03',
           title: 'Where AI Actually Creates Leverage in Modern Marketing',
           category: 'AI & TECHNOLOGY',
@@ -1353,6 +1356,7 @@ export const translations = {
       featuredArticles: [
         {
           id: 'article-1',
+          slug: 'more-marketing-not-more-growth',
           number: '۰۱',
           title: 'چرا مسائل رشد به ندرت صرفاً مسائل بازاریابی هستند',
           category: 'استراتژی',
@@ -1363,6 +1367,7 @@ export const translations = {
         },
         {
           id: 'article-2',
+          slug: 'more-content-is-not-fixing-problem',
           number: '۰۲',
           title: 'از ترافیک خام تا سیستم متصل: مهندسی موتور تبدیل پایدار',
           category: 'پرفورمنس',
@@ -1373,6 +1378,7 @@ export const translations = {
         },
         {
           id: 'article-3',
+          slug: 'ai-creative-volume-fallacy',
           number: '۰۳',
           title: 'هوش مصنوعی در کجای مارکتینگ مدرن اهرم واقعی خلق می‌کند',
           category: 'فناوری و هوش مصنوعی',

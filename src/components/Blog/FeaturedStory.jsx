@@ -67,10 +67,11 @@ export default function FeaturedStory({ article, onSelectArticle }) {
             </p>
 
             <div className="featured-action-bar">
-              <button
-                type="button"
+              <a
+                href={`/blog/${article.slug}`}
                 className="featured-read-btn"
                 onClick={(e) => {
+                  e.preventDefault();
                   e.stopPropagation();
                   onSelectArticle(article);
                 }}
@@ -86,7 +87,7 @@ export default function FeaturedStory({ article, onSelectArticle }) {
                     )}
                   </svg>
                 </span>
-              </button>
+              </a>
 
               <span className="featured-date-stamp">{date}</span>
             </div>

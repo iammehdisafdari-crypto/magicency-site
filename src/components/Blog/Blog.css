@@ -600,6 +600,11 @@
   transition: color 0.2s ease;
 }
 
+.item-headline-link {
+  color: inherit;
+  text-decoration: none;
+}
+
 .editorial-stream-item:hover .item-headline {
   color: #ff8833;
 }
@@ -1298,7 +1303,7 @@
 
 .related-articles-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1.25rem;
 }
 
@@ -1312,6 +1317,8 @@
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+  text-decoration: none;
+  color: inherit;
 }
 
 .related-article-card:hover {

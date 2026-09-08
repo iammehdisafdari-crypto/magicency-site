@@ -72,7 +72,18 @@ export default function EditorialStream({ articles, onSelectArticle }) {
                         <span className="item-date">{date}</span>
                       </div>
 
-                      <h3 className="item-headline">{title}</h3>
+                      <h3 className="item-headline">
+                        <a
+                          href={`/blog/${art.slug}`}
+                          className="item-headline-link"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            onSelectArticle(art);
+                          }}
+                        >
+                          {title}
+                        </a>
+                      </h3>
                       <p className="item-excerpt">{excerpt}</p>
                     </div>
 

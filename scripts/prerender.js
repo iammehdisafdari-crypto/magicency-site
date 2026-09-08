@@ -15,7 +15,7 @@ const BLOG_METADATA = {
     desc: 'Why increasing ad spend and publishing cadence fails to fix a broken conversion architecture, and how closed feedback loops engineer durable scale.',
     cover: '/journal-1.jpg',
     date: '2026-09-01',
-    author: 'Mehdi Safdari',
+    author: 'Magicency Editorial',
     readTime: '8 MIN READ'
   },
   'more-content-is-not-fixing-problem': {
@@ -23,7 +23,7 @@ const BLOG_METADATA = {
     desc: 'Why publishing more content without category conviction creates noise rather than authority, and how original perspective commands market power.',
     cover: '/journal-2.jpg',
     date: '2026-08-15',
-    author: 'Magicency Creative Studio',
+    author: 'Magicency Editorial',
     readTime: '6 MIN READ'
   },
   'website-has-conviction-problem': {
@@ -31,7 +31,7 @@ const BLOG_METADATA = {
     desc: 'Why website redesigns fail when focused only on aesthetic trends, and how digital interfaces must act as architectural instruments of commercial proof.',
     cover: '/journal-3.jpg',
     date: '2026-07-20',
-    author: 'Magicency Digital Architecture',
+    author: 'Magicency Editorial',
     readTime: '5 MIN READ'
   },
   'why-campaigns-reset-growth': {
@@ -39,7 +39,7 @@ const BLOG_METADATA = {
     desc: 'Why campaign-dependent businesses face extreme financial volatility, and how to engineer permanent inbound moats and compounding retention flywheels.',
     cover: '/project-1.jpg',
     date: '2026-06-10',
-    author: 'Magicency Performance Lab',
+    author: 'Magicency Editorial',
     readTime: '7 MIN READ'
   },
   'ai-creative-volume-fallacy': {
@@ -47,7 +47,7 @@ const BLOG_METADATA = {
     desc: 'Why zero-marginal-cost generative AI makes volume a commodity, and why strategic discernment, human taste, and positioning remain the only defensible moats.',
     cover: '/project-2.jpg',
     date: '2026-05-04',
-    author: 'Mehdi Safdari',
+    author: 'Magicency Editorial',
     readTime: '5 MIN READ'
   },
   'seo-traffic-vs-commercial-growth': {
@@ -55,7 +55,7 @@ const BLOG_METADATA = {
     desc: 'Why ranking for generic definitions fails to generate enterprise EBITDA, and how high-conviction decision frameworks build profitable inbound pipeline.',
     cover: '/project-3.jpg',
     date: '2026-04-18',
-    author: 'Magicency Strategy Group',
+    author: 'Magicency Editorial',
     readTime: '6 MIN READ'
   }
 };
@@ -98,9 +98,9 @@ function getRouteMetadata(route) {
           'datePublished': meta.date,
           'dateModified': '2026-09-07',
           'author': {
-            '@type': 'Person',
-            'name': meta.author,
-            'url': 'https://magicency.ir/about'
+            '@type': 'Organization',
+            'name': 'Magicency Editorial',
+            'url': 'https://magicency.ir'
           },
           'publisher': {
             '@type': 'Organization',

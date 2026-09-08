@@ -13,7 +13,7 @@ import './Blog.css';
 
 export default function BlogPage() {
   const { lang, isRTL, t } = useLanguage();
-  const { blogArticleSlug } = useRouter();
+  const { blogArticleSlug, navigate } = useRouter();
   const pageMeta = t.blog?.pageMeta || {};
 
   const [activeCategory, setActiveCategory] = useState('all');
@@ -24,6 +24,16 @@ export default function BlogPage() {
     }
     return null;
   });
+
+  const handleSelectArticle = (art) => {
+    setActiveArticle(art);
+    if (navigate) navigate(`/blog/${art.slug}`);
+  };
+
+  const handleCloseArticle = () => {
+    setActiveArticle(null);
+    if (navigate) navigate('/blog');
+  };
 
   // Set document title and scroll to top on mount
   useEffect(() => {
@@ -94,7 +104,7 @@ export default function BlogPage() {
       {activeCategory === 'all' && !searchQuery.trim() && (
         <FeaturedStory
           article={featuredArticle}
-          onSelectArticle={setActiveArticle}
+          onSelectArticle={handleSelectArticle}
         />
       )}
 
@@ -108,7 +118,7 @@ export default function BlogPage() {
       {/* 04 — Editorial Stream Archive */}
       <EditorialStream
         articles={filteredArticles}
-        onSelectArticle={setActiveArticle}
+        onSelectArticle={handleSelectArticle}
       />
 
       {/* 05 — Editorial Point of View (Observe, Question, Share) */}
@@ -121,8 +131,8 @@ export default function BlogPage() {
       {activeArticle && (
         <ArticleReaderModal
           article={activeArticle}
-          onClose={() => setActiveArticle(null)}
-          onSelectArticle={setActiveArticle}
+          onClose={handleCloseArticle}
+          onSelectArticle={handleSelectArticle}
         />
       )}
 
