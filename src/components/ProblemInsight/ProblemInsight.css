@@ -5,11 +5,12 @@
 
 .pi-scroll-section {
   position: relative;
-  height: 290vh; /* Smooth, intentional ~8-12 second scroll track */
+  height: var(--pi-height, 380vh);
   background-color: var(--bg-void, #060709);
   color: var(--text-primary, #FFFFFF);
   width: 100%;
   box-sizing: border-box;
+  z-index: 3;
 }
 
 /* Pinned 100svh Viewport */
@@ -24,6 +25,7 @@
   justify-content: center;
   box-sizing: border-box;
   background-color: #060709;
+  z-index: 4;
 }
 
 /* Atmospheric Ambient Layers */
@@ -494,7 +496,8 @@
    ========================================================= */
 @media (max-width: 960px) and (min-width: 768px) {
   .pi-scroll-section {
-    height: 260vh;
+    height: var(--pi-tablet-height, 400vh);
+    z-index: 3;
   }
 
   .pi-container {
@@ -584,9 +587,9 @@
 @media (max-width: 767px) {
   .pi-scroll-section {
     position: relative;
-    height: 320vh;
+    height: var(--pi-mobile-height, 440vh);
     isolation: isolate;
-    z-index: 1;
+    z-index: 3;
   }
 
   .pi-sticky-viewport {
@@ -599,6 +602,7 @@
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
+    z-index: 4;
   }
 
   .pi-container {

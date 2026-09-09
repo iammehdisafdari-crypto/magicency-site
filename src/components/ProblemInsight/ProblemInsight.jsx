@@ -93,27 +93,25 @@ export default function ProblemInsight() {
   });
 
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 90,
-    damping: 24,
+    stiffness: 180,
+    damping: 28,
     restDelta: 0.001
   });
 
-  // Calculate active narrative beat based on smooth scroll
+  // Calculate active narrative beat based on scroll progress
   useEffect(() => {
+    const totalBeats = beats.length; // 4
     const unsubscribe = smoothProgress.on('change', (val) => {
-      if (val < 0.24) {
-        setActiveBeatIndex(0);
-      } else if (val < 0.48) {
-        setActiveBeatIndex(1);
-      } else if (val < 0.72) {
-        setActiveBeatIndex(2);
-      } else {
-        setActiveBeatIndex(3);
-      }
+      // Clamp progress to [0, 1]
+      const p = Math.min(Math.max(val, 0), 1);
+      // Distribute beats evenly across [0.0, 0.88], reserving [0.88, 1.0] for comfortable hold of the final outcome card
+      const step = 0.88 / totalBeats; // 0.22 per beat
+      const index = Math.min(totalBeats - 1, Math.floor(p / step));
+      setActiveBeatIndex(index);
     });
 
     return () => unsubscribe();
-  }, [smoothProgress]);
+  }, [smoothProgress, beats.length]);
 
   const currentBeat = beats[activeBeatIndex] || beats[0];
 
@@ -143,7 +141,17 @@ export default function ProblemInsight() {
   }
 
   return (
-    <section ref={containerRef} id="insight" className="pi-scroll-section" aria-label="Strategic Problem Insight Interactive Architecture">
+    <section 
+      ref={containerRef} 
+      id="insight" 
+      className="pi-scroll-section" 
+      aria-label="Strategic Problem Insight Interactive Architecture"
+      style={{
+        '--pi-height': `${beats.length * 95}vh`,
+        '--pi-tablet-height': `${beats.length * 100}vh`,
+        '--pi-mobile-height': `${beats.length * 110}vh`
+      }}
+    >
       {/* Sticky Pinned Stage */}
       <div className="pi-sticky-viewport">
         {/* Background Atmosphere Layers */}
