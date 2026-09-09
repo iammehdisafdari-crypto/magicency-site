@@ -587,7 +587,7 @@
 @media (max-width: 767px) {
   .pi-scroll-section {
     position: relative;
-    height: var(--pi-mobile-height, 440vh);
+    height: var(--pi-mobile-height, 460vh);
     isolation: isolate;
     z-index: 3;
   }
@@ -651,18 +651,18 @@
   }
 
   .pi-headline {
-    font-size: clamp(1.15rem, 4.4vw, 1.45rem);
+    font-size: clamp(1.10rem, 4.2vw, 1.38rem);
     line-height: 1.25;
   }
 
   [dir="rtl"] .pi-headline {
-    font-size: clamp(1.1rem, 4.2vw, 1.35rem);
+    font-size: clamp(1.05rem, 4.0vw, 1.30rem);
     line-height: 1.32;
   }
 
   .pi-insight-text {
-    font-size: 0.80rem;
-    line-height: 1.42;
+    font-size: 0.78rem;
+    line-height: 1.40;
     margin-top: 4px;
     max-width: 100%;
   }
@@ -694,7 +694,7 @@
   .pi-visual-container {
     width: 100%;
     max-width: 340px;
-    max-height: min(48svh, 340px);
+    max-height: min(44svh, 310px);
     aspect-ratio: 380 / 400;
     margin-inline: auto;
     position: relative;

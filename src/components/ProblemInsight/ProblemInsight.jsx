@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
+import { motion, AnimatePresence, useScroll } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
-import { useDeferredTarget } from '../motion/useDeferredTarget';
 import './ProblemInsight.css';
 
 const ProblemInsightVisual = React.lazy(() => import('./ProblemInsightVisual'));
@@ -84,34 +83,31 @@ export default function ProblemInsight() {
     return () => mediaQuery.removeEventListener('change', handler);
   }, []);
 
-  const targetRef = useDeferredTarget(containerRef);
-
-  // Track scroll progress through this section (300vh total track)
+  // Track scroll progress directly through containerRef
   const { scrollYProgress } = useScroll({
-    target: targetRef,
+    target: containerRef,
     offset: ['start start', 'end end']
   });
 
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 180,
-    damping: 28,
-    restDelta: 0.001
-  });
-
-  // Calculate active narrative beat based on scroll progress
+  // Direct physical scroll mapping with wide hold buffer for final outcome
   useEffect(() => {
-    const totalBeats = beats.length; // 4
-    const unsubscribe = smoothProgress.on('change', (val) => {
-      // Clamp progress to [0, 1]
+    const unsubscribe = scrollYProgress.on('change', (val) => {
       const p = Math.min(Math.max(val, 0), 1);
-      // Distribute beats evenly across [0.0, 0.88], reserving [0.88, 1.0] for comfortable hold of the final outcome card
-      const step = 0.88 / totalBeats; // 0.22 per beat
-      const index = Math.min(totalBeats - 1, Math.floor(p / step));
+      let index = 0;
+      if (p >= 0.72) {
+        index = 3; // 04 THE OUTCOME (held from 0.72 all the way to 1.0)
+      } else if (p >= 0.46) {
+        index = 2; // 03 THE SYSTEM (0.46 to 0.72)
+      } else if (p >= 0.20) {
+        index = 1; // 02 THE INSIGHT (0.20 to 0.46)
+      } else {
+        index = 0; // 01 THE PROBLEM (0.00 to 0.20)
+      }
       setActiveBeatIndex(index);
     });
 
     return () => unsubscribe();
-  }, [smoothProgress, beats.length]);
+  }, [scrollYProgress]);
 
   const currentBeat = beats[activeBeatIndex] || beats[0];
 
@@ -148,8 +144,8 @@ export default function ProblemInsight() {
       aria-label="Strategic Problem Insight Interactive Architecture"
       style={{
         '--pi-height': `${beats.length * 95}vh`,
-        '--pi-tablet-height': `${beats.length * 100}vh`,
-        '--pi-mobile-height': `${beats.length * 110}vh`
+        '--pi-tablet-height': `${beats.length * 105}vh`,
+        '--pi-mobile-height': `${beats.length * 115}vh`
       }}
     >
       {/* Sticky Pinned Stage */}
@@ -189,10 +185,10 @@ export default function ProblemInsight() {
                 <motion.div
                   key={currentBeat.id}
                   className="pi-narrative-card"
-                  initial={{ opacity: 0, y: 16 }}
+                  initial={{ opacity: 0, y: 14 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -16 }}
-                  transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+                  exit={{ opacity: 0, y: -14 }}
+                  transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
                 >
                   {/* Beat Pill Tag */}
                   <div className="pi-tag-wrap">
