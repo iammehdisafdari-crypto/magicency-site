@@ -28,7 +28,7 @@ import './styles/global.css';
 function MainApp() {
   const { isRTL, isModalOpen } = useLanguage();
   const { isWorkPage, isApproachPage, isCapabilitiesPage, isBlogPage, isAboutPage, isNotFound } = useRouter();
-  const [introFinished, setIntroFinished] = useState(() => typeof window === 'undefined');
+  const [introFinished, setIntroFinished] = useState(true);
 
   useEffect(() => {
     initGA();

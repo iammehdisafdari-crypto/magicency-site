@@ -149,9 +149,7 @@ export default function ProblemInsightVisual({
   nodesData = []
 }) {
   const currentStage = Math.max(0, Math.min(3, activeBeat));
-  const [isMobile, setIsMobile] = React.useState(
-    typeof window !== 'undefined' ? window.innerWidth < 768 : false
-  );
+  const [isMobile, setIsMobile] = React.useState(false);
 
   React.useEffect(() => {
     const handleResize = () => {

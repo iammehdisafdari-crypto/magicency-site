@@ -11,13 +11,13 @@ import Journal from './components/Journal/Journal';
 import FinalCTA from './components/FinalCTA/FinalCTA';
 import Footer from './components/Footer/Footer';
 
-// Dynamic imports for subpages — code-splits CSS and JS, reducing main bundle unused CSS
-const WorkPage = lazy(() => import('./components/Work/WorkPage'));
-const ApproachPage = lazy(() => import('./components/Approach/ApproachPage'));
-const CapabilitiesPage = lazy(() => import('./components/Capabilities/CapabilitiesPage'));
-const BlogPage = lazy(() => import('./components/Blog/BlogPage'));
-const AboutPage = lazy(() => import('./components/About/AboutPage'));
-const NotFoundPage = lazy(() => import('./components/NotFound/NotFoundPage'));
+// Static imports for page components ensure synchronous hydration and match SSR pre-rendered HTML
+import WorkPage from './components/Work/WorkPage';
+import ApproachPage from './components/Approach/ApproachPage';
+import CapabilitiesPage from './components/Capabilities/CapabilitiesPage';
+import BlogPage from './components/Blog/BlogPage';
+import AboutPage from './components/About/AboutPage';
+import NotFoundPage from './components/NotFound/NotFoundPage';
 
 // Lazy load user-triggered modal dialogs
 const ProjectDiscovery = lazy(() => import('./components/ProjectDiscovery/ProjectDiscovery'));
@@ -28,7 +28,7 @@ import './styles/global.css';
 function MainApp() {
   const { isRTL, isModalOpen } = useLanguage();
   const { isWorkPage, isApproachPage, isCapabilitiesPage, isBlogPage, isAboutPage, isNotFound } = useRouter();
-  const [introFinished, setIntroFinished] = useState(() => typeof window === 'undefined');
+  const [introFinished, setIntroFinished] = useState(true);
 
   useEffect(() => {
     initGA();
@@ -50,23 +50,22 @@ function MainApp() {
 
       {/* Main Experience Flow */}
       <main id="main" className="main-content-flow">
-        <Suspense fallback={null}>
-          {isNotFound ? (
-            <NotFoundPage />
-          ) : isWorkPage ? (
-            <WorkPage />
-          ) : isApproachPage ? (
-            <ApproachPage />
-          ) : isCapabilitiesPage ? (
-            <CapabilitiesPage />
-          ) : isBlogPage ? (
-            <BlogPage />
-          ) : isAboutPage ? (
-            <AboutPage />
-          ) : (
-            <>
-              {/* Phase 01: Hero Section (Vivid Motion Architecture + Mouse Fire Effect) */}
-              <Hero isLoaded={introFinished} />
+        {isNotFound ? (
+          <NotFoundPage />
+        ) : isWorkPage ? (
+          <WorkPage />
+        ) : isApproachPage ? (
+          <ApproachPage />
+        ) : isCapabilitiesPage ? (
+          <CapabilitiesPage />
+        ) : isBlogPage ? (
+          <BlogPage />
+        ) : isAboutPage ? (
+          <AboutPage />
+        ) : (
+          <>
+            {/* Phase 01: Hero Section (Vivid Motion Architecture + Mouse Fire Effect) */}
+            <Hero isLoaded={introFinished} />
 
             {/* Phase 02: Featured Work (Sticky Scroll Showcase + 4 Projects + See All Work CTA) */}
             <SelectedWork />
@@ -84,7 +83,6 @@ function MainApp() {
             <FinalCTA />
           </>
         )}
-        </Suspense>
       </main>
 
       {/* Cinematic Closing Frame Footer */}
