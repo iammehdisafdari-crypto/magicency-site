@@ -89,25 +89,22 @@ export default function ProblemInsight() {
     offset: ['start start', 'end end']
   });
 
-  // Direct physical scroll mapping with wide hold buffer for final outcome
+  // Direct physical scroll mapping with equal 25% share per card and instant initial hydration
   useEffect(() => {
-    const unsubscribe = scrollYProgress.on('change', (val) => {
+    const totalBeats = beats.length; // 4
+    const updateBeat = (val) => {
       const p = Math.min(Math.max(val, 0), 1);
-      let index = 0;
-      if (p >= 0.72) {
-        index = 3; // 04 THE OUTCOME (held from 0.72 all the way to 1.0)
-      } else if (p >= 0.46) {
-        index = 2; // 03 THE SYSTEM (0.46 to 0.72)
-      } else if (p >= 0.20) {
-        index = 1; // 02 THE INSIGHT (0.20 to 0.46)
-      } else {
-        index = 0; // 01 THE PROBLEM (0.00 to 0.20)
-      }
+      // Single source of truth: each card gets exactly 1/4 (25%) of total pinned scroll distance
+      const index = Math.min(totalBeats - 1, Math.floor(p * totalBeats));
       setActiveBeatIndex(index);
-    });
+    };
 
+    // Immediately sync with current scroll value
+    updateBeat(scrollYProgress.get());
+
+    const unsubscribe = scrollYProgress.on('change', updateBeat);
     return () => unsubscribe();
-  }, [scrollYProgress]);
+  }, [scrollYProgress, beats.length]);
 
   const currentBeat = beats[activeBeatIndex] || beats[0];
 
@@ -143,9 +140,7 @@ export default function ProblemInsight() {
       className="pi-scroll-section" 
       aria-label="Strategic Problem Insight Interactive Architecture"
       style={{
-        '--pi-height': `${beats.length * 95}vh`,
-        '--pi-tablet-height': `${beats.length * 105}vh`,
-        '--pi-mobile-height': `${beats.length * 115}vh`
+        '--pi-height': `${beats.length * 100}vh`
       }}
     >
       {/* Sticky Pinned Stage */}
