@@ -4,7 +4,7 @@ import { useLanguage } from '../../context/LanguageContext';
 import { ArrowDown } from 'lucide-react';
 
 export default function QuestionShift() {
-  const { t, isRTL } = useLanguage();
+  const { t } = useLanguage();
   const q = t.approach?.questionShift || {};
   const containerRef = useRef(null);
 

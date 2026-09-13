@@ -21,7 +21,7 @@ export default function Hero({ isLoaded = true }) {
       window.innerWidth < 992 ||
       'ontouchstart' in window ||
       (navigator.maxTouchPoints && navigator.maxTouchPoints > 0) ||
-      (window.matchMedia && window.matchMedia('(pointer: coarse)').matches)
+      Boolean(window.matchMedia?.('(pointer: coarse)')?.matches)
     );
 
     if (isReducedMotion || isTouchOrMobile) return;
