@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useSpring } from 'framer-motion';
+import { motion, AnimatePresence, useSpring } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 import { useRouter } from '../../context/RouterContext';
 import { ArrowUpRight } from 'lucide-react';
-import { EASING } from '../motion';
+import { EASING, RevealLabel, RevealHeading, Stagger, editorialVariants } from '../motion';
 import './Journal.css';
 
 const toWebp = (url) => (url ? url.replace(/\.(jpg|jpeg|png)$/, '.webp') : url);
 
 export default function Journal() {
-  const { t } = useLanguage();
+  const { t, isRTL } = useLanguage();
   const { navigate } = useRouter();
   const [activeFilter, setActiveFilter] = useState('ALL');
   const [hoveredArticle, setHoveredArticle] = useState(null);
