@@ -48,19 +48,12 @@ export default function SystemLoop() {
               const Icon = ICONS[d.id] || Compass;
               const isCurrent = d.id === activeId;
               return (
-                <div 
+                <button
                   key={d.id} 
-                  role="button"
-                  tabIndex={0}
+                  type="button"
                   aria-pressed={isCurrent}
                   className={`system-node-item ${isCurrent ? 'is-active' : ''}`}
                   onClick={() => setActiveId(d.id)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault();
-                      setActiveId(d.id);
-                    }
-                  }}
                 >
                   <div className="node-icon-housing">
                     <Icon size={20} className="node-icon-svg" />
@@ -76,7 +69,7 @@ export default function SystemLoop() {
                   <div className="node-connector-arrow" aria-hidden="true">
                     <span>→</span>
                   </div>
-                </div>
+                </button>
               );
             })}
           </div>

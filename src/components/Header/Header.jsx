@@ -166,6 +166,14 @@ export default function Header() {
     { label: 'Dribbble', link: 'https://dribbble.com', onClick: () => trackOutboundClick('https://dribbble.com', 'dribbble') }
   ];
 
+  const renderExtraContent = React.useCallback(({ closeMenu }) => (
+    <MobileMenuExtra
+      closeMenu={closeMenu}
+      startProjectLabel={(t.nav.startProject || 'START A PROJECT').toUpperCase()}
+      onStartProject={() => setIsModalOpen(true)}
+    />
+  ), [t.nav.startProject]);
+
   return (
     <>
       {/* =========================================================
@@ -306,13 +314,7 @@ export default function Header() {
               <span className="vm-mobile-lang-text">{lang === 'en' ? 'FA' : 'EN'}</span>
             </button>
           }
-          extraContent={({ closeMenu }) => (
-            <MobileMenuExtra
-              closeMenu={closeMenu}
-              startProjectLabel={(t.nav.startProject || 'START A PROJECT').toUpperCase()}
-              onStartProject={() => setIsModalOpen(true)}
-            />
-          )}
+          extraContent={renderExtraContent}
           onMenuOpen={() => {
             console.log('Menu opened');
           }}
