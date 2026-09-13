@@ -143,6 +143,332 @@ const STAGE_COORDS_MOBILE_LTR = {
   ]
 };
 
+function renderEntropyLayer({ nodes, coordsMap, isMobile, centerX, isRTL }) {
+  return (
+    <g className="pi-entropy-layer">
+      {nodes.map((node) => {
+        const coord = coordsMap[node.id][0];
+        const boxW = isMobile ? 116 : 140;
+        const boxH = isMobile ? 38 : 56;
+        return (
+          <g key={`silo-frame-${node.id}`}>
+            {/* Dashed Silo Warning Boundary */}
+            <rect 
+              x={coord.x - boxW / 2} 
+              y={coord.y - boxH / 2} 
+              width={boxW} 
+              height={boxH} 
+              rx={isMobile ? "8" : "12"} 
+              fill="rgba(255, 60, 0, 0.04)" 
+              stroke="rgba(255, 85, 0, 0.35)" 
+              strokeWidth="1.2" 
+              strokeDasharray="4 4" 
+            />
+          </g>
+        );
+      })}
+
+      {/* Severed energy leakage traces */}
+      {isMobile ? (
+        <path 
+          d="M 160 68 L 220 68 M 150 220 L 230 220 M 190 250 L 190 310" 
+          stroke="rgba(255, 60, 0, 0.4)" 
+          strokeWidth="1.5" 
+          strokeDasharray="3 5"
+        />
+      ) : (
+        <path 
+          d="M 205 95 L 305 75 M 695 95 L 600 75 M 195 415 L 290 435 M 705 415 L 615 435" 
+          stroke="rgba(255, 60, 0, 0.4)" 
+          strokeWidth="1.5" 
+          strokeDasharray="3 5"
+        />
+      )}
+
+      {/* Central Broken Feedback Indicator */}
+      <text 
+        x={centerX} 
+        y={isMobile ? 142 : 248} 
+        textAnchor="middle" 
+        fill="#FF5500" 
+        fontSize={isMobile ? "10" : "12"} 
+        fontWeight="700" 
+        fontFamily="var(--font-mono)" 
+        letterSpacing={isMobile ? "0.06em" : "0.12em"}
+      >
+        ✕ {isRTL ? 'عدم همگام‌سازی و اتلاف انرژی' : 'ZERO INTERCONNECTION // LEAKING VALUE'}
+      </text>
+      <text 
+        x={centerX} 
+        y={isMobile ? 158 : 272} 
+        textAnchor="middle" 
+        fill="#7F8492" 
+        fontSize={isMobile ? "8" : "9.5"} 
+        fontFamily="var(--font-mono)" 
+        letterSpacing="0.06em"
+      >
+        {isRTL ? 'فعالیت‌های پراکنده به رشد تبدیل نمی‌شوند' : 'ISOLATED ACTIONS DO NOT COMPOUND'}
+      </text>
+    </g>
+  );
+}
+
+function renderConvergenceLayer({ nodes, coordsMap, centerX, centerY, isMobile }) {
+  return (
+    <g className="pi-convergence-layer">
+      {/* Center Gravitational Singularity at (centerX, centerY) */}
+      <circle cx={centerX} cy={centerY} r={isMobile ? 45 : 65} fill="url(#piCoreGlow)" />
+      <circle cx={centerX} cy={centerY} r={isMobile ? 14 : 18} fill="rgba(255, 85, 0, 0.25)" />
+      <circle cx={centerX} cy={centerY} r={isMobile ? 6 : 8} fill="#FF7722" filter="url(#piGlowNeon)" />
+
+      {/* Inward Vector Alignment Conduits */}
+      {nodes.map((node) => {
+        const coord = coordsMap[node.id][1];
+        return (
+          <g key={`pull-${node.id}`}>
+            <motion.line
+              x1={coord.x}
+              y1={coord.y}
+              x2={centerX}
+              y2={centerY}
+              stroke="rgba(255, 120, 40, 0.55)"
+              strokeWidth="1.8"
+              strokeDasharray="4 6"
+              initial={{ pathLength: 0, opacity: 0 }}
+              animate={{ pathLength: 1, opacity: 1 }}
+              transition={{ duration: 0.65, ease: "easeOut" }}
+            />
+            {/* Energy dot on conduit */}
+            <circle 
+              cx={(coord.x + centerX) / 2} 
+              cy={(coord.y + centerY) / 2} 
+              r={isMobile ? "2.5" : "3.5"} 
+              fill="#FFAA33" 
+            />
+          </g>
+        );
+      })}
+    </g>
+  );
+}
+
+function renderPipelineLayer({ isMobile, pipelineBridgesMobile, pipelineBridges, isRTL }) {
+  return (
+    <g className="pi-pipeline-layer">
+      {isMobile ? (
+        pipelineBridgesMobile.map((bridge, idx) => (
+          <g key={`pipe-bridge-mob-${bridge.fromY}-${bridge.toY}`}>
+            <circle cx="190" cy={bridge.fromY} r="2" fill="#FF7722" />
+            <circle cx="190" cy={bridge.toY} r="2" fill="#FF7722" />
+            <line
+              x1="190"
+              y1={bridge.fromY}
+              x2="190"
+              y2={bridge.toY}
+              stroke="rgba(255, 120, 40, 0.45)"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+            />
+            <circle cx="190" r="3" fill="#FFFFFF" filter="url(#piGlowNeon)">
+              <animate 
+                attributeName="cy" 
+                values={`${bridge.fromY};${bridge.toY}`} 
+                dur="0.85s" 
+                begin={`${idx * 0.2}s`}
+                repeatCount="indefinite" 
+              />
+            </circle>
+            <g transform={`translate(190, ${bridge.midY})`}>
+              <path
+                d="M -6 -3 L 0 3 L 6 -3"
+                fill="none"
+                stroke="#FF6600"
+                strokeWidth="3"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M -6 -7 L 0 -1 L 6 -7"
+                fill="none"
+                stroke="#FFFFFF"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </g>
+          </g>
+        ))
+      ) : (
+        pipelineBridges.map((bridge, idx) => (
+          <g key={`pipe-bridge-dt-${bridge.fromX}-${bridge.toX}`}>
+            <circle cx={bridge.fromX} cy="260" r="2.5" fill="#FF7722" />
+            <circle cx={bridge.toX} cy="260" r="2.5" fill="#FF7722" />
+            <line
+              x1={bridge.fromX}
+              y1="260"
+              x2={bridge.toX}
+              y2="260"
+              stroke="rgba(255, 120, 40, 0.4)"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+            />
+            <circle cy="260" r="3.5" fill="#FFFFFF" filter="url(#piGlowNeon)">
+              <animate 
+                attributeName="cx" 
+                values={`${bridge.fromX};${bridge.toX}`} 
+                dur="1.1s" 
+                begin={`${idx * 0.24}s`}
+                repeatCount="indefinite" 
+              />
+            </circle>
+            {isRTL ? (
+              <g transform={`translate(${bridge.midX}, 260)`}>
+                <path
+                  d="M 6 -7 L -2 0 L 6 7"
+                  fill="none"
+                  stroke="#FF6600"
+                  strokeWidth="3.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M 1 -7 L -7 0 L 1 7"
+                  fill="none"
+                  stroke="#FFFFFF"
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </g>
+            ) : (
+              <g transform={`translate(${bridge.midX}, 260)`}>
+                <path
+                  d="M -6 -7 L 2 0 L -6 7"
+                  fill="none"
+                  stroke="#FF6600"
+                  strokeWidth="3.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M -1 -7 L 7 0 L -1 7"
+                  fill="none"
+                  stroke="#FFFFFF"
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </g>
+            )}
+          </g>
+        ))
+      )}
+
+      {/* Desktop Pipeline Bottom Status Tag */}
+      {!isMobile && (
+        <text x="450" y="348" textAnchor="middle" fill="#FFFFFF" fontSize="11" fontWeight="700" fontFamily="var(--font-mono)" letterSpacing="0.1em">
+          ✦ {isRTL ? 'جریان داده و تبدیل بدون توقف // صفر درصد اصطکاک' : 'UNIFIED CLOSED-LOOP PIPELINE // ZERO FRICTION'}
+        </text>
+      )}
+    </g>
+  );
+}
+
+function renderReactorLayer({ centerX, centerY, isMobile, isRTL }) {
+  return (
+    <g className="pi-reactor-layer">
+      {/* Giant Radial Glow Field */}
+      <circle cx={centerX} cy={centerY} r={isMobile ? 150 : 210} fill="url(#piCoreGlow)" />
+
+      {/* Precision Flywheel Orbit Ring */}
+      <g transform={`translate(${centerX}, ${centerY})`}>
+        {/* Outer Orbit Dashed Ring */}
+        <motion.circle
+          cx="0"
+          cy="0"
+          r={isMobile ? 135 : 195}
+          stroke="rgba(255, 90, 0, 0.65)"
+          strokeWidth={isMobile ? 1.6 : 2}
+          strokeDasharray="8 10"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 30, ease: "linear", repeat: Infinity }}
+        />
+
+        {/* Glowing High-Velocity Energy Stream */}
+        <motion.circle
+          cx="0"
+          cy="0"
+          r={isMobile ? 135 : 195}
+          stroke="url(#piPipelineGrad)"
+          strokeWidth={isMobile ? 2.8 : 3.5}
+          fill="none"
+          strokeDasharray={isMobile ? "80 200" : "120 280"}
+          animate={{ rotate: isRTL ? -360 : 360 }}
+          transition={{ duration: 4.4, ease: "linear", repeat: Infinity }}
+        />
+      </g>
+
+      {/* Center Hub Core */}
+      <circle
+        cx={centerX}
+        cy={centerY}
+        r={isMobile ? 48 : 68}
+        fill="#080A0F"
+        stroke="rgba(255, 120, 40, 0.5)"
+        strokeWidth="1.5"
+      />
+      {/* Subtle inner concentric ring for premium tech feel */}
+      <circle
+        cx={centerX}
+        cy={centerY}
+        r={isMobile ? 42 : 60}
+        fill="rgba(255, 85, 0, 0.05)"
+        stroke="rgba(255, 255, 255, 0.1)"
+        strokeWidth="1"
+        strokeDasharray="3 3"
+      />
+
+      {/* Central Compounding Readout — Clean, high-contrast & 100% legible */}
+      <text 
+        x={centerX} 
+        y={centerY - (isMobile ? 10 : 16)} 
+        textAnchor="middle" 
+        fill="#FF7722" 
+        fontSize={isMobile ? "15" : "19"} 
+        fontWeight="900" 
+        fontFamily="var(--font-mono)" 
+        letterSpacing="0.05em"
+      >
+        +3.4X
+      </text>
+      <text 
+        x={centerX} 
+        y={centerY + (isMobile ? 6 : 8)} 
+        textAnchor="middle" 
+        fill="#FFFFFF" 
+        fontSize={isMobile ? "9.5" : "11"} 
+        fontWeight="800" 
+        fontFamily={isRTL ? 'var(--font-persian)' : 'var(--font-sans)'} 
+        letterSpacing="0.04em"
+      >
+        {isRTL ? 'شتاب خودافزا' : 'COMPOUNDING'}
+      </text>
+      <text 
+        x={centerX} 
+        y={centerY + (isMobile ? 20 : 26)} 
+        textAnchor="middle" 
+        fill="#A0AEC0" 
+        fontSize={isMobile ? "7.5" : "9"} 
+        fontWeight="600" 
+        fontFamily="var(--font-mono)" 
+        letterSpacing="0.06em"
+      >
+        {isRTL ? 'موتور رشد پایدار' : 'GROWTH ENGINE'}
+      </text>
+    </g>
+  );
+}
+
 export default function ProblemInsightVisual({ 
   activeBeat = 0, 
   isRTL = false,
@@ -279,336 +605,22 @@ export default function ProblemInsightVisual({
         {/* =========================================================
             STAGE 0: THE PROBLEM — 5 DISCONNECTED SILO FRAMES
             ========================================================= */}
-        {currentStage === 0 && (
-          <g className="pi-entropy-layer">
-            {nodes.map((node) => {
-              const coord = coordsMap[node.id][0];
-              const boxW = isMobile ? 116 : 140;
-              const boxH = isMobile ? 38 : 56;
-              return (
-                <g key={`silo-frame-${node.id}`}>
-                  {/* Dashed Silo Warning Boundary */}
-                  <rect 
-                    x={coord.x - boxW / 2} 
-                    y={coord.y - boxH / 2} 
-                    width={boxW} 
-                    height={boxH} 
-                    rx={isMobile ? "8" : "12"} 
-                    fill="rgba(255, 60, 0, 0.04)" 
-                    stroke="rgba(255, 85, 0, 0.35)" 
-                    strokeWidth="1.2" 
-                    strokeDasharray="4 4" 
-                  />
-                </g>
-              );
-            })}
-
-            {/* Severed energy leakage traces */}
-            {isMobile ? (
-              <path 
-                d="M 160 68 L 220 68 M 150 220 L 230 220 M 190 250 L 190 310" 
-                stroke="rgba(255, 60, 0, 0.4)" 
-                strokeWidth="1.5" 
-                strokeDasharray="3 5"
-              />
-            ) : (
-              <path 
-                d="M 205 95 L 305 75 M 695 95 L 600 75 M 195 415 L 290 435 M 705 415 L 615 435" 
-                stroke="rgba(255, 60, 0, 0.4)" 
-                strokeWidth="1.5" 
-                strokeDasharray="3 5"
-              />
-            )}
-
-            {/* Central Broken Feedback Indicator */}
-            <text 
-              x={centerX} 
-              y={isMobile ? 142 : 248} 
-              textAnchor="middle" 
-              fill="#FF5500" 
-              fontSize={isMobile ? "10" : "12"} 
-              fontWeight="700" 
-              fontFamily="var(--font-mono)" 
-              letterSpacing={isMobile ? "0.06em" : "0.12em"}
-            >
-              ✕ {isRTL ? 'عدم همگام‌سازی و اتلاف انرژی' : 'ZERO INTERCONNECTION // LEAKING VALUE'}
-            </text>
-            <text 
-              x={centerX} 
-              y={isMobile ? 158 : 272} 
-              textAnchor="middle" 
-              fill="#7F8492" 
-              fontSize={isMobile ? "8" : "9.5"} 
-              fontFamily="var(--font-mono)" 
-              letterSpacing="0.06em"
-            >
-              {isRTL ? 'فعالیت‌های پراکنده به رشد تبدیل نمی‌شوند' : 'ISOLATED ACTIONS DO NOT COMPOUND'}
-            </text>
-          </g>
-        )}
+        {currentStage === 0 && renderEntropyLayer({ nodes, coordsMap, isMobile, centerX, isRTL })}
 
         {/* =========================================================
             STAGE 1: THE INSIGHT — MAGNETIC CONVERGENCE VECTORS
             ========================================================= */}
-        {currentStage === 1 && (
-          <g className="pi-convergence-layer">
-            {/* Center Gravitational Singularity at (centerX, centerY) */}
-            <circle cx={centerX} cy={centerY} r={isMobile ? 45 : 65} fill="url(#piCoreGlow)" />
-            <circle cx={centerX} cy={centerY} r={isMobile ? 14 : 18} fill="rgba(255, 85, 0, 0.25)" />
-            <circle cx={centerX} cy={centerY} r={isMobile ? 6 : 8} fill="#FF7722" filter="url(#piGlowNeon)" />
-
-            {/* Inward Vector Alignment Conduits */}
-            {nodes.map((node) => {
-              const coord = coordsMap[node.id][1];
-              return (
-                <g key={`pull-${node.id}`}>
-                  <motion.line
-                    x1={coord.x}
-                    y1={coord.y}
-                    x2={centerX}
-                    y2={centerY}
-                    stroke="rgba(255, 120, 40, 0.55)"
-                    strokeWidth="1.8"
-                    strokeDasharray="4 6"
-                    initial={{ pathLength: 0, opacity: 0 }}
-                    animate={{ pathLength: 1, opacity: 1 }}
-                    transition={{ duration: 0.65, ease: "easeOut" }}
-                  />
-                  {/* Energy dot on conduit */}
-                  <circle 
-                    cx={(coord.x + centerX) / 2} 
-                    cy={(coord.y + centerY) / 2} 
-                    r={isMobile ? "2.5" : "3.5"} 
-                    fill="#FFAA33" 
-                  />
-                </g>
-              );
-            })}
-          </g>
-        )}
+        {currentStage === 1 && renderConvergenceLayer({ nodes, coordsMap, centerX, centerY, isMobile })}
 
         {/* =========================================================
             STAGE 2: THE SYSTEM — SYNCHRONIZED END-TO-END PIPELINE
             ========================================================= */}
-        {currentStage === 2 && (
-          <g className="pi-pipeline-layer">
-            {isMobile ? (
-              // Mobile: Vertical Top-to-Bottom Pipeline Bridges
-              pipelineBridgesMobile.map((bridge, idx) => (
-                <g key={`pipe-bridge-mob-${bridge.fromY}-${bridge.toY}`}>
-                  <circle cx="190" cy={bridge.fromY} r="2" fill="#FF7722" />
-                  <circle cx="190" cy={bridge.toY} r="2" fill="#FF7722" />
-                  <line
-                    x1="190"
-                    y1={bridge.fromY}
-                    x2="190"
-                    y2={bridge.toY}
-                    stroke="rgba(255, 120, 40, 0.45)"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                  />
-                  {/* Downward traveling photon */}
-                  <circle cx="190" r="3" fill="#FFFFFF" filter="url(#piGlowNeon)">
-                    <animate 
-                      attributeName="cy" 
-                      values={`${bridge.fromY};${bridge.toY}`} 
-                      dur="0.85s" 
-                      begin={`${idx * 0.2}s`}
-                      repeatCount="indefinite" 
-                    />
-                  </circle>
-                  {/* Downward pointing double chevron ⬇ */}
-                  <g transform={`translate(190, ${bridge.midY})`}>
-                    <path
-                      d="M -6 -3 L 0 3 L 6 -3"
-                      fill="none"
-                      stroke="#FF6600"
-                      strokeWidth="3"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M -6 -7 L 0 -1 L 6 -7"
-                      fill="none"
-                      stroke="#FFFFFF"
-                      strokeWidth="1.8"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </g>
-                </g>
-              ))
-            ) : (
-              // Desktop: Horizontal Left-to-Right or Right-to-Left Bridges
-              pipelineBridges.map((bridge, idx) => (
-                <g key={`pipe-bridge-dt-${bridge.fromX}-${bridge.toX}`}>
-                  <circle cx={bridge.fromX} cy="260" r="2.5" fill="#FF7722" />
-                  <circle cx={bridge.toX} cy="260" r="2.5" fill="#FF7722" />
-                  <line
-                    x1={bridge.fromX}
-                    y1="260"
-                    x2={bridge.toX}
-                    y2="260"
-                    stroke="rgba(255, 120, 40, 0.4)"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                  />
-                  <circle cy="260" r="3.5" fill="#FFFFFF" filter="url(#piGlowNeon)">
-                    <animate 
-                      attributeName="cx" 
-                      values={`${bridge.fromX};${bridge.toX}`} 
-                      dur="1.1s" 
-                      begin={`${idx * 0.24}s`}
-                      repeatCount="indefinite" 
-                    />
-                  </circle>
-                  {isRTL ? (
-                    <g transform={`translate(${bridge.midX}, 260)`}>
-                      <path
-                        d="M 6 -7 L -2 0 L 6 7"
-                        fill="none"
-                        stroke="#FF6600"
-                        strokeWidth="3.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M 1 -7 L -7 0 L 1 7"
-                        fill="none"
-                        stroke="#FFFFFF"
-                        strokeWidth="2.2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </g>
-                  ) : (
-                    <g transform={`translate(${bridge.midX}, 260)`}>
-                      <path
-                        d="M -6 -7 L 2 0 L -6 7"
-                        fill="none"
-                        stroke="#FF6600"
-                        strokeWidth="3.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M -1 -7 L 7 0 L -1 7"
-                        fill="none"
-                        stroke="#FFFFFF"
-                        strokeWidth="2.2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </g>
-                  )}
-                </g>
-              ))
-            )}
-
-            {/* Desktop Pipeline Bottom Status Tag */}
-            {!isMobile && (
-              <text x="450" y="348" textAnchor="middle" fill="#FFFFFF" fontSize="11" fontWeight="700" fontFamily="var(--font-mono)" letterSpacing="0.1em">
-                ✦ {isRTL ? 'جریان داده و تبدیل بدون توقف // صفر درصد اصطکاک' : 'UNIFIED CLOSED-LOOP PIPELINE // ZERO FRICTION'}
-              </text>
-            )}
-          </g>
-        )}
+        {currentStage === 2 && renderPipelineLayer({ isMobile, pipelineBridgesMobile, pipelineBridges, isRTL })}
 
         {/* =========================================================
             STAGE 3: THE OUTCOME — COMPOUNDING FLYWHEEL ENGINE
             ========================================================= */}
-        {currentStage === 3 && (
-          <g className="pi-reactor-layer">
-            {/* Giant Radial Glow Field */}
-            <circle cx={centerX} cy={centerY} r={isMobile ? 150 : 210} fill="url(#piCoreGlow)" />
-
-            {/* Precision Flywheel Orbit Ring */}
-            <g transform={`translate(${centerX}, ${centerY})`}>
-              {/* Outer Orbit Dashed Ring */}
-              <motion.circle
-                cx="0"
-                cy="0"
-                r={isMobile ? 135 : 195}
-                stroke="rgba(255, 90, 0, 0.65)"
-                strokeWidth={isMobile ? 1.6 : 2}
-                strokeDasharray="8 10"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 30, ease: "linear", repeat: Infinity }}
-              />
-
-              {/* Glowing High-Velocity Energy Stream */}
-              <motion.circle
-                cx="0"
-                cy="0"
-                r={isMobile ? 135 : 195}
-                stroke="url(#piPipelineGrad)"
-                strokeWidth={isMobile ? 2.8 : 3.5}
-                fill="none"
-                strokeDasharray={isMobile ? "80 200" : "120 280"}
-                animate={{ rotate: isRTL ? -360 : 360 }}
-                transition={{ duration: 4.4, ease: "linear", repeat: Infinity }}
-              />
-            </g>
-
-            {/* Center Hub Core */}
-            <circle
-              cx={centerX}
-              cy={centerY}
-              r={isMobile ? 48 : 68}
-              fill="#080A0F"
-              stroke="rgba(255, 120, 40, 0.5)"
-              strokeWidth="1.5"
-            />
-            {/* Subtle inner concentric ring for premium tech feel */}
-            <circle
-              cx={centerX}
-              cy={centerY}
-              r={isMobile ? 42 : 60}
-              fill="rgba(255, 85, 0, 0.05)"
-              stroke="rgba(255, 255, 255, 0.1)"
-              strokeWidth="1"
-              strokeDasharray="3 3"
-            />
-
-            {/* Central Compounding Readout — Clean, high-contrast & 100% legible */}
-            <text 
-              x={centerX} 
-              y={centerY - (isMobile ? 10 : 16)} 
-              textAnchor="middle" 
-              fill="#FF7722" 
-              fontSize={isMobile ? "15" : "19"} 
-              fontWeight="900" 
-              fontFamily="var(--font-mono)" 
-              letterSpacing="0.05em"
-            >
-              +3.4X
-            </text>
-            <text 
-              x={centerX} 
-              y={centerY + (isMobile ? 6 : 8)} 
-              textAnchor="middle" 
-              fill="#FFFFFF" 
-              fontSize={isMobile ? "9.5" : "11"} 
-              fontWeight="800" 
-              fontFamily={isRTL ? 'var(--font-persian)' : 'var(--font-sans)'} 
-              letterSpacing="0.04em"
-            >
-              {isRTL ? 'شتاب خودافزا' : 'COMPOUNDING'}
-            </text>
-            <text 
-              x={centerX} 
-              y={centerY + (isMobile ? 20 : 26)} 
-              textAnchor="middle" 
-              fill="#A0AEC0" 
-              fontSize={isMobile ? "7.5" : "9"} 
-              fontWeight="600" 
-              fontFamily="var(--font-mono)" 
-              letterSpacing="0.06em"
-            >
-              {isRTL ? 'موتور رشد پایدار' : 'GROWTH ENGINE'}
-            </text>
-          </g>
-        )}
+        {currentStage === 3 && renderReactorLayer({ centerX, centerY, isMobile, isRTL })}
       </svg>
 
       {/* =========================================================

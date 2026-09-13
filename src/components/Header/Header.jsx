@@ -41,9 +41,27 @@ function MobileMenuExtra({ closeMenu, startProjectLabel, onStartProject }) {
   );
 }
 
+const ROUTE_PAGE_CHECKERS = {
+  work: (r) => r.isWorkPage,
+  capabilities: (r) => r.isCapabilitiesPage,
+  approach: (r) => r.isApproachPage,
+  about: (r) => r.isAboutPage,
+  blog: (r) => r.isBlogPage,
+  journal: (r) => r.isBlogPage
+};
+
+function navigateToRoute(targetHref, isAlreadyOnPage, navigate) {
+  if (isAlreadyOnPage) {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else {
+    navigate(targetHref);
+  }
+}
+
 export default function Header() {
   const { t, lang, toggleLanguage, setIsModalOpen, isRTL } = useLanguage();
-  const { navigate, isWorkPage, isApproachPage, isCapabilitiesPage, isBlogPage, isAboutPage } = useRouter();
+  const router = useRouter();
+  const { navigate, isWorkPage, isApproachPage, isCapabilitiesPage, isBlogPage, isAboutPage } = router;
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -63,57 +81,17 @@ export default function Header() {
   }, []);
 
   const handleNavClick = (e, targetHref, itemId) => {
-    if (e && e.preventDefault) {
-      e.preventDefault();
-    }
+    e?.preventDefault?.();
 
-    if (itemId === 'work' || targetHref === '/work') {
-      if (isWorkPage) {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else {
-        navigate('/work');
-      }
-      return;
-    }
-
-    if (itemId === 'capabilities' || targetHref === '/capabilities') {
-      if (isCapabilitiesPage) {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else {
-        navigate('/capabilities');
-      }
-      return;
-    }
-
-    if (itemId === 'approach' || targetHref === '/approach') {
-      if (isApproachPage) {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else {
-        navigate('/approach');
-      }
-      return;
-    }
-
-    if (itemId === 'about' || targetHref === '/about') {
-      if (isAboutPage) {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else {
-        navigate('/about');
-      }
-      return;
-    }
-
-    if (itemId === 'journal' || itemId === 'blog' || targetHref === '/blog') {
-      if (isBlogPage) {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else {
-        navigate('/blog');
-      }
+    const checkCurrentPage = ROUTE_PAGE_CHECKERS[itemId];
+    if (checkCurrentPage) {
+      navigateToRoute(targetHref, checkCurrentPage(router), navigate);
       return;
     }
 
     if (targetHref === '/' || targetHref === '#hero' || targetHref === '#') {
-      if (isWorkPage || isApproachPage || isCapabilitiesPage || isBlogPage || isAboutPage) {
+      const isSubPage = isWorkPage || isApproachPage || isCapabilitiesPage || isBlogPage || isAboutPage;
+      if (isSubPage) {
         navigate('/');
       } else {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -123,9 +101,7 @@ export default function Header() {
 
     if (targetHref.startsWith('#')) {
       const elem = document.querySelector(targetHref);
-      if (elem) {
-        elem.scrollIntoView({ behavior: 'smooth' });
-      }
+      elem?.scrollIntoView?.({ behavior: 'smooth' });
     }
   };
 
