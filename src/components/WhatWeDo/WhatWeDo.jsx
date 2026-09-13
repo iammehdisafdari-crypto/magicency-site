@@ -78,6 +78,7 @@ export default function WhatWeDo() {
     if (dist > 90) {
       lastMousePosRef.current = currentPos;
       const pool = imagePools[groupIdx] || imagePools[0];
+      // NOSONAR: Visual image particle trail selection (non-cryptographic)
       const imgUrl = pool[Math.floor(Math.random() * pool.length)];
 
       const newTrailItem = {
@@ -94,6 +95,14 @@ export default function WhatWeDo() {
         setTrailImages((prev) => prev.filter((item) => item.id !== newTrailItem.id));
       }, 750);
     }
+  };
+
+  // Helper function to resolve trail image accessible alt text
+  const getTrailAltText = (src) => {
+    if (src.includes('whatwedo-1')) return 'Magicency Strategy & Growth Architecture';
+    if (src.includes('whatwedo-2')) return 'Magicency Creative Conviction & Brand Systems';
+    if (src.includes('whatwedo-3')) return 'Magicency Technology & AI Automation';
+    return 'Magicency Connected Growth Work';
   };
 
   return (
@@ -258,12 +267,7 @@ export default function WhatWeDo() {
                 <source srcSet={toWebp(item.src)} type="image/webp" />
                 <img
                   src={item.src}
-                  alt={
-                    item.src.includes('whatwedo-1') ? 'Magicency Strategy & Growth Architecture' :
-                    item.src.includes('whatwedo-2') ? 'Magicency Creative Conviction & Brand Systems' :
-                    item.src.includes('whatwedo-3') ? 'Magicency Technology & AI Automation' :
-                    'Magicency Connected Growth Work'
-                  }
+                  alt={getTrailAltText(item.src)}
                   className="wwd-trail-inner-img"
                   width="160"
                   height="200"

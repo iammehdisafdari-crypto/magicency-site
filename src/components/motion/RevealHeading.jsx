@@ -11,6 +11,12 @@ import { DURATION, STAGGER, VIEWPORT } from './motionConfig';
  * and smoothly reveals with cubic-bezier(0.22, 1, 0.36, 1).
  * =========================================================
  */
+function normalizeHeadingLines(children) {
+  if (Array.isArray(children)) return children;
+  if (typeof children === 'string') return children.split('\n');
+  return [children];
+}
+
 export default function RevealHeading({
   children,
   className = '',
@@ -25,11 +31,7 @@ export default function RevealHeading({
   const reducedMotion = Boolean(shouldReduceMotion);
 
   // Normalize children into an array of lines if string with \n or array
-  const lines = Array.isArray(children)
-    ? children
-    : typeof children === 'string'
-    ? children.split('\n')
-    : [children];
+  const lines = normalizeHeadingLines(children);
 
   const isControlled = typeof trigger === 'boolean';
 
