@@ -2,10 +2,9 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 import { CHALLENGE_CATEGORIES } from '../../data/projectsData';
-import { EASING } from '../motion';
 
 export default function WorkChallengeFilter({ activeCategory, onSelectCategory }) {
-  const { lang, isRTL } = useLanguage();
+  const { lang } = useLanguage();
   const categories = CHALLENGE_CATEGORIES[lang] || CHALLENGE_CATEGORIES.en;
 
   return (

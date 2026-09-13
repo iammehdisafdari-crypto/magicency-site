@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
-import { Reveal, RevealHeading, RevealStatement, RevealBody, ImageReveal, Parallax, EASING } from '../motion';
+import { RevealHeading, RevealStatement, RevealBody, ImageReveal, Parallax, EASING } from '../motion';
 import './WhatWeDo.css';
 
 const toWebp = (url) => (url ? url.replace(/\.(jpg|jpeg|png)$/, '.webp') : url);
@@ -14,7 +14,7 @@ const AsteriskIcon = () => (
 );
 
 export default function WhatWeDo() {
-  const { t, isRTL } = useLanguage();
+  const { t } = useLanguage();
   const [activeGroupIndex, setActiveGroupIndex] = useState(0);
   const [trailImages, setTrailImages] = useState([]);
   const itemRefs = useRef([]);

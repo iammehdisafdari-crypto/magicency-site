@@ -1,8 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useSpring } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
-import { ArrowUpRight, ArrowLeft, ArrowRight } from 'lucide-react';
-import { EASING, editorialVariants, Stagger } from '../motion';
+import { ArrowUpRight } from 'lucide-react';
+import { EASING } from '../motion';
 
 export default function WorkIndex({ projects }) {
   const { lang, isRTL, setIsModalOpen } = useLanguage();

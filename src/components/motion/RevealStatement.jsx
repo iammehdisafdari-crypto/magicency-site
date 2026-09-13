@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring, useReducedMotion } from 'framer-motion';
-import { DURATION, EASING, VIEWPORT } from './motionConfig';
+import { EASING, VIEWPORT } from './motionConfig';
 
 /**
  * =========================================================
@@ -62,6 +62,13 @@ export default function RevealStatement({
       <MotionComponent 
         className={`reveal-statement-root ${className}`}
         style={scrollLinked && !reducedMotion ? { y: scrollY } : {}}
+        initial="hidden"
+        {...(isControlled
+          ? { animate: trigger ? 'visible' : 'hidden' }
+          : {
+              whileInView: 'visible',
+              viewport: viewport || VIEWPORT
+            })}
       >
         {lines.map((line, idx) => (
           <span
@@ -90,13 +97,6 @@ export default function RevealStatement({
                   }
                 })
               }}
-              initial="hidden"
-              {...(isControlled
-                ? { animate: trigger ? 'visible' : 'hidden' }
-                : {
-                    whileInView: 'visible',
-                    viewport: viewport || VIEWPORT
-                  })}
               custom={{
                 delay: delay + idx * stagger,
                 duration

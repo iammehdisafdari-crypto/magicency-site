@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 import { POINT_OF_VIEW_DATA } from '../../data/projectsData';
 import { ArrowRight, ArrowLeft } from 'lucide-react';
-import { Reveal, Stagger, editorialVariants, EASING } from '../motion';
+import { Stagger, editorialVariants } from '../motion';
 
 export default function WorkPointOfView() {
   const { lang, isRTL } = useLanguage();

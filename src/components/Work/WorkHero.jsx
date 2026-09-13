@@ -1,10 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
-import { EASING, editorialVariants } from '../motion';
+import { EASING } from '../motion';
 
 export default function WorkHero() {
-  const { lang, isRTL } = useLanguage();
+  const { lang } = useLanguage();
 
   const heroContent = {
     en: {

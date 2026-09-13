@@ -26,7 +26,7 @@ import { initGA } from './utils/analytics';
 import './styles/global.css';
 
 function MainApp() {
-  const { isRTL, isModalOpen } = useLanguage();
+  const { isModalOpen } = useLanguage();
   const { isWorkPage, isApproachPage, isCapabilitiesPage, isBlogPage, isAboutPage, isNotFound } = useRouter();
   const [introFinished, setIntroFinished] = useState(true);
 
@@ -70,7 +70,7 @@ function MainApp() {
             {/* Phase 02: Featured Work (Sticky Scroll Showcase + 4 Projects + See All Work CTA) */}
             <SelectedWork />
 
-            {/* Phase 03: Problem / Insight Narrative (Sticky-Scroll 4-Beat System Architecture) */}
+            {/* Phase 03: Problem / Insight Narrative (Cinematic 4-Panel Scroll Progression) */}
             <ProblemInsight />
 
             {/* Phase 04: What We Do / Capabilities (3-Pillar Capability Architecture) */}

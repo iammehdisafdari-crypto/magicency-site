@@ -5,7 +5,7 @@ import { SELECTIVITY_DATA } from '../../data/projectsData';
 import { Stagger, editorialVariants } from '../motion';
 
 export default function WorkSelectivity() {
-  const { lang, isRTL } = useLanguage();
+  const { lang } = useLanguage();
   const data = SELECTIVITY_DATA[lang] || SELECTIVITY_DATA.en;
 
   return (

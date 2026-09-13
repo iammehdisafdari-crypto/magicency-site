@@ -1,10 +1,9 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 import { RefreshCw, TrendingUp, AlertTriangle, ShieldCheck } from 'lucide-react';
 
 export default function CompoundingComparison() {
-  const { t, isRTL } = useLanguage();
+  const { t } = useLanguage();
   const c = t.approach?.compounding || {};
   const linear = c.linear || {};
   const compounding = c.compounding || {};

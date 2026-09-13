@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 import { EASING } from '../motion';
-import { ArrowRight, AlertCircle, HelpCircle, CheckCircle2 } from 'lucide-react';
+import { AlertCircle, HelpCircle, CheckCircle2 } from 'lucide-react';
 
 export default function DiagnosisSection() {
   const { t, isRTL } = useLanguage();

@@ -1,11 +1,9 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
-import { EASING } from '../motion';
-import { RotateCw, ArrowDown, CornerDownLeft } from 'lucide-react';
+import { RotateCw } from 'lucide-react';
 
 export default function OperatingSystem() {
-  const { t, isRTL } = useLanguage();
+  const { t } = useLanguage();
   const os = t.approach?.operatingSystem || {};
   const loopNodes = os.loopNodes || [];
 

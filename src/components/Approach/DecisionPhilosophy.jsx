@@ -4,7 +4,7 @@ import { useLanguage } from '../../context/LanguageContext';
 import { EASING } from '../motion';
 
 export default function DecisionPhilosophy() {
-  const { t, isRTL } = useLanguage();
+  const { t } = useLanguage();
   const dp = t.approach?.decisionPhilosophy || {};
   const decisions = dp.decisions || [];
 
