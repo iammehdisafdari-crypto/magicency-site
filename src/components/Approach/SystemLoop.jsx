@@ -50,8 +50,17 @@ export default function SystemLoop() {
               return (
                 <div 
                   key={d.id} 
+                  role="button"
+                  tabIndex={0}
+                  aria-pressed={isCurrent}
                   className={`system-node-item ${isCurrent ? 'is-active' : ''}`}
                   onClick={() => setActiveId(d.id)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      setActiveId(d.id);
+                    }
+                  }}
                 >
                   <div className="node-icon-housing">
                     <Icon size={20} className="node-icon-svg" />

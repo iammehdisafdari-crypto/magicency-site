@@ -48,16 +48,14 @@ export default function WorkFeaturedCase() {
 
         {/* Google Search Console Audited Performance Metrics HUD */}
         {flagship.metrics && (
-          <div 
-            className="work-featured-metrics-grid" 
-            role="region" 
-            aria-label={lang === 'fa' ? 'شاخص‌های کلیدی عملکرد در سرچ کنسول گوگل' : 'Google Search Console Key Performance Metrics'}
-          >
-            {flagship.metrics.map((metric) => (
-              <div 
-                key={metric.id}
-                className={`featured-metric-card ${metric.variant ? `highlight-${metric.variant}` : ''}`}
-              >
+          <div className="work-featured-metrics-grid">
+            {flagship.metrics.map((metric) => {
+              const highlightClass = metric.variant ? `highlight-${metric.variant}` : '';
+              return (
+                <div 
+                  key={metric.id}
+                  className={`featured-metric-card ${highlightClass}`.trim()}
+                >
                 <div className="metric-card-top">
                   <div className="metric-label-wrap">
                     <span 
@@ -81,9 +79,10 @@ export default function WorkFeaturedCase() {
                   {metric.subtext[lang] || metric.subtext.en}
                 </span>
               </div>
-            ))}
-          </div>
-        )}
+            );
+          })}
+        </div>
+      )}
 
         {/* Timeline Verification Strip */}
         {flagship.timeline && (
