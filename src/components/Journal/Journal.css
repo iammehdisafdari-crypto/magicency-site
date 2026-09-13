@@ -101,7 +101,6 @@
   display: flex;
   flex-direction: column;
   cursor: pointer;
-  group: pointer;
   text-decoration: none;
   color: inherit;
 }
@@ -181,7 +180,7 @@
 }
 
 .journal-card-time {
-  color: #8E93A0;
+  color: #9CA3AF;
 }
 
 .journal-featured-card-title {
@@ -212,12 +211,12 @@
   font-family: var(--font-mono, monospace);
   font-size: 0.75rem;
   font-weight: 500;
-  color: #727787;
+  color: #96969E;
   text-transform: uppercase;
 }
 
 .journal-card-arrow {
-  color: #8E93A0;
+  color: #9CA3AF;
   transition: transform 220ms ease, color 220ms ease;
 }
 
