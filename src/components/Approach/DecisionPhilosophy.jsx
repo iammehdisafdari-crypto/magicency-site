@@ -27,7 +27,7 @@ export default function DecisionPhilosophy() {
         <div className="decision-editorial-sequence">
           {decisions.map((item, idx) => (
             <motion.div 
-              key={idx}
+              key={item.output}
               className="decision-row-item"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}

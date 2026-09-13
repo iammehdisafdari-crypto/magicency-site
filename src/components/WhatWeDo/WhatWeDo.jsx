@@ -183,7 +183,7 @@ export default function WhatWeDo() {
                   {/* Flowing Service Set with Sliding Hover Background & Running Marquee */}
                   <div className="wwd-list-item-set">
                     {pillar.services.map((serviceName, sIdx) => (
-                      <div key={sIdx} className="wwd-list-item-set-row grid">
+                      <div key={serviceName} className="wwd-list-item-set-row grid">
                         {/* Default Static Label */}
                         <div className="wwd-list-item-set-row-cell">
                           <span className="wwd-list-item-set-row-label">

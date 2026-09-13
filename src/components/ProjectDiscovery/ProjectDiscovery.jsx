@@ -125,7 +125,7 @@ export default function ProjectDiscovery() {
 
   const renderStep = () => {
     switch(step) {
-      case 1:
+      case 1: {
         const step1 = data.steps.step1;
         return (
           <div className="pd-step-content">
@@ -150,15 +150,16 @@ export default function ProjectDiscovery() {
             </div>
           </div>
         );
-      case 2:
+      }
+      case 2: {
         const step2 = data.steps.step2;
         return (
           <div className="pd-step-content">
             <h2 className="pd-step-title">{step2.title}</h2>
             <div className="pd-options-list">
-              {step2.options.map((opt, idx) => (
+              {step2.options.map((opt) => (
                 <button 
-                  key={idx} 
+                  key={opt.label} 
                   className={`pd-option-btn ${formData.challenge === opt.label ? 'active' : ''}`}
                   onClick={() => handleInputChange('challenge', opt.label)}
                 >
@@ -169,15 +170,16 @@ export default function ProjectDiscovery() {
             </div>
           </div>
         );
-      case 3:
+      }
+      case 3: {
         const step3 = data.steps.step3;
         return (
           <div className="pd-step-content">
             <h2 className="pd-step-title">{step3.title}</h2>
             <div className="pd-options-list">
-              {step3.options.map((opt, idx) => (
+              {step3.options.map((opt) => (
                 <button 
-                  key={idx} 
+                  key={opt} 
                   className={`pd-option-btn ${formData.needs === opt ? 'active' : ''}`}
                   onClick={() => handleInputChange('needs', opt)}
                 >
@@ -187,15 +189,16 @@ export default function ProjectDiscovery() {
             </div>
           </div>
         );
-      case 4:
+      }
+      case 4: {
         const step4 = data.steps.step4;
         return (
           <div className="pd-step-content">
             <h2 className="pd-step-title">{step4.title}</h2>
             <div className="pd-options-list">
-              {step4.options.map((opt, idx) => (
+              {step4.options.map((opt) => (
                 <button 
-                  key={idx} 
+                  key={opt} 
                   className={`pd-option-btn ${formData.timeline === opt ? 'active' : ''}`}
                   onClick={() => handleInputChange('timeline', opt)}
                 >
@@ -205,15 +208,16 @@ export default function ProjectDiscovery() {
             </div>
           </div>
         );
-      case 5:
+      }
+      case 5: {
         const step5 = data.steps.step5;
         return (
           <div className="pd-step-content">
             <h2 className="pd-step-title">{step5.title}</h2>
             <div className="pd-options-list">
-              {step5.options.map((opt, idx) => (
+              {step5.options.map((opt) => (
                 <button 
-                  key={idx} 
+                  key={opt} 
                   className={`pd-option-btn ${formData.investment === opt ? 'active' : ''}`}
                   onClick={() => handleInputChange('investment', opt)}
                 >
@@ -223,7 +227,8 @@ export default function ProjectDiscovery() {
             </div>
           </div>
         );
-      case 6:
+      }
+      case 6: {
         const step6 = data.steps.step6;
         return (
           <div className="pd-step-content">
@@ -237,7 +242,8 @@ export default function ProjectDiscovery() {
             </div>
           </div>
         );
-      case 7:
+      }
+      case 7: {
         const step7 = data.steps.step7;
         return (
           <div className="pd-step-content pd-review-step">
@@ -259,7 +265,8 @@ export default function ProjectDiscovery() {
             </button>
           </div>
         );
-      case 8:
+      }
+      case 8: {
         const step8 = data.steps.step8;
         return (
           <div className="pd-step-content pd-success-content">
@@ -268,6 +275,7 @@ export default function ProjectDiscovery() {
             <p className="pd-success-msg">{step8.successMessage}</p>
           </div>
         );
+      }
       default: return null;
     }
   };

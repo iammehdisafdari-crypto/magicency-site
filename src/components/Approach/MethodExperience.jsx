@@ -153,7 +153,7 @@ export default function MethodExperience() {
                     <div className="schematic-footer-telemetry">
                       <div className="telemetry-item">
                         <span className="t-key">{isRTL ? 'وضعیت فاز' : 'STATUS'}</span>
-                        <span className="t-val text-gradient-amber">{currentStage.title} // ACTIVE</span>
+                        <span className="t-val text-gradient-amber">{`${currentStage.title} // ACTIVE`}</span>
                       </div>
                       <div className="telemetry-item">
                         <span className="t-key">{isRTL ? 'دقت تصمیم' : 'CONVICTION'}</span>

@@ -24,7 +24,7 @@ export default function WorkSelectivity() {
           <Stagger stagger={0.08} className="work-outcomes-grid">
             {data.qualitativeStrip.map((item, idx) => (
               <motion.div 
-                key={idx}
+                key={item.label}
                 variants={editorialVariants}
                 className="work-outcome-card"
               >

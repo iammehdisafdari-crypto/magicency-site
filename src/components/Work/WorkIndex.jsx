@@ -115,8 +115,8 @@ export default function WorkIndex({ projects }) {
                 {/* 04: The Work (Services / Systems) */}
                 <div className="row-col col-work">
                   <div className="row-tags-wrapper">
-                    {(proj.services[lang] || proj.services.en).map((srv, sIdx) => (
-                      <span key={sIdx} className="row-service-pill">
+                    {(proj.services[lang] || proj.services.en).map((srv) => (
+                      <span key={srv} className="row-service-pill">
                         {srv}
                       </span>
                     ))}
@@ -129,8 +129,8 @@ export default function WorkIndex({ projects }) {
                     {proj.outcome[lang] || proj.outcome.en}
                   </p>
                   <div className="row-highlights-list">
-                    {(proj.qualitativeHighlights[lang] || proj.qualitativeHighlights.en).slice(0, 2).map((h, hIdx) => (
-                      <span key={hIdx} className="row-highlight-item">
+                    {(proj.qualitativeHighlights[lang] || proj.qualitativeHighlights.en).slice(0, 2).map((h) => (
+                      <span key={h} className="row-highlight-item">
                         • {h}
                       </span>
                     ))}

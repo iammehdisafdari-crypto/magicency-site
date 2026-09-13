@@ -41,11 +41,22 @@ export default function RevealHeading({
     );
   }
 
+  const MotionComponent = motion[Component] || motion.h2;
+
   return (
-    <Component className={`reveal-heading-root ${className}`}>
+    <MotionComponent
+      className={`reveal-heading-root ${className}`}
+      initial="hidden"
+      {...(isControlled
+        ? { animate: trigger ? 'visible' : 'hidden' }
+        : {
+            whileInView: 'visible',
+            viewport: viewport || VIEWPORT
+          })}
+    >
       {lines.map((line, idx) => (
         <span
-          key={idx}
+          key={typeof line === 'string' ? `${line}-${idx}` : idx}
           className="motion-line-mask"
           style={{
             display: 'block',
@@ -59,13 +70,6 @@ export default function RevealHeading({
               willChange: 'transform, opacity'
             }}
             variants={maskedLineVariants}
-            initial="hidden"
-            {...(isControlled
-              ? { animate: trigger ? 'visible' : 'hidden' }
-              : {
-                  whileInView: 'visible',
-                  viewport: viewport || VIEWPORT
-                })}
             custom={{
               delay: delay + idx * stagger,
               duration
@@ -75,6 +79,6 @@ export default function RevealHeading({
           </motion.span>
         </span>
       ))}
-    </Component>
+    </MotionComponent>
   );
 }

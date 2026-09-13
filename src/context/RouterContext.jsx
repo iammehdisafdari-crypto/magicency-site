@@ -1,5 +1,7 @@
-import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
 import { trackPageView } from '../utils/analytics';
+
+const DEFAULT_NAVIGATE_OPTIONS = Object.freeze({ scrollToTop: true });
 
 const RouterContext = createContext({
   currentPath: '/',
@@ -32,7 +34,7 @@ export function RouterProvider({ children, initialPath }) {
     trackPageView(currentPath, document.title);
   }, [currentPath]);
 
-  const navigate = useCallback((to, options = { scrollToTop: true }) => {
+  const navigate = useCallback((to, options = DEFAULT_NAVIGATE_OPTIONS) => {
     if (typeof window === 'undefined') return;
     
     // Check if navigating to anchor on same page or another route
@@ -72,8 +74,32 @@ export function RouterProvider({ children, initialPath }) {
   const blogArticleSlug = currentPath.startsWith('/blog/') ? currentPath.replace(/^\/blog\//, '').replace(/\/$/, '') : null;
   const isNotFound = currentPath === '/404' || (!isHomePage && !isWorkPage && !isApproachPage && !isCapabilitiesPage && !isBlogPage && !isAboutPage);
 
+  const contextValue = useMemo(() => ({
+    currentPath,
+    navigate,
+    isHomePage,
+    isWorkPage,
+    isApproachPage,
+    isCapabilitiesPage,
+    isBlogPage,
+    isAboutPage,
+    blogArticleSlug,
+    isNotFound
+  }), [
+    currentPath,
+    navigate,
+    isHomePage,
+    isWorkPage,
+    isApproachPage,
+    isCapabilitiesPage,
+    isBlogPage,
+    isAboutPage,
+    blogArticleSlug,
+    isNotFound
+  ]);
+
   return (
-    <RouterContext.Provider value={{ currentPath, navigate, isHomePage, isWorkPage, isApproachPage, isCapabilitiesPage, isBlogPage, isAboutPage, blogArticleSlug, isNotFound }}>
+    <RouterContext.Provider value={contextValue}>
       {children}
     </RouterContext.Provider>
   );

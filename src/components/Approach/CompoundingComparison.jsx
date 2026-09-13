@@ -40,7 +40,7 @@ export default function CompoundingComparison() {
 
             <div className="comparison-flow-list">
               {(linear.steps || []).map((step, idx) => (
-                <div key={idx} className="comparison-flow-step step-linear">
+                <div key={step.label} className="comparison-flow-step step-linear">
                   <div className="step-node-col">
                     <span className="node-dot dot-gray" />
                     {idx < (linear.steps || []).length - 1 && <span className="node-line-gray" />}
@@ -74,7 +74,7 @@ export default function CompoundingComparison() {
 
             <div className="comparison-flow-list">
               {(compounding.steps || []).map((step, idx) => (
-                <div key={idx} className="comparison-flow-step step-compounding">
+                <div key={step.label} className="comparison-flow-step step-compounding">
                   <div className="step-node-col">
                     <span className="node-dot dot-amber" />
                     {idx < (compounding.steps || []).length - 1 && <span className="node-line-amber" />}

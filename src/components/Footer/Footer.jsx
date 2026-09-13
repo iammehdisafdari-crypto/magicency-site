@@ -10,8 +10,8 @@ import './Footer.css';
 const FluidCursor = React.lazy(() => import('../effects/FluidCursor'));
 
 export default function Footer() {
-  const { t, isRTL } = useLanguage();
-  const { navigate, isWorkPage } = useRouter();
+  const { t } = useLanguage();
+  const { navigate, isWorkPage, isCapabilitiesPage, isApproachPage, isAboutPage, isBlogPage } = useRouter();
   const f = t.footer || {
     ctaLine1: 'Have a growth problem worth solving?',
     ctaLine2: "Let's build what moves it forward.",
@@ -107,8 +107,8 @@ export default function Footer() {
             ========================================================= */}
         <div className="footer-emails grid">
           <Stagger stagger={0.08} delay={0.1} className="footer-emails-block">
-            {f.locations.map((loc, idx) => (
-              <motion.div key={idx} variants={editorialVariants} className="footer-emails-block-group">
+            {f.locations.map((loc) => (
+              <motion.div key={loc.email || loc.city} variants={editorialVariants} className="footer-emails-block-group">
                 <div className="footer-location-name">{loc.city}</div>
                 <a
                   href={`mailto:${loc.email}`}
@@ -128,9 +128,9 @@ export default function Footer() {
         <div className="footer-useful grid">
           {/* Social Links with Scramble Effect */}
           <Stagger stagger={0.05} className="footer-useful-social">
-            {f.socials.map((soc, idx) => (
+            {f.socials.map((soc) => (
               <motion.a
-                key={idx}
+                key={soc.name}
                 href={soc.url}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -146,9 +146,9 @@ export default function Footer() {
 
           {/* Primary Navigation Links with Scramble Effect */}
           <Stagger stagger={0.05} delay={0.05} className="footer-useful-legal">
-            {f.nav.map((item, idx) => (
+            {f.nav.map((item) => (
               <motion.a
-                key={idx}
+                key={item.href || item.label}
                 href={item.href}
                 onClick={(e) => {
                   e.preventDefault();

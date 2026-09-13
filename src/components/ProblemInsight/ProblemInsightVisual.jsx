@@ -395,7 +395,7 @@ export default function ProblemInsightVisual({
             {isMobile ? (
               // Mobile: Vertical Top-to-Bottom Pipeline Bridges
               pipelineBridgesMobile.map((bridge, idx) => (
-                <g key={`pipe-bridge-mob-${idx}`}>
+                <g key={`pipe-bridge-mob-${bridge.fromY}-${bridge.toY}`}>
                   <circle cx="190" cy={bridge.fromY} r="2" fill="#FF7722" />
                   <circle cx="190" cy={bridge.toY} r="2" fill="#FF7722" />
                   <line
@@ -441,7 +441,7 @@ export default function ProblemInsightVisual({
             ) : (
               // Desktop: Horizontal Left-to-Right or Right-to-Left Bridges
               pipelineBridges.map((bridge, idx) => (
-                <g key={`pipe-bridge-dt-${idx}`}>
+                <g key={`pipe-bridge-dt-${bridge.fromX}-${bridge.toX}`}>
                   <circle cx={bridge.fromX} cy="260" r="2.5" fill="#FF7722" />
                   <circle cx={bridge.toX} cy="260" r="2.5" fill="#FF7722" />
                   <line

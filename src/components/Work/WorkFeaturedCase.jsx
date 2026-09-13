@@ -117,8 +117,8 @@ export default function WorkFeaturedCase() {
                 <span>{lang === 'fa' ? flagship.media.badgeFa : flagship.media.badgeEn}</span>
               </div>
               <div className="hud-scope-list">
-                {(flagship.services[lang] || flagship.services.en).map((srv, idx) => (
-                  <span key={idx} className="hud-scope-tag">{srv}</span>
+                {(flagship.services[lang] || flagship.services.en).map((srv) => (
+                  <span key={srv} className="hud-scope-tag">{srv}</span>
                 ))}
               </div>
             </div>
@@ -166,8 +166,8 @@ export default function WorkFeaturedCase() {
               {flagship.outcome[lang] || flagship.outcome.en}
             </p>
             <div className="triptych-highlights">
-              {(flagship.qualitativeHighlights[lang] || flagship.qualitativeHighlights.en).map((h, i) => (
-                <div key={i} className="triptych-highlight-item">
+              {(flagship.qualitativeHighlights[lang] || flagship.qualitativeHighlights.en).map((h) => (
+                <div key={h} className="triptych-highlight-item">
                   <span className="highlight-check" aria-hidden="true">✓</span>
                   <span>{h}</span>
                 </div>
