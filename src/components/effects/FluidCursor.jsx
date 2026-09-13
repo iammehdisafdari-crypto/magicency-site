@@ -295,19 +295,11 @@ function createDoubleFBO(gl, w, h, intFormat, fmt, tp, flt) {
   };
 }
 
-// Blit helper
-function blit(gl, quadBuffer, target) {
-  if (target == null) {
-    gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
-    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-  } else {
-    gl.viewport(0, 0, target.width, target.height);
-    gl.bindFramebuffer(gl.FRAMEBUFFER, target.fbo);
-  }
-  gl.bindBuffer(gl.ARRAY_BUFFER, quadBuffer);
-  gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
-  gl.enableVertexAttribArray(0);
-  gl.drawArrays(gl.TRIANGLE_FAN, 0, 4);
+// Texture type resolver
+function resolveTextureType(gl, isWebGL2, halfFloat) {
+  if (isWebGL2) return gl.HALF_FLOAT;
+  if (halfFloat) return halfFloat.HALF_FLOAT_OES;
+  return gl.UNSIGNED_BYTE;
 }
 
 export default function FluidCursor({
@@ -356,7 +348,7 @@ export default function FluidCursor({
 
     const internalFormat = isWebGL2 ? gl.RGBA16F : gl.RGBA;
     const format = gl.RGBA;
-    const type = isWebGL2 ? gl.HALF_FLOAT : (halfFloat ? halfFloat.HALF_FLOAT_OES : gl.UNSIGNED_BYTE);
+    const type = resolveTextureType(gl, isWebGL2, halfFloat);
     const filter = supportLinearFiltering ? gl.LINEAR : gl.NEAREST;
 
     // 3. Adaptive Resolution Settings

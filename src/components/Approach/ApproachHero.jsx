@@ -71,48 +71,60 @@ function updateNodePhysics(n, idx, activePhaseIndex, time, width, height, nodeCo
   n.y += (destY - n.y) * 0.045;
 }
 
+const PHASE_CONNECT_DISTANCES = [80, 160, 130];
+
+function getApproachStrokeStyle(activePhaseIndex, lineAlpha) {
+  if (activePhaseIndex === 1) {
+    return `rgba(255, 107, 44, ${lineAlpha * 1.2})`;
+  }
+  if (activePhaseIndex === 2) {
+    return `rgba(180, 210, 255, ${lineAlpha * 0.9})`;
+  }
+  return `rgba(255, 255, 255, ${lineAlpha})`;
+}
+
+function drawApproachSegment(ctx, nodeA, nodeB, activePhaseIndex, maxConnectDist) {
+  const dx = nodeA.x - nodeB.x;
+  const dy = nodeA.y - nodeB.y;
+  const dist = Math.hypot(dx, dy);
+
+  if (dist >= maxConnectDist) return;
+
+  const normalizedDist = 1 - dist / maxConnectDist;
+  const lineAlpha = normalizedDist * 0.35;
+
+  ctx.strokeStyle = getApproachStrokeStyle(activePhaseIndex, lineAlpha);
+  ctx.lineWidth = activePhaseIndex === 2 ? 1 : 0.8;
+  ctx.beginPath();
+  ctx.moveTo(nodeA.x, nodeA.y);
+  ctx.lineTo(nodeB.x, nodeB.y);
+  ctx.stroke();
+}
+
 function drawApproachConnections(ctx, nodes, activePhaseIndex) {
-  const maxConnectDist = activePhaseIndex === 0 ? 80 : activePhaseIndex === 1 ? 160 : 130;
+  const maxConnectDist = PHASE_CONNECT_DISTANCES[activePhaseIndex] ?? 130;
   for (let i = 0; i < nodes.length; i++) {
     for (let j = i + 1; j < nodes.length; j++) {
-      const dx = nodes[i].x - nodes[j].x;
-      const dy = nodes[i].y - nodes[j].y;
-      const dist = Math.hypot(dx, dy);
-
-      if (dist < maxConnectDist) {
-        const normalizedDist = 1 - dist / maxConnectDist;
-        const lineAlpha = normalizedDist * 0.35;
-        let strokeStyle = `rgba(255, 255, 255, ${lineAlpha})`;
-
-        if (activePhaseIndex === 1) {
-          strokeStyle = `rgba(255, 107, 44, ${lineAlpha * 1.2})`;
-        } else if (activePhaseIndex === 2) {
-          strokeStyle = `rgba(180, 210, 255, ${lineAlpha * 0.9})`;
-        }
-
-        ctx.strokeStyle = strokeStyle;
-        ctx.lineWidth = activePhaseIndex === 2 ? 1 : 0.8;
-        ctx.beginPath();
-        ctx.moveTo(nodes[i].x, nodes[i].y);
-        ctx.lineTo(nodes[j].x, nodes[j].y);
-        ctx.stroke();
-      }
+      drawApproachSegment(ctx, nodes[i], nodes[j], activePhaseIndex, maxConnectDist);
     }
   }
 }
 
+function getApproachNodeColor(activePhaseIndex) {
+  if (activePhaseIndex === 0) {
+    return 'rgba(255, 80, 80, 0.65)';
+  }
+  if (activePhaseIndex === 1) {
+    return 'rgba(255, 107, 44, 0.85)';
+  }
+  return 'rgba(255, 255, 255, 0.95)';
+}
+
 function drawApproachNodes(ctx, nodes, activePhaseIndex) {
+  const nodeColor = getApproachNodeColor(activePhaseIndex);
+
   nodes.forEach((n) => {
     const pulse = Math.sin(n.phase) * 0.8;
-    let nodeColor = 'rgba(255, 255, 255, 0.5)';
-
-    if (activePhaseIndex === 0) {
-      nodeColor = 'rgba(255, 80, 80, 0.65)';
-    } else if (activePhaseIndex === 1) {
-      nodeColor = 'rgba(255, 107, 44, 0.85)';
-    } else {
-      nodeColor = 'rgba(255, 255, 255, 0.95)';
-    }
 
     ctx.fillStyle = nodeColor;
     ctx.beginPath();

@@ -374,41 +374,41 @@ function renderPipelineLayer({ isMobile, pipelineBridgesMobile, pipelineBridges,
   );
 }
 
-function renderReactorLayer({ centerX, centerY, isMobile, isRTL }) {
+function renderReactorOrbits({ centerX, centerY, isMobile, isRTL }) {
+  const outerRadius = isMobile ? 135 : 195;
   return (
-    <g className="pi-reactor-layer">
-      {/* Giant Radial Glow Field */}
-      <circle cx={centerX} cy={centerY} r={isMobile ? 150 : 210} fill="url(#piCoreGlow)" />
+    <g transform={`translate(${centerX}, ${centerY})`}>
+      {/* Outer Orbit Dashed Ring */}
+      <motion.circle
+        cx="0"
+        cy="0"
+        r={outerRadius}
+        stroke="rgba(255, 90, 0, 0.65)"
+        strokeWidth={isMobile ? 1.6 : 2}
+        strokeDasharray="8 10"
+        animate={{ rotate: 360 }}
+        transition={{ duration: 30, ease: "linear", repeat: Infinity }}
+      />
 
-      {/* Precision Flywheel Orbit Ring */}
-      <g transform={`translate(${centerX}, ${centerY})`}>
-        {/* Outer Orbit Dashed Ring */}
-        <motion.circle
-          cx="0"
-          cy="0"
-          r={isMobile ? 135 : 195}
-          stroke="rgba(255, 90, 0, 0.65)"
-          strokeWidth={isMobile ? 1.6 : 2}
-          strokeDasharray="8 10"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 30, ease: "linear", repeat: Infinity }}
-        />
+      {/* Glowing High-Velocity Energy Stream */}
+      <motion.circle
+        cx="0"
+        cy="0"
+        r={outerRadius}
+        stroke="url(#piPipelineGrad)"
+        strokeWidth={isMobile ? 2.8 : 3.5}
+        fill="none"
+        strokeDasharray={isMobile ? "80 200" : "120 280"}
+        animate={{ rotate: isRTL ? -360 : 360 }}
+        transition={{ duration: 4.4, ease: "linear", repeat: Infinity }}
+      />
+    </g>
+  );
+}
 
-        {/* Glowing High-Velocity Energy Stream */}
-        <motion.circle
-          cx="0"
-          cy="0"
-          r={isMobile ? 135 : 195}
-          stroke="url(#piPipelineGrad)"
-          strokeWidth={isMobile ? 2.8 : 3.5}
-          fill="none"
-          strokeDasharray={isMobile ? "80 200" : "120 280"}
-          animate={{ rotate: isRTL ? -360 : 360 }}
-          transition={{ duration: 4.4, ease: "linear", repeat: Infinity }}
-        />
-      </g>
-
-      {/* Center Hub Core */}
+function renderReactorCore({ centerX, centerY, isMobile, isRTL }) {
+  return (
+    <>
       <circle
         cx={centerX}
         cy={centerY}
@@ -417,7 +417,6 @@ function renderReactorLayer({ centerX, centerY, isMobile, isRTL }) {
         stroke="rgba(255, 120, 40, 0.5)"
         strokeWidth="1.5"
       />
-      {/* Subtle inner concentric ring for premium tech feel */}
       <circle
         cx={centerX}
         cy={centerY}
@@ -427,8 +426,6 @@ function renderReactorLayer({ centerX, centerY, isMobile, isRTL }) {
         strokeWidth="1"
         strokeDasharray="3 3"
       />
-
-      {/* Central Compounding Readout — Clean, high-contrast & 100% legible */}
       <text 
         x={centerX} 
         y={centerY - (isMobile ? 10 : 16)} 
@@ -465,9 +462,76 @@ function renderReactorLayer({ centerX, centerY, isMobile, isRTL }) {
       >
         {isRTL ? 'موتور رشد پایدار' : 'GROWTH ENGINE'}
       </text>
+    </>
+  );
+}
+
+function renderReactorLayer({ centerX, centerY, isMobile, isRTL }) {
+  return (
+    <g className="pi-reactor-layer">
+      {/* Giant Radial Glow Field */}
+      <circle cx={centerX} cy={centerY} r={isMobile ? 150 : 210} fill="url(#piCoreGlow)" />
+      {renderReactorOrbits({ centerX, centerY, isMobile, isRTL })}
+      {renderReactorCore({ centerX, centerY, isMobile, isRTL })}
     </g>
   );
 }
+
+const FALLBACK_NODES_LTR = [
+  { id: 'strategy', num: '01', label: 'STRATEGY', sub: 'DIRECTION' },
+  { id: 'creative', num: '02', label: 'CREATIVE', sub: 'ATTENTION' },
+  { id: 'digital', num: '03', label: 'DIGITAL', sub: 'CONVERSION' },
+  { id: 'acquisition', num: '04', label: 'ACQUISITION', sub: 'SCALE' },
+  { id: 'measurement', num: '05', label: 'MEASUREMENT', sub: 'FEEDBACK' }
+];
+
+const FALLBACK_NODES_RTL = [
+  { id: 'strategy', num: '۰۱', label: 'استراتژی', sub: 'جهت‌گیری' },
+  { id: 'creative', num: '۰۲', label: 'خلاقیت', sub: 'تمایز' },
+  { id: 'digital', num: '۰۳', label: 'دیجیتال', sub: 'تبدیل' },
+  { id: 'acquisition', num: '۰۴', label: 'جذب مخاطب', sub: 'ترافیک' },
+  { id: 'measurement', num: '۰۵', label: 'سنجش داده', sub: 'اتریبیوشن' }
+];
+
+function resolveCoordsMap(isMobile, isRTL) {
+  if (isMobile) {
+    return isRTL ? STAGE_COORDS_MOBILE_RTL : STAGE_COORDS_MOBILE_LTR;
+  }
+  return isRTL ? STAGE_COORDS_RTL : STAGE_COORDS_LTR;
+}
+
+function resolveCenterY(isMobile, currentStage) {
+  if (!isMobile) return 260;
+  return currentStage === 1 ? 190 : 200;
+}
+
+const STAGE_AURA_OPACITIES = [0.25, 0.45, 0.65, 0.95];
+
+function resolveAuraOpacity(currentStage) {
+  return STAGE_AURA_OPACITIES[currentStage] ?? 0.25;
+}
+
+// Pipeline bridges between cards in Stage 2
+const PIPELINE_BRIDGES_LTR = [
+  { fromX: 142, toX: 203, midX: 172.5 },
+  { fromX: 327, toX: 388, midX: 357.5 },
+  { fromX: 512, toX: 573, midX: 542.5 },
+  { fromX: 697, toX: 758, midX: 727.5 }
+];
+
+const PIPELINE_BRIDGES_RTL = [
+  { fromX: 758, toX: 697, midX: 727.5 },
+  { fromX: 573, toX: 512, midX: 542.5 },
+  { fromX: 388, toX: 327, midX: 357.5 },
+  { fromX: 203, toX: 142, midX: 172.5 }
+];
+
+const PIPELINE_BRIDGES_MOBILE = [
+  { fromY: 62, toY: 100, midY: 81 },
+  { fromY: 136, toY: 174, midY: 155 },
+  { fromY: 210, toY: 248, midY: 229 },
+  { fromY: 284, toY: 322, midY: 303 }
+];
 
 export default function ProblemInsightVisual({ 
   activeBeat = 0, 
@@ -486,50 +550,15 @@ export default function ProblemInsightVisual({
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const coordsMap = isMobile
-    ? (isRTL ? STAGE_COORDS_MOBILE_RTL : STAGE_COORDS_MOBILE_LTR)
-    : (isRTL ? STAGE_COORDS_RTL : STAGE_COORDS_LTR);
-
+  const coordsMap = resolveCoordsMap(isMobile, isRTL);
   const vbW = isMobile ? 380 : 900;
   const vbH = isMobile ? 400 : 520;
   const centerX = isMobile ? 190 : 450;
-  const centerY = isMobile ? (currentStage === 1 ? 190 : 200) : 260;
+  const centerY = resolveCenterY(isMobile, currentStage);
 
-  const fallbackNodes = [
-    { id: 'strategy', num: isRTL ? '۰۱' : '01', label: isRTL ? 'استراتژی' : 'STRATEGY', sub: isRTL ? 'جهت‌گیری' : 'DIRECTION' },
-    { id: 'creative', num: isRTL ? '۰۲' : '02', label: isRTL ? 'خلاقیت' : 'CREATIVE', sub: isRTL ? 'تمایز' : 'ATTENTION' },
-    { id: 'digital', num: isRTL ? '۰۳' : '03', label: isRTL ? 'دیجیتال' : 'DIGITAL', sub: isRTL ? 'تبدیل' : 'CONVERSION' },
-    { id: 'acquisition', num: isRTL ? '۰۴' : '04', label: isRTL ? 'جذب مخاطب' : 'ACQUISITION', sub: isRTL ? 'ترافیک' : 'SCALE' },
-    { id: 'measurement', num: isRTL ? '۰۵' : '05', label: isRTL ? 'سنجش داده' : 'MEASUREMENT', sub: isRTL ? 'اتریبیوشن' : 'FEEDBACK' }
-  ];
-
-  const nodes = nodesData && nodesData.length ? nodesData : fallbackNodes;
-
-  // Pipeline bridges between cards in Stage 2
-  // Desktop: Horizontal
-  const pipelineBridgesLTR = [
-    { fromX: 142, toX: 203, midX: 172.5 },
-    { fromX: 327, toX: 388, midX: 357.5 },
-    { fromX: 512, toX: 573, midX: 542.5 },
-    { fromX: 697, toX: 758, midX: 727.5 }
-  ];
-
-  const pipelineBridgesRTL = [
-    { fromX: 758, toX: 697, midX: 727.5 },
-    { fromX: 573, toX: 512, midX: 542.5 },
-    { fromX: 388, toX: 327, midX: 357.5 },
-    { fromX: 203, toX: 142, midX: 172.5 }
-  ];
-
-  // Mobile: Vertical Top-to-Bottom Flow
-  const pipelineBridgesMobile = [
-    { fromY: 62, toY: 100, midY: 81 },
-    { fromY: 136, toY: 174, midY: 155 },
-    { fromY: 210, toY: 248, midY: 229 },
-    { fromY: 284, toY: 322, midY: 303 }
-  ];
-
-  const pipelineBridges = isRTL ? pipelineBridgesRTL : pipelineBridgesLTR;
+  const defaultNodes = isRTL ? FALLBACK_NODES_RTL : FALLBACK_NODES_LTR;
+  const nodes = nodesData && nodesData.length ? nodesData : defaultNodes;
+  const pipelineBridges = isRTL ? PIPELINE_BRIDGES_RTL : PIPELINE_BRIDGES_LTR;
 
   return (
     <div className={`pi-visual-container ${isRTL ? 'rtl-mode' : 'ltr-mode'}`} aria-hidden="true">
@@ -537,7 +566,7 @@ export default function ProblemInsightVisual({
       <div 
         className={`pi-visual-aura stage-${currentStage}`} 
         style={{
-          opacity: currentStage === 3 ? 0.95 : currentStage === 2 ? 0.65 : currentStage === 1 ? 0.45 : 0.25
+          opacity: resolveAuraOpacity(currentStage)
         }}
       />
 

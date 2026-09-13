@@ -9,9 +9,36 @@ import './Footer.css';
 
 const FluidCursor = React.lazy(() => import('../effects/FluidCursor'));
 
+function handleFooterNav(href, pageActiveMap, navigate) {
+  if (pageActiveMap[href] !== undefined) {
+    if (pageActiveMap[href]) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      navigate(href);
+    }
+    return;
+  }
+
+  if (href.startsWith('#')) {
+    const elem = document.querySelector(href);
+    if (elem) elem.scrollIntoView({ behavior: 'smooth' });
+    return;
+  }
+
+  navigate(href);
+}
+
 export default function Footer() {
   const { t } = useLanguage();
   const { navigate, isWorkPage, isCapabilitiesPage, isApproachPage, isAboutPage, isBlogPage } = useRouter();
+
+  const pageActiveMap = {
+    '/work': isWorkPage,
+    '/capabilities': isCapabilitiesPage,
+    '/approach': isApproachPage,
+    '/about': isAboutPage,
+    '/blog': isBlogPage
+  };
   const f = t.footer || {
     ctaLine1: 'Have a growth problem worth solving?',
     ctaLine2: "Let's build what moves it forward.",
@@ -152,37 +179,7 @@ export default function Footer() {
                 href={item.href}
                 onClick={(e) => {
                   e.preventDefault();
-                  if (item.href === '/work') {
-                    if (isWorkPage) window.scrollTo({ top: 0, behavior: 'smooth' });
-                    else navigate('/work');
-                    return;
-                  }
-                  if (item.href === '/capabilities') {
-                    if (isCapabilitiesPage) window.scrollTo({ top: 0, behavior: 'smooth' });
-                    else navigate('/capabilities');
-                    return;
-                  }
-                  if (item.href === '/approach') {
-                    if (isApproachPage) window.scrollTo({ top: 0, behavior: 'smooth' });
-                    else navigate('/approach');
-                    return;
-                  }
-                  if (item.href === '/about') {
-                    if (isAboutPage) window.scrollTo({ top: 0, behavior: 'smooth' });
-                    else navigate('/about');
-                    return;
-                  }
-                  if (item.href === '/blog') {
-                    if (isBlogPage) window.scrollTo({ top: 0, behavior: 'smooth' });
-                    else navigate('/blog');
-                    return;
-                  }
-                  if (item.href.startsWith('#')) {
-                    const elem = document.querySelector(item.href);
-                    if (elem) elem.scrollIntoView({ behavior: 'smooth' });
-                    return;
-                  }
-                  navigate(item.href);
+                  handleFooterNav(item.href, pageActiveMap, navigate);
                 }}
                 variants={editorialVariants}
                 className="footer-useful-social-link footer-nav-item"
