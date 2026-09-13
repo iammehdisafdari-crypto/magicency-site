@@ -2,6 +2,16 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring, useReducedMotion } from 'framer-motion';
 import { EASING, VIEWPORT } from './motionConfig';
 
+function normalizeStatementLines(children) {
+  if (Array.isArray(children)) {
+    return children;
+  }
+  if (typeof children === 'string') {
+    return children.includes('\n') ? children.split('\n') : [children];
+  }
+  return [children];
+}
+
 /**
  * =========================================================
  * RevealStatement Component
@@ -43,13 +53,7 @@ export default function RevealStatement({
   const isControlled = typeof trigger === 'boolean';
 
   // Process lines: split by line breaks or sentences
-  const lines = Array.isArray(children)
-    ? children
-    : typeof children === 'string'
-    ? children.includes('\n')
-      ? children.split('\n')
-      : [children]
-    : [children];
+  const lines = normalizeStatementLines(children);
 
   if (reducedMotion) {
     return <Component className={`reveal-statement-static ${className}`}>{children}</Component>;
@@ -72,7 +76,7 @@ export default function RevealStatement({
       >
         {lines.map((line, idx) => (
           <span
-            key={idx}
+            key={typeof line === 'string' ? `${line}-${idx}` : idx}
             className="motion-line-mask"
             style={{
               display: 'block',

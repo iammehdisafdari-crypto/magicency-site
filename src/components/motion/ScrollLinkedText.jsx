@@ -22,7 +22,7 @@ export default function ScrollLinkedText({
 
   useEffect(() => {
     const isMobile = window.innerWidth < 992;
-    const isReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isReduced = Boolean(window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches);
     setDisabled(isMobile || isReduced);
   }, []);
 

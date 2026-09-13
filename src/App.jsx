@@ -25,9 +25,53 @@ import { initGA } from './utils/analytics';
 
 import './styles/global.css';
 
+function renderPageContent({ isNotFound, isWorkPage, isApproachPage, isCapabilitiesPage, isBlogPage, isAboutPage, introFinished }) {
+  if (isNotFound) {
+    return <NotFoundPage />;
+  }
+  if (isWorkPage) {
+    return <WorkPage />;
+  }
+  if (isApproachPage) {
+    return <ApproachPage />;
+  }
+  if (isCapabilitiesPage) {
+    return <CapabilitiesPage />;
+  }
+  if (isBlogPage) {
+    return <BlogPage />;
+  }
+  if (isAboutPage) {
+    return <AboutPage />;
+  }
+
+  return (
+    <>
+      {/* Phase 01: Hero Section (Vivid Motion Architecture + Mouse Fire Effect) */}
+      <Hero isLoaded={introFinished} />
+
+      {/* Phase 02: Featured Work (Sticky Scroll Showcase + 4 Projects + See All Work CTA) */}
+      <SelectedWork />
+
+      {/* Phase 03: Problem / Insight Narrative (Cinematic 4-Panel Scroll Progression) */}
+      <ProblemInsight />
+
+      {/* Phase 04: What We Do / Capabilities (3-Pillar Capability Architecture) */}
+      <WhatWeDo />
+
+      {/* Phase 05: Journal / Insights (Exact Vivid Motion Recreation) */}
+      <Journal />
+
+      {/* Phase 06: Final Editorial Conversion Statement */}
+      <FinalCTA />
+    </>
+  );
+}
+
 function MainApp() {
   const { isModalOpen } = useLanguage();
-  const { isWorkPage, isApproachPage, isCapabilitiesPage, isBlogPage, isAboutPage, isNotFound } = useRouter();
+  const router = useRouter();
+  const { isWorkPage, isApproachPage, isCapabilitiesPage, isBlogPage, isAboutPage, isNotFound } = router;
   const [introFinished, setIntroFinished] = useState(true);
 
   useEffect(() => {
@@ -50,39 +94,15 @@ function MainApp() {
 
       {/* Main Experience Flow */}
       <main id="main" className="main-content-flow">
-        {isNotFound ? (
-          <NotFoundPage />
-        ) : isWorkPage ? (
-          <WorkPage />
-        ) : isApproachPage ? (
-          <ApproachPage />
-        ) : isCapabilitiesPage ? (
-          <CapabilitiesPage />
-        ) : isBlogPage ? (
-          <BlogPage />
-        ) : isAboutPage ? (
-          <AboutPage />
-        ) : (
-          <>
-            {/* Phase 01: Hero Section (Vivid Motion Architecture + Mouse Fire Effect) */}
-            <Hero isLoaded={introFinished} />
-
-            {/* Phase 02: Featured Work (Sticky Scroll Showcase + 4 Projects + See All Work CTA) */}
-            <SelectedWork />
-
-            {/* Phase 03: Problem / Insight Narrative (Cinematic 4-Panel Scroll Progression) */}
-            <ProblemInsight />
-
-            {/* Phase 04: What We Do / Capabilities (3-Pillar Capability Architecture) */}
-            <WhatWeDo />
-
-            {/* Phase 05: Journal / Insights (Exact Vivid Motion Recreation) */}
-            <Journal />
-
-            {/* Phase 06: Final Editorial Conversion Statement */}
-            <FinalCTA />
-          </>
-        )}
+        {renderPageContent({
+          isNotFound,
+          isWorkPage,
+          isApproachPage,
+          isCapabilitiesPage,
+          isBlogPage,
+          isAboutPage,
+          introFinished
+        })}
       </main>
 
       {/* Cinematic Closing Frame Footer */}

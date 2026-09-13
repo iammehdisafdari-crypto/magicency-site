@@ -116,7 +116,7 @@ export default function ApproachHero() {
         for (let j = i + 1; j < nodes.length; j++) {
           const dx = nodes[i].x - nodes[j].x;
           const dy = nodes[i].y - nodes[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
+          const dist = Math.hypot(dx, dy);
 
           if (dist < maxConnectDist) {
             const normalizedDist = 1 - dist / maxConnectDist;

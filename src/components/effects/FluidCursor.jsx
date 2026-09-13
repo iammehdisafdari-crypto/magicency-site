@@ -29,12 +29,12 @@ export default function FluidCursor({
 
   useEffect(() => {
     // 1. Accessibility & Device Detection
-    const isReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isReducedMotion = Boolean(window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches);
     const isTouch = (
       window.innerWidth < 992 ||
       'ontouchstart' in window ||
-      (navigator.maxTouchPoints && navigator.maxTouchPoints > 0) ||
-      (window.matchMedia && window.matchMedia('(pointer: coarse)').matches)
+      (navigator.maxTouchPoints > 0) ||
+      Boolean(window.matchMedia?.('(pointer: coarse)')?.matches)
     );
 
     if (isReducedMotion || isTouch) return;
