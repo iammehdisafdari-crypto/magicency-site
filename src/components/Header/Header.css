@@ -128,16 +128,18 @@
   align-items: center;
   justify-content: center;
   padding: 6px 12px;
+  background: #0d0f14;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 9999px;
-  color: #E2E8F0;
+  color: #FFFFFF;
   cursor: pointer;
   transition: all 200ms cubic-bezier(0.16, 1, 0.3, 1);
   white-space: nowrap;
 }
 
 .vm-desktop-lang-pill:hover {
+  background: #171922;
   background: rgba(255, 255, 255, 0.12);
   border-color: rgba(255, 255, 255, 0.25);
   color: #FFFFFF;
@@ -156,6 +158,7 @@
   align-items: center;
   gap: 8px;
   padding: 8px 18px;
+  background: #12141a;
   background: rgba(255, 255, 255, 0.07);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -225,10 +228,11 @@
   min-height: 44px;
   height: 38px;
   padding: 0 12px;
+  background: #0e1017;
   background: rgba(255, 255, 255, 0.07);
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 9999px;
-  color: #E2E8F0;
+  color: #FFFFFF;
   cursor: pointer;
   box-sizing: border-box;
   transition: all 200ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -237,6 +241,7 @@
 
 .vm-mobile-lang-btn:hover,
 .vm-mobile-lang-btn:active {
+  background: #171922;
   background: rgba(255, 255, 255, 0.14);
   border-color: rgba(255, 255, 255, 0.25);
   color: #FFFFFF;
@@ -278,6 +283,7 @@
 }
 
 .vm-mobile-home-btn.is-open {
+  background: #26130b;
   background: rgba(255, 85, 0, 0.18);
   border-color: #FF5500;
   color: #FFFFFF;
@@ -525,6 +531,7 @@
   align-items: center;
   gap: 10px;
   padding: 10px 22px;
+  background: #14141c;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 9999px;
@@ -685,3 +692,26 @@
     padding-top: 4px;
   }
 }
+
+/* =========================================================
+   06. MOBILE STAGGERED MENU CONTAINER SWITCH
+   ========================================================= */
+.vm-mobile-staggered-container {
+  display: none;
+}
+
+@media (min-width: 921px) {
+  .vm-mobile-staggered-container {
+    display: none !important;
+  }
+}
+
+@media (max-width: 920px) {
+  .vm-header {
+    display: none !important;
+  }
+  .vm-mobile-staggered-container {
+    display: block !important;
+  }
+}
+
