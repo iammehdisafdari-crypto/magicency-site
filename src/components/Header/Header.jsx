@@ -274,9 +274,9 @@ export default function Header() {
           menuButtonColor="#ffffff"
           openMenuButtonColor="#ffffff"
           changeMenuColorOnOpen={true}
-          colors={['#B497CF', '#5227FF']}
-          accentColor="#5227FF"
-          panelBackground="#0B0C10"
+          colors={['#DD0060', '#DD0060']}
+          accentColor="#DD0060"
+          panelBackground="#07101C"
           isFixed={true}
           isRTL={isRTL}
           className={isScrolled ? 'is-scrolled' : ''}

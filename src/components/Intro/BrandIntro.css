@@ -2,7 +2,7 @@
   position: fixed;
   inset: 0;
   z-index: 99999;
-  background-color: #040508;
+  background-color: #07101C;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -54,7 +54,7 @@
   width: 500px;
   height: 500px;
   border-radius: 50%;
-  background: radial-gradient(circle at center, rgba(255, 85, 0, 0.22) 0%, rgba(255, 60, 0, 0.06) 45%, transparent 70%);
+  background: radial-gradient(circle at center, rgba(221, 0, 96, 0.22) 0%, rgba(221, 0, 96, 0.06) 45%, transparent 70%);
   filter: blur(40px);
   opacity: 0;
   transform: scale(0.6);
@@ -82,7 +82,7 @@
   position: absolute;
   width: 240px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 85, 0, 0.8), transparent);
+  background: linear-gradient(90deg, transparent, rgba(221, 0, 96, 0.8), transparent);
   opacity: 0;
   transform: scaleX(0.2);
   animation: signalLineExpand 1.2s ease-out forwards;
@@ -92,7 +92,7 @@
   position: absolute;
   height: 240px;
   width: 1px;
-  background: linear-gradient(180deg, transparent, rgba(255, 85, 0, 0.8), transparent);
+  background: linear-gradient(180deg, transparent, rgba(221, 0, 96, 0.8), transparent);
   opacity: 0;
   transform: scaleY(0.2);
   animation: signalLineExpand 1.2s ease-out forwards;
@@ -106,7 +106,7 @@
 
 .signal-radar-ring {
   position: absolute;
-  border: 1px solid rgba(255, 85, 0, 0.4);
+  border: 1px solid rgba(221, 0, 96, 0.4);
   border-radius: 50%;
   opacity: 0;
   transform: scale(0.2);
@@ -152,7 +152,7 @@
 .intro-svg-logo {
   width: 100%;
   height: 100%;
-  filter: drop-shadow(0 0 16px rgba(255, 85, 0, 0.5));
+  filter: drop-shadow(0 0 16px rgba(221, 0, 96, 0.5));
 }
 
 /* Corner Alignment Brackets */
@@ -172,7 +172,7 @@
 .phase-formation .corner-bracket,
 .phase-identity .corner-bracket,
 .phase-transition .corner-bracket {
-  stroke: #FF6600;
+  stroke: #DD0060;
   stroke-dashoffset: 0;
 }
 
@@ -195,7 +195,7 @@
 .phase-transition .delta-shape {
   opacity: 1;
   transform: scale(1);
-  fill: #FF5500;
+  fill: #DD0060;
 }
 
 .phase-identity .delta-core-dot,
@@ -211,7 +211,7 @@
   height: 8px;
   border-radius: 50%;
   background: #FFFFFF;
-  box-shadow: 0 0 20px #FF5500, 0 0 40px #FF5500;
+  box-shadow: 0 0 20px #DD0060, 0 0 40px #DD0060;
   transform: translate(-50%, -50%);
   opacity: 0;
   animation: sparkFlash 1.6s ease-out forwards;
@@ -260,14 +260,14 @@
 .line-segment {
   width: 24px;
   height: 1px;
-  background: rgba(255, 85, 0, 0.5);
+  background: rgba(221, 0, 96, 0.5);
 }
 
 .intro-brand-sub {
   font-family: var(--font-mono);
   font-size: 0.65rem;
   letter-spacing: 0.16em;
-  color: #FF7722;
+  color: #DD0060;
   font-weight: 600;
 }
 
@@ -290,5 +290,5 @@
 .intro-skip-btn:hover {
   background: rgba(255, 255, 255, 0.12);
   color: #FFFFFF;
-  border-color: #FF5500;
+  border-color: #DD0060;
 }

@@ -11,7 +11,7 @@ export const CAPABILITY_DOMAINS = [
     titleFa: 'استراتژی',
     taglineEn: 'Define where the business should go and why.',
     taglineFa: 'تعیین اینکه کسب‌وکار به کجا باید برود و چرا.',
-    color: '#ff5500',
+    color: '#DD0060',
     capabilities: [
       {
         id: 'positioning',
@@ -63,7 +63,7 @@ export const CAPABILITY_DOMAINS = [
     titleFa: 'برند و خلاقیت',
     taglineEn: 'Turn strategic direction into something people understand and remember.',
     taglineFa: 'تبدیل جهت‌گیری استراتژیک به چیزی ملموس که در ذهن بماند.',
-    color: '#ff7722',
+    color: '#DD0060',
     capabilities: [
       {
         id: 'brand-identity',
@@ -115,7 +115,7 @@ export const CAPABILITY_DOMAINS = [
     titleFa: 'تجربه دیجیتال',
     taglineEn: 'Build the experience that turns attention into commercial action.',
     taglineFa: 'ساخت تجربه‌ای تعاملی که توجه را به اقدام تجاری تبدیل کند.',
-    color: '#ff9944',
+    color: '#DD0060',
     capabilities: [
       {
         id: 'flagship-websites',
@@ -167,7 +167,7 @@ export const CAPABILITY_DOMAINS = [
     titleFa: 'رشد و جذب مخاطب',
     taglineEn: 'Create and optimize the paths that generate predictable demand.',
     taglineFa: 'خلق و بهینه‌سازی مسیرهایی که تقاضای پایدار می‌آفرینند.',
-    color: '#ff5500',
+    color: '#DD0060',
     capabilities: [
       {
         id: 'performance-marketing',
@@ -219,7 +219,7 @@ export const CAPABILITY_DOMAINS = [
     titleFa: 'داده و بهینه‌سازی',
     taglineEn: 'Measure reality and turn results into better decisions.',
     taglineFa: 'سنجش واقعیت و تبدیل نتایج تجربی به تصمیم‌های هوشمندانه‌تر.',
-    color: '#ffaa44',
+    color: '#DD0060',
     capabilities: [
       {
         id: 'telemetry-analytics',

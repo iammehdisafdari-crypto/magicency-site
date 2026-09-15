@@ -6,13 +6,13 @@ export default function OperatingSystemReactor({ activeStateId, isAutoPlaying })
       <svg viewBox="0 0 600 450" fill="none" xmlns="http://www.w3.org/2000/svg" className="os-reactor-svg">
         <defs>
           <radialGradient id="reactorCoreGlow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="rgba(255, 85, 0, 0.45)" />
-            <stop offset="60%" stopColor="rgba(255, 85, 0, 0.1)" />
+            <stop offset="0%" stopColor="rgba(221, 0, 96, 0.45)" />
+            <stop offset="60%" stopColor="rgba(221, 0, 96, 0.1)" />
             <stop offset="100%" stopColor="transparent" />
           </radialGradient>
 
           <radialGradient id="signalGreenAura" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="rgba(0, 245, 155, 0.4)" />
+            <stop offset="0%" stopColor="rgba(221, 0, 96, 0.4)" />
             <stop offset="100%" stopColor="transparent" />
           </radialGradient>
 
@@ -39,7 +39,7 @@ export default function OperatingSystemReactor({ activeStateId, isAutoPlaying })
 
         {/* Orbitals & Energy Bounds */}
         <circle cx="300" cy="225" r="160" stroke="rgba(255, 255, 255, 0.08)" strokeDasharray="6 6" className="orbital-ring-outer" />
-        <circle cx="300" cy="225" r="100" stroke="rgba(255, 85, 0, 0.25)" strokeDasharray="4 4" className="orbital-ring-inner" />
+        <circle cx="300" cy="225" r="100" stroke="rgba(221, 0, 96, 0.25)" strokeDasharray="4 4" className="orbital-ring-inner" />
         <circle cx="300" cy="225" r="45" fill="url(#reactorCoreGlow)" />
 
         {/* =========================================================
@@ -49,17 +49,17 @@ export default function OperatingSystemReactor({ activeStateId, isAutoPlaying })
         {/* STATE 01: INPUT — Baseline Bottleneck & Data Ingestion */}
         {activeStateId === 'input' && (
           <g className="reactor-mode-input">
-            <line x1="80" y1="120" x2="260" y2="210" stroke="#FF5500" strokeWidth="2" strokeDasharray="4 4" />
-            <line x1="80" y1="225" x2="255" y2="225" stroke="#FF5500" strokeWidth="3" />
-            <line x1="80" y1="330" x2="260" y2="240" stroke="#FF5500" strokeWidth="2" strokeDasharray="4 4" />
+            <line x1="80" y1="120" x2="260" y2="210" stroke="#DD0060" strokeWidth="2" strokeDasharray="4 4" />
+            <line x1="80" y1="225" x2="255" y2="225" stroke="#DD0060" strokeWidth="3" />
+            <line x1="80" y1="330" x2="260" y2="240" stroke="#DD0060" strokeWidth="2" strokeDasharray="4 4" />
 
-            <circle cx="80" cy="120" r="8" fill="#151822" stroke="#FF5500" strokeWidth="2" />
-            <circle cx="80" cy="225" r="10" fill="#FF5500" />
-            <circle cx="80" cy="330" r="8" fill="#151822" stroke="#FF5500" strokeWidth="2" />
+            <circle cx="80" cy="120" r="8" fill="#07101C" stroke="#DD0060" strokeWidth="2" />
+            <circle cx="80" cy="225" r="10" fill="#DD0060" />
+            <circle cx="80" cy="330" r="8" fill="#07101C" stroke="#DD0060" strokeWidth="2" />
 
-            <text x="80" y="100" textAnchor="middle" fill="#94A3B8" fontSize="10" fontFamily="var(--font-mono)">MARKET</text>
-            <text x="80" y="205" textAnchor="middle" fill="#FF8833" fontSize="11" fontFamily="var(--font-mono)" fontWeight="700">STALLED CAC</text>
-            <text x="80" y="355" textAnchor="middle" fill="#94A3B8" fontSize="10" fontFamily="var(--font-mono)">CUSTOMER</text>
+            <text x="80" y="100" textAnchor="middle" fill="#8B93A7" fontSize="10" fontFamily="var(--font-mono)">MARKET</text>
+            <text x="80" y="205" textAnchor="middle" fill="#DD0060" fontSize="11" fontFamily="var(--font-mono)" fontWeight="700">STALLED CAC</text>
+            <text x="80" y="355" textAnchor="middle" fill="#8B93A7" fontSize="10" fontFamily="var(--font-mono)">CUSTOMER</text>
           </g>
         )}
 
@@ -67,15 +67,15 @@ export default function OperatingSystemReactor({ activeStateId, isAutoPlaying })
         {activeStateId === 'insight' && (
           <g className="reactor-mode-insight">
             {/* Anamorphic Convergence Traces */}
-            <path d="M 80 80 Q 200 160 300 225" stroke="#FF5500" strokeWidth="2" fill="none" />
-            <path d="M 520 80 Q 400 160 300 225" stroke="#FF5500" strokeWidth="2" fill="none" />
-            <path d="M 80 370 Q 200 290 300 225" stroke="#FF5500" strokeWidth="2" fill="none" />
-            <path d="M 520 370 Q 400 290 300 225" stroke="#FF5500" strokeWidth="2" fill="none" />
+            <path d="M 80 80 Q 200 160 300 225" stroke="#DD0060" strokeWidth="2" fill="none" />
+            <path d="M 520 80 Q 400 160 300 225" stroke="#DD0060" strokeWidth="2" fill="none" />
+            <path d="M 80 370 Q 200 290 300 225" stroke="#DD0060" strokeWidth="2" fill="none" />
+            <path d="M 520 370 Q 400 290 300 225" stroke="#DD0060" strokeWidth="2" fill="none" />
 
             {/* Radiant Pattern Focal Point */}
-            <circle cx="300" cy="225" r="28" fill="#181B24" stroke="#FF5500" strokeWidth="3" filter="url(#reactorLaserBloom)" />
-            <circle cx="300" cy="225" r="12" fill="#FF5500" />
-            <text x="300" y="275" textAnchor="middle" fill="#00F59B" fontSize="11" fontFamily="var(--font-mono)" fontWeight="800">
+            <circle cx="300" cy="225" r="28" fill="#07101C" stroke="#DD0060" strokeWidth="3" filter="url(#reactorLaserBloom)" />
+            <circle cx="300" cy="225" r="12" fill="#DD0060" />
+            <text x="300" y="275" textAnchor="middle" fill="#DD0060" fontSize="11" fontFamily="var(--font-mono)" fontWeight="800">
               PATTERN ISOLATED [98.4% MATCH]
             </text>
           </g>
@@ -85,17 +85,17 @@ export default function OperatingSystemReactor({ activeStateId, isAutoPlaying })
         {activeStateId === 'action' && (
           <g className="reactor-mode-action">
             {/* Outgoing Laser Deployment Paths */}
-            <line x1="300" y1="225" x2="480" y2="100" stroke="#FF5500" strokeWidth="3" className="action-laser-pulse" />
-            <line x1="300" y1="225" x2="520" y2="225" stroke="#FF5500" strokeWidth="3.5" className="action-laser-pulse" />
-            <line x1="300" y1="225" x2="480" y2="350" stroke="#FF5500" strokeWidth="3" className="action-laser-pulse" />
+            <line x1="300" y1="225" x2="480" y2="100" stroke="#DD0060" strokeWidth="3" className="action-laser-pulse" />
+            <line x1="300" y1="225" x2="520" y2="225" stroke="#DD0060" strokeWidth="3.5" className="action-laser-pulse" />
+            <line x1="300" y1="225" x2="480" y2="350" stroke="#DD0060" strokeWidth="3" className="action-laser-pulse" />
 
-            <circle cx="480" cy="100" r="18" fill="#141722" stroke="#FF5500" strokeWidth="2" />
+            <circle cx="480" cy="100" r="18" fill="#07101C" stroke="#DD0060" strokeWidth="2" />
             <text x="480" y="104" textAnchor="middle" fill="#FFFFFF" fontSize="9" fontFamily="var(--font-mono)" fontWeight="700">STRAT</text>
 
-            <circle cx="520" cy="225" r="22" fill="#141722" stroke="#FF5500" strokeWidth="2.5" />
+            <circle cx="520" cy="225" r="22" fill="#07101C" stroke="#DD0060" strokeWidth="2.5" />
             <text x="520" y="229" textAnchor="middle" fill="#FFFFFF" fontSize="9" fontFamily="var(--font-mono)" fontWeight="700">MEDIA</text>
 
-            <circle cx="480" cy="350" r="18" fill="#141722" stroke="#FF5500" strokeWidth="2" />
+            <circle cx="480" cy="350" r="18" fill="#07101C" stroke="#DD0060" strokeWidth="2" />
             <text x="480" y="354" textAnchor="middle" fill="#FFFFFF" fontSize="9" fontFamily="var(--font-mono)" fontWeight="700">CRO</text>
           </g>
         )}
@@ -103,17 +103,17 @@ export default function OperatingSystemReactor({ activeStateId, isAutoPlaying })
         {/* STATE 04: SIGNAL — Full-Funnel Telemetry Radar Stream */}
         {activeStateId === 'signal' && (
           <g className="reactor-mode-signal">
-            <circle cx="300" cy="225" r="70" stroke="#00F59B" strokeWidth="1.5" strokeDasharray="4 4" className="signal-echo-ring-1" />
-            <circle cx="300" cy="225" r="130" stroke="#00F59B" strokeWidth="1.5" strokeDasharray="6 6" className="signal-echo-ring-2" />
-            <circle cx="300" cy="225" r="190" stroke="rgba(0, 245, 155, 0.4)" strokeWidth="1" className="signal-echo-ring-3" />
+            <circle cx="300" cy="225" r="70" stroke="#DD0060" strokeWidth="1.5" strokeDasharray="4 4" className="signal-echo-ring-1" />
+            <circle cx="300" cy="225" r="130" stroke="#DD0060" strokeWidth="1.5" strokeDasharray="6 6" className="signal-echo-ring-2" />
+            <circle cx="300" cy="225" r="190" stroke="rgba(221, 0, 96, 0.4)" strokeWidth="1" className="signal-echo-ring-3" />
 
-            <line x1="140" y1="140" x2="300" y2="225" stroke="#00F59B" strokeWidth="2" />
-            <line x1="460" y1="140" x2="300" y2="225" stroke="#00F59B" strokeWidth="2" />
-            <line x1="380" y1="360" x2="300" y2="225" stroke="#00F59B" strokeWidth="2" />
+            <line x1="140" y1="140" x2="300" y2="225" stroke="#DD0060" strokeWidth="2" />
+            <line x1="460" y1="140" x2="300" y2="225" stroke="#DD0060" strokeWidth="2" />
+            <line x1="380" y1="360" x2="300" y2="225" stroke="#DD0060" strokeWidth="2" />
 
-            <circle cx="140" cy="140" r="7" fill="#00F59B" />
-            <circle cx="460" cy="140" r="7" fill="#00F59B" />
-            <circle cx="380" cy="360" r="7" fill="#00F59B" />
+            <circle cx="140" cy="140" r="7" fill="#DD0060" />
+            <circle cx="460" cy="140" r="7" fill="#DD0060" />
+            <circle cx="380" cy="360" r="7" fill="#DD0060" />
           </g>
         )}
 
@@ -121,17 +121,17 @@ export default function OperatingSystemReactor({ activeStateId, isAutoPlaying })
         {activeStateId === 'optimization' && (
           <g className="reactor-mode-optimization">
             {/* Suppressed Vector (Losing variation) */}
-            <line x1="300" y1="225" x2="480" y2="120" stroke="#475569" strokeWidth="1.5" strokeDasharray="3 3" />
-            <circle cx="480" cy="120" r="10" fill="#111319" stroke="#475569" strokeWidth="1" />
-            <text x="480" y="100" textAnchor="middle" fill="#64748B" fontSize="9" fontFamily="var(--font-mono)">PHASED OUT</text>
+            <line x1="300" y1="225" x2="480" y2="120" stroke="#8B93A7" strokeWidth="1.5" strokeDasharray="3 3" />
+            <circle cx="480" cy="120" r="10" fill="#07101C" stroke="#8B93A7" strokeWidth="1" />
+            <text x="480" y="100" textAnchor="middle" fill="#8B93A7" fontSize="9" fontFamily="var(--font-mono)">PHASED OUT</text>
 
             {/* Amplified Vector (Top ROAS Winner) */}
-            <line x1="300" y1="225" x2="510" y2="260" stroke="#FF5500" strokeWidth="6" filter="url(#reactorLaserBloom)" />
-            <circle cx="510" cy="260" r="26" fill="#181B24" stroke="#FF5500" strokeWidth="3" />
+            <line x1="300" y1="225" x2="510" y2="260" stroke="#DD0060" strokeWidth="6" filter="url(#reactorLaserBloom)" />
+            <circle cx="510" cy="260" r="26" fill="#07101C" stroke="#DD0060" strokeWidth="3" />
             <text x="510" y="256" textAnchor="middle" fill="#FFFFFF" fontSize="10" fontFamily="var(--font-mono)" fontWeight="800">
               +84%
             </text>
-            <text x="510" y="270" textAnchor="middle" fill="#00F59B" fontSize="8" fontFamily="var(--font-mono)" fontWeight="700">
+            <text x="510" y="270" textAnchor="middle" fill="#DD0060" fontSize="8" fontFamily="var(--font-mono)" fontWeight="700">
               AMPLIFIED
             </text>
           </g>
@@ -141,14 +141,14 @@ export default function OperatingSystemReactor({ activeStateId, isAutoPlaying })
         {activeStateId === 'compounding' && (
           <g className="reactor-mode-compounding">
             {/* Spinning Flywheel Vortex Elements */}
-            <circle cx="300" cy="225" r="130" stroke="#FF5500" strokeWidth="3" strokeDasharray="80 20" className="flywheel-rotator-1" />
-            <circle cx="300" cy="225" r="90" stroke="#FFAA44" strokeWidth="2.5" strokeDasharray="40 30" className="flywheel-rotator-2" />
-            <circle cx="300" cy="225" r="50" fill="url(#reactorCoreGlow)" stroke="#FF5500" strokeWidth="2" filter="url(#reactorLaserBloom)" />
+            <circle cx="300" cy="225" r="130" stroke="#DD0060" strokeWidth="3" strokeDasharray="80 20" className="flywheel-rotator-1" />
+            <circle cx="300" cy="225" r="90" stroke="#DD0060" strokeWidth="2.5" strokeDasharray="40 30" className="flywheel-rotator-2" />
+            <circle cx="300" cy="225" r="50" fill="url(#reactorCoreGlow)" stroke="#DD0060" strokeWidth="2" filter="url(#reactorLaserBloom)" />
 
             <text x="300" y="221" textAnchor="middle" fill="#FFFFFF" fontSize="13" fontFamily="var(--font-display)" fontWeight="900">
               3.4X
             </text>
-            <text x="300" y="238" textAnchor="middle" fill="#00F59B" fontSize="8" fontFamily="var(--font-mono)" fontWeight="800">
+            <text x="300" y="238" textAnchor="middle" fill="#DD0060" fontSize="8" fontFamily="var(--font-mono)" fontWeight="800">
               COMPOUNDING
             </text>
           </g>
@@ -161,8 +161,8 @@ export default function OperatingSystemReactor({ activeStateId, isAutoPlaying })
           width="72" 
           height="72" 
           rx="18" 
-          fill="#101218" 
-          stroke={activeStateId === 'compounding' ? '#00F59B' : '#FF5500'} 
+          fill="#07101C" 
+          stroke={activeStateId === 'compounding' ? '#DD0060' : '#DD0060'} 
           strokeWidth="2"
         />
         <text 
@@ -180,7 +180,7 @@ export default function OperatingSystemReactor({ activeStateId, isAutoPlaying })
           x="300" 
           y="238" 
           textAnchor="middle" 
-          fill="#FF8833" 
+          fill="#DD0060" 
           fontSize="7" 
           fontFamily="var(--font-mono)" 
           fontWeight="700"

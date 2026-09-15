@@ -112,10 +112,10 @@ function drawApproachConnections(ctx, nodes, activePhaseIndex) {
 
 function getApproachNodeColor(activePhaseIndex) {
   if (activePhaseIndex === 0) {
-    return 'rgba(255, 80, 80, 0.65)';
+    return 'rgba(221, 0, 96, 0.65)';
   }
   if (activePhaseIndex === 1) {
-    return 'rgba(255, 107, 44, 0.85)';
+    return 'rgba(221, 0, 96, 0.85)';
   }
   return 'rgba(255, 255, 255, 0.95)';
 }
@@ -132,7 +132,7 @@ function drawApproachNodes(ctx, nodes, activePhaseIndex) {
     ctx.fill();
 
     if (activePhaseIndex === 2) {
-      ctx.fillStyle = 'rgba(255, 107, 44, 0.2)';
+      ctx.fillStyle = 'rgba(221, 0, 96, 0.2)';
       ctx.beginPath();
       ctx.arc(n.x, n.y, n.size + 3 + pulse, 0, Math.PI * 2);
       ctx.fill();
@@ -207,7 +207,7 @@ export default function ApproachHero() {
 
     const visibilityObserver = new IntersectionObserver((entries) => {
       const entry = entries[0];
-      isVisible = Boolean(entry && entry.isIntersecting);
+      isVisible = Boolean(entry?.isIntersecting);
       if (isVisible) {
         startLoop();
       } else {

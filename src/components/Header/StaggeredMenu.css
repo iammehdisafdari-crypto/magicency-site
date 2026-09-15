@@ -1,0 +1,520 @@
+/* =========================================================
+   STAGGERED MENU — REACT BITS GSAP TECHNIQUE FOR MAGICENCY
+   Layered Curtain Wipe + Staggered Kinetic Typography
+   ========================================================= */
+
+.staggered-menu-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 90;
+  pointer-events: none;
+  --sm-accent: #DD0060;
+  --sm-panel-bg: #07101C;
+}
+
+.staggered-menu-wrapper.fixed-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  z-index: 100;
+  overflow: hidden;
+}
+
+/* Header bar inside StaggeredMenu */
+.staggered-menu-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(72px + env(safe-area-inset-top, 0px));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: env(safe-area-inset-top, 0px) clamp(16px, 4.5vw, 64px) 0;
+  background: transparent;
+  pointer-events: none;
+  z-index: 30;
+  box-sizing: border-box;
+}
+
+.staggered-menu-header > * {
+  pointer-events: auto;
+}
+
+.sm-logo {
+  display: flex;
+  align-items: center;
+  user-select: none;
+}
+
+.sm-logo-img {
+  display: block;
+  height: 26px;
+  width: auto;
+  object-fit: contain;
+}
+
+.sm-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* =========================================================
+   TOGGLE BUTTON (Rolling text + Morphing +/x icon)
+   ========================================================= */
+.sm-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 44px;
+  min-height: 44px;
+  height: 38px;
+  padding: 0 16px;
+  background: #07101C;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 9999px;
+  color: #FFFFFF;
+  cursor: pointer;
+  box-sizing: border-box;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: background-color 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+[dir="rtl"] .sm-toggle {
+  font-family: var(--font-persian, 'Vazirmatn', sans-serif);
+  letter-spacing: 0;
+  font-size: 0.8rem;
+}
+
+.sm-toggle:hover {
+  background: #07101C;
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+}
+
+.sm-toggle.is-open {
+  background: rgba(221, 0, 96, 0.18);
+  border-color: var(--sm-accent, #DD0060);
+  color: #FFFFFF;
+  box-shadow: 0 0 20px rgba(221, 0, 96, 0.35);
+}
+
+.sm-toggle:focus-visible {
+  outline: 2px solid var(--sm-accent, #DD0060);
+  outline-offset: 3px;
+}
+
+.sm-toggle-textWrap {
+  position: relative;
+  display: inline-block;
+  height: 1.2em;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.sm-toggle-textInner {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.sm-toggle-line {
+  display: block;
+  height: 1.2em;
+  line-height: 1.2;
+}
+
+.sm-icon {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
+}
+
+.sm-icon-line {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+}
+
+.sm-icon-line-v {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+/* =========================================================
+   STAGGERED PRELAYERS (Colored sliding curtains)
+   ========================================================= */
+.sm-prelayers {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: clamp(280px, 44vw, 500px);
+  height: 100%;
+  height: 100dvh;
+  pointer-events: none;
+  z-index: 10;
+  overflow: hidden;
+  opacity: 0;
+}
+
+[data-position='left'] .sm-prelayers {
+  right: auto;
+  left: 0;
+}
+
+.sm-prelayer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+}
+
+/* =========================================================
+   MAIN SLIDING PANEL
+   ========================================================= */
+.staggered-menu-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: clamp(280px, 44vw, 500px);
+  height: 100%;
+  height: 100dvh;
+  background: var(--sm-panel-bg, #07101C);
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  padding: calc(84px + env(safe-area-inset-top, 0px)) clamp(20px, 4.5vw, 48px) calc(28px + env(safe-area-inset-bottom, 0px));
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 20;
+  pointer-events: auto;
+  box-sizing: border-box;
+  opacity: 0;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* Subtle atmospheric glow inside panel */
+.staggered-menu-panel::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(221, 0, 96, 0.12) 0%, transparent 70%);
+  filter: blur(50px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+[data-position='left'] .staggered-menu-panel {
+  right: auto;
+  left: 0;
+  border-left: none;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sm-panel-inner {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+/* =========================================================
+   NAV ITEMS LIST & KINETIC TYPOGRAPHY
+   ========================================================= */
+.sm-panel-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(6px, 1.4vh, 16px);
+}
+
+.sm-panel-itemWrap {
+  position: relative;
+  overflow: hidden;
+  line-height: 1.1;
+  padding: 2px 0;
+}
+
+.sm-panel-item {
+  position: relative;
+  color: #FFFFFF;
+  font-family: var(--font-display, 'Plus Jakarta Sans', sans-serif);
+  font-weight: 700;
+  font-size: clamp(2rem, 5.5vw, 3.4rem);
+  cursor: pointer;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: baseline;
+  padding-right: 1.6em;
+  transition: color 240ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 240ms cubic-bezier(0.16, 1, 0.3, 1);
+  -webkit-tap-highlight-color: transparent;
+}
+
+[dir="rtl"] .sm-panel-item {
+  font-family: var(--font-persian, 'Vazirmatn', sans-serif);
+  letter-spacing: 0;
+  padding-right: 0;
+  padding-left: 1.6em;
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+}
+
+.sm-panel-itemLabel {
+  display: inline-block;
+  will-change: transform;
+  transform-origin: 0% 100%;
+}
+
+[dir="rtl"] .sm-panel-itemLabel {
+  transform-origin: 100% 100%;
+}
+
+.sm-panel-item:hover {
+  color: var(--sm-accent, #DD0060);
+  transform: translateX(6px);
+}
+
+[dir="rtl"] .sm-panel-item:hover {
+  transform: translateX(-6px);
+}
+
+.sm-panel-item:focus-visible {
+  outline: 2px solid var(--sm-accent, #DD0060);
+  outline-offset: 4px;
+}
+
+/* Item numbering */
+.sm-panel-list[data-numbering] {
+  counter-reset: smItem;
+}
+
+.sm-panel-list[data-numbering] .sm-panel-item::after {
+  counter-increment: smItem;
+  content: counter(smItem, decimal-leading-zero);
+  position: absolute;
+  top: 0.12em;
+  right: 0.2em;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--sm-accent, #DD0060);
+  letter-spacing: 0.05em;
+  pointer-events: none;
+  user-select: none;
+  opacity: var(--sm-num-opacity, 0);
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  transition: opacity 300ms ease;
+}
+
+[dir="rtl"] .sm-panel-list[data-numbering] .sm-panel-item::after {
+  right: auto;
+  left: 0.2em;
+}
+
+/* =========================================================
+   EXTRA SLOT (CTA button & direct contact)
+   ========================================================= */
+.sm-extra-slot {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 12px 0;
+}
+
+.sm-panel-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 9999px;
+  color: #FFFFFF;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  width: fit-content;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+  transition: all 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  -webkit-tap-highlight-color: transparent;
+}
+
+[dir="rtl"] .sm-panel-cta-btn {
+  font-family: var(--font-persian, 'Vazirmatn', sans-serif);
+  letter-spacing: 0;
+}
+
+.sm-panel-cta-btn:hover {
+  background: rgba(221, 0, 96, 0.25);
+  border-color: var(--sm-accent, #DD0060);
+  box-shadow: 0 6px 24px rgba(221, 0, 96, 0.4);
+  transform: translateY(-2px);
+}
+
+.sm-panel-contact-link {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  transition: color 200ms ease;
+  width: fit-content;
+}
+
+.sm-panel-contact-link:hover {
+  color: var(--sm-accent, #DD0060);
+}
+
+/* =========================================================
+   SOCIALS SECTION
+   ========================================================= */
+.sm-socials {
+  margin-top: auto;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sm-socials-title {
+  margin: 0;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sm-accent, #DD0060);
+}
+
+[dir="rtl"] .sm-socials-title {
+  font-family: var(--font-persian, 'Vazirmatn', sans-serif);
+  letter-spacing: 0;
+}
+
+.sm-socials-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.sm-socials-link {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.65);
+  text-decoration: none;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.sm-socials-list:hover .sm-socials-link {
+  opacity: 0.45;
+}
+
+.sm-socials-list .sm-socials-link:hover {
+  color: #FFFFFF;
+  opacity: 1 !important;
+}
+
+/* =========================================================
+   RESPONSIVE & MOBILE FULLSCREEN OVERLAY
+   ========================================================= */
+@media (max-width: 920px) {
+  .staggered-menu-header {
+    height: calc(64px + env(safe-area-inset-top, 0px));
+    padding: env(safe-area-inset-top, 0px) 18px 0;
+  }
+
+  .sm-prelayers,
+  .staggered-menu-panel {
+    width: 100%;
+    left: 0;
+    right: 0;
+    border-left: none;
+    border-right: none;
+  }
+
+  .staggered-menu-panel {
+    padding-left: 22px;
+    padding-right: 22px;
+    padding-top: calc(76px + env(safe-area-inset-top, 0px));
+    padding-bottom: calc(28px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .sm-panel-item {
+    font-size: clamp(1.85rem, 6.5vw, 2.6rem);
+  }
+
+  [dir="rtl"] .sm-panel-item {
+    font-size: clamp(1.65rem, 5.5vw, 2.2rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .staggered-menu-header {
+    height: calc(60px + env(safe-area-inset-top, 0px));
+    padding: env(safe-area-inset-top, 0px) 16px 0;
+  }
+
+  .staggered-menu-panel {
+    padding-left: 18px;
+    padding-right: 18px;
+    padding-top: calc(70px + env(safe-area-inset-top, 0px));
+    padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .sm-panel-item {
+    font-size: clamp(1.65rem, 7.5vw, 2.1rem);
+  }
+
+  .sm-toggle {
+    padding: 0 14px;
+    font-size: 0.72rem;
+  }
+}

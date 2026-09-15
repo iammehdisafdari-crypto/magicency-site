@@ -187,22 +187,22 @@ export default function TheReveal() {
           <svg className="workspace-conduit-svg" viewBox="0 0 1000 600" fill="none" preserveAspectRatio="none">
             <motion.path 
               d="M 240 180 L 240 380 L 580 300 L 760 420 L 500 300"
-              stroke="#FF5500" 
+              stroke="#DD0060" 
               strokeWidth="2" 
               strokeDasharray="6 6"
               style={{ opacity: conduitGlow }}
             />
             {activeStageIdx >= 1 && (
-              <line x1="240" y1="220" x2="240" y2="340" stroke="#FF5500" strokeWidth="2.5" />
+              <line x1="240" y1="220" x2="240" y2="340" stroke="#DD0060" strokeWidth="2.5" />
             )}
             {activeStageIdx >= 2 && (
-              <line x1="380" y1="200" x2="550" y2="280" stroke="#FF5500" strokeWidth="2.5" />
+              <line x1="380" y1="200" x2="550" y2="280" stroke="#DD0060" strokeWidth="2.5" />
             )}
             {activeStageIdx >= 3 && (
-              <line x1="550" y1="360" x2="720" y2="380" stroke="#00F59B" strokeWidth="2.5" />
+              <line x1="550" y1="360" x2="720" y2="380" stroke="#DD0060" strokeWidth="2.5" />
             )}
             {activeStageIdx >= 4 && (
-              <circle cx="500" cy="300" r="80" stroke="#FF5500" strokeWidth="2" strokeDasharray="8 4" className="core-flywheel-ring" />
+              <circle cx="500" cy="300" r="80" stroke="#DD0060" strokeWidth="2" strokeDasharray="8 4" className="core-flywheel-ring" />
             )}
           </svg>
 
@@ -220,7 +220,7 @@ export default function TheReveal() {
               />
               <div className="artifact-glass-vignette" />
               <div className="artifact-meta-pill">
-                <span className="status-ping-dot" style={{ backgroundColor: '#FF8833' }} />
+                <span className="status-ping-dot" style={{ backgroundColor: '#DD0060' }} />
                 <span>{SYSTEM_LAYERS[0].badge}</span>
               </div>
             </div>
@@ -245,7 +245,7 @@ export default function TheReveal() {
               />
               <div className="artifact-glass-vignette" />
               <div className="artifact-meta-pill">
-                <span className="status-ping-dot" style={{ backgroundColor: '#FF5500' }} />
+                <span className="status-ping-dot" style={{ backgroundColor: '#DD0060' }} />
                 <span>{SYSTEM_LAYERS[1].badge}</span>
               </div>
             </div>
@@ -270,7 +270,7 @@ export default function TheReveal() {
               />
               <div className="artifact-glass-vignette" />
               <div className="artifact-meta-pill dominant-pill">
-                <span className="status-ping-dot" style={{ backgroundColor: '#00F59B' }} />
+                <span className="status-ping-dot" style={{ backgroundColor: '#DD0060' }} />
                 <span>{SYSTEM_LAYERS[2].badge}</span>
               </div>
               <div className="hero-execution-badge">
@@ -298,7 +298,7 @@ export default function TheReveal() {
               />
               <div className="artifact-glass-vignette" />
               <div className="artifact-meta-pill">
-                <span className="status-ping-dot" style={{ backgroundColor: '#00F59B' }} />
+                <span className="status-ping-dot" style={{ backgroundColor: '#DD0060' }} />
                 <span>{SYSTEM_LAYERS[3].badge}</span>
               </div>
             </div>
@@ -323,7 +323,7 @@ export default function TheReveal() {
               />
               <div className="artifact-glass-vignette" />
               <div className="artifact-meta-pill scale-pill">
-                <span className="status-ping-dot" style={{ backgroundColor: '#FF8833' }} />
+                <span className="status-ping-dot" style={{ backgroundColor: '#DD0060' }} />
                 <span>{SYSTEM_LAYERS[4].badge}</span>
               </div>
             </div>

@@ -13,6 +13,14 @@ export default function WorkFeaturedCase() {
     ? 'داشبورد عملکرد سئو در سرچ کنسول گوگل با ۸۴.۱ هزار کلیک ارگانیک و ۵.۱۸ میلیون ایمپرشن'
     : 'Google Search Console verified performance dashboard with 84.1K organic clicks and 5.18M impressions';
 
+  const defaultFooterNote = lang === 'fa'
+    ? 'مهندسی معماری سئو، بهینه‌سازی بودجه خزش و ثبت ۵.۱۸ میلیون ایمپرشن و ۸۴.۱ هزار کلیک ارگانیک در سرچ کنسول.'
+    : 'Engineered programmatic SEO architecture, crawl optimization & 84.1K click compounding scale.';
+
+  const footerNote = flagship.footerNote
+    ? (flagship.footerNote[lang] || flagship.footerNote.en)
+    : defaultFooterNote;
+
   return (
     <section 
       id="organic-growth-engine"
@@ -180,13 +188,7 @@ export default function WorkFeaturedCase() {
         <div className="work-featured-action-bar">
           <div className="featured-case-note">
             <span className="note-indicator" aria-hidden="true">✦</span>
-            <span>
-              {flagship.footerNote 
-                ? (flagship.footerNote[lang] || flagship.footerNote.en)
-                : (lang === 'fa'
-                    ? 'مهندسی معماری سئو، بهینه‌سازی بودجه خزش و ثبت ۵.۱۸ میلیون ایمپرشن و ۸۴.۱ هزار کلیک ارگانیک در سرچ کنسول.'
-                    : 'Engineered programmatic SEO architecture, crawl optimization & 84.1K click compounding scale.')}
-            </span>
+            <span>{footerNote}</span>
           </div>
 
           <button 

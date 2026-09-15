@@ -159,8 +159,8 @@ function renderEntropyLayer({ nodes, coordsMap, isMobile, centerX, isRTL }) {
               width={boxW} 
               height={boxH} 
               rx={isMobile ? "8" : "12"} 
-              fill="rgba(255, 60, 0, 0.04)" 
-              stroke="rgba(255, 85, 0, 0.35)" 
+              fill="rgba(221, 0, 96, 0.04)" 
+              stroke="rgba(221, 0, 96, 0.35)" 
               strokeWidth="1.2" 
               strokeDasharray="4 4" 
             />
@@ -172,14 +172,14 @@ function renderEntropyLayer({ nodes, coordsMap, isMobile, centerX, isRTL }) {
       {isMobile ? (
         <path 
           d="M 160 68 L 220 68 M 150 220 L 230 220 M 190 250 L 190 310" 
-          stroke="rgba(255, 60, 0, 0.4)" 
+          stroke="rgba(221, 0, 96, 0.4)" 
           strokeWidth="1.5" 
           strokeDasharray="3 5"
         />
       ) : (
         <path 
           d="M 205 95 L 305 75 M 695 95 L 600 75 M 195 415 L 290 435 M 705 415 L 615 435" 
-          stroke="rgba(255, 60, 0, 0.4)" 
+          stroke="rgba(221, 0, 96, 0.4)" 
           strokeWidth="1.5" 
           strokeDasharray="3 5"
         />
@@ -190,7 +190,7 @@ function renderEntropyLayer({ nodes, coordsMap, isMobile, centerX, isRTL }) {
         x={centerX} 
         y={isMobile ? 142 : 248} 
         textAnchor="middle" 
-        fill="#FF5500" 
+        fill="#DD0060" 
         fontSize={isMobile ? "10" : "12"} 
         fontWeight="700" 
         fontFamily="var(--font-mono)" 
@@ -202,7 +202,7 @@ function renderEntropyLayer({ nodes, coordsMap, isMobile, centerX, isRTL }) {
         x={centerX} 
         y={isMobile ? 158 : 272} 
         textAnchor="middle" 
-        fill="#7F8492" 
+        fill="#8B93A7" 
         fontSize={isMobile ? "8" : "9.5"} 
         fontFamily="var(--font-mono)" 
         letterSpacing="0.06em"
@@ -218,8 +218,8 @@ function renderConvergenceLayer({ nodes, coordsMap, centerX, centerY, isMobile }
     <g className="pi-convergence-layer">
       {/* Center Gravitational Singularity at (centerX, centerY) */}
       <circle cx={centerX} cy={centerY} r={isMobile ? 45 : 65} fill="url(#piCoreGlow)" />
-      <circle cx={centerX} cy={centerY} r={isMobile ? 14 : 18} fill="rgba(255, 85, 0, 0.25)" />
-      <circle cx={centerX} cy={centerY} r={isMobile ? 6 : 8} fill="#FF7722" filter="url(#piGlowNeon)" />
+      <circle cx={centerX} cy={centerY} r={isMobile ? 14 : 18} fill="rgba(221, 0, 96, 0.25)" />
+      <circle cx={centerX} cy={centerY} r={isMobile ? 6 : 8} fill="#DD0060" filter="url(#piGlowNeon)" />
 
       {/* Inward Vector Alignment Conduits */}
       {nodes.map((node) => {
@@ -231,7 +231,7 @@ function renderConvergenceLayer({ nodes, coordsMap, centerX, centerY, isMobile }
               y1={coord.y}
               x2={centerX}
               y2={centerY}
-              stroke="rgba(255, 120, 40, 0.55)"
+              stroke="rgba(221, 0, 96, 0.55)"
               strokeWidth="1.8"
               strokeDasharray="4 6"
               initial={{ pathLength: 0, opacity: 0 }}
@@ -243,7 +243,7 @@ function renderConvergenceLayer({ nodes, coordsMap, centerX, centerY, isMobile }
               cx={(coord.x + centerX) / 2} 
               cy={(coord.y + centerY) / 2} 
               r={isMobile ? "2.5" : "3.5"} 
-              fill="#FFAA33" 
+              fill="#DD0060" 
             />
           </g>
         );
@@ -258,14 +258,14 @@ function renderPipelineLayer({ isMobile, pipelineBridgesMobile, pipelineBridges,
       {isMobile ? (
         pipelineBridgesMobile.map((bridge, idx) => (
           <g key={`pipe-bridge-mob-${bridge.fromY}-${bridge.toY}`}>
-            <circle cx="190" cy={bridge.fromY} r="2" fill="#FF7722" />
-            <circle cx="190" cy={bridge.toY} r="2" fill="#FF7722" />
+            <circle cx="190" cy={bridge.fromY} r="2" fill="#DD0060" />
+            <circle cx="190" cy={bridge.toY} r="2" fill="#DD0060" />
             <line
               x1="190"
               y1={bridge.fromY}
               x2="190"
               y2={bridge.toY}
-              stroke="rgba(255, 120, 40, 0.45)"
+              stroke="rgba(221, 0, 96, 0.45)"
               strokeWidth="2.5"
               strokeLinecap="round"
             />
@@ -282,7 +282,7 @@ function renderPipelineLayer({ isMobile, pipelineBridgesMobile, pipelineBridges,
               <path
                 d="M -6 -3 L 0 3 L 6 -3"
                 fill="none"
-                stroke="#FF6600"
+                stroke="#DD0060"
                 strokeWidth="3"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -301,14 +301,14 @@ function renderPipelineLayer({ isMobile, pipelineBridgesMobile, pipelineBridges,
       ) : (
         pipelineBridges.map((bridge, idx) => (
           <g key={`pipe-bridge-dt-${bridge.fromX}-${bridge.toX}`}>
-            <circle cx={bridge.fromX} cy="260" r="2.5" fill="#FF7722" />
-            <circle cx={bridge.toX} cy="260" r="2.5" fill="#FF7722" />
+            <circle cx={bridge.fromX} cy="260" r="2.5" fill="#DD0060" />
+            <circle cx={bridge.toX} cy="260" r="2.5" fill="#DD0060" />
             <line
               x1={bridge.fromX}
               y1="260"
               x2={bridge.toX}
               y2="260"
-              stroke="rgba(255, 120, 40, 0.4)"
+              stroke="rgba(221, 0, 96, 0.4)"
               strokeWidth="2.5"
               strokeLinecap="round"
             />
@@ -326,7 +326,7 @@ function renderPipelineLayer({ isMobile, pipelineBridgesMobile, pipelineBridges,
                 <path
                   d="M 6 -7 L -2 0 L 6 7"
                   fill="none"
-                  stroke="#FF6600"
+                  stroke="#DD0060"
                   strokeWidth="3.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -345,7 +345,7 @@ function renderPipelineLayer({ isMobile, pipelineBridgesMobile, pipelineBridges,
                 <path
                   d="M -6 -7 L 2 0 L -6 7"
                   fill="none"
-                  stroke="#FF6600"
+                  stroke="#DD0060"
                   strokeWidth="3.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -383,7 +383,7 @@ function renderReactorOrbits({ centerX, centerY, isMobile, isRTL }) {
         cx="0"
         cy="0"
         r={outerRadius}
-        stroke="rgba(255, 90, 0, 0.65)"
+        stroke="rgba(221, 0, 96, 0.65)"
         strokeWidth={isMobile ? 1.6 : 2}
         strokeDasharray="8 10"
         animate={{ rotate: 360 }}
@@ -413,15 +413,15 @@ function renderReactorCore({ centerX, centerY, isMobile, isRTL }) {
         cx={centerX}
         cy={centerY}
         r={isMobile ? 48 : 68}
-        fill="#080A0F"
-        stroke="rgba(255, 120, 40, 0.5)"
+        fill="#07101C"
+        stroke="rgba(221, 0, 96, 0.5)"
         strokeWidth="1.5"
       />
       <circle
         cx={centerX}
         cy={centerY}
         r={isMobile ? 42 : 60}
-        fill="rgba(255, 85, 0, 0.05)"
+        fill="rgba(221, 0, 96, 0.05)"
         stroke="rgba(255, 255, 255, 0.1)"
         strokeWidth="1"
         strokeDasharray="3 3"
@@ -430,7 +430,7 @@ function renderReactorCore({ centerX, centerY, isMobile, isRTL }) {
         x={centerX} 
         y={centerY - (isMobile ? 10 : 16)} 
         textAnchor="middle" 
-        fill="#FF7722" 
+        fill="#DD0060" 
         fontSize={isMobile ? "15" : "19"} 
         fontWeight="900" 
         fontFamily="var(--font-mono)" 
@@ -454,7 +454,7 @@ function renderReactorCore({ centerX, centerY, isMobile, isRTL }) {
         x={centerX} 
         y={centerY + (isMobile ? 20 : 26)} 
         textAnchor="middle" 
-        fill="#A0AEC0" 
+        fill="#8B93A7" 
         fontSize={isMobile ? "7.5" : "9"} 
         fontWeight="600" 
         fontFamily="var(--font-mono)" 
@@ -557,7 +557,7 @@ export default function ProblemInsightVisual({
   const centerY = resolveCenterY(isMobile, currentStage);
 
   const defaultNodes = isRTL ? FALLBACK_NODES_RTL : FALLBACK_NODES_LTR;
-  const nodes = nodesData && nodesData.length ? nodesData : defaultNodes;
+  const nodes = nodesData?.length ? nodesData : defaultNodes;
   const pipelineBridges = isRTL ? PIPELINE_BRIDGES_RTL : PIPELINE_BRIDGES_LTR;
 
   return (
@@ -582,23 +582,23 @@ export default function ProblemInsightVisual({
         <defs>
           {/* Radial Glow Gradients */}
           <radialGradient id="piCoreGlow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#FF5500" stopOpacity="0.55" />
-            <stop offset="50%" stopColor="#FF6600" stopOpacity="0.2" />
-            <stop offset="100%" stopColor="#FF5500" stopOpacity="0" />
+            <stop offset="0%" stopColor="#DD0060" stopOpacity="0.55" />
+            <stop offset="50%" stopColor="#DD0060" stopOpacity="0.2" />
+            <stop offset="100%" stopColor="#DD0060" stopOpacity="0" />
           </radialGradient>
 
           <radialGradient id="piFlywheelCenter" cx="50%" cy="50%" r="50%">
             <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.95" />
-            <stop offset="25%" stopColor="#FF7722" stopOpacity="0.65" />
-            <stop offset="65%" stopColor="#FF4400" stopOpacity="0.18" />
-            <stop offset="100%" stopColor="#FF4400" stopOpacity="0" />
+            <stop offset="25%" stopColor="#DD0060" stopOpacity="0.65" />
+            <stop offset="65%" stopColor="#DD0060" stopOpacity="0.18" />
+            <stop offset="100%" stopColor="#DD0060" stopOpacity="0" />
           </radialGradient>
 
           {/* Pipeline Bus Gradient */}
           <linearGradient id="piPipelineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#FF4400" stopOpacity="0.6" />
-            <stop offset="50%" stopColor="#FF8833" stopOpacity="1" />
-            <stop offset="100%" stopColor="#FFAA44" stopOpacity="0.6" />
+            <stop offset="0%" stopColor="#DD0060" stopOpacity="0.6" />
+            <stop offset="50%" stopColor="#DD0060" stopOpacity="1" />
+            <stop offset="100%" stopColor="#DD0060" stopOpacity="0.6" />
           </linearGradient>
 
           <filter id="piGlowNeon" x="-30%" y="-30%" width="160%" height="160%">

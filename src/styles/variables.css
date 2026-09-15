@@ -1,14 +1,22 @@
 :root {
   /* =========================================
-     COLOR SYSTEM — GCORE/OBSIDIAN AMBER-FIRE THEME
+     OFFICIAL MAGICENCY GLOBAL COLOR SYSTEM
+     Permanent Source of Truth
      ========================================= */
-  --bg-void: #060709;
-  --bg-primary: #0A0B0E;
-  --bg-surface: #101217;
-  --bg-surface-elevated: #161922;
-  --bg-chip: #12141A;
-  --bg-chip-surface: #181B24;
-  --bg-surface-glass: rgba(16, 18, 23, 0.75);
+  --color-bg: #050505;
+  --color-bg-secondary: #07101C;
+  --color-text: #FFFFFF;
+  --color-text-muted: #8B93A7;
+  --color-accent: #DD0060;
+
+  /* Semantic Aliases & Layers */
+  --bg-void: var(--color-bg);
+  --bg-primary: var(--color-bg);
+  --bg-surface: var(--color-bg-secondary);
+  --bg-surface-elevated: #07101C;
+  --bg-chip: var(--color-bg-secondary);
+  --bg-chip-surface: #07101C;
+  --bg-surface-glass: rgba(7, 16, 28, 0.75);
   --bg-surface-glass-subtle: rgba(255, 255, 255, 0.03);
 
   /* Borders & Dividers */
@@ -16,22 +24,24 @@
   --border-medium: rgba(255, 255, 255, 0.16);
   --border-strong: rgba(255, 255, 255, 0.28);
   --border-circuit: rgba(255, 255, 255, 0.12);
-  --border-circuit-active: #FF5A1F;
+  --border-circuit-active: var(--color-accent);
 
-  /* Radiant Amber / Orange Accent */
-  --accent-orange: #FF5500;
-  --accent-orange-bright: #FF6E26;
-  --accent-orange-deep: #E04000;
-  --accent-orange-glow: rgba(255, 85, 0, 0.35);
-  --accent-orange-dim: rgba(255, 85, 0, 0.12);
-  --accent-flare: rgba(255, 120, 40, 0.18);
+  /* Brand Accent & Controlled Signal Layers */
+  --color-accent-dim: rgba(221, 0, 96, 0.12);
+  --color-accent-glow: rgba(221, 0, 96, 0.35);
+  --accent-orange: var(--color-accent);
+  --accent-orange-bright: var(--color-accent);
+  --accent-orange-deep: var(--color-accent);
+  --accent-orange-glow: rgba(221, 0, 96, 0.35);
+  --accent-orange-dim: rgba(221, 0, 96, 0.12);
+  --accent-flare: rgba(221, 0, 96, 0.18);
 
   /* Typography Colors */
-  --text-primary: #FFFFFF;
-  --text-secondary: #9BA3AF;
-  --text-tertiary: #687282;
-  --text-muted: #4B5563;
-  --text-inverse: #FFFFFF;
+  --text-primary: var(--color-text);
+  --text-secondary: var(--color-text-muted);
+  --text-tertiary: var(--color-text-muted);
+  --text-muted: var(--color-text-muted);
+  --text-inverse: var(--color-text);
 
   /* =========================================
      UNIFIED TYPOGRAPHY SYSTEM

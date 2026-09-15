@@ -84,7 +84,7 @@
   text-transform: uppercase;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45), 0 0 24px rgba(255, 85, 0, 0.25);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45), 0 0 24px rgba(221, 0, 96, 0.25);
   cursor: pointer;
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -93,7 +93,7 @@
   position: absolute;
   inset: -6px;
   border-radius: 9999px;
-  border: 1px solid rgba(255, 85, 0, 0.4);
+  border: 1px solid rgba(221, 0, 96, 0.4);
   opacity: 0.6;
   animation: vimeoRingPulse 2.4s cubic-bezier(0.25, 1, 0.5, 1) infinite;
   pointer-events: none;
@@ -117,16 +117,16 @@
 .vm-lazy-vimeo-play-icon {
   width: 1.15rem;
   height: 1.15rem;
-  color: #ff6e26;
+  color: #DD0060;
   transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .vm-lazy-vimeo-play-button:hover {
-  background: rgba(255, 85, 0, 0.95);
-  border-color: #ff8547;
+  background: rgba(221, 0, 96, 0.95);
+  border-color: #DD0060;
   color: #ffffff;
   transform: scale(1.06);
-  box-shadow: 0 16px 48px rgba(255, 85, 0, 0.4);
+  box-shadow: 0 16px 48px rgba(221, 0, 96, 0.4);
 }
 
 .vm-lazy-vimeo-play-button:hover .vm-lazy-vimeo-play-icon {
@@ -135,6 +135,6 @@
 }
 
 .vm-lazy-vimeo-play-button:focus-visible {
-  outline: 2px solid #ff6e26;
+  outline: 2px solid #DD0060;
   outline-offset: 4px;
 }

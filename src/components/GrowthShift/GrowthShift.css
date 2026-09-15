@@ -32,7 +32,7 @@
 .shift-ambient-void {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 50%, #10131B 0%, #050505 85%);
+  background: radial-gradient(circle at 50% 50%, #07101C 0%, #050505 85%);
   pointer-events: none;
   z-index: 1;
 }
@@ -57,20 +57,20 @@
   align-items: center;
   gap: 8px;
   padding: 4px 16px;
-  background: rgba(255, 85, 0, 0.08);
-  border: 1px solid rgba(255, 85, 0, 0.35);
+  background: rgba(221, 0, 96, 0.08);
+  border: 1px solid rgba(221, 0, 96, 0.35);
   border-radius: var(--radius-full);
   font-family: var(--font-mono);
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: #FF8833;
+  color: #DD0060;
   z-index: 30;
   backdrop-filter: blur(10px);
 }
 
 .shift-pill-dot {
-  color: #FF5500;
+  color: #DD0060;
 }
 
 /* =========================================================
@@ -116,8 +116,8 @@
   font-family: var(--font-mono);
   font-size: clamp(2.8rem, 2rem + 5vw, 6.4rem);
   font-weight: 900;
-  color: #FF5500;
-  text-shadow: 0 0 28px rgba(255, 85, 0, 0.6);
+  color: #DD0060;
+  text-shadow: 0 0 28px rgba(221, 0, 96, 0.6);
   display: inline-block;
 }
 
@@ -127,15 +127,15 @@
   align-items: center;
   gap: 10px;
   padding: 8px 20px;
-  background: rgba(255, 85, 0, 0.1);
-  border: 1px solid rgba(255, 85, 0, 0.4);
+  background: rgba(221, 0, 96, 0.1);
+  border: 1px solid rgba(221, 0, 96, 0.4);
   border-radius: var(--radius-full);
   font-family: var(--font-mono);
   font-size: clamp(0.72rem, 0.66rem + 0.16vw, 0.84rem);
   font-weight: 700;
-  color: #FF8833;
+  color: #DD0060;
   letter-spacing: 0.05em;
-  box-shadow: 0 0 24px rgba(255, 85, 0, 0.2);
+  box-shadow: 0 0 24px rgba(221, 0, 96, 0.2);
 }
 
 .friction-pulse-icon {
@@ -167,22 +167,22 @@
 }
 
 .reframe-var-node {
-  background: linear-gradient(155deg, #151824 0%, #0B0D12 100%);
-  border: 1px solid rgba(255, 85, 0, 0.35);
+  background: linear-gradient(155deg, #07101C 0%, #07101C 100%);
+  border: 1px solid rgba(221, 0, 96, 0.35);
   border-radius: 18px;
   padding: clamp(16px, 2.2vh, 26px) clamp(20px, 2.5vw, 32px);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 6px;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 85, 0, 0.1);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(221, 0, 96, 0.1);
 }
 
 .var-num {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   font-weight: 800;
-  color: #FF5500;
+  color: #DD0060;
 }
 
 .var-name {
@@ -196,7 +196,7 @@
   font-family: var(--font-mono);
   font-size: 1.8rem;
   font-weight: 700;
-  color: #64748B;
+  color: #8B93A7;
 }
 
 .reframe-formula-tag {
@@ -204,10 +204,10 @@
   font-family: var(--font-mono);
   font-size: clamp(0.82rem, 0.75rem + 0.2vw, 0.98rem);
   font-weight: 700;
-  color: #00F59B;
+  color: #DD0060;
   letter-spacing: 0.06em;
-  background: rgba(0, 245, 155, 0.08);
-  border: 1px solid rgba(0, 245, 155, 0.3);
+  background: rgba(221, 0, 96, 0.08);
+  border: 1px solid rgba(221, 0, 96, 0.3);
   padding: 6px 18px;
   border-radius: var(--radius-full);
 }
@@ -247,8 +247,8 @@
 }
 
 .res-line.res-highlight {
-  color: #FF5500;
-  text-shadow: 0 0 36px rgba(255, 85, 0, 0.7), 0 0 72px rgba(255, 85, 0, 0.4);
+  color: #DD0060;
+  text-shadow: 0 0 36px rgba(221, 0, 96, 0.7), 0 0 72px rgba(221, 0, 96, 0.4);
 }
 
 .resolution-sub-text {
@@ -269,21 +269,21 @@
   align-items: center;
   gap: 10px;
   padding: clamp(12px, 1.6vh, 16px) clamp(26px, 2.4vw, 38px);
-  background: linear-gradient(135deg, #FF6600 0%, #FF3300 100%);
+  background: #DD0060;
   color: #FFFFFF;
   border-radius: var(--radius-full);
   font-family: var(--font-display);
   font-size: clamp(0.88rem, 0.8rem + 0.25vw, 1.05rem);
   font-weight: 700;
-  box-shadow: 0 8px 28px rgba(255, 68, 0, 0.45);
+  box-shadow: 0 8px 28px rgba(221, 0, 96, 0.45);
   transition: all var(--transition-fast);
   border: none;
   cursor: pointer;
 }
 
 .shift-btn-orange:hover {
-  background: linear-gradient(135deg, #FF7711 0%, #FF4400 100%);
-  box-shadow: 0 10px 36px rgba(255, 85, 0, 0.65);
+  background: #DD0060;
+  box-shadow: 0 10px 36px rgba(221, 0, 96, 0.65);
   transform: translateY(-2px);
 }
 

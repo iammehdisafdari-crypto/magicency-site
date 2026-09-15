@@ -28,11 +28,11 @@ export default function CapabilitiesHero() {
 
     // 5 primary domain clusters
     const modules = [
-      { name: 'STRATEGY', color: '#ff5500' },
-      { name: 'CREATIVE', color: '#ff7722' },
-      { name: 'DIGITAL', color: '#ff9944' },
-      { name: 'GROWTH', color: '#ff5500' },
-      { name: 'DATA', color: '#ffaa44' }
+      { name: 'STRATEGY', color: '#DD0060' },
+      { name: 'CREATIVE', color: '#DD0060' },
+      { name: 'DIGITAL', color: '#DD0060' },
+      { name: 'GROWTH', color: '#DD0060' },
+      { name: 'DATA', color: '#DD0060' }
     ];
 
     const nodes = [];
@@ -120,7 +120,7 @@ export default function CapabilitiesHero() {
         }
 
         // Central hub circle
-        ctx.strokeStyle = 'rgba(255, 85, 0, 0.2)';
+        ctx.strokeStyle = 'rgba(221, 0, 96, 0.2)';
         ctx.lineWidth = 1;
         ctx.setLineDash([4, 4]);
         ctx.beginPath();
@@ -132,13 +132,13 @@ export default function CapabilitiesHero() {
       // Draw nodes
       nodes.forEach((n) => {
         const pulseSize = Math.sin(n.pulse) * 0.7;
-        ctx.fillStyle = isConnected ? n.color : 'rgba(180, 180, 195, 0.4)';
+        ctx.fillStyle = isConnected ? n.color : 'rgba(139, 147, 167, 0.45)';
         ctx.beginPath();
         ctx.arc(n.x, n.y, Math.max(1.5, n.size + pulseSize), 0, Math.PI * 2);
         ctx.fill();
 
         if (isConnected) {
-          ctx.fillStyle = 'rgba(255, 85, 0, 0.15)';
+          ctx.fillStyle = 'rgba(221, 0, 96, 0.15)';
           ctx.beginPath();
           ctx.arc(n.x, n.y, n.size + 4 + pulseSize, 0, Math.PI * 2);
           ctx.fill();

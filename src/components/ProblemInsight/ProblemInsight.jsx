@@ -1,81 +1,18 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { motion, AnimatePresence, useScroll } from 'framer-motion';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
+import { SKEWED_PAGES_DATA } from '../../data/problemInsightData';
 import './ProblemInsight.css';
 
-const ProblemInsightVisual = React.lazy(() => import('./ProblemInsightVisual'));
-
 export default function ProblemInsight() {
-  const { t, isRTL } = useLanguage();
-  const containerRef = useRef(null);
-  const [activeBeatIndex, setActiveBeatIndex] = useState(0);
+  const { lang, isRTL } = useLanguage();
+  const [curPage, setCurPage] = useState(1);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-  const [shouldLoadVisual, setShouldLoadVisual] = useState(false);
 
-  const data = t.problemInsight || {
-    badge: 'THE CORE PREMISE',
-    sectionIndex: '03',
-    sectionLabel: 'PROBLEM // INSIGHT',
-    beats: [
-      {
-        id: 'problem',
-        num: '01',
-        tag: 'THE PROBLEM',
-        headline: 'More content. More campaigns. More channels.',
-        insight: 'But more activity does not necessarily create more growth.',
-        status: 'STATE: DISPERSED ACTIVITY',
-        metric: 'HIGH NOISE // ZERO COMPOUNDING'
-      },
-      {
-        id: 'insight',
-        num: '02',
-        tag: 'THE INSIGHT',
-        headline: "Growth doesn't come from isolated marketing actions.",
-        insight: 'It comes from connecting the right decisions together.',
-        status: 'STATE: CONVERGING SIGNALS',
-        metric: 'DISCONNECTED SILOS → SHARED AXIS'
-      },
-      {
-        id: 'system',
-        num: '03',
-        tag: 'THE SYSTEM',
-        headline: 'Strategy → Creative → Digital → Acquisition → Measurement',
-        insight: 'A synchronized architecture moving as one continuous pipeline.',
-        status: 'STATE: SYNCHRONIZED PIPELINE',
-        metric: 'CLOSED-LOOP ATTRIBUTION & FLOW'
-      },
-      {
-        id: 'outcome',
-        num: '04',
-        tag: 'THE OUTCOME',
-        headline: 'When everything compounds together, marketing becomes a growth engine.',
-        insight: 'Deterministic scale. Compounding velocity. Zero wasted energy.',
-        status: 'STATE: COMPOUNDING FLYWHEEL',
-        metric: 'AUTONOMOUS GROWTH ARCHITECTURE'
-      }
-    ]
-  };
+  const sectionRef = useRef(null);
 
-  const beats = data.beats;
-
+  // Check prefers-reduced-motion
   useEffect(() => {
-    if (!containerRef.current || shouldLoadVisual) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setShouldLoadVisual(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: '400px' }
-    );
-
-    observer.observe(containerRef.current);
-    return () => observer.disconnect();
-  }, [shouldLoadVisual]);
-
-  useEffect(() => {
+    if (typeof window === 'undefined') return;
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     setPrefersReducedMotion(mediaQuery.matches);
     const handler = (e) => setPrefersReducedMotion(e.matches);
@@ -83,152 +20,173 @@ export default function ProblemInsight() {
     return () => mediaQuery.removeEventListener('change', handler);
   }, []);
 
-  // Track scroll progress directly through containerRef
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start start', 'end end']
-  });
-
-  // Direct physical scroll mapping with equal 25% share per card and instant initial hydration
+  // Natural document scroll-driven state manager (no mousewheel hijacking)
   useEffect(() => {
-    const totalBeats = beats.length; // 4
-    const updateBeat = (val) => {
-      const p = Math.min(Math.max(val, 0), 1);
-      // Single source of truth: each card gets exactly 1/4 (25%) of total pinned scroll distance
-      const index = Math.min(totalBeats - 1, Math.floor(p * totalBeats));
-      setActiveBeatIndex(index);
+    let rafId = null;
+
+    const handleScroll = () => {
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
+        const container = sectionRef.current;
+        if (!container) return;
+
+        const rect = container.getBoundingClientRect();
+        const scrollableHeight = rect.height - window.innerHeight;
+        if (scrollableHeight <= 0) return;
+
+        const scrolled = -rect.top;
+        const totalPages = SKEWED_PAGES_DATA.length;
+
+        // Bounded discrete page calculation: 1 to totalPages
+        const rawPage = Math.floor((scrolled / scrollableHeight) * totalPages) + 1;
+        const newPage = Math.min(totalPages, Math.max(1, rawPage));
+
+        setCurPage((prev) => (prev !== newPage ? newPage : prev));
+      });
     };
 
-    // Immediately sync with current scroll value
-    updateBeat(scrollYProgress.get());
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll, { passive: true });
+    handleScroll();
 
-    const unsubscribe = scrollYProgress.on('change', updateBeat);
-    return () => unsubscribe();
-  }, [scrollYProgress, beats.length]);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+  }, []);
 
-  const currentBeat = beats[activeBeatIndex] || beats[0];
+  // Smooth navigation by clicking indicator
+  const handlePageClick = useCallback((targetPage) => {
+    const container = sectionRef.current;
+    if (!container) return;
 
-  // Accessible Reduced Motion Fallback
-  if (prefersReducedMotion) {
-    return (
-      <section id="insight" className="pi-section-fallback" aria-label="Strategic Problem Insight">
-        <div className="pi-container">
-          <header className="pi-fallback-header">
-            <span className="pi-hud-badge">{data.badge}</span>
-            <h2 className="pi-fallback-title">{data.sectionLabel}</h2>
-          </header>
-          <div className="pi-fallback-grid">
-            {beats.map((beat, idx) => (
-              <article key={beat.id} className="pi-fallback-card">
-                <span className="pi-beat-num">{beat.num}</span>
-                <span className="pi-beat-tag">{beat.tag}</span>
-                <h3 className="pi-beat-headline">{beat.headline}</h3>
-                <p className="pi-beat-insight">{beat.insight}</p>
-                <div className="pi-beat-status">{beat.status}</div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  }
+    const rect = container.getBoundingClientRect();
+    const scrollableHeight = rect.height - window.innerHeight;
+    const stepHeight = scrollableHeight / SKEWED_PAGES_DATA.length;
+
+    const targetScrollY = window.scrollY + rect.top + ((targetPage - 1) * stepHeight) + 4;
+    window.scrollTo({
+      top: targetScrollY,
+      behavior: prefersReducedMotion ? 'auto' : 'smooth'
+    });
+  }, [prefersReducedMotion]);
 
   return (
-    <section 
-      ref={containerRef} 
-      id="insight" 
-      className="pi-scroll-section" 
-      aria-label="Strategic Problem Insight Interactive Architecture"
-      style={{
-        '--pi-height': `${beats.length * 100}vh`
-      }}
+    <section
+      ref={sectionRef}
+      id="problem-insight"
+      className={`skw-scroll-wrapper ${prefersReducedMotion ? 'reduced-motion' : ''}`}
+      aria-label={lang === 'fa' ? 'مسئله و نگرش سیستم رشد' : 'Problem Insight: Disconnected Marketing vs Growth Operating System'}
     >
-      {/* Sticky Pinned Stage */}
-      <div className="pi-sticky-viewport">
-        {/* Background Atmosphere Layers */}
-        <div className="pi-bg-ambient" aria-hidden="true" />
-        <div className="pi-bg-subtle-grid" aria-hidden="true" />
+      {/* Pinned 100vh Sticky Viewport matching Reference */}
+      <div className="skw-pages">
+        
+        {/* Subtle HUD Pagination Indicator */}
+        <nav
+          className="skw-hud-nav"
+          aria-label={lang === 'fa' ? 'صفحات نگرش' : 'Problem Insight Navigation'}
+        >
+          {SKEWED_PAGES_DATA.map((item) => (
+            <button
+              key={item.page}
+              type="button"
+              className={`skw-hud-dot ${curPage === item.page ? 'is-active' : ''}`}
+              onClick={() => handlePageClick(item.page)}
+              aria-label={`Go to page 0${item.page}`}
+            >
+              <span className="skw-hud-num">0{item.page}</span>
+              <span className="skw-hud-line" />
+            </button>
+          ))}
+        </nav>
 
-        <div className="pi-container">
-          {/* Top Minimal HUD: Stage Tracker & 4-Beat Progress Bar */}
-          <div className="pi-top-hud">
-            <div className="pi-hud-left">
-              <span className="pi-hud-dot" />
-              <span className="pi-hud-badge">{data.badge}</span>
-              <span className="pi-hud-divider">/</span>
-              <span className="pi-hud-counter">
-                {currentBeat.num} <span className="pi-hud-counter-max">/ 04</span>
-              </span>
+        {/* 5 Distinct Skewed Pages */}
+        {SKEWED_PAGES_DATA.map((item) => {
+          const isActive = curPage >= item.page;
+          const isInactive = curPage > item.page;
+          const isVisualLeft = item.visualSide === 'left';
+
+          // Helper to render Visual Half
+          const renderVisualContent = () => (
+            <div
+              className="skw-page__content skw-page__content--visual"
+              style={{
+                backgroundImage: `linear-gradient(rgba(5, 5, 5, 0.65), rgba(7, 16, 28, 0.85)), url(${item.image})`
+              }}
+            >
+              <div className="skw-visual-overlay">
+                <span className="skw-visual-badge">
+                  {item.visualBadge[lang] || item.visualBadge.en}
+                </span>
+
+                <div className="skw-visual-chips">
+                  {item.visualItems.map((chip, cIdx) => (
+                    <span key={cIdx} className="skw-visual-chip">
+                      {chip}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="skw-visual-meta">
+                  <span className="skw-meta-indicator" aria-hidden="true" />
+                  <span className="skw-meta-text">
+                    {item.status[lang] || item.status.en}
+                  </span>
+                </div>
+              </div>
             </div>
+          );
 
-            {/* 4-Segment Minimal Progress Indicator */}
-            <div className="pi-progress-track" aria-hidden="true">
-              {beats.map((beat, i) => (
-                <div
-                  key={`seg-${beat.id}`}
-                  className={`pi-progress-segment ${i === activeBeatIndex ? 'active' : i < activeBeatIndex ? 'completed' : ''}`}
-                />
-              ))}
-            </div>
-          </div>
+          // Helper to render Content Half
+          const renderEditorialContent = () => (
+            <div className="skw-page__content skw-page__content--text">
+              <div className="skw-editorial-inner">
+                <span className="skw-page__eyebrow">
+                  {item.eyebrow[lang] || item.eyebrow.en}
+                </span>
 
-          {/* Main Two-Column Stage */}
-          <div className="pi-content-grid">
-            {/* Left Column: Narrative Copy with Seamless Crossfade */}
-            <div className="pi-text-col">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentBeat.id}
-                  className="pi-narrative-card"
-                  initial={{ opacity: 0, y: 14 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -14 }}
-                  transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  {/* Beat Pill Tag */}
-                  <div className="pi-tag-wrap">
-                    <span className="pi-beat-tag-pill">{currentBeat.tag}</span>
-                  </div>
+                <h2 className="skw-page__heading">
+                  {item.heading[lang] || item.heading.en}
+                </h2>
 
-                  {/* Monumental Headline */}
-                  <h2 className="pi-headline">
-                    {currentBeat.headline}
-                  </h2>
-
-                  {/* Supporting Strategic Insight */}
-                  <p className="pi-insight-text">
-                    {currentBeat.insight}
+                {item.emphasis && (
+                  <p className="skw-page__emphasis">
+                    {item.emphasis[lang] || item.emphasis.en}
                   </p>
+                )}
 
-                  {/* Technical Telemetry Metadata Footer */}
-                  <div className="pi-meta-strip">
-                    <div className="pi-meta-item">
-                      <span className="pi-meta-label">STATUS</span>
-                      <span className="pi-meta-value">{currentBeat.status}</span>
-                    </div>
-                    <div className="pi-meta-item">
-                      <span className="pi-meta-label">METRIC</span>
-                      <span className="pi-meta-value accent">{currentBeat.metric}</span>
-                    </div>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
+                <p className="skw-page__description">
+                  {item.description[lang] || item.description.en}
+                </p>
+              </div>
             </div>
+          );
 
-            {/* Right Column: Single Evolving System Object */}
-            <div className="pi-visual-col">
-              {shouldLoadVisual && (
-                <React.Suspense fallback={null}>
-                  <ProblemInsightVisual 
-                    activeBeat={activeBeatIndex} 
-                    isRTL={isRTL} 
-                    nodesData={data.nodes}
-                  />
-                </React.Suspense>
-              )}
+          return (
+            <div
+              key={item.page}
+              className={`skw-page skw-page-${item.page} ${isActive ? 'active' : ''} ${isInactive ? 'inactive' : ''}`}
+              aria-hidden={curPage !== item.page}
+            >
+              {/* Left Half (50% width, translates from bottom-left) */}
+              <div className="skw-page__half skw-page__half--left">
+                <div className="skw-page__skewed">
+                  {isVisualLeft ? renderVisualContent() : renderEditorialContent()}
+                </div>
+              </div>
+
+              {/* Right Half (50% width, translates from top-right) */}
+              <div className="skw-page__half skw-page__half--right">
+                <div className="skw-page__skewed">
+                  {isVisualLeft ? renderEditorialContent() : renderVisualContent()}
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          );
+        })}
+
       </div>
     </section>
   );

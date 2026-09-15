@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import './FluidCursorBackground.css';
 
 // =========================================================
-// MAGICENCY SIMULATION PARAMETERS (BURNT ORANGE #D54A0C PALETTE)
+// MAGICENCY SIMULATION PARAMETERS (BURNT ORANGE #DD0060 PALETTE)
 // =========================================================
 const CONFIG = {
   SIM_RESOLUTION: 128,
@@ -15,10 +15,10 @@ const CONFIG = {
   SPLAT_RADIUS: 0.28,
   SPLAT_FORCE: 6000,
   // Magicency Exact Fire Colors
-  PRIMARY_COLOR: [0.835, 0.290, 0.047], // #D54A0C (Dominant Primary)
-  HOT_COLOR: [0.941, 0.416, 0.141],     // #F06A24 (Hot highlight)
-  DEEP_COLOR: [0.561, 0.184, 0.031],    // #8F2F08 (Deep orange)
-  CORE_COLOR: [1.000, 0.690, 0.404]     // #FFB067 (Core highlight)
+  PRIMARY_COLOR: [0.835, 0.290, 0.047], // #DD0060 (Dominant Primary)
+  HOT_COLOR: [0.941, 0.416, 0.141],     // #DD0060 (Hot highlight)
+  DEEP_COLOR: [0.561, 0.184, 0.031],    // #DD0060 (Deep orange)
+  CORE_COLOR: [1.000, 0.690, 0.404]     // #DD0060 (Core highlight)
 };
 
 export default function FluidCursorBackground({ className = '' }) {
@@ -237,7 +237,7 @@ export default function FluidCursorBackground({ className = '' }) {
       }
     `;
 
-    // Magicency #D54A0C Fire Color Mapping Display Shader
+    // Magicency #DD0060 Fire Color Mapping Display Shader
     const displayShader = `
       precision highp float;
       precision highp sampler2D;
@@ -513,7 +513,7 @@ export default function FluidCursorBackground({ className = '' }) {
         mouse.lastActiveTime = performance.now();
         mouse.hasMoved = true;
 
-        // Splat Primary #D54A0C with hot highlight
+        // Splat Primary #DD0060 with hot highlight
         const highlightMix = Math.min(speed / 800, 1.0);
         const color = [
           CONFIG.PRIMARY_COLOR[0] * (1 - highlightMix) + CONFIG.HOT_COLOR[0] * highlightMix,

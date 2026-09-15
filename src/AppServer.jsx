@@ -4,7 +4,7 @@ import { RouterProvider, useRouter } from './context/RouterContext';
 import BrandIntro from './components/Intro/BrandIntro';
 import Header from './components/Header/Header';
 import Hero from './components/Hero/Hero';
-import SelectedWork from './components/SelectedWork/SelectedWork';
+import FeatureWork from './components/FeatureWork/FeatureWork';
 import ProblemInsight from './components/ProblemInsight/ProblemInsight';
 import WhatWeDo from './components/WhatWeDo/WhatWeDo';
 import Journal from './components/Journal/Journal';
@@ -67,10 +67,10 @@ function MainApp() {
             {/* Phase 01: Hero Section (Vivid Motion Architecture + Mouse Fire Effect) */}
             <Hero isLoaded={introFinished} />
 
-            {/* Phase 02: Featured Work (Sticky Scroll Showcase + 4 Projects + See All Work CTA) */}
-            <SelectedWork />
+            {/* Phase 02: Feature Work (Sticky Scroll Showcase + 4 Projects) */}
+            <FeatureWork />
 
-            {/* Phase 03: Problem / Insight Narrative (Sticky-Scroll 4-Beat System Architecture) */}
+            {/* Phase 03: Problem / Insight Narrative (Fragmented Silos to Growth Operating System) */}
             <ProblemInsight />
 
             {/* Phase 04: What We Do / Capabilities (3-Pillar Capability Architecture) */}

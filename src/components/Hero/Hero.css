@@ -5,7 +5,7 @@
 .vm-hero-section {
   position: relative;
   width: 100%;
-  background-color: #060709;
+  background-color: #07101C;
   overflow: hidden;
   box-sizing: border-box;
 }
@@ -164,8 +164,9 @@
   font-family: var(--font-persian, 'Vazirmatn', sans-serif);
   font-style: normal;
   font-weight: 900;
-  background: linear-gradient(135deg, #FFFFFF 30%, #FF7722 100%);
+  background: linear-gradient(135deg, #FFFFFF 30%, #DD0060 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   padding-left: 0;
   padding-right: 0;
@@ -231,7 +232,7 @@
   font-size: clamp(0.85rem, 1.1vw, 1.15rem);
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: #E2E8F0;
+  color: #FFFFFF;
   text-transform: uppercase;
 }
 

@@ -78,11 +78,11 @@ export default function WhatWeDo() {
     if (dist > 90) {
       lastMousePosRef.current = currentPos;
       const pool = imagePools[groupIdx] || imagePools[0];
-      // NOSONAR: Visual image particle trail selection (non-cryptographic)
-      const imgUrl = pool[Math.floor(Math.random() * pool.length)];
+      const nextId = ++trailIdRef.current;
+      const imgUrl = pool[nextId % pool.length];
 
       const newTrailItem = {
-        id: ++trailIdRef.current,
+        id: nextId,
         x: currentPos.x,
         y: currentPos.y,
         src: imgUrl

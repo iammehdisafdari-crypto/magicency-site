@@ -81,7 +81,7 @@ export const translations = {
           clientTag: 'CLIENT',
           image: '/branding-client.png',
           alt: 'atrash store Branding & Identity Design',
-          color: '#E3C280'
+          color: '#DD0060'
         },
         {
           id: 'web',
@@ -92,7 +92,7 @@ export const translations = {
           clientTag: 'CLIENT',
           image: '/web-client.png',
           alt: 'GR8 Real Estate Worldwide Web Platform',
-          color: '#C68B59'
+          color: '#DD0060'
         },
         {
           id: 'mobile',
@@ -103,7 +103,7 @@ export const translations = {
           clientTag: 'CLIENT',
           image: '/zarin-strategy.png',
           alt: 'Zarin Real Estate Strategy Case Study',
-          color: '#C5A059'
+          color: '#DD0060'
         },
         {
           id: 'motion',
@@ -114,7 +114,7 @@ export const translations = {
           clientTag: 'CLIENT',
           image: '/performance-achievements.png',
           alt: 'Klasino Performance Achievements Case Study',
-          color: '#0066FF'
+          color: '#DD0060'
         }
       ]
     },
@@ -770,7 +770,7 @@ export const translations = {
           primaryMetric: '+148%',
           metricLabel: 'LTV EXPANSION',
           secondaryMetric: '-34% CAC',
-          accent: '#FF5500',
+          accent: '#DD0060',
           visualType: 'fintech'
         },
         {
@@ -783,7 +783,7 @@ export const translations = {
           primaryMetric: '4.8X',
           metricLabel: 'BLENDED ROAS',
           secondaryMetric: '+$14M REVENUE',
-          accent: '#FFAA44',
+          accent: '#DD0060',
           visualType: 'luxury'
         },
         {
@@ -796,7 +796,7 @@ export const translations = {
           primaryMetric: '+210%',
           metricLabel: 'PIPELINE VELOCITY',
           secondaryMetric: '68% DEMO CONVERSION',
-          accent: '#00F59B',
+          accent: '#DD0060',
           visualType: 'saas'
         },
         {
@@ -809,7 +809,7 @@ export const translations = {
           primaryMetric: '+89%',
           metricLabel: 'PATIENT RETENTION',
           secondaryMetric: '3.2X CAPITAL EFFICIENCY',
-          accent: '#FF5500',
+          accent: '#DD0060',
           visualType: 'health'
         }
       ]
@@ -1195,7 +1195,7 @@ export const translations = {
           clientTag: 'کارفرما',
           image: '/branding-client.png',
           alt: 'هویت بصری و برندینگ atrash store',
-          color: '#E3C280'
+          color: '#DD0060'
         },
         {
           id: 'web',
@@ -1206,7 +1206,7 @@ export const translations = {
           clientTag: 'کارفرما',
           image: '/web-client.png',
           alt: 'پلتفرم جهانی وب GR8 Real Estate',
-          color: '#C68B59'
+          color: '#DD0060'
         },
         {
           id: 'mobile',
@@ -1217,7 +1217,7 @@ export const translations = {
           clientTag: 'کارفرما',
           image: '/zarin-strategy.png',
           alt: 'کیس استادی استراتژی املاک زرین دبی',
-          color: '#C5A059'
+          color: '#DD0060'
         },
         {
           id: 'motion',
@@ -1228,7 +1228,7 @@ export const translations = {
           clientTag: 'کارفرما',
           image: '/performance-achievements.png',
           alt: 'کیس استادی دستاوردهای عملکرد کلاسینو',
-          color: '#0066FF'
+          color: '#DD0060'
         }
       ]
     },
@@ -1884,7 +1884,7 @@ export const translations = {
           primaryMetric: '+۱۴۸٪',
           metricLabel: 'افزایش ارزش طول عمر (LTV)',
           secondaryMetric: '۳۴٪ کاهش هزینه جذب',
-          accent: '#FF5500',
+          accent: '#DD0060',
           visualType: 'fintech'
         },
         {
@@ -1897,7 +1897,7 @@ export const translations = {
           primaryMetric: '۴.۸X',
           metricLabel: 'بازدهی تلفیقی بودجه (ROAS)',
           secondaryMetric: '+۱۴ میلیون دلار فروش',
-          accent: '#FFAA44',
+          accent: '#DD0060',
           visualType: 'luxury'
         },
         {
@@ -1910,7 +1910,7 @@ export const translations = {
           primaryMetric: '+۲۱۰٪',
           metricLabel: 'شتاب پایپ‌لاین فروش',
           secondaryMetric: '۶۸٪ نرخ تبدیل دمو',
-          accent: '#00F59B',
+          accent: '#DD0060',
           visualType: 'saas'
         },
         {
@@ -1923,7 +1923,7 @@ export const translations = {
           primaryMetric: '+۸۹٪',
           metricLabel: 'نرخ بازگشت بیماران',
           secondaryMetric: '۳.۲ برابر کارایی سرمایه',
-          accent: '#FF5500',
+          accent: '#DD0060',
           visualType: 'health'
         }
       ]

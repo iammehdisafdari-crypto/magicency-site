@@ -6,7 +6,7 @@
 .vm-journal-section {
   position: relative;
   width: 100%;
-  background-color: #060709;
+  background-color: #07101C;
   color: #FFFFFF;
   padding-top: clamp(36px, 5.5vh, 64px);
   padding-bottom: 0px;
@@ -38,7 +38,7 @@
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.14em;
-  color: #FF5500;
+  color: #DD0060;
   text-transform: uppercase;
 }
 
@@ -74,7 +74,7 @@
   font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
   font-size: clamp(1.45rem, 2.2vw, 1.95rem);
   font-weight: 400;
-  color: #8E93A0;
+  color: #8B93A7;
   margin: 0;
   letter-spacing: -0.01em;
 }
@@ -111,7 +111,7 @@
   aspect-ratio: 16 / 10;
   border-radius: clamp(12px, 1.8vw, 18px);
   overflow: hidden;
-  background-color: #0B0D12;
+  background-color: #07101C;
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.95);
   margin-bottom: 20px;
@@ -170,17 +170,17 @@
   font-family: var(--font-mono, monospace);
   font-size: 0.72rem;
   font-weight: 600;
-  color: #FF5500;
+  color: #DD0060;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
 
 .journal-card-dot {
-  color: #555A68;
+  color: #8B93A7;
 }
 
 .journal-card-time {
-  color: #9CA3AF;
+  color: #8B93A7;
 }
 
 .journal-featured-card-title {
@@ -200,7 +200,7 @@
 }
 
 .journal-featured-card:hover .journal-featured-card-title {
-  color: #FF6600;
+  color: #DD0060;
 }
 
 .journal-featured-card-date {
@@ -211,17 +211,17 @@
   font-family: var(--font-mono, monospace);
   font-size: 0.75rem;
   font-weight: 500;
-  color: #96969E;
+  color: #8B93A7;
   text-transform: uppercase;
 }
 
 .journal-card-arrow {
-  color: #9CA3AF;
+  color: #8B93A7;
   transition: transform 220ms ease, color 220ms ease;
 }
 
 .journal-featured-card:hover .journal-card-arrow {
-  color: #FF5500;
+  color: #DD0060;
   transform: translate(2px, -2px);
 }
 
@@ -258,7 +258,7 @@
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.12em;
-  color: #707584;
+  color: #8B93A7;
   text-transform: uppercase;
   cursor: pointer;
   padding: 4px 0;
@@ -287,7 +287,7 @@
   left: 0;
   width: 100%;
   height: 2px;
-  background-color: #FF5500;
+  background-color: #DD0060;
 }
 
 /* =========================================================
@@ -334,7 +334,7 @@
   font-family: var(--font-mono, monospace);
   font-size: 0.85rem;
   font-weight: 700;
-  color: #FF5500;
+  color: #DD0060;
   flex-shrink: 0;
 }
 
@@ -343,7 +343,7 @@
   font-size: clamp(1.2rem, 1.8vw, 1.65rem);
   font-weight: 600;
   line-height: 1.25;
-  color: #E2E8F0;
+  color: #FFFFFF;
   margin: 0;
   transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1), color 250ms ease;
 }
@@ -364,7 +364,7 @@
   font-family: var(--font-mono, monospace);
   font-size: 0.74rem;
   font-weight: 700;
-  color: #8E93A0;
+  color: #8B93A7;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
@@ -377,12 +377,12 @@
   font-family: var(--font-mono, monospace);
   font-size: 0.74rem;
   font-weight: 500;
-  color: #616675;
+  color: #8B93A7;
   text-transform: uppercase;
 }
 
 .journal-list-item-arrow {
-  color: #616675;
+  color: #8B93A7;
   transition: transform 220ms ease, color 220ms ease;
   flex-shrink: 0;
 }
@@ -395,7 +395,7 @@
 
   .journal-list-item:hover {
     opacity: 1 !important;
-    border-bottom-color: rgba(255, 85, 0, 0.4);
+    border-bottom-color: rgba(221, 0, 96, 0.4);
   }
 
   .journal-list-item:hover .journal-list-item-title-text {
@@ -408,7 +408,7 @@
   }
 
   .journal-list-item:hover .journal-list-item-arrow {
-    color: #FF5500;
+    color: #DD0060;
     transform: translate(3px, -3px);
   }
 
@@ -455,9 +455,9 @@
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.95),
-              0 0 30px rgba(255, 85, 0, 0.35);
+              0 0 30px rgba(221, 0, 96, 0.35);
   border: 1px solid rgba(255, 255, 255, 0.22);
-  background-color: #0B0D12;
+  background-color: #07101C;
 }
 
 .journal-floating-img {
@@ -487,7 +487,7 @@
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: #FF5500;
+  color: #DD0060;
 }
 
 [dir="rtl"] .journal-floating-caption {
@@ -546,7 +546,7 @@
   gap: 14px;
   padding: 16px 36px;
   border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.04);
+  background: #07101C;
   border: 1px solid rgba(255, 255, 255, 0.14);
   color: #FFFFFF;
   text-decoration: none;
@@ -567,11 +567,11 @@
 }
 
 .journal-explore-all-btn:hover {
-  background: #FF5500;
-  border-color: #FF5500;
-  color: #FFFFFF;
+  background: #DD0060;
+  border-color: #DD0060;
+  color: #07101C;
   transform: translateY(-3px);
-  box-shadow: 0 12px 30px -6px rgba(255, 85, 0, 0.45);
+  box-shadow: 0 12px 30px -6px rgba(221, 0, 96, 0.45);
 }
 
 .journal-btn-arrow {

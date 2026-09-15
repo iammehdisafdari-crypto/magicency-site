@@ -24,11 +24,11 @@
 .vm-reel-modal {
   width: 100%;
   max-width: 860px;
-  background: #0B0D12;
+  background: #07101C;
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: var(--radius-xl, 28px);
   box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.95),
-              0 0 40px rgba(255, 85, 0, 0.15);
+              0 0 40px rgba(221, 0, 96, 0.15);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -67,13 +67,13 @@
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.06em;
-  color: #FF6600;
+  color: #DD0060;
 }
 
 .vm-reel-counter {
   font-family: var(--font-mono, monospace);
   font-size: 0.7rem;
-  color: var(--text-tertiary, #687282);
+  color: var(--text-tertiary, #8B93A7);
 }
 
 .vm-reel-close-btn {
@@ -85,7 +85,7 @@
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--text-secondary, #9BA3AF);
+  color: var(--text-secondary, #8B93A7);
   cursor: pointer;
   transition: all 180ms ease;
 }
@@ -100,7 +100,7 @@
   position: relative;
   aspect-ratio: 16 / 9;
   max-height: 420px;
-  background: #060709;
+  background: #07101C;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -112,8 +112,8 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(circle at 70% 30%, rgba(255, 85, 0, 0.22) 0%, transparent 65%),
-              radial-gradient(circle at 20% 80%, rgba(37, 99, 235, 0.15) 0%, transparent 60%);
+  background: radial-gradient(circle at 70% 30%, rgba(221, 0, 96, 0.22) 0%, transparent 65%),
+              radial-gradient(circle at 20% 80%, rgba(7, 16, 28, 0.15) 0%, transparent 60%);
   filter: blur(40px);
 }
 
@@ -142,7 +142,7 @@
   font-family: var(--font-mono, monospace);
   font-size: 0.72rem;
   font-weight: 700;
-  color: #FF7711;
+  color: #DD0060;
   letter-spacing: 0.08em;
 }
 
@@ -156,7 +156,7 @@
 
 .vm-reel-step-desc {
   font-size: 0.88rem;
-  color: var(--text-secondary, #9BA3AF);
+  color: var(--text-secondary, #8B93A7);
   max-width: 580px;
   line-height: 1.55;
 }
@@ -179,7 +179,7 @@
 
 .wave-bar {
   width: 3px;
-  background: linear-gradient(to top, #FF4400, #FF7700);
+  background: linear-gradient(to top, #DD0060, #DD0060);
   border-radius: 2px;
   transition: height 300ms ease;
 }
@@ -215,7 +215,7 @@
 .vm-reel-prog-fill {
   width: 0%;
   height: 100%;
-  background: #FF5500;
+  background: #DD0060;
   transition: width 3800ms linear;
 }
 
@@ -266,7 +266,7 @@
 .vm-reel-status-text {
   font-family: var(--font-mono, monospace);
   font-size: 0.68rem;
-  color: var(--text-secondary, #9BA3AF);
+  color: var(--text-secondary, #8B93A7);
   letter-spacing: 0.05em;
 }
 

@@ -106,23 +106,23 @@ export default function MagicencySystem() {
                 <svg className="system-dynamic-svg" viewBox="0 0 500 500">
                   <defs>
                     <linearGradient id="systemGlow" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#FF5500" stopOpacity="0.9" />
-                      <stop offset="100%" stopColor="#FF8833" stopOpacity="0.3" />
+                      <stop offset="0%" stopColor="#DD0060" stopOpacity="0.9" />
+                      <stop offset="100%" stopColor="#DD0060" stopOpacity="0.3" />
                     </linearGradient>
                   </defs>
 
                   {/* Progressive Background Geometry Layers */}
                   <circle cx="250" cy="250" r="210" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
                   <circle cx="250" cy="250" r="160" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="1" strokeDasharray="3 4" />
-                  <circle cx="250" cy="250" r="100" fill="none" stroke={activeStageIdx >= 2 ? 'rgba(255,85,0,0.3)' : 'rgba(255,255,255,0.05)'} strokeWidth="1.2" />
+                  <circle cx="250" cy="250" r="100" fill="none" stroke={activeStageIdx >= 2 ? 'rgba(221, 0, 96, 0.3)' : 'rgba(255,255,255,0.05)'} strokeWidth="1.2" />
 
                   {/* Central Compounding Nexus Node (GPU accelerated without SVG filter) */}
                   <circle 
                     cx="250" 
                     cy="250" 
                     r={30 + activeStageIdx * 6} 
-                    fill="rgba(255, 85, 0, 0.14)" 
-                    stroke="#FF5500" 
+                    fill="rgba(221, 0, 96, 0.14)" 
+                    stroke="#DD0060" 
                     strokeWidth="1.5"
                     className="nexus-core-pulse"
                   />
@@ -163,7 +163,7 @@ export default function MagicencySystem() {
                             y1={250 + 160 * Math.sin(((idx - 1) * 60 - 90) * (Math.PI / 180))}
                             x2={nx}
                             y2={ny}
-                            stroke="#FF5500"
+                            stroke="#DD0060"
                             strokeWidth="1.5"
                           />
                         )}
@@ -173,18 +173,18 @@ export default function MagicencySystem() {
                           cx={nx} 
                           cy={ny} 
                           r={isCurrent ? 14 : isPassed ? 10 : 6} 
-                          fill={isCurrent ? '#FF5500' : isPassed ? 'rgba(255,85,0,0.4)' : '#12141A'}
-                          stroke={isPassed ? '#FF5500' : 'rgba(255,255,255,0.2)'}
+                          fill={isCurrent ? '#DD0060' : isPassed ? 'rgba(221, 0, 96, 0.4)' : '#07101C'}
+                          stroke={isPassed ? '#DD0060' : 'rgba(255,255,255,0.2)'}
                           strokeWidth="1.5"
                         />
                         {isCurrent && (
-                          <circle cx={nx} cy={ny} r={22} fill="none" stroke="rgba(255,85,0,0.5)" strokeWidth="1" strokeDasharray="3 3" className="node-ping-ring" />
+                          <circle cx={nx} cy={ny} r={22} fill="none" stroke="rgba(221, 0, 96, 0.5)" strokeWidth="1" strokeDasharray="3 3" className="node-ping-ring" />
                         )}
                         <text 
                           x={nx} 
                           y={ny + (ny > 250 ? 24 : -16)} 
                           textAnchor="middle" 
-                          fill={isCurrent ? '#FFFFFF' : isPassed ? '#9BA3AF' : '#4B5563'}
+                          fill={isCurrent ? '#FFFFFF' : isPassed ? '#8B93A7' : '#8B93A7'}
                           fontSize="10"
                           fontFamily="monospace"
                           fontWeight={isCurrent ? '700' : '400'}

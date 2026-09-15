@@ -82,8 +82,8 @@ export default function WhyWeExist() {
             <svg className="stage-lines-svg" viewBox="0 0 1000 500" preserveAspectRatio="none">
               <defs>
                 <linearGradient id="laserGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#FF4500" stopOpacity="0.8" />
-                  <stop offset="100%" stopColor="#FF8C00" stopOpacity="0.3" />
+                  <stop offset="0%" stopColor="#DD0060" stopOpacity="0.8" />
+                  <stop offset="100%" stopColor="#DD0060" stopOpacity="0.3" />
                 </linearGradient>
               </defs>
 
@@ -97,7 +97,7 @@ export default function WhyWeExist() {
                   <line x1="500" y1="80" x2="500" y2="250" stroke="url(#laserGrad)" strokeWidth="1.5" className="laser-pulse" />
 
                   {/* Peripheral Circuit Ring */}
-                  <polygon points="160,120 500,80 840,120 780,380 220,380" fill="none" stroke="rgba(255, 69, 0, 0.18)" strokeWidth="1" strokeDasharray="4 6" />
+                  <polygon points="160,120 500,80 840,120 780,380 220,380" fill="none" stroke="rgba(221, 0, 96, 0.18)" strokeWidth="1" strokeDasharray="4 6" />
                 </>
               )}
             </svg>

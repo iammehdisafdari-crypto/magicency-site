@@ -5,11 +5,11 @@ import './FluidCursor.css';
  * =========================================================
  * FLUID CURSOR COMPONENT
  * WebGL Fluid Simulation based on Pavel Dobryakov
- * Strictly Monochromatic #B82E0C (RGB: 184, 46, 12)
+ * Strictly Monochromatic #DD0060 (RGB: 184, 46, 12)
  * =========================================================
  */
 
-// Strict Monochromatic #B82E0C Color Generator
+// Strict Monochromatic #DD0060 Color Generator
 function generateColor() {
   return {
     r: 184 / 255,
@@ -398,9 +398,10 @@ export default function FluidCursor({
     const updateSize = (entries) => {
       invalidateRect();
       let width, height;
-      if (entries && entries[0] && entries[0].contentRect) {
-        width = entries[0].contentRect.width;
-        height = entries[0].contentRect.height;
+      const contentRect = entries?.[0]?.contentRect;
+      if (contentRect) {
+        width = contentRect.width;
+        height = contentRect.height;
       } else {
         width = container.clientWidth || window.innerWidth;
         height = container.clientHeight || window.innerHeight;
@@ -435,7 +436,7 @@ export default function FluidCursor({
       gl.drawArrays(gl.TRIANGLE_FAN, 0, 4);
     }
 
-    // Splat injection function (strictly monochromatic #B82E0C)
+    // Splat injection function (strictly monochromatic #DD0060)
     function splat(x, y, dx, dy) {
       const monoColor = generateColor();
 
@@ -449,7 +450,7 @@ export default function FluidCursor({
       blit(velocity.write);
       velocity.swap();
 
-      // 2. Density splat using strictly monochromatic #B82E0C
+      // 2. Density splat using strictly monochromatic #DD0060
       gl.uniform1i(gl.getUniformLocation(splatProg, 'uTarget'), density.read.attach(0));
       gl.uniform3f(gl.getUniformLocation(splatProg, 'uColor'), monoColor.r, monoColor.g, monoColor.b);
       blit(density.write);
@@ -496,7 +497,7 @@ export default function FluidCursor({
 
     const visibilityObserver = new IntersectionObserver((entries) => {
       const entry = entries[0];
-      isVisible = Boolean(entry && entry.isIntersecting);
+      isVisible = Boolean(entry?.isIntersecting);
       if (isVisible && isTabVisible) {
         startLoop();
       } else {

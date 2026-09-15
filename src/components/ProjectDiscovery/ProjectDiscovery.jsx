@@ -77,7 +77,7 @@ export default function ProjectDiscovery() {
       particleCount: 50,
       spread: 60,
       origin: { y: 0.6 },
-      colors: ['#00F59B', '#2563EB', '#FFFFFF']
+      colors: ['#DD0060', '#DD0060', '#FFFFFF']
     });
   };
 

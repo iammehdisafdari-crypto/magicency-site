@@ -2,7 +2,7 @@
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background-color: var(--color-background, #0a0a0a);
+  background-color: var(--color-background, #07101C);
   color: var(--color-text, #ffffff);
   display: flex;
   flex-direction: column;
@@ -26,7 +26,7 @@
 }
 
 .pd-step-indicator {
-  color: var(--color-accent, #00F59B);
+  color: var(--color-accent, #DD0060);
   font-weight: 500;
 }
 
@@ -113,7 +113,7 @@
 
 .pd-input-group input:focus,
 .pd-input-group textarea:focus {
-  border-bottom-color: var(--color-accent, #00F59B);
+  border-bottom-color: var(--color-accent, #DD0060);
 }
 
 .pd-textarea-group textarea {
@@ -128,7 +128,7 @@
 }
 
 .pd-option-btn {
-  background: rgba(255, 255, 255, 0.03);
+  background: #07101C;
   border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 1.5rem;
   text-align: left;
@@ -144,12 +144,12 @@
 }
 
 .pd-option-btn:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: #07101C;
 }
 
 .pd-option-btn.active {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: var(--color-accent, #00F59B);
+  background: #07101C;
+  border-color: var(--color-accent, #DD0060);
 }
 
 .pd-opt-label {
@@ -160,7 +160,7 @@
 
 .pd-opt-desc {
   font-size: 0.85rem;
-  color: #c4c4cc;
+  color: #FFFFFF;
   opacity: 0.88;
 }
 
@@ -208,7 +208,7 @@
 }
 
 .pd-submit-action {
-  background: var(--color-accent, #00F59B);
+  background: var(--color-accent, #DD0060);
   color: #000;
   border: none;
   padding: 1.25rem 2.5rem;
@@ -237,7 +237,7 @@
 }
 
 .pd-success-icon {
-  color: var(--color-accent, #00F59B);
+  color: var(--color-accent, #DD0060);
   margin-bottom: 2rem;
 }
 
@@ -273,7 +273,7 @@
   top: 0;
   left: 0;
   height: 100%;
-  background: var(--color-accent, #00F59B);
+  background: var(--color-accent, #DD0060);
   transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .pd-overlay[dir="rtl"] .pd-progress-fill {

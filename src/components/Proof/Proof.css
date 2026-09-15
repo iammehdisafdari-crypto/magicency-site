@@ -37,7 +37,7 @@
   transform: translate(-50%, -50%);
   width: 800px;
   height: 600px;
-  background: radial-gradient(circle, rgba(255, 85, 0, 0.08) 0%, rgba(5, 5, 5, 0) 75%);
+  background: radial-gradient(circle, rgba(221, 0, 96, 0.08) 0%, rgba(5, 5, 5, 0) 75%);
   pointer-events: none;
   z-index: 1;
 }
@@ -71,14 +71,14 @@
   align-items: center;
   gap: 6px;
   padding: 3px 12px;
-  background: rgba(255, 85, 0, 0.08);
-  border: 1px solid rgba(255, 85, 0, 0.35);
+  background: rgba(221, 0, 96, 0.08);
+  border: 1px solid rgba(221, 0, 96, 0.35);
   border-radius: var(--radius-full);
   font-family: var(--font-mono);
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: #FF8833;
+  color: #DD0060;
 }
 
 .proof-pipeline-tracker {
@@ -101,7 +101,7 @@
   cursor: pointer;
   font-family: var(--font-mono);
   font-size: 0.64rem;
-  color: #64748B;
+  color: #8B93A7;
   transition: color 200ms ease;
   padding: 2px 4px;
 }
@@ -111,21 +111,21 @@
 }
 
 .proof-step-btn.is-unlocked {
-  color: #CBD5E1;
+  color: #FFFFFF;
 }
 
 .proof-step-btn.is-active {
-  color: #FF8833;
+  color: #DD0060;
   font-weight: 800;
 }
 
 .proof-step-btn .step-num {
-  color: #FF5500;
+  color: #DD0060;
 }
 
 .step-arrow {
   font-size: 0.6rem;
-  color: #475569;
+  color: #8B93A7;
   margin: 0 2px;
 }
 
@@ -145,12 +145,12 @@
   position: relative;
   width: 100%;
   height: 100%;
-  background: linear-gradient(155deg, #121520 0%, #07090D 100%);
-  border: 1px solid rgba(255, 85, 0, 0.3);
+  background: linear-gradient(155deg, #07101C 0%, #07101C 100%);
+  border: 1px solid rgba(221, 0, 96, 0.3);
   border-radius: 20px;
   box-shadow: 
     0 24px 70px rgba(0, 0, 0, 0.92),
-    0 0 28px rgba(255, 85, 0, 0.08),
+    0 0 28px rgba(221, 0, 96, 0.08),
     inset 0 1px 1px rgba(255, 255, 255, 0.1);
   overflow: hidden;
   box-sizing: border-box;
@@ -188,7 +188,7 @@
   font-family: var(--font-mono);
   font-size: 0.58rem;
   font-weight: 800;
-  color: #E2E8F0;
+  color: #FFFFFF;
   letter-spacing: 0.05em;
 }
 
@@ -201,24 +201,24 @@
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #00F59B;
-  box-shadow: 0 0 6px #00F59B;
+  background: #DD0060;
+  box-shadow: 0 0 6px #DD0060;
 }
 
 .dot-orange {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #FF5500;
-  box-shadow: 0 0 6px #FF5500;
+  background: #DD0060;
+  box-shadow: 0 0 6px #DD0060;
 }
 
 .dot-red {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #EF4444;
-  box-shadow: 0 0 6px #EF4444;
+  background: #DD0060;
+  box-shadow: 0 0 6px #DD0060;
 }
 
 /* ---------------------------------------------------------
@@ -247,8 +247,8 @@
   right: 16px;
   width: 40%;
   height: 76%;
-  background: #0A0D14;
-  border: 1px solid rgba(255, 85, 0, 0.4);
+  background: #07101C;
+  border: 1px solid rgba(221, 0, 96, 0.4);
   border-radius: 14px;
   overflow: hidden;
   box-shadow: 0 20px 48px rgba(0, 0, 0, 0.95);
@@ -288,16 +288,16 @@
 }
 
 .intel-pipe {
-  color: #475569;
+  color: #8B93A7;
 }
 
 .intel-ind {
-  color: #FF8833;
+  color: #DD0060;
   font-weight: 700;
 }
 
 .intel-scope {
-  color: #94A3B8;
+  color: #8B93A7;
 }
 
 /* ---------------------------------------------------------
@@ -352,15 +352,15 @@
   font-family: var(--font-mono);
   font-size: 0.7rem;
   font-weight: 800;
-  color: #00F59B;
+  color: #DD0060;
 }
 
 .status-live-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #00F59B;
-  box-shadow: 0 0 8px #00F59B;
+  background: #DD0060;
+  box-shadow: 0 0 8px #DD0060;
   animation: livePing 1.6s ease-in-out infinite;
 }
 
@@ -372,7 +372,7 @@
 .hud-timestamp {
   font-family: var(--font-mono);
   font-size: 0.65rem;
-  color: #94A3B8;
+  color: #8B93A7;
   letter-spacing: 0.05em;
 }
 
@@ -384,7 +384,7 @@
 
 .hud-metric-card {
   background: rgba(14, 18, 28, 0.85);
-  border: 1px solid rgba(255, 85, 0, 0.35);
+  border: 1px solid rgba(221, 0, 96, 0.35);
   border-radius: 16px;
   padding: 16px 20px;
   display: flex;
@@ -397,7 +397,7 @@
   font-family: var(--font-mono);
   font-size: 0.65rem;
   font-weight: 700;
-  color: #94A3B8;
+  color: #8B93A7;
   letter-spacing: 0.04em;
 }
 
@@ -405,14 +405,14 @@
   font-family: var(--font-display);
   font-size: clamp(1.8rem, 1.4rem + 1vw, 2.5rem);
   font-weight: 900;
-  color: #FF5500;
+  color: #DD0060;
   line-height: 1.1;
 }
 
 .hud-m-sub {
   font-family: var(--font-mono);
   font-size: 0.62rem;
-  color: #00F59B;
+  color: #DD0060;
   font-weight: 700;
 }
 
@@ -461,8 +461,8 @@
 .before-badge {
   left: 14px;
   background: rgba(18, 12, 14, 0.92);
-  border: 1px solid rgba(239, 68, 68, 0.4);
-  color: #F87171;
+  border: 1px solid rgba(221, 0, 96, 0.4);
+  color: #DD0060;
 }
 
 [dir="rtl"] .before-badge {
@@ -473,8 +473,8 @@
 .after-badge {
   right: 14px;
   background: rgba(10, 18, 14, 0.92);
-  border: 1px solid rgba(0, 245, 155, 0.4);
-  color: #00F59B;
+  border: 1px solid rgba(221, 0, 96, 0.4);
+  color: #DD0060;
 }
 
 [dir="rtl"] .after-badge {
@@ -487,8 +487,8 @@
   top: 0;
   bottom: 0;
   width: 2px;
-  background: #FF5500;
-  box-shadow: 0 0 12px #FF5500;
+  background: #DD0060;
+  box-shadow: 0 0 12px #DD0060;
   z-index: 15;
   transform: translateX(-50%);
   display: flex;
@@ -500,15 +500,15 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: #11141E;
-  border: 2px solid #FF5500;
+  background: #07101C;
+  border: 2px solid #DD0060;
   color: #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.75rem;
   font-weight: 900;
-  box-shadow: 0 0 16px rgba(255, 85, 0, 0.6);
+  box-shadow: 0 0 16px rgba(221, 0, 96, 0.6);
 }
 
 /* ---------------------------------------------------------
@@ -549,7 +549,7 @@
 .impact-step-box {
   position: relative;
   background: rgba(14, 18, 28, 0.9);
-  border: 1px solid rgba(255, 85, 0, 0.35);
+  border: 1px solid rgba(221, 0, 96, 0.35);
   border-radius: 16px;
   padding: 18px 20px;
   display: flex;
@@ -560,7 +560,7 @@
 }
 
 .impact-step-box.step-2 {
-  border-color: rgba(0, 245, 155, 0.45);
+  border-color: rgba(221, 0, 96, 0.45);
   background: rgba(10, 20, 18, 0.9);
 }
 
@@ -574,13 +574,13 @@
 .step-badge-code {
   font-size: 0.75rem;
   font-weight: 800;
-  color: #FF5500;
+  color: #DD0060;
 }
 
 .step-badge-name {
   font-size: 0.65rem;
   font-weight: 700;
-  color: #94A3B8;
+  color: #8B93A7;
   letter-spacing: 0.05em;
 }
 
@@ -597,7 +597,7 @@
   right: -16px;
   top: 50%;
   transform: translateY(-50%);
-  color: #FF5500;
+  color: #DD0060;
   font-size: 1rem;
   z-index: 10;
 }
@@ -645,13 +645,13 @@
   align-items: center;
   gap: 6px;
   padding: 3px 12px;
-  background: rgba(255, 85, 0, 0.1);
-  border: 1px solid rgba(255, 85, 0, 0.4);
+  background: rgba(221, 0, 96, 0.1);
+  border: 1px solid rgba(221, 0, 96, 0.4);
   border-radius: var(--radius-full);
   font-family: var(--font-mono);
   font-size: 0.68rem;
   font-weight: 800;
-  color: #FF8833;
+  color: #DD0060;
 }
 
 .trust-quote-text {
@@ -674,15 +674,15 @@
 
 .trust-author {
   font-weight: 800;
-  color: #FF8833;
+  color: #DD0060;
 }
 
 .trust-pipe {
-  color: #475569;
+  color: #8B93A7;
 }
 
 .trust-company {
-  color: #94A3B8;
+  color: #8B93A7;
 }
 
 /* =========================================================

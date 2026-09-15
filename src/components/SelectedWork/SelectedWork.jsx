@@ -21,10 +21,10 @@ export default function SelectedWork() {
     eyebrow: 'Featured work',
     seeAllWork: 'SEE ALL WORK',
     projects: [
-      { id: 'branding', num: '01', category: 'Brand', categoryItalic: 'ing', client: 'atrash store', clientTag: 'CLIENT', image: '/branding-client.png', alt: 'atrash store Branding', color: '#E3C280' },
-      { id: 'web', num: '02', category: 'Web', categoryItalic: '', client: 'GR8 Real Estate', clientTag: 'CLIENT', image: '/web-client.png', alt: 'GR8 Real Estate Web', color: '#C68B59' },
-      { id: 'mobile', num: '03', category: 'Strat', categoryItalic: 'egy', client: 'Zarin Real Estate', clientTag: 'CLIENT', image: '/zarin-strategy.png', alt: 'Zarin Real Estate Strategy', color: '#C5A059' },
-      { id: 'motion', num: '04', category: 'Performance', categoryItalic: ' Achievements', client: 'Klasino', clientTag: 'CLIENT', image: '/performance-achievements.png', alt: 'Klasino Performance Achievements', color: '#0066FF' }
+      { id: 'branding', num: '01', category: 'Brand', categoryItalic: 'ing', client: 'atrash store', clientTag: 'CLIENT', image: '/branding-client.png', alt: 'atrash store Branding', color: '#DD0060' },
+      { id: 'web', num: '02', category: 'Web', categoryItalic: '', client: 'GR8 Real Estate', clientTag: 'CLIENT', image: '/web-client.png', alt: 'GR8 Real Estate Web', color: '#DD0060' },
+      { id: 'mobile', num: '03', category: 'Strat', categoryItalic: 'egy', client: 'Zarin Real Estate', clientTag: 'CLIENT', image: '/zarin-strategy.png', alt: 'Zarin Real Estate Strategy', color: '#DD0060' },
+      { id: 'motion', num: '04', category: 'Performance', categoryItalic: ' Achievements', client: 'Klasino', clientTag: 'CLIENT', image: '/performance-achievements.png', alt: 'Klasino Performance Achievements', color: '#DD0060' }
     ]
   };
 
@@ -262,7 +262,7 @@ export default function SelectedWork() {
               >
                 <div 
                   className={`vm-client-badge-icon is-logo ${activeProject.id === 'mobile' ? 'is-dark' : ''}`}
-                  style={{ background: activeProject.id === 'mobile' ? '#1D1D1D' : '#FFFFFF' }}
+                  style={{ background: activeProject.id === 'mobile' ? '#07101C' : '#FFFFFF' }}
                 >
                   {renderClientIcon(activeProject)}
                 </div>
@@ -321,7 +321,7 @@ export default function SelectedWork() {
                 >
                   <div 
                     className={`vm-client-badge-icon is-logo ${activeProject.id === 'mobile' ? 'is-dark' : ''}`}
-                    style={{ background: activeProject.id === 'mobile' ? '#1D1D1D' : '#FFFFFF' }}
+                    style={{ background: activeProject.id === 'mobile' ? '#07101C' : '#FFFFFF' }}
                   >
                     {renderClientIcon(activeProject)}
                   </div>
@@ -368,7 +368,7 @@ export default function SelectedWork() {
                       {/* Mobile In-Card Floating Pill */}
                       <div className="vm-card-corner-badge">
                         <span className="vm-corner-num">{proj.num}</span>
-                        <span className="vm-corner-dot" style={{ backgroundColor: proj.color || '#FF5500' }} />
+                        <span className="vm-corner-dot" style={{ backgroundColor: proj.color || '#DD0060' }} />
                         <span className="vm-corner-client">{proj.client}</span>
                       </div>
                     </div>
