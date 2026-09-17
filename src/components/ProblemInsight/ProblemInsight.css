@@ -1,535 +1,498 @@
-/* =========================================================
-   MAGICENCY PROBLEM INSIGHT — SKEWED ONE PAGE SCROLL ARCHITECTURE
-   Exact 1:1 Reproduction of the Skewed Split-Screen Reference
-   Integrated into Natural Document Scroll (No Wheel Hijacking)
-   ========================================================= */
+/**
+ * PROBLEM INSIGHT COMPONENT STYLES
+ * Direct reference architecture from https://scrollservices.framer.website/
+ * Reskinned with Magicency Design System:
+ * --color-bg: #050505
+ * --color-bg-secondary: #07101C
+ * --color-text: #FFFFFF
+ * --color-text-muted: #8B93A7
+ * --color-accent: #DD0060
+ */
 
-/* Parent scroll container providing multi-viewport scroll distance */
-.skw-scroll-wrapper {
+/* Micro float animation matching reference __spIconFloat */
+@keyframes __spIconFloat {
+  0%   { transform: translateY(0) rotate(0deg); }
+  50%  { transform: translateY(-14px) rotate(1.2deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+.__sp_icon_float {
+  animation: __spIconFloat 6s ease-in-out infinite;
+}
+
+/* Reduced motion preference */
+.pi-section-root.reduced-motion .__sp_icon_float {
+  animation: none;
+}
+
+/* Outer scroll section */
+.pi-section-root {
   position: relative;
   width: 100%;
-  height: 500vh; /* 5 discrete pages at 100vh each */
-  height: 500svh;
-  background-color: #050505;
-  box-sizing: border-box;
+  background: var(--color-bg, #050505);
+  color: var(--color-text, #FFFFFF);
+  -webkit-font-smoothing: antialiased;
+  contain: paint;
 }
 
-/* =========================================================
-   PINNED STICKY VIEWPORT (.skw-pages)
-   ========================================================= */
-.skw-pages {
+/* 100vh Sticky Viewport matching reference */
+.pi-sticky-viewport {
   position: sticky;
   top: 0;
-  left: 0;
-  width: 100%;
   height: 100vh;
-  height: 100svh;
-  height: 100dvh;
+  width: 100%;
   overflow: hidden;
-  background: #050505;
   box-sizing: border-box;
-  z-index: 10;
+  background: radial-gradient(circle at 18% 50%, rgba(7, 16, 28, 0.5) 0%, transparent 60%);
 }
 
-/* =========================================================
-   SKEWED PAGE ARCHITECTURE (.skw-page)
-   ========================================================= */
-.skw-page {
+.pi-section-root.is-rtl .pi-sticky-viewport {
+  background: radial-gradient(circle at 82% 50%, rgba(7, 16, 28, 0.5) 0%, transparent 60%);
+}
+
+/* SVG Arc Track */
+.pi-arc-svg {
+  pointer-events: none;
+  filter: drop-shadow(0 0 12px rgba(221, 0, 96, 0.18));
+}
+
+/* Number Wheel Container */
+.pi-wheel-container {
   position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
+  z-index: 5;
   pointer-events: none;
 }
 
-.skw-page.active {
+/* Individual Wheel Node Button */
+.pi-wheel-btn {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
   pointer-events: auto;
+  transform-origin: center center;
+  transition: outline 0.15s ease;
 }
 
-/* Page Stacking Order */
-.skw-page-1 { z-index: 1; }
-.skw-page-2 { z-index: 2; }
-.skw-page-3 { z-index: 3; }
-.skw-page-4 { z-index: 4; }
-.skw-page-5 { z-index: 5; }
+.pi-wheel-btn:focus-visible {
+  outline: 2px solid var(--color-accent, #DD0060);
+  outline-offset: 4px;
+}
 
-/* =========================================================
-   SPLIT HALVES WITH OPPOSING ENTRANCE DIRECTIONS
-   Left: enters from bottom-left (-32.49vh, 100%, 0)
-   Right: enters from top-right (32.49vh, -100%, 0)
-   Active: translates to (0, 0, 0)
-   ========================================================= */
-.skw-page__half {
+.pi-wheel-node-base {
   position: absolute;
-  top: 0;
-  width: 50%;
-  height: 100vh;
-  height: 100svh;
-  height: 100dvh;
-  transition: transform 0.85s cubic-bezier(0.77, 0, 0.175, 1);
-  will-change: transform;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--color-bg, #050505);
 }
 
-.skw-page__half--left {
-  left: 0;
-  transform: translate3d(-32.49vh, 100%, 0);
-}
-
-.skw-page__half--right {
-  left: 50%;
-  transform: translate3d(32.49vh, -100%, 0);
-}
-
-.skw-page.active .skw-page__half {
-  transform: translate3d(0, 0, 0);
-}
-
-/* =========================================================
-   DIAGONAL SKEWED CONTAINER (skewX: -18deg)
-   ========================================================= */
-.skw-page__skewed {
-  overflow: hidden;
+.pi-wheel-node-active {
   position: absolute;
-  top: 0;
-  width: 140%;
-  height: 100%;
-  transform: skewX(-18deg);
-  background: #050505;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--color-bg-secondary, #07101C);
+  border: 1.5px solid var(--color-accent, #DD0060);
+  transition: opacity 0.1s linear;
 }
 
-.skw-page__half--left .skw-page__skewed {
-  left: -40%;
+.pi-wheel-node-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.2px solid rgba(255, 255, 255, 0.2);
+  transition: opacity 0.1s linear;
 }
 
-.skw-page__half--right .skw-page__skewed {
-  right: -40%;
-}
-
-/* =========================================================
-   COUNTER-SKEWED CONTENT (skewX: 18deg)
-   ========================================================= */
-.skw-page__content {
+.pi-wheel-num {
+  position: absolute;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-flow: column wrap;
+  font-family: var(--font-serif, 'Instrument Serif', Georgia, serif);
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: opacity 0.1s linear;
+}
+
+.pi-wheel-num--inactive {
+  color: var(--color-text-muted, #8B93A7);
+}
+
+.pi-wheel-num--active {
+  color: var(--color-text, #FFFFFF);
+}
+
+/* Mobile Bottom Navigation Pills */
+.pi-mobile-pills {
   position: absolute;
+  bottom: 24px;
   left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  color: #FFFFFF;
-  transform: skewX(18deg);
-  transition: transform 0.85s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.85s ease;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  box-sizing: border-box;
-}
-
-.skw-page__half--left .skw-page__content {
-  padding-left: 26%;
-  padding-right: 22%;
-  transform-origin: 100% 0;
-}
-
-.skw-page__half--right .skw-page__content {
-  padding-left: 22%;
-  padding-right: 26%;
-  transform-origin: 0 100%;
-}
-
-/* Inactive Previous State Scaling & Opacity */
-.skw-page.inactive .skw-page__content {
-  opacity: 0.4;
-  transform: skewX(18deg) scale(0.95);
-}
-
-/* =========================================================
-   EDITORIAL CONTENT HALF STYLING (MAGICENCY BRAND)
-   ========================================================= */
-.skw-page__content--text {
-  background: #07101C;
-  border-left: 1px solid rgba(255, 255, 255, 0.05);
-  border-right: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.skw-editorial-inner {
-  max-width: 520px;
-  width: 100%;
-}
-
-.skw-page__eyebrow {
-  display: inline-block;
-  font-family: var(--font-mono, monospace);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #DD0060;
-  margin-bottom: 16px;
-}
-
-.skw-page__heading {
-  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
-  font-size: clamp(1.65rem, 2.6vw, 2.65rem);
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.025em;
-  color: #FFFFFF;
-  margin: 0 0 16px 0;
-}
-
-.skw-page__emphasis {
-  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
-  font-size: clamp(1.4rem, 2.3vw, 2.2rem);
-  font-weight: 700;
-  line-height: 1.25;
-  letter-spacing: -0.02em;
-  color: #DD0060;
-  margin: 0 0 18px 0;
-}
-
-.skw-page__description {
-  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
-  font-size: clamp(0.92rem, 1.05vw, 1.05rem);
-  line-height: 1.6;
-  color: #8B93A7;
-  margin: 0;
-}
-
-/* =========================================================
-   VISUAL HALF STYLING (MAGICENCY DIGITAL SYSTEMS)
-   ========================================================= */
-.skw-page__content--visual {
-  position: relative;
-  overflow: hidden;
-}
-
-.skw-visual-overlay {
+  right: 0;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 480px;
-  height: 60%;
-  padding: 24px;
+  justify-content: center;
+  gap: 10px;
+  z-index: 12;
+}
+
+.pi-mobile-pill {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.22);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+  transition: width 0.3s cubic-bezier(0.2, 0, 0, 1), background 0.3s ease;
+}
+
+.pi-mobile-pill.is-active {
+  width: 28px;
+  background: var(--color-accent, #DD0060);
+  box-shadow: 0 0 12px rgba(221, 0, 96, 0.4);
+}
+
+/* Visual Anchor Container (Houses large conceptual objects) */
+.pi-visual-anchor {
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  width: 32%;
+  max-width: 440px;
+  aspect-ratio: 1 / 1;
+  z-index: 8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.pi-section-root.is-rtl .pi-visual-anchor {
+  right: auto;
+  left: 5%;
+}
+
+/* Editorial Text Stack */
+.pi-editorial-stack {
+  position: absolute;
+  top: 50%;
+  left: 31%;
+  width: 36%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.pi-section-root.is-rtl .pi-editorial-stack {
+  left: auto;
+  right: 31%;
+}
+
+.pi-content-step {
   box-sizing: border-box;
 }
 
-.skw-visual-badge {
-  display: inline-block;
-  font-family: var(--font-mono, monospace);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
+/* Eyebrow */
+.pi-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--color-accent);
-  padding: 6px 12px;
-  border-radius: 4px;
-  background: rgba(7, 16, 28, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(221, 0, 96, 0.35);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  color: var(--color-accent, #DD0060);
+  margin-bottom: 14px;
 }
 
-.skw-visual-chips {
+.pi-eyebrow-sep {
+  color: rgba(139, 147, 167, 0.4);
+}
+
+/* Headline */
+.pi-headline {
+  font-family: var(--font-serif, 'Instrument Serif', Georgia, serif);
+  font-weight: 400;
+  font-size: clamp(32px, 3.8vw, 54px);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  color: var(--color-text, #FFFFFF);
+  margin: 0 0 16px;
+  text-wrap: balance;
+}
+
+.pi-section-root.is-rtl .pi-headline {
+  font-family: var(--font-sans, -apple-system, sans-serif);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.25;
+}
+
+.pi-headline-line--sub {
+  color: var(--color-text, #FFFFFF);
+}
+
+/* Secondary Climax Statement */
+.pi-secondary-statement {
+  font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, sans-serif);
+  font-size: clamp(18px, 1.8vw, 24px);
+  font-weight: 600;
+  color: var(--color-accent, #DD0060);
+  margin: 0 0 14px;
+  letter-spacing: -0.01em;
+}
+
+/* Supporting Idea */
+.pi-supporting-idea {
+  font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, sans-serif);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #FFFFFF;
+  margin: 0 0 14px;
+}
+
+/* Description Body */
+.pi-description {
+  font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, sans-serif);
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--color-text-muted, #8B93A7);
+  max-width: 440px;
+  margin: 0 0 22px;
+}
+
+/* System Chips / Tags */
+.pi-chips-list {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin: 20px 0;
+  margin-bottom: 22px;
 }
 
-.skw-visual-chip {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  color: #FFFFFF;
-  padding: 5px 10px;
-  border-radius: 4px;
-  background: rgba(7, 16, 28, 0.8);
-  backdrop-filter: blur(8px);
+.pi-chip {
+  padding: 7px 14px;
   border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(7, 16, 28, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 999px;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 12px;
+  font-weight: 500;
+  color: #FFFFFF;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  transition: border-color 0.2s ease, background 0.2s ease;
 }
 
-.skw-visual-meta {
+.pi-chip:hover {
+  border-color: rgba(221, 0, 96, 0.4);
+  background: rgba(221, 0, 96, 0.08);
+}
+
+/* Telemetry Status Indicator */
+.pi-step-status {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   padding: 5px 12px;
-  border-radius: 20px;
-  background: rgba(5, 5, 5, 0.75);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.skw-meta-indicator {
+.pi-status-led {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #DD0060;
-  box-shadow: 0 0 8px #DD0060;
+  background: var(--color-accent, #DD0060);
+  box-shadow: 0 0 8px var(--color-accent, #DD0060);
 }
 
-.skw-meta-text {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+.pi-status-text {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted, #8B93A7);
   text-transform: uppercase;
-  color: #8B93A7;
 }
 
-/* =========================================================
-   HUD PAGINATION INDICATOR (DESKTOP & TABLET)
-   ========================================================= */
-.skw-hud-nav {
+/* Corner Step Counter */
+.pi-corner-counter {
+  z-index: 12;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 17px;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted, #8B93A7);
+  pointer-events: none;
+}
+
+.pi-counter-current {
+  color: var(--color-text, #FFFFFF);
+  font-weight: 600;
+}
+
+/* CONCEPTUAL 3D OBJECTS (Production-Optimized) */
+.pi-object-wrapper {
   position: absolute;
-  top: 50%;
-  right: 28px;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  z-index: 25;
-}
-
-[dir="rtl"] .skw-hud-nav {
-  right: auto;
-  left: 28px;
-}
-
-.skw-hud-dot {
+  inset: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
-  gap: 8px;
-  background: none;
-  border: none;
-  padding: 4px;
-  cursor: pointer;
-  color: #8B93A7;
-  outline: none;
-  transition: all 0.3s ease;
+  justify-content: center;
+  filter: drop-shadow(0 34px 56px rgba(0, 0, 0, 0.95)) drop-shadow(0 10px 30px rgba(221, 0, 96, 0.16));
 }
 
-.skw-hud-dot:hover,
-.skw-hud-dot:focus-visible {
-  color: #FFFFFF;
+.pi-3d-picture {
+  display: contents;
 }
 
-.skw-hud-dot:focus-visible {
-  outline: 2px solid #DD0060;
-  outline-offset: 4px;
-}
-
-.skw-hud-num {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.72rem;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-.skw-hud-dot.is-active .skw-hud-num {
-  color: #FFFFFF;
-  font-weight: 700;
-}
-
-.skw-hud-line {
+.pi-3d-object-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  aspect-ratio: 1 / 1;
   display: block;
-  width: 14px;
-  height: 2px;
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 1px;
-  transition: width 0.35s ease, background-color 0.35s ease;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
 }
 
-.skw-hud-dot.is-active .skw-hud-line {
-  width: 32px;
-  background-color: #DD0060;
-  box-shadow: 0 0 8px rgba(221, 0, 96, 0.6);
-}
 
-/* =========================================================
-   PERSIAN (RTL) ADJUSTMENTS
-   ========================================================= */
-[dir="rtl"] .skw-page__heading,
-[dir="rtl"] .skw-page__emphasis,
-[dir="rtl"] .skw-page__description,
-[dir="rtl"] .skw-visual-chip {
-  font-family: var(--font-persian, 'Vazirmatn', sans-serif) !important;
-  letter-spacing: 0 !important;
-}
 
-[dir="rtl"] .skw-page__half--left .skw-page__content {
-  text-align: right;
-}
+/* RESPONSIVE MEDIA QUERIES */
 
-[dir="rtl"] .skw-page__half--right .skw-page__content {
-  text-align: right;
-}
-
-/* =========================================================
-   RESPONSIVE GEOMETRY (LAPTOP & TABLET)
-   ========================================================= */
-@media (max-width: 1279px) {
-  .skw-page__half--left .skw-page__content {
-    padding-left: 22%;
-    padding-right: 18%;
+/* Tablet (810px to 1199.98px) */
+@media (min-width: 810px) and (max-width: 1199.98px) {
+  .pi-wheel-btn {
+    width: 60px;
+    height: 60px;
   }
-
-  .skw-page__half--right .skw-page__content {
-    padding-left: 18%;
-    padding-right: 22%;
+  .pi-wheel-num {
+    font-size: 20px;
   }
-
-  .skw-page__heading {
-    font-size: 2rem;
+  .pi-visual-anchor {
+    width: 32%;
+    max-width: 380px;
+    right: 4%;
+  }
+  .pi-section-root.is-rtl .pi-visual-anchor {
+    right: auto;
+    left: 4%;
+  }
+  .pi-editorial-stack {
+    left: 26%;
+    width: 40%;
+  }
+  .pi-section-root.is-rtl .pi-editorial-stack {
+    left: auto;
+    right: 26%;
+  }
+  .pi-headline {
+    font-size: clamp(28px, 3.4vw, 42px);
+  }
+  .pi-description {
+    font-size: 14.5px;
+  }
+  .pi-corner-counter {
+    font-size: 15px;
+    bottom: 22px;
   }
 }
 
-/* =========================================================
-   MOBILE ARCHITECTURE (< 768px down to 320px)
-   Preserves the diagonal split, opposing entrances, and counter-skew
-   with adjusted angle for comfortable text reading
-   ========================================================= */
-@media (max-width: 767px) {
-  /* Skew adjusted to 11deg so content width is generous on mobile */
-  .skw-page__skewed {
-    transform: skewX(-11deg);
-    width: 130%;
+/* Mobile (<= 809.98px) */
+@media (max-width: 809.98px) {
+  .pi-section-root {
+    contain: initial;
   }
 
-  .skw-page__half--left .skw-page__skewed {
-    left: -30%;
+  /* Hide desktop arc, wheel, and counter */
+  .pi-arc-svg {
+    display: none !important;
+  }
+  .pi-wheel-container {
+    display: none !important;
+  }
+  .pi-corner-counter {
+    display: none !important;
   }
 
-  .skw-page__half--right .skw-page__skewed {
-    right: -30%;
+  /* Show mobile pills */
+  .pi-mobile-pills {
+    display: flex !important;
   }
 
-  .skw-page__content {
-    transform: skewX(11deg);
+  .pi-sticky-viewport {
+    background: radial-gradient(circle at 50% 18%, rgba(7, 16, 28, 0.7) 0%, transparent 65%);
   }
 
-  .skw-page.inactive .skw-page__content {
-    transform: skewX(11deg) scale(0.95);
+  /* Stack conceptual object at top center */
+  .pi-visual-anchor {
+    top: 18% !important;
+    left: 50% !important;
+    right: auto !important;
+    width: 54% !important;
+    max-width: 240px !important;
+    transform: translate(-50%, -50%) !important;
   }
 
-  /* tan(11deg) * 100vh ~ 19.44vh horizontal offset */
-  .skw-page__half--left {
-    transform: translate3d(-19.44vh, 100%, 0);
+  /* Stack editorial content at lower center */
+  .pi-editorial-stack {
+    top: 40% !important;
+    left: 50% !important;
+    right: auto !important;
+    width: 88% !important;
+    bottom: 12% !important;
+    transform: translateX(-50%) !important;
   }
 
-  .skw-page__half--right {
-    transform: translate3d(19.44vh, -100%, 0);
-  }
-
-  .skw-page__half--left .skw-page__content {
-    padding-left: 16%;
-    padding-right: 12%;
-  }
-
-  .skw-page__half--right .skw-page__content {
-    padding-left: 12%;
-    padding-right: 16%;
-  }
-
-  .skw-page__eyebrow {
-    font-size: 0.68rem;
-    margin-bottom: 8px;
-  }
-
-  .skw-page__heading {
-    font-size: clamp(1.15rem, 4.2vw, 1.45rem);
-    line-height: 1.25;
-    margin-bottom: 8px;
-  }
-
-  .skw-page__emphasis {
-    font-size: clamp(1.05rem, 3.8vw, 1.3rem);
+  .pi-headline {
+    font-size: clamp(23px, 6vw, 32px);
     margin-bottom: 10px;
   }
 
-  .skw-page__description {
-    font-size: clamp(0.78rem, 2.7vw, 0.88rem);
-    line-height: 1.45;
+  .pi-secondary-statement {
+    font-size: 15.5px;
+    margin-bottom: 8px;
   }
 
-  .skw-visual-overlay {
-    height: 70%;
-    padding: 12px;
+  .pi-supporting-idea {
+    font-size: 13.5px;
+    margin-bottom: 8px;
   }
 
-  .skw-visual-badge {
-    font-size: 0.62rem;
-    padding: 4px 8px;
+  .pi-description {
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 12px;
   }
 
-  .skw-visual-chips {
-    gap: 4px;
-    margin: 10px 0;
+  .pi-chips-list {
+    gap: 6px;
+    margin-bottom: 12px;
   }
 
-  .skw-visual-chip {
-    font-size: 0.58rem;
-    padding: 3px 6px;
+  .pi-chip {
+    padding: 4px 9px;
+    font-size: 10px;
   }
 
-  .skw-hud-nav {
-    right: 10px;
-    gap: 8px;
+  .pi-step-status {
+    padding: 3px 8px;
   }
 
-  [dir="rtl"] .skw-hud-nav {
-    left: 10px;
-  }
-
-  .skw-hud-num {
-    font-size: 0.62rem;
-  }
-
-  .skw-hud-line {
-    width: 10px;
-  }
-
-  .skw-hud-dot.is-active .skw-hud-line {
-    width: 20px;
+  .pi-status-text {
+    font-size: 9px;
   }
 }
 
-/* Extra Small Mobile (320px – 375px) */
-@media (max-width: 375px) {
-  .skw-page__half--left .skw-page__content {
-    padding-left: 12%;
-    padding-right: 8%;
-  }
-
-  .skw-page__half--right .skw-page__content {
-    padding-left: 8%;
-    padding-right: 12%;
-  }
-
-  .skw-page__heading {
-    font-size: 1.05rem;
-  }
-
-  .skw-page__emphasis {
-    font-size: 0.95rem;
-  }
-
-  .skw-visual-chips {
-    display: none; /* Keep visual clean and unclipped on 320px screens */
-  }
-}
-
-/* =========================================================
-   ACCESSIBILITY: REDUCED MOTION
-   ========================================================= */
-.reduced-motion .skw-page__half,
-.reduced-motion .skw-page__content {
-  transition-duration: 0.01ms !important;
-}

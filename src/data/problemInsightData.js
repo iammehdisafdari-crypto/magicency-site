@@ -1,166 +1,190 @@
 /**
  * PROBLEM INSIGHT DATA MODEL
- * 5 Distinct States following the Exact Skewed Split-Screen Architecture
- * Alternating:
- * State 1: Visual LEFT / Content RIGHT
- * State 2: Content LEFT / Visual RIGHT
- * State 3: Visual LEFT / Content RIGHT
- * State 4: Content LEFT / Visual RIGHT
- * State 5: Visual LEFT / Content RIGHT
+ * 5 Problem Insight States matching the exact narrative specification:
+ * 01 — THE PROBLEM (Image 11: 3D padlock)
+ * 02 — MORE CHANNELS (Image 12: 3D antenna)
+ * 03 — THE INSIGHT (Image 13: 3D magnifying glass)
+ * 04 — CONNECTION (Image 14: 3D precision connectors)
+ * 05 — GROWTH OPERATING SYSTEM (Image 15: 3D precision engine)
  */
 
-export const SKEWED_PAGES_DATA = [
+export const PROBLEM_INSIGHT_STEPS = [
   {
-    page: 1,
+    step: 1,
     id: 'fragmentation',
-    visualSide: 'left',
-    contentSide: 'right',
-    image: '/assets/capabilities/experimentation.webp',
-    imageJpg: '/assets/capabilities/experimentation.jpg',
-    visualBadge: {
-      en: 'FRAGMENTATION // DISPERSED EFFORT',
-      fa: 'اقدامات جزیره‌ای // پراکندگی توان'
+    imageName: '11',
+    image: '/assets/problem-insight/11.webp',
+    image400: '/assets/problem-insight/11-400w.webp',
+    imagePng: '/assets/problem-insight/11.png',
+    imageAlt: {
+      en: '3D padlock representing a blocked growth system — The Problem',
+      fa: 'قفل سه‌بعدی نماد سیستم رشد قفل‌شده — مسئله بنیادین'
     },
-    visualItems: ['ADS', 'SEO', 'SOCIAL', 'CONTENT', 'WEBSITE', 'ANALYTICS', 'CRM', 'CAMPAIGNS'],
     eyebrow: {
-      en: '01 / THE PROBLEM',
-      fa: '۰۱ / مسئله بنیادین'
+      en: 'THE PROBLEM',
+      fa: 'مسئله بنیادین'
     },
-    heading: {
-      en: "Marketing doesn't fail because there aren't enough channels.",
-      fa: 'شکست بازاریابی به دلیل کمبود کانال‌های تبلیغاتی نیست.'
+    titleLine1: {
+      en: "Marketing doesn't fail",
+      fa: 'شکست بازاریابی به دلیل'
+    },
+    titleLine2: {
+      en: "because there aren't enough channels.",
+      fa: 'کمبود کانال‌های تبلیغاتی نیست.'
     },
     description: {
       en: 'Businesses accumulate disconnected tools, channels, and campaigns. But activity without structural cohesion creates friction, not compounding growth.',
-      fa: 'کسب‌وکارها کانال‌ها و ابزارهای پراکنده را روی هم تلنبار می‌کنند. اما فعالیت بدون معماری یکپارچه، صرفاً اصطکاک و هزینه ایجاد می‌کند، نه رشد تصاعدی.'
+      fa: 'کسب‌وکارها ابزارها، کانال‌ها و کمپین‌های جداگانه را انباشته می‌کنند؛ اما فعالیت بدون انسجام ساختاری، صرفاً اصطکاک ایجاد می‌کند نه رشد هم‌افزا.'
     },
+    chips: ['ADS', 'SEO', 'SOCIAL', 'CONTENT', 'WEBSITE', 'ANALYTICS', 'CRM', 'CAMPAIGNS'],
     status: {
-      en: 'STATE: DISCONNECTED SILOS',
-      fa: 'وضعیت: جزیره‌های مستقل و بی‌ارتباط'
+      en: 'STATE: FRAGMENTED & DISCONNECTED',
+      fa: 'وضعیت: جزیره‌ای و پراکنده'
     }
   },
   {
-    page: 2,
+    step: 2,
     id: 'channels',
-    visualSide: 'right',
-    contentSide: 'left',
-    image: '/assets/capabilities/analytics.webp',
-    imageJpg: '/assets/capabilities/analytics.jpg',
-    visualBadge: {
-      en: 'COMPLEXITY TRAP // DATA NOISE',
-      fa: 'تله پیچیدگی // خطای داده‌ها'
+    imageName: '12',
+    image: '/assets/problem-insight/12.webp',
+    image400: '/assets/problem-insight/12-400w.webp',
+    imagePng: '/assets/problem-insight/12.png',
+    imageAlt: {
+      en: '3D antenna representing multiple marketing channels — More Channels',
+      fa: 'آنتن سه‌بعدی نماد کانال‌های بازاریابی پراکنده — کانال‌های بیشتر'
     },
-    visualItems: ['ISOLATED SILOS', 'ATTRIBUTION BLINDSPOTS', 'BUDGET COMPETITION', 'ZERO COMPOUNDING'],
     eyebrow: {
-      en: '02 / MORE CHANNELS',
-      fa: '۰۲ / کانال‌های بیشتر'
+      en: 'MORE CHANNELS',
+      fa: 'کانال‌های بیشتر'
     },
-    heading: {
-      en: "More channels don't automatically create growth.",
-      fa: 'کانال‌های بیشتر لزوماً رشد بیشتری خلق نمی‌کنند.'
+    titleLine1: {
+      en: "More channels don't",
+      fa: 'کانال‌های بیشتر لزوماً'
+    },
+    titleLine2: {
+      en: 'automatically create growth.',
+      fa: 'رشد خودکار خلق نمی‌کنند.'
+    },
+    supportingIdea: {
+      en: 'Disconnected channels make growth harder to see, measure, and optimize.',
+      fa: 'کانال‌های نامتصل مشاهده، سنجش و بهینه‌سازی رشد را پیچیده‌تر و مبهم‌تر می‌کنند.'
     },
     description: {
-      en: 'When every channel operates independently, the system becomes harder to understand, measure, and optimize. Disconnected channels compete for budget rather than multiplying return.',
-      fa: 'وقتی هر کانال جداگانه عمل کند، سیستم غیرقابل اندازه‌گیری و اصلاح می‌شود. بخش‌های مختلف به جای هم‌افزایی، برای تصاحب بودجه رقابت می‌کنند.'
+      en: 'Disconnected channels compete for budget rather than multiplying return, turning marketing into an increasingly complex attribution blindspot.',
+      fa: 'کانال‌های نامتصل به جای هم‌افزایی و چندبرابر کردن بازده، برای تصاحب بودجه رقابت می‌کنند و سیستم را کدر می‌سازند.'
     },
+    chips: ['ISOLATED SILOS', 'ATTRIBUTION BLINDSPOTS', 'BUDGET COMPETITION', 'ZERO COMPOUNDING'],
     status: {
-      en: 'STATE: MOUNTING FRICTION',
-      fa: 'وضعیت: افزایش اصطکاک عملیاتی'
+      en: 'STATE: MOUNTING COMPLEXITY',
+      fa: 'وضعیت: افزایش پیچیدگی'
     }
   },
   {
-    page: 3,
+    step: 3,
     id: 'insight',
-    visualSide: 'left',
-    contentSide: 'right',
-    image: '/assets/capabilities/strategy.webp',
-    imageJpg: '/assets/capabilities/strategy.jpg',
-    visualBadge: {
-      en: 'CORE DIAGNOSIS // THE CRITICAL FLAW',
-      fa: 'تشخیص بنیادین // ریشه مسئله'
+    imageName: '13',
+    image: '/assets/problem-insight/13.webp',
+    image400: '/assets/problem-insight/13-400w.webp',
+    imagePng: '/assets/problem-insight/13.png',
+    imageAlt: {
+      en: '3D magnifying glass representing marketing insight — The Insight',
+      fa: 'ذره‌بین سه‌بعدی نماد بینش و شفافیت بازاریابی — نگرش بنیادین'
     },
-    visualItems: ['TACTICAL BUSYNESS', 'VS', 'STRUCTURAL ALIGNMENT'],
     eyebrow: {
-      en: '03 / THE INSIGHT',
-      fa: '۰۳ / نگرش راهبردی'
+      en: 'THE INSIGHT',
+      fa: 'نگرش بنیادین'
     },
-    heading: {
-      en: "The problem isn't more marketing.",
-      fa: 'مسئله بازاریابی بیشتر نیست.'
+    titleLine1: {
+      en: "The problem isn't",
+      fa: 'مسئله بازاریابی'
     },
-    emphasis: {
+    titleLine2: {
+      en: 'more marketing.',
+      fa: 'بیشتر نیست.'
+    },
+    secondaryStatement: {
       en: "It's disconnected marketing.",
       fa: 'مسئله بازاریابی نامتصل است.'
     },
     description: {
       en: 'Activity without unified architecture is just tactical noise that resets to zero every quarter. Compounding begins only when the pieces connect.',
-      fa: 'فعالیت بدون معماری، صرفاً هیاهوی تاکتیکی است که با پایان هر فصل صفر می‌شود. هم‌افزایی واقعی تنها زمانی آغاز می‌شود که اجزا به هم متصل شوند.'
+      fa: 'فعالیت بدون معماری یکپارچه هیاهوی تاکتیکی است که هر فصل صفر می‌شود. هم‌افزایی پایدار تنها با اتصال ساختاری آغاز می‌گردد.'
     },
+    chips: ['TACTICAL NOISE', 'VS', 'STRUCTURAL ALIGNMENT'],
     status: {
-      en: 'STATE: ARCHITECTURAL AWAKENING',
-      fa: 'وضعیت: آگاهی ساختاری'
+      en: 'STATE: CONCEPTUAL CLIMAX',
+      fa: 'وضعیت: اوج نگرش ساختاری'
     }
   },
   {
-    page: 4,
+    step: 4,
     id: 'connection',
-    visualSide: 'right',
-    contentSide: 'left',
-    image: '/assets/capabilities/performance.webp',
-    imageJpg: '/assets/capabilities/performance.jpg',
-    visualBadge: {
-      en: 'INTEGRATED FLOW // CLOSED-LOOP ATTRIBUTION',
-      fa: 'جریان یکپارچه // اتریبیوشن حلقه-بسته'
+    imageName: '14',
+    image: '/assets/problem-insight/14.webp',
+    image400: '/assets/problem-insight/14-400w.webp',
+    imagePng: '/assets/problem-insight/14.png',
+    imageAlt: {
+      en: '3D precision connectors representing connected marketing systems — Connection',
+      fa: 'کانکتورهای دقیق سه‌بعدی نماد سیستم‌های متصل بازاریابی — اتصال سیستم'
     },
-    visualItems: ['STRATEGY', 'EXPERIENCE', 'ACQUISITION', 'MEASUREMENT', 'OPTIMIZATION'],
     eyebrow: {
-      en: '04 / CONNECTION',
-      fa: '۰۴ / اتصال سیستم'
+      en: 'CONNECTION',
+      fa: 'اتصال سیستم'
     },
-    heading: {
-      en: 'Growth happens when the system starts working together.',
-      fa: 'رشد زمانی رخ می‌دهد که سیستم به صورت یکپارچه کار کند.'
+    titleLine1: {
+      en: 'Growth happens when the system',
+      fa: 'رشد زمانی محقق می‌شود که'
+    },
+    titleLine2: {
+      en: 'starts working together.',
+      fa: 'سیستم به صورت هماهنگ کار کند.'
     },
     description: {
-      en: 'Connecting brand positioning, frictionless digital experiences, high-intent acquisition, and full-funnel telemetry into a single continuous feedback loop.',
-      fa: 'اتصال جایگاه‌یابی برند، تجربه دیجیتال روان، جذب هدفمند و تله‌متری سرتاسری در یک چرخه بسته بازخورد پیوسته.'
+      en: 'Aligning strategy, user experience, high-intent acquisition, and full-funnel measurement into a synchronized, compounding pipeline.',
+      fa: 'هماهنگ‌سازی استراتژی، تجربه کاربری، جذب هدفمند و اندازه‌گیری سرتاسری در یک زنجیره پیوسته و هم‌افزا.'
     },
+    chips: ['STRATEGY ↓', 'EXPERIENCE ↓', 'ACQUISITION ↓', 'MEASUREMENT ↓', 'OPTIMIZATION'],
     status: {
-      en: 'STATE: SYNCHRONIZED ENGINE',
-      fa: 'وضعیت: موتور هماهنگ رشد'
+      en: 'STATE: COORDINATED SYSTEM',
+      fa: 'وضعیت: سیستم متصل و هماهنگ'
     }
   },
   {
-    page: 5,
-    id: 'operating-system',
-    visualSide: 'left',
-    contentSide: 'right',
-    image: '/assets/capabilities/growth_systems.webp',
-    imageJpg: '/assets/capabilities/growth_systems.jpg',
-    visualBadge: {
-      en: 'SYSTEM ACTIVE // COMPOUNDING VELOCITY',
-      fa: 'سیستم فعال // سرعت رشد تصاعدی'
+    step: 5,
+    id: 'growth-os',
+    imageName: '15',
+    image: '/assets/problem-insight/15.webp',
+    image400: '/assets/problem-insight/15-400w.webp',
+    imagePng: '/assets/problem-insight/15.png',
+    imageAlt: {
+      en: '3D precision engine representing a growth operating system — Growth Operating System',
+      fa: 'موتور مهندسی سه‌بعدی نماد سیستم‌عامل رشد — سیستم‌عامل رشد'
     },
-    visualItems: ['STRATEGY → EXPERIENCE → ACQUISITION → MEASUREMENT → OPTIMIZATION → COMPOUNDING'],
     eyebrow: {
-      en: '05 / THE OPERATING SYSTEM',
-      fa: '۰۵ / سیستم‌عامل رشد'
+      en: 'GROWTH OPERATING SYSTEM',
+      fa: 'سیستم‌عامل رشد'
     },
-    heading: {
+    titleLine1: {
       en: "Growth isn't a channel.",
       fa: 'رشد یک کانال نیست.'
     },
-    emphasis: {
+    titleLine2: {
+      en: 'Growth is an operating system.',
+      fa: 'رشد یک سیستم‌عامل است.'
+    },
+    secondaryStatement: {
       en: 'Growth is an operating system.',
       fa: 'رشد یک سیستم‌عامل است.'
     },
     description: {
-      en: 'When every layer compounds together, marketing stops being a series of speculative bets and becomes an autonomous, predictable enterprise engine.',
-      fa: 'وقتی تمام لایه‌ها به صورت هم‌افزا کار کنند، بازاریابی از شرط‌بندی‌های پرریسک خارج شده و به یک موتور قابل‌پیش‌بینی و پایدار رشد تبدیل می‌شود.'
+      en: 'When every layer compounds together, marketing stops being a series of speculative bets and becomes an autonomous, predictable engine.',
+      fa: 'وقتی تمام لایه‌ها با هم هم‌افزا شوند، بازاریابی از شرط‌بندی‌های مقطعی رها شده و به موتوری خودگردان، پایدار و پیش‌بینی‌پذیر تبدیل می‌شود.'
     },
+    chips: ['STRATEGY →', 'EXPERIENCE →', 'ACQUISITION →', 'MEASUREMENT →', 'OPTIMIZATION →', 'COMPOUNDING'],
     status: {
-      en: 'STATE: AUTONOMOUS GROWTH OPERATING SYSTEM',
-      fa: 'وضعیت: سیستم‌عامل جامع و خودگردان رشد'
+      en: 'STATE: RESOLUTION & AUTONOMY',
+      fa: 'وضعیت: فرجام و سیستم‌عامل رشد'
     }
   }
 ];
+
