@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import { useRouter } from '../../context/RouterContext';
-import { ArrowRight, ArrowLeft } from 'lucide-react';
 import { FEATURED_WORKS } from '../../data/featureWorkData';
+import CTA from '../Common/CTA';
 import './FeatureWork.css';
 
 export default function FeatureWork() {
@@ -186,17 +186,17 @@ export default function FeatureWork() {
                   })}
                 </nav>
 
-                <button
-                  type="button"
-                  onClick={() => navigate('/work')}
-                  className="fw-see-all-btn"
-                  aria-label={lang === 'fa' ? 'مشاهده همه پروژه‌ها' : 'Explore All Systems & Case Studies'}
+                <CTA
+                  variant="secondary"
+                  size="compact"
+                  href="/work"
+                  trackingName="see_all_work"
+                  trackingLocation="feature_work_section"
+                  ariaLabel={lang === 'fa' ? 'مشاهده همه پروژه‌ها' : 'Explore All Systems & Case Studies'}
+                  className="fw-see-all-cta"
                 >
-                  <span>{lang === 'fa' ? 'مشاهده تمام پروژه‌ها' : 'SEE ALL WORK'}</span>
-                  <span className="fw-cta-icon" aria-hidden="true">
-                    {isRTL ? <ArrowLeft size={16} /> : <ArrowRight size={16} />}
-                  </span>
-                </button>
+                  {lang === 'fa' ? 'مشاهده تمام پروژه‌ها' : 'SEE ALL WORK'}
+                </CTA>
               </div>
             </div>
 
