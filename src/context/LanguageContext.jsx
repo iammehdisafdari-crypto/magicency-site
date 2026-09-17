@@ -171,8 +171,10 @@ export const translations = {
     whatWeDo: {
       badge: 'WHAT WE DO',
       eyebrow: 'WHAT WE DO',
-      heading: 'What we do',
-      introStatement: 'Strategy sets the direction. Performance and creative turn strategy into action. Technology, AI and automation make growth measurable and compounding.',
+      heading: 'We turn marketing into a growth system.',
+      headline: 'We turn marketing into a growth system.',
+      supportingLine: 'Strategy, performance, creativity, and technology — connected to move the business forward.',
+      introStatement: 'Strategy, performance, creativity, and technology — connected to move the business forward.',
       pillars: [
         {
           number: '01',
@@ -1298,10 +1300,12 @@ export const translations = {
       ]
     },
     whatWeDo: {
-      badge: 'آنچه انجام می‌دهیم',
-      eyebrow: 'آنچه انجام می‌دهیم',
-      heading: 'آنچه انجام می‌دهیم',
-      introStatement: 'استراتژی جهت حرکت را تعیین می‌کند. خلاقیت و پرفورمنس، استراتژی را به اقدام تبدیل می‌کنند. فناوری و هوش مصنوعی رشد را تصاعدی و سنجش‌پذیر می‌سازند.',
+      badge: 'چه کاری انجام میدهیم',
+      eyebrow: 'چه کاری انجام میدهیم',
+      heading: 'بازاریابی را به یک سیستم رشد تبدیل میکنیم.',
+      headline: 'بازاریابی را به یک سیستم رشد تبدیل میکنیم.',
+      supportingLine: 'استراتژی، پرفورمنس، خلاقیت و فناوری را به هم متصل میکنیم تا رشد قابل اندازهگیری ایجاد شود.',
+      introStatement: 'استراتژی، پرفورمنس، خلاقیت و فناوری را به هم متصل میکنیم تا رشد قابل اندازهگیری ایجاد شود.',
       pillars: [
         {
           number: '۰۱',

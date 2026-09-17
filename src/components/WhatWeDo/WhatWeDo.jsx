@@ -22,8 +22,9 @@ export default function WhatWeDo() {
   const lastMousePosRef = useRef({ x: 0, y: 0 });
 
   const data = t.whatWeDo || {
-    heading: 'What we do',
-    introStatement: 'Strategy sets the direction. Performance and creative turn strategy into action. Technology, AI and automation make growth measurable and compounding.',
+    eyebrow: 'WHAT WE DO',
+    headline: 'We turn marketing into a growth system.',
+    supportingLine: 'Strategy, performance, creativity, and technology — connected to move the business forward.',
     pillars: []
   };
 
@@ -110,18 +111,21 @@ export default function WhatWeDo() {
       <div className="container vm-wwd-main-container">
         
         {/* =========================================================
-            01. SECTION INTRO (EXACT VIVID MOTION DOM: wwd-intro grid)
+            01. SECTION INTRO (Eyebrow, Headline & Supporting Line)
             ========================================================= */}
         <div className="wwd-intro grid">
           <div className="wwd-intro-heading">
-            <RevealHeading as="h2" className="u-text-heading-xs" delay={0.0}>
-              {data.heading || 'What we do'}
+            <RevealHeading as="span" className="wwd-eyebrow" delay={0.0}>
+              {data.eyebrow || 'WHAT WE DO'}
             </RevealHeading>
           </div>
           <div className="wwd-intro-description">
-            <RevealStatement as="p" className="u-text-heading-sm leading-none" delay={0.12}>
-              {data.introStatement}
-            </RevealStatement>
+            <RevealHeading as="h2" className="wwd-headline" delay={0.08}>
+              {data.headline || data.heading || 'We turn marketing into a growth system.'}
+            </RevealHeading>
+            <RevealBody as="p" className="wwd-supporting-line" delay={0.16}>
+              {data.supportingLine || data.introStatement}
+            </RevealBody>
           </div>
         </div>
 
