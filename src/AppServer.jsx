@@ -24,6 +24,7 @@ import NotFoundPage from './components/NotFound/NotFoundPage';
 // Lazy load user-triggered modal dialogs
 const ProjectDiscovery = lazy(() => import('./components/ProjectDiscovery/ProjectDiscovery'));
 import { initGA } from './utils/analytics';
+import SmoothScrollProvider from './components/SmoothScroll/SmoothScrollProvider';
 
 import './styles/global.css';
 
@@ -110,7 +111,9 @@ export default function App({ initialPath, initialLang } = {}) {
   return (
     <LanguageProvider initialLang={initialLang}>
       <RouterProvider initialPath={initialPath}>
-        <MainApp />
+        <SmoothScrollProvider>
+          <MainApp />
+        </SmoothScrollProvider>
       </RouterProvider>
     </LanguageProvider>
   );
