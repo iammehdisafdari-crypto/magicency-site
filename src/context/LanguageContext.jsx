@@ -35,8 +35,8 @@ export const translations = {
       editorialStatement: 'We unify strategy, design, technology, and performance to build digital experiences and scalable growth systems that move ambitious brands forward.',
       playReel: 'Play reel',
       reelDuration: '01:42 SHOWREEL',
-      primaryCta: 'Start a Project',
-      secondaryCta: 'Explore Approach',
+      primaryCta: 'BUILD YOUR GROWTH SYSTEM',
+      secondaryCta: 'SEE HOW WE THINK',
       clients: [
         'tamir online',
         'atrash store',
@@ -1134,8 +1134,8 @@ export const translations = {
       editorialStatement: 'ما با همگام‌سازی استراتژی، طراحی، فناوری و پرفورمنس، تجربیات دیجیتال و سیستم‌های مقیاس‌پذیر رشد را برای برندهای پیشرو مهندسی می‌کنیم.',
       playReel: 'مشاهده شو‌ریل',
       reelDuration: '۰۱:۴۲ شو‌ریل',
-      primaryCta: 'شروع پروژه',
-      secondaryCta: 'بررسی متدولوژی',
+      primaryCta: 'سیستم رشد خود را بسازید',
+      secondaryCta: 'دیدگاه و رویکرد ما',
       clients: [
         'tamir online',
         'atrash store',
