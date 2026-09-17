@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 import { ArrowRight, ArrowLeft } from 'lucide-react';
 import { EASING } from '../motion';
+import CTA from '../Common/CTA';
 
 export default function ApproachCTA() {
   const { t, isRTL, setIsModalOpen } = useLanguage();
@@ -46,18 +47,16 @@ export default function ApproachCTA() {
 
             {/* Triggers existing Project Discovery Experience directly */}
             <div className="final-cta-btn-wrap">
-              <button
-                type="button"
-                className="approach-primary-cta-btn"
+              <CTA
+                variant="primary"
                 onClick={() => setIsModalOpen(true)}
-                aria-label="Start a Project Discovery"
+                trackingName="start_project"
+                trackingLocation="approach_cta_section"
+                ariaLabel={c.ctaButton || 'START A PROJECT'}
+                className="approach-primary-cta"
               >
-                <span className="btn-asterisk" aria-hidden="true">✱</span>
-                <span className="btn-text">{c.ctaButton || 'START A PROJECT'}</span>
-                <span className="btn-arrow-icon" aria-hidden="true">
-                  {isRTL ? <ArrowLeft size={18} /> : <ArrowRight size={18} />}
-                </span>
-              </button>
+                {c.ctaButton || 'START A PROJECT'}
+              </CTA>
             </div>
           </motion.div>
         </div>

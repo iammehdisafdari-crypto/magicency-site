@@ -3,6 +3,7 @@ import { useLanguage } from '../../context/LanguageContext';
 import { useRouter } from '../../context/RouterContext';
 import { ABOUT_DATA } from '../../data/aboutData';
 import { ArrowUpRight } from 'lucide-react';
+import CTA from '../Common/CTA';
 
 export default function ProofSection() {
   const { lang, isRTL } = useLanguage();
@@ -63,14 +64,18 @@ export default function ProofSection() {
             <span className="seal-note">{data.caseStudyNote}</span>
           </div>
 
-          <button
-            type="button"
-            onClick={() => navigate('/work')}
-            className="proof-explore-btn"
+          <CTA
+            variant="secondary"
+            size="compact"
+            href="/work"
+            trackingName="explore_documented_work"
+            trackingLocation="about_proof_section"
+            arrowDirection="up-right"
+            ariaLabel={isRTL ? 'مشاهده همه پروژه‌های مهندسی‌شده' : 'EXPLORE DOCUMENTED WORK'}
+            className="proof-explore-cta"
           >
-            <span>{isRTL ? 'مشاهده همه پروژه‌های مهندسی‌شده' : 'EXPLORE DOCUMENTED WORK'}</span>
-            <ArrowUpRight size={18} />
-          </button>
+            {isRTL ? 'مشاهده همه پروژه‌های مهندسی‌شده' : 'EXPLORE DOCUMENTED WORK'}
+          </CTA>
         </div>
 
       </div>

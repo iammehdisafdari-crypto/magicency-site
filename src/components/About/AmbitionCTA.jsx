@@ -5,9 +5,10 @@ import { useRouter } from '../../context/RouterContext';
 import { ABOUT_DATA } from '../../data/aboutData';
 import { ArrowUpRight } from 'lucide-react';
 
+import CTA from '../Common/CTA';
+
 export default function AmbitionCTA() {
   const { lang, isRTL, setIsModalOpen } = useLanguage();
-  const { navigate } = useRouter();
   const data = ABOUT_DATA[lang]?.finalCta || ABOUT_DATA.en.finalCta;
 
   return (
@@ -44,29 +45,26 @@ export default function AmbitionCTA() {
 
           {/* Action Hub */}
           <div className="final-cta-actions-row">
-            {/* Primary Action Button (Triggers Project Discovery Modal) */}
-            <motion.button
-              type="button"
+            <CTA
+              variant="primary"
               onClick={() => setIsModalOpen(true)}
-              className="final-cta-primary-btn"
-              whileHover={{ scale: 1.03, y: -2 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              trackingName="start_project"
+              trackingLocation="about_final_cta"
+              ariaLabel={data.ctaButton}
             >
-              <span className="btn-glow-dot" />
-              <span className="btn-text">{data.ctaButton}</span>
-              <span className="btn-arrow" aria-hidden="true">{isRTL ? '←' : '→'}</span>
-            </motion.button>
+              {data.ctaButton}
+            </CTA>
 
-            {/* Secondary Action */}
-            <button
-              type="button"
-              onClick={() => navigate('/work')}
-              className="final-cta-secondary-link"
+            <CTA
+              variant="secondary"
+              href="/work"
+              trackingName="explore_work"
+              trackingLocation="about_final_cta"
+              arrowDirection="up-right"
+              ariaLabel={data.secondaryAction}
             >
-              <span>{data.secondaryAction}</span>
-              <ArrowUpRight size={18} />
-            </button>
+              {data.secondaryAction}
+            </CTA>
           </div>
 
           <div className="final-cta-direct-line">

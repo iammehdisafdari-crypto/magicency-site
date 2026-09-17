@@ -1,7 +1,6 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
-import { EASING } from '../motion';
+import CTA from '../Common/CTA';
 
 export default function ApproachClosingCTA() {
   const { t, isRTL, setIsModalOpen } = useLanguage();
@@ -37,26 +36,16 @@ export default function ApproachClosingCTA() {
 
           {/* Primary Action Button */}
           <div className="closing-cta-action">
-            <button
-              type="button"
-              className="approach-primary-cta-btn"
+            <CTA
+              variant="primary"
               onClick={handleOpenDiscovery}
-              aria-label={closing.ctaButton || (isRTL ? 'شروع پروژه' : 'START A PROJECT')}
+              trackingName="start_project"
+              trackingLocation="approach_closing_section"
+              ariaLabel={closing.ctaButton || (isRTL ? 'شروع پروژه' : 'START A PROJECT')}
+              className="approach-closing-cta"
             >
-              <span className="btn-glow-border" />
-              <span className="btn-inner">
-                <span className="btn-label">{closing.ctaButton || (isRTL ? 'شروع پروژه' : 'START A PROJECT')}</span>
-                <span className="btn-arrow" aria-hidden="true">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                    {isRTL ? (
-                      <path d="M19 12H5M12 19l-7-7 7-7" />
-                    ) : (
-                      <path d="M5 12h14M12 5l7 7-7 7" />
-                    )}
-                  </svg>
-                </span>
-              </span>
-            </button>
+              {closing.ctaButton || (isRTL ? 'شروع پروژه' : 'START A PROJECT')}
+            </CTA>
           </div>
 
           {/* Minimal Footnote */}

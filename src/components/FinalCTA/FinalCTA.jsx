@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLanguage } from '../../context/LanguageContext';
-import { trackCtaClick } from '../../utils/analytics';
+import CTA from '../Common/CTA';
 import './FinalCTA.css';
 
 export default function FinalCTA() {
@@ -13,8 +13,7 @@ export default function FinalCTA() {
     headline: isPersian ? 'گام بعدی را هوشمندانه بردارید.' : 'MAKE THE NEXT MOVE.',
     supportingLine1: isPersian ? 'استراتژی، خلاقیت و فناوری،' : 'Strategy, creative, and technology',
     supportingLine2: isPersian ? 'هماهنگ برای رشد مقیاس‌پذیر شما.' : 'built around your growth.',
-    ctaText: isPersian ? 'شروع پروژه' : 'START A PROJECT',
-    ctaArrow: isRTL ? '←' : '→'
+    ctaText: isPersian ? 'شروع پروژه' : 'START A PROJECT'
   };
 
   return (
@@ -41,20 +40,20 @@ export default function FinalCTA() {
         </div>
 
         <div className="final-cta-action">
-          <a
+          <CTA
+            variant="primary"
             href="#contact"
             onClick={(e) => {
               e.preventDefault();
-              trackCtaClick('start_project', 'final_cta_section');
               setIsModalOpen(true);
             }}
+            trackingName="start_project"
+            trackingLocation="final_cta_section"
+            ariaLabel={content.ctaText}
             className="final-cta-btn"
-            role="button"
-            aria-label={content.ctaText}
           >
-            <span className="final-cta-btn-text">{content.ctaText}</span>
-            <span className="final-cta-arrow" aria-hidden="true">{content.ctaArrow}</span>
-          </a>
+            {content.ctaText}
+          </CTA>
         </div>
       </div>
     </section>

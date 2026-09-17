@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
+import CTA from '../Common/CTA';
 
 export default function NewsletterSubscribe() {
   const { t, isRTL } = useLanguage();
@@ -60,22 +61,15 @@ export default function NewsletterSubscribe() {
                     className="newsletter-email-input"
                     aria-label="Email address for subscription"
                   />
-                  <button
+                  <CTA
+                    variant="primary"
+                    size="compact"
                     type="submit"
-                    className="newsletter-submit-btn"
-                    aria-label={n.button || 'SUBSCRIBE'}
+                    ariaLabel={n.button || 'SUBSCRIBE'}
+                    className="newsletter-submit-cta"
                   >
-                    <span>{n.button || 'SUBSCRIBE'}</span>
-                    <span className="btn-arrow" aria-hidden="true">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                        {isRTL ? (
-                          <path d="M19 12H5M12 19l-7-7 7-7" />
-                        ) : (
-                          <path d="M5 12h14M12 5l7 7-7 7" />
-                        )}
-                      </svg>
-                    </span>
-                  </button>
+                    {n.button || 'SUBSCRIBE'}
+                  </CTA>
                 </motion.form>
               )}
             </AnimatePresence>

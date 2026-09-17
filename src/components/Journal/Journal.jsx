@@ -4,6 +4,7 @@ import { useLanguage } from '../../context/LanguageContext';
 import { useRouter } from '../../context/RouterContext';
 import { ArrowUpRight } from 'lucide-react';
 import { EASING, RevealLabel, RevealHeading, Stagger, editorialVariants } from '../motion';
+import CTA from '../Common/CTA';
 import './Journal.css';
 
 const toWebp = (url) => (url ? url.replace(/\.(jpg|jpeg|png)$/, '.webp') : url);
@@ -272,17 +273,16 @@ export default function Journal() {
             05. EXPLORE ALL INSIGHTS CTA LINK
             ========================================================= */}
         <div className="journal-footer-action">
-          <a
+          <CTA
+            variant="secondary"
             href="/blog"
-            className="journal-explore-all-btn"
-            onClick={(e) => {
-              e.preventDefault();
-              if (navigate) navigate('/blog');
-            }}
+            trackingName="explore_all_insights"
+            trackingLocation="journal_section"
+            ariaLabel={isRTL ? 'مشاهده همه دیدگاه‌ها و مقالات' : 'EXPLORE ALL INSIGHTS'}
+            className="journal-explore-all-cta"
           >
-            <span>{isRTL ? 'مشاهده همه دیدگاه‌ها و مقالات' : 'EXPLORE ALL INSIGHTS'}</span>
-            <span className="journal-btn-arrow" aria-hidden="true">{isRTL ? '←' : '→'}</span>
-          </a>
+            {isRTL ? 'مشاهده همه دیدگاه‌ها و مقالات' : 'EXPLORE ALL INSIGHTS'}
+          </CTA>
         </div>
 
       </div>

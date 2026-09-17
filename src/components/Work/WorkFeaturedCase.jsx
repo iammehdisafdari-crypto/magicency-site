@@ -2,6 +2,7 @@ import React from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import { PROJECTS_DATA } from '../../data/projectsData';
 import { ArrowRight, ArrowLeft } from 'lucide-react';
+import CTA from '../Common/CTA';
 
 export default function WorkFeaturedCase() {
   const { lang, isRTL, setIsModalOpen } = useLanguage();
@@ -191,17 +192,17 @@ export default function WorkFeaturedCase() {
             <span>{footerNote}</span>
           </div>
 
-          <button 
-            type="button"
+          <CTA
+            variant="secondary"
+            size="compact"
             onClick={() => setIsModalOpen(true)}
-            className="work-featured-cta-btn"
-            aria-label={lang === 'fa' ? 'درخواست گفتگوی استراتژیک این پرونده' : 'Discuss This Architecture'}
+            trackingName="discuss_architecture"
+            trackingLocation="work_featured_case"
+            ariaLabel={lang === 'fa' ? 'درخواست گفتگوی استراتژیک این پرونده' : 'Discuss This Architecture'}
+            className="work-featured-cta"
           >
-            <span>{lang === 'fa' ? 'گفتگوی استراتژیک این پرونده' : 'DISCUSS THIS ARCHITECTURE'}</span>
-            <span className="cta-icon" aria-hidden="true">
-              {isRTL ? <ArrowLeft size={16} /> : <ArrowRight size={16} />}
-            </span>
-          </button>
+            {lang === 'fa' ? 'گفتگوی استراتژیک این پرونده' : 'DISCUSS THIS ARCHITECTURE'}
+          </CTA>
         </div>
 
       </div>

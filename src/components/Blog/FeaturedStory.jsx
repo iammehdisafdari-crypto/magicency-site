@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
+import CTA from '../Common/CTA';
 
 export default function FeaturedStory({ article, onSelectArticle }) {
   const { t, isRTL } = useLanguage();
@@ -67,27 +68,20 @@ export default function FeaturedStory({ article, onSelectArticle }) {
             </p>
 
             <div className="featured-action-bar">
-              <a
+              <CTA
+                variant="text"
+                size="compact"
                 href={`/blog/${article.slug}`}
-                className="featured-read-btn"
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
                   onSelectArticle(article);
                 }}
-                aria-label={`${f.readArticle || 'READ ARTICLE'} - ${title}`}
+                ariaLabel={`${f.readArticle || 'READ ARTICLE'} - ${title}`}
+                className="featured-read-cta"
               >
-                <span className="read-btn-text">{f.readArticle || 'READ ARTICLE'}</span>
-                <span className="read-btn-arrow" aria-hidden="true">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-                    {isRTL ? (
-                      <path d="M19 12H5M12 19l-7-7 7-7" />
-                    ) : (
-                      <path d="M5 12h14M12 5l7 7-7 7" />
-                    )}
-                  </svg>
-                </span>
-              </a>
+                {f.readArticle || 'READ ARTICLE'}
+              </CTA>
 
               <span className="featured-date-stamp">{date}</span>
             </div>

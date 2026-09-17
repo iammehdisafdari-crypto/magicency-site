@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import { useRouter } from '../../context/RouterContext';
 import { ArrowLeft, ArrowRight, Home, Compass, BookOpen } from 'lucide-react';
+import CTA from '../Common/CTA';
 import './NotFound.css';
 
 export default function NotFoundPage() {
@@ -63,35 +64,35 @@ export default function NotFoundPage() {
 
         {/* Action Directives */}
         <div className="notfound-actions">
-          <button
-            type="button"
-            className="notfound-btn-primary"
-            onClick={() => navigate('/')}
-            aria-label={lang === 'fa' ? 'بازگشت به صفحه اصلی' : 'Return to Home'}
+          <CTA
+            variant="primary"
+            href="/"
+            icon={<Home size={16} />}
+            ariaLabel={lang === 'fa' ? 'بازگشت به صفحه اصلی' : 'Return to Home'}
+            className="notfound-cta-primary"
           >
-            <Home size={16} />
-            <span>{lang === 'fa' ? 'بازگشت به خانه' : 'RETURN TO HOME'}</span>
-          </button>
+            {lang === 'fa' ? 'بازگشت به خانه' : 'RETURN TO HOME'}
+          </CTA>
 
-          <button
-            type="button"
-            className="notfound-btn-secondary"
-            onClick={() => navigate('/work')}
-            aria-label={lang === 'fa' ? 'مشاهده پروژه‌ها' : 'Explore Work'}
+          <CTA
+            variant="secondary"
+            href="/work"
+            icon={<Compass size={16} />}
+            ariaLabel={lang === 'fa' ? 'مشاهده پروژه‌ها' : 'Explore Work'}
+            className="notfound-cta-secondary"
           >
-            <Compass size={16} />
-            <span>{lang === 'fa' ? 'مشاهده پروژه‌ها' : 'EXPLORE WORK'}</span>
-          </button>
+            {lang === 'fa' ? 'مشاهده پروژه‌ها' : 'EXPLORE WORK'}
+          </CTA>
 
-          <button
-            type="button"
-            className="notfound-btn-secondary"
-            onClick={() => navigate('/blog')}
-            aria-label={lang === 'fa' ? 'مطالعه مقالات' : 'Read Journal'}
+          <CTA
+            variant="secondary"
+            href="/blog"
+            icon={<BookOpen size={16} />}
+            ariaLabel={lang === 'fa' ? 'مطالعه مقالات' : 'Read Journal'}
+            className="notfound-cta-secondary"
           >
-            <BookOpen size={16} />
-            <span>{lang === 'fa' ? 'نشریه تحلیلی' : 'READ JOURNAL'}</span>
-          </button>
+            {lang === 'fa' ? 'نشریه تحلیلی' : 'READ JOURNAL'}
+          </CTA>
         </div>
       </div>
     </div>

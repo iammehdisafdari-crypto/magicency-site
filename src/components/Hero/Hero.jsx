@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 import { DURATION, maskedLineVariants, editorialVariants } from '../motion';
+import { trackCtaClick } from '../../utils/analytics';
 import LazyVimeoPlayer from '../Common/LazyVimeoPlayer';
+import CTA from '../Common/CTA';
 import './Hero.css';
 
 const FluidCursor = React.lazy(() => import('../effects/FluidCursor'));
 
 export default function Hero({ isLoaded = true }) {
-  const { t } = useLanguage();
+  const { t, isRTL, setIsModalOpen } = useLanguage();
   const [shouldLoadFluid, setShouldLoadFluid] = useState(false);
 
   useEffect(() => {
@@ -119,6 +121,41 @@ export default function Hero({ isLoaded = true }) {
               </motion.span>
             </span>
           </h1>
+
+          {/* Growth System CTA Group (Primary + Secondary) */}
+          <motion.div
+            className="vm-hero-cta-wrap"
+            variants={editorialVariants}
+            initial="hidden"
+            animate={isLoaded ? 'visible' : 'hidden'}
+            custom={{ delay: 0.22, duration: DURATION.BODY, y: 12 }}
+          >
+            <CTA
+              variant="primary"
+              href="#contact"
+              onClick={(e) => {
+                e.preventDefault();
+                setIsModalOpen(true);
+              }}
+              trackingName="build_growth_system"
+              trackingLocation="hero_section"
+              ariaLabel={t.hero.primaryCta || 'BUILD YOUR GROWTH SYSTEM'}
+              className="hero-primary-cta"
+            >
+              {t.hero.primaryCta || 'BUILD YOUR GROWTH SYSTEM'}
+            </CTA>
+
+            <CTA
+              variant="secondary"
+              href="/approach"
+              trackingName="see_how_we_think"
+              trackingLocation="hero_section"
+              ariaLabel={t.hero.secondaryCta || 'SEE HOW WE THINK'}
+              className="hero-secondary-cta"
+            >
+              {t.hero.secondaryCta || 'SEE HOW WE THINK'}
+            </CTA>
+          </motion.div>
         </div>
 
         {/* Bottom Clients & Partners Marquee */}

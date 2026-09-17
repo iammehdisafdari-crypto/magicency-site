@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 import { ArrowRight, ArrowLeft } from 'lucide-react';
 import { EASING } from '../motion';
+import CTA from '../Common/CTA';
 
 const AsteriskIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" width="20" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -51,21 +52,16 @@ export default function WorkCTA() {
           </p>
 
           <div className="work-cta-actions">
-            <motion.button
-              type="button"
+            <CTA
+              variant="primary"
               onClick={() => setIsModalOpen(true)}
-              className="work-primary-cta-btn btn-motion"
-              aria-label={c.cta}
-              whileHover={{ y: -3, scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ duration: 0.22, ease: EASING.SECONDARY }}
+              trackingName="start_project"
+              trackingLocation="work_cta_section"
+              ariaLabel={c.cta}
+              className="work-primary-cta"
             >
-              <span className="cta-asterisk"><AsteriskIcon /></span>
-              <span className="cta-label">{c.cta}</span>
-              <span className="cta-arrow">
-                {isRTL ? <ArrowLeft size={18} /> : <ArrowRight size={18} />}
-              </span>
-            </motion.button>
+              {c.cta}
+            </CTA>
           </div>
 
           <div className="work-cta-guarantee-note">

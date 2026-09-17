@@ -369,7 +369,7 @@
   padding: 12px 24px;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 9999px;
+  border-radius: var(--cta-radius, 8px);
   color: #FFFFFF;
   font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
   font-size: 0.78rem;
