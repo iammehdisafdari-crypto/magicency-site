@@ -1,0 +1,564 @@
+/* =========================================================
+   MAGICENCY: BUILT FOR COMPOUNDING GROWTH SECTION
+   Exact SVG + GSAP ScrollTrigger Interaction Technique (CodePen KwgGBRp)
+   Faithfully Synchronized to Scroll Progress
+   ========================================================= */
+
+.compounding-growth-section {
+  --strokeDashoffset: 0px;
+
+  position: relative;
+  isolation: isolate;
+  z-index: 2;
+  width: 100%;
+  background-color: #07101C;
+  color: #FFFFFF;
+  scroll-margin-top: 90px;
+  padding-top: clamp(60px, 8vh, 100px);
+  padding-bottom: clamp(60px, 9vh, 120px);
+  box-sizing: border-box;
+  overflow-x: clip;
+}
+
+/* Background Atmosphere & Subtle Blueprint Grid */
+.cg-ambient-glow {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1000px, 90vw);
+  height: 900px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(221, 0, 96, 0.07) 0%,
+    rgba(14, 26, 43, 0.25) 50%,
+    transparent 75%
+  );
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(60px);
+}
+
+.cg-grid-blueprint {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 80px 80px;
+  background-position: center top;
+  pointer-events: none;
+  opacity: 0.6;
+  z-index: 0;
+}
+
+.cg-content-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1400px;
+  margin-inline: auto;
+  padding: 0 clamp(20px, 4vw, 64px);
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   01. DOMINANT EDITORIAL SECTION HEADER
+   ========================================================= */
+.cg-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: clamp(48px, 6vh, 80px);
+  padding-bottom: clamp(24px, 3vh, 36px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.is-rtl .cg-header {
+  align-items: flex-start;
+}
+
+.cg-eyebrow-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: clamp(12px, 1.8vh, 18px);
+}
+
+.cg-eyebrow-accent-bullet {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--color-accent, #DD0060);
+  box-shadow: 0 0 10px rgba(221, 0, 96, 0.65);
+}
+
+.cg-eyebrow {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: clamp(11.5px, 0.85vw, 13px);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-accent, #DD0060);
+  line-height: 1.2;
+}
+
+.is-rtl .cg-eyebrow {
+  font-family: var(--font-persian, 'Vazirmatn', sans-serif);
+  letter-spacing: 0.04em;
+  font-weight: 700;
+}
+
+.cg-headline {
+  margin: 0 0 clamp(16px, 2vh, 24px) 0;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: clamp(2.6rem, 6.2vw, 5.8rem);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  max-width: 1100px;
+}
+
+.is-rtl .cg-headline {
+  font-family: var(--font-persian, 'Vazirmatn', sans-serif);
+  font-size: clamp(2.3rem, 5vw, 4.8rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.cg-headline-line {
+  display: block;
+}
+
+.cg-headline-accent {
+  color: #FFFFFF;
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
+}
+
+.cg-supporting-statement {
+  margin: 0 0 clamp(20px, 2.5vh, 28px) 0;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+  font-weight: 400;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.72);
+  max-width: 720px;
+}
+
+.is-rtl .cg-supporting-statement {
+  font-family: var(--font-persian, 'Vazirmatn', sans-serif);
+  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+  line-height: 1.65;
+}
+
+.cg-system-status-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+}
+
+.cg-status-tag {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.cg-status-divider {
+  color: rgba(221, 0, 96, 0.6);
+}
+
+/* =========================================================
+   02. LARGE VERTICAL SVG COMPOSITION
+   Exact Reproduction of CodePen KwgGBRp
+   ========================================================= */
+.cg-canvas-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 740px;
+  height: auto;
+  aspect-ratio: 740 / 2000;
+  margin-inline: auto;
+  box-sizing: border-box;
+}
+
+/* Master SVG Canvas */
+.cg-svg-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 0 10px rgba(221, 0, 96, 0.2));
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Baseline Blueprint Tracks */
+.cg-track-guide {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 1.5px;
+  stroke-linecap: round;
+}
+
+/* Exact CodePen Active Pulse & Trailing Stroke System */
+/* CRITICAL: NO CSS transition on stroke-dashoffset (pure 1:1 scroll synchronization) */
+.cg-pulse-path {
+  fill: none;
+  stroke: url(#magicencyGrowthGradient);
+  stroke-linecap: round;
+  stroke-width: var(--dot);
+  stroke-dashoffset: var(--strokeDashoffset);
+}
+
+/* Exact Dasharray and Dimensions from CodePen KwgGBRp Source Code */
+.cg-pulse-path.path-1 {
+  --dot: 20px;
+  --gap: 50px;
+  stroke-dasharray: var(--dot) var(--gap) 120px var(--gap) var(--dot) var(--gap) 300px var(--gap) var(--dot) var(--gap) 150px var(--gap) var(--dot) 20000px;
+}
+
+.cg-pulse-path.path-2 {
+  --dot: 34px;
+  --gap: 60px;
+  stroke-dasharray: var(--dot) var(--gap) 120px var(--gap) var(--dot) var(--gap) 300px var(--gap) var(--dot) var(--gap) 150px var(--gap) var(--dot) 20000px;
+}
+
+.cg-pulse-path.path-3 {
+  --dot: 25px;
+  --gap: 40px;
+  stroke-dasharray: var(--dot) var(--gap) 120px var(--gap) var(--dot) var(--gap) 250px var(--gap) var(--dot) var(--gap) 150px var(--gap) var(--dot) 20000px;
+}
+
+.cg-pulse-path.path-4 {
+  --dot: 40px;
+  --gap: 70px;
+  stroke-dasharray: var(--dot) var(--gap) 100px var(--gap) var(--dot) var(--gap) 200px var(--gap) var(--dot) 20000px;
+}
+
+/* Junction Intersection Nodes */
+.cg-junction-dot {
+  fill: #07101C;
+  stroke: rgba(255, 255, 255, 0.4);
+  stroke-width: 2px;
+}
+
+.cg-terminal-dot {
+  stroke: var(--color-accent, #DD0060);
+  fill: var(--color-accent, #DD0060);
+}
+
+/* =========================================================
+   03. INTEGRATED MINIMAL DISCIPLINE LABELS
+   Directly anchored along path wave coordinates (percentage based)
+   Clear visual hierarchy: Active stage immediately distinguishable
+   ========================================================= */
+.cg-disciplines-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.cg-discipline-node {
+  position: absolute;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  max-width: 270px;
+  pointer-events: auto;
+  opacity: 0.35;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cg-discipline-node.is-passed {
+  opacity: 0.55;
+}
+
+.cg-discipline-node.is-current {
+  opacity: 1;
+  z-index: 10;
+  transform: translateX(2px);
+}
+
+.is-rtl .cg-discipline-node.is-current {
+  transform: translateX(-2px);
+}
+
+/* Scalable Percentage Coordinates corresponding to path wave coordinates */
+.cg-discipline-node.stage-0 {
+  top: 3.5%;
+  left: 20px;
+}
+
+.cg-discipline-node.stage-1 {
+  top: 20.5%;
+  right: 20px;
+}
+
+.cg-discipline-node.stage-2 {
+  top: 39.5%;
+  left: 20px;
+}
+
+.cg-discipline-node.stage-3 {
+  top: 58.0%;
+  right: 20px;
+}
+
+.cg-discipline-node.stage-4 {
+  top: 76.5%;
+  left: 20px;
+}
+
+.cg-discipline-node.stage-5 {
+  top: 92.0%;
+  right: 24px;
+}
+
+/* Marker Line & Dot */
+.cg-node-marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 5px;
+}
+
+.cg-node-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-accent, #DD0060);
+  background-color: #07101C;
+  transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.cg-discipline-node.is-current .cg-node-dot {
+  background-color: var(--color-accent, #DD0060);
+  box-shadow: 0 0 14px var(--color-accent, #DD0060), 0 0 4px #FFFFFF;
+  transform: scale(1.35);
+  border-color: #FFFFFF;
+}
+
+.cg-node-line {
+  width: 1px;
+  height: 36px;
+  background: linear-gradient(to bottom, rgba(221, 0, 96, 0.4), transparent);
+  transition: background 0.3s ease;
+}
+
+.cg-discipline-node.is-current .cg-node-line {
+  background: linear-gradient(to bottom, var(--color-accent, #DD0060), rgba(221, 0, 96, 0.15));
+}
+
+/* Subtle Editorial Background Surface for Crisp Readability Over Moving Stroke */
+.cg-node-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 6px 12px 7px;
+  border-radius: 6px;
+  background: rgba(7, 16, 28, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cg-discipline-node.is-current .cg-node-content {
+  background: rgba(7, 16, 28, 0.88);
+  border-color: rgba(221, 0, 96, 0.32);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 18px rgba(221, 0, 96, 0.12);
+}
+
+.cg-node-num {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.4);
+  transition: color 0.3s ease;
+}
+
+.is-rtl .cg-node-num {
+  font-family: var(--font-persian, 'Vazirmatn', sans-serif);
+}
+
+.cg-discipline-node.is-current .cg-node-num {
+  color: var(--color-accent, #DD0060);
+  font-weight: 700;
+}
+
+.cg-node-title {
+  margin: 0;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 14.5px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.75);
+  text-transform: uppercase;
+  transition: color 0.3s ease, font-size 0.3s ease, text-shadow 0.3s ease;
+}
+
+.is-rtl .cg-node-title {
+  font-family: var(--font-persian, 'Vazirmatn', sans-serif);
+  font-size: 15.5px;
+  letter-spacing: 0;
+}
+
+.cg-discipline-node.is-current .cg-node-title {
+  color: #FFFFFF;
+  font-size: 16px;
+  letter-spacing: 0.06em;
+  text-shadow: 0 0 16px rgba(255, 255, 255, 0.25);
+}
+
+.is-rtl .cg-discipline-node.is-current .cg-node-title {
+  font-size: 16.5px;
+}
+
+.cg-node-desc {
+  margin: 0;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 12px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.45);
+  max-width: 220px;
+  transition: color 0.3s ease;
+}
+
+.is-rtl .cg-node-desc {
+  font-family: var(--font-persian, 'Vazirmatn', sans-serif);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.cg-discipline-node.is-current .cg-node-desc {
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 400;
+}
+
+/* =========================================================
+   04. FOOTER STATEMENT / OUTCOME CARD
+   ========================================================= */
+.cg-footer-statement {
+  margin-top: 48px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 10;
+}
+
+.cg-footer-card {
+  max-width: 680px;
+  padding: clamp(24px, 3vh, 32px) clamp(24px, 3.5vw, 44px);
+  background: rgba(14, 26, 43, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  text-align: center;
+}
+
+.cg-footer-tag {
+  display: inline-block;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--color-accent, #DD0060);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.is-rtl .cg-footer-tag {
+  font-family: var(--font-persian, 'Vazirmatn', sans-serif);
+}
+
+.cg-footer-text {
+  margin: 0;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: clamp(14px, 1.2vw, 17px);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.is-rtl .cg-footer-text {
+  font-family: var(--font-persian, 'Vazirmatn', sans-serif);
+}
+
+/* =========================================================
+   05. RESPONSIVE MEDIA QUERIES (1440px, 1280px, 1024px, 768px, 390px, 375px, 360px)
+   ========================================================= */
+@media (max-width: 768px) {
+  .cg-discipline-node {
+    max-width: 200px;
+  }
+
+  .cg-node-title {
+    font-size: 13px;
+  }
+
+  .cg-discipline-node.is-current .cg-node-title {
+    font-size: 14.5px;
+  }
+
+  .cg-node-desc {
+    font-size: 11px;
+    line-height: 1.4;
+    max-width: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cg-discipline-node {
+    max-width: 165px;
+  }
+
+  .cg-discipline-node.stage-0 { left: 4px; }
+  .cg-discipline-node.stage-1 { right: 4px; }
+  .cg-discipline-node.stage-2 { left: 4px; }
+  .cg-discipline-node.stage-3 { right: 4px; }
+  .cg-discipline-node.stage-4 { left: 4px; }
+  .cg-discipline-node.stage-5 { right: 4px; }
+
+  .cg-node-content {
+    padding: 5px 8px 6px;
+  }
+
+  .cg-node-title {
+    font-size: 11.5px;
+  }
+
+  .cg-discipline-node.is-current .cg-node-title {
+    font-size: 13px;
+  }
+
+  .cg-node-desc {
+    font-size: 10px;
+    line-height: 1.35;
+    max-width: 145px;
+  }
+
+  .cg-node-line {
+    height: 24px;
+  }
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  .cg-pulse-path {
+    stroke-dashoffset: -1200px !important;
+  }
+  .cg-discipline-node {
+    opacity: 1 !important;
+  }
+}

@@ -233,6 +233,21 @@ export const translations = {
         }
       ]
     },
+    compoundingGrowth: {
+      eyebrow: 'BUILT FOR',
+      headline: 'COMPOUNDING\nGROWTH',
+      headlinePart1: 'COMPOUNDING',
+      headlinePart2: 'GROWTH',
+      supportingStatement: 'Growth gets stronger when everything works together.',
+      disciplines: [
+        { id: '01', number: '01', title: 'STRATEGY', desc: 'The diagnostic foundation and architecture directing every commercial move.' },
+        { id: '02', number: '02', title: 'EXPERIENCE', desc: 'Frictionless digital touchpoints engineered for immediate clarity and trust.' },
+        { id: '03', number: '03', title: 'ACQUISITION', desc: 'Precision performance channels capturing high-intent commercial demand.' },
+        { id: '04', number: '04', title: 'MEASUREMENT', desc: 'Full-funnel telemetry eliminating attribution bias and blind spots.' },
+        { id: '05', number: '05', title: 'OPTIMIZATION', desc: 'Continuous feedback loops converting live signals into improved yield.' },
+        { id: '06', number: '06', title: 'COMPOUNDING', desc: 'All disciplines connected into an autonomous, self-reinforcing growth system.' }
+      ]
+    },
     journal: {
       badge: 'Blog',
       headline: 'Ideas between growth and technology.',
@@ -1345,6 +1360,21 @@ export const translations = {
             'سیستم‌های گزارش‌دهی و داده'
           ]
         }
+      ]
+    },
+    compoundingGrowth: {
+      eyebrow: 'طراحی شده برای',
+      headline: 'رشد تصاعدی',
+      headlinePart1: 'رشد',
+      headlinePart2: 'تصاعدی',
+      supportingStatement: 'رشد زمانی قدرتمندتر می‌شود که تمام بخش‌ها هماهنگ کار کنند.',
+      disciplines: [
+        { id: '01', number: '۰۱', title: 'استراتژی', desc: 'زیربنای عارضه‌یابی و معماری هدایت‌کننده هر اقدام تجاری.' },
+        { id: '02', number: '۰۲', title: 'تجربه دیجیتال', desc: 'نقاط تماس دیجیتال بدون اصطکاک مهندسی‌شده برای وضوح و اعتماد آنی.' },
+        { id: '03', number: '۰۳', title: 'جذب مخاطب', desc: 'کانال‌های پرفورمنس دقیق برای جذب تقاضای تجاری با قصد بالا.' },
+        { id: '04', number: '۰۴', title: 'سنجش و اندازه‌گیری', desc: 'ردیابی داده در تمام مسیر قیف جهت حذف خطاهای نسبت‌دهی.' },
+        { id: '05', number: '۰۵', title: 'بهینه‌سازی', desc: 'حلقه‌های بازخورد مداوم برای تبدیل سیگنال‌های زنده به بازدهی بالاتر.' },
+        { id: '06', number: '۰۶', title: 'رشد تصاعدی', desc: 'اتصال تمام بخش‌ها در قالب یک سیستم رشد خودکار و هم‌افزا.' }
       ]
     },
     journal: {

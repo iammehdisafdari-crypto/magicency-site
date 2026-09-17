@@ -7,6 +7,7 @@ import Hero from './components/Hero/Hero';
 import FeatureWork from './components/FeatureWork/FeatureWork';
 import ProblemInsight from './components/ProblemInsight/ProblemInsight';
 import WhatWeDo from './components/WhatWeDo/WhatWeDo';
+import BuiltForCompoundingGrowth from './components/CompoundingGrowth/BuiltForCompoundingGrowth';
 import Journal from './components/Journal/Journal';
 import FinalCTA from './components/FinalCTA/FinalCTA';
 import Footer from './components/Footer/Footer';
@@ -59,7 +60,10 @@ function renderPageContent({ isNotFound, isWorkPage, isApproachPage, isCapabilit
       {/* Phase 04: What We Do / Capabilities (3-Pillar Capability Architecture) */}
       <WhatWeDo />
 
-      {/* Phase 05: Journal / Insights (Exact Vivid Motion Recreation) */}
+      {/* Phase 05: Built For Compounding Growth (Exact CodePen SVG + ScrollTrigger Technique) */}
+      <BuiltForCompoundingGrowth />
+
+      {/* Phase 06: Journal / Insights (Exact Vivid Motion Recreation) */}
       <Journal />
 
       {/* Phase 06: Final Editorial Conversion Statement */}
