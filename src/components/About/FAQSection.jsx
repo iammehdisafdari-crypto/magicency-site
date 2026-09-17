@@ -3,8 +3,17 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 import { ABOUT_DATA } from '../../data/aboutData';
 import { Plus, Minus } from 'lucide-react';
+import './FAQSection.css';
 
-export default function FAQSection() {
+export default function FAQSection({
+  isHomepage = false,
+  id = isHomepage ? 'faq' : 'section-08',
+  eyebrow,
+  title,
+  lead,
+  chapterNum = isHomepage ? null : undefined,
+  chapterTag = isHomepage ? null : undefined,
+}) {
   const { lang, isRTL } = useLanguage();
   const data = ABOUT_DATA[lang]?.faq || ABOUT_DATA.en.faq;
   const items = data.items || [];
@@ -16,29 +25,41 @@ export default function FAQSection() {
     setOpenId((prev) => (prev === id ? null : id));
   };
 
+  const displayEyebrow = eyebrow || (isHomepage ? (isRTL ? 'پرسش‌های متداول' : 'FAQ') : data.eyebrow);
+  const displayTitle = title || (isHomepage ? (isRTL ? 'پاسخ‌های شفاف به پرسش‌های کلیدی شما.' : 'QUESTIONS, ANSWERED.') : data.title);
+  const displayLead = lead || data.lead;
+  const displayChapterNum = chapterNum !== undefined ? chapterNum : (isHomepage ? null : data.chapterNum);
+  const displayChapterTag = chapterTag !== undefined ? chapterTag : (isHomepage ? (isRTL ? 'شفافیت و پاسخگویی' : 'CLARITY & TRANSPARENCY') : data.chapterTag);
+
   return (
     <section 
-      id="section-08" 
+      id={id}
       className={`about-chapter-section faq-chapter ${isRTL ? 'is-rtl' : 'is-ltr'}`}
-      aria-label="Chapter 08: Frequently Asked Questions"
+      aria-label={isRTL ? 'پرسش‌های متداول' : (isHomepage ? 'FAQ: Questions, Answered' : 'Chapter 08: Frequently Asked Questions')}
     >
       <div className="container faq-container">
         
         {/* Section Header */}
         <div className="chapter-header-row">
           <div className="chapter-meta-tag">
-            <span className="chapter-number">{data.chapterNum}</span>
-            <span className="chapter-separator">/</span>
-            <span className="chapter-name">{data.eyebrow}</span>
+            {displayChapterNum && (
+              <>
+                <span className="chapter-number">{displayChapterNum}</span>
+                <span className="chapter-separator">/</span>
+              </>
+            )}
+            <span className="chapter-name">{displayEyebrow}</span>
           </div>
-          <div className="chapter-pill-tag">
-            <span>{data.chapterTag}</span>
-          </div>
+          {displayChapterTag && (
+            <div className="chapter-pill-tag">
+              <span>{displayChapterTag}</span>
+            </div>
+          )}
         </div>
 
         <div className="faq-intro-block">
-          <h2 className="faq-headline">{data.title}</h2>
-          <p className="faq-lead">{data.lead}</p>
+          <h2 className="faq-headline">{displayTitle}</h2>
+          <p className="faq-lead">{displayLead}</p>
         </div>
 
         {/* Accordion List */}

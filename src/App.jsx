@@ -9,6 +9,7 @@ import ProblemInsight from './components/ProblemInsight/ProblemInsight';
 import WhatWeDo from './components/WhatWeDo/WhatWeDo';
 import BuiltForCompoundingGrowth from './components/CompoundingGrowth/BuiltForCompoundingGrowth';
 import Journal from './components/Journal/Journal';
+import FAQSection from './components/About/FAQSection';
 import FinalCTA from './components/FinalCTA/FinalCTA';
 import Footer from './components/Footer/Footer';
 
@@ -66,7 +67,10 @@ function renderPageContent({ isNotFound, isWorkPage, isApproachPage, isCapabilit
       {/* Phase 06: Journal / Insights (Exact Vivid Motion Recreation) */}
       <Journal />
 
-      {/* Phase 06: Final Editorial Conversion Statement */}
+      {/* Phase 07: FAQ (Exact About Page FAQ Reused as Single Source of Truth) */}
+      <FAQSection isHomepage={true} />
+
+      {/* Phase 08: Final Editorial Conversion Statement */}
       <FinalCTA />
     </>
   );
