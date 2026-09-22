@@ -180,7 +180,7 @@
   pointer-events: none;
   z-index: 10;
   overflow: hidden;
-  opacity: 0;
+  opacity: 1;
 }
 
 [data-position='left'] .sm-prelayers {
@@ -218,7 +218,7 @@
   z-index: 20;
   pointer-events: auto;
   box-sizing: border-box;
-  opacity: 0;
+  opacity: 1;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
 }

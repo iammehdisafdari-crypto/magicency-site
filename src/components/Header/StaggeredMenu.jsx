@@ -6,7 +6,7 @@ const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffec
 
 export const StaggeredMenu = ({
   position = 'right',
-  colors = ['#DD0060', '#DD0060'],
+  colors = ['#050505', '#07101C'],
   items = [],
   socialItems = [],
   displaySocials = true,
@@ -60,8 +60,10 @@ export const StaggeredMenu = ({
     if (open) {
       const originalOverflow = document.body.style.overflow;
       document.body.style.overflow = 'hidden';
+      window.__lenis?.stop();
       return () => {
         document.body.style.overflow = originalOverflow;
+        window.__lenis?.start();
       };
     }
   }, [open]);
@@ -141,8 +143,8 @@ export const StaggeredMenu = ({
     layerStates.forEach((ls, i) => {
       tl.fromTo(
         ls.el,
-        { xPercent: ls.start },
-        { xPercent: 0, duration: 0.52, ease: 'power4.out' },
+        { xPercent: ls.start, opacity: 1 },
+        { xPercent: 0, opacity: 1, duration: 0.52, ease: 'power4.out' },
         i * 0.08
       );
     });
@@ -153,8 +155,8 @@ export const StaggeredMenu = ({
 
     tl.fromTo(
       panel,
-      { xPercent: panelStart },
-      { xPercent: 0, duration: panelDuration, ease: 'power4.out' },
+      { xPercent: panelStart, opacity: 1 },
+      { xPercent: 0, opacity: 1, duration: panelDuration, ease: 'power4.out' },
       panelInsertTime
     );
 
@@ -240,7 +242,10 @@ export const StaggeredMenu = ({
   }, [position, isRTL]);
 
   const playOpen = useCallback(() => {
-    if (busyRef.current) return;
+    if (closeTweenRef.current) {
+      closeTweenRef.current.kill();
+      closeTweenRef.current = null;
+    }
     busyRef.current = true;
     const tl = buildOpenTimeline();
     if (tl) {
@@ -452,7 +457,7 @@ export const StaggeredMenu = ({
       {/* Sliding prelayers / colored backdrop curtains */}
       <div ref={preLayersRef} className="sm-prelayers" aria-hidden="true">
         {(() => {
-          const raw = colors && colors.length ? colors.slice(0, 4) : ['#DD0060', '#DD0060'];
+          const raw = colors && colors.length ? colors.slice(0, 4) : ['#050505', '#07101C'];
           let arr = [...raw];
           if (arr.length >= 3) {
             const mid = Math.floor(arr.length / 2);
@@ -516,6 +521,7 @@ export const StaggeredMenu = ({
         ref={panelRef}
         className="staggered-menu-panel"
         aria-hidden={!open}
+        data-lenis-prevent
       >
         <div className="sm-panel-inner">
           <ul
