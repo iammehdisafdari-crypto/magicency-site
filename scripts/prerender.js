@@ -60,10 +60,71 @@ const BLOG_METADATA = {
   }
 };
 
+// Known capability sub-routes metadata
+const CAPABILITY_METADATA = {
+  'performance-marketing': {
+    title: 'Performance Marketing // Acquisition & Growth Systems | Magicency',
+    desc: 'Performance marketing engineered around measurable customer acquisition, capital allocation efficiency, conversion quality, and compounding business growth.',
+    num: '(001)',
+    name: 'Performance Marketing',
+    image: '/assets/capabilities/performance.webp'
+  },
+  'ppc-campaigns': {
+    title: 'PPC Campaigns // Google Ads & High-Intent Acquisition | Magicency',
+    desc: 'High-intent search campaigns, Google Ads, and Performance Max architectures built to intercept active commercial interest and maximize return on ad spend.',
+    num: '(002)',
+    name: 'PPC Campaigns',
+    image: '/assets/work/atrash_secondary.png'
+  },
+  'seo': {
+    title: 'Technical SEO // Search Engine Architecture & Crawl Engineering | Magicency',
+    desc: 'Search engine optimization from technical crawl architectures to search-intent modeling, turning organic search into an enduring, compounding commercial asset.',
+    num: '(003)',
+    name: 'SEO',
+    image: '/assets/work/velox_secondary.webp'
+  },
+  'social-media-marketing': {
+    title: 'Social Media Marketing // Attention to Owned Audience Velocity | Magicency',
+    desc: 'Transforming social media attention into audience ownership and pipeline velocity through organic editorial distribution and conversion-oriented paid campaigns.',
+    num: '(004)',
+    name: 'Social Media Marketing',
+    image: '/whatwedo-2.webp'
+  },
+  'content-marketing': {
+    title: 'Content Marketing // Category Authority & Narrative Systems | Magicency',
+    desc: 'Strategic narrative architectures engineered to answer high-value commercial questions, educate your category, and position your brand as the definitive authority.',
+    num: '(005)',
+    name: 'Content Marketing',
+    image: '/assets/capabilities/creative.webp'
+  },
+  'digital-experience': {
+    title: 'Digital Experience // High-Conversion Web & UX Architecture | Magicency',
+    desc: 'Conversion-focused web platforms, UX architectures, and high-velocity landing experiences engineered to turn traffic into pipeline momentum.',
+    num: '(006)',
+    name: 'Digital Experience',
+    image: '/project-4.webp'
+  },
+  'retention-marketing': {
+    title: 'Retention Marketing // Lifecycle Automation & LTV Compounding | Magicency',
+    desc: 'Lifecycle marketing automation, CRM architecture, and behavioral re-engagement loops engineered to compound customer lifetime value and eliminate churn.',
+    num: '(007)',
+    name: 'Retention Marketing',
+    image: '/assets/capabilities/growth_systems.webp'
+  },
+  'event-marketing': {
+    title: 'Event Marketing // Product Launches & Demand Spikes | Magicency',
+    desc: 'Multi-channel launch campaigns and experiential activations engineered to concentrate market momentum, generate demand spikes, and acquire qualified audiences.',
+    num: '(008)',
+    name: 'Event Marketing',
+    image: '/whatwedo-1.webp'
+  }
+};
+
 const ROUTES = [
   '/',
   '/work',
   '/capabilities',
+  ...Object.keys(CAPABILITY_METADATA).map((slug) => `/capabilities/${slug}`),
   '/approach',
   '/about',
   '/blog',
@@ -139,6 +200,59 @@ function getRouteMetadata(route) {
                   'position': 3,
                   'name': meta.title,
                   'item': `${baseCanonical}/blog/${slug}`
+                }
+              ]
+            }
+          ]
+        }
+      };
+    }
+  }
+
+  if (route.startsWith('/capabilities/') && route !== '/capabilities') {
+    const slug = route.replace('/capabilities/', '');
+    const meta = CAPABILITY_METADATA[slug];
+    if (meta) {
+      return {
+        title: meta.title,
+        desc: meta.desc,
+        canonical: `${baseCanonical}/capabilities/${slug}`,
+        ogType: 'website',
+        ogImage: `${baseCanonical}${meta.image}`,
+        ogImageAlt: meta.title,
+        jsonLd: {
+          '@context': 'https://schema.org',
+          '@graph': [
+            {
+              '@type': 'Service',
+              'name': `${meta.name} — Magicency Growth Capability`,
+              'description': meta.desc,
+              'provider': {
+                '@type': 'Organization',
+                'name': 'Magicency',
+                'url': 'https://magicency.ir/'
+              }
+            },
+            {
+              '@type': 'BreadcrumbList',
+              'itemListElement': [
+                {
+                  '@type': 'ListItem',
+                  'position': 1,
+                  'name': 'Home',
+                  'item': 'https://magicency.ir/'
+                },
+                {
+                  '@type': 'ListItem',
+                  'position': 2,
+                  'name': 'Capabilities',
+                  'item': 'https://magicency.ir/capabilities'
+                },
+                {
+                  '@type': 'ListItem',
+                  'position': 3,
+                  'name': meta.name,
+                  'item': `${baseCanonical}/capabilities/${slug}`
                 }
               ]
             }

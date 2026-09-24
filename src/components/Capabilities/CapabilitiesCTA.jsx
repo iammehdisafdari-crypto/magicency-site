@@ -1,60 +1,49 @@
 import React from 'react';
 import { useLanguage } from '../../context/LanguageContext';
-import CTA from '../Common/CTA';
 
 export default function CapabilitiesCTA() {
-  const { t, isRTL, setIsModalOpen } = useLanguage();
-  const closing = t.capabilities?.closing || {};
+  const { lang, isRTL, setIsModalOpen } = useLanguage();
 
-  const handleOpenDiscovery = () => {
+  const handleOpenDiscovery = (e) => {
+    e.preventDefault();
     setIsModalOpen(true);
   };
 
   return (
-    <section className="capabilities-section capabilities-cta-section" aria-label="Capabilities Project Initiation">
-      <div className="container">
-        <div className="capabilities-cta-card">
-          {/* Ambient Glow */}
-          <div className="cta-ambient-glow" aria-hidden="true" />
-
-          {/* Eyebrow */}
-          <div className="capabilities-eyebrow-pill">
-            <span className="capabilities-pill-indicator" />
-            <span className="capabilities-pill-text">
-              {closing.eyebrow || (isRTL ? 'شروع همکاری' : 'GET STARTED')}
-            </span>
-          </div>
-
-          {/* Large Statement */}
-          <div className="cta-statement-wrap">
-            <h2 className="cta-statement-title">
-              <span className="statement-row">{closing.statementLine1}</span>
-              <span className="statement-row highlight-amber">{closing.statementLine2}</span>
-            </h2>
-          </div>
-
-          {/* Action Button */}
-          <div className="cta-action-wrap">
-            <CTA
-              variant="primary"
+    <section className="cap-cta-block" id="contact" aria-label="Let's talk">
+      <div className="cap-cta-inner">
+        <div className="cap-cta-header">
+          <span className="about-intro-label">
+            <span className="clients-label-icon">+</span>{' '}
+            {lang === 'fa' ? 'شروع همکاری' : "Let's talk"}
+          </span>
+          <h2 className="cap-cta-heading">
+            {lang === 'fa' ? (
+              <>
+                چالش رشدی دارید که<br />
+                <span>ارزش حل کردن داشته باشد؟</span>
+              </>
+            ) : (
+              <>
+                Have a growth problem<br />
+                <span>worth solving?</span>
+              </>
+            )}
+          </h2>
+          <p className="cap-cta-sub">
+            {lang === 'fa'
+              ? 'بیایید آن را به یک سیستم قابل اتکا و سودآور تبدیل کنیم.'
+              : "Let's turn it into a system."}
+          </p>
+          <div className="cap-cta-actions">
+            <button
+              type="button"
               onClick={handleOpenDiscovery}
-              trackingName="start_project"
-              trackingLocation="capabilities_cta_section"
-              ariaLabel={closing.ctaButton || (isRTL ? 'شروع پروژه' : 'START A PROJECT')}
-              className="capabilities-closing-cta"
+              className="btn btn-accent btn-lg cap-cta-button"
             >
-              {closing.ctaButton || (isRTL ? 'شروع پروژه' : 'START A PROJECT')}
-            </CTA>
-          </div>
-
-          {/* Minimal Footnote */}
-          <div className="cta-footnote">
-            <span className="footnote-dot" />
-            <span className="footnote-text">
-              {isRTL
-                ? 'مشاوره تشخیصی اولیه // مهندسی سیستم اختصاصی رشد'
-                : 'DIAGNOSTIC ARCHITECTURE DISCOVERY // TAILORED SYSTEM ENGINEERING'}
-            </span>
+              <span>{lang === 'fa' ? 'طرح یک چالش رشد' : 'Discuss a Growth Challenge'}</span>
+              <span className="cap-arrow">{isRTL ? '←' : '→'}</span>
+            </button>
           </div>
         </div>
       </div>
