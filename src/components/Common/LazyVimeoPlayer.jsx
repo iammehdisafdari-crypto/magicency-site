@@ -11,6 +11,7 @@ export default function LazyVimeoPlayer({
   videoId = '1224224238',
   title = 'Magicency Showreel',
   posterWebp = '/reel-preview.webp',
+  posterMobileWebp = '/reel-preview-720w.webp',
   posterJpg = '/reel-preview.jpg',
   aspectRatio = '16 / 9'
 }) {
@@ -61,7 +62,17 @@ export default function LazyVimeoPlayer({
       ) : (
         <div className="vm-lazy-vimeo-facade" onClick={handlePlayClick}>
           <picture className="vm-lazy-vimeo-picture">
-            <source srcSet={posterWebp} type="image/webp" />
+            {posterMobileWebp && (
+              <source
+                media="(max-width: 767px)"
+                srcSet={posterMobileWebp}
+                type="image/webp"
+              />
+            )}
+            <source
+              srcSet={posterWebp}
+              type="image/webp"
+            />
             <img
               src={posterJpg}
               alt={title}
