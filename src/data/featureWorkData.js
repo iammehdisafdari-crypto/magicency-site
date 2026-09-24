@@ -145,6 +145,7 @@ export const FEATURED_WORKS = [
       fa: 'طراحی پلتفرم پرچمدار ادیتوریال با فضاسازی سینمایی ظروف سفالی، ساختار چندزبانه بین‌المللی و گشایش مسیر ثبت سفارش مستقیم برای خریداران اروپایی.'
     },
     image: '/project-4.webp',
+    mobileImage: '/project-4-720w.webp',
     imageJpg: '/project-4.jpg',
     imageAlt: {
       en: 'Wine Amphorae luxury digital experience flagship mockup',
