@@ -64,6 +64,7 @@ export const FEATURED_WORKS = [
       fa: 'مهندسی صفر تا صد کمپین‌های Performance Max با تله‌متری اختصاصی تبدیل، ثبت بازگشت سرمایه ۱۱ برابری با ۱۲۲۰ خرید در ۱۴ روز.'
     },
     image: '/project-2.webp',
+    mobileImage: '/project-2-720w.webp',
     imageJpg: '/project-2.jpg',
     imageAlt: {
       en: 'Google Ads Performance Max Dashboard ROAS 11 telemetry',

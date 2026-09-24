@@ -216,7 +216,17 @@ export default function FeatureWork() {
                       aria-hidden={activeIndex !== idx}
                     >
                       <picture>
-                        <source srcSet={work.image} type="image/webp" />
+                        {work.mobileImage && (
+                          <source
+                            media="(max-width: 767px)"
+                            srcSet={work.mobileImage}
+                            type="image/webp"
+                          />
+                        )}
+                        <source
+                          srcSet={work.image}
+                          type="image/webp"
+                        />
                         <img
                           src={work.imageJpg || work.image}
                           alt={work.imageAlt[lang] || work.imageAlt.en}
