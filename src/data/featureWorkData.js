@@ -105,6 +105,7 @@ export const FEATURED_WORKS = [
       fa: 'مهندسی کمپین‌های متمرکز بر جستجوهای فوری، ثبت ۱.۲۸ میلیون ایمپرشن، ۱۳۴ هزار کلیک و بیش از ۹ هزار فرم درخواست تعمیر با رکورد CTR معادل ۲۳.۴۲٪.'
     },
     image: '/project-3.webp',
+    mobileImage: '/project-3-720w.webp',
     imageJpg: '/project-3.jpg',
     imageAlt: {
       en: 'Search Lead Generation Campaign Performance Data',
