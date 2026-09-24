@@ -68,8 +68,9 @@ export default function LazyVimeoPlayer({
               className="vm-lazy-vimeo-poster"
               width="1280"
               height="720"
-              loading="lazy"
+              loading="eager"
               decoding="async"
+              fetchpriority="high"
             />
           </picture>
           <div className="vm-lazy-vimeo-scrim" aria-hidden="true" />
