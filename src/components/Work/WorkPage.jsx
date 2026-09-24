@@ -1,21 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
-import { PROJECTS_DATA } from '../../data/projectsData';
 import WorkHero from './WorkHero';
-import WorkPointOfView from './WorkPointOfView';
-import WorkFeaturedCase from './WorkFeaturedCase';
-import WorkChallengeFilter from './WorkChallengeFilter';
-import WorkIndex from './WorkIndex';
-import WorkSelectivity from './WorkSelectivity';
-import WorkCTA from './WorkCTA';
+import CaseStudiesSection from './CaseStudiesSection';
+import WorkNextStep from './WorkNextStep';
+import PerformanceProofSection from './PerformanceProofSection';
+import CuratedPortfolioSection from './CuratedPortfolioSection';
+import WorkFinalCTA from './WorkFinalCTA';
+import WorkFAQ from './WorkFAQ';
 import './Work.css';
 
 export default function WorkPage() {
-  const { lang, isRTL } = useLanguage();
-  const [activeCategory, setActiveCategory] = useState('all');
+  const { lang, isRTL, setIsModalOpen } = useLanguage();
 
   useEffect(() => {
-    // Check if hash exists in URL (e.g. from About navigation)
+    // Hash navigation handler
     const hash = window.location.hash;
     if (hash) {
       const targetId = hash.replace('#', '');
@@ -24,62 +22,48 @@ export default function WorkPage() {
         if (elem) {
           elem.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-      }, 120);
+      }, 100);
       return () => clearTimeout(timer);
     } else {
       window.scrollTo(0, 0);
     }
+
     // Dynamic document title
     document.title = lang === 'fa' 
-      ? 'مطالعات موردی و نتایج پروژه‌ها // پرونده‌های رشد // مجیکنسـی (MAGICENCY®)' 
-      : 'Growth Case Studies // Client Results & Proof // MAGICENCY®';
+      ? 'نمونه‌آثار و پرونده‌های رشد // شواهد مستند و پورتفولیو // مجیکنسـی (MAGICENCY®)' 
+      : 'Growth Case Studies & Performance Proof // Portfolio // MAGICENCY®';
   }, [lang]);
 
-  // Filter projects by challenge category
-  const filteredProjects = activeCategory === 'all'
-    ? PROJECTS_DATA
-    : PROJECTS_DATA.filter((p) => p.challengeCategory === activeCategory);
+  const handleSelectCaseOrItem = (item) => {
+    // Opens Magicency's existing project discovery protocol
+    setIsModalOpen(true);
+  };
 
   return (
     <div className={`work-page-root ${isRTL ? 'is-rtl' : 'is-ltr'}`}>
       
-      {/* 01. Editorial Hero */}
+      {/* 01. HERO */}
       <WorkHero />
 
-      {/* 02. The Point of View (The brief is rarely the whole problem) */}
-      <WorkPointOfView />
+      {/* 02. DOCUMENTED CASE STUDIES */}
+      <CaseStudiesSection onSelectCase={handleSelectCaseOrItem} />
 
-      {/* 03. Flagship Case Study (Dominant Case 01) */}
-      <WorkFeaturedCase />
+      {/* 03. A CLEAR NEXT STEP */}
+      <WorkNextStep />
 
-      {/* 04 & 05. Challenge-Based Navigation + Editorial Work Index */}
-      <section className="work-catalog-section shared-section" aria-label="Selected Work Index">
-        <div className="container work-catalog-container">
-          
-          <div className="work-catalog-header">
-            <span className="work-section-eyebrow">
-              {lang === 'fa' ? 'ایندکس پرونده‌ها // دسته‌بندی موضوعی' : 'PORTFOLIO INDEX // EDITORIAL CATALOG'}
-            </span>
-            <h2 className="work-catalog-heading">
-              {lang === 'fa' ? 'مسائل پیچیده، راه‌حل‌های سیستمی.' : 'Complex Problems, Systemic Solutions.'}
-            </h2>
-          </div>
+      {/* 04. PERFORMANCE PROOF */}
+      <PerformanceProofSection />
 
-          <WorkChallengeFilter 
-            activeCategory={activeCategory} 
-            onSelectCategory={setActiveCategory} 
-          />
+      {/* 05. CURATED PORTFOLIO */}
+      <CuratedPortfolioSection onSelectItem={handleSelectCaseOrItem} />
 
-          <WorkIndex projects={filteredProjects} />
+      {/* 06. YOUR NEXT MOVE */}
+      <WorkFinalCTA />
 
-        </div>
-      </section>
+      {/* 07. QUESTIONS BEFORE THE NEXT STEP (FAQ) */}
+      <WorkFAQ />
 
-      {/* 06. Selectivity & Credibility Strip */}
-      <WorkSelectivity />
-
-      {/* 07. Strategic Call to Action (Triggers Project Discovery) */}
-      <WorkCTA />
+      {/* 08. FOOTER / EXISTING PROJECT FORM is handled globally by App.jsx */}
 
     </div>
   );

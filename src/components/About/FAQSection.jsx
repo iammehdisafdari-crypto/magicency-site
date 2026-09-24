@@ -15,7 +15,7 @@ export default function FAQSection({
   chapterTag = isHomepage ? null : undefined,
 }) {
   const { lang, isRTL } = useLanguage();
-  const data = ABOUT_DATA[lang]?.faq || ABOUT_DATA.en.faq;
+  const data = ABOUT_DATA[lang]?.faq || ABOUT_DATA.en?.faq || {};
   const items = data.items || [];
   
   // Default open first item

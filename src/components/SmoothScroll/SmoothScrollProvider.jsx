@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useRef } from 'react';
+import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
 import Lenis from 'lenis';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -25,6 +25,7 @@ export function useSmoothScroll() {
  */
 export default function SmoothScrollProvider({ children }) {
   const lenisRef = useRef(null);
+  const [lenisInstance, setLenisInstance] = useState(null);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -49,6 +50,7 @@ export default function SmoothScrollProvider({ children }) {
 
     lenisRef.current = lenis;
     window.__lenis = lenis;
+    setLenisInstance(lenis);
 
     // 1. Synchronize Lenis scroll position with GSAP ScrollTrigger
     lenis.on('scroll', ScrollTrigger.update);
@@ -88,11 +90,12 @@ export default function SmoothScrollProvider({ children }) {
       lenis.destroy();
       lenisRef.current = null;
       window.__lenis = null;
+      setLenisInstance(null);
     };
   }, []);
 
   return (
-    <SmoothScrollContext.Provider value={lenisRef.current}>
+    <SmoothScrollContext.Provider value={lenisInstance}>
       {children}
     </SmoothScrollContext.Provider>
   );

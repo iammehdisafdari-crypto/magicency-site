@@ -930,91 +930,6 @@ export const translations = {
         close: 'CLOSE'
       }
     },
-    approach: {
-      pageMeta: {
-        title: 'Growth Operating System // Our Methodology // MAGICENCY®',
-        description: 'Our growth operating system, diagnostic methodology, and closed-loop decision framework engineered for scalable commercial velocity.'
-      },
-      hero: {
-        eyebrow: 'GROWTH OPERATING SYSTEM // METHODOLOGY',
-        headlineLine1: "We don't start",
-        headlineLine2: "with the answer.",
-        subline: 'A disciplined diagnostic methodology and growth operating system that transforms commercial trajectory.',
-        metaphor: 'CHAOS → CONNECTION → CLARITY'
-      },
-      deconstruction: {
-        badge: '01 / DIAGNOSIS',
-        title: 'From Request to Problem',
-        requestPrompt: 'THE INCOMING REQUEST',
-        requestQuote: '“We need a new website.”',
-        subtext: 'We take the request apart to find the actual commercial pivot point.',
-        revealedTitle: 'WHAT THE BUSINESS ACTUALLY NEEDS',
-        problems: [
-          {
-            id: 'positioning',
-            title: 'Positioning',
-            desc: 'The market doesn’t know why this brand deserves to win.'
-          },
-          {
-            id: 'experience',
-            title: 'Experience',
-            desc: 'The customer journey has high friction and low conviction.'
-          },
-          {
-            id: 'conversion',
-            title: 'Conversion',
-            desc: 'Traffic enters pages that fail to make an irrefutable commercial case.'
-          },
-          {
-            id: 'acquisition',
-            title: 'Acquisition',
-            desc: 'Channels are operating in silos without a compounding feedback loop.'
-          }
-        ]
-      },
-      systemNetwork: {
-        badge: '02 / THE SYSTEM',
-        headline: 'Nothing works in isolation.',
-        subheadline: 'When marketing fails, it’s because the pieces aren’t connected. We engineer a living feedback loop.',
-        centralNode: 'BUSINESS',
-        nodes: [
-          { id: 'strategy', label: 'STRATEGY', micro: 'Direction & moats.' },
-          { id: 'creative', label: 'CREATIVE', micro: 'Meaning & resonance.' },
-          { id: 'digital', label: 'DIGITAL', micro: 'Experience & interface.' },
-          { id: 'acquisition', label: 'ACQUISITION', micro: 'Demand & pipeline.' },
-          { id: 'measurement', label: 'MEASUREMENT', micro: 'Attribution & telemetry.' }
-        ],
-        loopReturn: 'MEASUREMENT → INTELLIGENCE → STRATEGY'
-      },
-      shift: {
-        badge: '03 / THE SHIFT',
-        headline: 'From Disconnected Tactics to a Living System',
-        subheadline: 'Tactics reset to zero when the campaign ends. Systems compound value with every transaction.',
-        tacticsTitle: 'TACTICS',
-        tacticsSubtitle: 'DISCONNECTED EFFORTS',
-        tacticsItems: ['Campaign', 'Website', 'Content', 'Paid Ads'],
-        systemTitle: 'SYSTEM',
-        systemSubtitle: 'COMPOUNDING VALUE',
-        systemItems: ['Strategy', 'Creative', 'Digital', 'Acquisition', 'Telemetry']
-      },
-      compounding: {
-        badge: '04 / COMPOUNDING',
-        headline: 'Why we think in systems.',
-        axiom: 'Better decisions build stronger systems.\nStronger systems build compounding growth.',
-        subtext: 'Every cycle makes the next cycle smarter, faster, and more capital efficient.',
-        steps: [
-          '1 STRATEGIC DECISION',
-          'DECISION + LEARNING',
-          'DECISION + LEARNING + DATA',
-          'DECISION + LEARNING + DATA + EXPERIENCE',
-          'COMPOUNDING MOMENTUM'
-        ]
-      },
-      closing: {
-        statement: "Growth isn't a collection of tactics.\nIt's a system of better decisions.",
-        ctaButton: 'START A PROJECT'
-      }
-    },
     capabilities: {
       pageMeta: {
         title: 'Integrated Marketing Capabilities // What We Build // MAGICENCY®',
@@ -1098,6 +1013,63 @@ export const translations = {
         backToBlog: '← BACK TO ALL INSIGHTS',
         keyTakeaways: 'KEY TAKEAWAYS',
         relatedArticles: 'RELATED INSIGHTS'
+      }
+    },
+    approach: {
+      pageMeta: {
+        title: 'Approach // Growth Architecture // MAGICENCY®',
+        description: 'Growth is not a channel. It is an operating system. How Magicency approaches performance marketing and digital growth architecture.'
+      },
+      hero: {
+        eyebrow: 'PERFORMANCE MARKETING & DIGITAL GROWTH AGENCY',
+        headlineLine1: "Growth isn't a channel.",
+        headlineLine2: "It's an operating system.",
+        supporting: "We don't just execute marketing. We engineer growth systems.",
+        boardBadge: 'SYSTEM ARCHITECTURE',
+        boardFlow: '01 INPUT → 06 COMPOUNDING',
+        cta: 'EXPLORE THE ARCHITECTURE',
+        scrollNote: 'SCROLL TO EXPLORE ARCHITECTURE'
+      },
+      statement: {
+        eyebrow: '01 / THE DEFINITION',
+        headline: 'Growth is not a campaign. It is a system of connected decisions.',
+        p1: 'Most businesses do not suffer from a lack of marketing activity. They suffer from disconnected decisions.',
+        p2: 'Ad spend is pushed without understanding unit economics. Landing pages are built without buying psychology. Conversion tracking reports what happened in the past rather than directing where capital should move next.',
+        p3: 'Growth is not about doing more marketing. It is about understanding the business, making better decisions, executing those decisions, reading the signals, optimizing based on evidence, and allowing what is learned to compound.'
+      },
+      pillars: {
+        eyebrow: '02 / THE ARCHITECTURE',
+        headline: 'Every growth problem has an architecture behind it.',
+        lead: 'When growth stalls, the issue is rarely ad spend. It is a misalignment across the three foundational pillars of the commercial engine.'
+      },
+      operatingModel: {
+        eyebrow: '03 / METHODOLOGY',
+        headline: 'How the system operates.',
+        desc: 'Growth is not a series of disconnected campaigns. It is a continuous decision loop where each layer feeds directly into the next.',
+        sub: 'Six continuous layers. One unified engine.'
+      },
+      comparison: {
+        eyebrow: '04 / THE SHIFT',
+        headline: 'A different way of working.',
+        lead: 'Traditional agencies manage channel tactics. We build and calibrate growth architecture.',
+        colArea: 'Decision Area',
+        colTraditional: 'Traditional Agency',
+        colGrowth: 'Magicency Growth Architecture'
+      },
+      principle: {
+        eyebrow: '05 / CORE PRINCIPLE',
+        quote: '“Marketing is the execution layer. Growth architecture is the decision system.”',
+        subtext: 'When the architecture is sound, marketing scales with compounding conviction.'
+      },
+      faq: {
+        eyebrow: '06 / FREQUENT QUESTIONS',
+        headline: 'Understanding the approach.'
+      },
+      closingCta: {
+        eyebrow: 'NEXT STEP',
+        headline: 'Your business may not need more marketing. It may need a better architecture.',
+        subhead: 'Let’s diagnose your commercial constraints and build a system that scales.',
+        button: 'Start Growth Diagnosis'
       }
     }
   },
@@ -2061,91 +2033,6 @@ export const translations = {
         close: 'بستن'
       }
     },
-    approach: {
-      pageMeta: {
-        title: 'سیستم‌عامل و متدولوژی رشد // رویکرد ما // مجیکنسـی (MAGICENCY®)',
-        description: 'سیستم‌عامل رشد، متدولوژی عارضه‌یابی و چارچوب تصمیم‌گیری مداربسته برای تحول پایدار کسب‌وکار.'
-      },
-      hero: {
-        eyebrow: 'سیستم‌عامل و متدولوژی رشد',
-        headlineLine1: 'ما با پاسخ',
-        headlineLine2: 'شروع نمی‌کنیم.',
-        subline: 'یک متدولوژی منضبط و سیستم‌عامل رشد که مسیر تجاری کسب‌وکار را متحول می‌کند.',
-        metaphor: 'هرج‌ومرج ← پیوند ← شفافیت'
-      },
-      deconstruction: {
-        badge: '۰۱ / عارضه‌یابی',
-        title: 'از درخواست تا صورت‌مسئله',
-        requestPrompt: 'درخواست اولیه',
-        requestQuote: '«ما به یک وبسایت جدید نیاز داریم.»',
-        subtext: 'ما درخواست را کالبدشکافی می‌کنیم تا ریشه اصلی تحول را کشف کنیم.',
-        revealedTitle: 'مسئله واقعی',
-        problems: [
-          {
-            id: 'positioning',
-            title: 'جایگاه‌یابی',
-            desc: 'برند ارزش تجاری خود را به درستی و وضوح منتقل نمی‌کند.'
-          },
-          {
-            id: 'experience',
-            title: 'تجربه کاربر',
-            desc: 'مسیر تعامل مشتری دارای اصطکاک بالا و کشش اندک است.'
-          },
-          {
-            id: 'conversion',
-            title: 'نرخ تبدیل',
-            desc: 'ترافیک وارد صفحاتی فاقد معماری سیستماتیک اثبات ارزش می‌شود.'
-          },
-          {
-            id: 'acquisition',
-            title: 'جذب مخاطب',
-            desc: 'کانال‌ها جزیره‌ای هستند و چرخه‌های رشد بازگشتی شکل نگرفته است.'
-          }
-        ]
-      },
-      systemNetwork: {
-        badge: '۰۲ / سیستم',
-        headline: 'هیچ چیزی در انزوا کار نمی‌کند.',
-        subheadline: 'وقتی بازاریابی شکست می‌خورد، به این دلیل است که دیسیپلین‌ها متصل نیستند. ما یک مدار زنده مهندسی می‌کنیم.',
-        centralNode: 'کسب‌وکار',
-        nodes: [
-          { id: 'strategy', label: 'استراتژی', micro: 'جهت و مسیر.' },
-          { id: 'creative', label: 'خلاقیت', micro: 'معنا و هویت.' },
-          { id: 'digital', label: 'دیجیتال', micro: 'تجربه تعاملی.' },
-          { id: 'acquisition', label: 'جذب مخاطب', micro: 'کشش و تقاضا.' },
-          { id: 'measurement', label: 'سنجش و داده', micro: 'یادگیری تجربی.' }
-        ],
-        loopReturn: 'سنجش داده‌ها ← بینش تحلیلی ← استراتژی بعدی'
-      },
-      shift: {
-        badge: '۰۳ / گذار بنیادی',
-        headline: 'از اقدامات جزیره‌ای تا رشد پیوسته و متصل',
-        subheadline: 'تاکتیک‌ها پس از هر کمپین به نقطه صفر بازمی‌گردند. سیستم‌ها شتابی مرکب و دائمی می‌سازند.',
-        tacticsTitle: 'تاکتیک‌ها',
-        tacticsSubtitle: 'اقدامات جزیره‌ای',
-        tacticsItems: ['کمپین', 'وبسایت', 'محتوا', 'تبلیغات'],
-        systemTitle: 'سیستم',
-        systemSubtitle: 'رشد پیوسته',
-        systemItems: ['استراتژی', 'خلاقیت', 'دیجیتال', 'جذب مخاطب', 'سنجش داده']
-      },
-      compounding: {
-        badge: '۰۴ / رشد تصاعدی',
-        headline: 'چرا به شکل سیستم فکر می‌کنیم.',
-        axiom: 'تصمیم‌های بهتر، سیستم‌های قوی‌تر می‌سازند.\nسیستم‌های قوی‌تر، رشد تصاعدی خلق می‌کنند.',
-        subtext: 'هر چرخه، چرخه بعدی را هوشمندانه‌تر و قدرتمندتر می‌کند.',
-        steps: [
-          '۱ تصمیم استراتژیک',
-          'تصمیم + یادگیری',
-          'تصمیم + یادگیری + داده',
-          'تصمیم + یادگیری + داده + تجربه',
-          'مقیاس تصاعدی مرکب'
-        ]
-      },
-      closing: {
-        statement: 'رشد، مجموعه‌ای از تاکتیک‌های پراکنده نیست.\nرشد، سیستمِ اتخاذ تصمیم‌های بهتر است.',
-        ctaButton: 'شروع پروژه'
-      }
-    },
     capabilities: {
       pageMeta: {
         title: 'توانمندی‌های یکپارچه بازاریابی // آنچه می‌سازیم // مجیکنسـی (MAGICENCY®)',
@@ -2229,6 +2116,63 @@ export const translations = {
         backToBlog: '← بازگشت به تمام مقالات',
         keyTakeaways: 'نکات کلیدی و راهبردی',
         relatedArticles: 'دیدگاه‌های مرتبط'
+      }
+    },
+    approach: {
+      pageMeta: {
+        title: 'معماری رشد و سیستم‌عامل کسب‌وکار // رویکرد ما // مجیکنسـی (MAGICENCY®)',
+        description: 'رشد یک کانال تبلیغاتی نیست؛ یک سیستم‌عامل است. نحوه نگرش و عملکرد آژانس پرفورمنس مارکتینگ و معماری رشد مجیکنسـی.'
+      },
+      hero: {
+        eyebrow: 'آژانس پرفورمنس مارکتینگ و معماری رشد دیجیتال',
+        headlineLine1: 'رشد یک کانال بازاریابی نیست.',
+        headlineLine2: 'رشد یک سیستم‌عامل است.',
+        supporting: 'ما فقط بازاریابی را اجرا نمی‌کنیم؛ ما سیستم‌های رشد را مهندسی می‌کنیم.',
+        boardBadge: 'معماری سیستم',
+        boardFlow: '۰۱ ورودی ← ۰۶ رشد تصاعدی',
+        cta: 'بررسی معماری سیستم',
+        scrollNote: 'اسکرول برای کاوش در معماری'
+      },
+      statement: {
+        eyebrow: '۰۱ / تعریف بنیادین',
+        headline: 'رشد یک کمپین موقت نیست؛ یک سیستم از تصمیم‌های به هم پیوسته است.',
+        p1: 'بیشتر کسب‌وکارها از کمبود فعالیت‌های بازاریابی آسیب نمی‌بینند، بلکه از تکه‌تکه بودن و قطع ارتباط میان تصمیم‌ها رنج می‌برند.',
+        p2: 'بودجه‌های تبلیغاتی بدون محاسبه اقتصاد واحد تزریق می‌شوند؛ صفحات فرود بدون درک روان‌شناسی خرید ساخته می‌شوند؛ و تحلیل داده تنها گذشته را گزارش می‌دهد به جای اینکه مسیر حرکت بعدی سرمایه را تعیین کند.',
+        p3: 'رشد در انجام کارهای بیشتر بازاریابی نیست؛ در شناخت کسب‌وکار، اتخاذ تصمیم‌های بهتر، اجرای دقیق آن‌ها، رصد سیگنال‌های واقعی، بهینه‌سازی مبتنی بر شواهد و ایجاد هم‌افزایی تصاعدی از آموخته‌هاست.'
+      },
+      pillars: {
+        eyebrow: '۰۲ / معماری رشد',
+        headline: 'پشت هر چالش رشد، یک معماری ساختاری نهفته است.',
+        lead: 'زمانی که رشد متوقف می‌شود، مشکل به ندرت کمبود بودجه تبلیغات است؛ مسئله عدم هماهنگی میان سه ستون بنیادین موتور تجاری است.'
+      },
+      operatingModel: {
+        eyebrow: '۰۳ / متدولوژی عملیاتی',
+        headline: 'سیستم چگونه کار می‌کند.',
+        desc: 'رشد مجموعه‌ای از کمپین‌های پراکنده نیست؛ یک حلقه تصمیم‌گیری پیوسته است که در آن هر لایه مستقیماً لایه بعدی را تغذیه می‌کند.',
+        sub: 'شش لایه پیوسته. یک موتور یکپارچه.'
+      },
+      comparison: {
+        eyebrow: '۰۴ / تغییر پارادایم',
+        headline: 'رویکردی متفاوت در همکاری.',
+        lead: 'آژانس‌های سنتی صرفاً تاکتیک‌های کانال‌ها را مدیریت می‌کنند؛ ما معماری رشد را طراحی و کالیبره می‌کنیم.',
+        colArea: 'حوزه تصمیم‌گیری',
+        colTraditional: 'آژانس سنتی دیجیتال',
+        colGrowth: 'معماری رشد مجیکنسـی'
+      },
+      principle: {
+        eyebrow: '۰۵ / اصل محوری',
+        quote: '«بازاریابی لایه اجراست؛ معماری رشد سیستم تصمیم‌گیری است.»',
+        subtext: 'هنگامی که معماری سالم و استوار باشد، بازاریابی با اطمینان تصاعدی مقیاس می‌پذیرد.'
+      },
+      faq: {
+        eyebrow: '۰۶ / پرسش‌های متداول',
+        headline: 'درک رویکرد معماری رشد.'
+      },
+      closingCta: {
+        eyebrow: 'گام بعدی',
+        headline: 'شاید کسب‌وکار شما به بازاریابی بیشتر نیاز ندارد؛ بلکه به معماری بهتری نیاز دارد.',
+        subhead: 'بیایید گلوگاه‌های تجاری شما را عارضه‌یابی کرده و سیستمی بسازیم که واقعاً مقیاس‌پذیر باشد.',
+        button: 'شروع عارضه‌یابی رشد'
       }
     }
   }

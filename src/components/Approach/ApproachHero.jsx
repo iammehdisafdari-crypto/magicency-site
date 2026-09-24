@@ -1,327 +1,146 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
-import { EASING } from '../motion';
-
-const PHASES = [
-  { id: 'chaos', labelEn: 'CHAOS', labelFa: 'هرج‌ومرج' },
-  { id: 'connection', labelEn: 'CONNECTION', labelFa: 'پیوند' },
-  { id: 'clarity', labelEn: 'CLARITY', labelFa: 'شفافیت' }
-];
-
-// NOSONAR: Math.random() is intentionally used for non-cryptographic visual particle distribution and canvas animation
-function initApproachNodes(nodeCount, cols, rows, width, height) {
-  const nodes = [];
-  for (let i = 0; i < nodeCount; i++) {
-    const col = i % cols;
-    const row = Math.floor(i / cols);
-    const targetX = (width * 0.2) + (col * (width * 0.6) / (cols - 1));
-    const targetY = (height * 0.2) + (row * (height * 0.6) / (rows - 1));
-
-    const angle = (i / nodeCount) * Math.PI * 2;
-    const radius = Math.min(width, height) * (0.18 + (i % 3) * 0.1);
-    const ringX = width * 0.5 + Math.cos(angle) * radius;
-    const ringY = height * 0.5 + Math.sin(angle) * radius;
-
-    nodes.push({
-      x: Math.random() * width, // NOSONAR
-      y: Math.random() * height, // NOSONAR
-      chaosX: Math.random() * width, // NOSONAR
-      chaosY: Math.random() * height, // NOSONAR
-      ringX,
-      ringY,
-      gridX: targetX,
-      gridY: targetY,
-      vx: (Math.random() - 0.5) * 0.8, // NOSONAR
-      vy: (Math.random() - 0.5) * 0.8, // NOSONAR
-      size: Math.random() * 2.5 + 2, // NOSONAR
-      phase: Math.random() * Math.PI * 2 // NOSONAR
-    });
-  }
-  return nodes;
-}
-
-function updateNodePhysics(n, idx, activePhaseIndex, time, width, height, nodeCount) {
-  n.phase += 0.02;
-  let destX;
-  let destY;
-
-  if (activePhaseIndex === 0) {
-    // CHAOS: erratic drift
-    n.chaosX += n.vx + Math.sin(time + idx) * 0.4;
-    n.chaosY += n.vy + Math.cos(time + idx) * 0.4;
-    if (n.chaosX < 0 || n.chaosX > width) n.vx *= -1;
-    if (n.chaosY < 0 || n.chaosY > height) n.vy *= -1;
-    destX = n.chaosX;
-    destY = n.chaosY;
-  } else if (activePhaseIndex === 1) {
-    // CONNECTION: flowing orbital cluster
-    const dynamicAngle = (idx / nodeCount) * Math.PI * 2 + time * 0.15;
-    const r = Math.min(width, height) * (0.2 + (idx % 4) * 0.08);
-    destX = width * 0.5 + Math.cos(dynamicAngle) * r;
-    destY = height * 0.5 + Math.sin(dynamicAngle) * r;
-  } else {
-    // CLARITY: structured harmonic alignment
-    destX = n.gridX + Math.sin(time * 0.8 + idx) * 3;
-    destY = n.gridY + Math.cos(time * 0.8 + idx) * 3;
-  }
-
-  // Smooth spring physics
-  n.x += (destX - n.x) * 0.045;
-  n.y += (destY - n.y) * 0.045;
-}
-
-const PHASE_CONNECT_DISTANCES = [80, 160, 130];
-
-function getApproachStrokeStyle(activePhaseIndex, lineAlpha) {
-  if (activePhaseIndex === 1) {
-    return `rgba(255, 107, 44, ${lineAlpha * 1.2})`;
-  }
-  if (activePhaseIndex === 2) {
-    return `rgba(180, 210, 255, ${lineAlpha * 0.9})`;
-  }
-  return `rgba(255, 255, 255, ${lineAlpha})`;
-}
-
-function drawApproachSegment(ctx, nodeA, nodeB, activePhaseIndex, maxConnectDist) {
-  const dx = nodeA.x - nodeB.x;
-  const dy = nodeA.y - nodeB.y;
-  const dist = Math.hypot(dx, dy);
-
-  if (dist >= maxConnectDist) return;
-
-  const normalizedDist = 1 - dist / maxConnectDist;
-  const lineAlpha = normalizedDist * 0.35;
-
-  ctx.strokeStyle = getApproachStrokeStyle(activePhaseIndex, lineAlpha);
-  ctx.lineWidth = activePhaseIndex === 2 ? 1 : 0.8;
-  ctx.beginPath();
-  ctx.moveTo(nodeA.x, nodeA.y);
-  ctx.lineTo(nodeB.x, nodeB.y);
-  ctx.stroke();
-}
-
-function drawApproachConnections(ctx, nodes, activePhaseIndex) {
-  const maxConnectDist = PHASE_CONNECT_DISTANCES[activePhaseIndex] ?? 130;
-  for (let i = 0; i < nodes.length; i++) {
-    for (let j = i + 1; j < nodes.length; j++) {
-      drawApproachSegment(ctx, nodes[i], nodes[j], activePhaseIndex, maxConnectDist);
-    }
-  }
-}
-
-function getApproachNodeColor(activePhaseIndex) {
-  if (activePhaseIndex === 0) {
-    return 'rgba(221, 0, 96, 0.65)';
-  }
-  if (activePhaseIndex === 1) {
-    return 'rgba(221, 0, 96, 0.85)';
-  }
-  return 'rgba(255, 255, 255, 0.95)';
-}
-
-function drawApproachNodes(ctx, nodes, activePhaseIndex) {
-  const nodeColor = getApproachNodeColor(activePhaseIndex);
-
-  nodes.forEach((n) => {
-    const pulse = Math.sin(n.phase) * 0.8;
-
-    ctx.fillStyle = nodeColor;
-    ctx.beginPath();
-    ctx.arc(n.x, n.y, Math.max(1.5, n.size + pulse), 0, Math.PI * 2);
-    ctx.fill();
-
-    if (activePhaseIndex === 2) {
-      ctx.fillStyle = 'rgba(221, 0, 96, 0.2)';
-      ctx.beginPath();
-      ctx.arc(n.x, n.y, n.size + 3 + pulse, 0, Math.PI * 2);
-      ctx.fill();
-    }
-  });
-}
+import { ARCHITECTURE_BOARD_NODES } from '../../data/growthArchitecture';
 
 export default function ApproachHero() {
-  const { t, isRTL } = useLanguage();
+  const { t, lang, isRTL } = useLanguage();
   const hero = t.approach?.hero || {};
-  const [activePhaseIndex, setActivePhaseIndex] = useState(0);
-  const canvasRef = useRef(null);
 
-  // Auto-cycle through the 3 phases every 4.5 seconds
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setActivePhaseIndex((prev) => (prev + 1) % 3);
-    }, 4500);
-    return () => clearInterval(timer);
-  }, []);
-
-  // Canvas visual evolution: Chaos -> Connection -> Clarity
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    let animationFrameId;
-    let width = (canvas.width = canvas.offsetWidth);
-    let height = (canvas.height = canvas.offsetHeight);
-
-    const handleResize = () => {
-      if (!canvas) return;
-      width = canvas.width = canvas.offsetWidth;
-      height = canvas.height = canvas.offsetHeight;
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    const nodeCount = 36;
-    const nodes = initApproachNodes(nodeCount, 6, 6, width, height);
-
-    let time = 0;
-
-    const render = () => {
-      time += 0.015;
-      ctx.clearRect(0, 0, width, height);
-
-      nodes.forEach((n, idx) => {
-        updateNodePhysics(n, idx, activePhaseIndex, time, width, height, nodeCount);
-      });
-
-      drawApproachConnections(ctx, nodes, activePhaseIndex);
-      drawApproachNodes(ctx, nodes, activePhaseIndex);
-    };
-
-    let isVisible = true;
-    let isRunning = false;
-
-    const startLoop = () => {
-      if (!isRunning && isVisible) {
-        isRunning = true;
-        animationFrameId = requestAnimationFrame(render);
-      }
-    };
-
-    const stopLoop = () => {
-      if (isRunning) {
-        isRunning = false;
-        cancelAnimationFrame(animationFrameId);
-      }
-    };
-
-    const visibilityObserver = new IntersectionObserver((entries) => {
-      const entry = entries[0];
-      isVisible = Boolean(entry?.isIntersecting);
-      if (isVisible) {
-        startLoop();
-      } else {
-        stopLoop();
-      }
-    }, { threshold: 0 });
-    visibilityObserver.observe(canvas);
-
-    startLoop();
-
-    return () => {
-      visibilityObserver.disconnect();
-      window.removeEventListener('resize', handleResize);
-      stopLoop();
-    };
-  }, [activePhaseIndex]);
+  const handleScrollToExplore = () => {
+    const target = document.getElementById('the-definition');
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
-    <section className="approach-hero-section" aria-label="Approach Hero">
-      {/* Background Architectural Canvas Visual */}
-      <div className="approach-hero-canvas-wrap" aria-hidden="true">
-        <canvas ref={canvasRef} className="approach-hero-canvas" />
-        <div className="approach-hero-vignette" />
-      </div>
-
+    <section className="approach-section approach-hero-section" id="approach-hero">
       <div className="container approach-hero-container">
-        {/* Eyebrow */}
+        
+        {/* Eyebrow Pill */}
         <motion.div
           className="approach-hero-badge-wrap"
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: EASING.PRIMARY }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
           <div className="approach-eyebrow-pill">
             <span className="approach-pill-indicator" />
-            <span className="approach-pill-text">{hero.eyebrow || 'APPROACH'}</span>
+            <span className="approach-pill-text">{hero.eyebrow}</span>
           </div>
         </motion.div>
 
-        {/* Primary Philosophical Headline */}
+        {/* Primary Headline */}
         <div className="approach-hero-headline-wrap">
           <h1 className="approach-hero-title">
-            <div className="approach-hero-line-mask">
-              <motion.span
-                className="approach-hero-line"
-                initial={{ y: '100%', opacity: 0 }}
-                animate={{ y: '0%', opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.1, ease: EASING.CINEMATIC }}
-              >
-                {hero.headlineLine1}
-              </motion.span>
-            </div>
-            <div className="approach-hero-line-mask">
-              <motion.span
-                className="approach-hero-line text-gradient-amber"
-                initial={{ y: '100%', opacity: 0 }}
-                animate={{ y: '0%', opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.2, ease: EASING.CINEMATIC }}
-              >
-                {hero.headlineLine2}
-              </motion.span>
-            </div>
+            <motion.span
+              className="approach-hero-title-line"
+              initial={{ opacity: 0, y: 22 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            >
+              {hero.headlineLine1}
+            </motion.span>
+            <motion.span
+              className="approach-hero-title-line highlight-accent"
+              initial={{ opacity: 0, y: 22 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            >
+              {hero.headlineLine2}
+            </motion.span>
           </h1>
 
-          {/* Subline */}
-          <motion.div
-            className="approach-hero-sub-wrap"
-            initial={{ opacity: 0, y: 16 }}
+          <motion.p
+            className="approach-hero-supporting"
+            initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.32, ease: EASING.PRIMARY }}
+            transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           >
-            <p className="approach-hero-secondary">
-              {hero.subline}
-            </p>
-          </motion.div>
+            {hero.supporting}
+          </motion.p>
         </div>
 
-        {/* Interactive Phase Controller & Metaphor Indicator */}
+        {/* DOMINANT CINEMATIC HERO VISUAL STAGE */}
         <motion.div
-          className="approach-hero-phase-controller"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.45, ease: EASING.PRIMARY }}
+          className="approach-hero-visual-stage"
+          initial={{ opacity: 0, scale: 0.98, y: 24 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.85, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="phase-pills-bar">
-            {PHASES.map((p, idx) => {
-              const isActive = activePhaseIndex === idx;
-              return (
-                <button
-                  key={p.id}
-                  type="button"
-                  onClick={() => setActivePhaseIndex(idx)}
-                  className={`phase-pill-btn ${isActive ? 'active' : ''}`}
-                  aria-pressed={isActive}
-                >
-                  <span className="phase-pill-dot" />
-                  <span className="phase-pill-label">{isRTL ? p.labelFa : p.labelEn}</span>
-                  {isActive && (
-                    <motion.span
-                      layoutId="activePhaseIndicator"
-                      className="phase-pill-active-bg"
-                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                    />
-                  )}
-                </button>
-              );
-            })}
+          {/* Main Cinematic Image */}
+          <div className="hero-media-backdrop">
+            <img
+              src="/assets/capabilities/growth_systems.webp"
+              alt="Magicency Growth Architecture System"
+              className="hero-media-img"
+              loading="eager"
+            />
+            <div className="hero-media-overlay-gradient" />
+            <div className="hero-media-scanlines" aria-hidden="true" />
           </div>
 
-          <div className="approach-scroll-cue">
-            <span className="cue-dot" />
-            <span className="cue-text">{isRTL ? 'حرکت به سمت سیستم' : 'EXPLORE THE SYSTEM'}</span>
+          {/* Integrated Architectural Signal Conduits */}
+          <div className="hero-media-hud" aria-hidden="true">
+            <div className="hud-corner hud-tl" />
+            <div className="hud-corner hud-tr" />
+            <div className="hud-corner hud-bl" />
+            <div className="hud-corner hud-br" />
+
+            <div className="hud-status-badge">
+              <span className="hud-pulse-dot" />
+              <span className="hud-status-label">
+                {isRTL ? 'معماری فعال // سیستم هماهنگ' : 'ACTIVE ARCHITECTURE // SYNCHRONIZED'}
+              </span>
+            </div>
+
+            <div className="hud-metric-pill">
+              <span>{isRTL ? 'هدف: مقیاس تصاعدی' : 'OBJECTIVE: COMPOUNDING SCALE'}</span>
+            </div>
+          </div>
+
+          {/* Subordinated Architectural Node Stream at Base of Visual */}
+          <div className="hero-integrated-flow-strip">
+            <div className="flow-strip-label">
+              <span className="flow-strip-icon">✦</span>
+              <span>{hero.boardFlow || '01 INPUT → 06 COMPOUNDING'}</span>
+            </div>
+            
+            <div className="flow-strip-nodes">
+              {ARCHITECTURE_BOARD_NODES.map((node) => {
+                const nodeName = lang === 'fa' ? node.nameFa : node.nameEn;
+                const nodeLabel = lang === 'fa' ? node.labelFa : node.labelEn;
+                return (
+                  <div key={node.index} className="flow-strip-node">
+                    <span className="flow-node-index">{node.index}</span>
+                    <span className="flow-node-name">{nodeName}</span>
+                    <span className="flow-node-label">{nodeLabel}</span>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </motion.div>
+
+        {/* Scroll Cue */}
+        <motion.div
+          className="approach-hero-scroll-cue"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+        >
+          <button
+            type="button"
+            className="approach-scroll-btn"
+            onClick={handleScrollToExplore}
+            aria-label={hero.scrollNote || 'SCROLL TO EXPLORE ARCHITECTURE'}
+          >
+            <span className="scroll-btn-line" />
+            <span className="scroll-btn-text">{hero.scrollNote || 'SCROLL TO EXPLORE ARCHITECTURE'}</span>
+          </button>
+        </motion.div>
+
       </div>
     </section>
   );

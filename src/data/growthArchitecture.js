@@ -1,0 +1,197 @@
+/**
+ * Magicency Growth Architecture
+ * Adapted directly from the Growth Architecture narrative reference
+ * Single source of truth for editorial copy, layers, comparison and methodology.
+ */
+
+export const ARCHITECTURE_BOARD_NODES = [
+  { index: '01', nameEn: 'Input', nameFa: 'ورودی', labelEn: 'Economics', labelFa: 'اقتصاد واحد' },
+  { index: '02', nameEn: 'Insight', nameFa: 'بینش', labelEn: 'Decisions', labelFa: 'تصمیم‌گیری' },
+  { index: '03', nameEn: 'Action', nameFa: 'اقدام', labelEn: 'Execution', labelFa: 'اجرا' },
+  { index: '04', nameEn: 'Signal', nameFa: 'سیگنال', labelEn: 'Telemetry', labelFa: 'تله‌متری' },
+  { index: '05', nameEn: 'Optimization', nameFa: 'بهینه‌سازی', labelEn: 'Calibration', labelFa: 'کالیبراسیون' },
+  { index: '06', nameEn: 'Compounding', nameFa: 'رشد تصاعدی', labelEn: 'Scale', labelFa: 'مقیاس پایدار' }
+];
+
+export const ARCHITECTURE_BOARD_METRICS = [
+  {
+    labelEn: 'Architecture goal',
+    labelFa: 'هدف معماری رشد',
+    valEn: 'Compounding Scale',
+    valFa: 'مقیاس‌پذیری تصاعدی'
+  },
+  {
+    labelEn: 'Operating principle',
+    labelFa: 'اصل بنیادین سیستم',
+    valEn: 'One connected system',
+    valFa: 'یک سیستم یکپارچه و متصل'
+  },
+  {
+    labelEn: 'Primary output',
+    labelFa: 'خروجی اصلی',
+    valEn: 'Better growth decisions',
+    valFa: 'تصمیم‌های رشد با بازدهی بالا'
+  }
+];
+
+export const SYSTEM_PILLARS = [
+  {
+    num: '01',
+    categoryEn: 'CUSTOMER',
+    categoryFa: 'مشتری و اقتصاد واحد',
+    questionEn: 'Who should grow?',
+    questionFa: 'کدام بخش از بازار باید رشد کند؟',
+    descEn: 'We separate high-intent commercial demand from low-yield traffic through unit economics, search intent, and customer buying motivation.',
+    descFa: 'ما تقاضای تجاری با ارزش بالا را از ترافیک بی‌کیفیت جدا می‌کنیم؛ از طریق تحلیل اقتصاد واحد، قصد جستجو و روان‌شناسی خرید مشتری.'
+  },
+  {
+    num: '02',
+    categoryEn: 'OFFER & CONVICTION',
+    categoryFa: 'ارزش پیشنهادی و تمایز',
+    questionEn: 'Why should they choose?',
+    questionFa: 'چرا باید شما را انتخاب کنند؟',
+    descEn: 'We turn features into a clear commercial value structure that eliminates friction, strengthens market preference, and supports premium positioning.',
+    descFa: 'ما ویژگی‌های محصول را به ساختار شفافی از ارزش تبدیل می‌کنیم که اصطکاک خرید را حذف کرده، ترجیح برند را بالا برده و جایگاه‌یابی پرمیوم می‌سازد.'
+  },
+  {
+    num: '03',
+    categoryEn: 'SYSTEM & SCALE',
+    categoryFa: 'سیستم و مقیاس‌پذیری',
+    questionEn: 'How should it scale?',
+    questionFa: 'سیستم چگونه باید مقیاس‌پذیر شود؟',
+    descEn: 'We connect acquisition, landing platforms, conversion journeys, measurement and optimization around the exact same growth decision.',
+    descFa: 'ما جذب پولی، صفحات فرود، مسیر تبدیل، تحلیل داده و بهینه‌سازی را حول یک تصمیم استراتژیک واحد یکپارچه می‌کنیم.'
+  }
+];
+
+export const OPERATING_MODEL_LAYERS = [
+  {
+    num: '01',
+    nameEn: 'Input layer',
+    nameFa: 'لایه ورودی (Input)',
+    descEn: 'Business baseline, unit economics, market demand, customer economics, and operational constraints are gathered in one clear view.',
+    descFa: 'ساختار مالی، اقتصاد واحد، ظرفیت‌های بازار، رفتار مشتریان و محدودیت‌های عملیاتی کسب‌وکار در یک نمای واحد تحلیل و مستقر می‌شوند.',
+    icon: '◎'
+  },
+  {
+    num: '02',
+    nameEn: 'Insight layer',
+    nameFa: 'لایه بینش (Insight)',
+    descEn: 'Data signals become commercial priorities: where conversion is lost, where high-yield demand exists, and which decisions matter first.',
+    descFa: 'سیگنال‌های خام به اولویت‌های تجاری تبدیل می‌شوند: کجا ریزش مشتری رخ می‌دهد، تقاضای سودآور کجاست و کدام اقدامات بالاترین اهرم رشد را دارند.',
+    icon: '✦'
+  },
+  {
+    num: '03',
+    nameEn: 'Action layer',
+    nameFa: 'لایه اقدام (Action)',
+    descEn: 'Strategic decisions translate directly into customer-facing reality: high-conviction creative, frictionless conversion journeys, and aligned acquisition.',
+    descFa: 'تصمیم‌های استراتژیک مستقیماً به خروجی‌های ملموس تبدیل می‌شوند: خلاقیت پرکشش، رابط کاربری با نرخ تبدیل بالا و کمپین‌های هماهنگ.',
+    icon: '◌'
+  },
+  {
+    num: '04',
+    nameEn: 'Signal layer',
+    nameFa: 'لایه سیگنال (Signal)',
+    descEn: 'Real market response is captured without attribution bias through server-side telemetry, cohort tracking, and conversion behavior.',
+    descFa: 'پاسخ واقعی بازار بدون خطای اتریبیوشن پلتفرم‌ها سنجیده می‌شود؛ از طریق ردیابی سمت سرور، تحلیل کوهورت و ثبت دقیق رفتار تبدیل کاربران.',
+    icon: '◇'
+  },
+  {
+    num: '05',
+    nameEn: 'Optimization layer',
+    nameFa: 'لایه بهینه‌سازی (Optimization)',
+    descEn: 'Evidence drives disciplined capital reallocation: winning messaging is scaled, friction points are removed, and CAC is compressed.',
+    descFa: 'شواهد ملموس، تخصیص بودجه را هدایت می‌کنند: پیام‌های برنده تقویت می‌شوند، نقاط اصطکاک حذف شده و هزینه جذب مشتری به سرعت فشرده می‌شود.',
+    icon: '↳'
+  },
+  {
+    num: '06',
+    nameEn: 'Compounding layer',
+    nameFa: 'لایه رشد تصاعدی (Compounding)',
+    descEn: 'Knowledge generated by each loop feeds directly back into the Input model, making subsequent cycles faster, smarter, and permanently more profitable.',
+    descFa: 'دانش و آموخته‌های هر چرخه مستقیماً به لایه ورودی بازمی‌گردد؛ این امر چرخه‌های بعدی را سریع‌تر، هوشمندانه‌تر و با بازده سرمایه بالاتر آغاز می‌کند.',
+    icon: '↗'
+  }
+];
+
+export const AGENCY_COMPARISON_ROWS = [
+  {
+    areaEn: 'Starting question',
+    areaFa: 'پرسش نقطه آغاز',
+    traditionalEn: 'Which campaign or channel should we launch?',
+    traditionalFa: 'کدام کمپین یا کانال تبلیغاتی را اجرا کنیم؟',
+    growthEn: 'Which growth constraint should we solve?',
+    growthFa: 'کدام گلوگاه تجاری و استراتژیک را باید حل کنیم؟'
+  },
+  {
+    areaEn: 'Primary focus',
+    areaFa: 'تمرکز اصلی',
+    traditionalEn: 'Traffic volume, ad impressions and platform vanity metrics',
+    traditionalFa: 'ترافیک، نمایش تبلیغات و شاخص‌های سطحی پلتفرم‌ها',
+    growthEn: 'Customer intent, conversion velocity and compounding profit',
+    growthFa: 'کیفیت مشتری، نرخ تبدیل و سودآوری تصاعدی'
+  },
+  {
+    areaEn: 'Service structure',
+    areaFa: 'ساختار خدمات',
+    traditionalEn: 'Separate, siloed deliverables by disconnected teams',
+    traditionalFa: 'تحویل اقلام جزیره‌ای و جداگانه توسط تیم‌های پراکنده',
+    growthEn: 'One connected commercial operating system',
+    growthFa: 'یک سیستم‌عامل تجاری یکپارچه و به هم پیوسته'
+  },
+  {
+    areaEn: 'Measurement model',
+    areaFa: 'مدل سنجش و تحلیل',
+    traditionalEn: 'Reports what happened after money has already been spent',
+    traditionalFa: 'گزارش‌دهی از اتفاقات گذشته پس از خرج شدن بودجه',
+    growthEn: 'Explains what to decide and where to reallocate capital next',
+    growthFa: 'تفسیر چرایی داده‌ها و هدایت تصمیم و بازتوزیع بعدی بودجه'
+  },
+  {
+    areaEn: 'Scaling logic',
+    areaFa: 'منطق مقیاس‌پذیری',
+    traditionalEn: 'Increase media budget into existing, leaky funnels',
+    traditionalFa: 'تزریق بودجه بیشتر به قیف‌های دارای نشتی و اثبات‌نشده',
+    growthEn: 'Scale the validated segments and offers that produce durable value',
+    growthFa: 'مقیاس‌بخشی به بخش‌ها و پیشنهادهایی که ارزش پایدار خلق می‌کنند'
+  }
+];
+
+export const APPROACH_FAQS = [
+  {
+    id: 'faq-1',
+    questionEn: 'What is a growth architecture agency?',
+    questionFa: 'آژانس معماری رشد چیست و چه تفاوتی دارد؟',
+    answerEn: 'A growth architecture agency designs the complete decision system behind growth: unit economics, positioning, value offers, acquisition channels, conversion journeys, measurement and compounding scale. Rather than managing disconnected channels, we build the underlying engine.',
+    answerFa: 'آژانس معماری رشد کل سیستم تصمیم‌گیریِ پشت رشد را طراحی می‌کند: اقتصاد واحد، جایگاه‌یابی، ارزش پیشنهادی، کانال‌های جذب، مسیر تبدیل، داده و مقیاس‌پذیری تصاعدی. ما به جای مدیریت کانال‌های پراکنده، موتور بنیادین رشد را مهندسی می‌کنیم.'
+  },
+  {
+    id: 'faq-2',
+    questionEn: 'How is growth architecture different from growth marketing?',
+    questionFa: 'معماری رشد چه تفاوتی با بازاریابی رشد (Growth Marketing) مرسوم دارد؟',
+    answerEn: 'Growth marketing typically focuses on tactical experiments, ad optimization, and surface channel tweaks. Growth architecture begins one level earlier: by connecting commercial economics, brand conviction, conversion friction, and telemetry into a single unified operating model before scaling spend.',
+    answerFa: 'بازاریابی رشد متداول معمولاً بر آزمایش‌های تاکتیکی و بهینه‌سازی‌های سطحی ادز متمرکز است. اما معماری رشد یک لایه عمیق‌تر آغاز می‌شود: پیوند اقتصاد تجاری، جایگاه برند، اصطکاک تبدیل و تله‌متری در قالب یک مدل عملیاتی واحد پیش از افزایش بودجه.'
+  },
+  {
+    id: 'faq-3',
+    questionEn: 'What happens behind the work?',
+    questionFa: 'پشت صحنه اجرای کارها در مجیکنسـی چه می‌گذرد؟',
+    answerEn: 'Behind every campaign is a disciplined cycle: diagnosing commercial constraints, modeling buying psychology, engineering high-conviction creative and frictionless web experiences, capturing live first-party signals, and reallocating capital to winning variations.',
+    answerFa: 'پشت هر کمپین یک چرخه منضبط وجود دارد: عارضه‌یابی گلوگاه‌های تجاری، مدل‌سازی روان‌شناسی خرید، خلق پیام‌های متقاعدکننده و وب‌سایت‌های بدون اصطکاک، ثبت سیگنال‌های دست اول و بازتوزیع سریع سرمایه به گزینه‌های برنده.'
+  },
+  {
+    id: 'faq-4',
+    questionEn: 'How are growth decisions made?',
+    questionFa: 'تصمیم‌های رشد چگونه و بر چه مبنایی اتخاذ می‌شوند؟',
+    answerEn: 'Decisions are deterministic, not speculative. We evaluate full-funnel economics: margin thresholds, blended acquisition costs, cohort retention, and verified customer payback periods. If an offer does not convert with conviction at small scale, it is never scaled with blind media spend.',
+    answerFa: 'تصمیم‌ها قطعی و مبتنی بر شواهد هستند، نه حدس و گمان. ما معیارهای واقعی مالی را می‌سنجیم: آستانه سودآوری، هزینه جذب ترکیبی، ماندگاری مشتریان و دوره بازگشت سرمایه. تا زمانی که اثبات ارزش در مقیاس کوچک رخ ندهد، بودجه کلان صرف تبلیغات نمی‌شود.'
+  },
+  {
+    id: 'faq-5',
+    questionEn: 'Why does this system create compounding improvement?',
+    questionFa: 'چرا این سیستم منجر به رشد تصاعدی و مرکب می‌شود؟',
+    answerEn: 'Tactical campaigns reset to zero the moment media budgets pause. In a growth architecture, every experiment builds institutional knowledge: audience insights sharpen product offers, landing tests optimize checkout velocity, and closed-loop data ensures each iteration starts from a higher baseline of efficiency.',
+    answerFa: 'کمپین‌های تاکتیکی به محض قطع بودجه تبلیغات به صفر بازمی‌گردند. در معماری رشد، هر آزمایش به دارایی دائمی تبدیل می‌شود: بینش مخاطب پیشنهاد را صیقل می‌دهد، تجربه وب نرخ تبدیل را بالا می‌برد و تله‌متری مداربسته تضمین می‌کند چرخه بعدی از یک پایه قوی‌تر آغاز شود.'
+  }
+];

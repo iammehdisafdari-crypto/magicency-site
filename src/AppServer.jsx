@@ -10,6 +10,7 @@ import WhatWeDo from './components/WhatWeDo/WhatWeDo';
 import BuiltForCompoundingGrowth from './components/CompoundingGrowth/BuiltForCompoundingGrowth';
 import Journal from './components/Journal/Journal';
 import FAQSection from './components/About/FAQSection';
+import ScrollProgress from './components/About/ScrollProgress';
 import FinalCTA from './components/FinalCTA/FinalCTA';
 import Footer from './components/Footer/Footer';
 
@@ -41,6 +42,9 @@ function MainApp() {
     <div className={`magicency-app-root ${introFinished ? 'app-loaded' : 'app-loading'}`}>
       {/* Screen Reader Skip Navigation Link */}
       <a href="#main" className="skip-to-content">Skip to content</a>
+
+      {/* Global Viewport Scroll Progress Bar */}
+      <ScrollProgress />
 
       {/* Cinematic Brand Intro Preloader */}
       <BrandIntro onComplete={() => setIntroFinished(true)} />

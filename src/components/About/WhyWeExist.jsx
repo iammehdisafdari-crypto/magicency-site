@@ -1,163 +1,219 @@
-import React, { useState, useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
+import { ABOUT_DATA } from '../../data/aboutData';
+import { Compass, Sparkles, Activity, Cpu, Database } from 'lucide-react';
+
+const ICON_MAP = {
+  Compass,
+  Sparkles,
+  Activity,
+  Cpu,
+  Database
+};
 
 export default function WhyWeExist() {
-  const { t, isRTL } = useLanguage();
-  const data = t.about?.whyWeExist || {};
-  const containerRef = useRef(null);
-  const isInView = useInView(containerRef, { amount: 0.3, once: false });
+  const { lang, isRTL } = useLanguage();
+  const dna = ABOUT_DATA[lang]?.dna || ABOUT_DATA.en.dna;
+  const [isConnected, setIsConnected] = useState(true);
+  const [activeFragmentId, setActiveFragmentId] = useState('strategy');
 
-  // Mode: 'fragmented' vs 'connected' (toggleable or interactive)
-  const [isSystemConnected, setIsSystemConnected] = useState(true);
-  const [activeFragment, setActiveFragment] = useState(null);
-
-  const fragments = data.fragments || [
-    { id: 'strategy', num: '01', label: 'Strategy', isolatedIssue: 'Isolated from execution', connectedRole: 'Directs capital & positioning' },
-    { id: 'creative', num: '02', label: 'Creative', isolatedIssue: 'Judged on aesthetics alone', connectedRole: 'Communicates advantage' },
-    { id: 'digital', num: '03', label: 'Digital', isolatedIssue: 'Built in technical silos', connectedRole: 'Engineers customer velocity' },
-    { id: 'media', num: '04', label: 'Media', isolatedIssue: 'Buys impressions without context', connectedRole: 'Amplifies proven value' },
-    { id: 'data', num: '05', label: 'Data', isolatedIssue: 'Rearview dashboards with no action', connectedRole: 'Governs next decision' },
-  ];
+  const fragments = dna.fragments || [];
+  const activeFragment = fragments.find((f) => f.id === activeFragmentId) || fragments[0];
 
   return (
     <section 
-      ref={containerRef}
-      className="why-exist-section" 
-      aria-label="Why Magicency Exists"
+      id="section-dna" 
+      className={`about-chapter-section dna-chapter ${isRTL ? 'is-rtl' : 'is-ltr'}`}
+      aria-label="Chapter 02: Our DNA and Why We Exist"
     >
-      <div className="container why-exist-container">
+      <div className="container dna-container">
         
-        {/* =========================================================
-            HEADER & CENTRAL THESIS (CONCISE TEXT, VISUAL CARRIES IT)
-            ========================================================= */}
-        <div className="why-exist-header">
-          <div className="why-exist-eyebrow-row">
-            <span className="why-exist-eyebrow">{data.eyebrow || '01 / IDENTITY & CAUSE'}</span>
-            <div className="system-state-indicator">
-              <span className={`status-orb ${isSystemConnected ? 'is-connected' : 'is-fragmented'}`} />
-              <span className="status-label">
-                {isSystemConnected ? (isRTL ? 'وضعیت: سیستم پیوسته' : 'STATE: ONE SYSTEM') : (isRTL ? 'وضعیت: قطعات پراکنده' : 'STATE: FRAGMENTED')}
-              </span>
-            </div>
+        {/* Section Meta Header */}
+        <div className="chapter-header-row">
+          <div className="chapter-meta-tag">
+            <span className="chapter-number">{dna.chapterNum}</span>
+            <span className="chapter-separator">/</span>
+            <span className="chapter-name">{dna.eyebrow}</span>
           </div>
-
-          <h2 className="why-exist-headline">
-            {data.headline || 'Marketing became too fragmented.'}
-          </h2>
-
-          <p className="why-exist-thesis">
-            {data.copy || 'Too many businesses are solving different parts of the same problem with disconnected decisions. Magicency exists to connect those decisions.'}
-          </p>
-
-          {/* Interactive State Toggle */}
-          <div className="why-state-toggle-wrap">
-            <button
-              type="button"
-              onClick={() => setIsSystemConnected(false)}
-              className={`state-toggle-btn ${!isSystemConnected ? 'is-active' : ''}`}
-              aria-pressed={!isSystemConnected}
-            >
-              <span>{isRTL ? 'مشاهده بحران تفرق و جدایی' : 'DISCONNECTED SILOS'}</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => setIsSystemConnected(true)}
-              className={`state-toggle-btn ${isSystemConnected ? 'is-active' : ''}`}
-              aria-pressed={isSystemConnected}
-            >
-              <span className="toggle-glow-dot" />
-              <span>{isRTL ? 'معماری پیوسته: یک سیستم واحد' : 'ONE CONNECTED SYSTEM'}</span>
-            </button>
+          <div className="chapter-status-pill">
+            <span className={`status-indicator-dot ${isConnected ? 'is-live' : 'is-warning'}`} />
+            <span className="status-indicator-label">
+              {isConnected 
+                ? (isRTL ? 'سیستم: حلقه پیوسته فعال' : 'STATE: ONE CONNECTED SYSTEM')
+                : (isRTL ? 'سیستم: جزیره‌های گسسته' : 'STATE: DISCONNECTED SILOS')}
+            </span>
           </div>
         </div>
 
-        {/* =========================================================
-            CINEMATIC FRAGMENT-TO-SYSTEM TRANSFORMATION VISUAL
-            ========================================================= */}
-        <div className={`why-exist-visual-stage ${isSystemConnected ? 'mode-connected' : 'mode-fragmented'}`}>
-          
-          {/* Background Grid & Laser Mesh */}
-          <div className="stage-mesh-canvas" aria-hidden="true">
-            <svg className="stage-lines-svg" viewBox="0 0 1000 500" preserveAspectRatio="none">
-              <defs>
-                <linearGradient id="laserGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#DD0060" stopOpacity="0.8" />
-                  <stop offset="100%" stopColor="#DD0060" stopOpacity="0.3" />
-                </linearGradient>
-              </defs>
-
-              {isSystemConnected && (
-                <>
-                  {/* Central Node Connectors */}
-                  <line x1="160" y1="120" x2="500" y2="250" stroke="url(#laserGrad)" strokeWidth="1.5" className="laser-pulse" />
-                  <line x1="840" y1="120" x2="500" y2="250" stroke="url(#laserGrad)" strokeWidth="1.5" className="laser-pulse" />
-                  <line x1="220" y1="380" x2="500" y2="250" stroke="url(#laserGrad)" strokeWidth="1.5" className="laser-pulse" />
-                  <line x1="780" y1="380" x2="500" y2="250" stroke="url(#laserGrad)" strokeWidth="1.5" className="laser-pulse" />
-                  <line x1="500" y1="80" x2="500" y2="250" stroke="url(#laserGrad)" strokeWidth="1.5" className="laser-pulse" />
-
-                  {/* Peripheral Circuit Ring */}
-                  <polygon points="160,120 500,80 840,120 780,380 220,380" fill="none" stroke="rgba(221, 0, 96, 0.18)" strokeWidth="1" strokeDasharray="4 6" />
-                </>
-              )}
-            </svg>
+        {/* Narrative Intro & Central Problem Statement */}
+        <div className="dna-headline-wrap">
+          <h2 className="dna-statement-title">
+            <span className="statement-line block">{dna.headlinePart1}</span>
+            <span className="statement-line block highlight-pink">{dna.headlinePart2}</span>
+          </h2>
+          <div className="dna-lead-row">
+            <p className="dna-lead-text">{dna.lead}</p>
+            <p className="dna-thesis-text">{dna.thesis}</p>
           </div>
+        </div>
 
-          {/* Central Synthesis Emblem: Appears only in ONE SYSTEM mode */}
-          <div className={`central-one-system-core ${isSystemConnected ? 'is-revealed' : 'is-suppressed'}`}>
-            <div className="core-beacon-rings" aria-hidden="true" />
-            <div className="core-badge-pill">
-              <span className="core-spark">✦</span>
-              <span className="core-code">{data.unifiedBadge || 'ONE SYSTEM'}</span>
+        {/* Editorial Visual Composition: Studio Reality & Authentic Grounding */}
+        {dna.workspace && (
+          <div className="dna-editorial-media-frame">
+            <div className="media-image-wrapper">
+              <img 
+                src={dna.workspace.image} 
+                alt="Magicency Strategic Systems Workspace" 
+                className="dna-studio-photo"
+                width="1200"
+                height="675"
+                loading="lazy"
+                decoding="async"
+              />
+              <div className="media-gradient-vignette" />
+              <div className="media-caption-bar">
+                <span className="caption-dot" />
+                <span className="caption-text">{dna.workspace.caption}</span>
+              </div>
             </div>
-            <p className="core-resolution-line">
-              {data.unifiedStatement || 'When strategy, creative, digital, media, and data converge into one continuous feedback loop, growth stops being accidental.'}
-            </p>
+            <div className="media-side-narrative">
+              <h3 className="side-narrative-title">{dna.workspace.headline}</h3>
+              <p className="side-narrative-copy">{dna.workspace.copy}</p>
+            </div>
+          </div>
+        )}
+
+        {/* Interactive Mode Controller: Disconnected Silos vs Connected System */}
+        <div className="dna-system-interactive-block">
+          <div className="dna-state-controller" role="group" aria-label="System Connectivity Toggle">
+            <button
+              type="button"
+              onClick={() => setIsConnected(false)}
+              className={`state-tab-btn ${!isConnected ? 'is-active' : ''}`}
+              aria-pressed={!isConnected}
+            >
+              <span className="tab-marker">✕</span>
+              <span>{dna.toggleSilos}</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setIsConnected(true)}
+              className={`state-tab-btn ${isConnected ? 'is-active' : ''}`}
+              aria-pressed={isConnected}
+            >
+              <span className="tab-marker glow-pink">✦</span>
+              <span>{dna.toggleSystem}</span>
+            </button>
           </div>
 
-          {/* Five Discipline Fragment Nodes */}
-          <div className="fragments-orbital-grid">
-            {fragments.map((frag, idx) => {
-              const isSelected = activeFragment === frag.id;
-              return (
-                <motion.div
-                  key={frag.id}
-                  onClick={() => setActiveFragment(frag.id)}
-                  className={`fragment-node-card fragment-idx-${idx} ${isSelected ? 'is-selected' : ''}`}
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.25 }}
-                >
-                  <div className="fragment-card-top">
-                    <span className="fragment-number">{frag.num}</span>
-                    <span className="fragment-type-pill">{isSystemConnected ? 'CONNECTED' : 'DISCONNECTED'}</span>
-                  </div>
+          <p className="dna-toggle-thesis-subtext">
+            {isConnected ? dna.systemThesis : dna.lead}
+          </p>
 
-                  <h3 className="fragment-title">{frag.label}</h3>
+          {/* Interactive Silo-to-System Canvas */}
+          <div className={`dna-connective-canvas ${isConnected ? 'mode-connected' : 'mode-disconnected'}`}>
+            
+            {/* Dynamic Vector Circuit Lines */}
+            <div className="canvas-vector-layer" aria-hidden="true">
+              <svg className="vector-connections-svg" viewBox="0 0 1000 360" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="dnaLaser" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#DD0060" stopOpacity="0.8" />
+                    <stop offset="50%" stopColor="#DD0060" stopOpacity="0.3" />
+                    <stop offset="100%" stopColor="#DD0060" stopOpacity="0.8" />
+                  </linearGradient>
+                </defs>
 
-                  <div className="fragment-dynamic-statement">
-                    {isSystemConnected ? (
-                      <p className="fragment-role-text">
-                        <span className="role-prefix">✦ </span>
-                        {frag.connectedRole}
-                      </p>
-                    ) : (
-                      <p className="fragment-issue-text">
-                        <span className="issue-prefix">✕ </span>
-                        {frag.isolatedIssue}
-                      </p>
-                    )}
-                  </div>
+                {isConnected ? (
+                  <>
+                    <line x1="120" y1="180" x2="500" y2="180" stroke="url(#dnaLaser)" strokeWidth="1.5" className="dna-pulse-line" />
+                    <line x1="500" y1="180" x2="880" y2="180" stroke="url(#dnaLaser)" strokeWidth="1.5" className="dna-pulse-line" />
+                    <circle cx="500" cy="180" r="6" fill="#DD0060" />
+                    <circle cx="500" cy="180" r="14" fill="none" stroke="rgba(221, 0, 96, 0.4)" strokeWidth="1" />
+                  </>
+                ) : (
+                  <line x1="80" y1="180" x2="920" y2="180" stroke="rgba(139, 147, 167, 0.15)" strokeWidth="1" strokeDasharray="6 8" />
+                )}
+              </svg>
+            </div>
 
-                  <div className="fragment-card-footer">
-                    <span className="fragment-footer-metric">
-                      {isSystemConnected ? 'SYNERGY // 100%' : 'FRICTION // HIGH'}
-                    </span>
+            {/* 5 Disciplines Fragment Grid */}
+            <div className="dna-fragments-row" role="tablist" aria-label="Operating Disciplines">
+              {fragments.map((frag) => {
+                const IconComponent = ICON_MAP[frag.icon] || Compass;
+                const isSelected = activeFragmentId === frag.id;
+
+                return (
+                  <button
+                    key={frag.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={isSelected}
+                    onClick={() => setActiveFragmentId(frag.id)}
+                    className={`dna-fragment-card ${isSelected ? 'is-selected' : ''} ${isConnected ? 'state-connected' : 'state-isolated'}`}
+                  >
+                    <div className="fragment-card-top">
+                      <span className="fragment-num">{frag.num}</span>
+                      <IconComponent className="fragment-icon" size={18} aria-hidden="true" />
+                    </div>
+
+                    <h4 className="fragment-name">{frag.name}</h4>
+
+                    <div className="fragment-status-tag">
+                      {isConnected ? (
+                        <span className="tag-connected">{isRTL ? 'حلقه پیوسته' : 'CONNECTED'}</span>
+                      ) : (
+                        <span className="tag-isolated">{isRTL ? 'جزیره منفرد' : 'ISOLATED'}</span>
+                      )}
+                    </div>
+
+                    <p className="fragment-role-preview">
+                      {isConnected ? frag.connectedRole : frag.isolatedIssue}
+                    </p>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Active Fragment Detail Console */}
+            <AnimatePresence mode="wait">
+              <motion.div 
+                key={`${activeFragment.id}-${isConnected}`}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.25 }}
+                className="dna-detail-console"
+              >
+                <div className="console-meta-bar">
+                  <span className="console-discipline-tag">
+                    {activeFragment.num} // {activeFragment.name.toUpperCase()}
+                  </span>
+                  <span className="console-state-badge">
+                    {isConnected ? (isRTL ? 'نقش در سیستم یکپارچه' : 'ROLE IN CONNECTED SYSTEM') : (isRTL ? 'عارضه کارکرد جزیره‌ای' : 'FAILURE IN ISOLATED SILO')}
+                  </span>
+                </div>
+
+                <div className="console-content-split">
+                  <div className="console-statement-box">
+                    <h5 className="console-statement-title">
+                      {isConnected ? activeFragment.connectedRole : activeFragment.isolatedIssue}
+                    </h5>
                   </div>
-                </motion.div>
-              );
-            })}
+                  <div className="console-impact-box">
+                    <p className="console-impact-text">
+                      {isConnected 
+                        ? (isRTL ? 'این تخصص مستقیماً با لایه‌های دیگر تبادل سیگنال دارد و با هر تراکنش، هوشمندی سیستم را ارتقا می‌دهد.' : 'This discipline shares telemetry continuously with other layers, turning market interactions into predictable commercial compounding.')
+                        : (isRTL ? 'این بخش در انزوای کامل عمل می‌کند؛ خروجی آن به اهرم تجاری تبدیل نشده و سرمایه در مرزهای ارتباطی اتلاف می‌شود.' : 'This department operates in functional isolation; its outputs fail to create commercial leverage, and marketing capital leaks at every boundary.')}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+
           </div>
-
         </div>
 
       </div>
