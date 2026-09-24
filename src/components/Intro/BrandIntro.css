@@ -13,6 +13,13 @@
   will-change: opacity, transform;
 }
 
+/* Mobile (<768px): Non-occluding alpha background allows immediate Hero/Showreel LCP paint */
+@media (max-width: 767px) {
+  .brand-intro-overlay {
+    background-color: rgba(7, 16, 28, 0.78);
+  }
+}
+
 .brand-intro-overlay.phase-transition {
   opacity: 0.15;
   transform: scale(1.04);

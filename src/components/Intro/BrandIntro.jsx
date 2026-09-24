@@ -33,7 +33,7 @@ export default function BrandIntro({ onComplete }) {
     }, isMobile ? 1800 : 5800);
 
     // Timed Cinematic Sequence
-    // Mobile: 1.3s total sequence for responsive mobile LCP
+    // Mobile: 1.3s total sequence for responsive mobile LCP (non-occluding alpha overlay)
     // Desktop: ~5.2s total rich cinematic sequence
     const tFormation = setTimeout(() => {
       setPhase('formation');
