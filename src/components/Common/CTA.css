@@ -73,7 +73,7 @@
 }
 
 .mag-cta--primary:hover {
-  background-color: #E60A6C;
+  background-color: #D69B4A;
   border-color: rgba(255, 255, 255, 0.3);
   box-shadow: 0 6px 24px rgba(197, 138, 58, 0.38), 0 2px 8px rgba(0, 0, 0, 0.4);
   transform: translateY(-2px);
@@ -82,7 +82,7 @@
 
 .mag-cta--primary:active {
   transform: translateY(0);
-  background-color: #C70054;
+  background-color: #A8752E;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
