@@ -521,6 +521,7 @@ export const StaggeredMenu = ({
         ref={panelRef}
         className="staggered-menu-panel"
         aria-hidden={!open}
+        {...(!open ? { inert: '' } : {})}
         data-lenis-prevent
       >
         <div className="sm-panel-inner">

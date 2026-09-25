@@ -398,7 +398,7 @@ export default function ProblemInsight() {
         </div>
 
         {/* Mobile Pagination Pills (CSS displayed on mobile) */}
-        <div className="pi-mobile-pills" role="tablist" aria-label="Step navigation">
+        <div className="pi-mobile-pills" role="group" aria-label="Step navigation">
           {steps.map((_, idx) => {
             const isCurrent = idx === activeStep;
             return (
@@ -408,7 +408,7 @@ export default function ProblemInsight() {
                 onClick={() => scrollToStep(idx)}
                 className={`pi-mobile-pill ${isCurrent ? 'is-active' : ''}`}
                 aria-label={`Go to step ${padZero(idx)}`}
-                aria-selected={isCurrent}
+                aria-current={isCurrent ? 'step' : undefined}
               />
             );
           })}

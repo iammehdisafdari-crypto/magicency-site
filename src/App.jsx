@@ -14,13 +14,13 @@ import ScrollProgress from './components/About/ScrollProgress';
 import FinalCTA from './components/FinalCTA/FinalCTA';
 import Footer from './components/Footer/Footer';
 
-// Static imports for page components ensure synchronous hydration and match SSR pre-rendered HTML
-import WorkPage from './components/Work/WorkPage';
-import ApproachPage from './components/Approach/ApproachPage';
-import CapabilitiesPage from './components/Capabilities/CapabilitiesPage';
-import BlogPage from './components/Blog/BlogPage';
-import AboutPage from './components/About/AboutPage';
-import NotFoundPage from './components/NotFound/NotFoundPage';
+// Lazy load non-homepage page components
+const WorkPage = lazy(() => import('./components/Work/WorkPage'));
+const ApproachPage = lazy(() => import('./components/Approach/ApproachPage'));
+const CapabilitiesPage = lazy(() => import('./components/Capabilities/CapabilitiesPage'));
+const BlogPage = lazy(() => import('./components/Blog/BlogPage'));
+const AboutPage = lazy(() => import('./components/About/AboutPage'));
+const NotFoundPage = lazy(() => import('./components/NotFound/NotFoundPage'));
 
 // Lazy load user-triggered modal dialogs
 const ProjectDiscovery = lazy(() => import('./components/ProjectDiscovery/ProjectDiscovery'));
@@ -107,15 +107,17 @@ function MainApp() {
 
       {/* Main Experience Flow */}
       <main id="main" className="main-content-flow">
-        {renderPageContent({
-          isNotFound,
-          isWorkPage,
-          isApproachPage,
-          isCapabilitiesPage,
-          isBlogPage,
-          isAboutPage,
-          introFinished
-        })}
+        <Suspense fallback={null}>
+          {renderPageContent({
+            isNotFound,
+            isWorkPage,
+            isApproachPage,
+            isCapabilitiesPage,
+            isBlogPage,
+            isAboutPage,
+            introFinished
+          })}
+        </Suspense>
       </main>
 
       {/* Cinematic Closing Frame Footer */}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
-import { ABOUT_DATA } from '../../data/aboutData';
+import { FAQ_DATA } from '../../data/faqData';
 import { Plus, Minus } from 'lucide-react';
 import './FAQSection.css';
 
@@ -15,7 +15,7 @@ export default function FAQSection({
   chapterTag = isHomepage ? null : undefined,
 }) {
   const { lang, isRTL } = useLanguage();
-  const data = ABOUT_DATA[lang]?.faq || ABOUT_DATA.en?.faq || {};
+  const data = FAQ_DATA[lang] || FAQ_DATA.en || {};
   const items = data.items || [];
   
   // Default open first item

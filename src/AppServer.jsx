@@ -57,45 +57,47 @@ function MainApp() {
 
       {/* Main Experience Flow */}
       <main id="main" className="main-content-flow">
-        {isNotFound ? (
-          <NotFoundPage />
-        ) : isWorkPage ? (
-          <WorkPage />
-        ) : isApproachPage ? (
-          <ApproachPage />
-        ) : isCapabilitiesPage ? (
-          <CapabilitiesPage />
-        ) : isBlogPage ? (
-          <BlogPage />
-        ) : isAboutPage ? (
-          <AboutPage />
-        ) : (
-          <>
-            {/* Phase 01: Hero Section (Vivid Motion Architecture + Mouse Fire Effect) */}
-            <Hero isLoaded={introFinished} />
+        <Suspense fallback={null}>
+          {isNotFound ? (
+            <NotFoundPage />
+          ) : isWorkPage ? (
+            <WorkPage />
+          ) : isApproachPage ? (
+            <ApproachPage />
+          ) : isCapabilitiesPage ? (
+            <CapabilitiesPage />
+          ) : isBlogPage ? (
+            <BlogPage />
+          ) : isAboutPage ? (
+            <AboutPage />
+          ) : (
+            <>
+              {/* Phase 01: Hero Section (Vivid Motion Architecture + Mouse Fire Effect) */}
+              <Hero isLoaded={introFinished} />
 
-            {/* Phase 02: Feature Work (Sticky Scroll Showcase + 4 Projects) */}
-            <FeatureWork />
+              {/* Phase 02: Feature Work (Sticky Scroll Showcase + 4 Projects) */}
+              <FeatureWork />
 
-            {/* Phase 03: Problem / Insight Narrative (Fragmented Silos to Growth Operating System) */}
-            <ProblemInsight />
+              {/* Phase 03: Problem / Insight Narrative (Fragmented Silos to Growth Operating System) */}
+              <ProblemInsight />
 
-            {/* Phase 04: What We Do / Capabilities (3-Pillar Capability Architecture) */}
-            <WhatWeDo />
+              {/* Phase 04: What We Do / Capabilities (3-Pillar Capability Architecture) */}
+              <WhatWeDo />
 
-            {/* Phase 05: Built For Compounding Growth (Exact CodePen SVG + ScrollTrigger Technique) */}
-            <BuiltForCompoundingGrowth />
+              {/* Phase 05: Built For Compounding Growth (Exact CodePen SVG + ScrollTrigger Technique) */}
+              <BuiltForCompoundingGrowth />
 
-            {/* Phase 06: Journal / Insights (Exact Vivid Motion Recreation) */}
-            <Journal />
+              {/* Phase 06: Journal / Insights (Exact Vivid Motion Recreation) */}
+              <Journal />
 
-            {/* Phase 07: FAQ (Exact About Page FAQ Reused as Single Source of Truth) */}
-            <FAQSection isHomepage={true} />
+              {/* Phase 07: FAQ (Exact About Page FAQ Reused as Single Source of Truth) */}
+              <FAQSection isHomepage={true} />
 
-            {/* Phase 08: Final Editorial Conversion Statement */}
-            <FinalCTA />
-          </>
-        )}
+              {/* Phase 08: Final Editorial Conversion Statement */}
+              <FinalCTA />
+            </>
+          )}
+        </Suspense>
       </main>
 
       {/* Cinematic Closing Frame Footer */}

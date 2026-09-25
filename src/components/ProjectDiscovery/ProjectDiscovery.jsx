@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
+import { PROJECT_DISCOVERY_DATA } from './projectDiscoveryData';
 import { X, ArrowRight, ArrowLeft, CheckCircle2 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { trackLeadStart, trackLeadSubmit } from '../../utils/analytics';
 import './ProjectDiscovery.css';
 
 export default function ProjectDiscovery() {
-  const { isModalOpen, setIsModalOpen, t, isRTL } = useLanguage();
+  const { isModalOpen, setIsModalOpen, isRTL, lang } = useLanguage();
   const [step, setStep] = useState(1);
   const [direction, setDirection] = useState(1); // 1 for forward, -1 for backward
 
@@ -48,7 +49,7 @@ export default function ProjectDiscovery() {
 
   if (!isModalOpen) return null;
 
-  const data = t.projectDiscovery;
+  const data = PROJECT_DISCOVERY_DATA[lang] || PROJECT_DISCOVERY_DATA.en;
   if (!data) return null; // Safety
 
   const nextStep = () => {
