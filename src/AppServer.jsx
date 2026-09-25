@@ -1,7 +1,6 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import { RouterProvider, useRouter } from './context/RouterContext';
-import BrandIntro from './components/Intro/BrandIntro';
 import Header from './components/Header/Header';
 import Hero from './components/Hero/Hero';
 import FeatureWork from './components/FeatureWork/FeatureWork';
@@ -26,6 +25,7 @@ import NotFoundPage from './components/NotFound/NotFoundPage';
 const ProjectDiscovery = lazy(() => import('./components/ProjectDiscovery/ProjectDiscovery'));
 import { initGA } from './utils/analytics';
 import SmoothScrollProvider from './components/SmoothScroll/SmoothScrollProvider';
+import { LazyMotion, domAnimation } from 'framer-motion';
 
 import './styles/global.css';
 
@@ -45,9 +45,6 @@ function MainApp() {
 
       {/* Global Viewport Scroll Progress Bar */}
       <ScrollProgress />
-
-      {/* Cinematic Brand Intro Preloader */}
-      <BrandIntro onComplete={() => setIntroFinished(true)} />
 
       {/* Tactile Grain Overlay */}
       <div className="bg-grain" aria-hidden="true" />
@@ -118,7 +115,9 @@ export default function App({ initialPath, initialLang } = {}) {
     <LanguageProvider initialLang={initialLang}>
       <RouterProvider initialPath={initialPath}>
         <SmoothScrollProvider>
-          <MainApp />
+          <LazyMotion features={domAnimation} strict={false}>
+            <MainApp />
+          </LazyMotion>
         </SmoothScrollProvider>
       </RouterProvider>
     </LanguageProvider>

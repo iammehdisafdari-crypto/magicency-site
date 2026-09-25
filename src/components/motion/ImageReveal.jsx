@@ -1,7 +1,8 @@
 import React from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { m, useReducedMotion } from 'framer-motion';
 import { cinematicImageVariants } from './variants';
-import { DURATION, VIEWPORT } from './motionConfig';
+import { DURATION } from './motionConfig';
+import { useInViewObserver } from './useInViewObserver';
 
 const toWebp = (url) => (url ? url.replace(/\.(jpg|jpeg|png)$/, '.webp') : url);
 
@@ -22,9 +23,13 @@ export default function ImageReveal({
   imageClassName = '',
   delay = 0,
   duration = DURATION.IMAGE,
-  viewport = VIEWPORT,
+  viewport,
   trigger
 }) {
+  const [ref, isInView] = useInViewObserver({ 
+    once: viewport?.once ?? true, 
+    amount: viewport?.amount ?? 0.15 
+  });
   const shouldReduceMotion = useReducedMotion();
   const reducedMotion = Boolean(shouldReduceMotion);
   const isControlled = typeof trigger === 'boolean';
@@ -52,17 +57,13 @@ export default function ImageReveal({
   }
 
   return (
-    <motion.div
+    <m.div
+      ref={ref}
       className={`motion-image-reveal-wrapper ${className}`}
       style={{ overflow: 'hidden', position: 'relative' }}
       variants={cinematicImageVariants}
       initial="hidden"
-      {...(isControlled
-        ? { animate: trigger ? 'visible' : 'hidden' }
-        : {
-            whileInView: 'visible',
-            viewport: viewport || VIEWPORT
-          })}
+      animate={isControlled ? (trigger ? 'visible' : 'hidden') : (isInView ? 'visible' : 'hidden')}
       custom={{ delay, duration }}
     >
       {src ? (
@@ -82,6 +83,6 @@ export default function ImageReveal({
       ) : (
         children
       )}
-    </motion.div>
+    </m.div>
   );
 }

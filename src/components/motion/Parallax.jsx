@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { m, useScroll, useTransform } from 'framer-motion';
 
 export default function Parallax({
   children,
@@ -10,7 +10,7 @@ export default function Parallax({
   const [disabled, setDisabled] = useState(false);
 
   useEffect(() => {
-    const isMobile = window.innerWidth < 992;
+    const isMobile = window.matchMedia('(max-width: 991px)').matches;
     const isReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     setDisabled(isMobile || isReduced);
   }, []);
@@ -28,9 +28,9 @@ export default function Parallax({
 
   return (
     <div ref={ref} className={`motion-parallax-container ${className}`} style={{ overflow: 'hidden' }}>
-      <motion.div style={{ y, willChange: 'transform' }}>
+      <m.div style={{ y, willChange: 'transform' }}>
         {children}
-      </motion.div>
+      </m.div>
     </div>
   );
 }

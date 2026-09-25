@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { m, useScroll, useTransform, useSpring } from 'framer-motion';
 
 /**
  * =========================================================
@@ -21,7 +21,7 @@ export default function ScrollLinkedText({
   const [disabled, setDisabled] = useState(false);
 
   useEffect(() => {
-    const isMobile = window.innerWidth < 992;
+    const isMobile = window.matchMedia('(max-width: 991px)').matches;
     const isReduced = Boolean(window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches);
     setDisabled(isMobile || isReduced);
   }, []);
@@ -45,7 +45,7 @@ export default function ScrollLinkedText({
     return <Component ref={ref} className={className}>{children}</Component>;
   }
 
-  const MotionComponent = motion[Component] || motion.div;
+  const MotionComponent = m[Component] || m.div;
 
   return (
     <div ref={ref} className={`scroll-linked-text-wrapper ${className}`} style={{ overflow: 'visible' }}>

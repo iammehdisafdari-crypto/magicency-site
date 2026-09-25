@@ -595,6 +595,8 @@ async function prerender() {
     css: [{ raw: rawCritical }],
     safelist: {
       standard: [
+        /^hero-/,
+        /^row-/,
         /^is-/,
         /^has-/,
         /^vm-/,

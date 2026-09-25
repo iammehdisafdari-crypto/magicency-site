@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, useSpring } from 'framer-motion';
+import { m, AnimatePresence, useSpring } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 import { useRouter } from '../../context/RouterContext';
 import { ArrowUpRight } from 'lucide-react';
@@ -25,7 +25,9 @@ export default function Journal() {
 
   useEffect(() => {
     setIsTouchDevice(
-      'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.innerWidth < 992
+      'ontouchstart' in window ||
+      navigator.maxTouchPoints > 0 ||
+      Boolean(window.matchMedia?.('(max-width: 991px)')?.matches)
     );
   }, []);
 
@@ -125,7 +127,7 @@ export default function Journal() {
 
           <Stagger stagger={0.08} delay={0.1} className="journal-featured-grid">
             {articles.map((art) => (
-              <motion.a 
+              <m.a 
                 key={art.id} 
                 href={`/blog/${art.slug || 'more-marketing-not-more-growth'}`}
                 className="journal-featured-card"
@@ -173,7 +175,7 @@ export default function Journal() {
                     <ArrowUpRight size={15} className="journal-card-arrow" />
                   </div>
                 </div>
-              </motion.a>
+              </m.a>
             ))}
           </Stagger>
         </div>
@@ -206,7 +208,7 @@ export default function Journal() {
               const isExpandedMobile = expandedMobileArticle === art.id;
 
               return (
-                <motion.a
+                <m.a
                   key={art.id}
                   href={`/blog/${art.slug || 'more-marketing-not-more-growth'}`}
                   className={`journal-list-item ${isHovered ? 'is-hovered' : ''} ${isExpandedMobile ? 'is-expanded-mobile' : ''}`}
@@ -248,7 +250,7 @@ export default function Journal() {
                   {isTouchDevice && (
                     <AnimatePresence>
                       {isExpandedMobile && (
-                        <motion.div
+                        <m.div
                           className="journal-mobile-expanded-media"
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: 'auto', opacity: 1 }}
@@ -259,11 +261,11 @@ export default function Journal() {
                             <source srcSet={toWebp(art.image)} type="image/webp" />
                             <img src={art.image} alt={art.alt} className="journal-mobile-img" width="600" height="400" loading="lazy" decoding="async" />
                           </picture>
-                        </motion.div>
+                        </m.div>
                       )}
                     </AnimatePresence>
                   )}
-                </motion.a>
+                </m.a>
               );
             })}
           </Stagger>
@@ -294,7 +296,7 @@ export default function Journal() {
       {!isTouchDevice && (
         <AnimatePresence>
           {hoveredArticle && (
-            <motion.div
+            <m.div
               className="journal-floating-cursor-preview"
               style={{
                 x: mouseX,
@@ -340,7 +342,7 @@ export default function Journal() {
                   <span className="journal-floating-tag">{hoveredArticle.category}</span>
                 </div>
               </div>
-            </motion.div>
+            </m.div>
           )}
         </AnimatePresence>
       )}

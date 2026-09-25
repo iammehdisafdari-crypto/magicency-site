@@ -1,5 +1,5 @@
 import React, { useCallback, useLayoutEffect, useEffect, useRef, useState } from 'react';
-import { gsap } from 'gsap';
+import { getGsap, runOnIdle } from '../../utils/gsapLoader';
 import './StaggeredMenu.css';
 
 const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
@@ -49,6 +49,17 @@ export const StaggeredMenu = ({
   const toggleBtnRef = useRef(null);
   const busyRef = useRef(false);
   const itemEntranceTweenRef = useRef(null);
+  const gsapRef = useRef(null);
+
+  const ensureGsap = useCallback(() => {
+    if (!gsapRef.current) {
+      return getGsap().then((loaded) => {
+        if (loaded) gsapRef.current = loaded;
+        return loaded;
+      });
+    }
+    return Promise.resolve(gsapRef.current);
+  }, []);
 
   // Sync text labels on prop change
   useEffect(() => {
@@ -68,47 +79,59 @@ export const StaggeredMenu = ({
     }
   }, [open]);
 
-  // Initial GSAP setup deferred to requestAnimationFrame so it does not block mount or cause forced reflow
+  // Lazy GSAP setup deferred to idle time and batched via requestAnimationFrame
   useEffect(() => {
     let rafId = null;
     let ctx = null;
+    let isMounted = true;
 
-    rafId = requestAnimationFrame(() => {
-      ctx = gsap.context(() => {
-        const panel = panelRef.current;
-        const preContainer = preLayersRef.current;
-        const plusH = plusHRef.current;
-        const plusV = plusVRef.current;
-        const icon = iconRef.current;
-        const textInner = textInnerRef.current;
-        if (!panel || !plusH || !plusV || !icon || !textInner) return;
+    const cancelIdle = runOnIdle(() => {
+      ensureGsap().then((gsap) => {
+        if (!isMounted || !gsap) return;
+        rafId = requestAnimationFrame(() => {
+          if (!isMounted) return;
+          ctx = gsap.context(() => {
+            const panel = panelRef.current;
+            const preContainer = preLayersRef.current;
+            const plusH = plusHRef.current;
+            const plusV = plusVRef.current;
+            const icon = iconRef.current;
+            const textInner = textInnerRef.current;
+            if (!panel || !plusH || !plusV || !icon || !textInner) return;
 
-        let preLayers = [];
-        if (preContainer) {
-          preLayers = Array.from(preContainer.querySelectorAll('.sm-prelayer'));
-        }
-        preLayerElsRef.current = preLayers;
+            let preLayers = [];
+            if (preContainer) {
+              preLayers = Array.from(preContainer.querySelectorAll('.sm-prelayer'));
+            }
+            preLayerElsRef.current = preLayers;
 
-        const offscreen = position === 'left' ? -100 : 100;
-        gsap.set([panel, ...preLayers], { xPercent: offscreen, opacity: 1 });
-        if (preContainer) {
-          gsap.set(preContainer, { xPercent: 0, opacity: 1 });
-        }
-        gsap.set(plusH, { transformOrigin: '50% 50%', rotate: 0 });
-        gsap.set(plusV, { transformOrigin: '50% 50%', rotate: 90 });
-        gsap.set(icon, { rotate: 0, transformOrigin: '50% 50%' });
-        gsap.set(textInner, { yPercent: 0 });
-        if (toggleBtnRef.current) gsap.set(toggleBtnRef.current, { color: menuButtonColor });
+            const offscreen = position === 'left' ? -100 : 100;
+            gsap.set([panel, ...preLayers], { xPercent: offscreen, opacity: 1 });
+            if (preContainer) {
+              gsap.set(preContainer, { xPercent: 0, opacity: 1 });
+            }
+            gsap.set(plusH, { transformOrigin: '50% 50%', rotate: 0 });
+            gsap.set(plusV, { transformOrigin: '50% 50%', rotate: 90 });
+            gsap.set(icon, { rotate: 0, transformOrigin: '50% 50%' });
+            gsap.set(textInner, { yPercent: 0 });
+            if (toggleBtnRef.current) gsap.set(toggleBtnRef.current, { color: menuButtonColor });
+          });
+        });
       });
-    });
+    }, 2500);
 
     return () => {
+      isMounted = false;
+      cancelIdle();
       if (rafId) cancelAnimationFrame(rafId);
       ctx?.revert();
     };
-  }, [menuButtonColor, position]);
+  }, [ensureGsap, menuButtonColor, position]);
 
-  const buildOpenTimeline = useCallback(() => {
+  const buildOpenTimeline = useCallback((gsapInstance) => {
+    const gsap = gsapInstance || gsapRef.current;
+    if (!gsap) return null;
+
     const panel = panelRef.current;
     const layers = preLayerElsRef.current?.length
       ? preLayerElsRef.current
@@ -252,13 +275,18 @@ export const StaggeredMenu = ({
     return tl;
   }, [position, isRTL]);
 
-  const playOpen = useCallback(() => {
+  const playOpen = useCallback(async () => {
     if (closeTweenRef.current) {
       closeTweenRef.current.kill();
       closeTweenRef.current = null;
     }
     busyRef.current = true;
-    const tl = buildOpenTimeline();
+    const gsap = await ensureGsap();
+    if (!gsap) {
+      busyRef.current = false;
+      return;
+    }
+    const tl = buildOpenTimeline(gsap);
     if (tl) {
       tl.eventCallback('onComplete', () => {
         busyRef.current = false;
@@ -267,9 +295,9 @@ export const StaggeredMenu = ({
     } else {
       busyRef.current = false;
     }
-  }, [buildOpenTimeline]);
+  }, [buildOpenTimeline, ensureGsap]);
 
-  const playClose = useCallback(() => {
+  const playClose = useCallback(async () => {
     openTlRef.current?.kill();
     openTlRef.current = null;
     itemEntranceTweenRef.current?.kill();
@@ -279,6 +307,9 @@ export const StaggeredMenu = ({
       ? preLayerElsRef.current
       : Array.from(preLayersRef.current?.querySelectorAll('.sm-prelayer') || []);
     if (!panel) return;
+
+    const gsap = await ensureGsap();
+    if (!gsap) return;
 
     const all = [...layers, panel];
     closeTweenRef.current?.kill();
@@ -308,11 +339,13 @@ export const StaggeredMenu = ({
         busyRef.current = false;
       }
     });
-  }, [position, isRTL]);
+  }, [position, isRTL, ensureGsap]);
 
-  const animateIcon = useCallback((opening) => {
+  const animateIcon = useCallback(async (opening) => {
     const icon = iconRef.current;
     if (!icon) return;
+    const gsap = await ensureGsap();
+    if (!gsap) return;
     spinTweenRef.current?.kill();
     if (opening) {
       spinTweenRef.current = gsap.to(icon, {
@@ -329,12 +362,14 @@ export const StaggeredMenu = ({
         overwrite: 'auto'
       });
     }
-  }, []);
+  }, [ensureGsap]);
 
   const animateColor = useCallback(
-    (opening) => {
+    async (opening) => {
       const btn = toggleBtnRef.current;
       if (!btn) return;
+      const gsap = await ensureGsap();
+      if (!gsap) return;
       colorTweenRef.current?.kill();
       if (changeMenuColorOnOpen) {
         const targetColor = opening ? openMenuButtonColor : menuButtonColor;
@@ -348,24 +383,26 @@ export const StaggeredMenu = ({
         gsap.set(btn, { color: menuButtonColor });
       }
     },
-    [openMenuButtonColor, menuButtonColor, changeMenuColorOnOpen]
+    [openMenuButtonColor, menuButtonColor, changeMenuColorOnOpen, ensureGsap]
   );
 
   useEffect(() => {
     if (toggleBtnRef.current) {
-      if (changeMenuColorOnOpen) {
-        const targetColor = openRef.current ? openMenuButtonColor : menuButtonColor;
-        gsap.set(toggleBtnRef.current, { color: targetColor });
+      const targetColor = openRef.current && changeMenuColorOnOpen ? openMenuButtonColor : menuButtonColor;
+      if (gsapRef.current) {
+        gsapRef.current.set(toggleBtnRef.current, { color: targetColor });
       } else {
-        gsap.set(toggleBtnRef.current, { color: menuButtonColor });
+        toggleBtnRef.current.style.color = targetColor;
       }
     }
   }, [changeMenuColorOnOpen, menuButtonColor, openMenuButtonColor]);
 
   const animateText = useCallback(
-    (opening) => {
+    async (opening) => {
       const inner = textInnerRef.current;
       if (!inner) return;
+      const gsap = await ensureGsap();
+      if (!gsap) return;
       textCycleAnimRef.current?.kill();
 
       const current = opening ? menuLabel : closeLabel;
@@ -390,7 +427,7 @@ export const StaggeredMenu = ({
         ease: 'power4.out'
       });
     },
-    [menuLabel, closeLabel]
+    [menuLabel, closeLabel, ensureGsap]
   );
 
   const toggleMenu = useCallback(() => {
@@ -509,6 +546,9 @@ export const StaggeredMenu = ({
             aria-expanded={open}
             aria-controls="staggered-menu-panel"
             onClick={toggleMenu}
+            onMouseEnter={ensureGsap}
+            onTouchStart={ensureGsap}
+            onFocus={ensureGsap}
             type="button"
           >
             <span ref={textWrapRef} className="sm-toggle-textWrap" aria-hidden="true">

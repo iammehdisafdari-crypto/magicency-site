@@ -1,11 +1,7 @@
 import React, { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { getGsapWithScrollTrigger } from '../../utils/gsapLoader';
 import { useLanguage } from '../../context/LanguageContext';
 import './BuiltForCompoundingGrowth.css';
-
-// Ensure ScrollTrigger plugin is registered with GSAP
-gsap.registerPlugin(ScrollTrigger);
 
 export default function BuiltForCompoundingGrowth() {
   const { t, isRTL } = useLanguage();
@@ -36,90 +32,90 @@ export default function BuiltForCompoundingGrowth() {
     // Respect prefers-reduced-motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) {
-      gsap.set(section, { '--strokeDashoffset': '-1200px' });
+      section.style.setProperty('--strokeDashoffset', '-1200px');
       return;
     }
 
-    const ctx = gsap.context(() => {
-      const nodes = section.querySelectorAll('.cg-discipline-node');
+    let isDestroyed = false;
+    let ctx = null;
+    let observer = null;
+    let rafId = null;
 
-      // EXACT SCROLL SYNCHRONIZATION FROM CODEPEN REFERENCE KwgGBRp:
-      // 1. trigger: section
-      // 2. start: "top top" (begins in lockstep when user enters section after WHAT WE DO)
-      // 3. end: "bottom bottom" (completes exactly when user reaches bottom of section)
-      // 4. scrub: true (DIRECT 1:1 scroll binding, ZERO time lag, ZERO independent duration)
-      // 5. scrollProgress = - (2400 * thisProgress)
-      ScrollTrigger.create({
-        trigger: section,
-        start: 'top top',
-        end: 'bottom bottom',
-        scrub: true,
-        invalidateOnRefresh: true,
-        onUpdate: (self) => {
-          const thisProgress = self.progress;
+    // Initialize ScrollTrigger only when section becomes visible via IntersectionObserver
+    const initScrollTrigger = () => {
+      if (isDestroyed) return;
 
-          // Exact math relationship from CodePen source code:
-          // let scrollProgress = - ( 2400 * thisProgress );
-          // gsap.set("body", { "--strokeDashoffset": scrollProgress });
-          const scrollProgress = - (2400 * thisProgress);
-          gsap.set(section, { '--strokeDashoffset': `${scrollProgress}px` });
+      getGsapWithScrollTrigger().then((loaded) => {
+        if (isDestroyed || !loaded || !sectionRef.current) return;
+        const { gsap, ScrollTrigger } = loaded;
 
-          // High-performance DOM classList update (zero React re-renders on scroll)
-          const activeIndex = Math.min(
-            disciplines.length - 1,
-            Math.max(0, Math.floor(thisProgress * disciplines.length))
-          );
+        // Batch timeline/ScrollTrigger creation into a single requestAnimationFrame
+        rafId = requestAnimationFrame(() => {
+          if (isDestroyed || !sectionRef.current) return;
 
-          if (activeIndex !== lastActiveIndexRef.current) {
-            lastActiveIndexRef.current = activeIndex;
-            nodes.forEach((node, idx) => {
-              if (idx < activeIndex) {
-                node.classList.add('is-passed');
-                node.classList.remove('is-current');
-              } else if (idx === activeIndex) {
-                node.classList.add('is-passed');
-                node.classList.add('is-current');
-              } else {
-                node.classList.remove('is-passed');
-                node.classList.remove('is-current');
+          ctx = gsap.context(() => {
+            const nodes = section.querySelectorAll('.cg-discipline-node');
+
+            ScrollTrigger.create({
+              trigger: section,
+              start: 'top top',
+              end: 'bottom bottom',
+              scrub: true,
+              invalidateOnRefresh: true,
+              onUpdate: (self) => {
+                const thisProgress = self.progress;
+                const scrollProgress = - (2400 * thisProgress);
+                section.style.setProperty('--strokeDashoffset', `${scrollProgress}px`);
+
+                // High-performance DOM classList update (zero React re-renders on scroll)
+                const activeIndex = Math.min(
+                  disciplines.length - 1,
+                  Math.max(0, Math.floor(thisProgress * disciplines.length))
+                );
+
+                if (activeIndex !== lastActiveIndexRef.current) {
+                  lastActiveIndexRef.current = activeIndex;
+                  nodes.forEach((node, idx) => {
+                    if (idx < activeIndex) {
+                      node.classList.add('is-passed');
+                      node.classList.remove('is-current');
+                    } else if (idx === activeIndex) {
+                      node.classList.add('is-passed');
+                      node.classList.add('is-current');
+                    } else {
+                      node.classList.remove('is-passed');
+                      node.classList.remove('is-current');
+                    }
+                  });
+                }
               }
             });
-          }
-        }
-      });
-    }, sectionRef);
+          }, sectionRef);
 
-    // Ensure ScrollTrigger refreshes when layout stabilizes (intro finishes, fonts load, upstream sections resize)
-    const handleRefresh = () => {
-      ScrollTrigger.refresh();
+          ScrollTrigger.refresh();
+        });
+      });
     };
 
-    window.addEventListener('load', handleRefresh);
-    if (document.fonts?.ready) {
-      document.fonts.ready.then(handleRefresh);
-    }
+    observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry.isIntersecting) {
+          observer.disconnect();
+          observer = null;
+          initScrollTrigger();
+        }
+      },
+      { rootMargin: '400px 0px 400px 0px' }
+    );
 
-    // Refresh after short delays to catch async layout shifts from Hero/ProblemInsight/Intro
-    const timer1 = setTimeout(handleRefresh, 300);
-    const timer2 = setTimeout(handleRefresh, 1000);
-    const timer3 = setTimeout(handleRefresh, 2200);
-
-    // Observe body for upstream layout changes (e.g. accordion expansions, intro dismissal)
-    let ro = null;
-    if (typeof ResizeObserver !== 'undefined') {
-      ro = new ResizeObserver(() => {
-        ScrollTrigger.refresh();
-      });
-      ro.observe(document.body);
-    }
+    observer.observe(section);
 
     return () => {
-      window.removeEventListener('load', handleRefresh);
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-      clearTimeout(timer3);
-      if (ro) ro.disconnect();
-      ctx.revert();
+      isDestroyed = true;
+      if (observer) observer.disconnect();
+      if (rafId) cancelAnimationFrame(rafId);
+      ctx?.revert();
     };
   }, [disciplines.length]);
 

@@ -2,10 +2,26 @@ import React, { useState, useEffect } from 'react';
 import './BrandIntro.css';
 
 export default function BrandIntro({ onComplete }) {
-  const [phase, setPhase] = useState('signal'); // 'signal' | 'formation' | 'identity' | 'transition' | 'done'
-  const [shouldRender, setShouldRender] = useState(true);
+  // Never render blocking preloader in SSR / initial HTML so Hero paints immediately
+  if (typeof window === 'undefined') return null;
+
+  const [phase, setPhase] = useState('signal');
+  const [shouldRender, setShouldRender] = useState(() => {
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('intro') === '1') return true;
+      return !sessionStorage.getItem('magicency_intro_played');
+    } catch (e) {
+      return false;
+    }
+  });
 
   useEffect(() => {
+    if (!shouldRender) {
+      onComplete?.();
+      return;
+    }
+
     // Check reduced motion preference
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     if (mediaQuery.matches) {
@@ -14,64 +30,34 @@ export default function BrandIntro({ onComplete }) {
       return;
     }
 
-    // Check if intro was already played in this session (unless URL has ?intro=1)
-    const urlParams = new URLSearchParams(window.location.search);
-    const forceIntro = urlParams.get('intro') === '1';
-    const played = sessionStorage.getItem('magicency_intro_played');
+    // Record session play immediately so subsequent navigations / reloads bypass instantly
+    try {
+      sessionStorage.setItem('magicency_intro_played', 'true');
+    } catch (e) {}
 
-    if (played && !forceIntro) {
-      setShouldRender(false);
-      onComplete?.();
-      return;
-    }
-
-    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-
-    // Failsafe timeout
-    const failsafe = setTimeout(() => {
-      handleComplete();
-    }, isMobile ? 1800 : 5800);
-
-    // Timed Cinematic Sequence
-    // Mobile: 1.3s total sequence for responsive mobile LCP (non-occluding alpha overlay)
-    // Desktop: ~5.2s total rich cinematic sequence
-    const tFormation = setTimeout(() => {
-      setPhase('formation');
-    }, isMobile ? 250 : 1200);
-
-    const tIdentity = setTimeout(() => {
-      setPhase('identity');
-    }, isMobile ? 600 : 2800);
-
+    // Shortened sequence: max 400ms total
     const tTransition = setTimeout(() => {
       setPhase('transition');
       onComplete?.();
-    }, isMobile ? 1000 : 4500);
+    }, 200);
 
     const tDone = setTimeout(() => {
       handleComplete();
-    }, isMobile ? 1300 : 5100);
+    }, 380);
 
     return () => {
-      clearTimeout(failsafe);
-      clearTimeout(tFormation);
-      clearTimeout(tIdentity);
       clearTimeout(tTransition);
       clearTimeout(tDone);
     };
-  }, []);
+  }, [shouldRender]);
 
   const handleComplete = () => {
     try {
       sessionStorage.setItem('magicency_intro_played', 'true');
-    } catch (e) {
-      // Ignore storage errors in private mode
-    }
+    } catch (e) {}
     setPhase('done');
-    setTimeout(() => {
-      setShouldRender(false);
-      onComplete?.();
-    }, 400);
+    setShouldRender(false);
+    onComplete?.();
   };
 
   if (!shouldRender) return null;

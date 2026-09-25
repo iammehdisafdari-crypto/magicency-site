@@ -28,6 +28,7 @@ const NotFoundPage = lazy(() => import('./components/NotFound/NotFoundPage'));
 const ProjectDiscovery = lazy(() => import('./components/ProjectDiscovery/ProjectDiscovery'));
 import { initGA } from './utils/analytics';
 import SmoothScrollProvider from './components/SmoothScroll/SmoothScrollProvider';
+import { LazyMotion, domAnimation } from 'framer-motion';
 
 import './styles/global.css';
 
@@ -142,7 +143,9 @@ export default function App({ initialPath, initialLang } = {}) {
     <LanguageProvider initialLang={initialLang}>
       <RouterProvider initialPath={initialPath}>
         <SmoothScrollProvider>
-          <MainApp />
+          <LazyMotion features={domAnimation} strict={false}>
+            <MainApp />
+          </LazyMotion>
         </SmoothScrollProvider>
       </RouterProvider>
     </LanguageProvider>

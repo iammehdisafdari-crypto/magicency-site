@@ -1,7 +1,8 @@
 import React from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { m, useReducedMotion } from 'framer-motion';
 import { bodyTextVariants } from './variants';
-import { DURATION, STAGGER, VIEWPORT } from './motionConfig';
+import { DURATION, STAGGER } from './motionConfig';
+import { useInViewObserver } from './useInViewObserver';
 
 /**
  * =========================================================
@@ -17,13 +18,17 @@ export default function RevealBody({
   delay = STAGGER.BODY_DELAY,
   duration = DURATION.BODY,
   y = 12,
-  viewport = VIEWPORT,
+  viewport,
   trigger
 }) {
+  const [ref, isInView] = useInViewObserver({ 
+    once: viewport?.once ?? true, 
+    amount: viewport?.amount ?? 0.15 
+  });
   const shouldReduceMotion = useReducedMotion();
   const reducedMotion = Boolean(shouldReduceMotion);
 
-  const MotionComponent = motion[Component] || motion.p;
+  const MotionComponent = m[Component] || m.p;
   const isControlled = typeof trigger === 'boolean';
 
   if (reducedMotion) {
@@ -32,15 +37,11 @@ export default function RevealBody({
 
   return (
     <MotionComponent
+      ref={ref}
       className={`reveal-body-root ${className}`}
       variants={bodyTextVariants}
       initial="hidden"
-      {...(isControlled
-        ? { animate: trigger ? 'visible' : 'hidden' }
-        : {
-            whileInView: 'visible',
-            viewport: viewport || VIEWPORT
-          })}
+      animate={isControlled ? (trigger ? 'visible' : 'hidden') : (isInView ? 'visible' : 'hidden')}
       custom={{ delay, duration, y }}
     >
       {children}

@@ -1,6 +1,7 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { staggerContainerVariants } from './variants';
+import { useInViewObserver } from './useInViewObserver';
 
 export default function Stagger({
   children,
@@ -10,20 +11,17 @@ export default function Stagger({
   delay = 0,
   trigger
 }) {
-  const MotionComponent = motion[Component] || motion.div;
+  const [ref, isInView] = useInViewObserver({ once: true, amount: 0.15 });
+  const MotionComponent = m[Component] || m.div;
   const isControlled = typeof trigger === 'boolean';
 
   return (
     <MotionComponent
+      ref={ref}
       className={`motion-stagger-group ${className}`}
       variants={staggerContainerVariants}
       initial="hidden"
-      {...(isControlled
-        ? { animate: trigger ? 'visible' : 'hidden' }
-        : {
-            whileInView: 'visible',
-            viewport: { once: true, amount: 0.15 }
-          })}
+      animate={isControlled ? (trigger ? 'visible' : 'hidden') : (isInView ? 'visible' : 'hidden')}
       custom={{ stagger, delay }}
     >
       {children}

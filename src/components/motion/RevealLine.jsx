@@ -1,7 +1,8 @@
 import React from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { m, useReducedMotion } from 'framer-motion';
 import { maskedLineVariants } from './variants';
-import { DURATION, VIEWPORT } from './motionConfig';
+import { DURATION } from './motionConfig';
+import { useInViewObserver } from './useInViewObserver';
 
 /**
  * =========================================================
@@ -15,9 +16,13 @@ export default function RevealLine({
   className = '',
   delay = 0,
   duration = DURATION.HEADLINE,
-  viewport = VIEWPORT,
+  viewport,
   trigger
 }) {
+  const [ref, isInView] = useInViewObserver({ 
+    once: viewport?.once ?? true, 
+    amount: viewport?.amount ?? 0.15 
+  });
   const shouldReduceMotion = useReducedMotion();
   const reducedMotion = Boolean(shouldReduceMotion);
 
@@ -29,6 +34,7 @@ export default function RevealLine({
 
   return (
     <span
+      ref={ref}
       className={`motion-line-mask ${className}`}
       style={{
         display: 'block',
@@ -36,23 +42,18 @@ export default function RevealLine({
         lineHeight: 'inherit'
       }}
     >
-      <motion.span
+      <m.span
         style={{
           display: 'inline-block',
           willChange: 'transform, opacity'
         }}
         variants={maskedLineVariants}
         initial="hidden"
-        {...(isControlled
-          ? { animate: trigger ? 'visible' : 'hidden' }
-          : {
-              whileInView: 'visible',
-              viewport: viewport || VIEWPORT
-            })}
+        animate={isControlled ? (trigger ? 'visible' : 'hidden') : (isInView ? 'visible' : 'hidden')}
         custom={{ delay, duration }}
       >
         {children}
-      </motion.span>
+      </m.span>
     </span>
   );
 }

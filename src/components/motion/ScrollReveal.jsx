@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { motion, useScroll, useTransform, useSpring, useReducedMotion } from 'framer-motion';
+import { m, useScroll, useTransform, useSpring, useReducedMotion } from 'framer-motion';
 
 /**
  * =========================================================
@@ -37,7 +37,7 @@ export default function ScrollReveal({
     return <Component className={`scroll-reveal-static ${className}`}>{children}</Component>;
   }
 
-  const MotionComponent = motion[Component] || motion.div;
+  const MotionComponent = m[Component] || m.div;
 
   return (
     <div ref={ref} className="scroll-reveal-wrapper">

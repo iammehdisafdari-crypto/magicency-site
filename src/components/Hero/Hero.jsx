@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
-import { DURATION, maskedLineVariants, editorialVariants } from '../motion';
 import { trackCtaClick } from '../../utils/analytics';
 import LazyVimeoPlayer from '../Common/LazyVimeoPlayer';
 import CTA from '../Common/CTA';
@@ -20,7 +18,7 @@ export default function Hero({ isLoaded = true }) {
 
     const isReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
     const isTouchOrMobile = (
-      window.innerWidth < 992 ||
+      Boolean(window.matchMedia?.('(max-width: 991px)')?.matches) ||
       'ontouchstart' in window ||
       (navigator.maxTouchPoints && navigator.maxTouchPoints > 0) ||
       Boolean(window.matchMedia?.('(pointer: coarse)')?.matches)
@@ -94,42 +92,24 @@ export default function Hero({ isLoaded = true }) {
           <h1 className="vm-hero-giant-title">
             {/* Row 1 Masked Reveal */}
             <span className="title-row row-1 motion-line-mask">
-              <motion.span
-                style={{ display: 'inline-block', willChange: 'transform, opacity' }}
-                variants={maskedLineVariants}
-                initial="hidden"
-                animate={isLoaded ? 'visible' : 'hidden'}
-                custom={{ delay: 0.08, duration: DURATION.HEADLINE }}
-              >
+              <span className="hero-line-inner row-1">
                 {t.hero.titleLine1}
                 <em className="italic-serif-word">{t.hero.italicWord1}</em>
-              </motion.span>
+              </span>
             </span>
 
             {/* Row 2 Masked Reveal */}
             <span className="title-row row-2 motion-line-mask">
-              <motion.span
-                style={{ display: 'inline-block', willChange: 'transform, opacity' }}
-                variants={maskedLineVariants}
-                initial="hidden"
-                animate={isLoaded ? 'visible' : 'hidden'}
-                custom={{ delay: 0.15, duration: DURATION.HEADLINE }}
-              >
+              <span className="hero-line-inner row-2">
                 {t.hero.titleLine2}
                 <em className="italic-serif-word">{t.hero.italicWord2}</em>
                 {t.hero.titleLine2Suffix}
-              </motion.span>
+              </span>
             </span>
           </h1>
 
           {/* Growth System CTA Group (Primary + Secondary) */}
-          <motion.div
-            className="vm-hero-cta-wrap"
-            variants={editorialVariants}
-            initial="hidden"
-            animate={isLoaded ? 'visible' : 'hidden'}
-            custom={{ delay: 0.22, duration: DURATION.BODY, y: 12 }}
-          >
+          <div className="vm-hero-cta-wrap hero-cta-reveal">
             <CTA
               variant="primary"
               href="#contact"
@@ -155,17 +135,13 @@ export default function Hero({ isLoaded = true }) {
             >
               {t.hero.secondaryCta || 'SEE HOW WE THINK'}
             </CTA>
-          </motion.div>
+          </div>
         </div>
 
         {/* Bottom Clients & Partners Marquee */}
-        <motion.div
-          className="vm-hero-clients-bar"
+        <div
+          className={`vm-hero-clients-bar hero-clients-reveal ${isLoaded ? 'is-revealed' : ''}`}
           aria-label="Clients and Partners"
-          variants={editorialVariants}
-          initial="hidden"
-          animate={isLoaded ? 'visible' : 'hidden'}
-          custom={{ delay: 0.32, duration: DURATION.BODY, y: 16 }}
         >
           <div className="vm-clients-marquee">
             <div className="vm-clients-track">
@@ -183,7 +159,7 @@ export default function Hero({ isLoaded = true }) {
               ))}
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
 
       {/* =========================================================

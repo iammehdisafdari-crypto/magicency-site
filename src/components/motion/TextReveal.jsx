@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { maskedLineVariants } from './variants';
 
 export default function TextReveal({
@@ -30,7 +30,7 @@ export default function TextReveal({
             lineHeight: 'inherit'
           }}
         >
-          <motion.span
+          <m.span
             style={{ display: 'inline-block', willChange: 'transform, opacity' }}
             variants={maskedLineVariants}
             initial="hidden"
@@ -41,7 +41,7 @@ export default function TextReveal({
             }}
           >
             {line}
-          </motion.span>
+          </m.span>
         </span>
       ))}
     </Component>

@@ -1,6 +1,7 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { editorialVariants } from './variants';
+import { useInViewObserver } from './useInViewObserver';
 
 export default function Reveal({
   children,
@@ -11,22 +12,17 @@ export default function Reveal({
   y = 24,
   trigger
 }) {
-  const MotionComponent = motion[Component] || motion.div;
-
-  // If trigger prop is passed, use controlled animation; otherwise use whileInView
+  const [ref, isInView] = useInViewObserver({ once: true, amount: 0.15 });
+  const MotionComponent = m[Component] || m.div;
   const isControlled = typeof trigger === 'boolean';
 
   return (
     <MotionComponent
+      ref={ref}
       className={`motion-reveal ${className}`}
       variants={editorialVariants}
       initial="hidden"
-      {...(isControlled
-        ? { animate: trigger ? 'visible' : 'hidden' }
-        : {
-            whileInView: 'visible',
-            viewport: { once: true, amount: 0.15 }
-          })}
+      animate={isControlled ? (trigger ? 'visible' : 'hidden') : (isInView ? 'visible' : 'hidden')}
       custom={{ delay, duration, y }}
     >
       {children}

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 import { useRouter } from '../../context/RouterContext';
 import ScrambleText from '../Header/ScrambleText';
@@ -135,7 +135,7 @@ export default function Footer() {
         <div className="footer-emails grid">
           <Stagger stagger={0.08} delay={0.1} className="footer-emails-block">
             {f.locations.map((loc) => (
-              <motion.div key={loc.email || loc.city} variants={editorialVariants} className="footer-emails-block-group">
+              <m.div key={loc.email || loc.city} variants={editorialVariants} className="footer-emails-block-group">
                 <div className="footer-location-name">{loc.city}</div>
                 <a
                   href={`mailto:${loc.email}`}
@@ -144,7 +144,7 @@ export default function Footer() {
                 >
                   {loc.email}
                 </a>
-              </motion.div>
+              </m.div>
             ))}
           </Stagger>
         </div>
@@ -156,7 +156,7 @@ export default function Footer() {
           {/* Social Links with Scramble Effect */}
           <Stagger stagger={0.05} className="footer-useful-social">
             {f.socials.map((soc) => (
-              <motion.a
+              <m.a
                 key={soc.name}
                 href={soc.url}
                 target="_blank"
@@ -167,14 +167,14 @@ export default function Footer() {
                 className="footer-useful-social-link"
               >
                 <ScrambleText text={soc.name} />
-              </motion.a>
+              </m.a>
             ))}
           </Stagger>
 
           {/* Primary Navigation Links with Scramble Effect */}
           <Stagger stagger={0.05} delay={0.05} className="footer-useful-legal">
             {f.nav.map((item) => (
-              <motion.a
+              <m.a
                 key={item.href || item.label}
                 href={item.href}
                 onClick={(e) => {
@@ -185,7 +185,7 @@ export default function Footer() {
                 className="footer-useful-social-link footer-nav-item"
               >
                 <ScrambleText text={item.label} />
-              </motion.a>
+              </m.a>
             ))}
           </Stagger>
 

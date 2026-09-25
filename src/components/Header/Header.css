@@ -54,6 +54,11 @@
   text-decoration: none;
   flex-shrink: 0;
   cursor: pointer;
+  transition: opacity 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.vm-brand:hover {
+  opacity: 0.88;
 }
 
 .vm-brand-text {
@@ -141,6 +146,11 @@
   background: #07101C;
   border-color: rgba(255, 255, 255, 0.25);
   color: #FFFFFF;
+  transform: scale(1.04);
+}
+
+.vm-desktop-lang-pill:active {
+  transform: scale(0.96);
 }
 
 .vm-desktop-lang-code {
@@ -171,8 +181,13 @@
 .vm-start-project-pill-btn:hover {
   background: #07101C;
   border-color: rgba(197, 138, 58, 0.45);
+  transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6),
               0 0 16px rgba(197, 138, 58, 0.22);
+}
+
+.vm-start-project-pill-btn:active {
+  transform: scale(0.98);
 }
 
 .vm-pill-asterisk {

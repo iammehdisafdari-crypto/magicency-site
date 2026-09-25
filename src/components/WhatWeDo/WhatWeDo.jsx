@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 import { RevealHeading, RevealStatement, RevealBody, ImageReveal, Parallax, EASING } from '../motion';
 import './WhatWeDo.css';
@@ -240,7 +240,7 @@ export default function WhatWeDo() {
       <div className="wwd-trail-wrapper" aria-hidden="true">
         <AnimatePresence>
           {trailImages.map((item) => (
-            <motion.div
+            <m.div
               key={item.id}
               className="wwd-trail-pool-img-container"
               style={{
@@ -279,7 +279,7 @@ export default function WhatWeDo() {
                   decoding="async"
                 />
               </picture>
-            </motion.div>
+            </m.div>
           ))}
         </AnimatePresence>
       </div>

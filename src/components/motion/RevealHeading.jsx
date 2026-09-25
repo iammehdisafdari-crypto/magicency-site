@@ -1,7 +1,8 @@
 import React from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { m, useReducedMotion } from 'framer-motion';
 import { maskedLineVariants } from './variants';
-import { DURATION, STAGGER, VIEWPORT } from './motionConfig';
+import { DURATION, STAGGER } from './motionConfig';
+import { useInViewObserver } from './useInViewObserver';
 
 /**
  * =========================================================
@@ -24,9 +25,13 @@ export default function RevealHeading({
   delay = 0,
   duration = DURATION.HEADLINE,
   stagger = STAGGER.HEADLINE_LINE,
-  viewport = VIEWPORT,
+  viewport,
   trigger
 }) {
+  const [ref, isInView] = useInViewObserver({ 
+    once: viewport?.once ?? true, 
+    amount: viewport?.amount ?? 0.15 
+  });
   const shouldReduceMotion = useReducedMotion();
   const reducedMotion = Boolean(shouldReduceMotion);
 
@@ -43,18 +48,14 @@ export default function RevealHeading({
     );
   }
 
-  const MotionComponent = motion[Component] || motion.h2;
+  const MotionComponent = m[Component] || m.h2;
 
   return (
     <MotionComponent
+      ref={ref}
       className={`reveal-heading-root ${className}`}
       initial="hidden"
-      {...(isControlled
-        ? { animate: trigger ? 'visible' : 'hidden' }
-        : {
-            whileInView: 'visible',
-            viewport: viewport || VIEWPORT
-          })}
+      animate={isControlled ? (trigger ? 'visible' : 'hidden') : (isInView ? 'visible' : 'hidden')}
     >
       {lines.map((line, idx) => (
         <span
@@ -66,7 +67,7 @@ export default function RevealHeading({
             lineHeight: 'inherit'
           }}
         >
-          <motion.span
+          <m.span
             style={{
               display: 'inline-block',
               willChange: 'transform, opacity'
@@ -78,7 +79,7 @@ export default function RevealHeading({
             }}
           >
             {line}
-          </motion.span>
+          </m.span>
         </span>
       ))}
     </MotionComponent>

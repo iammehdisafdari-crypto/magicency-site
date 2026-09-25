@@ -8,6 +8,9 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
+            if (id.includes('gsap/ScrollTrigger') || id.includes('ScrollTrigger')) {
+              return 'vendor-gsap-scrolltrigger';
+            }
             if (id.includes('gsap')) {
               return 'vendor-gsap';
             }

@@ -463,3 +463,68 @@
   }
 }
 
+/* =========================================================
+   COMPOSITOR-DRIVEN CSS REVEAL ANIMATIONS (ZERO JS FORCED REFLOW)
+   Visible by default in initial DOM & SSR with CSS keyframes
+   ========================================================= */
+.hero-line-inner {
+  display: inline-block;
+  will-change: transform, opacity;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-line-inner.row-1 {
+  animation: heroLineReveal 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.04s both;
+}
+
+.hero-line-inner.row-2 {
+  animation: heroLineReveal 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.10s both;
+}
+
+@keyframes heroLineReveal {
+  from {
+    transform: translateY(100%);
+    opacity: 0.15;
+  }
+  to {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+.hero-cta-reveal {
+  opacity: 1;
+  transform: translateY(0);
+  will-change: transform, opacity;
+  animation: heroFadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.16s both;
+}
+
+.hero-clients-reveal {
+  opacity: 1;
+  transform: translateY(0);
+  will-change: transform, opacity;
+  animation: heroFadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.22s both;
+}
+
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-line-inner,
+  .hero-cta-reveal,
+  .hero-clients-reveal {
+    transform: none !important;
+    opacity: 1 !important;
+    animation: none !important;
+  }
+}
+

@@ -304,14 +304,46 @@ h1, h2, h3, h4, h5, h6 {
 
 /* =========================================
    PERFORMANCE: CONTENT CONTAINMENT
-   Skips layout and paint for deep offscreen sections during initial load
+   Skips layout and paint for offscreen sections during initial load,
+   prioritizing Hero and LCP element rendering.
    ========================================= */
+.fw-scroll-section {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 1200px;
+}
+
+.pi-section-root {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 1200px;
+}
+
+.vm-exact-wwd-section {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 1000px;
+}
+
+.compounding-growth-section {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 800px;
+}
+
 .vm-journal-section {
   content-visibility: auto;
   contain-intrinsic-size: 0 900px;
+}
+
+.about-chapter-section.faq-chapter {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 700px;
+}
+
+.final-cta-section {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 350px;
 }
 
 .vm-footer-root {
   content-visibility: auto;
   contain-intrinsic-size: 0 650px;
 }
+

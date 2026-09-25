@@ -66,7 +66,7 @@ export default function ProblemInsightVisual({ stepIndex, currentProgress, isRTL
           height="400"
           loading="eager"
           decoding="async"
-          fetchPriority={stepIndex === 0 ? 'high' : 'auto'}
+          fetchpriority={stepIndex === 0 ? 'high' : 'auto'}
         />
       </picture>
     </div>

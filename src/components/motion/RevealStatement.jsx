@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
-import { motion, useScroll, useTransform, useSpring, useReducedMotion } from 'framer-motion';
-import { EASING, VIEWPORT } from './motionConfig';
+import { m, useScroll, useTransform, useSpring, useReducedMotion } from 'framer-motion';
+import { EASING } from './motionConfig';
+import { useInViewObserver } from './useInViewObserver';
 
 function normalizeStatementLines(children) {
   if (Array.isArray(children)) {
@@ -28,11 +29,15 @@ export default function RevealStatement({
   delay = 0.05,
   duration = 0.85,
   stagger = 0.08,
-  viewport = VIEWPORT,
+  viewport,
   scrollLinked = true,
   trigger
 }) {
   const containerRef = useRef(null);
+  const [inViewRef, isInView] = useInViewObserver({ 
+    once: viewport?.once ?? true, 
+    amount: viewport?.amount ?? 0.15 
+  });
   const shouldReduceMotion = useReducedMotion();
   const reducedMotion = Boolean(shouldReduceMotion);
 
@@ -59,58 +64,55 @@ export default function RevealStatement({
     return <Component className={`reveal-statement-static ${className}`}>{children}</Component>;
   }
 
-  const MotionComponent = motion[Component] || motion.p;
+  const MotionComponent = m[Component] || m.p;
 
   return (
     <div ref={containerRef} className="reveal-statement-spatial-frame" style={{ overflow: 'visible' }}>
-      <MotionComponent 
-        className={`reveal-statement-root ${className}`}
-        style={scrollLinked && !reducedMotion ? { y: scrollY } : {}}
-        initial="hidden"
-        {...(isControlled
-          ? { animate: trigger ? 'visible' : 'hidden' }
-          : {
-              whileInView: 'visible',
-              viewport: viewport || VIEWPORT
-            })}
-      >
-        {lines.map((line, idx) => (
-          <span
-            key={typeof line === 'string' ? `${line}-${idx}` : idx}
-            className="motion-line-mask"
-            style={{
-              display: 'block',
-              overflow: 'hidden',
-              lineHeight: 'inherit'
-            }}
-          >
-            <motion.span
+      <div ref={inViewRef}>
+        <MotionComponent 
+          className={`reveal-statement-root ${className}`}
+          style={scrollLinked && !reducedMotion ? { y: scrollY } : {}}
+          initial="hidden"
+          animate={isControlled ? (trigger ? 'visible' : 'hidden') : (isInView ? 'visible' : 'hidden')}
+        >
+          {lines.map((line, idx) => (
+            <span
+              key={typeof line === 'string' ? `${line}-${idx}` : idx}
+              className="motion-line-mask"
               style={{
-                display: 'inline-block',
-                willChange: 'transform, opacity'
-              }}
-              variants={{
-                hidden: { y: '110%', opacity: 0 },
-                visible: (custom = {}) => ({
-                  y: '0%',
-                  opacity: 1,
-                  transition: {
-                    duration: custom.duration || duration,
-                    delay: custom.delay || 0,
-                    ease: EASING.MOMENTUM
-                  }
-                })
-              }}
-              custom={{
-                delay: delay + idx * stagger,
-                duration
+                display: 'block',
+                overflow: 'hidden',
+                lineHeight: 'inherit'
               }}
             >
-              {line}
-            </motion.span>
-          </span>
-        ))}
-      </MotionComponent>
+              <m.span
+                style={{
+                  display: 'inline-block',
+                  willChange: 'transform, opacity'
+                }}
+                variants={{
+                  hidden: { y: '110%', opacity: 0 },
+                  visible: (custom = {}) => ({
+                    y: '0%',
+                    opacity: 1,
+                    transition: {
+                      duration: custom.duration || duration,
+                      delay: custom.delay || 0,
+                      ease: EASING.MOMENTUM
+                    }
+                  })
+                }}
+                custom={{
+                  delay: delay + idx * stagger,
+                  duration
+                }}
+              >
+                {line}
+              </m.span>
+            </span>
+          ))}
+        </MotionComponent>
+      </div>
     </div>
   );
 }

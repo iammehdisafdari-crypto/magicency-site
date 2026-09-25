@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 import { useRouter } from '../../context/RouterContext';
 import ScrambleText from './ScrambleText';
 import StaggeredMenu from './StaggeredMenu';
 import { trackCtaClick, trackLanguageSwitch, trackContactClick, trackOutboundClick } from '../../utils/analytics';
-import { EASING } from '../motion';
 import './Header.css';
 
 // Asterisk Icon matching Desktop Reference Image 1: "✱ START A PROJECT"
@@ -184,7 +182,7 @@ export default function Header() {
         <div className="vm-header-inner">
           
           {/* Brand Wordmark */}
-          <motion.a 
+          <a 
             href="/" 
             className="vm-brand" 
             aria-label="Magicency Home"
@@ -196,12 +194,10 @@ export default function Header() {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }
             }}
-            whileHover={{ opacity: 0.88 }}
-            transition={{ duration: 0.2, ease: EASING.SECONDARY }}
           >
             <span className="vm-brand-text">MAGICENCY</span>
             <span className="vm-brand-registered">®</span>
-          </motion.a>
+          </a>
 
           {/* Desktop Navigation */}
           <div className="vm-header-desktop-right">
@@ -219,7 +215,7 @@ export default function Header() {
             </nav>
 
             {/* Desktop Language Switcher */}
-            <motion.button 
+            <button 
               type="button"
               onClick={() => {
                 trackLanguageSwitch(lang === 'en' ? 'fa' : 'en');
@@ -228,24 +224,18 @@ export default function Header() {
               className="vm-desktop-lang-pill"
               aria-label={lang === 'en' ? 'Switch to Persian' : 'Switch to English'}
               title={lang === 'en' ? 'تغییر به فارسی' : 'Switch to English'}
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.96 }}
-              transition={{ duration: 0.18, ease: EASING.SECONDARY }}
             >
               <span className="vm-desktop-lang-code">{lang === 'en' ? 'FA' : 'EN'}</span>
-            </motion.button>
+            </button>
 
             {/* Desktop Primary Pill Button (* START A PROJECT) */}
-            <motion.button
+            <button
               type="button"
               onClick={() => {
                 trackCtaClick('start_project', 'header_desktop');
                 setIsModalOpen(true);
               }}
               className="vm-start-project-pill-btn"
-              whileHover={{ y: -2 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ duration: 0.22, ease: EASING.SECONDARY }}
             >
               <span className="vm-pill-asterisk">
                 <AsteriskIcon />
@@ -253,7 +243,7 @@ export default function Header() {
               <span className="vm-pill-label">
                 {(t.nav.startProject || 'START A PROJECT').toUpperCase()}
               </span>
-            </motion.button>
+            </button>
           </div>
 
         </div>

@@ -1,7 +1,8 @@
 import React from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { m, useReducedMotion } from 'framer-motion';
 import { labelVariants } from './variants';
-import { DURATION, VIEWPORT } from './motionConfig';
+import { DURATION } from './motionConfig';
+import { useInViewObserver } from './useInViewObserver';
 
 /**
  * =========================================================
@@ -16,13 +17,17 @@ export default function RevealLabel({
   as: Component = 'span',
   delay = 0,
   duration = DURATION.LABEL,
-  viewport = VIEWPORT,
+  viewport,
   trigger
 }) {
+  const [ref, isInView] = useInViewObserver({ 
+    once: viewport?.once ?? true, 
+    amount: viewport?.amount ?? 0.15 
+  });
   const shouldReduceMotion = useReducedMotion();
   const reducedMotion = Boolean(shouldReduceMotion);
 
-  const MotionComponent = motion[Component] || motion.span;
+  const MotionComponent = m[Component] || m.span;
   const isControlled = typeof trigger === 'boolean';
 
   if (reducedMotion) {
@@ -31,15 +36,11 @@ export default function RevealLabel({
 
   return (
     <MotionComponent
+      ref={ref}
       className={`reveal-label-root ${className}`}
       variants={labelVariants}
       initial="hidden"
-      {...(isControlled
-        ? { animate: trigger ? 'visible' : 'hidden' }
-        : {
-            whileInView: 'visible',
-            viewport: viewport || VIEWPORT
-          })}
+      animate={isControlled ? (trigger ? 'visible' : 'hidden') : (isInView ? 'visible' : 'hidden')}
       custom={{ delay, duration }}
     >
       {children}
