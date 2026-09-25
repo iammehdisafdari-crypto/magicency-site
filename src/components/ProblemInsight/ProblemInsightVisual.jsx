@@ -38,20 +38,32 @@ export default function ProblemInsightVisual({ stepIndex, currentProgress, isRTL
     <div style={style} className="pi-object-wrapper __sp_icon_float">
       <picture className="pi-3d-picture">
         <source
+          media="(max-width: 809px)"
+          srcSet={step.image400}
           type="image/webp"
-          srcSet={`${step.image} 800w, ${step.image400} 400w`}
-          sizes="(max-width: 809px) 240px, (max-width: 1199px) 380px, 440px"
         />
         <source
-          type="image/png"
+          srcSet={`${step.image400} 400w, ${step.image} 800w`}
+          sizes="(max-width: 1199px) 380px, 390px"
+          type="image/webp"
+        />
+        <source
+          media="(max-width: 809px)"
           srcSet={step.imagePng}
+          type="image/png"
+        />
+        <source
+          srcSet={step.imagePng}
+          type="image/png"
         />
         <img
-          src={step.image}
+          src={step.image400}
+          srcSet={`${step.image400} 400w, ${step.image} 800w`}
+          sizes="(max-width: 809px) 240px, (max-width: 1199px) 380px, 390px"
           alt={altText}
           className="pi-3d-object-img"
-          width="800"
-          height="800"
+          width="400"
+          height="400"
           loading="eager"
           decoding="async"
           fetchPriority={stepIndex === 0 ? 'high' : 'auto'}

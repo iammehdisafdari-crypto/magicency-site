@@ -4,15 +4,17 @@ import { RouterProvider, useRouter } from './context/RouterContext';
 import BrandIntro from './components/Intro/BrandIntro';
 import Header from './components/Header/Header';
 import Hero from './components/Hero/Hero';
-import FeatureWork from './components/FeatureWork/FeatureWork';
-import ProblemInsight from './components/ProblemInsight/ProblemInsight';
-import WhatWeDo from './components/WhatWeDo/WhatWeDo';
-import BuiltForCompoundingGrowth from './components/CompoundingGrowth/BuiltForCompoundingGrowth';
-import Journal from './components/Journal/Journal';
-import FAQSection from './components/About/FAQSection';
 import ScrollProgress from './components/About/ScrollProgress';
-import FinalCTA from './components/FinalCTA/FinalCTA';
-import Footer from './components/Footer/Footer';
+
+// Lazy load below-the-fold homepage components
+const FeatureWork = lazy(() => import('./components/FeatureWork/FeatureWork'));
+const ProblemInsight = lazy(() => import('./components/ProblemInsight/ProblemInsight'));
+const WhatWeDo = lazy(() => import('./components/WhatWeDo/WhatWeDo'));
+const BuiltForCompoundingGrowth = lazy(() => import('./components/CompoundingGrowth/BuiltForCompoundingGrowth'));
+const Journal = lazy(() => import('./components/Journal/Journal'));
+const FAQSection = lazy(() => import('./components/About/FAQSection'));
+const FinalCTA = lazy(() => import('./components/FinalCTA/FinalCTA'));
+const Footer = lazy(() => import('./components/Footer/Footer'));
 
 // Lazy load non-homepage page components
 const WorkPage = lazy(() => import('./components/Work/WorkPage'));
@@ -121,7 +123,9 @@ function MainApp() {
       </main>
 
       {/* Cinematic Closing Frame Footer */}
-      <Footer />
+      <Suspense fallback={null}>
+        <Footer />
+      </Suspense>
 
       {/* Interactive Growth Protocol Modal */}
       {isModalOpen && (

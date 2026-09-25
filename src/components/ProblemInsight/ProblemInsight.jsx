@@ -43,9 +43,10 @@ export default function ProblemInsight() {
   const mouseTargetX = useRef(0);
   const mouseTargetY = useRef(0);
   const stateRef = useRef({ progress: 0, mx: 0, my: 0 });
-  const isIntersectingRef = useRef(true);
+  const isIntersectingRef = useRef(false);
   const isLoopRunningRef = useRef(false);
   const rafIdRef = useRef(null);
+  const metricsRef = useRef({ containerTop: 0, containerHeight: 0 });
 
   const isMobile = viewport.W <= 810;
   const isTablet = viewport.W > 810 && viewport.W <= 1199.98;
@@ -60,52 +61,70 @@ export default function ProblemInsight() {
     return () => mq.removeEventListener?.('change', handler);
   }, []);
 
-  // Update viewport dimensions on resize / scroll
+  // Decoupled Layout Measurement (READ) and Scroll Progress Calculation
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    const getW = () => window.innerWidth || 1440;
-    const getH = () => window.innerHeight || 900;
-
-    const updateMeasurements = () => {
+    // Phase 1 (READ): Cache container geometry only on mount, resize, or viewport entry
+    const measureLayout = () => {
       const container = sectionRef.current;
-      const w = getW();
-      const h = getH();
-
-      if (container) {
-        const rect = container.getBoundingClientRect();
-        const scrollableDist = rect.height - h;
-        const raw = scrollableDist > 0 ? -rect.top / scrollableDist : 0;
-        targetProgressRef.current = Math.max(0, Math.min(1, raw));
-      }
-
+      if (!container) return;
+      const rect = container.getBoundingClientRect();
+      metricsRef.current = {
+        containerTop: rect.top + window.scrollY,
+        containerHeight: rect.height
+      };
+      const w = window.innerWidth || 1440;
+      const h = window.innerHeight || 900;
       setViewport((prev) => (prev.W !== w || prev.H !== h ? { W: w, H: h } : prev));
     };
 
+    // Phase 2 (READ from Compositor): Compute target progress using window.scrollY (zero layout thrashing)
+    const updateScrollProgress = () => {
+      const h = window.innerHeight || 900;
+      const { containerTop, containerHeight } = metricsRef.current;
+      const scrollableDist = containerHeight - h;
+      if (scrollableDist <= 0) return;
+      const scrolled = window.scrollY - containerTop;
+      const raw = scrolled / scrollableDist;
+      targetProgressRef.current = Math.max(0, Math.min(1, raw));
+      if (isIntersectingRef.current) {
+        startLoop();
+      }
+    };
+
     const handleMouseMove = (e) => {
-      mouseTargetX.current = (e.clientX / getW() - 0.5) * 2;
-      mouseTargetY.current = (e.clientY / getH() - 0.5) * 2;
+      const w = window.innerWidth || 1440;
+      const h = window.innerHeight || 900;
+      mouseTargetX.current = (e.clientX / w - 0.5) * 2;
+      mouseTargetY.current = (e.clientY / h - 0.5) * 2;
+      if (isIntersectingRef.current) {
+        startLoop();
+      }
     };
 
     const scrollEase = 0.09;
 
+    // Pure animation loop: operates strictly on in-memory numeric values (no getBoundingClientRect)
     const animLoop = () => {
       if (!isIntersectingRef.current) {
         isLoopRunningRef.current = false;
         return;
       }
 
-      updateMeasurements();
-
       const st = stateRef.current;
       const ease = prefersReducedMotion ? 1 : scrollEase;
       let nextProg = st.progress + (targetProgressRef.current - st.progress) * ease;
-      if (Math.abs(targetProgressRef.current - nextProg) < 0.0004) {
+      const isProgSettled = Math.abs(targetProgressRef.current - nextProg) < 0.0004;
+      if (isProgSettled) {
         nextProg = targetProgressRef.current;
       }
 
       const nextMx = st.mx + (mouseTargetX.current - st.mx) * 0.07;
       const nextMy = st.my + (mouseTargetY.current - st.my) * 0.07;
+      const isMouseSettled =
+        Math.abs(mouseTargetX.current - nextMx) < 0.001 &&
+        Math.abs(mouseTargetY.current - nextMy) < 0.001;
 
       if (
         Math.abs(nextProg - st.progress) > 0.00005 ||
@@ -115,6 +134,11 @@ export default function ProblemInsight() {
         stateRef.current = { progress: nextProg, mx: nextMx, my: nextMy };
         setProgress(nextProg);
         setMousePos({ mx: nextMx, my: nextMy });
+      }
+
+      if (isProgSettled && isMouseSettled) {
+        isLoopRunningRef.current = false;
+        return; // Sleep until woken by scroll or mousemove
       }
 
       isLoopRunningRef.current = true;
@@ -135,31 +159,51 @@ export default function ProblemInsight() {
       }
     };
 
+    // IntersectionObserver activates loop only when ProblemInsight is actually in or near viewport
     const observer = typeof IntersectionObserver !== 'undefined'
       ? new IntersectionObserver((entries) => {
           const isVis = !!entries[0]?.isIntersecting;
           isIntersectingRef.current = isVis;
-          if (isVis) startLoop();
-          else stopLoop();
-        }, { threshold: 0 })
+          if (isVis) {
+            measureLayout();
+            updateScrollProgress();
+            startLoop();
+          } else {
+            stopLoop();
+          }
+        }, { threshold: 0, rootMargin: '100px 0px' })
       : null;
 
     if (observer && sectionRef.current) {
       observer.observe(sectionRef.current);
     }
 
-    window.addEventListener('scroll', updateMeasurements, { passive: true });
-    window.addEventListener('resize', updateMeasurements);
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    let scrollScheduled = false;
+    const handleScroll = () => {
+      if (scrollScheduled) return;
+      scrollScheduled = true;
+      requestAnimationFrame(() => {
+        scrollScheduled = false;
+        updateScrollProgress();
+      });
+    };
 
-    updateMeasurements();
-    startLoop();
+    const handleResize = () => {
+      measureLayout();
+      updateScrollProgress();
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleResize, { passive: true });
+    window.addEventListener('orientationchange', handleResize, { passive: true });
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
 
     return () => {
       stopLoop();
       observer?.disconnect();
-      window.removeEventListener('scroll', updateMeasurements);
-      window.removeEventListener('resize', updateMeasurements);
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('orientationchange', handleResize);
       window.removeEventListener('mousemove', handleMouseMove);
     };
   }, [prefersReducedMotion]);

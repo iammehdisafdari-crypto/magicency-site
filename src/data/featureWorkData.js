@@ -24,6 +24,7 @@ export const FEATURED_WORKS = [
       fa: 'جهش از خط مبنا به ۸۴.۱ هزار کلیک ارگانیک و ۵.۱۸ میلیون ایمپرشن در طول ۱۲ ماه، و تبدیل جستجوی ارگانیک به موتور جذب مستقل و پایدار.'
     },
     image: '/project-1.webp',
+    mobileImage: '/project-1-720w.webp',
     imageJpg: '/project-1.jpg',
     imageAlt: {
       en: 'Enterprise Search Console Performance Graph with 84.1K clicks',

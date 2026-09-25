@@ -164,7 +164,7 @@
 }
 
 .wwd-list-item.is-inactive-item {
-  opacity: 0.78;
+  opacity: 0.88;
   transform: scale(0.99) translateY(0);
 }
 
@@ -378,14 +378,14 @@
 }
 
 .wwd-row-counter {
-  color: var(--color-accent);
-  font-size: 0.76rem;
+  color: #E2A54E;
+  font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.04em;
 }
 
 .is-inactive-item .wwd-row-counter {
-  color: var(--color-accent);
+  color: #E2A54E;
 }
 
 .is-inactive-item .wwd-list-item-set-row-label {

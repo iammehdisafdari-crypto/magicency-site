@@ -132,32 +132,53 @@
 
 /* Mobile Bottom Navigation Pills */
 .pi-mobile-pills {
+  display: none;
   position: absolute;
   bottom: 24px;
   left: 0;
   right: 0;
-  display: flex;
   justify-content: center;
-  gap: 10px;
+  align-items: center;
+  gap: 12px;
   z-index: 12;
 }
 
 .pi-mobile-pill {
-  width: 9px;
-  height: 9px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.22);
+  width: 48px;
+  min-width: 48px;
+  height: 48px;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
   border: none;
   padding: 0;
   cursor: pointer;
   outline: none;
-  transition: width 0.3s cubic-bezier(0.2, 0, 0, 1), background 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.pi-mobile-pill.is-active {
-  width: 28px;
+.pi-mobile-pill::before {
+  content: '';
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.32);
+  transition: width 0.3s cubic-bezier(0.2, 0, 0, 1), background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pi-mobile-pill.is-active::before {
+  width: 32px;
   background: var(--color-accent, #C58A3A);
-  box-shadow: 0 0 12px rgba(197, 138, 58, 0.4);
+  box-shadow: 0 0 12px rgba(197, 138, 58, 0.45);
+}
+
+.pi-mobile-pill:focus-visible::before {
+  outline: 2px solid var(--color-accent, #C58A3A);
+  outline-offset: 3px;
 }
 
 /* Visual Anchor Container (Houses large conceptual objects) */

@@ -25,23 +25,32 @@ export default function FeatureWork() {
     return () => mediaQuery.removeEventListener('change', handler);
   }, []);
 
-  // Natural page scroll-driven activeIndex calculation
+  // Natural page scroll-driven activeIndex calculation with decoupled READ/WRITE
   useEffect(() => {
     let rafId = null;
+    let metrics = { containerTop: 0, containerHeight: 0 };
 
+    // Phase 1 (READ): Cache container geometry only on mount, resize, or orientation change
+    const measureLayout = () => {
+      const container = scrollContainerRef.current;
+      if (!container) return;
+      const rect = container.getBoundingClientRect();
+      metrics = {
+        containerTop: rect.top + window.scrollY,
+        containerHeight: rect.height
+      };
+    };
+
+    // Phase 2: Compute active slide using compositor scrollY without triggering forced reflow
     const handleScroll = () => {
       if (rafId) return;
       rafId = requestAnimationFrame(() => {
         rafId = null;
-        const container = scrollContainerRef.current;
-        if (!container) return;
-
-        const rect = container.getBoundingClientRect();
-        const scrollableHeight = rect.height - window.innerHeight;
+        const scrollableHeight = metrics.containerHeight - window.innerHeight;
         if (scrollableHeight <= 0) return;
 
         // Scrolled distance within this pinned section
-        const scrolled = -rect.top;
+        const scrolled = window.scrollY - metrics.containerTop;
         const stepHeight = scrollableHeight / FEATURED_WORKS.length;
 
         // Bounded active index calculation (Source of Truth)
@@ -54,13 +63,22 @@ export default function FeatureWork() {
       });
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll, { passive: true });
+    measureLayout();
     handleScroll();
+
+    const handleResize = () => {
+      measureLayout();
+      handleScroll();
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleResize, { passive: true });
+    window.addEventListener('orientationchange', handleResize, { passive: true });
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('orientationchange', handleResize);
       if (rafId) cancelAnimationFrame(rafId);
     };
   }, []);
@@ -224,15 +242,18 @@ export default function FeatureWork() {
                           />
                         )}
                         <source
-                          srcSet={work.image}
+                          srcSet={work.mobileImage ? `${work.mobileImage} 720w, ${work.image} 1376w` : work.image}
+                          sizes="(max-width: 1200px) 50vw, 663px"
                           type="image/webp"
                         />
                         <img
-                          src={work.imageJpg || work.image}
+                          src={work.mobileImage || work.imageJpg || work.image}
+                          srcSet={work.mobileImage ? `${work.mobileImage} 720w, ${work.image} 1376w` : undefined}
+                          sizes="(max-width: 767px) 100vw, (max-width: 1200px) 50vw, 663px"
                           alt={work.imageAlt[lang] || work.imageAlt.en}
                           className="fw-image-el"
-                          width="960"
-                          height="640"
+                          width="720"
+                          height="402"
                           loading={idx === 0 ? 'eager' : 'lazy'}
                           decoding="async"
                         />

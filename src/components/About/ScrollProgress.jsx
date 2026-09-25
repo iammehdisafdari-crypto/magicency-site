@@ -58,14 +58,18 @@ export default function ScrollProgress() {
       window.addEventListener('resize', handleResize, { passive: true });
       window.addEventListener('orientationchange', handleResize, { passive: true });
 
-      // Observe dynamic DOM / image load height adjustments
+      // Observe dynamic DOM / image load height adjustments with RAF batching
       let resizeObserver = null;
+      let roRafId = null;
       if (typeof ResizeObserver !== 'undefined' && document.body) {
         resizeObserver = new ResizeObserver(() => {
-          if (typeof activeLenis.resize === 'function') {
-            activeLenis.resize();
-          }
-          setScale(activeLenis.progress);
+          if (roRafId) cancelAnimationFrame(roRafId);
+          roRafId = requestAnimationFrame(() => {
+            if (typeof activeLenis.resize === 'function') {
+              activeLenis.resize();
+            }
+            setScale(activeLenis.progress);
+          });
         });
         resizeObserver.observe(document.body);
       }
@@ -78,6 +82,7 @@ export default function ScrollProgress() {
         }
         window.removeEventListener('resize', handleResize);
         window.removeEventListener('orientationchange', handleResize);
+        if (roRafId) cancelAnimationFrame(roRafId);
         if (resizeObserver) resizeObserver.disconnect();
       };
     }

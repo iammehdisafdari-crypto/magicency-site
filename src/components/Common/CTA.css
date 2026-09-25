@@ -62,12 +62,13 @@
 /* ---------------------------------------------------------
    Variant: PRIMARY (Main Conversion Action)
    - Magicency accent #C58A3A
-   - Confident, crisp white text (AA contrast: 4.62:1)
+   - Confident high-contrast dark text (#07101C, AA/AAA contrast: 6.46:1)
    - Subtle top-light border
    --------------------------------------------------------- */
 .mag-cta--primary {
   background-color: var(--color-accent, #C58A3A);
-  color: #FFFFFF;
+  color: #07101C;
+  font-weight: 800;
   border: 1px solid rgba(255, 255, 255, 0.18);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
 }
@@ -77,13 +78,14 @@
   border-color: rgba(255, 255, 255, 0.3);
   box-shadow: 0 6px 24px rgba(197, 138, 58, 0.38), 0 2px 8px rgba(0, 0, 0, 0.4);
   transform: translateY(-2px);
-  color: #FFFFFF;
+  color: #07101C;
 }
 
 .mag-cta--primary:active {
   transform: translateY(0);
   background-color: #A8752E;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  color: #07101C;
 }
 
 .mag-cta--primary:focus-visible {
@@ -169,7 +171,17 @@
 }
 
 .mag-cta--primary .mag-cta__icon {
-  color: #FFFFFF;
+  color: #07101C;
+}
+
+/* Specific high-contrast override for hero-primary-cta */
+.hero-primary-cta {
+  color: #07101C !important;
+  font-weight: 800;
+}
+
+.hero-primary-cta .mag-cta__icon {
+  color: #07101C !important;
 }
 
 /* Hover Dynamics for Arrow */

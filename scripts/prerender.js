@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { build } from 'vite';
+import { PurgeCSS } from 'purgecss';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, '..');
@@ -550,14 +551,146 @@ async function prerender() {
   if (!fs.existsSync(templatePath)) {
     throw new Error(`Client template not found at ${templatePath}`);
   }
-  const baseTemplate = fs.readFileSync(templatePath, 'utf-8');
+  let baseTemplate = fs.readFileSync(templatePath, 'utf-8');
 
-  console.log(`🚀 [Prerender] Pre-rendering ${ROUTES.length} routes with custom SEO metadata...`);
-
-  // Discover route-specific CSS chunks from client build
+  // Discover route-specific and main CSS chunks from client build
   const assetFiles = fs.existsSync(path.resolve(distDir, 'assets'))
     ? fs.readdirSync(path.resolve(distDir, 'assets'))
     : [];
+
+  const mainCssFile = assetFiles.find((f) => f.startsWith('index-') && f.endsWith('.css'));
+
+  // 1. Critical CSS Extraction & Purging (Above-the-fold)
+  console.log('🎨 [Critical CSS] Extracting and inlining above-the-fold styles...');
+  const criticalFiles = [
+    'src/styles/variables.css',
+    'src/styles/fonts.css',
+    'src/styles/global.css',
+    'src/components/About/ScrollProgress.css',
+    'src/components/Intro/BrandIntro.css',
+    'src/components/Header/Header.css',
+    'src/components/Header/StaggeredMenu.css',
+    'src/components/Hero/Hero.css',
+    'src/components/Common/CTA.css',
+    'src/components/Common/LazyVimeoPlayer.css'
+  ];
+
+  let rawCritical = '';
+  for (const f of criticalFiles) {
+    const p = path.resolve(rootDir, f);
+    if (fs.existsSync(p)) {
+      rawCritical += '\n' + fs.readFileSync(p, 'utf8');
+    }
+  }
+  rawCritical = rawCritical.replace(/@import\s+[^;]+;/g, '');
+
+  const criticalPurge = await new PurgeCSS().purge({
+    content: [
+      { raw: baseTemplate, extension: 'html' },
+      { raw: fs.readFileSync(path.resolve(rootDir, 'src/components/Header/Header.jsx'), 'utf8'), extension: 'jsx' },
+      { raw: fs.readFileSync(path.resolve(rootDir, 'src/components/Hero/Hero.jsx'), 'utf8'), extension: 'jsx' },
+      { raw: fs.readFileSync(path.resolve(rootDir, 'src/components/Intro/BrandIntro.jsx'), 'utf8'), extension: 'jsx' },
+      { raw: fs.readFileSync(path.resolve(rootDir, 'src/components/Header/StaggeredMenu.jsx'), 'utf8'), extension: 'jsx' }
+    ],
+    css: [{ raw: rawCritical }],
+    safelist: {
+      standard: [
+        /^is-/,
+        /^has-/,
+        /^vm-/,
+        /^mag-/,
+        /^sm-/,
+        /^staggered-menu/,
+        /^app-/,
+        'html',
+        'body',
+        '#root',
+        ':root',
+        '::selection',
+        '::-webkit-scrollbar',
+        '::-webkit-scrollbar-thumb',
+        '::-webkit-scrollbar-track'
+      ],
+      deep: [/^data-/, /^aria-/, /^role/],
+      greedy: [/active/, /open/, /loading/, /loaded/, /scrolled/]
+    },
+    keyframes: false,
+    fontFace: false
+  });
+
+  const minifiedCriticalCss = (criticalPurge[0]?.css || rawCritical)
+    .replace(/\/\*[\s\S]*?\*\//g, '')
+    .replace(/\s+/g, ' ')
+    .replace(/\s*([{}:;,])\s*/g, '$1')
+    .replace(/;}/g, '}')
+    .trim();
+
+  console.log(`  ✓ Inlined Critical CSS: ${(minifiedCriticalCss.length / 1024).toFixed(1)} KB`);
+
+  // 2. Purge unused CSS rules from the main CSS file using PurgeCSS
+  if (mainCssFile) {
+    console.log(`🧹 [PurgeCSS] Purging unused CSS from ${mainCssFile}...`);
+    const mainCssPath = path.resolve(distDir, 'assets', mainCssFile);
+    const rawMainCss = fs.readFileSync(mainCssPath, 'utf8');
+
+    const mainPurge = await new PurgeCSS().purge({
+      content: [
+        { raw: baseTemplate, extension: 'html' },
+        'src/**/*.{js,jsx,html}'
+      ],
+      css: [{ raw: rawMainCss }],
+      safelist: {
+        standard: [
+          /^is-/,
+          /^has-/,
+          /^motion-/,
+          /^staggered-menu/,
+          /^sm-/,
+          /^vm-/,
+          /^mag-/,
+          /^pi-/,
+          /^fw-/,
+          /^wwd-/,
+          /^app-/,
+          'html',
+          'body',
+          '#root',
+          ':root',
+          '::selection',
+          '::-webkit-scrollbar',
+          '::-webkit-scrollbar-thumb',
+          '::-webkit-scrollbar-track'
+        ],
+        deep: [/^data-/, /^aria-/, /^role/],
+        greedy: [/active/, /open/, /loading/, /loaded/, /scrolled/, /current/, /visible/]
+      },
+      keyframes: false,
+      fontFace: false
+    });
+
+    const purgedMainCss = mainPurge[0]?.css || rawMainCss;
+    fs.writeFileSync(mainCssPath, purgedMainCss, 'utf8');
+    console.log(`  ✓ Main CSS: ${(rawMainCss.length / 1024).toFixed(1)} KB -> ${(purgedMainCss.length / 1024).toFixed(1)} KB`);
+
+    // 3. Make main stylesheet load asynchronously (preload + media="print" onload trick + noscript fallback)
+    const linkRegex = new RegExp(`<link[^>]*rel=["']stylesheet["'][^>]*href=["'][^"']*assets/${mainCssFile}["'][^>]*>`, 'i');
+    const asyncMainCssTags = [
+      `    <!-- Inlined Above-the-Fold Critical CSS -->`,
+      `    <style id="critical-css">${minifiedCriticalCss}</style>`,
+      `    <!-- Asynchronous Non-blocking Stylesheet -->`,
+      `    <link rel="preload" as="style" href="/assets/${mainCssFile}" />`,
+      `    <link rel="stylesheet" href="/assets/${mainCssFile}" media="print" onload="this.media='all'" />`,
+      `    <noscript><link rel="stylesheet" href="/assets/${mainCssFile}" /></noscript>`
+    ].join('\n');
+
+    if (linkRegex.test(baseTemplate)) {
+      baseTemplate = baseTemplate.replace(linkRegex, asyncMainCssTags);
+    } else {
+      baseTemplate = baseTemplate.replace('</head>', `${asyncMainCssTags}\n  </head>`);
+    }
+  }
+
+  console.log(`🚀 [Prerender] Pre-rendering ${ROUTES.length} routes with custom SEO metadata...`);
 
   const pageCssMap = {
     '/work': assetFiles.find((f) => f.startsWith('WorkPage-') && f.endsWith('.css')),
@@ -574,7 +707,7 @@ async function prerender() {
 
     let html = baseTemplate;
 
-    // Inject route-specific CSS if applicable
+    // Inject route-specific CSS if applicable (asynchronously)
     let matchedCss = null;
     if (route === '/work') matchedCss = pageCssMap['/work'];
     else if (route === '/about') matchedCss = pageCssMap['/about'];
@@ -584,7 +717,13 @@ async function prerender() {
     else if (route === '/404') matchedCss = pageCssMap['/404'];
 
     if (matchedCss) {
-      html = html.replace('</head>', `    <link rel="stylesheet" href="/assets/${matchedCss}" />\n  </head>`);
+      const asyncRouteCss = [
+        `    <link rel="preload" as="style" href="/assets/${matchedCss}" />`,
+        `    <link rel="stylesheet" href="/assets/${matchedCss}" media="print" onload="this.media='all'" />`,
+        `    <noscript><link rel="stylesheet" href="/assets/${matchedCss}" /></noscript>`,
+        `  </head>`
+      ].join('\n');
+      html = html.replace('</head>', asyncRouteCss);
     }
 
     // 1. Update Title

@@ -194,8 +194,6 @@ export default function Hero({ isLoaded = true }) {
         <LazyVimeoPlayer
           videoId="1224224238"
           title="Magicency Showreel"
-          posterWebp="/reel-preview.webp"
-          posterJpg="/reel-preview.jpg"
         />
       </div>
     </section>

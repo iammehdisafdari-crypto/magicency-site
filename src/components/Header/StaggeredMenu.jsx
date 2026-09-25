@@ -68,40 +68,51 @@ export const StaggeredMenu = ({
     }
   }, [open]);
 
-  // Initial GSAP setup
-  useIsomorphicLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      const panel = panelRef.current;
-      const preContainer = preLayersRef.current;
-      const plusH = plusHRef.current;
-      const plusV = plusVRef.current;
-      const icon = iconRef.current;
-      const textInner = textInnerRef.current;
-      if (!panel || !plusH || !plusV || !icon || !textInner) return;
+  // Initial GSAP setup deferred to requestAnimationFrame so it does not block mount or cause forced reflow
+  useEffect(() => {
+    let rafId = null;
+    let ctx = null;
 
-      let preLayers = [];
-      if (preContainer) {
-        preLayers = Array.from(preContainer.querySelectorAll('.sm-prelayer'));
-      }
-      preLayerElsRef.current = preLayers;
+    rafId = requestAnimationFrame(() => {
+      ctx = gsap.context(() => {
+        const panel = panelRef.current;
+        const preContainer = preLayersRef.current;
+        const plusH = plusHRef.current;
+        const plusV = plusVRef.current;
+        const icon = iconRef.current;
+        const textInner = textInnerRef.current;
+        if (!panel || !plusH || !plusV || !icon || !textInner) return;
 
-      const offscreen = position === 'left' ? -100 : 100;
-      gsap.set([panel, ...preLayers], { xPercent: offscreen, opacity: 1 });
-      if (preContainer) {
-        gsap.set(preContainer, { xPercent: 0, opacity: 1 });
-      }
-      gsap.set(plusH, { transformOrigin: '50% 50%', rotate: 0 });
-      gsap.set(plusV, { transformOrigin: '50% 50%', rotate: 90 });
-      gsap.set(icon, { rotate: 0, transformOrigin: '50% 50%' });
-      gsap.set(textInner, { yPercent: 0 });
-      if (toggleBtnRef.current) gsap.set(toggleBtnRef.current, { color: menuButtonColor });
+        let preLayers = [];
+        if (preContainer) {
+          preLayers = Array.from(preContainer.querySelectorAll('.sm-prelayer'));
+        }
+        preLayerElsRef.current = preLayers;
+
+        const offscreen = position === 'left' ? -100 : 100;
+        gsap.set([panel, ...preLayers], { xPercent: offscreen, opacity: 1 });
+        if (preContainer) {
+          gsap.set(preContainer, { xPercent: 0, opacity: 1 });
+        }
+        gsap.set(plusH, { transformOrigin: '50% 50%', rotate: 0 });
+        gsap.set(plusV, { transformOrigin: '50% 50%', rotate: 90 });
+        gsap.set(icon, { rotate: 0, transformOrigin: '50% 50%' });
+        gsap.set(textInner, { yPercent: 0 });
+        if (toggleBtnRef.current) gsap.set(toggleBtnRef.current, { color: menuButtonColor });
+      });
     });
-    return () => ctx.revert();
+
+    return () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      ctx?.revert();
+    };
   }, [menuButtonColor, position]);
 
   const buildOpenTimeline = useCallback(() => {
     const panel = panelRef.current;
-    const layers = preLayerElsRef.current;
+    const layers = preLayerElsRef.current?.length
+      ? preLayerElsRef.current
+      : Array.from(preLayersRef.current?.querySelectorAll('.sm-prelayer') || []);
     if (!panel) return null;
 
     openTlRef.current?.kill();
@@ -264,7 +275,9 @@ export const StaggeredMenu = ({
     itemEntranceTweenRef.current?.kill();
 
     const panel = panelRef.current;
-    const layers = preLayerElsRef.current;
+    const layers = preLayerElsRef.current?.length
+      ? preLayerElsRef.current
+      : Array.from(preLayersRef.current?.querySelectorAll('.sm-prelayer') || []);
     if (!panel) return;
 
     const all = [...layers, panel];
