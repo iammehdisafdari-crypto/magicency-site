@@ -156,9 +156,9 @@ export default function AgencyComparison() {
                     <stop offset="100%" stopColor="#050505" />
                   </linearGradient>
                   <linearGradient id="conduitGlow" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stopColor="#DD0060" stopOpacity="0.9" />
-                    <stop offset="50%" stopColor="#DD0060" stopOpacity="1" />
-                    <stop offset="100%" stopColor="#DD0060" stopOpacity="0.9" />
+                    <stop offset="0%" stopColor="#C58A3A" stopOpacity="0.9" />
+                    <stop offset="50%" stopColor="#C58A3A" stopOpacity="1" />
+                    <stop offset="100%" stopColor="#C58A3A" stopOpacity="0.9" />
                   </linearGradient>
                   <filter id="monolithShadow" x="-10%" y="-10%" width="120%" height="130%">
                     <feDropShadow dx="0" dy="12" stdDeviation="14" floodColor="#000000" floodOpacity="0.85" />
@@ -192,7 +192,7 @@ export default function AgencyComparison() {
                   <polygon points="108,118 128,68 128,72 108,122" fill="#050505" />
 
                   {/* Terraced Tier 04: The Monolithic Summit (Compounding Scale) */}
-                  <polygon points="128,68 312,68 288,32 152,32" fill="#07101C" stroke="#DD0060" strokeWidth="1.4" />
+                  <polygon points="128,68 312,68 288,32 152,32" fill="#07101C" stroke="#C58A3A" strokeWidth="1.4" />
 
                   {/* Summit Engraving */}
                   <text x="220" y="48" fill="#FFFFFF" fontSize="9.5" fontFamily="'Plus Jakarta Sans', monospace" fontWeight="800" letterSpacing="0.14em" textAnchor="middle">05 // COMPOUNDING SCALE</text>
@@ -213,7 +213,7 @@ export default function AgencyComparison() {
                   <line x1="220" y1="32" x2="220" y2="236" stroke="url(#conduitGlow)" strokeWidth="2.2" filter="url(#laserGlow)" className="monolith-spine-laser" />
                   
                   {/* Interlocking Horizontal Registration Accents */}
-                  <line x1="152" y1="32" x2="288" y2="32" stroke="#DD0060" strokeWidth="1.5" />
+                  <line x1="152" y1="32" x2="288" y2="32" stroke="#C58A3A" strokeWidth="1.5" />
                   <line x1="210" y1="68" x2="230" y2="68" stroke="#FFFFFF" strokeWidth="1" />
                   <line x1="205" y1="118" x2="235" y2="118" stroke="#FFFFFF" strokeWidth="1" />
                   <line x1="200" y1="168" x2="240" y2="168" stroke="#FFFFFF" strokeWidth="1" />

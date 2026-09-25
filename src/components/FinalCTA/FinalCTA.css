@@ -41,7 +41,7 @@
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--accent-orange, #DD0060);
+  color: var(--color-accent);
   margin: 0 0 clamp(16px, 2.2vh, 22px) 0;
   line-height: 1;
 }

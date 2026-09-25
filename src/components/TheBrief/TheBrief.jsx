@@ -8,31 +8,31 @@ const DIRECTION_MEDIA = {
   grow: {
     img: '/assets/capabilities/experimentation.jpg',
     badge: 'GROWTH // ACQUISITION & TELEMETRY',
-    color: '#DD0060',
+    color: '#C58A3A',
     accentClass: 'accent-grow'
   },
   reposition: {
     img: '/assets/capabilities/creative.jpg',
     badge: 'POSITIONING // BRAND & OFFER ARCHITECTURE',
-    color: '#DD0060',
+    color: '#C58A3A',
     accentClass: 'accent-reposition'
   },
   build: {
     img: '/assets/work/velox_primary.jpg',
     badge: 'BUILD // HIGH-CONVERTING INTERFACE & APP',
-    color: '#DD0060',
+    color: '#C58A3A',
     accentClass: 'accent-build'
   },
   fix: {
     img: '/assets/work/synapse_primary.jpg',
     badge: 'DIAGNOSTICS // FRICTION & CRO AUDIT',
-    color: '#DD0060',
+    color: '#C58A3A',
     accentClass: 'accent-fix'
   },
   other: {
     img: '/assets/capabilities/growth_systems.jpg',
     badge: 'BESPOKE // SYSTEMIC GROWTH PROTOCOL',
-    color: '#DD0060',
+    color: '#C58A3A',
     accentClass: 'accent-other'
   }
 };

@@ -26,7 +26,7 @@
 }
 
 .pd-step-indicator {
-  color: var(--color-accent, #DD0060);
+  color: var(--color-accent, #C58A3A);
   font-weight: 500;
 }
 
@@ -113,7 +113,7 @@
 
 .pd-input-group input:focus,
 .pd-input-group textarea:focus {
-  border-bottom-color: var(--color-accent, #DD0060);
+  border-bottom-color: var(--color-accent, #C58A3A);
 }
 
 .pd-textarea-group textarea {
@@ -149,7 +149,7 @@
 
 .pd-option-btn.active {
   background: #07101C;
-  border-color: var(--color-accent, #DD0060);
+  border-color: var(--color-accent, #C58A3A);
 }
 
 .pd-opt-label {
@@ -208,7 +208,7 @@
 }
 
 .pd-submit-action {
-  background: var(--color-accent, #DD0060);
+  background: var(--color-accent, #C58A3A);
   color: #000;
   border: none;
   padding: 1.25rem 2.5rem;
@@ -237,7 +237,7 @@
 }
 
 .pd-success-icon {
-  color: var(--color-accent, #DD0060);
+  color: var(--color-accent, #C58A3A);
   margin-bottom: 2rem;
 }
 
@@ -273,7 +273,7 @@
   top: 0;
   left: 0;
   height: 100%;
-  background: var(--color-accent, #DD0060);
+  background: var(--color-accent, #C58A3A);
   transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .pd-overlay[dir="rtl"] .pd-progress-fill {

@@ -89,9 +89,9 @@ export default function BeliefSection() {
             <svg className="vector-connections-svg" viewBox="0 0 1000 400" preserveAspectRatio="none">
               <defs>
                 <linearGradient id="beliefLaser" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#DD0060" stopOpacity="0.8" />
-                  <stop offset="50%" stopColor="#DD0060" stopOpacity="0.4" />
-                  <stop offset="100%" stopColor="#DD0060" stopOpacity="0.8" />
+                  <stop offset="0%" stopColor="#C58A3A" stopOpacity="0.8" />
+                  <stop offset="50%" stopColor="#C58A3A" stopOpacity="0.4" />
+                  <stop offset="100%" stopColor="#C58A3A" stopOpacity="0.8" />
                 </linearGradient>
               </defs>
 
@@ -103,19 +103,19 @@ export default function BeliefSection() {
                   <line x1="310" y1="120" x2="500" y2="200" stroke="url(#beliefLaser)" strokeWidth="1.2" />
                   <line x1="500" y1="200" x2="690" y2="120" stroke="url(#beliefLaser)" strokeWidth="1.2" />
                   <line x1="690" y1="120" x2="880" y2="200" stroke="url(#beliefLaser)" strokeWidth="1.2" strokeDasharray="4 4" />
-                  <line x1="120" y1="200" x2="500" y2="200" stroke="rgba(221, 0, 96, 0.2)" strokeWidth="1" />
-                  <line x1="500" y1="200" x2="880" y2="200" stroke="rgba(221, 0, 96, 0.2)" strokeWidth="1" />
+                  <line x1="120" y1="200" x2="500" y2="200" stroke="rgba(197, 138, 58, 0.2)" strokeWidth="1" />
+                  <line x1="500" y1="200" x2="880" y2="200" stroke="rgba(197, 138, 58, 0.2)" strokeWidth="1" />
                   
                   {/* Core feedback orbit */}
-                  <circle cx="500" cy="200" r="70" fill="none" stroke="rgba(221, 0, 96, 0.25)" strokeWidth="1" strokeDasharray="5 5" className="feedback-orbit-pulse" />
+                  <circle cx="500" cy="200" r="70" fill="none" stroke="rgba(197, 138, 58, 0.25)" strokeWidth="1" strokeDasharray="5 5" className="feedback-orbit-pulse" />
                 </>
               ) : (
                 <>
                   {/* Broken red/muted dashed isolation vectors */}
-                  <line x1="120" y1="200" x2="220" y2="200" stroke="rgba(221, 0, 96, 0.25)" strokeWidth="1.2" strokeDasharray="4 6" />
-                  <line x1="310" y1="120" x2="410" y2="120" stroke="rgba(221, 0, 96, 0.25)" strokeWidth="1.2" strokeDasharray="4 6" />
-                  <line x1="590" y1="120" x2="690" y2="120" stroke="rgba(221, 0, 96, 0.25)" strokeWidth="1.2" strokeDasharray="4 6" />
-                  <line x1="780" y1="200" x2="880" y2="200" stroke="rgba(221, 0, 96, 0.25)" strokeWidth="1.2" strokeDasharray="4 6" />
+                  <line x1="120" y1="200" x2="220" y2="200" stroke="rgba(197, 138, 58, 0.25)" strokeWidth="1.2" strokeDasharray="4 6" />
+                  <line x1="310" y1="120" x2="410" y2="120" stroke="rgba(197, 138, 58, 0.25)" strokeWidth="1.2" strokeDasharray="4 6" />
+                  <line x1="590" y1="120" x2="690" y2="120" stroke="rgba(197, 138, 58, 0.25)" strokeWidth="1.2" strokeDasharray="4 6" />
+                  <line x1="780" y1="200" x2="880" y2="200" stroke="rgba(197, 138, 58, 0.25)" strokeWidth="1.2" strokeDasharray="4 6" />
                 </>
               )}
             </svg>

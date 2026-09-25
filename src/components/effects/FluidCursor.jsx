@@ -5,16 +5,16 @@ import './FluidCursor.css';
  * =========================================================
  * FLUID CURSOR COMPONENT
  * WebGL Fluid Simulation based on Pavel Dobryakov
- * Strictly Monochromatic #DD0060 (RGB: 184, 46, 12)
+ * Strictly Monochromatic #C58A3A (RGB: 184, 46, 12)
  * =========================================================
  */
 
-// Strict Monochromatic #DD0060 Color Generator
+// Strict Monochromatic #C58A3A Color Generator
 function generateColor() {
   return {
-    r: 184 / 255,
-    g: 46 / 255,
-    b: 12 / 255
+    r: 197 / 255,
+    g: 138 / 255,
+    b: 58 / 255
   };
 }
 
@@ -436,7 +436,7 @@ export default function FluidCursor({
       gl.drawArrays(gl.TRIANGLE_FAN, 0, 4);
     }
 
-    // Splat injection function (strictly monochromatic #DD0060)
+    // Splat injection function (strictly monochromatic #C58A3A)
     function splat(x, y, dx, dy) {
       const monoColor = generateColor();
 
@@ -450,7 +450,7 @@ export default function FluidCursor({
       blit(velocity.write);
       velocity.swap();
 
-      // 2. Density splat using strictly monochromatic #DD0060
+      // 2. Density splat using strictly monochromatic #C58A3A
       gl.uniform1i(gl.getUniformLocation(splatProg, 'uTarget'), density.read.attach(0));
       gl.uniform3f(gl.getUniformLocation(splatProg, 'uColor'), monoColor.r, monoColor.g, monoColor.b);
       blit(density.write);
@@ -549,7 +549,7 @@ export default function FluidCursor({
     // Main Simulation Step Loop
     let animId;
     let lastTime = performance.now();
-    const monoColorUniform = [184 / 255, 46 / 255, 12 / 255];
+    const monoColorUniform = [197 / 255, 138 / 255, 58 / 255];
 
     function step(currentTime) {
       if (!isVisible) {

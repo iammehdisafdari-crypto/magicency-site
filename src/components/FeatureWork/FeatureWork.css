@@ -65,7 +65,7 @@
 }
 
 .fw-eyebrow-accent {
-  color: #DD0060;
+  color: #C58A3A;
   font-size: 0.85rem;
   line-height: 1;
 }
@@ -164,9 +164,9 @@
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  background: rgba(221, 0, 96, 0.12);
+  background: rgba(197, 138, 58, 0.12);
   color: var(--color-accent);
-  border: 1px solid rgba(221, 0, 96, 0.3);
+  border: 1px solid rgba(197, 138, 58, 0.3);
 }
 
 .fw-client-name {
@@ -272,7 +272,7 @@
 }
 
 .fw-pagination-item:focus-visible {
-  outline: 2px solid #DD0060;
+  outline: 2px solid #C58A3A;
   outline-offset: 4px;
   border-radius: 4px;
 }
@@ -302,7 +302,7 @@
 .fw-pagination-item.is-active .fw-pagination-bar {
   width: 52px;
   background-color: var(--color-accent);
-  box-shadow: 0 0 10px rgba(221, 0, 96, 0.5);
+  box-shadow: 0 0 10px rgba(197, 138, 58, 0.5);
 }
 
 /* Global See All Work CTA */
@@ -332,7 +332,7 @@
 }
 
 .fw-see-all-btn:focus-visible {
-  outline: 2px solid #DD0060;
+  outline: 2px solid #C58A3A;
   outline-offset: 2px;
 }
 
@@ -467,7 +467,7 @@
   position: absolute;
   width: 8px;
   height: 8px;
-  border-color: rgba(221, 0, 96, 0.6);
+  border-color: rgba(197, 138, 58, 0.6);
   border-style: solid;
   pointer-events: none;
   z-index: 4;

@@ -88,7 +88,7 @@ export default function LiquidFireCanvas() {
             vy: -Math.random() * 2.5 - 1,
             size: Math.random() * 3 + 1,
             alpha: 1,
-            color: Math.random() > 0.5 ? '#DD0060' : Math.random() > 0.3 ? '#DD0060' : '#DD0060',
+            color: Math.random() > 0.5 ? '#C58A3A' : Math.random() > 0.3 ? '#C58A3A' : '#C58A3A',
             life: 1,
             decay: Math.random() * 0.02 + 0.015,
           });
@@ -150,8 +150,8 @@ export default function LiquidFireCanvas() {
         mouse.x, mouse.y, 0,
         mouse.x, mouse.y, Math.max(width * 0.4, 300)
       );
-      baseGrad.addColorStop(0, 'rgba(221, 0, 96, 0.18)');
-      baseGrad.addColorStop(0.35, 'rgba(221, 0, 96, 0.08)');
+      baseGrad.addColorStop(0, 'rgba(197, 138, 58, 0.18)');
+      baseGrad.addColorStop(0.35, 'rgba(197, 138, 58, 0.08)');
       baseGrad.addColorStop(0.7, 'rgba(7, 16, 28, 0.02)');
       baseGrad.addColorStop(1, 'transparent');
 
@@ -171,16 +171,16 @@ export default function LiquidFireCanvas() {
 
         const blobGrad = ctx.createRadialGradient(bx, by, 0, bx, by, radius);
         if (i === 0) {
-          blobGrad.addColorStop(0, 'rgba(221, 0, 96, 0.28)');
-          blobGrad.addColorStop(0.5, 'rgba(221, 0, 96, 0.12)');
+          blobGrad.addColorStop(0, 'rgba(197, 138, 58, 0.28)');
+          blobGrad.addColorStop(0.5, 'rgba(197, 138, 58, 0.12)');
           blobGrad.addColorStop(1, 'transparent');
         } else if (i === 1) {
-          blobGrad.addColorStop(0, 'rgba(221, 0, 96, 0.22)');
-          blobGrad.addColorStop(0.6, 'rgba(221, 0, 96, 0.07)');
+          blobGrad.addColorStop(0, 'rgba(197, 138, 58, 0.22)');
+          blobGrad.addColorStop(0.6, 'rgba(197, 138, 58, 0.07)');
           blobGrad.addColorStop(1, 'transparent');
         } else {
-          blobGrad.addColorStop(0, 'rgba(221, 0, 96, 0.15)');
-          blobGrad.addColorStop(0.5, 'rgba(221, 0, 96, 0.05)');
+          blobGrad.addColorStop(0, 'rgba(197, 138, 58, 0.15)');
+          blobGrad.addColorStop(0.5, 'rgba(197, 138, 58, 0.05)');
           blobGrad.addColorStop(1, 'transparent');
         }
 
@@ -198,9 +198,9 @@ export default function LiquidFireCanvas() {
         mouse.x, mouse.y, 0,
         mouse.x, mouse.y, coreRadius
       );
-      coreGrad.addColorStop(0, 'rgba(221, 0, 96, 0.35)');
-      coreGrad.addColorStop(0.3, 'rgba(221, 0, 96, 0.25)');
-      coreGrad.addColorStop(0.8, 'rgba(221, 0, 96, 0.08)');
+      coreGrad.addColorStop(0, 'rgba(197, 138, 58, 0.35)');
+      coreGrad.addColorStop(0.3, 'rgba(197, 138, 58, 0.25)');
+      coreGrad.addColorStop(0.8, 'rgba(197, 138, 58, 0.08)');
       coreGrad.addColorStop(1, 'transparent');
 
       ctx.fillStyle = coreGrad;

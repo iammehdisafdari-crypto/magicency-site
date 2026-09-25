@@ -119,7 +119,7 @@ export default function Footer() {
 
   return (
     <footer ref={footerRef} className="footer vm-footer-root" aria-label="Magicency Experience Footer">
-      {/* Reusable WebGL Fluid Cursor Layer (#DD0060 Monochromatic) */}
+      {/* Reusable WebGL Fluid Cursor Layer (#C58A3A Monochromatic) */}
       {shouldLoadFluid && (
         <React.Suspense fallback={null}>
           <FluidCursor intensity={0.8} className="footer-fluid-bg" />

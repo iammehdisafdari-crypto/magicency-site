@@ -28,7 +28,7 @@
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: var(--radius-xl, 28px);
   box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.95),
-              0 0 40px rgba(221, 0, 96, 0.15);
+              0 0 40px rgba(197, 138, 58, 0.15);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -67,7 +67,7 @@
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.06em;
-  color: #DD0060;
+  color: #C58A3A;
 }
 
 .vm-reel-counter {
@@ -112,7 +112,7 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(circle at 70% 30%, rgba(221, 0, 96, 0.22) 0%, transparent 65%),
+  background: radial-gradient(circle at 70% 30%, rgba(197, 138, 58, 0.22) 0%, transparent 65%),
               radial-gradient(circle at 20% 80%, rgba(7, 16, 28, 0.15) 0%, transparent 60%);
   filter: blur(40px);
 }
@@ -142,7 +142,7 @@
   font-family: var(--font-mono, monospace);
   font-size: 0.72rem;
   font-weight: 700;
-  color: #DD0060;
+  color: #C58A3A;
   letter-spacing: 0.08em;
 }
 
@@ -179,7 +179,7 @@
 
 .wave-bar {
   width: 3px;
-  background: linear-gradient(to top, #DD0060, #DD0060);
+  background: linear-gradient(to top, #C58A3A, #C58A3A);
   border-radius: 2px;
   transition: height 300ms ease;
 }
@@ -215,7 +215,7 @@
 .vm-reel-prog-fill {
   width: 0%;
   height: 100%;
-  background: #DD0060;
+  background: #C58A3A;
   transition: width 3800ms linear;
 }
 

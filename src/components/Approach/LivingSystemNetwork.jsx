@@ -70,13 +70,13 @@ export default function LivingSystemNetwork() {
               <defs>
                 {/* Core Radial Glow */}
                 <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stopColor="rgba(221, 0, 96, 0.35)" />
-                  <stop offset="100%" stopColor="rgba(221, 0, 96, 0)" />
+                  <stop offset="0%" stopColor="rgba(197, 138, 58, 0.35)" />
+                  <stop offset="100%" stopColor="rgba(197, 138, 58, 0)" />
                 </radialGradient>
                 {/* Active Path Gradient */}
                 <linearGradient id="activeTrace" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#DD0060" />
-                  <stop offset="100%" stopColor="#DD0060" />
+                  <stop offset="0%" stopColor="#C58A3A" />
+                  <stop offset="100%" stopColor="#C58A3A" />
                 </linearGradient>
               </defs>
 
@@ -116,7 +116,7 @@ export default function LivingSystemNetwork() {
                     y1={p1.y}
                     x2={p2.x}
                     y2={p2.y}
-                    stroke={isActiveEdge ? 'rgba(221, 0, 96, 0.7)' : 'rgba(255, 255, 255, 0.08)'}
+                    stroke={isActiveEdge ? 'rgba(197, 138, 58, 0.7)' : 'rgba(255, 255, 255, 0.08)'}
                     strokeWidth={isActiveEdge ? 1.8 : 1}
                   />
                 );
@@ -128,7 +128,7 @@ export default function LivingSystemNetwork() {
                 cy={centerY} 
                 r="44" 
                 fill="#07101C" 
-                stroke="#DD0060" 
+                stroke="#C58A3A" 
                 strokeWidth="2" 
                 className="center-core-circle"
               />
@@ -137,7 +137,7 @@ export default function LivingSystemNetwork() {
                 cy={centerY} 
                 r="50" 
                 fill="none" 
-                stroke="rgba(221, 0, 96, 0.3)" 
+                stroke="rgba(197, 138, 58, 0.3)" 
                 strokeWidth="1" 
                 className="center-core-ring"
               />

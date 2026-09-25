@@ -275,7 +275,7 @@ export default function Header() {
           openMenuButtonColor="#ffffff"
           changeMenuColorOnOpen={true}
           colors={['#050505', '#07101C']}
-          accentColor="#DD0060"
+          accentColor="#C58A3A"
           panelBackground="#07101C"
           isFixed={true}
           isRTL={isRTL}

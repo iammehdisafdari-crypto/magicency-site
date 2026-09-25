@@ -37,7 +37,7 @@
   transform: translate(-50%, -50%);
   width: 800px;
   height: 600px;
-  background: radial-gradient(circle, rgba(221, 0, 96, 0.08) 0%, rgba(5, 5, 5, 0) 75%);
+  background: radial-gradient(circle, rgba(197, 138, 58, 0.08) 0%, rgba(5, 5, 5, 0) 75%);
   pointer-events: none;
   z-index: 1;
 }
@@ -71,14 +71,14 @@
   align-items: center;
   gap: 6px;
   padding: 3px 12px;
-  background: rgba(221, 0, 96, 0.08);
-  border: 1px solid rgba(221, 0, 96, 0.35);
+  background: rgba(197, 138, 58, 0.08);
+  border: 1px solid rgba(197, 138, 58, 0.35);
   border-radius: var(--radius-full);
   font-family: var(--font-mono);
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: #DD0060;
+  color: #C58A3A;
 }
 
 .proof-pipeline-tracker {
@@ -115,12 +115,12 @@
 }
 
 .proof-step-btn.is-active {
-  color: #DD0060;
+  color: #C58A3A;
   font-weight: 800;
 }
 
 .proof-step-btn .step-num {
-  color: #DD0060;
+  color: #C58A3A;
 }
 
 .step-arrow {
@@ -146,11 +146,11 @@
   width: 100%;
   height: 100%;
   background: linear-gradient(155deg, #07101C 0%, #07101C 100%);
-  border: 1px solid rgba(221, 0, 96, 0.3);
+  border: 1px solid rgba(197, 138, 58, 0.3);
   border-radius: 20px;
   box-shadow: 
     0 24px 70px rgba(0, 0, 0, 0.92),
-    0 0 28px rgba(221, 0, 96, 0.08),
+    0 0 28px rgba(197, 138, 58, 0.08),
     inset 0 1px 1px rgba(255, 255, 255, 0.1);
   overflow: hidden;
   box-sizing: border-box;
@@ -201,24 +201,24 @@
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #DD0060;
-  box-shadow: 0 0 6px #DD0060;
+  background: #C58A3A;
+  box-shadow: 0 0 6px #C58A3A;
 }
 
 .dot-orange {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #DD0060;
-  box-shadow: 0 0 6px #DD0060;
+  background: #C58A3A;
+  box-shadow: 0 0 6px #C58A3A;
 }
 
 .dot-red {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #DD0060;
-  box-shadow: 0 0 6px #DD0060;
+  background: #C58A3A;
+  box-shadow: 0 0 6px #C58A3A;
 }
 
 /* ---------------------------------------------------------
@@ -248,7 +248,7 @@
   width: 40%;
   height: 76%;
   background: #07101C;
-  border: 1px solid rgba(221, 0, 96, 0.4);
+  border: 1px solid rgba(197, 138, 58, 0.4);
   border-radius: 14px;
   overflow: hidden;
   box-shadow: 0 20px 48px rgba(0, 0, 0, 0.95);
@@ -292,7 +292,7 @@
 }
 
 .intel-ind {
-  color: #DD0060;
+  color: #C58A3A;
   font-weight: 700;
 }
 
@@ -352,15 +352,15 @@
   font-family: var(--font-mono);
   font-size: 0.7rem;
   font-weight: 800;
-  color: #DD0060;
+  color: #C58A3A;
 }
 
 .status-live-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #DD0060;
-  box-shadow: 0 0 8px #DD0060;
+  background: #C58A3A;
+  box-shadow: 0 0 8px #C58A3A;
   animation: livePing 1.6s ease-in-out infinite;
 }
 
@@ -384,7 +384,7 @@
 
 .hud-metric-card {
   background: rgba(14, 18, 28, 0.85);
-  border: 1px solid rgba(221, 0, 96, 0.35);
+  border: 1px solid rgba(197, 138, 58, 0.35);
   border-radius: 16px;
   padding: 16px 20px;
   display: flex;
@@ -405,14 +405,14 @@
   font-family: var(--font-display);
   font-size: clamp(1.8rem, 1.4rem + 1vw, 2.5rem);
   font-weight: 900;
-  color: #DD0060;
+  color: #C58A3A;
   line-height: 1.1;
 }
 
 .hud-m-sub {
   font-family: var(--font-mono);
   font-size: 0.62rem;
-  color: #DD0060;
+  color: #C58A3A;
   font-weight: 700;
 }
 
@@ -461,8 +461,8 @@
 .before-badge {
   left: 14px;
   background: rgba(18, 12, 14, 0.92);
-  border: 1px solid rgba(221, 0, 96, 0.4);
-  color: #DD0060;
+  border: 1px solid rgba(197, 138, 58, 0.4);
+  color: #C58A3A;
 }
 
 [dir="rtl"] .before-badge {
@@ -473,8 +473,8 @@
 .after-badge {
   right: 14px;
   background: rgba(10, 18, 14, 0.92);
-  border: 1px solid rgba(221, 0, 96, 0.4);
-  color: #DD0060;
+  border: 1px solid rgba(197, 138, 58, 0.4);
+  color: #C58A3A;
 }
 
 [dir="rtl"] .after-badge {
@@ -487,8 +487,8 @@
   top: 0;
   bottom: 0;
   width: 2px;
-  background: #DD0060;
-  box-shadow: 0 0 12px #DD0060;
+  background: #C58A3A;
+  box-shadow: 0 0 12px #C58A3A;
   z-index: 15;
   transform: translateX(-50%);
   display: flex;
@@ -501,14 +501,14 @@
   height: 32px;
   border-radius: 50%;
   background: #07101C;
-  border: 2px solid #DD0060;
+  border: 2px solid #C58A3A;
   color: #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.75rem;
   font-weight: 900;
-  box-shadow: 0 0 16px rgba(221, 0, 96, 0.6);
+  box-shadow: 0 0 16px rgba(197, 138, 58, 0.6);
 }
 
 /* ---------------------------------------------------------
@@ -549,7 +549,7 @@
 .impact-step-box {
   position: relative;
   background: rgba(14, 18, 28, 0.9);
-  border: 1px solid rgba(221, 0, 96, 0.35);
+  border: 1px solid rgba(197, 138, 58, 0.35);
   border-radius: 16px;
   padding: 18px 20px;
   display: flex;
@@ -560,7 +560,7 @@
 }
 
 .impact-step-box.step-2 {
-  border-color: rgba(221, 0, 96, 0.45);
+  border-color: rgba(197, 138, 58, 0.45);
   background: rgba(10, 20, 18, 0.9);
 }
 
@@ -574,7 +574,7 @@
 .step-badge-code {
   font-size: 0.75rem;
   font-weight: 800;
-  color: #DD0060;
+  color: #C58A3A;
 }
 
 .step-badge-name {
@@ -597,7 +597,7 @@
   right: -16px;
   top: 50%;
   transform: translateY(-50%);
-  color: #DD0060;
+  color: #C58A3A;
   font-size: 1rem;
   z-index: 10;
 }
@@ -645,13 +645,13 @@
   align-items: center;
   gap: 6px;
   padding: 3px 12px;
-  background: rgba(221, 0, 96, 0.1);
-  border: 1px solid rgba(221, 0, 96, 0.4);
+  background: rgba(197, 138, 58, 0.1);
+  border: 1px solid rgba(197, 138, 58, 0.4);
   border-radius: var(--radius-full);
   font-family: var(--font-mono);
   font-size: 0.68rem;
   font-weight: 800;
-  color: #DD0060;
+  color: #C58A3A;
 }
 
 .trust-quote-text {
@@ -674,7 +674,7 @@
 
 .trust-author {
   font-weight: 800;
-  color: #DD0060;
+  color: #C58A3A;
 }
 
 .trust-pipe {

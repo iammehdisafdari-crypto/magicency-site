@@ -34,7 +34,7 @@
   transform: translate(-50%, -50%);
   width: min(800px, 90vw);
   height: min(800px, 90vw);
-  background: radial-gradient(circle, rgba(221, 0, 96, 0.08) 0%, rgba(6, 7, 9, 0) 70%);
+  background: radial-gradient(circle, rgba(197, 138, 58, 0.08) 0%, rgba(6, 7, 9, 0) 70%);
   pointer-events: none;
 }
 
@@ -53,8 +53,8 @@
   gap: 10px;
   padding: 6px 16px;
   border-radius: 9999px;
-  background: rgba(221, 0, 96, 0.08);
-  border: 1px solid rgba(221, 0, 96, 0.28);
+  background: rgba(197, 138, 58, 0.08);
+  border: 1px solid rgba(197, 138, 58, 0.28);
   margin-bottom: clamp(24px, 4vh, 36px);
 }
 
@@ -62,8 +62,8 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background-color: #DD0060;
-  box-shadow: 0 0 10px #DD0060;
+  background-color: #C58A3A;
+  box-shadow: 0 0 10px #C58A3A;
 }
 
 .notfound-badge-text {
@@ -71,7 +71,7 @@
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.12em;
-  color: #DD0060;
+  color: #C58A3A;
   text-transform: uppercase;
 }
 
@@ -130,7 +130,7 @@
   align-items: center;
   gap: 10px;
   padding: 14px 28px;
-  background-color: #DD0060;
+  background-color: #C58A3A;
   color: #07101C;
   font-family: var(--font-mono, monospace);
   font-size: 0.85rem;
@@ -141,13 +141,13 @@
   cursor: pointer;
   border: none;
   transition: transform 200ms ease, background-color 200ms ease, box-shadow 200ms ease;
-  box-shadow: 0 8px 24px -6px rgba(221, 0, 96, 0.4);
+  box-shadow: 0 8px 24px -6px rgba(197, 138, 58, 0.4);
 }
 
 .notfound-btn-primary:hover {
-  background-color: #DD0060;
+  background-color: #C58A3A;
   transform: translateY(-2px);
-  box-shadow: 0 12px 28px -4px rgba(221, 0, 96, 0.55);
+  box-shadow: 0 12px 28px -4px rgba(197, 138, 58, 0.55);
 }
 
 .notfound-btn-secondary {

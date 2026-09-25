@@ -42,9 +42,9 @@ export default function CompoundingGrowthNetwork() {
             >
               <defs>
                 <radialGradient id="compoundGlow" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stopColor="rgba(221, 0, 96, 0.4)" />
-                  <stop offset="70%" stopColor="rgba(221, 0, 96, 0.08)" />
-                  <stop offset="100%" stopColor="rgba(221, 0, 96, 0)" />
+                  <stop offset="0%" stopColor="rgba(197, 138, 58, 0.4)" />
+                  <stop offset="70%" stopColor="rgba(197, 138, 58, 0.08)" />
+                  <stop offset="100%" stopColor="rgba(197, 138, 58, 0)" />
                 </radialGradient>
               </defs>
 
@@ -61,7 +61,7 @@ export default function CompoundingGrowthNetwork() {
                       cx="250"
                       cy="250"
                       r={radius}
-                      stroke={isReached ? (isCurrent ? '#DD0060' : 'rgba(221, 0, 96, 0.35)') : 'rgba(255, 255, 255, 0.05)'}
+                      stroke={isReached ? (isCurrent ? '#C58A3A' : 'rgba(197, 138, 58, 0.35)') : 'rgba(255, 255, 255, 0.05)'}
                       strokeWidth={isCurrent ? 2 : 1}
                       strokeDasharray={isReached ? 'none' : '4 6'}
                       className={isCurrent ? 'active-expanding-ring' : ''}
@@ -72,7 +72,7 @@ export default function CompoundingGrowthNetwork() {
                         cx={250 + radius * Math.cos((idx * 1.3) + 0.4)}
                         cy={250 + radius * Math.sin((idx * 1.3) + 0.4)}
                         r={isCurrent ? 5 : 3}
-                        fill={isCurrent ? '#ffffff' : '#DD0060'}
+                        fill={isCurrent ? '#ffffff' : '#C58A3A'}
                       />
                     )}
                   </g>
@@ -80,7 +80,7 @@ export default function CompoundingGrowthNetwork() {
               })}
 
               {/* Central Origin Node */}
-              <circle cx="250" cy="250" r="30" fill="#07101C" stroke="#DD0060" strokeWidth="2" />
+              <circle cx="250" cy="250" r="30" fill="#07101C" stroke="#C58A3A" strokeWidth="2" />
               <text
                 x="250"
                 y="254"

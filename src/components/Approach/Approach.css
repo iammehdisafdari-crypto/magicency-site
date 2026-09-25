@@ -1,6 +1,6 @@
 /* ==========================================================================
    MAGICENCY APPROACH — GROWTH ARCHITECTURE (VISUAL-FIRST EDITORIAL REDESIGN)
-   Strict Palette: #050505 (bg), #07101C (surface), #DD0060 (accent), #8B93A7 (muted), #FFFFFF (text)
+   Strict Palette: #050505 (bg), #07101C (surface), #C58A3A (accent), #8B93A7 (muted), #FFFFFF (text)
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -46,8 +46,8 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background-color: #DD0060;
-  box-shadow: 0 0 10px #DD0060;
+  background-color: #C58A3A;
+  box-shadow: 0 0 10px #C58A3A;
 }
 
 .approach-pill-text {
@@ -148,8 +148,8 @@
 }
 
 .approach-hero-title-line.highlight-accent {
-  color: #DD0060;
-  text-shadow: 0 0 40px rgba(221, 0, 96, 0.35);
+  color: #C58A3A;
+  text-shadow: 0 0 40px rgba(197, 138, 58, 0.35);
 }
 
 .approach-hero-supporting {
@@ -176,7 +176,7 @@
   border: 1px solid rgba(255, 255, 255, 0.14);
   background: #07101C;
   overflow: hidden;
-  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.7), 0 0 1px rgba(221, 0, 96, 0.3);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.7), 0 0 1px rgba(197, 138, 58, 0.3);
 }
 
 .hero-media-backdrop {
@@ -229,7 +229,7 @@
   position: absolute;
   width: 12px;
   height: 12px;
-  border-color: rgba(221, 0, 96, 0.5);
+  border-color: rgba(197, 138, 58, 0.5);
 }
 
 .hud-tl { top: -8px; left: -8px; border-top: 2px solid; border-left: 2px solid; }
@@ -252,8 +252,8 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #DD0060;
-  box-shadow: 0 0 8px #DD0060;
+  background: #C58A3A;
+  box-shadow: 0 0 8px #C58A3A;
 }
 
 .hud-status-label {
@@ -307,7 +307,7 @@
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: #DD0060;
+  color: #C58A3A;
   white-space: nowrap;
   flex-shrink: 0;
 }
@@ -338,7 +338,7 @@
   font-family: 'Plus Jakarta Sans', monospace;
   font-size: 0.68rem;
   font-weight: 700;
-  color: #DD0060;
+  color: #C58A3A;
 }
 
 .flow-node-name {
@@ -387,7 +387,7 @@
 .scroll-btn-line {
   width: 1px;
   height: 24px;
-  background: linear-gradient(180deg, #DD0060 0%, rgba(221, 0, 96, 0) 100%);
+  background: linear-gradient(180deg, #C58A3A 0%, rgba(197, 138, 58, 0) 100%);
   animation: scrollPulse 2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
 }
 
@@ -483,7 +483,7 @@
   font-family: 'Plus Jakarta Sans', monospace;
   font-size: 0.68rem;
   font-weight: 700;
-  color: #DD0060;
+  color: #C58A3A;
   letter-spacing: 0.12em;
 }
 
@@ -545,7 +545,7 @@
 .quote-accent-bar {
   width: 3px;
   height: 36px;
-  background: #DD0060;
+  background: #C58A3A;
   border-radius: 2px;
   flex-shrink: 0;
 }
@@ -648,10 +648,10 @@
 
 .integrated-pillar-panel:hover,
 .integrated-pillar-panel.is-active {
-  border-color: #DD0060;
+  border-color: #C58A3A;
   background: rgba(7, 16, 28, 0.96);
   transform: translateY(-4px);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 20px rgba(221, 0, 96, 0.25);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 20px rgba(197, 138, 58, 0.25);
 }
 
 .pillar-header-line {
@@ -665,7 +665,7 @@
   font-family: 'Plus Jakarta Sans', monospace;
   font-size: 0.85rem;
   font-weight: 700;
-  color: #DD0060;
+  color: #C58A3A;
 }
 
 .pillar-tag {
@@ -722,14 +722,14 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #DD0060;
+  background: #C58A3A;
 }
 
 .dot-ring {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  border: 1px solid #DD0060;
+  border: 1px solid #C58A3A;
   animation: pulseRing 2s infinite ease-out;
 }
 
@@ -760,7 +760,7 @@
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: #DD0060;
+  color: #C58A3A;
 }
 
 /* --------------------------------------------------------------------------
@@ -801,7 +801,7 @@
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.14);
   background: #07101C;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 1px rgba(221, 0, 96, 0.3);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 1px rgba(197, 138, 58, 0.3);
 }
 
 .journey-media-img {
@@ -844,8 +844,8 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #DD0060;
-  box-shadow: 0 0 8px #DD0060;
+  background: #C58A3A;
+  box-shadow: 0 0 8px #C58A3A;
 }
 
 .journey-hud-telemetry {
@@ -866,7 +866,7 @@
   font-family: 'Plus Jakarta Sans', monospace;
   font-size: 1.1rem;
   font-weight: 800;
-  color: #DD0060;
+  color: #C58A3A;
 }
 
 .journey-hud-stage-title {
@@ -903,7 +903,7 @@
 
 .journey-stage-item:hover,
 .journey-stage-item.is-active {
-  border-color: #DD0060;
+  border-color: #C58A3A;
   background: rgba(7, 16, 28, 0.98);
   transform: translateX(6px);
 }
@@ -925,7 +925,7 @@
   font-family: 'Plus Jakarta Sans', monospace;
   font-size: 0.85rem;
   font-weight: 700;
-  color: #DD0060;
+  color: #C58A3A;
 }
 
 .stage-item-glyph {
@@ -934,7 +934,7 @@
 }
 
 .journey-stage-item.is-active .stage-item-glyph {
-  color: #DD0060;
+  color: #C58A3A;
 }
 
 .stage-item-content {
@@ -971,7 +971,7 @@
   top: 0;
   bottom: 0;
   width: 3px;
-  background: #DD0060;
+  background: #C58A3A;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -1016,8 +1016,8 @@
 }
 
 .contrast-panel.connected-panel {
-  border-color: rgba(221, 0, 96, 0.4);
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5), 0 0 24px rgba(221, 0, 96, 0.18);
+  border-color: rgba(197, 138, 58, 0.4);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5), 0 0 24px rgba(197, 138, 58, 0.18);
 }
 
 .panel-architectural-stage {
@@ -1107,7 +1107,7 @@
 }
 
 .badge-accent {
-  color: #DD0060;
+  color: #C58A3A;
 }
 
 .panel-headline {
@@ -1158,7 +1158,7 @@
 }
 
 .point-check {
-  color: #DD0060;
+  color: #C58A3A;
   font-weight: 800;
   flex-shrink: 0;
 }
@@ -1258,7 +1258,7 @@
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #DD0060;
+  background: #C58A3A;
 }
 
 .datum-label {
@@ -1292,7 +1292,7 @@
 }
 
 .faq-item-card.is-open {
-  border-color: rgba(221, 0, 96, 0.35);
+  border-color: rgba(197, 138, 58, 0.35);
 }
 
 .faq-question-btn {
@@ -1318,7 +1318,7 @@
   font-family: 'Plus Jakarta Sans', monospace;
   font-size: 0.85rem;
   font-weight: 700;
-  color: #DD0060;
+  color: #C58A3A;
   letter-spacing: 0.08em;
   flex-shrink: 0;
 }
@@ -1346,7 +1346,7 @@
 }
 
 .faq-item-card.is-open .faq-toggle-icon {
-  color: #DD0060;
+  color: #C58A3A;
 }
 
 .faq-answer-wrap {
@@ -1429,7 +1429,7 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 1px rgba(221, 0, 96, 0.3);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 1px rgba(197, 138, 58, 0.3);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
 }
@@ -1481,7 +1481,7 @@
 }
 
 .approach-closing-cta-button {
-  background: #DD0060 !important;
+  background: #C58A3A !important;
   color: #FFFFFF !important;
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-weight: 700;
@@ -1491,7 +1491,7 @@
   border: none;
   font-size: 0.95rem;
   transition: all 0.3s ease;
-  box-shadow: 0 8px 24px rgba(221, 0, 96, 0.35);
+  box-shadow: 0 8px 24px rgba(197, 138, 58, 0.35);
   cursor: pointer;
 }
 
@@ -1512,7 +1512,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #DD0060;
+  background: #C58A3A;
 }
 
 .footnote-text {

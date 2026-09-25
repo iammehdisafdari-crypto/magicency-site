@@ -140,16 +140,16 @@ export default function GrowthEngineCanvas() {
       );
 
       if (currentMode === 'momentum') {
-        coreGradient.addColorStop(0, 'rgba(221, 0, 96, 0.14)');
+        coreGradient.addColorStop(0, 'rgba(197, 138, 58, 0.14)');
         coreGradient.addColorStop(0.3, 'rgba(7, 16, 28, 0.06)');
         coreGradient.addColorStop(1, 'rgba(8, 10, 15, 0)');
       } else if (currentMode === 'signal') {
-        coreGradient.addColorStop(0, 'rgba(221, 0, 96, 0.12)');
-        coreGradient.addColorStop(0.35, 'rgba(221, 0, 96, 0.05)');
+        coreGradient.addColorStop(0, 'rgba(197, 138, 58, 0.12)');
+        coreGradient.addColorStop(0.35, 'rgba(197, 138, 58, 0.05)');
         coreGradient.addColorStop(1, 'rgba(8, 10, 15, 0)');
       } else {
         // System Matrix
-        coreGradient.addColorStop(0, 'rgba(221, 0, 96, 0.09)');
+        coreGradient.addColorStop(0, 'rgba(197, 138, 58, 0.09)');
         coreGradient.addColorStop(0.4, 'rgba(7, 16, 28, 0.04)');
         coreGradient.addColorStop(1, 'rgba(8, 10, 15, 0)');
       }
@@ -177,7 +177,7 @@ export default function GrowthEngineCanvas() {
             const y1 = centerY + Math.sin(angle) * (r - 3);
             const x2 = centerX + Math.cos(angle) * (r + 3);
             const y2 = centerY + Math.sin(angle) * (r + 3);
-            ctx.strokeStyle = 'rgba(221, 0, 96, 0.12)';
+            ctx.strokeStyle = 'rgba(197, 138, 58, 0.12)';
             ctx.beginPath();
             ctx.moveTo(x1, y1);
             ctx.lineTo(x2, y2);
@@ -186,7 +186,7 @@ export default function GrowthEngineCanvas() {
         });
 
         // Crosshairs at mouse position
-        ctx.strokeStyle = 'rgba(221, 0, 96, 0.2)';
+        ctx.strokeStyle = 'rgba(197, 138, 58, 0.2)';
         ctx.setLineDash([4, 6]);
         ctx.beginPath();
         ctx.moveTo(mouse.x, 0);
@@ -211,9 +211,9 @@ export default function GrowthEngineCanvas() {
           const endY = height * 0.1 + c * 10;
 
           const grad = ctx.createLinearGradient(startX, startY, endX, endY);
-          grad.addColorStop(0, 'rgba(221, 0, 96, 0)');
+          grad.addColorStop(0, 'rgba(197, 138, 58, 0)');
           grad.addColorStop(0.5, `rgba(0, 245, 155, ${0.15 + (c / curves) * 0.25})`);
-          grad.addColorStop(1, 'rgba(221, 0, 96, 0.8)');
+          grad.addColorStop(1, 'rgba(197, 138, 58, 0.8)');
 
           ctx.strokeStyle = grad;
           ctx.beginPath();
@@ -227,12 +227,12 @@ export default function GrowthEngineCanvas() {
           const px = omt * omt * omt * startX + 3 * omt * omt * tPos * cp1X + 3 * omt * tPos * tPos * cp2X + tPos * tPos * tPos * endX;
           const py = omt * omt * omt * startY + 3 * omt * omt * tPos * cp1Y + 3 * omt * tPos * tPos * cp2Y + tPos * tPos * tPos * endY;
 
-          ctx.fillStyle = '#DD0060';
+          ctx.fillStyle = '#C58A3A';
           ctx.beginPath();
           ctx.arc(px, py, 2.5, 0, Math.PI * 2);
           ctx.fill();
 
-          ctx.strokeStyle = 'rgba(221, 0, 96, 0.3)';
+          ctx.strokeStyle = 'rgba(197, 138, 58, 0.3)';
           ctx.beginPath();
           ctx.arc(px, py, 6 + Math.sin(time * 8) * 2, 0, Math.PI * 2);
           ctx.stroke();
@@ -251,7 +251,7 @@ export default function GrowthEngineCanvas() {
         }
 
         // Focused ray to high converting node
-        ctx.strokeStyle = 'rgba(221, 0, 96, 0.45)';
+        ctx.strokeStyle = 'rgba(197, 138, 58, 0.45)';
         ctx.setLineDash([3, 3]);
         ctx.beginPath();
         ctx.moveTo(mouse.x, mouse.y);
@@ -303,7 +303,7 @@ export default function GrowthEngineCanvas() {
         node.currentRadius += (node.targetRadius - node.currentRadius) * 0.1;
 
         // Render Node
-        ctx.fillStyle = currentMode === 'signal' ? '#DD0060' : '#DD0060';
+        ctx.fillStyle = currentMode === 'signal' ? '#C58A3A' : '#C58A3A';
         ctx.beginPath();
         ctx.arc(node.x, node.y, node.currentRadius, 0, Math.PI * 2);
         ctx.fill();
@@ -311,8 +311,8 @@ export default function GrowthEngineCanvas() {
         // Node Glow on key nodes
         if (idx % 4 === 0) {
           ctx.strokeStyle = currentMode === 'signal' 
-            ? 'rgba(221, 0, 96, 0.25)' 
-            : 'rgba(221, 0, 96, 0.25)';
+            ? 'rgba(197, 138, 58, 0.25)' 
+            : 'rgba(197, 138, 58, 0.25)';
           ctx.beginPath();
           ctx.arc(node.x, node.y, node.currentRadius * 2.4 + Math.sin(time * 3 + idx) * 1.5, 0, Math.PI * 2);
           ctx.stroke();
@@ -323,7 +323,7 @@ export default function GrowthEngineCanvas() {
           ctx.font = '9px "JetBrains Mono", monospace';
           ctx.fillStyle = 'rgba(255, 255, 255, 0.55)';
           ctx.fillText(node.label, node.x + 8, node.y + 3);
-          ctx.fillStyle = 'rgba(221, 0, 96, 0.7)';
+          ctx.fillStyle = 'rgba(197, 138, 58, 0.7)';
           ctx.fillText(`+${((1 - dist / 220) * 100).toFixed(1)}%`, node.x + 8, node.y + 13);
         }
       });
@@ -367,7 +367,7 @@ export default function GrowthEngineCanvas() {
           const px = sNode.x + (tNode.x - sNode.x) * pkt.progress;
           const py = sNode.y + (tNode.y - sNode.y) * pkt.progress;
 
-          ctx.fillStyle = currentMode === 'signal' ? '#DD0060' : '#FFFFFF';
+          ctx.fillStyle = currentMode === 'signal' ? '#C58A3A' : '#FFFFFF';
           ctx.beginPath();
           ctx.arc(px, py, pkt.size, 0, Math.PI * 2);
           ctx.fill();

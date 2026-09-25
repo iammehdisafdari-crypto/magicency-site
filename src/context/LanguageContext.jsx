@@ -81,7 +81,7 @@ export const translations = {
           clientTag: 'CLIENT',
           image: '/branding-client.png',
           alt: 'atrash store Branding & Identity Design',
-          color: '#DD0060'
+          color: '#C58A3A'
         },
         {
           id: 'web',
@@ -92,7 +92,7 @@ export const translations = {
           clientTag: 'CLIENT',
           image: '/web-client.png',
           alt: 'GR8 Real Estate Worldwide Web Platform',
-          color: '#DD0060'
+          color: '#C58A3A'
         },
         {
           id: 'mobile',
@@ -103,7 +103,7 @@ export const translations = {
           clientTag: 'CLIENT',
           image: '/zarin-strategy.png',
           alt: 'Zarin Real Estate Strategy Case Study',
-          color: '#DD0060'
+          color: '#C58A3A'
         },
         {
           id: 'motion',
@@ -114,7 +114,7 @@ export const translations = {
           clientTag: 'CLIENT',
           image: '/performance-achievements.png',
           alt: 'Klasino Performance Achievements Case Study',
-          color: '#DD0060'
+          color: '#C58A3A'
         }
       ]
     },
@@ -580,7 +580,7 @@ export const translations = {
           clientTag: 'کارفرما',
           image: '/branding-client.png',
           alt: 'هویت بصری و برندینگ atrash store',
-          color: '#DD0060'
+          color: '#C58A3A'
         },
         {
           id: 'web',
@@ -591,7 +591,7 @@ export const translations = {
           clientTag: 'کارفرما',
           image: '/web-client.png',
           alt: 'پلتفرم جهانی وب GR8 Real Estate',
-          color: '#DD0060'
+          color: '#C58A3A'
         },
         {
           id: 'mobile',
@@ -602,7 +602,7 @@ export const translations = {
           clientTag: 'کارفرما',
           image: '/zarin-strategy.png',
           alt: 'کیس استادی استراتژی املاک زرین دبی',
-          color: '#DD0060'
+          color: '#C58A3A'
         },
         {
           id: 'motion',
@@ -613,7 +613,7 @@ export const translations = {
           clientTag: 'کارفرما',
           image: '/performance-achievements.png',
           alt: 'کیس استادی دستاوردهای عملکرد کلاسینو',
-          color: '#DD0060'
+          color: '#C58A3A'
         }
       ]
     },

@@ -120,9 +120,9 @@ export default function WhyWeExist() {
               <svg className="vector-connections-svg" viewBox="0 0 1000 360" preserveAspectRatio="none">
                 <defs>
                   <linearGradient id="dnaLaser" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#DD0060" stopOpacity="0.8" />
-                    <stop offset="50%" stopColor="#DD0060" stopOpacity="0.3" />
-                    <stop offset="100%" stopColor="#DD0060" stopOpacity="0.8" />
+                    <stop offset="0%" stopColor="#C58A3A" stopOpacity="0.8" />
+                    <stop offset="50%" stopColor="#C58A3A" stopOpacity="0.3" />
+                    <stop offset="100%" stopColor="#C58A3A" stopOpacity="0.8" />
                   </linearGradient>
                 </defs>
 
@@ -130,8 +130,8 @@ export default function WhyWeExist() {
                   <>
                     <line x1="120" y1="180" x2="500" y2="180" stroke="url(#dnaLaser)" strokeWidth="1.5" className="dna-pulse-line" />
                     <line x1="500" y1="180" x2="880" y2="180" stroke="url(#dnaLaser)" strokeWidth="1.5" className="dna-pulse-line" />
-                    <circle cx="500" cy="180" r="6" fill="#DD0060" />
-                    <circle cx="500" cy="180" r="14" fill="none" stroke="rgba(221, 0, 96, 0.4)" strokeWidth="1" />
+                    <circle cx="500" cy="180" r="6" fill="#C58A3A" />
+                    <circle cx="500" cy="180" r="14" fill="none" stroke="rgba(197, 138, 58, 0.4)" strokeWidth="1" />
                   </>
                 ) : (
                   <line x1="80" y1="180" x2="920" y2="180" stroke="rgba(139, 147, 167, 0.15)" strokeWidth="1" strokeDasharray="6 8" />

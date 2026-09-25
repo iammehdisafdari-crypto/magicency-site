@@ -333,7 +333,7 @@ export default function ProblemInsight() {
             cy={radius}
             r={radius}
             fill="none"
-            stroke="#DD0060"
+            stroke="#C58A3A"
             strokeWidth="3.5"
             strokeLinecap="round"
             strokeDasharray={`${arcLength} ${circumference}`}
@@ -367,7 +367,7 @@ export default function ProblemInsight() {
                   className="pi-wheel-node-active"
                   style={{
                     opacity: node.bgA,
-                    boxShadow: node.bgA > 0.5 ? `0 10px 28px rgba(221, 0, 96, ${0.35 * node.bgA})` : 'none'
+                    boxShadow: node.bgA > 0.5 ? `0 10px 28px rgba(197, 138, 58, ${0.35 * node.bgA})` : 'none'
                   }}
                 />
 

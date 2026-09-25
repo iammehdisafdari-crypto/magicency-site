@@ -6,7 +6,7 @@
  * --color-bg-secondary: #07101C
  * --color-text: #FFFFFF
  * --color-text-muted: #8B93A7
- * --color-accent: #DD0060
+ * --color-accent: #C58A3A
  */
 
 /* Micro float animation matching reference __spIconFloat */
@@ -53,7 +53,7 @@
 /* SVG Arc Track */
 .pi-arc-svg {
   pointer-events: none;
-  filter: drop-shadow(0 0 12px rgba(221, 0, 96, 0.18));
+  filter: drop-shadow(0 0 12px rgba(197, 138, 58, 0.18));
 }
 
 /* Number Wheel Container */
@@ -81,7 +81,7 @@
 }
 
 .pi-wheel-btn:focus-visible {
-  outline: 2px solid var(--color-accent, #DD0060);
+  outline: 2px solid var(--color-accent, #C58A3A);
   outline-offset: 4px;
 }
 
@@ -97,7 +97,7 @@
   inset: 0;
   border-radius: 50%;
   background: var(--color-bg-secondary, #07101C);
-  border: 1.5px solid var(--color-accent, #DD0060);
+  border: 1.5px solid var(--color-accent, #C58A3A);
   transition: opacity 0.1s linear;
 }
 
@@ -156,8 +156,8 @@
 
 .pi-mobile-pill.is-active {
   width: 28px;
-  background: var(--color-accent, #DD0060);
-  box-shadow: 0 0 12px rgba(221, 0, 96, 0.4);
+  background: var(--color-accent, #C58A3A);
+  box-shadow: 0 0 12px rgba(197, 138, 58, 0.4);
 }
 
 /* Visual Anchor Container (Houses large conceptual objects) */
@@ -209,7 +209,7 @@
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--color-accent, #DD0060);
+  color: var(--color-accent, #C58A3A);
   margin-bottom: 14px;
 }
 
@@ -245,7 +245,7 @@
   font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, sans-serif);
   font-size: clamp(18px, 1.8vw, 24px);
   font-weight: 600;
-  color: var(--color-accent, #DD0060);
+  color: var(--color-accent, #C58A3A);
   margin: 0 0 14px;
   letter-spacing: -0.01em;
 }
@@ -295,8 +295,8 @@
 }
 
 .pi-chip:hover {
-  border-color: rgba(221, 0, 96, 0.4);
-  background: rgba(221, 0, 96, 0.08);
+  border-color: rgba(197, 138, 58, 0.4);
+  background: rgba(197, 138, 58, 0.08);
 }
 
 /* Telemetry Status Indicator */
@@ -314,8 +314,8 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--color-accent, #DD0060);
-  box-shadow: 0 0 8px var(--color-accent, #DD0060);
+  background: var(--color-accent, #C58A3A);
+  box-shadow: 0 0 8px var(--color-accent, #C58A3A);
 }
 
 .pi-status-text {
@@ -350,7 +350,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  filter: drop-shadow(0 34px 56px rgba(0, 0, 0, 0.95)) drop-shadow(0 10px 30px rgba(221, 0, 96, 0.16));
+  filter: drop-shadow(0 34px 56px rgba(0, 0, 0, 0.95)) drop-shadow(0 10px 30px rgba(197, 138, 58, 0.16));
 }
 
 .pi-3d-picture {

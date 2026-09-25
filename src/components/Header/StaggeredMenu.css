@@ -9,7 +9,7 @@
   height: 100%;
   z-index: 90;
   pointer-events: none;
-  --sm-accent: #DD0060;
+  --sm-accent: #C58A3A;
   --sm-panel-bg: #07101C;
 }
 
@@ -108,14 +108,14 @@
 }
 
 .sm-toggle.is-open {
-  background: rgba(221, 0, 96, 0.18);
-  border-color: var(--sm-accent, #DD0060);
+  background: rgba(197, 138, 58, 0.18);
+  border-color: var(--sm-accent, #C58A3A);
   color: #FFFFFF;
-  box-shadow: 0 0 20px rgba(221, 0, 96, 0.35);
+  box-shadow: 0 0 20px rgba(197, 138, 58, 0.35);
 }
 
 .sm-toggle:focus-visible {
-  outline: 2px solid var(--sm-accent, #DD0060);
+  outline: 2px solid var(--sm-accent, #C58A3A);
   outline-offset: 3px;
 }
 
@@ -232,7 +232,7 @@
   width: 320px;
   height: 320px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(221, 0, 96, 0.12) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(197, 138, 58, 0.12) 0%, transparent 70%);
   filter: blur(50px);
   pointer-events: none;
   z-index: 1;
@@ -312,7 +312,7 @@
 }
 
 .sm-panel-item:hover {
-  color: var(--sm-accent, #DD0060);
+  color: var(--sm-accent, #C58A3A);
   transform: translateX(6px);
 }
 
@@ -321,7 +321,7 @@
 }
 
 .sm-panel-item:focus-visible {
-  outline: 2px solid var(--sm-accent, #DD0060);
+  outline: 2px solid var(--sm-accent, #C58A3A);
   outline-offset: 4px;
 }
 
@@ -338,7 +338,7 @@
   right: 0.2em;
   font-size: 0.95rem;
   font-weight: 600;
-  color: var(--sm-accent, #DD0060);
+  color: var(--sm-accent, #C58A3A);
   letter-spacing: 0.05em;
   pointer-events: none;
   user-select: none;
@@ -388,9 +388,9 @@
 }
 
 .sm-panel-cta-btn:hover {
-  background: rgba(221, 0, 96, 0.25);
-  border-color: var(--sm-accent, #DD0060);
-  box-shadow: 0 6px 24px rgba(221, 0, 96, 0.4);
+  background: rgba(197, 138, 58, 0.25);
+  border-color: var(--sm-accent, #C58A3A);
+  box-shadow: 0 6px 24px rgba(197, 138, 58, 0.4);
   transform: translateY(-2px);
 }
 
@@ -404,7 +404,7 @@
 }
 
 .sm-panel-contact-link:hover {
-  color: var(--sm-accent, #DD0060);
+  color: var(--sm-accent, #C58A3A);
 }
 
 /* =========================================================
@@ -426,7 +426,7 @@
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--sm-accent, #DD0060);
+  color: var(--sm-accent, #C58A3A);
 }
 
 [dir="rtl"] .sm-socials-title {

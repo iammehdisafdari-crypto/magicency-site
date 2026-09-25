@@ -37,7 +37,7 @@
   transform: translate(-50%, -50%);
   width: 800px;
   height: 600px;
-  background: radial-gradient(circle, rgba(221, 0, 96, 0.08) 0%, rgba(5, 5, 5, 0) 75%);
+  background: radial-gradient(circle, rgba(197, 138, 58, 0.08) 0%, rgba(5, 5, 5, 0) 75%);
   pointer-events: none;
   z-index: 1;
 }
@@ -73,14 +73,14 @@
   align-items: center;
   gap: 6px;
   padding: 3px 12px;
-  background: rgba(221, 0, 96, 0.08);
-  border: 1px solid rgba(221, 0, 96, 0.35);
+  background: rgba(197, 138, 58, 0.08);
+  border: 1px solid rgba(197, 138, 58, 0.35);
   border-radius: var(--radius-full);
   font-family: var(--font-mono);
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: #DD0060;
+  color: #C58A3A;
 }
 
 .approach-pipeline-track {
@@ -109,12 +109,12 @@
 }
 
 .pipeline-step-node.is-active {
-  color: #DD0060;
+  color: #C58A3A;
   font-weight: 800;
 }
 
 .pipeline-step-node .step-num {
-  color: #DD0060;
+  color: #C58A3A;
 }
 
 .step-divider {
@@ -133,11 +133,11 @@
   height: clamp(380px, 58vh, 520px);
   margin: 0 auto;
   background: radial-gradient(circle at 45% 45%, #07101C 0%, #07101C 90%);
-  border: 1px solid rgba(221, 0, 96, 0.25);
+  border: 1px solid rgba(197, 138, 58, 0.25);
   border-radius: 20px;
   box-shadow: 
     0 24px 70px rgba(0, 0, 0, 0.92),
-    0 0 24px rgba(221, 0, 96, 0.06),
+    0 0 24px rgba(197, 138, 58, 0.06),
     inset 0 1px 1px rgba(255, 255, 255, 0.1);
   overflow: hidden;
   display: grid;
@@ -234,13 +234,13 @@
 }
 
 .artifact-meta-pill.dominant-pill {
-  border-color: rgba(221, 0, 96, 0.4);
-  color: #DD0060;
+  border-color: rgba(197, 138, 58, 0.4);
+  color: #C58A3A;
 }
 
 .artifact-meta-pill.scale-pill {
-  border-color: rgba(221, 0, 96, 0.4);
-  color: #DD0060;
+  border-color: rgba(197, 138, 58, 0.4);
+  color: #C58A3A;
 }
 
 .hero-execution-badge {
@@ -248,13 +248,13 @@
   bottom: 8px;
   left: 8px;
   background: rgba(14, 18, 28, 0.92);
-  border: 1px solid rgba(221, 0, 96, 0.35);
+  border: 1px solid rgba(197, 138, 58, 0.35);
   padding: 3px 10px;
   border-radius: var(--radius-full);
   font-family: var(--font-mono);
   font-size: 0.58rem;
   font-weight: 800;
-  color: #DD0060;
+  color: #C58A3A;
 }
 
 [dir="rtl"] .hero-execution-badge {
@@ -290,13 +290,13 @@
 }
 
 .micro-chip.highlight-chip {
-  border-color: rgba(221, 0, 96, 0.3);
-  color: #DD0060;
+  border-color: rgba(197, 138, 58, 0.3);
+  color: #C58A3A;
 }
 
 .micro-chip.scale-chip {
-  border-color: rgba(221, 0, 96, 0.35);
-  color: #DD0060;
+  border-color: rgba(197, 138, 58, 0.35);
+  color: #C58A3A;
 }
 
 /* Specific Layer Spatial Placements */
@@ -316,7 +316,7 @@
   grid-column: 2;
   grid-row: 1 / span 2;
   height: 100%;
-  border: 1px solid rgba(221, 0, 96, 0.35);
+  border: 1px solid rgba(197, 138, 58, 0.35);
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85);
 }
 
@@ -326,7 +326,7 @@
   bottom: 20px;
   width: 44%;
   height: 44%;
-  border: 1px solid rgba(221, 0, 96, 0.4);
+  border: 1px solid rgba(197, 138, 58, 0.4);
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.95);
   z-index: 12;
 }
@@ -343,11 +343,11 @@
   transform: translate(-50%, -50%);
   width: 32%;
   height: 48%;
-  border: 1px solid rgba(221, 0, 96, 0.5);
+  border: 1px solid rgba(197, 138, 58, 0.5);
   border-radius: 18px;
   box-shadow: 
     0 24px 60px rgba(0, 0, 0, 0.98),
-    0 0 28px rgba(221, 0, 96, 0.2);
+    0 0 28px rgba(197, 138, 58, 0.2);
   z-index: 20;
 }
 
@@ -392,7 +392,7 @@
 .stage-code {
   font-size: 0.65rem;
   font-weight: 800;
-  color: #DD0060;
+  color: #C58A3A;
 }
 
 .stage-title {
@@ -422,13 +422,13 @@
   align-items: center;
   gap: 6px;
   padding: 8px 18px;
-  background: #DD0060;
+  background: #C58A3A;
   color: #FFFFFF;
   border-radius: var(--radius-full);
   font-family: var(--font-display);
   font-size: 0.8rem;
   font-weight: 700;
-  box-shadow: 0 4px 16px rgba(221, 0, 96, 0.4);
+  box-shadow: 0 4px 16px rgba(197, 138, 58, 0.4);
   transition: all var(--transition-fast);
   white-space: nowrap;
   border: none;
@@ -436,8 +436,8 @@
 }
 
 .approach-cta-btn:hover {
-  background: #DD0060;
-  box-shadow: 0 6px 20px rgba(221, 0, 96, 0.6);
+  background: #C58A3A;
+  box-shadow: 0 6px 20px rgba(197, 138, 58, 0.6);
   transform: translateY(-2px);
 }
 

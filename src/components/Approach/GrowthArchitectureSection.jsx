@@ -71,8 +71,8 @@ export default function GrowthArchitectureSection() {
             >
               <defs>
                 <linearGradient id="busGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#DD0060" stopOpacity="0.8" />
-                  <stop offset="50%" stopColor="#DD0060" stopOpacity="0.4" />
+                  <stop offset="0%" stopColor="#C58A3A" stopOpacity="0.8" />
+                  <stop offset="50%" stopColor="#C58A3A" stopOpacity="0.4" />
                   <stop offset="100%" stopColor="#8B93A7" stopOpacity="0.8" />
                 </linearGradient>
               </defs>
@@ -86,7 +86,7 @@ export default function GrowthArchitectureSection() {
                 y1="40"
                 x2={60 + (activeLayerIndex * 216)}
                 y2="40"
-                stroke="#DD0060"
+                stroke="#C58A3A"
                 strokeWidth="2.5"
                 className="bus-signal-active-stroke"
               />
@@ -94,7 +94,7 @@ export default function GrowthArchitectureSection() {
               {/* Feedback Return Circuit */}
               <path
                 d="M 1140,40 C 1140,95 950,105 600,105 C 250,105 60,95 60,40"
-                stroke="rgba(221,0,96,0.35)"
+                stroke="rgba(197, 138, 58,0.35)"
                 strokeWidth="1.5"
                 strokeDasharray="6 6"
               />
@@ -106,12 +106,12 @@ export default function GrowthArchitectureSection() {
                     cx={cx}
                     cy="40"
                     r={idx === activeLayerIndex ? 7 : 4}
-                    fill={idx <= activeLayerIndex ? '#DD0060' : '#07101C'}
+                    fill={idx <= activeLayerIndex ? '#C58A3A' : '#07101C'}
                     stroke={idx === activeLayerIndex ? '#FFFFFF' : 'rgba(255,255,255,0.2)'}
                     strokeWidth="1.5"
                   />
                   {idx === activeLayerIndex && (
-                    <circle cx={cx} cy="40" r="14" stroke="rgba(221,0,96,0.4)" strokeWidth="1" fill="none" />
+                    <circle cx={cx} cy="40" r="14" stroke="rgba(197, 138, 58,0.4)" strokeWidth="1" fill="none" />
                   )}
                 </g>
               ))}

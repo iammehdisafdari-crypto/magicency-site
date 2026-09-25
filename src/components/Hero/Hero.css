@@ -164,7 +164,7 @@
   font-family: var(--font-persian, 'Vazirmatn', sans-serif);
   font-style: normal;
   font-weight: 900;
-  background: linear-gradient(135deg, #FFFFFF 30%, #DD0060 100%);
+  background: linear-gradient(135deg, #FFFFFF 30%, #C58A3A 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;

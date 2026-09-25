@@ -7,7 +7,7 @@
   --color-bg-secondary: #07101C;
   --color-text: #FFFFFF;
   --color-text-muted: #8B93A7;
-  --color-accent: #DD0060;
+  --color-accent: #C58A3A;
 
   /* Semantic Aliases & Layers */
   --bg-void: var(--color-bg);
@@ -27,14 +27,14 @@
   --border-circuit-active: var(--color-accent);
 
   /* Brand Accent & Controlled Signal Layers */
-  --color-accent-dim: rgba(221, 0, 96, 0.12);
-  --color-accent-glow: rgba(221, 0, 96, 0.35);
+  --color-accent-dim: rgba(197, 138, 58, 0.12);
+  --color-accent-glow: rgba(197, 138, 58, 0.35);
   --accent-orange: var(--color-accent);
   --accent-orange-bright: var(--color-accent);
   --accent-orange-deep: var(--color-accent);
-  --accent-orange-glow: rgba(221, 0, 96, 0.35);
-  --accent-orange-dim: rgba(221, 0, 96, 0.12);
-  --accent-flare: rgba(221, 0, 96, 0.18);
+  --accent-orange-glow: rgba(197, 138, 58, 0.35);
+  --accent-orange-dim: rgba(197, 138, 58, 0.12);
+  --accent-flare: rgba(197, 138, 58, 0.18);
 
   /* Typography Colors */
   --text-primary: var(--color-text);

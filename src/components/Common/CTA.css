@@ -61,12 +61,12 @@
 
 /* ---------------------------------------------------------
    Variant: PRIMARY (Main Conversion Action)
-   - Magicency accent #DD0060
+   - Magicency accent #C58A3A
    - Confident, crisp white text (AA contrast: 4.62:1)
    - Subtle top-light border
    --------------------------------------------------------- */
 .mag-cta--primary {
-  background-color: var(--color-accent, #DD0060);
+  background-color: var(--color-accent, #C58A3A);
   color: #FFFFFF;
   border: 1px solid rgba(255, 255, 255, 0.18);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
@@ -75,7 +75,7 @@
 .mag-cta--primary:hover {
   background-color: #E60A6C;
   border-color: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 6px 24px rgba(221, 0, 96, 0.38), 0 2px 8px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 6px 24px rgba(197, 138, 58, 0.38), 0 2px 8px rgba(0, 0, 0, 0.4);
   transform: translateY(-2px);
   color: #FFFFFF;
 }
@@ -105,20 +105,20 @@
 }
 
 .mag-cta--secondary:hover {
-  background-color: rgba(221, 0, 96, 0.08);
-  border-color: rgba(221, 0, 96, 0.6);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 16px rgba(221, 0, 96, 0.15);
+  background-color: rgba(197, 138, 58, 0.08);
+  border-color: rgba(197, 138, 58, 0.6);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 16px rgba(197, 138, 58, 0.15);
   transform: translateY(-2px);
   color: #FFFFFF;
 }
 
 .mag-cta--secondary:active {
   transform: translateY(0);
-  background-color: rgba(221, 0, 96, 0.12);
+  background-color: rgba(197, 138, 58, 0.12);
 }
 
 .mag-cta--secondary:focus-visible {
-  outline: 2px solid var(--color-accent, #DD0060);
+  outline: 2px solid var(--color-accent, #C58A3A);
   outline-offset: 3px;
 }
 
@@ -137,12 +137,12 @@
 }
 
 .mag-cta--text:hover {
-  color: var(--color-accent, #DD0060);
+  color: var(--color-accent, #C58A3A);
   transform: none;
 }
 
 .mag-cta--text:focus-visible {
-  outline: 2px solid var(--color-accent, #DD0060);
+  outline: 2px solid var(--color-accent, #C58A3A);
   outline-offset: 2px;
 }
 
@@ -165,7 +165,7 @@
 }
 
 .mag-cta--secondary .mag-cta__icon {
-  color: var(--color-accent, #DD0060);
+  color: var(--color-accent, #C58A3A);
 }
 
 .mag-cta--primary .mag-cta__icon {

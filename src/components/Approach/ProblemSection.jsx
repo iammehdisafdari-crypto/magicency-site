@@ -156,9 +156,9 @@ export default function ProblemSection() {
                     >
                       <defs>
                         <linearGradient id="connectedFlowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                          <stop offset="0%" stopColor="#DD0060" stopOpacity="0.4" />
-                          <stop offset="50%" stopColor="#DD0060" stopOpacity="0.9" />
-                          <stop offset="100%" stopColor="#DD0060" stopOpacity="0.4" />
+                          <stop offset="0%" stopColor="#C58A3A" stopOpacity="0.4" />
+                          <stop offset="50%" stopColor="#C58A3A" stopOpacity="0.9" />
+                          <stop offset="100%" stopColor="#C58A3A" stopOpacity="0.4" />
                         </linearGradient>
                       </defs>
 
@@ -174,19 +174,19 @@ export default function ProblemSection() {
                       {/* Closed-loop Return Highway */}
                       <path
                         d="M 940,100 C 940,180 800,210 500,210 C 200,210 60,180 60,100"
-                        stroke="rgba(221, 0, 96, 0.4)"
+                        stroke="rgba(197, 138, 58, 0.4)"
                         strokeWidth="2"
                         strokeDasharray="4 4"
                         className="pulse-flow-reverse"
                       />
 
                       {/* Node connection anchors */}
-                      <circle cx="125" cy="100" r="8" fill="#DD0060" />
-                      <circle cx="375" cy="100" r="8" fill="#DD0060" />
-                      <circle cx="625" cy="100" r="8" fill="#DD0060" />
-                      <circle cx="875" cy="100" r="8" fill="#DD0060" />
+                      <circle cx="125" cy="100" r="8" fill="#C58A3A" />
+                      <circle cx="375" cy="100" r="8" fill="#C58A3A" />
+                      <circle cx="625" cy="100" r="8" fill="#C58A3A" />
+                      <circle cx="875" cy="100" r="8" fill="#C58A3A" />
 
-                      <text x="500" y="232" textAnchor="middle" fill="#DD0060" fontSize="11" letterSpacing="0.15em">
+                      <text x="500" y="232" textAnchor="middle" fill="#C58A3A" fontSize="11" letterSpacing="0.15em">
                         {isRTL ? 'مدار بسته: بازخورد دائمی داده‌ها به استراتژی ↺' : 'CLOSED LOOP: CONTINUOUS TELEMETRY FEEDS NEXT HYPOTHESIS ↺'}
                       </text>
                     </svg>

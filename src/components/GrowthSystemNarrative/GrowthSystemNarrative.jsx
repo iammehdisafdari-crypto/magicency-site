@@ -347,33 +347,33 @@ export default function GrowthSystemNarrative() {
           <svg className="media-connections-svg" aria-hidden="true">
             <defs>
               <linearGradient id="busGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#DD0060" stopOpacity="0.4" />
-                <stop offset="50%" stopColor="#DD0060" stopOpacity="0.9" />
-                <stop offset="100%" stopColor="#DD0060" stopOpacity="0.4" />
+                <stop offset="0%" stopColor="#C58A3A" stopOpacity="0.4" />
+                <stop offset="50%" stopColor="#C58A3A" stopOpacity="0.9" />
+                <stop offset="100%" stopColor="#C58A3A" stopOpacity="0.4" />
               </linearGradient>
             </defs>
 
             {/* Stage 01 & 02: Disjointed broken connections */}
             {activeStageIndex <= 1 && (
               <g className="connections-chaotic">
-                <path d="M 160 140 Q 240 80 340 120" stroke="rgba(221, 0, 96, 0.25)" strokeDasharray="4,6" strokeWidth="1" fill="none" />
-                <path d="M 520 120 Q 620 180 660 160" stroke="rgba(221, 0, 96, 0.2)" strokeDasharray="6,8" strokeWidth="1" fill="none" />
-                <path d="M 680 280 Q 720 360 620 420" stroke="rgba(221, 0, 96, 0.15)" strokeDasharray="3,5" strokeWidth="1" fill="none" />
+                <path d="M 160 140 Q 240 80 340 120" stroke="rgba(197, 138, 58, 0.25)" strokeDasharray="4,6" strokeWidth="1" fill="none" />
+                <path d="M 520 120 Q 620 180 660 160" stroke="rgba(197, 138, 58, 0.2)" strokeDasharray="6,8" strokeWidth="1" fill="none" />
+                <path d="M 680 280 Q 720 360 620 420" stroke="rgba(197, 138, 58, 0.15)" strokeDasharray="3,5" strokeWidth="1" fill="none" />
               </g>
             )}
 
             {/* Stage 03: Friction alerts (Flickering red lines) */}
             {activeStageIndex === 2 && (
               <g className="connections-friction">
-                <path d="M 180 160 L 320 160" stroke="#DD0060" strokeWidth="1.5" strokeDasharray="6,4" fill="none" className="pulse-leak-line" />
-                <path d="M 520 180 L 640 180" stroke="#DD0060" strokeWidth="1.5" strokeDasharray="8,6" fill="none" className="pulse-leak-line" />
+                <path d="M 180 160 L 320 160" stroke="#C58A3A" strokeWidth="1.5" strokeDasharray="6,4" fill="none" className="pulse-leak-line" />
+                <path d="M 520 180 L 640 180" stroke="#C58A3A" strokeWidth="1.5" strokeDasharray="8,6" fill="none" className="pulse-leak-line" />
               </g>
             )}
 
             {/* Stage 04: Diagnostic scanning line */}
             {activeStageIndex === 3 && (
               <g className="connections-diagnosis">
-                <path d="M 160 220 L 320 220 L 520 220 L 720 220" stroke="#DD0060" strokeWidth="1.5" strokeDasharray="2,2" fill="none" />
+                <path d="M 160 220 L 320 220 L 520 220 L 720 220" stroke="#C58A3A" strokeWidth="1.5" strokeDasharray="2,2" fill="none" />
               </g>
             )}
 
@@ -382,7 +382,7 @@ export default function GrowthSystemNarrative() {
               <g className="connections-synchronized">
                 <path d="M 120 200 L 260 200 L 520 200 L 700 200 L 860 200" stroke="url(#busGrad)" strokeWidth="2.5" fill="none" className="synchronized-pipeline-path" />
                 {/* Return telemetry loop */}
-                <path d="M 880 240 C 880 440, 100 440, 100 240" stroke="rgba(221, 0, 96, 0.5)" strokeWidth="1.5" strokeDasharray="4,4" fill="none" />
+                <path d="M 880 240 C 880 440, 100 440, 100 240" stroke="rgba(197, 138, 58, 0.5)" strokeWidth="1.5" strokeDasharray="4,4" fill="none" />
               </g>
             )}
           </svg>

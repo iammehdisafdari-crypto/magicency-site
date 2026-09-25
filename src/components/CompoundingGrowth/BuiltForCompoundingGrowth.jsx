@@ -209,11 +209,11 @@ export default function BuiltForCompoundingGrowth() {
             <defs>
               {/* Magicency Brand Linear Gradient: Vivid Raspberry Pink to White Highlight to Metallic Slate */}
               <linearGradient id="magicencyGrowthGradient" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#DD0060" />
+                <stop offset="0%" stopColor="#C58A3A" />
                 <stop offset="30%" stopColor="#FF2D78" />
                 <stop offset="60%" stopColor="#FFFFFF" />
                 <stop offset="85%" stopColor="#CBD5E1" />
-                <stop offset="100%" stopColor="#DD0060" />
+                <stop offset="100%" stopColor="#C58A3A" />
               </linearGradient>
 
               {/* High-Precision Glow Filter */}

@@ -53,7 +53,7 @@
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--color-accent, #DD0060);
+  color: var(--color-accent, #C58A3A);
   line-height: 1.3;
 }
 
@@ -185,7 +185,7 @@
   font-family: 'Instrument Serif', Georgia, serif;
   font-size: clamp(2.8rem, 5.5vw, 5.2rem);
   font-weight: 400;
-  color: #DD0060;
+  color: #C58A3A;
   line-height: 1;
   flex-shrink: 0;
   display: inline-flex;
@@ -309,8 +309,8 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #DD0060;
-  box-shadow: 0 0 8px #DD0060;
+  background: #C58A3A;
+  box-shadow: 0 0 8px #C58A3A;
 }
 
 .wwd-pillar-summary-text {
@@ -378,14 +378,14 @@
 }
 
 .wwd-row-counter {
-  color: #DD0060;
+  color: var(--color-accent);
   font-size: 0.76rem;
   font-weight: 700;
   letter-spacing: 0.04em;
 }
 
 .is-inactive-item .wwd-row-counter {
-  color: #DD0060;
+  color: var(--color-accent);
 }
 
 .is-inactive-item .wwd-list-item-set-row-label {
@@ -463,7 +463,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #DD0060;
+  color: #C58A3A;
   flex-shrink: 0;
 }
 
@@ -494,7 +494,7 @@
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 20px 44px rgba(0, 0, 0, 0.85),
-              0 0 24px rgba(221, 0, 96, 0.35);
+              0 0 24px rgba(197, 138, 58, 0.35);
   border: 1px solid rgba(255, 255, 255, 0.18);
   pointer-events: none;
   background-color: #07101C;
