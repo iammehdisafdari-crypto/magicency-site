@@ -90,7 +90,7 @@ export function runOnIdle(callback, idleDelay = 200) {
     if (idleId && 'cancelIdleCallback' in window) {
       window.cancelIdleCallback(idleId);
     }
-    window.removeEventListener('load', scheduleIdle);
+    document.removeEventListener('DOMContentLoaded', scheduleIdle);
   };
 
   // Immediate trigger on scroll / user interaction
@@ -111,10 +111,10 @@ export function runOnIdle(callback, idleDelay = 200) {
     }, idleDelay);
   };
 
-  if (document.readyState === 'complete') {
-    scheduleIdle();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', scheduleIdle, { once: true });
   } else {
-    window.addEventListener('load', scheduleIdle, { once: true });
+    scheduleIdle();
   }
 
   return cleanup;
