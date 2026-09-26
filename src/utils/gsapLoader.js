@@ -65,7 +65,7 @@ export async function getGsapWithScrollTrigger() {
  * Schedules execution on first user scroll/interaction or when main thread is truly idle well after initial load.
  * Prevents GSAP from entering the critical rendering chain during initial render / LCP.
  */
-export function runOnIdle(callback, idleDelay = 3500) {
+export function runOnIdle(callback, idleDelay = 200) {
   if (typeof window === 'undefined') return () => {};
 
   let idleId = null;
@@ -104,7 +104,7 @@ export function runOnIdle(callback, idleDelay = 3500) {
     timerId = setTimeout(() => {
       if (executed) return;
       if ('requestIdleCallback' in window) {
-        idleId = window.requestIdleCallback(run, { timeout: 2000 });
+        idleId = window.requestIdleCallback(run, { timeout: 300 });
       } else {
         run();
       }
