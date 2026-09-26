@@ -119,3 +119,68 @@ export function runOnIdle(callback, idleDelay = 200) {
 
   return cleanup;
 }
+
+/**
+ * Schedules execution strictly AFTER full window load and when the main thread is idle.
+ * Zero interaction event triggers before window.load.
+ * Prevents GSAP/ScrollTrigger from ever entering the critical request chain / initial render window.
+ */
+export function runAfterLoadAndIdle(callback, idleDelay = 0) {
+  if (typeof window === 'undefined') return () => {};
+
+  let idleId = null;
+  let timerId = null;
+  let delayTimerId = null;
+  let executed = false;
+
+  const run = () => {
+    if (executed) return;
+    executed = true;
+    cleanup();
+    callback();
+  };
+
+  const cleanup = () => {
+    window.removeEventListener('load', scheduleIdle);
+    if (delayTimerId) {
+      clearTimeout(delayTimerId);
+      delayTimerId = null;
+    }
+    if (timerId) {
+      clearTimeout(timerId);
+      timerId = null;
+    }
+    if (idleId && 'cancelIdleCallback' in window) {
+      window.cancelIdleCallback(idleId);
+      idleId = null;
+    }
+  };
+
+  const scheduleIdle = () => {
+    if (executed) return;
+
+    const triggerIdle = () => {
+      if (executed) return;
+      if ('requestIdleCallback' in window) {
+        idleId = window.requestIdleCallback(run, { timeout: 2000 });
+      } else {
+        // Safe fallback for browsers without requestIdleCallback (e.g. Safari)
+        timerId = setTimeout(run, 1000);
+      }
+    };
+
+    if (idleDelay > 0) {
+      delayTimerId = setTimeout(triggerIdle, idleDelay);
+    } else {
+      triggerIdle();
+    }
+  };
+
+  if (document.readyState === 'complete') {
+    scheduleIdle();
+  } else {
+    window.addEventListener('load', scheduleIdle, { once: true });
+  }
+
+  return cleanup;
+}

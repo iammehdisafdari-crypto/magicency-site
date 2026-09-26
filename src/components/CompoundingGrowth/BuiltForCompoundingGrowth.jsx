@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { getGsapWithScrollTrigger } from '../../utils/gsapLoader';
+import { getGsapWithScrollTrigger, runAfterLoadAndIdle } from '../../utils/gsapLoader';
 import { useLanguage } from '../../context/LanguageContext';
 import './BuiltForCompoundingGrowth.css';
 
@@ -40,6 +40,7 @@ export default function BuiltForCompoundingGrowth() {
     let ctx = null;
     let observer = null;
     let rafId = null;
+    let cancelIdle = null;
 
     // Initialize ScrollTrigger only when section becomes visible via IntersectionObserver
     const initScrollTrigger = () => {
@@ -97,6 +98,18 @@ export default function BuiltForCompoundingGrowth() {
       });
     };
 
+    // If still in initial loading / critical rendering, defer GSAP request to post-load / idle.
+    // If the page is already fully loaded, initialize immediately.
+    const requestInit = () => {
+      if (document.readyState === 'complete') {
+        initScrollTrigger();
+      } else {
+        cancelIdle = runAfterLoadAndIdle(() => {
+          initScrollTrigger();
+        });
+      }
+    };
+
     observer = new IntersectionObserver(
       (entries) => {
         const [entry] = entries;
@@ -109,7 +122,7 @@ export default function BuiltForCompoundingGrowth() {
             observer.disconnect();
             observer = null;
           }
-          initScrollTrigger();
+          requestInit();
         }
       },
       { rootMargin: '300px 0px 300px 0px' }
@@ -125,7 +138,7 @@ export default function BuiltForCompoundingGrowth() {
           observer.disconnect();
           observer = null;
         }
-        initScrollTrigger();
+        requestInit();
       }
     };
     window.addEventListener('scroll', handleScrollCheck, { passive: true });
@@ -134,6 +147,7 @@ export default function BuiltForCompoundingGrowth() {
 
     return () => {
       isDestroyed = true;
+      if (cancelIdle) cancelIdle();
       window.removeEventListener('scroll', handleScrollCheck);
       if (observer) observer.disconnect();
       if (rafId) cancelAnimationFrame(rafId);

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
 import Lenis from 'lenis';
-import { getGsapWithScrollTrigger, runOnIdle } from '../../utils/gsapLoader';
+import { getGsapWithScrollTrigger, runAfterLoadAndIdle } from '../../utils/gsapLoader';
 import './SmoothScroll.css';
 
 const SmoothScrollContext = createContext(null);
@@ -62,7 +62,7 @@ export default function SmoothScrollProvider({ children }) {
     standaloneRafId = requestAnimationFrame(runRaf);
 
     // Lazy load GSAP & ScrollTrigger only after the page becomes interactive and idle
-    const cancelIdle = runOnIdle(() => {
+    const cancelIdle = runAfterLoadAndIdle(() => {
       getGsapWithScrollTrigger().then((loaded) => {
         if (!loaded || !lenisRef.current) return;
         const { gsap, ScrollTrigger } = loaded;
@@ -85,7 +85,7 @@ export default function SmoothScrollProvider({ children }) {
 
         lenis.on('scroll', ScrollTrigger.update);
       });
-    }, 2500);
+    });
 
     // Listen for reduced motion changes at runtime
     const handleMotionPreferenceChange = (e) => {
