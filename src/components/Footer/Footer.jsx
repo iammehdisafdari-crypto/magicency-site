@@ -1,9 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { m } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 import { useRouter } from '../../context/RouterContext';
 import ScrambleText from '../Header/ScrambleText';
-import { Reveal, Stagger, editorialVariants } from '../motion';
 import { trackContactClick, trackOutboundClick } from '../../utils/analytics';
 import './Footer.css';
 
@@ -133,9 +131,9 @@ export default function Footer() {
             01. DIRECT CONTACT / LOCATIONS (footer-emails grid)
             ========================================================= */}
         <div className="footer-emails grid">
-          <Stagger stagger={0.08} delay={0.1} className="footer-emails-block">
+          <div className="footer-emails-block">
             {f.locations.map((loc) => (
-              <m.div key={loc.email || loc.city} variants={editorialVariants} className="footer-emails-block-group">
+              <div key={loc.email || loc.city} className="footer-emails-block-group">
                 <div className="footer-location-name">{loc.city}</div>
                 <a
                   href={`mailto:${loc.email}`}
@@ -144,9 +142,9 @@ export default function Footer() {
                 >
                   {loc.email}
                 </a>
-              </m.div>
+              </div>
             ))}
-          </Stagger>
+          </div>
         </div>
 
         {/* =========================================================
@@ -154,47 +152,45 @@ export default function Footer() {
             ========================================================= */}
         <div className="footer-useful grid">
           {/* Social Links with Scramble Effect */}
-          <Stagger stagger={0.05} className="footer-useful-social">
+          <div className="footer-useful-social">
             {f.socials.map((soc) => (
-              <m.a
+              <a
                 key={soc.name}
                 href={soc.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`Visit Magicency on ${soc.name}`}
                 onClick={() => trackOutboundClick(soc.url, soc.name)}
-                variants={editorialVariants}
                 className="footer-useful-social-link"
               >
                 <ScrambleText text={soc.name} />
-              </m.a>
+              </a>
             ))}
-          </Stagger>
+          </div>
 
           {/* Primary Navigation Links with Scramble Effect */}
-          <Stagger stagger={0.05} delay={0.05} className="footer-useful-legal">
+          <div className="footer-useful-legal">
             {f.nav.map((item) => (
-              <m.a
+              <a
                 key={item.href || item.label}
                 href={item.href}
                 onClick={(e) => {
                   e.preventDefault();
                   handleFooterNav(item.href, pageActiveMap, navigate);
                 }}
-                variants={editorialVariants}
                 className="footer-useful-social-link footer-nav-item"
               >
                 <ScrambleText text={item.label} />
-              </m.a>
+              </a>
             ))}
-          </Stagger>
+          </div>
 
           {/* Copyright Information */}
-          <Reveal delay={0.15} className="footer-useful-copyright">
+          <div className="footer-useful-copyright">
             <div className="footer-useful-copyright-text">
               {f.copyright}
             </div>
-          </Reveal>
+          </div>
         </div>
 
       </div>
@@ -208,7 +204,7 @@ export default function Footer() {
         onMouseMove={handleWordmarkMouseMove}
         onMouseLeave={handleWordmarkMouseLeave}
       >
-        <Reveal delay={0.1} duration={0.9} className="footer-end-reveal">
+        <div className="footer-end-reveal">
           <div
             ref={wordmarkRef}
             className="footer-logo-wordmark"
@@ -218,7 +214,7 @@ export default function Footer() {
           >
             MAGICENCY
           </div>
-        </Reveal>
+        </div>
       </div>
     </footer>
   );

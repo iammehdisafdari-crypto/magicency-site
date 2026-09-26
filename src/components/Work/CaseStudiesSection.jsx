@@ -48,7 +48,7 @@ export default function CaseStudiesSection({ onSelectCase }) {
   };
 
   return (
-    <section id="case-studies" class="work-cases-section shared-section" aria-labelledby="work-cases-heading">
+    <section id="case-studies" className="work-cases-section shared-section" aria-labelledby="work-cases-heading">
       <div className="container work-cases-container">
         
         {/* Section Header */}

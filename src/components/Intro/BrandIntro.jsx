@@ -2,30 +2,25 @@ import React, { useState, useEffect } from 'react';
 import './BrandIntro.css';
 
 export default function BrandIntro({ onComplete }) {
-  // Never render blocking preloader in SSR / initial HTML so Hero paints immediately
-  if (typeof window === 'undefined') return null;
-
+  const [mounted, setMounted] = useState(false);
   const [phase, setPhase] = useState('signal');
-  const [shouldRender, setShouldRender] = useState(() => {
-    try {
-      const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.get('intro') === '1') return true;
-      return !sessionStorage.getItem('magicency_intro_played');
-    } catch (e) {
-      return false;
-    }
-  });
 
   useEffect(() => {
-    if (!shouldRender) {
-      onComplete?.();
-      return;
+    let shouldPlay = false;
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('intro') === '1') {
+        shouldPlay = true;
+      } else {
+        shouldPlay = !sessionStorage.getItem('magicency_intro_played');
+      }
+    } catch (e) {
+      shouldPlay = false;
     }
 
     // Check reduced motion preference
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (mediaQuery.matches) {
-      setShouldRender(false);
+    const mediaQuery = window.matchMedia?.('(prefers-reduced-motion: reduce)');
+    if (mediaQuery?.matches || !shouldPlay) {
       onComplete?.();
       return;
     }
@@ -35,7 +30,10 @@ export default function BrandIntro({ onComplete }) {
       sessionStorage.setItem('magicency_intro_played', 'true');
     } catch (e) {}
 
-    // Shortened sequence: max 400ms total
+    // Mount intro overlay purely on the client after hydration has finished
+    setMounted(true);
+
+    // Sequence: 200ms signal/formation -> transition, 380ms done
     const tTransition = setTimeout(() => {
       setPhase('transition');
       onComplete?.();
@@ -49,18 +47,18 @@ export default function BrandIntro({ onComplete }) {
       clearTimeout(tTransition);
       clearTimeout(tDone);
     };
-  }, [shouldRender]);
+  }, []);
 
   const handleComplete = () => {
     try {
       sessionStorage.setItem('magicency_intro_played', 'true');
     } catch (e) {}
     setPhase('done');
-    setShouldRender(false);
+    setMounted(false);
     onComplete?.();
   };
 
-  if (!shouldRender) return null;
+  if (!mounted) return null;
 
   return (
     <div 

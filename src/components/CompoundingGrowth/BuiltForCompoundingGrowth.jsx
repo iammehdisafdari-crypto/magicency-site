@@ -101,18 +101,40 @@ export default function BuiltForCompoundingGrowth() {
       (entries) => {
         const [entry] = entries;
         if (entry.isIntersecting) {
-          observer.disconnect();
-          observer = null;
+          const rect = section.getBoundingClientRect();
+          if (rect.top > window.innerHeight && (window.scrollY || 0) < 100) {
+            return;
+          }
+          if (observer) {
+            observer.disconnect();
+            observer = null;
+          }
           initScrollTrigger();
         }
       },
-      { rootMargin: '400px 0px 400px 0px' }
+      { rootMargin: '300px 0px 300px 0px' }
     );
+
+    // Also trigger on first scroll if section becomes visible
+    const handleScrollCheck = () => {
+      if (!observer) return;
+      const rect = section.getBoundingClientRect();
+      if (rect.top < window.innerHeight + 400) {
+        window.removeEventListener('scroll', handleScrollCheck);
+        if (observer) {
+          observer.disconnect();
+          observer = null;
+        }
+        initScrollTrigger();
+      }
+    };
+    window.addEventListener('scroll', handleScrollCheck, { passive: true });
 
     observer.observe(section);
 
     return () => {
       isDestroyed = true;
+      window.removeEventListener('scroll', handleScrollCheck);
       if (observer) observer.disconnect();
       if (rafId) cancelAnimationFrame(rafId);
       ctx?.revert();

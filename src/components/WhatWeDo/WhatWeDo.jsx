@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { m, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
-import { RevealHeading, RevealStatement, RevealBody, ImageReveal, Parallax, EASING } from '../motion';
 import './WhatWeDo.css';
 
 const toWebp = (url) => (url ? url.replace(/\.(jpg|jpeg|png)$/, '.webp') : url);
@@ -115,17 +113,17 @@ export default function WhatWeDo() {
             ========================================================= */}
         <div className="wwd-intro grid">
           <div className="wwd-intro-heading">
-            <RevealHeading as="span" className="wwd-eyebrow" delay={0.0}>
+            <span className="wwd-eyebrow">
               {data.eyebrow || 'WHAT WE DO'}
-            </RevealHeading>
+            </span>
           </div>
           <div className="wwd-intro-description">
-            <RevealHeading as="h2" className="wwd-headline" delay={0.08}>
+            <h2 className="wwd-headline">
               {data.headline || data.heading || 'We turn marketing into a growth system.'}
-            </RevealHeading>
-            <RevealBody as="p" className="wwd-supporting-line" delay={0.16}>
+            </h2>
+            <p className="wwd-supporting-line">
               {data.supportingLine || data.introStatement}
-            </RevealBody>
+            </p>
           </div>
         </div>
 
@@ -159,37 +157,25 @@ export default function WhatWeDo() {
                   {/* Visual Stage representing this capability */}
                   <div className="wwd-item-visual-column">
                     <div className="wwd-sticky-visual-wrapper">
-                      <Parallax offset={16}>
-                        <ImageReveal
+                      <div className="wwd-visual-media-frame">
+                        <img
                           src={currentVisual}
                           alt={pillar.title}
+                          className="wwd-visual-media-img"
                           width="1376"
                           height="768"
-                          className="wwd-visual-media-frame"
-                          imageClassName="wwd-visual-media-img"
-                          delay={0.22}
-                        >
-                          <div className="wwd-visual-media-frame">
-                            <img
-                              src={currentVisual}
-                              alt={pillar.title}
-                              className="wwd-visual-media-img"
-                              width="1376"
-                              height="768"
-                              loading="lazy"
-                              decoding="async"
-                            />
-                            <div className="wwd-visual-media-overlay" />
-                            <div className="wwd-visual-caption">
-                              <span className="wwd-caption-dot" />
-                              <span className="wwd-caption-tag">{pillar.tag}</span>
-                            </div>
-                          </div>
-                        </ImageReveal>
-                      </Parallax>
-                      <RevealBody as="p" className="wwd-pillar-summary-text" delay={0.16}>
+                          loading="lazy"
+                          decoding="async"
+                        />
+                        <div className="wwd-visual-media-overlay" />
+                        <div className="wwd-visual-caption">
+                          <span className="wwd-caption-dot" />
+                          <span className="wwd-caption-tag">{pillar.tag}</span>
+                        </div>
+                      </div>
+                      <p className="wwd-pillar-summary-text">
                         {pillar.description}
-                      </RevealBody>
+                      </p>
                     </div>
                   </div>
 
@@ -238,50 +224,29 @@ export default function WhatWeDo() {
           03. VIVID MOTION SIGNATURE IMAGE TRAIL OVERLAY
           ========================================================= */}
       <div className="wwd-trail-wrapper" aria-hidden="true">
-        <AnimatePresence>
-          {trailImages.map((item) => (
-            <m.div
-              key={item.id}
-              className="wwd-trail-pool-img-container"
-              style={{
-                left: item.x - 110,
-                top: item.y - 80
-              }}
-              initial={{
-                opacity: 0,
-                scale: 0.2,
-                clipPath: 'polygon(15% 0%, 85% 0%, 100% 85%, 0% 100%)'
-              }}
-              animate={{
-                opacity: 1,
-                scale: 1,
-                clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)'
-              }}
-              exit={{
-                opacity: 0,
-                scale: 0.6,
-                transition: { duration: 0.35, ease: EASING.SECONDARY }
-              }}
-              transition={{
-                duration: 0.45,
-                ease: EASING.CINEMATIC
-              }}
-            >
-              <picture>
-                <source srcSet={toWebp(item.src)} type="image/webp" />
-                <img
-                  src={item.src}
-                  alt={getTrailAltText(item.src)}
-                  className="wwd-trail-inner-img"
-                  width="160"
-                  height="200"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </picture>
-            </m.div>
-          ))}
-        </AnimatePresence>
+        {trailImages.map((item) => (
+          <div
+            key={item.id}
+            className="wwd-trail-pool-img-container"
+            style={{
+              left: item.x - 110,
+              top: item.y - 80
+            }}
+          >
+            <picture>
+              <source srcSet={toWebp(item.src)} type="image/webp" />
+              <img
+                src={item.src}
+                alt={getTrailAltText(item.src)}
+                className="wwd-trail-inner-img"
+                width="160"
+                height="200"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
+          </div>
+        ))}
       </div>
     </section>
   );

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 import { FAQ_DATA } from '../../data/faqData';
 import { Plus, Minus } from 'lucide-react';
@@ -89,24 +88,16 @@ export default function FAQSection({
                   </div>
                 </button>
 
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      id={`faq-panel-${item.id}`}
-                      role="region"
-                      aria-labelledby={`faq-btn-${item.id}`}
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-                      className="faq-answer-panel"
-                    >
-                      <div className="faq-answer-inner">
-                        <p className="faq-answer-text">{item.answer}</p>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                <div
+                  id={`faq-panel-${item.id}`}
+                  role="region"
+                  aria-labelledby={`faq-btn-${item.id}`}
+                  className={`faq-answer-panel ${isOpen ? 'is-open' : ''}`}
+                >
+                  <div className="faq-answer-inner">
+                    <p className="faq-answer-text">{item.answer}</p>
+                  </div>
+                </div>
               </div>
             );
           })}

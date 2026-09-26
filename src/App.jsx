@@ -6,15 +6,14 @@ import Header from './components/Header/Header';
 import Hero from './components/Hero/Hero';
 import ScrollProgress from './components/About/ScrollProgress';
 
-// Lazy load below-the-fold homepage components
-const FeatureWork = lazy(() => import('./components/FeatureWork/FeatureWork'));
-const ProblemInsight = lazy(() => import('./components/ProblemInsight/ProblemInsight'));
-const WhatWeDo = lazy(() => import('./components/WhatWeDo/WhatWeDo'));
-const BuiltForCompoundingGrowth = lazy(() => import('./components/CompoundingGrowth/BuiltForCompoundingGrowth'));
-const Journal = lazy(() => import('./components/Journal/Journal'));
-const FAQSection = lazy(() => import('./components/About/FAQSection'));
-const FinalCTA = lazy(() => import('./components/FinalCTA/FinalCTA'));
-const Footer = lazy(() => import('./components/Footer/Footer'));
+import FeatureWork from './components/FeatureWork/FeatureWork';
+import ProblemInsight from './components/ProblemInsight/ProblemInsight';
+import WhatWeDo from './components/WhatWeDo/WhatWeDo';
+import BuiltForCompoundingGrowth from './components/CompoundingGrowth/BuiltForCompoundingGrowth';
+import Journal from './components/Journal/Journal';
+import FAQSection from './components/About/FAQSection';
+import FinalCTA from './components/FinalCTA/FinalCTA';
+import Footer from './components/Footer/Footer';
 
 // Lazy load non-homepage page components
 const WorkPage = lazy(() => import('./components/Work/WorkPage'));
@@ -28,7 +27,6 @@ const NotFoundPage = lazy(() => import('./components/NotFound/NotFoundPage'));
 const ProjectDiscovery = lazy(() => import('./components/ProjectDiscovery/ProjectDiscovery'));
 import { initGA } from './utils/analytics';
 import SmoothScrollProvider from './components/SmoothScroll/SmoothScrollProvider';
-import { LazyMotion, domAnimation } from 'framer-motion';
 
 import './styles/global.css';
 
@@ -124,9 +122,7 @@ function MainApp() {
       </main>
 
       {/* Cinematic Closing Frame Footer */}
-      <Suspense fallback={null}>
-        <Footer />
-      </Suspense>
+      <Footer />
 
       {/* Interactive Growth Protocol Modal */}
       {isModalOpen && (
@@ -143,9 +139,7 @@ export default function App({ initialPath, initialLang } = {}) {
     <LanguageProvider initialLang={initialLang}>
       <RouterProvider initialPath={initialPath}>
         <SmoothScrollProvider>
-          <LazyMotion features={domAnimation} strict={false}>
-            <MainApp />
-          </LazyMotion>
+          <MainApp />
         </SmoothScrollProvider>
       </RouterProvider>
     </LanguageProvider>

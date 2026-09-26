@@ -94,6 +94,16 @@
   padding-bottom: clamp(4px, 0.8vh, 8px);
 }
 
+.final-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  min-width: 48px;
+  padding: 14px 28px;
+  box-sizing: border-box;
+}
+
 /* =========================================================
    RESPONSIVE LAYOUT (TABLET & MOBILE)
    Deliberate single-column stack
@@ -127,7 +137,9 @@
   .final-cta-btn {
     width: auto;
     min-height: 48px;
+    min-width: 48px;
     padding: 14px 28px;
+    box-sizing: border-box;
   }
 }
 

@@ -62,42 +62,60 @@ export async function getGsapWithScrollTrigger() {
 }
 
 /**
- * Schedules execution when main thread is idle after page interactive
+ * Schedules execution on first user scroll/interaction or when main thread is truly idle well after initial load.
+ * Prevents GSAP from entering the critical rendering chain during initial render / LCP.
  */
-export function runOnIdle(callback, timeout = 2500) {
+export function runOnIdle(callback, idleDelay = 3500) {
   if (typeof window === 'undefined') return () => {};
 
-  let id = null;
+  let idleId = null;
+  let timerId = null;
   let executed = false;
 
   const run = () => {
     if (executed) return;
     executed = true;
-    if ('requestIdleCallback' in window) {
-      id = window.requestIdleCallback(() => callback(), { timeout });
-    } else {
-      id = setTimeout(callback, 50);
+    cleanup();
+    callback();
+  };
+
+  const interactionEvents = ['scroll', 'wheel', 'touchmove', 'touchstart'];
+  const handleInteraction = () => run();
+
+  const cleanup = () => {
+    interactionEvents.forEach((evt) => {
+      window.removeEventListener(evt, handleInteraction);
+    });
+    if (timerId) clearTimeout(timerId);
+    if (idleId && 'cancelIdleCallback' in window) {
+      window.cancelIdleCallback(idleId);
     }
+    window.removeEventListener('load', scheduleIdle);
+  };
+
+  // Immediate trigger on scroll / user interaction
+  interactionEvents.forEach((evt) => {
+    window.addEventListener(evt, handleInteraction, { once: true, passive: true });
+  });
+
+  // Defer idle fallback until well after full window load
+  const scheduleIdle = () => {
+    if (executed) return;
+    timerId = setTimeout(() => {
+      if (executed) return;
+      if ('requestIdleCallback' in window) {
+        idleId = window.requestIdleCallback(run, { timeout: 2000 });
+      } else {
+        run();
+      }
+    }, idleDelay);
   };
 
   if (document.readyState === 'complete') {
-    run();
+    scheduleIdle();
   } else {
-    window.addEventListener('load', run, { once: true });
-    if (document.readyState === 'interactive') {
-      setTimeout(run, 200);
-    }
+    window.addEventListener('load', scheduleIdle, { once: true });
   }
 
-  return () => {
-    executed = true;
-    if (id !== null) {
-      if ('cancelIdleCallback' in window && typeof id === 'number') {
-        window.cancelIdleCallback(id);
-      } else {
-        clearTimeout(id);
-      }
-    }
-    window.removeEventListener('load', run);
-  };
+  return cleanup;
 }

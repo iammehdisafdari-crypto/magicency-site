@@ -6,7 +6,8 @@ import './SmoothScroll.css';
 const SmoothScrollContext = createContext(null);
 
 export function useSmoothScroll() {
-  return useContext(SmoothScrollContext);
+  const ref = useContext(SmoothScrollContext);
+  return ref?.current || (typeof window !== 'undefined' ? window.__lenis : null);
 }
 
 /**
@@ -22,7 +23,6 @@ export function useSmoothScroll() {
  */
 export default function SmoothScrollProvider({ children }) {
   const lenisRef = useRef(null);
-  const [lenisInstance, setLenisInstance] = useState(null);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -47,7 +47,6 @@ export default function SmoothScrollProvider({ children }) {
 
     lenisRef.current = lenis;
     window.__lenis = lenis;
-    setLenisInstance(lenis);
 
     // Initial lean RAF loop for Lenis (zero GSAP overhead during page load)
     let standaloneRafId = null;
@@ -118,12 +117,11 @@ export default function SmoothScrollProvider({ children }) {
       lenis.destroy();
       lenisRef.current = null;
       window.__lenis = null;
-      setLenisInstance(null);
     };
   }, []);
 
   return (
-    <SmoothScrollContext.Provider value={lenisInstance}>
+    <SmoothScrollContext.Provider value={lenisRef}>
       {children}
     </SmoothScrollContext.Provider>
   );

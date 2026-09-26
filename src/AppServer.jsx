@@ -10,6 +10,7 @@ import BuiltForCompoundingGrowth from './components/CompoundingGrowth/BuiltForCo
 import Journal from './components/Journal/Journal';
 import FAQSection from './components/About/FAQSection';
 import ScrollProgress from './components/About/ScrollProgress';
+import BrandIntro from './components/Intro/BrandIntro';
 import FinalCTA from './components/FinalCTA/FinalCTA';
 import Footer from './components/Footer/Footer';
 
@@ -25,7 +26,6 @@ import NotFoundPage from './components/NotFound/NotFoundPage';
 const ProjectDiscovery = lazy(() => import('./components/ProjectDiscovery/ProjectDiscovery'));
 import { initGA } from './utils/analytics';
 import SmoothScrollProvider from './components/SmoothScroll/SmoothScrollProvider';
-import { LazyMotion, domAnimation } from 'framer-motion';
 
 import './styles/global.css';
 
@@ -45,6 +45,9 @@ function MainApp() {
 
       {/* Global Viewport Scroll Progress Bar */}
       <ScrollProgress />
+
+      {/* Cinematic Brand Intro Preloader */}
+      <BrandIntro onComplete={() => setIntroFinished(true)} />
 
       {/* Tactile Grain Overlay */}
       <div className="bg-grain" aria-hidden="true" />
@@ -115,9 +118,7 @@ export default function App({ initialPath, initialLang } = {}) {
     <LanguageProvider initialLang={initialLang}>
       <RouterProvider initialPath={initialPath}>
         <SmoothScrollProvider>
-          <LazyMotion features={domAnimation} strict={false}>
-            <MainApp />
-          </LazyMotion>
+          <MainApp />
         </SmoothScrollProvider>
       </RouterProvider>
     </LanguageProvider>

@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { m, AnimatePresence, useSpring } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 import { useRouter } from '../../context/RouterContext';
 import { ArrowUpRight } from 'lucide-react';
-import { EASING, RevealLabel, RevealHeading, Stagger, editorialVariants } from '../motion';
 import CTA from '../Common/CTA';
 import './Journal.css';
 
@@ -18,10 +16,10 @@ export default function Journal() {
   const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   const containerRef = useRef(null);
-
-  // Smooth cursor tracking with Framer Motion springs for cinematic inertia
-  const mouseX = useSpring(0, EASING.SPRING_PHYSICS);
-  const mouseY = useSpring(0, EASING.SPRING_PHYSICS);
+  const previewRef = useRef(null);
+  const targetPos = useRef({ x: 0, y: 0 });
+  const currentPos = useRef({ x: 0, y: 0 });
+  const rafId = useRef(null);
 
   useEffect(() => {
     setIsTouchDevice(
@@ -30,6 +28,29 @@ export default function Journal() {
       Boolean(window.matchMedia?.('(max-width: 991px)')?.matches)
     );
   }, []);
+
+  // Smooth cursor tracking with requestAnimationFrame spring lerp for cinematic inertia
+  useEffect(() => {
+    if (!hoveredArticle || isTouchDevice) {
+      if (rafId.current) cancelAnimationFrame(rafId.current);
+      return;
+    }
+
+    const update = () => {
+      currentPos.current.x += (targetPos.current.x - currentPos.current.x) * 0.18;
+      currentPos.current.y += (targetPos.current.y - currentPos.current.y) * 0.18;
+
+      if (previewRef.current) {
+        previewRef.current.style.transform = `translate3d(calc(${currentPos.current.x}px - 50%), calc(${currentPos.current.y}px - 115%), 0)`;
+      }
+      rafId.current = requestAnimationFrame(update);
+    };
+
+    rafId.current = requestAnimationFrame(update);
+    return () => {
+      if (rafId.current) cancelAnimationFrame(rafId.current);
+    };
+  }, [hoveredArticle, isTouchDevice]);
 
   const journalData = t.journal || {
     badge: 'Blog',
@@ -85,8 +106,8 @@ export default function Journal() {
 
   const handleMouseMove = (e) => {
     if (isTouchDevice) return;
-    mouseX.set(e.clientX);
-    mouseY.set(e.clientY);
+    targetPos.current.x = e.clientX;
+    targetPos.current.y = e.clientY;
   };
 
   const handleRowClick = (articleId) => {
@@ -109,30 +130,28 @@ export default function Journal() {
             01. JOURNAL HERO / INTRO
             ========================================================= */}
         <div className="journal-heading-block">
-          <RevealLabel as="div" className="journal-badge-label" delay={0.0}>
+          <div className="journal-badge-label">
             <span className="journal-badge-text">{journalData.badge}</span>
-          </RevealLabel>
-          <RevealHeading as="h2" className="journal-main-headline" delay={0.06}>
+          </div>
+          <h2 className="journal-main-headline">
             {journalData.headline}
-          </RevealHeading>
+          </h2>
         </div>
 
         {/* =========================================================
             02. IN FOCUS (FEATURED EDITORIAL CARDS)
             ========================================================= */}
         <div className="journal-featured-section">
-          <RevealLabel as="div" className="journal-featured-heading" delay={0.08}>
+          <div className="journal-featured-heading">
             <h3 className="u-text-heading-xs">{journalData.inFocusLabel}</h3>
-          </RevealLabel>
+          </div>
 
-          <Stagger stagger={0.08} delay={0.1} className="journal-featured-grid">
+          <div className="journal-featured-grid">
             {articles.map((art) => (
-              <m.a 
+              <a 
                 key={art.id} 
                 href={`/blog/${art.slug || 'more-marketing-not-more-growth'}`}
                 className="journal-featured-card"
-                variants={editorialVariants}
-                whileHover={{ y: -4, transition: { duration: 0.25, ease: EASING.SECONDARY } }}
                 onMouseEnter={() => !isTouchDevice && setHoveredArticle(art)}
                 onMouseLeave={() => !isTouchDevice && setHoveredArticle(null)}
                 onClick={(e) => {
@@ -175,9 +194,9 @@ export default function Journal() {
                     <ArrowUpRight size={15} className="journal-card-arrow" />
                   </div>
                 </div>
-              </m.a>
+              </a>
             ))}
-          </Stagger>
+          </div>
         </div>
 
         {/* =========================================================
@@ -202,17 +221,16 @@ export default function Journal() {
             04. EDITORIAL ARTICLE LIST WITH SIGNATURE CURSOR HOVER
             ========================================================= */}
         <div className="journal-list-wrapper">
-          <Stagger stagger={0.06} className="journal-list">
+          <div className="journal-list">
             {filteredArticles.map((art) => {
               const isHovered = hoveredArticle?.id === art.id;
               const isExpandedMobile = expandedMobileArticle === art.id;
 
               return (
-                <m.a
+                <a
                   key={art.id}
                   href={`/blog/${art.slug || 'more-marketing-not-more-growth'}`}
                   className={`journal-list-item ${isHovered ? 'is-hovered' : ''} ${isExpandedMobile ? 'is-expanded-mobile' : ''}`}
-                  variants={editorialVariants}
                   onMouseEnter={() => !isTouchDevice && setHoveredArticle(art)}
                   onMouseLeave={() => !isTouchDevice && setHoveredArticle(null)}
                   onClick={(e) => {
@@ -246,29 +264,19 @@ export default function Journal() {
                     <ArrowUpRight size={16} className="journal-list-item-arrow" />
                   </div>
 
-                  {/* Mobile Tap-To-Reveal Image Inline */}
+                  {/* Mobile Tap-To-Reveal Image Inline with CSS Grid transition */}
                   {isTouchDevice && (
-                    <AnimatePresence>
-                      {isExpandedMobile && (
-                        <m.div
-                          className="journal-mobile-expanded-media"
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: 'auto', opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.35, ease: EASING.SECONDARY }}
-                        >
-                          <picture>
-                            <source srcSet={toWebp(art.image)} type="image/webp" />
-                            <img src={art.image} alt={art.alt} className="journal-mobile-img" width="600" height="400" loading="lazy" decoding="async" />
-                          </picture>
-                        </m.div>
-                      )}
-                    </AnimatePresence>
+                    <div className={`journal-mobile-expanded-media ${isExpandedMobile ? 'is-open' : ''}`}>
+                      <picture>
+                        <source srcSet={toWebp(art.image)} type="image/webp" />
+                        <img src={art.image} alt={art.alt} className="journal-mobile-img" width="600" height="400" loading="lazy" decoding="async" />
+                      </picture>
+                    </div>
                   )}
-                </m.a>
+                </a>
               );
             })}
-          </Stagger>
+          </div>
         </div>
 
         {/* =========================================================
@@ -291,60 +299,35 @@ export default function Journal() {
 
       {/* =========================================================
           05. SIGNATURE FLOATING CURSOR-FOLLOWING PREVIEW IMAGE
-          Positioned relative to cursor with smooth inertia & clipPath
+          Positioned relative to cursor with smooth inertia & CSS clipPath transition
           ========================================================= */}
       {!isTouchDevice && (
-        <AnimatePresence>
+        <div
+          ref={previewRef}
+          className={`journal-floating-cursor-preview ${hoveredArticle ? 'is-visible' : ''}`}
+          aria-hidden="true"
+        >
           {hoveredArticle && (
-            <m.div
-              className="journal-floating-cursor-preview"
-              style={{
-                x: mouseX,
-                y: mouseY,
-                translateX: '-50%',
-                translateY: '-115%'
-              }}
-              initial={{
-                opacity: 0,
-                scale: 0.88,
-                clipPath: 'inset(100% 0% 0% 0%)'
-              }}
-              animate={{
-                opacity: 1,
-                scale: 1,
-                clipPath: 'inset(0% 0% 0% 0%)'
-              }}
-              exit={{
-                opacity: 0,
-                scale: 0.92,
-                clipPath: 'inset(0% 0% 100% 0%)'
-              }}
-              transition={{
-                duration: 0.38,
-                ease: EASING.CINEMATIC
-              }}
-            >
-              <div className="journal-floating-img-frame">
-                <picture>
-                  <source srcSet={toWebp(hoveredArticle.image)} type="image/webp" />
-                  <img
-                    src={hoveredArticle.image}
-                    alt={hoveredArticle.title}
-                    className="journal-floating-img"
-                    width="400"
-                    height="260"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </picture>
-                <div className="journal-floating-img-overlay" />
-                <div className="journal-floating-caption">
-                  <span className="journal-floating-tag">{hoveredArticle.category}</span>
-                </div>
+            <div className="journal-floating-img-frame">
+              <picture>
+                <source srcSet={toWebp(hoveredArticle.image)} type="image/webp" />
+                <img
+                  src={hoveredArticle.image}
+                  alt={hoveredArticle.title}
+                  className="journal-floating-img"
+                  width="400"
+                  height="260"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
+              <div className="journal-floating-img-overlay" />
+              <div className="journal-floating-caption">
+                <span className="journal-floating-tag">{hoveredArticle.category}</span>
               </div>
-            </m.div>
+            </div>
           )}
-        </AnimatePresence>
+        </div>
       )}
     </section>
   );

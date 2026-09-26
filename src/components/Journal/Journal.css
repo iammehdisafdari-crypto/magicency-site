@@ -419,10 +419,25 @@
 
 /* Mobile Expanded Image */
 .journal-mobile-expanded-media {
-  overflow: hidden;
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease, margin-top 0.35s ease;
+  opacity: 0;
   width: 100%;
-  margin-top: 14px;
+  margin-top: 0;
   border-radius: 12px;
+  overflow: hidden;
+}
+
+.journal-mobile-expanded-media.is-open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  margin-top: 14px;
+}
+
+.journal-mobile-expanded-media > * {
+  overflow: hidden;
+  min-height: 0;
 }
 
 .journal-mobile-img {
@@ -445,7 +460,16 @@
   z-index: 999;
   width: 280px;
   aspect-ratio: 16 / 10;
-  will-change: transform;
+  will-change: transform, opacity;
+  opacity: 0;
+  clip-path: inset(100% 0% 0% 0%);
+  transition: opacity 0.38s cubic-bezier(0.16, 1, 0.3, 1),
+              clip-path 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.journal-floating-cursor-preview.is-visible {
+  opacity: 1;
+  clip-path: inset(0% 0% 0% 0%);
 }
 
 .journal-floating-img-frame {
