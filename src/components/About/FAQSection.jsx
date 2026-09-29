@@ -6,7 +6,7 @@ import './FAQSection.css';
 
 export default function FAQSection({
   isHomepage = false,
-  id = isHomepage ? 'faq' : 'section-08',
+  id = isHomepage ? 'about' : 'section-08',
   eyebrow,
   title,
   lead,

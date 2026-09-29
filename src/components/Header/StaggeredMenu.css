@@ -22,6 +22,12 @@
   height: 100dvh;
   z-index: 100;
   overflow: hidden;
+  pointer-events: none;
+}
+
+.staggered-menu-wrapper.is-active,
+.staggered-menu-wrapper[data-open="true"] {
+  pointer-events: auto;
 }
 
 /* Header bar inside StaggeredMenu */
@@ -90,9 +96,12 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   overflow: hidden;
-  transition: background-color 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+  transition: color 220ms ease, background-color 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  pointer-events: auto;
+  z-index: 40;
 }
 
 [dir="rtl"] .sm-toggle {
@@ -147,7 +156,6 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  will-change: transform;
 }
 
 .sm-icon-line {
@@ -159,7 +167,6 @@
   background: currentColor;
   border-radius: 2px;
   transform: translate(-50%, -50%);
-  will-change: transform;
 }
 
 .sm-icon-line-v {
@@ -196,12 +203,18 @@
   bottom: 0;
   height: 100%;
   width: 100%;
-  transform: translate3d(100%, 0, 0);
-  will-change: transform;
+  transform-origin: right top;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 [data-position='left'] .sm-prelayer {
-  transform: translate3d(-100%, 0, 0);
+  transform-origin: left top;
+}
+
+.staggered-menu-wrapper.is-active .sm-prelayer,
+.staggered-menu-wrapper[data-open="true"] .sm-prelayer {
+  visibility: visible;
 }
 
 /* =========================================================
@@ -214,8 +227,10 @@
   width: clamp(280px, 44vw, 500px);
   height: 100%;
   height: 100dvh;
-  transform: translate3d(100%, 0, 0);
-  will-change: transform;
+  transform-origin: right top;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
   background: var(--sm-panel-bg, #07101C);
   border-left: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
@@ -224,11 +239,16 @@
   overflow-y: auto;
   overflow-x: hidden;
   z-index: 20;
-  pointer-events: auto;
   box-sizing: border-box;
-  opacity: 1;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
+}
+
+.staggered-menu-wrapper.is-active .staggered-menu-panel,
+.staggered-menu-wrapper[data-open="true"] .staggered-menu-panel {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* Subtle atmospheric glow inside panel */
@@ -249,7 +269,7 @@
 [data-position='left'] .staggered-menu-panel {
   right: auto;
   left: 0;
-  transform: translate3d(-100%, 0, 0);
+  transform-origin: left top;
   border-left: none;
   border-right: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -296,7 +316,7 @@
   text-decoration: none;
   display: inline-flex;
   align-items: baseline;
-  padding-right: 1.6em;
+  padding: 0;
   transition: color 240ms cubic-bezier(0.16, 1, 0.3, 1),
               transform 240ms cubic-bezier(0.16, 1, 0.3, 1);
   -webkit-tap-highlight-color: transparent;
@@ -305,14 +325,12 @@
 [dir="rtl"] .sm-panel-item {
   font-family: var(--font-persian, 'Vazirmatn', sans-serif);
   letter-spacing: 0;
-  padding-right: 0;
-  padding-left: 1.6em;
+  padding: 0;
   font-size: clamp(1.8rem, 5vw, 2.8rem);
 }
 
 .sm-panel-itemLabel {
   display: inline-block;
-  will-change: transform;
   transform-origin: 0% 100%;
 }
 
@@ -334,33 +352,6 @@
   outline-offset: 4px;
 }
 
-/* Item numbering */
-.sm-panel-list[data-numbering] {
-  counter-reset: smItem;
-}
-
-.sm-panel-list[data-numbering] .sm-panel-item::after {
-  counter-increment: smItem;
-  content: counter(smItem, decimal-leading-zero);
-  position: absolute;
-  top: 0.12em;
-  right: 0.2em;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--sm-accent, #C58A3A);
-  letter-spacing: 0.05em;
-  pointer-events: none;
-  user-select: none;
-  opacity: var(--sm-num-opacity, 0);
-  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
-  transition: opacity 300ms ease;
-}
-
-[dir="rtl"] .sm-panel-list[data-numbering] .sm-panel-item::after {
-  right: auto;
-  left: 0.2em;
-}
-
 /* =========================================================
    EXTRA SLOT (CTA button & direct contact)
    ========================================================= */
@@ -369,6 +360,15 @@
   flex-direction: column;
   gap: 16px;
   padding: 12px 0;
+}
+
+.sm-panel-cta-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  width: 100%;
 }
 
 .sm-panel-cta-btn {
@@ -380,6 +380,7 @@
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: var(--cta-radius, 8px);
   color: #FFFFFF;
+  text-decoration: none;
   font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
   font-size: 0.78rem;
   font-weight: 700;
@@ -387,7 +388,11 @@
   cursor: pointer;
   width: fit-content;
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
-  transition: all 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: auto !important;
+  position: relative;
+  z-index: 5;
+  flex-shrink: 0;
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1), background-color 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -405,11 +410,15 @@
 
 .sm-panel-contact-link {
   font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   color: rgba(255, 255, 255, 0.75);
   text-decoration: none;
   transition: color 200ms ease;
   width: fit-content;
+  max-width: 100%;
+  word-break: break-all;
+  overflow-wrap: anywhere;
+  display: inline-block;
 }
 
 .sm-panel-contact-link:hover {
@@ -454,11 +463,20 @@
 }
 
 .sm-socials-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 6px 4px;
   font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
   font-size: 0.85rem;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.65);
   text-decoration: none;
+  cursor: pointer;
+  pointer-events: auto !important;
+  position: relative;
+  z-index: 5;
+  -webkit-tap-highlight-color: transparent;
   transition: color 0.2s ease, opacity 0.2s ease;
 }
 
@@ -503,6 +521,12 @@
   [dir="rtl"] .sm-panel-item {
     font-size: clamp(1.65rem, 5.5vw, 2.2rem);
   }
+
+  .sm-panel-cta-box {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -525,5 +549,13 @@
   .sm-toggle {
     padding: 0 14px;
     font-size: 0.72rem;
+  }
+
+  .sm-panel-cta-box {
+    gap: 12px;
+  }
+
+  .sm-panel-contact-link {
+    font-size: 0.86rem;
   }
 }

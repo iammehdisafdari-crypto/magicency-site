@@ -266,12 +266,12 @@ function getRouteMetadata(route) {
   switch (route) {
     case '/work':
       return {
-        title: 'Growth Case Studies & Client Results | Magicency',
-        desc: "Explore Magicency's curated index of growth case studies, client results, conversion architecture, and market-tested creative systems.",
+        title: 'نمونه‌آثار و پرونده‌های رشد // شواهد مستند و پورتفولیو // مجیکنسـی (MAGICENCY®)',
+        desc: 'کاوش در پرونده‌های رشد، نتایج تجاری مشتریان، معماری تبدیل و سیستم‌های خلاقانه استودیو رشد مجیکنسـی.',
         canonical: `${baseCanonical}/work`,
         ogType: 'website',
         ogImage: `${baseCanonical}/og-image.png`,
-        ogImageAlt: 'Magicency Growth Case Studies & Client Results',
+        ogImageAlt: 'پرونده‌های رشد و نتایج مشتریان مجیکنسـی',
         jsonLd: {
           '@context': 'https://schema.org',
           '@graph': [
@@ -330,12 +330,12 @@ function getRouteMetadata(route) {
 
     case '/capabilities':
       return {
-        title: 'Integrated Marketing Capabilities & Services | Magicency',
-        desc: "Explore Magicency's integrated marketing capabilities: commercial strategy, high-conviction creative, full-stack digital platforms, and conversion architecture.",
+        title: 'توانمندی‌های یکپارچه بازاریابی // آنچه می‌سازیم // مجیکنسـی (MAGICENCY®)',
+        desc: 'کالبدشکافی توانمندی‌های یکپارچه بازاریابی: استراتژی تجاری، خلاقیت متقاعدکننده، پلتفرم‌های دیجیتال و معماری تبدیل.',
         canonical: `${baseCanonical}/capabilities`,
         ogType: 'website',
         ogImage: `${baseCanonical}/og-image.png`,
-        ogImageAlt: 'Magicency Integrated Marketing Capabilities',
+        ogImageAlt: 'توانمندی‌های یکپارچه بازاریابی مجیکنسـی',
         jsonLd: {
           '@context': 'https://schema.org',
           '@graph': [
@@ -381,12 +381,12 @@ function getRouteMetadata(route) {
 
     case '/approach':
       return {
-        title: 'Growth Operating System & Growth Methodology | Magicency',
-        desc: 'Why linear marketing resets growth and how our growth operating system, diagnostic methodology, and closed-loop decision framework transform commercial trajectory.',
+        title: 'معماری رشد و سیستم‌عامل کسب‌وکار // رویکرد ما // مجیکنسـی (MAGICENCY®)',
+        desc: 'رشد یک کانال تبلیغاتی نیست؛ یک سیستم‌عامل است. نحوه نگرش و عملکرد آژانس پرفورمنس مارکتینگ و معماری رشد مجیکنسـی.',
         canonical: `${baseCanonical}/approach`,
         ogType: 'website',
         ogImage: `${baseCanonical}/og-image.png`,
-        ogImageAlt: 'The Magicency Growth Operating System & Methodology',
+        ogImageAlt: 'معماری رشد و سیستم‌عامل کسب‌وکار مجیکنسـی',
         jsonLd: {
           '@context': 'https://schema.org',
           '@graph': [
@@ -419,12 +419,12 @@ function getRouteMetadata(route) {
 
     case '/about':
       return {
-        title: 'About Magicency — Studio, Philosophy & Founder Mehdi Safdari',
-        desc: 'Learn about Magicency: who we are, our studio philosophy, and founder Mehdi Safdari uniting disciplined engineering and creative conviction.',
+        title: 'درباره استودیو مجیکنسـی // همگام‌سازی استراتژی، فناوری و پرفورمنس // مجیکنسـی (MAGICENCY®)',
+        desc: 'آشنایی با استودیو رشد مجیکنسـی: فلسفه استودیو و بنیان‌گذار مهدی صفدری در همگام‌سازی مهندسی دقیق و جسارت خلاقانه.',
         canonical: `${baseCanonical}/about`,
         ogType: 'website',
         ogImage: `${baseCanonical}/og-image.png`,
-        ogImageAlt: 'About Magicency Studio & Leadership',
+        ogImageAlt: 'درباره استودیو مجیکنسـی و رهبری',
         jsonLd: {
           '@context': 'https://schema.org',
           '@graph': [
@@ -467,12 +467,12 @@ function getRouteMetadata(route) {
 
     case '/blog':
       return {
-        title: 'Growth Marketing Insights & Strategic Essays | Magicency',
-        desc: 'Explore strategic essays, field notes, and growth marketing insights on positioning, retention flywheels, conversion architecture, and AI-era marketing.',
+        title: 'بینش‌های بازاریابی رشد // نشریه تحلیلی // مجیکنسـی (MAGICENCY®)',
+        desc: 'جستارهای تحلیلی، بینش‌های بازاریابی رشد، معماری تبدیل، فلای‌ویل‌های حفظ مشتری و بازاریابی عصر هوش مصنوعی.',
         canonical: `${baseCanonical}/blog`,
         ogType: 'website',
         ogImage: `${baseCanonical}/og-image.png`,
-        ogImageAlt: 'Magicency Journal of Growth Marketing Insights',
+        ogImageAlt: 'نشریه بینش‌های بازاریابی رشد مجیکنسـی',
         jsonLd: {
           '@context': 'https://schema.org',
           '@graph': [
@@ -505,25 +505,25 @@ function getRouteMetadata(route) {
 
     case '/404':
       return {
-        title: 'Page Not Found (404) | Magicency',
-        desc: "The requested page could not be found. Return to Magicency's homepage to explore our connected growth systems and strategic work.",
+        title: 'صفحه پیدا نشد (۴۰۴) // مجیکنسـی (MAGICENCY®)',
+        desc: 'صفحه مورد نظر یافت نشد. برای بازگشت به صفحه اصلی و مشاهده سیستم‌های متصل رشد به وبسایت مجیکنسـی مراجعه کنید.',
         canonical: null,
         robots: 'noindex, follow',
         ogType: 'website',
         ogImage: `${baseCanonical}/og-image.png`,
-        ogImageAlt: 'Magicency 404',
+        ogImageAlt: 'مجیکنسـی ۴۰۴',
         jsonLd: null
       };
 
     case '/':
     default:
       return {
-        title: 'Magicency — Growth Marketing Agency & Connected Growth Systems',
-        desc: 'Magicency is a growth marketing agency engineering connected growth systems that unite commercial strategy, high-conviction creative, and conversion architecture.',
+        title: 'مجیکنسـی — سیستم‌های متصل رشد و آژانس پرفورمنس مارکتینگ',
+        desc: 'ما با همگام‌سازی استراتژی، طراحی، فناوری و پرفورمنس، تجربیات دیجیتال و سیستم‌های مقیاس‌پذیر رشد را برای برندهای پیشرو مهندسی می‌کنیم.',
         canonical: `${baseCanonical}/`,
         ogType: 'website',
         ogImage: `${baseCanonical}/og-image.png`,
-        ogImageAlt: 'Magicency — Growth Marketing Agency & Connected Growth Systems',
+        ogImageAlt: 'مجیکنسـی — سیستم‌های متصل رشد و آژانس پرفورمنس مارکتینگ',
         jsonLd: null // already in base template
       };
   }
@@ -567,7 +567,6 @@ async function prerender() {
     'src/styles/fonts.css',
     'src/styles/global.css',
     'src/components/About/ScrollProgress.css',
-    'src/components/Intro/BrandIntro.css',
     'src/components/Header/Header.css',
     'src/components/Header/StaggeredMenu.css',
     'src/components/Hero/Hero.css',
@@ -587,14 +586,19 @@ async function prerender() {
   const criticalPurge = await new PurgeCSS().purge({
     content: [
       { raw: baseTemplate, extension: 'html' },
+      { raw: fs.readFileSync(path.resolve(rootDir, 'src/App.jsx'), 'utf8'), extension: 'jsx' },
+      { raw: fs.readFileSync(path.resolve(rootDir, 'src/AppServer.jsx'), 'utf8'), extension: 'jsx' },
+      { raw: fs.readFileSync(path.resolve(rootDir, 'src/components/About/ScrollProgress.jsx'), 'utf8'), extension: 'jsx' },
       { raw: fs.readFileSync(path.resolve(rootDir, 'src/components/Header/Header.jsx'), 'utf8'), extension: 'jsx' },
       { raw: fs.readFileSync(path.resolve(rootDir, 'src/components/Hero/Hero.jsx'), 'utf8'), extension: 'jsx' },
-      { raw: fs.readFileSync(path.resolve(rootDir, 'src/components/Intro/BrandIntro.jsx'), 'utf8'), extension: 'jsx' },
       { raw: fs.readFileSync(path.resolve(rootDir, 'src/components/Header/StaggeredMenu.jsx'), 'utf8'), extension: 'jsx' }
     ],
     css: [{ raw: rawCritical }],
     safelist: {
       standard: [
+        'skip-to-content',
+        /^reveal-/,
+        /^motion-/,
         /^hero-/,
         /^row-/,
         /^is-/,
@@ -643,17 +647,13 @@ async function prerender() {
       css: [{ raw: rawMainCss }],
       safelist: {
         standard: [
+          /^reveal-/,
           /^is-/,
           /^has-/,
           /^motion-/,
           /^staggered-menu/,
           /^sm-/,
-          /^vm-/,
-          /^mag-/,
-          /^pi-/,
-          /^fw-/,
-          /^wwd-/,
-          /^app-/,
+          /^cg-/,
           'html',
           'body',
           '#root',
@@ -664,7 +664,7 @@ async function prerender() {
           '::-webkit-scrollbar-track'
         ],
         deep: [/^data-/, /^aria-/, /^role/],
-        greedy: [/active/, /open/, /loading/, /loaded/, /scrolled/, /current/, /visible/]
+        greedy: [/active/, /open/, /loading/, /loaded/, /scrolled/, /current/, /visible/, /passed/, /stage-/]
       },
       keyframes: false,
       fontFace: false
@@ -704,10 +704,13 @@ async function prerender() {
   };
 
   for (const route of ROUTES) {
-    const { appHtml } = render(route, 'en');
+    const { appHtml } = render(route, 'fa');
     const meta = getRouteMetadata(route);
 
     let html = baseTemplate;
+
+    // Ensure <html> tag has lang="fa" and dir="rtl"
+    html = html.replace(/<html[^>]*>/i, '<html lang="fa" dir="rtl">');
 
     // Inject route-specific CSS if applicable (asynchronously)
     let matchedCss = null;
@@ -732,23 +735,23 @@ async function prerender() {
     html = html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${meta.title}</title>`);
 
     // 2. Update Meta Description
-    html = html.replace(/<meta name="description" content="[^"]*"/i, `<meta name="description" content="${meta.desc}"`);
+    html = html.replace(/<meta\s+name=["']description["'][\s\S]*?content=["'][^"']*["']/i, `<meta name="description" content="${meta.desc}"`);
 
     // 3. Update Robots & Canonical Link
     if (meta.robots) {
-      html = html.replace(/<meta name="robots" content="[^"]*"/i, `<meta name="robots" content="${meta.robots}"`);
+      html = html.replace(/<meta\s+name=["']robots["'][\s\S]*?content=["'][^"']*["']/i, `<meta name="robots" content="${meta.robots}"`);
     } else {
-      html = html.replace(/<meta name="robots" content="[^"]*"/i, `<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"`);
+      html = html.replace(/<meta\s+name=["']robots["'][\s\S]*?content=["'][^"']*["']/i, `<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"`);
     }
 
     if (meta.canonical) {
-      html = html.replace(/<link rel="canonical" href="[^"]*"/i, `<link rel="canonical" href="${meta.canonical}"`);
+      html = html.replace(/<link\s+rel=["']canonical["'][\s\S]*?href=["'][^"']*["']/i, `<link rel="canonical" href="${meta.canonical}"`);
     } else {
-      html = html.replace(/\s*<link rel="canonical" href="[^"]*"\s*\/?>/i, '');
+      html = html.replace(/\s*<link\s+rel=["']canonical["'][^>]*\/?>/i, '');
     }
 
     // 4. Update Open Graph tags
-    html = html.replace(/<meta property="og:type" content="[^"]*"/i, `<meta property="og:type" content="${meta.ogType}"`);
+    html = html.replace(/<meta\s+property=["']og:type["'][\s\S]*?content=["'][^"']*["']/i, `<meta property="og:type" content="${meta.ogType}"`);
     if (meta.ogType === 'article' && meta.articleMeta) {
       const articleMetaTags = [
         `    <meta property="article:published_time" content="${meta.articleMeta.publishedTime}" />`,
@@ -758,18 +761,20 @@ async function prerender() {
       ].join('\n');
       html = html.replace(new RegExp(`<meta property="og:type" content="${meta.ogType}"[^>]*>`, 'i'), `<meta property="og:type" content="${meta.ogType}" />\n${articleMetaTags}`);
     }
-    html = html.replace(/<meta property="og:title" content="[^"]*"/i, `<meta property="og:title" content="${meta.title}"`);
-    html = html.replace(/<meta property="og:description" content="[^"]*"/i, `<meta property="og:description" content="${meta.desc}"`);
-    html = html.replace(/<meta property="og:url" content="[^"]*"/i, `<meta property="og:url" content="${meta.canonical || 'https://magicency.ir/404'}"`);
-    html = html.replace(/<meta property="og:image" content="[^"]*"/i, `<meta property="og:image" content="${meta.ogImage}"`);
-    html = html.replace(/<meta property="og:image:secure_url" content="[^"]*"/i, `<meta property="og:image:secure_url" content="${meta.ogImage}"`);
-    html = html.replace(/<meta property="og:image:alt" content="[^"]*"/i, `<meta property="og:image:alt" content="${meta.ogImageAlt}"`);
+    html = html.replace(/<meta\s+property=["']og:title["'][\s\S]*?content=["'][^"']*["']/i, `<meta property="og:title" content="${meta.title}"`);
+    html = html.replace(/<meta\s+property=["']og:description["'][\s\S]*?content=["'][^"']*["']/i, `<meta property="og:description" content="${meta.desc}"`);
+    html = html.replace(/<meta\s+property=["']og:url["'][\s\S]*?content=["'][^"']*["']/i, `<meta property="og:url" content="${meta.canonical || 'https://magicency.ir/404'}"`);
+    html = html.replace(/<meta\s+property=["']og:locale["'][\s\S]*?content=["'][^"']*["']/i, '<meta property="og:locale" content="fa_IR"');
+    html = html.replace(/<meta\s+property=["']og:locale:alternate["'][\s\S]*?content=["'][^"']*["']/i, '<meta property="og:locale:alternate" content="en_US"');
+    html = html.replace(/<meta\s+property=["']og:image["'][\s\S]*?content=["'][^"']*["']/i, `<meta property="og:image" content="${meta.ogImage}"`);
+    html = html.replace(/<meta\s+property=["']og:image:secure_url["'][\s\S]*?content=["'][^"']*["']/i, `<meta property="og:image:secure_url" content="${meta.ogImage}"`);
+    html = html.replace(/<meta\s+property=["']og:image:alt["'][\s\S]*?content=["'][^"']*["']/i, `<meta property="og:image:alt" content="${meta.ogImageAlt}"`);
 
     // 5. Update Twitter Card tags
-    html = html.replace(/<meta name="twitter:title" content="[^"]*"/i, `<meta name="twitter:title" content="${meta.title}"`);
-    html = html.replace(/<meta name="twitter:description" content="[^"]*"/i, `<meta name="twitter:description" content="${meta.desc}"`);
-    html = html.replace(/<meta name="twitter:image" content="[^"]*"/i, `<meta name="twitter:image" content="${meta.ogImage}"`);
-    html = html.replace(/<meta name="twitter:image:alt" content="[^"]*"/i, `<meta name="twitter:image:alt" content="${meta.ogImageAlt}"`);
+    html = html.replace(/<meta\s+name=["']twitter:title["'][\s\S]*?content=["'][^"']*["']/i, `<meta name="twitter:title" content="${meta.title}"`);
+    html = html.replace(/<meta\s+name=["']twitter:description["'][\s\S]*?content=["'][^"']*["']/i, `<meta name="twitter:description" content="${meta.desc}"`);
+    html = html.replace(/<meta\s+name=["']twitter:image["'][\s\S]*?content=["'][^"']*["']/i, `<meta name="twitter:image" content="${meta.ogImage}"`);
+    html = html.replace(/<meta\s+name=["']twitter:image:alt["'][\s\S]*?content=["'][^"']*["']/i, `<meta name="twitter:image:alt" content="${meta.ogImageAlt}"`);
 
     // 6. Inject Route-Specific JSON-LD Schema
     if (meta.jsonLd) {

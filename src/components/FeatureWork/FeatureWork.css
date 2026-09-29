@@ -36,7 +36,7 @@
   width: 100%;
   max-width: 1440px;
   margin-inline: auto;
-  padding: 0 clamp(20px, 4vw, 64px);
+  padding-inline: clamp(1rem, 4vw, 4rem);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -305,52 +305,6 @@
   box-shadow: 0 0 10px rgba(197, 138, 58, 0.5);
 }
 
-/* Global See All Work CTA */
-.fw-see-all-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 6px;
-  color: #FFFFFF;
-  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
-  font-size: 0.76rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  outline: none;
-}
-
-.fw-see-all-btn:hover {
-  background: rgba(255, 255, 255, 0.09);
-  border-color: rgba(255, 255, 255, 0.24);
-  transform: translateY(-1px);
-}
-
-.fw-see-all-btn:focus-visible {
-  outline: 2px solid #C58A3A;
-  outline-offset: 2px;
-}
-
-.fw-cta-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.25s ease;
-}
-
-.fw-see-all-btn:hover .fw-cta-icon {
-  transform: translateX(3px);
-}
-
-[dir="rtl"] .fw-see-all-btn:hover .fw-cta-icon {
-  transform: translateX(-3px);
-}
-
 /* =========================================================
    RIGHT COLUMN: PHYSICAL VERTICAL IMAGE TRACK VIEWPORT
    ========================================================= */
@@ -506,7 +460,6 @@
 [dir="rtl"] .fw-project-title,
 [dir="rtl"] .fw-project-description,
 [dir="rtl"] .fw-metric-lbl,
-[dir="rtl"] .fw-see-all-btn,
 [dir="rtl"] .fw-hud-client {
   font-family: var(--font-persian, 'Vazirmatn', sans-serif) !important;
   letter-spacing: 0 !important;
@@ -543,7 +496,8 @@
 @media (max-width: 1023px) {
   .fw-container {
     max-height: 100svh;
-    padding: 12px 18px;
+    padding-block: 12px;
+    padding-inline: clamp(1rem, 4vw, 2rem);
     gap: 12px;
     justify-content: space-evenly;
   }
@@ -673,17 +627,13 @@
   .fw-pagination-item.is-active .fw-pagination-bar {
     width: 32px;
   }
-
-  .fw-see-all-btn {
-    padding: 6px 12px;
-    font-size: 0.68rem;
-  }
 }
 
 /* Extra small mobile (320px – 375px) */
 @media (max-width: 375px) {
   .fw-container {
-    padding: 8px 12px;
+    padding-block: 8px;
+    padding-inline: clamp(1rem, 4vw, 1.25rem);
     gap: 8px;
   }
 
@@ -714,8 +664,7 @@
 @media (prefers-reduced-motion: reduce) {
   .fw-image-track,
   .fw-slide-content,
-  .fw-pagination-bar,
-  .fw-see-all-btn {
+  .fw-pagination-bar {
     transition-duration: 0.01ms !important;
   }
 }

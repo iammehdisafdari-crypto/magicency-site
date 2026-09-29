@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useLayoutEffect, useCallback } from 'react';
 
 const LanguageContext = createContext();
 
@@ -970,28 +970,49 @@ export const translations = {
   }
 };
 
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
+
 export const LanguageProvider = ({ children, initialLang }) => {
-  const [lang, setLang] = useState(initialLang || 'en');
+  const [lang, setLang] = useState(initialLang || 'fa');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeNode, setActiveNode] = useState(null);
 
-  useEffect(() => {
+
+  useIsomorphicLayoutEffect(() => {
     if (typeof document === 'undefined') return;
     document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
     document.documentElement.lang = lang;
   }, [lang]);
 
-  const toggleLanguage = () => {
-    setLang((prev) => (prev === 'en' ? 'fa' : 'en'));
-  };
+  const toggleLanguage = useCallback(() => {
+    setLang((prev) => {
+      const next = prev === 'en' ? 'fa' : 'en';
+      try {
+        localStorage.setItem('magicency_lang', next);
+      } catch (_) {}
+      return next;
+    });
+  }, []);
 
-  const t = translations[lang];
+  const handleSetLang = useCallback((newLangOrFn) => {
+    setLang((prev) => {
+      const next = typeof newLangOrFn === 'function' ? newLangOrFn(prev) : newLangOrFn;
+      if (next === 'fa' || next === 'en') {
+        try {
+          localStorage.setItem('magicency_lang', next);
+        } catch (_) {}
+      }
+      return next;
+    });
+  }, []);
+
+  const t = translations[lang] || translations.fa;
 
   return (
     <LanguageContext.Provider
       value={{
         lang,
-        setLang,
+        setLang: handleSetLang,
         toggleLanguage,
         isRTL: lang === 'fa',
         t,

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import { RotateCw } from 'lucide-react';
+import Reveal from '../motion/Reveal';
 
 export default function OperatingSystem() {
   const { t } = useLanguage();
@@ -12,7 +13,7 @@ export default function OperatingSystem() {
       <div className="container approach-os-container">
         
         {/* Header Block */}
-        <div className="os-header-block">
+        <Reveal className="os-header-block">
           <span className="approach-tag-label">{os.badge || 'THE OPERATING SYSTEM'}</span>
           <h2 className="os-main-title">
             {os.headline || 'A system designed to learn.'}
@@ -23,10 +24,10 @@ export default function OperatingSystem() {
           <p className="os-body-statement">
             {os.body}
           </p>
-        </div>
+        </Reveal>
 
         {/* Continuous Flow Architecture Visualization */}
-        <div className="os-architecture-schematic">
+        <Reveal className="os-architecture-schematic" delay={0.1}>
           <div className="os-schematic-inner">
             
             {/* The Cycle Nodes Track */}
@@ -57,7 +58,7 @@ export default function OperatingSystem() {
             </div>
 
           </div>
-        </div>
+        </Reveal>
 
       </div>
     </section>

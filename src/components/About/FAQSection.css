@@ -18,8 +18,7 @@
 .faq-container {
   max-width: 1320px;
   margin: 0 auto;
-  padding-left: clamp(1.25rem, 4vw, 3.5rem);
-  padding-right: clamp(1.25rem, 4vw, 3.5rem);
+  padding-inline: clamp(1rem, 4vw, 3.5rem);
   position: relative;
   z-index: 2;
   box-sizing: border-box;

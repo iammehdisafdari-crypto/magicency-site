@@ -17,7 +17,7 @@
 .vm-journal-container {
   max-width: 1400px;
   margin-inline: auto;
-  padding: 0 clamp(20px, 3.5vw, 64px);
+  padding-inline: clamp(1rem, 4vw, 4rem);
   box-sizing: border-box;
 }
 
@@ -562,51 +562,4 @@
   margin-bottom: clamp(32px, 5vh, 48px);
   display: flex;
   justify-content: center;
-}
-
-.journal-explore-all-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 14px;
-  padding: 16px 36px;
-  border-radius: 9999px;
-  background: #07101C;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  color: #FFFFFF;
-  text-decoration: none;
-  font-family: var(--font-mono, monospace);
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  transition: all 260ms cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-}
-
-[dir="rtl"] .journal-explore-all-btn {
-  font-family: var(--font-persian, 'Vazirmatn', sans-serif);
-  font-weight: 700;
-  font-size: 0.95rem;
-  letter-spacing: 0;
-}
-
-.journal-explore-all-btn:hover {
-  background: #C58A3A;
-  border-color: #C58A3A;
-  color: #07101C;
-  transform: translateY(-3px);
-  box-shadow: 0 12px 30px -6px rgba(197, 138, 58, 0.45);
-}
-
-.journal-btn-arrow {
-  display: inline-block;
-  transition: transform 220ms ease;
-}
-
-.journal-explore-all-btn:hover .journal-btn-arrow {
-  transform: translateX(4px);
-}
-
-[dir="rtl"] .journal-explore-all-btn:hover .journal-btn-arrow {
-  transform: translateX(-4px);
 }

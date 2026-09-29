@@ -43,12 +43,12 @@ export const bodyTextVariants = {
   })
 };
 
-// Backwards-compatible alias for existing imports
+// Backwards-compatible alias for existing imports matching .reveal-initial static CSS
 export const editorialVariants = {
-  hidden: {
-    opacity: 0,
-    y: 14
-  },
+  hidden: (custom = {}) => ({
+    opacity: 0.15,
+    y: custom?.y !== undefined ? custom.y : 24
+  }),
   visible: (custom = {}) => ({
     opacity: 1,
     y: 0,
@@ -98,11 +98,13 @@ export const cinematicImageVariants = {
 
 export const imageMaskVariants = {
   hidden: {
-    clipPath: 'inset(100% 0% 0% 0%)',
+    scaleY: 0,
+    originY: 0,
     opacity: 0
   },
   visible: (custom = {}) => ({
-    clipPath: 'inset(0% 0% 0% 0%)',
+    scaleY: 1,
+    originY: 0,
     opacity: 1,
     transition: {
       duration: custom.duration || DURATION.IMAGE,

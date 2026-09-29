@@ -27,7 +27,7 @@
   z-index: 2;
   max-width: 1400px;
   margin-inline: auto;
-  padding: 0 clamp(20px, 3.5vw, 64px);
+  padding-inline: clamp(1rem, 4vw, 4rem);
   box-sizing: border-box;
 }
 
@@ -191,19 +191,6 @@
     padding-bottom: 28px;
   }
 
-  .liquid-ether-wrapper.bottom {
-    display: none !important;
-  }
-
-  .footer-contact {
-    gap: 20px;
-    padding-bottom: 32px;
-  }
-
-  .footer-cta-btn.btn.is-lg.is-brand {
-    width: 100%;
-  }
-
   .footer-emails-block {
     flex-direction: column;
     gap: 20px;
@@ -222,16 +209,8 @@
    ACCESSIBILITY: PREFERS-REDUCED-MOTION
    ========================================================= */
 @media (prefers-reduced-motion: reduce) {
-  .liquid-ether-wrapper.bottom {
-    display: none !important;
-  }
-
   .footer-logo-wordmark {
     transition: none !important;
     transform: none !important;
-  }
-
-  .footer-cta-btn {
-    transition: none !important;
   }
 }

@@ -287,7 +287,6 @@
   z-index: 2;
 }
 
-.capabilities-page-root.is-rtl .featured-hud-badge,
 .blog-page-root.is-rtl .featured-hud-badge {
   left: auto;
   right: 1rem;
@@ -374,38 +373,6 @@
   border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.featured-read-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  background: transparent;
-  border: none;
-  color: #ffffff;
-  font-size: 0.82rem;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  cursor: pointer;
-  padding: 0;
-  transition: color 0.2s ease;
-}
-
-.featured-read-btn:hover {
-  color: #C58A3A;
-}
-
-.read-btn-arrow {
-  display: flex;
-  align-items: center;
-  transition: transform 0.2s ease;
-}
-
-.featured-read-btn:hover .read-btn-arrow {
-  transform: translateX(4px);
-}
-
-.blog-page-root.is-rtl .featured-read-btn:hover .read-btn-arrow {
-  transform: translateX(-4px);
-}
 
 .featured-date-stamp {
   font-size: 0.72rem;
@@ -955,26 +922,6 @@
   color: #8B93A7;
 }
 
-.newsletter-submit-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: #C58A3A;
-  border: none;
-  color: #ffffff;
-  font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  padding: 0.75rem 1.4rem;
-  border-radius: 9999px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.newsletter-submit-btn:hover {
-  background: #C58A3A;
-  transform: scale(1.02);
-}
 
 .newsletter-success-box {
   display: flex;
@@ -1489,10 +1436,6 @@
     flex-direction: column;
     border-radius: 16px;
     padding: 0.75rem;
-  }
-
-  .newsletter-submit-btn {
-    justify-content: center;
   }
 
   .related-articles-grid {

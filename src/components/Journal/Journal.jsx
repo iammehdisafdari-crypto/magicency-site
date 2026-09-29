@@ -118,7 +118,8 @@ export default function Journal() {
 
   return (
     <section 
-      id="journal" 
+      id="blog" 
+      data-section="journal"
       ref={containerRef} 
       className="shared-section vm-journal-section"
       aria-label="Journal and Strategic Insights"

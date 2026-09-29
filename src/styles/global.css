@@ -189,52 +189,18 @@ h1, h2, h3, h4, h5, h6 {
 /* Responsive Container */
 .container {
   width: 100%;
-  max-width: var(--max-width);
+  max-width: var(--max-width, 1360px);
   margin-inline: auto;
-  padding-inline: var(--space-6);
+  box-sizing: border-box;
+  padding-inline: clamp(1rem, 4vw, 2rem);
 }
 
 @media (max-width: 768px) {
   .container {
-    padding-inline: var(--space-4);
+    padding-inline: clamp(1rem, 4vw, 2rem);
   }
 }
 
-/* Experience Footer */
-.experience-footer {
-  position: relative;
-  z-index: var(--z-content);
-  padding: 12px 0 16px;
-  border-top: 1px solid var(--border-subtle);
-  background: rgba(5, 5, 5, 0.85);
-}
-
-.footer-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.footer-status {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.status-ping {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: var(--color-accent);
-  box-shadow: 0 0 8px var(--color-accent);
-}
-
-.footer-copyright {
-  color: var(--text-tertiary);
-  font-size: 0.7rem;
-}
 
 /* =========================================
    CINEMATIC TYPOGRAPHY MOTION UTILITIES
@@ -249,6 +215,33 @@ h1, h2, h3, h4, h5, h6 {
 .reveal-statement-root {
   display: flex;
   flex-direction: column;
+}
+
+/* =========================================
+   STATIC INITIAL REVEAL BASELINE (ANTI-FOUC)
+   Defines initial reveal state directly in static CSS (not purely JS)
+   Prevents unstyled content flash on slow networks/throttled CPUs
+   ========================================= */
+.reveal-initial {
+  opacity: 0.15;
+  transform: translateY(24px);
+  will-change: transform, opacity;
+  animation: revealGracefulFallback 1.8s cubic-bezier(0.16, 1, 0.3, 1) 1.5s forwards;
+}
+
+@keyframes revealGracefulFallback {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Graceful fallback if JavaScript is disabled / failed */
+noscript + * .reveal-initial,
+.no-js .reveal-initial {
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
 }
 
 /* Micro-interactions: Buttons & Icons */
@@ -292,9 +285,11 @@ h1, h2, h3, h4, h5, h6 {
     overflow: visible !important;
   }
 
-  .scroll-reveal-content {
+  .scroll-reveal-content,
+  .reveal-initial {
     transform: none !important;
     opacity: 1 !important;
+    animation: none !important;
   }
 
   .btn-motion:hover {

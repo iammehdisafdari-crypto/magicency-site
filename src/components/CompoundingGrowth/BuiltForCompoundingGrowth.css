@@ -57,7 +57,7 @@
   z-index: 1;
   max-width: 1400px;
   margin-inline: auto;
-  padding: 0 clamp(20px, 4vw, 64px);
+  padding-inline: clamp(1rem, 4vw, 4rem);
   box-sizing: border-box;
 }
 
@@ -401,12 +401,12 @@
 .cg-node-title {
   margin: 0;
   font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
-  font-size: 14.5px;
+  font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.05em;
   color: rgba(255, 255, 255, 0.75);
   text-transform: uppercase;
-  transition: color 0.3s ease, font-size 0.3s ease, text-shadow 0.3s ease;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
 .is-rtl .cg-node-title {
@@ -417,13 +417,12 @@
 
 .cg-discipline-node.is-current .cg-node-title {
   color: #FFFFFF;
-  font-size: 16px;
   letter-spacing: 0.06em;
   text-shadow: 0 0 16px rgba(255, 255, 255, 0.25);
 }
 
 .is-rtl .cg-discipline-node.is-current .cg-node-title {
-  font-size: 16.5px;
+  font-size: 15.5px;
 }
 
 .cg-node-desc {

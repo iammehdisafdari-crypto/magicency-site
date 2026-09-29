@@ -1,9 +1,33 @@
-/* =========================================================
-   MAGICENCY HERO — EXACT VIVID MOTION DESKTOP & MOBILE AESTHETIC
-   ========================================================= */
+/* Ensure top skip link and scroll track never push the hero viewport or cause layout shift */
+.skip-to-content {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.skip-to-content:focus {
+  top: 10px;
+  left: 10px;
+  width: auto;
+  height: auto;
+  z-index: 9999;
+}
+
+.global-scroll-progress-track {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 9999;
+}
 
 .vm-hero-section {
   position: relative;
+  z-index: 5;
   width: 100%;
   background-color: #07101C;
   overflow: hidden;
@@ -111,13 +135,23 @@
   text-align: left;
 }
 
-[dir="rtl"] .vm-hero-giant-title {
+[dir="rtl"] .vm-hero-giant-title,
+html[lang="fa"] .vm-hero-giant-title {
   font-family: var(--font-persian, 'Vazirmatn', sans-serif);
   font-size: clamp(2.35rem, 4.2vw, 4.5rem);
   letter-spacing: 0;
+  word-spacing: normal;
+  text-transform: none;
   line-height: 1.36;
   font-weight: 800;
   text-align: right;
+}
+
+[dir="rtl"] .vm-hero-giant-title *,
+html[lang="fa"] .vm-hero-giant-title * {
+  letter-spacing: 0;
+  word-spacing: normal;
+  text-transform: none;
 }
 
 .title-row {
@@ -126,9 +160,11 @@
   margin: 0;
 }
 
-[dir="rtl"] .vm-hero-giant-title .title-row {
+[dir="rtl"] .vm-hero-giant-title .title-row,
+html[lang="fa"] .vm-hero-giant-title .title-row {
   display: block;
-  padding: 0.06em 0;
+  padding-block: 0.08em;
+  padding-inline: 0;
   margin: 0;
 }
 
@@ -436,19 +472,20 @@
     padding-bottom: clamp(14px, 2.2vh, 18px);
   }
 
-  [dir="rtl"] .vm-hero-giant-title {
-    font-size: clamp(1.75rem, 6.8vw, 2.25rem);
-    line-height: 1.32;
+  [dir="rtl"] .vm-hero-giant-title,
+  html[lang="fa"] .vm-hero-giant-title {
+    font-size: clamp(1.65rem, 6.4vw, 2.15rem);
+    line-height: 1.34;
+    letter-spacing: 0;
   }
 
-  [dir="rtl"] .vm-hero-giant-title .row-1 {
-    white-space: nowrap;
-  }
-
+  [dir="rtl"] .vm-hero-giant-title .row-1,
   [dir="rtl"] .vm-hero-giant-title .row-2,
-  [dir="rtl"] .vm-hero-giant-title .row-2 > * {
+  html[lang="fa"] .vm-hero-giant-title .row-1,
+  html[lang="fa"] .vm-hero-giant-title .row-2 {
     white-space: normal;
-    word-break: normal;
+    word-break: keep-all;
+    overflow-wrap: break-word;
   }
 
   .vm-hero-cta-wrap {

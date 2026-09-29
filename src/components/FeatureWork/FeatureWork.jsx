@@ -105,10 +105,16 @@ export default function FeatureWork() {
   return (
     <section
       ref={scrollContainerRef}
-      id="feature-work"
+      id="work"
+      data-section="work"
+      data-nav-section="work"
       className={`fw-scroll-section ${prefersReducedMotion ? 'reduced-motion' : ''}`}
+      style={{ scrollMarginTop: '80px' }}
       aria-label={lang === 'fa' ? 'پروژه‌های منتخب مجیکنسـی' : 'Featured Work Systems'}
     >
+      {/* Anchor alias supporting both #work and #feature-work */}
+      <span id="feature-work" className="section-anchor-alias" style={{ position: 'absolute', top: 0, left: 0, width: 0, height: 0, opacity: 0, pointerEvents: 'none' }} aria-hidden="true" />
+
       {/* Pinned Sticky Viewport (100vh / 100svh) */}
       <div ref={stickyPanelRef} className="fw-sticky-viewport">
         <div className="fw-container">

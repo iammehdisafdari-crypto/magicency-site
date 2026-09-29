@@ -374,6 +374,11 @@
   filter: drop-shadow(0 34px 56px rgba(0, 0, 0, 0.95)) drop-shadow(0 10px 30px rgba(197, 138, 58, 0.16));
 }
 
+.pi-object-wrapper:not(:first-child) {
+  opacity: 0;
+  pointer-events: none;
+}
+
 .pi-3d-picture {
   display: contents;
 }
@@ -472,7 +477,10 @@
     top: 40% !important;
     left: 50% !important;
     right: auto !important;
-    width: 88% !important;
+    width: min(88%, calc(100% - 2rem)) !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding-inline: clamp(0.5rem, 2vw, 1rem) !important;
     bottom: 12% !important;
     transform: translateX(-50%) !important;
   }

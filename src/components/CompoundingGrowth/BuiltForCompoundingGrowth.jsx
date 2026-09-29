@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { getGsapWithScrollTrigger, runAfterLoadAndIdle } from '../../utils/gsapLoader';
 import { useLanguage } from '../../context/LanguageContext';
+import Reveal from '../motion/Reveal';
 import './BuiltForCompoundingGrowth.css';
 
 export default function BuiltForCompoundingGrowth() {
@@ -56,6 +57,7 @@ export default function BuiltForCompoundingGrowth() {
 
           ctx = gsap.context(() => {
             const nodes = section.querySelectorAll('.cg-discipline-node');
+            const svgCanvas = section.querySelector('.cg-svg-canvas');
 
             ScrollTrigger.create({
               trigger: section,
@@ -63,10 +65,23 @@ export default function BuiltForCompoundingGrowth() {
               end: 'bottom bottom',
               scrub: true,
               invalidateOnRefresh: true,
+              onToggle: (self) => {
+                if (svgCanvas) {
+                  if (self.isActive) {
+                    svgCanvas.style.willChange = 'transform';
+                  } else {
+                    svgCanvas.style.willChange = '';
+                  }
+                }
+              },
               onUpdate: (self) => {
                 const thisProgress = self.progress;
                 const scrollProgress = - (2400 * thisProgress);
-                section.style.setProperty('--strokeDashoffset', `${scrollProgress}px`);
+                if (svgCanvas) {
+                  svgCanvas.style.setProperty('--strokeDashoffset', `${scrollProgress}px`);
+                } else {
+                  section.style.setProperty('--strokeDashoffset', `${scrollProgress}px`);
+                }
 
                 // High-performance DOM classList update (zero React re-renders on scroll)
                 const activeIndex = Math.min(
@@ -92,8 +107,6 @@ export default function BuiltForCompoundingGrowth() {
               }
             });
           }, sectionRef);
-
-          ScrollTrigger.refresh();
         });
       });
     };
@@ -110,12 +123,14 @@ export default function BuiltForCompoundingGrowth() {
       }
     };
 
+    // Use IntersectionObserver with 400px margin: reads entry.boundingClientRect without forced reflow
     observer = new IntersectionObserver(
       (entries) => {
         const [entry] = entries;
         if (entry.isIntersecting) {
-          const rect = section.getBoundingClientRect();
-          if (rect.top > window.innerHeight && (window.scrollY || 0) < 100) {
+          const rect = entry.boundingClientRect;
+          const scrollY = window.scrollY || window.pageYOffset || 0;
+          if (rect.top > window.innerHeight && scrollY < 100) {
             return;
           }
           if (observer) {
@@ -125,39 +140,26 @@ export default function BuiltForCompoundingGrowth() {
           requestInit();
         }
       },
-      { rootMargin: '300px 0px 300px 0px' }
+      { rootMargin: '400px 0px 400px 0px' }
     );
-
-    // Also trigger on first scroll if section becomes visible
-    const handleScrollCheck = () => {
-      if (!observer) return;
-      const rect = section.getBoundingClientRect();
-      if (rect.top < window.innerHeight + 400) {
-        window.removeEventListener('scroll', handleScrollCheck);
-        if (observer) {
-          observer.disconnect();
-          observer = null;
-        }
-        requestInit();
-      }
-    };
-    window.addEventListener('scroll', handleScrollCheck, { passive: true });
 
     observer.observe(section);
 
     return () => {
       isDestroyed = true;
       if (cancelIdle) cancelIdle();
-      window.removeEventListener('scroll', handleScrollCheck);
       if (observer) observer.disconnect();
       if (rafId) cancelAnimationFrame(rafId);
+      const svgCanvas = section.querySelector('.cg-svg-canvas');
+      if (svgCanvas) svgCanvas.style.willChange = '';
       ctx?.revert();
     };
   }, [disciplines.length]);
 
   return (
     <section
-      id="compounding-growth"
+      id="approach"
+      data-section="compounding-growth"
       ref={sectionRef}
       className={`compounding-growth-section ${isRTL ? 'is-rtl' : 'is-ltr'}`}
       aria-label="Built For Compounding Growth"
@@ -175,7 +177,7 @@ export default function BuiltForCompoundingGrowth() {
             Main Title: COMPOUNDING GROWTH
             Supporting Statement: Growth gets stronger when everything works together.
             ========================================================= */}
-        <header className="cg-header">
+        <Reveal as="header" className="cg-header">
           <div className="cg-eyebrow-wrapper">
             <span className="cg-eyebrow-accent-bullet" aria-hidden="true" />
             <span className="cg-eyebrow">{data.eyebrow}</span>
@@ -197,7 +199,7 @@ export default function BuiltForCompoundingGrowth() {
             <span className="cg-status-divider">//</span>
             <span className="cg-status-tag">CONTINUOUS CYCLE</span>
           </div>
-        </header>
+        </Reveal>
 
         {/* =========================================================
             02. LARGE VERTICAL SVG COMPOSITION & STAGE LABELS
@@ -309,14 +311,14 @@ export default function BuiltForCompoundingGrowth() {
         </div>
 
         {/* Section Footer Metric / Outcome Statement */}
-        <div className="cg-footer-statement">
+        <Reveal className="cg-footer-statement">
           <div className="cg-footer-card">
             <span className="cg-footer-tag">THE COMPOUNDING EFFECT</span>
             <p className="cg-footer-text">
               Strategy informs execution. Execution creates signals. Signals refine decisions. Optimization powers compounding growth.
             </p>
           </div>
-        </div>
+        </Reveal>
 
       </div>
     </section>

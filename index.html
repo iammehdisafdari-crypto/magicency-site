@@ -1,118 +1,129 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-    
-    <!-- Critical Font Preload (Plus Jakarta Sans Latin) -->
-    <link rel="preload" href="/fonts/font-8-LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko20yw.woff2" as="font" type="font/woff2" crossorigin>
+<html lang="fa" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+
+  <!-- Critical Font Preload (Vazirmatn Persian) -->
+  <link rel="preload" href="/fonts/font-9-Dxxo8j6PP2D_kU2muijlGMWWMmk.woff2" as="font" type="font/woff2"
+    crossorigin>
+  <!-- Secondary Font Preload (Plus Jakarta Sans Latin) -->
+  <link rel="preload" href="/fonts/font-8-LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko20yw.woff2" as="font" type="font/woff2"
+    crossorigin>
 
 
-    <!-- Google Tag Manager (Deferred Loading for Zero LCP Impact) -->
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      (function() {
-        var gtmLoaded = false;
-        var events = ['scroll', 'click', 'touchstart', 'mousemove', 'keydown', 'wheel'];
+  <!-- Google Tag Manager (Deferred Loading for Zero LCP Impact) -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    (function () {
+      var gtmLoaded = false;
+      var loadTimer = null;
+      var interactionEvents = ['scroll', 'click', 'touchstart'];
 
-        function loadGTM() {
-          if (gtmLoaded) return;
-          gtmLoaded = true;
+      function loadGTM() {
+        if (gtmLoaded) return;
+        gtmLoaded = true;
 
-          // Remove interaction and load listeners once triggered
-          events.forEach(function(evt) {
-            window.removeEventListener(evt, loadGTM, { passive: true });
-          });
-          window.removeEventListener('load', onLoadTrigger);
-
-          // 1. Initialize GTM container execution with timestamp
-          window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
-
-          // 2. Dispatch lifecycle events so DOM Ready & Window Loaded triggers inside GTM fire reliably
-          if (document.readyState === 'interactive' || document.readyState === 'complete') {
-            window.dataLayer.push({ event: 'gtm.dom' });
-          }
-          if (document.readyState === 'complete') {
-            window.dataLayer.push({ event: 'gtm.load' });
-          }
-
-          // 3. Inject GTM script non-blockingly
-          var j = document.createElement('script');
-          j.async = true;
-          j.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-KRRT449J';
-          var f = document.getElementsByTagName('script')[0];
-          f.parentNode.insertBefore(j, f);
+        if (loadTimer) {
+          clearTimeout(loadTimer);
+          loadTimer = null;
         }
 
-        function onLoadTrigger() {
-          if ('requestIdleCallback' in window) {
-            window.requestIdleCallback(function() { loadGTM(); }, { timeout: 1500 });
-          } else {
-            setTimeout(loadGTM, 1);
-          }
-        }
-
-        // Trigger on first user interaction
-        events.forEach(function(evt) {
-          window.addEventListener(evt, loadGTM, { once: true, passive: true });
+        // Clean up interaction and load listeners
+        interactionEvents.forEach(function (evt) {
+          window.removeEventListener(evt, loadGTM, { passive: true });
         });
+        window.removeEventListener('load', scheduleDelayedLoad);
 
-        // Trigger on window.onload if no user interaction occurred yet
-        if (document.readyState === 'complete') {
-          onLoadTrigger();
-        } else {
-          window.addEventListener('load', onLoadTrigger, { once: true });
+        // 1. Initialize GTM container execution with timestamp
+        window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+
+        // 2. Dispatch lifecycle events so DOM Ready & Window Loaded triggers inside GTM fire reliably
+        if (document.readyState === 'interactive' || document.readyState === 'complete') {
+          window.dataLayer.push({ event: 'gtm.dom' });
         }
-      })();
-    </script>
-    <!-- End Google Tag Manager -->
-    
-    <!-- Primary Metadata (156 chars description - optimal for Google SERP) -->
-    <title>Magicency — Growth Marketing Agency &amp; Connected Growth Systems</title>
-    <meta name="description" content="Magicency is a growth marketing agency engineering connected growth systems that unite commercial strategy, high-conviction creative, and conversion architecture." />
-    <meta name="author" content="Magicency" />
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    <meta name="theme-color" content="#080A0F" />
-    <link rel="canonical" href="https://magicency.ir/" />
+        if (document.readyState === 'complete') {
+          window.dataLayer.push({ event: 'gtm.load' });
+        }
 
-    <!-- Favicon & PWA Icons -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23080A0F'/><path d='M25 75 L50 25 L75 75 L50 55 Z' fill='%2300F59B'/></svg>" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="manifest" href="/manifest.json" />
+        // 3. Inject GTM script non-blockingly
+        var j = document.createElement('script');
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-KRRT449J';
+        var f = document.getElementsByTagName('script')[0];
+        f.parentNode.insertBefore(j, f);
+      }
 
-    <!-- Open Graph Protocol (Facebook, LinkedIn, Slack, WhatsApp) -->
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Magicency" />
-    <meta property="og:title" content="Magicency — Growth Marketing Agency &amp; Connected Growth Systems" />
-    <meta property="og:description" content="Magicency is a growth marketing agency engineering connected growth systems that unite commercial strategy, high-conviction creative, and conversion architecture." />
-    <meta property="og:url" content="https://magicency.ir/" />
-    <meta property="og:locale" content="en_US" />
-    <meta property="og:locale:alternate" content="fa_IR" />
-    <meta property="og:image" content="https://magicency.ir/og-image.png" />
-    <meta property="og:image:secure_url" content="https://magicency.ir/og-image.png" />
-    <meta property="og:image:type" content="image/png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Magicency — Growth Marketing Agency &amp; Connected Growth Systems" />
+      function scheduleDelayedLoad() {
+        loadTimer = setTimeout(loadGTM, 2500);
+      }
 
-    <!-- Twitter Cards (Strictly using name= attribute as required by X) -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@magicency" />
-    <meta name="twitter:creator" content="@magicency" />
-    <meta name="twitter:title" content="Magicency — Growth Marketing Agency &amp; Connected Growth Systems" />
-    <meta name="twitter:description" content="Magicency is a growth marketing agency engineering connected growth systems that unite commercial strategy, high-conviction creative, and conversion architecture." />
-    <meta name="twitter:image" content="https://magicency.ir/og-image.png" />
-    <meta name="twitter:image:alt" content="Magicency — Growth Marketing Agency &amp; Connected Growth Systems" />
+      // Trigger on first user interaction (scroll, click, touch)
+      interactionEvents.forEach(function (evt) {
+        window.addEventListener(evt, loadGTM, { once: true, passive: true });
+      });
 
-    <!-- Content Feeds & Discovery -->
-    <link rel="alternate" type="application/rss+xml" title="Magicency Strategic Insights" href="/feed.xml" />
+      // Trigger 2500ms after window.load (or immediately schedule if window already loaded)
+      if (document.readyState === 'complete') {
+        scheduleDelayedLoad();
+      } else {
+        window.addEventListener('load', scheduleDelayedLoad, { once: true });
+      }
+    })();
+  </script>
+  <!-- End Google Tag Manager -->
 
-    <!-- In-Document Security Policies -->
-    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-    <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <!-- Primary Metadata (156 chars description - optimal for Google SERP) -->
+  <title>Magicency — Growth Marketing Agency &amp; Connected Growth Systems</title>
+  <meta name="description"
+    content="Magicency is a growth marketing agency engineering connected growth systems that unite commercial strategy, high-conviction creative, and conversion architecture." />
+  <meta name="author" content="Magicency" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="theme-color" content="#080A0F" />
+  <link rel="canonical" href="https://magicency.ir/" />
 
-    <!-- JSON-LD Structured Data: Organization & WebSite -->
-    <script type="application/ld+json">
+  <!-- Favicon & PWA Icons -->
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23080A0F'/><path d='M25 75 L50 25 L75 75 L50 55 Z' fill='%2300F59B'/></svg>" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/manifest.json" />
+
+  <!-- Open Graph Protocol (Facebook, LinkedIn, Slack, WhatsApp) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Magicency" />
+  <meta property="og:title" content="Magicency — Growth Marketing Agency &amp; Connected Growth Systems" />
+  <meta property="og:description"
+    content="Magicency is a growth marketing agency engineering connected growth systems that unite commercial strategy, high-conviction creative, and conversion architecture." />
+  <meta property="og:url" content="https://magicency.ir/" />
+  <meta property="og:locale" content="fa_IR" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:image" content="https://magicency.ir/og-image.png" />
+  <meta property="og:image:secure_url" content="https://magicency.ir/og-image.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Magicency — Growth Marketing Agency &amp; Connected Growth Systems" />
+
+  <!-- Twitter Cards (Strictly using name= attribute as required by X) -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@magicency" />
+  <meta name="twitter:creator" content="@magicency" />
+  <meta name="twitter:title" content="Magicency — Growth Marketing Agency &amp; Connected Growth Systems" />
+  <meta name="twitter:description"
+    content="Magicency is a growth marketing agency engineering connected growth systems that unite commercial strategy, high-conviction creative, and conversion architecture." />
+  <meta name="twitter:image" content="https://magicency.ir/og-image.png" />
+  <meta name="twitter:image:alt" content="Magicency — Growth Marketing Agency &amp; Connected Growth Systems" />
+
+  <!-- Content Feeds & Discovery -->
+  <link rel="alternate" type="application/rss+xml" title="Magicency Strategic Insights" href="/feed.xml" />
+
+  <!-- In-Document Security Policies -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+  <!-- JSON-LD Structured Data: Organization & WebSite -->
+  <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@graph": [
@@ -153,7 +164,19 @@
         }
       ]
     }
-    </script>
+  </script>
+
+  <!-- Reveal Animation Fallback (No-JS / Script Failure Guarantee) -->
+  <noscript>
+      <style>
+        .reveal-initial,
+        .motion-reveal {
+          opacity: 1 !important;
+          transform: none !important;
+          animation: none !important;
+        }
+      </style>
+    </noscript>
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->
@@ -163,4 +186,5 @@
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
+
 </html>

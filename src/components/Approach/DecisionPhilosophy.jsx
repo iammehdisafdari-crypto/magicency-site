@@ -1,7 +1,6 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
-import { EASING } from '../motion';
+import Reveal from '../motion/Reveal';
 
 export default function DecisionPhilosophy() {
   const { t } = useLanguage();
@@ -13,7 +12,7 @@ export default function DecisionPhilosophy() {
       <div className="container approach-decision-container">
         
         {/* Header Block */}
-        <div className="decision-header-block">
+        <Reveal className="decision-header-block">
           <span className="approach-tag-label">{dp.badge || 'DECISION ARCHITECTURE'}</span>
           <h2 className="decision-main-title">
             {dp.headline || 'Every output is a business decision.'}
@@ -21,18 +20,15 @@ export default function DecisionPhilosophy() {
           <p className="decision-main-sub">
             {dp.subheadline}
           </p>
-        </div>
+        </Reveal>
 
         {/* Large Editorial Typographic Sequence (Not generic cards) */}
         <div className="decision-editorial-sequence">
           {decisions.map((item, idx) => (
-            <motion.div 
+            <Reveal 
               key={item.output}
               className="decision-row-item"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.6, delay: idx * 0.08, ease: EASING.PRIMARY }}
+              delay={idx * 0.08}
             >
               <div className="decision-index-col">
                 <span className="decision-num">0{idx + 1}</span>
@@ -49,7 +45,7 @@ export default function DecisionPhilosophy() {
               </div>
 
               <div className="decision-decor-line" aria-hidden="true" />
-            </motion.div>
+            </Reveal>
           ))}
         </div>
 

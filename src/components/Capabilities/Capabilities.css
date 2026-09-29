@@ -1221,11 +1221,6 @@
    06. RESPONSIVE BREAKPOINTS (1024px, 768px, 375px)
    ========================================================================== */
 @media (max-width: 1024px) {
-  .capabilities-page-root .service-body-inner {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
   .capabilities-page-root .stats-bar {
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
@@ -1246,10 +1241,6 @@
 }
 
 @media (max-width: 768px) {
-  .capabilities-page-root .service-trigger {
-    padding: 1.25rem 0.25rem;
-  }
-
   .capabilities-page-root .service-num {
     min-width: 2.75rem;
   }

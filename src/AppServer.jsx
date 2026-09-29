@@ -10,7 +10,6 @@ import BuiltForCompoundingGrowth from './components/CompoundingGrowth/BuiltForCo
 import Journal from './components/Journal/Journal';
 import FAQSection from './components/About/FAQSection';
 import ScrollProgress from './components/About/ScrollProgress';
-import BrandIntro from './components/Intro/BrandIntro';
 import FinalCTA from './components/FinalCTA/FinalCTA';
 import Footer from './components/Footer/Footer';
 
@@ -32,22 +31,18 @@ import './styles/global.css';
 function MainApp() {
   const { isRTL, isModalOpen } = useLanguage();
   const { isWorkPage, isApproachPage, isCapabilitiesPage, isBlogPage, isAboutPage, isNotFound } = useRouter();
-  const [introFinished, setIntroFinished] = useState(true);
 
   useEffect(() => {
     initGA();
   }, []);
 
   return (
-    <div className={`magicency-app-root ${introFinished ? 'app-loaded' : 'app-loading'}`}>
+    <div className="magicency-app-root app-loaded">
       {/* Screen Reader Skip Navigation Link */}
       <a href="#main" className="skip-to-content">Skip to content</a>
 
       {/* Global Viewport Scroll Progress Bar */}
       <ScrollProgress />
-
-      {/* Cinematic Brand Intro Preloader */}
-      <BrandIntro onComplete={() => setIntroFinished(true)} />
 
       {/* Tactile Grain Overlay */}
       <div className="bg-grain" aria-hidden="true" />
@@ -73,7 +68,7 @@ function MainApp() {
           ) : (
             <>
               {/* Phase 01: Hero Section (Vivid Motion Architecture + Mouse Fire Effect) */}
-              <Hero isLoaded={introFinished} />
+              <Hero />
 
               {/* Phase 02: Feature Work (Sticky Scroll Showcase + 4 Projects) */}
               <FeatureWork />

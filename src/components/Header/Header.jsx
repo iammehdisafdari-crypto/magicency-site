@@ -21,7 +21,7 @@ function MobileMenuExtra({ closeMenu, startProjectLabel, onStartProject }) {
         onClick={() => {
           trackCtaClick('start_project', 'header_mobile_menu');
           closeMenu?.();
-          onStartProject();
+          onStartProject?.();
         }}
         className="sm-panel-cta-btn"
       >
@@ -39,27 +39,10 @@ function MobileMenuExtra({ closeMenu, startProjectLabel, onStartProject }) {
   );
 }
 
-const ROUTE_PAGE_CHECKERS = {
-  work: (r) => r.isWorkPage,
-  capabilities: (r) => r.isCapabilitiesPage,
-  approach: (r) => r.isApproachPage,
-  about: (r) => r.isAboutPage,
-  blog: (r) => r.isBlogPage,
-  journal: (r) => r.isBlogPage
-};
-
-function navigateToRoute(targetHref, isAlreadyOnPage, navigate) {
-  if (isAlreadyOnPage) {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  } else {
-    navigate(targetHref);
-  }
-}
-
 export default function Header() {
   const { t, lang, toggleLanguage, setIsModalOpen, isRTL } = useLanguage();
   const router = useRouter();
-  const { navigate, isWorkPage, isApproachPage, isCapabilitiesPage, isBlogPage, isAboutPage } = router;
+  const { navigate, currentPath, isHomePage, isWorkPage, isApproachPage, isCapabilitiesPage, isBlogPage, isAboutPage } = router;
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -78,82 +61,69 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNavClick = (e, targetHref, itemId) => {
+  const handleNavClick = (e, targetHref) => {
     e?.preventDefault?.();
-
-    const checkCurrentPage = ROUTE_PAGE_CHECKERS[itemId];
-    if (checkCurrentPage) {
-      navigateToRoute(targetHref, checkCurrentPage(router), navigate);
-      return;
-    }
-
-    if (targetHref === '/' || targetHref === '#hero' || targetHref === '#') {
-      const isSubPage = isWorkPage || isApproachPage || isCapabilitiesPage || isBlogPage || isAboutPage;
-      if (isSubPage) {
-        navigate('/');
-      } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (targetHref === currentPath || (targetHref === '/' && isHomePage)) {
+      if (window.__lenis) {
+        try { window.__lenis.scrollTo(0, { immediate: false }); } catch (_) {}
       }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
-
-    if (targetHref.startsWith('#')) {
-      const elem = document.querySelector(targetHref);
-      elem?.scrollIntoView?.({ behavior: 'smooth' });
-    }
+    navigate(targetHref);
   };
 
   const navItems = [
-    { id: 'work', label: t.nav.work, href: '/work', number: '01' },
-    { id: 'capabilities', label: t.nav.capabilities, href: '/capabilities', number: '02' },
-    { id: 'approach', label: t.nav.approach, href: '/approach', number: '03' },
-    { id: 'about', label: t.nav.about, href: '/about', number: '04' },
-    { id: 'journal', label: t.journal?.badge || (lang === 'fa' ? 'ژورنال' : 'Blog'), href: '/blog', number: '05' }
+    { id: 'work', label: t.nav.work, href: '/work', number: '01', isActive: isWorkPage },
+    { id: 'capabilities', label: t.nav.capabilities, href: '/capabilities', number: '02', isActive: isCapabilitiesPage },
+    { id: 'approach', label: t.nav.approach, href: '/approach', number: '03', isActive: isApproachPage },
+    { id: 'about', label: t.nav.about, href: '/about', number: '04', isActive: isAboutPage },
+    { id: 'journal', label: t.journal?.badge || (lang === 'fa' ? 'ژورنال' : 'Blog'), href: '/blog', number: '05', isActive: isBlogPage }
   ];
 
-  // Mobile staggered menu items matching requested structure
+  // Mobile staggered menu items targeting full page routes
   const mobileMenuItems = [
     {
       label: lang === 'fa' ? 'صفحه اصلی' : 'Home',
       ariaLabel: 'Go to home page',
       link: '/',
       id: 'home',
-      onClick: (e) => handleNavClick(e, '/', 'home')
+      isActive: isHomePage
     },
     {
       label: t.nav.work,
       ariaLabel: 'View our work',
       link: '/work',
       id: 'work',
-      onClick: (e) => handleNavClick(e, '/work', 'work')
+      isActive: isWorkPage
     },
     {
       label: t.nav.capabilities,
       ariaLabel: 'View our capabilities and services',
       link: '/capabilities',
       id: 'capabilities',
-      onClick: (e) => handleNavClick(e, '/capabilities', 'capabilities')
+      isActive: isCapabilitiesPage
     },
     {
       label: t.nav.approach,
       ariaLabel: 'Learn about our approach',
       link: '/approach',
       id: 'approach',
-      onClick: (e) => handleNavClick(e, '/approach', 'approach')
+      isActive: isApproachPage
     },
     {
       label: t.nav.about,
       ariaLabel: 'Learn about us',
       link: '/about',
       id: 'about',
-      onClick: (e) => handleNavClick(e, '/about', 'about')
+      isActive: isAboutPage
     },
     {
       label: t.journal?.badge || (lang === 'fa' ? 'ژورنال' : 'Blog'),
       ariaLabel: 'Read our blog and journal',
       link: '/blog',
-      id: 'journal',
-      onClick: (e) => handleNavClick(e, '/blog', 'journal')
+      id: 'blog',
+      isActive: isBlogPage
     }
   ];
 
@@ -191,6 +161,9 @@ export default function Header() {
               if (isWorkPage || isApproachPage || isCapabilitiesPage || isBlogPage || isAboutPage) {
                 navigate('/');
               } else {
+                if (window.__lenis) {
+                  try { window.__lenis.scrollTo(0, { immediate: false }); } catch (_) {}
+                }
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }
             }}
@@ -206,8 +179,9 @@ export default function Header() {
                 <a 
                   key={item.id}
                   href={item.href} 
-                  className="vm-desktop-nav-link" 
-                  onClick={(e) => handleNavClick(e, item.href, item.id)}
+                  className={`vm-desktop-nav-link ${item.isActive ? 'is-active' : ''}`} 
+                  aria-current={item.isActive ? 'page' : undefined}
+                  onClick={(e) => handleNavClick(e, item.href)}
                 >
                   <ScrambleText text={item.label.toUpperCase()} />
                 </a>
@@ -282,6 +256,9 @@ export default function Header() {
                 if (isWorkPage || isApproachPage || isCapabilitiesPage || isBlogPage || isAboutPage) {
                   navigate('/');
                 } else {
+                  if (window.__lenis) {
+                    try { window.__lenis.scrollTo(0, { immediate: false }); } catch (_) {}
+                  }
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
               }}

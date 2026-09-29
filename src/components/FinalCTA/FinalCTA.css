@@ -145,8 +145,7 @@
 
 /* Reduced Motion Override */
 @media (prefers-reduced-motion: reduce) {
-  .final-cta-btn,
-  .final-cta-arrow {
+  .final-cta-btn {
     transition: none !important;
     transform: none !important;
   }

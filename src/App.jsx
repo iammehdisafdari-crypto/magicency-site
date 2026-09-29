@@ -1,7 +1,6 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import { RouterProvider, useRouter } from './context/RouterContext';
-import BrandIntro from './components/Intro/BrandIntro';
 import Header from './components/Header/Header';
 import Hero from './components/Hero/Hero';
 import ScrollProgress from './components/About/ScrollProgress';
@@ -30,7 +29,7 @@ import SmoothScrollProvider from './components/SmoothScroll/SmoothScrollProvider
 
 import './styles/global.css';
 
-function renderPageContent({ isNotFound, isWorkPage, isApproachPage, isCapabilitiesPage, isBlogPage, isAboutPage, introFinished }) {
+function renderPageContent({ isNotFound, isWorkPage, isApproachPage, isCapabilitiesPage, isBlogPage, isAboutPage }) {
   if (isNotFound) {
     return <NotFoundPage />;
   }
@@ -53,7 +52,7 @@ function renderPageContent({ isNotFound, isWorkPage, isApproachPage, isCapabilit
   return (
     <>
       {/* Phase 01: Hero Section (Vivid Motion Architecture + Mouse Fire Effect) */}
-      <Hero isLoaded={introFinished} />
+      <Hero />
 
       {/* Phase 02: Feature Work (Sticky Scroll Showcase + 4 Projects) */}
       <FeatureWork />
@@ -83,22 +82,18 @@ function MainApp() {
   const { isModalOpen } = useLanguage();
   const router = useRouter();
   const { isWorkPage, isApproachPage, isCapabilitiesPage, isBlogPage, isAboutPage, isNotFound } = router;
-  const [introFinished, setIntroFinished] = useState(true);
 
   useEffect(() => {
     initGA();
   }, []);
 
   return (
-    <div className={`magicency-app-root ${introFinished ? 'app-loaded' : 'app-loading'}`}>
+    <div className="magicency-app-root app-loaded">
       {/* Screen Reader Skip Navigation Link */}
       <a href="#main" className="skip-to-content">Skip to content</a>
 
       {/* Global Viewport Scroll Progress Bar */}
       <ScrollProgress />
-
-      {/* Cinematic Brand Intro Preloader */}
-      <BrandIntro onComplete={() => setIntroFinished(true)} />
 
       {/* Tactile Grain Overlay */}
       <div className="bg-grain" aria-hidden="true" />
@@ -115,8 +110,7 @@ function MainApp() {
             isApproachPage,
             isCapabilitiesPage,
             isBlogPage,
-            isAboutPage,
-            introFinished
+            isAboutPage
           })}
         </Suspense>
       </main>
