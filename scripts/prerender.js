@@ -150,22 +150,36 @@ function getJsonLd(route, meta, lang) {
               '@type': 'ListItem',
               'position': 1,
               'name': isEn
-                ? 'Enterprise Search Engine — 84.1K Organic Clicks Architecture'
+                ? 'Enterprise Search Engine — 84.1K Organic Clicks & 5.18M Impressions Architecture'
                 : 'Enterprise Search Engine — معماری سئو سازمانی با ۸۴.۱ هزار کلیک ارگانیک'
             },
             {
               '@type': 'ListItem',
               'position': 2,
               'name': isEn
-                ? 'Atrash Store — Google Ads Performance Max Engine'
+                ? 'Atrash Store — Google Ads Performance Max Engine & ROAS 11 Scalable Acquisition'
                 : 'فروشگاه آتراش — موتور بازاریابی عملکردی با روآس ۱۱'
             },
             {
               '@type': 'ListItem',
               'position': 3,
               'name': isEn
-                ? 'Tamir Online — Google Ads Lead Gen Engine'
+                ? 'Tamir Online — Google Ads Lead Gen Engine & 23.42% CTR Peak Acquisition'
                 : 'تعمیر آنلاین — موتور جذب لید و مشتری در گوگل ادز'
+            },
+            {
+              '@type': 'ListItem',
+              'position': 4,
+              'name': isEn
+                ? 'Wine Amphorae — Heritage Brand Modernization & Digital Flagship Website Design'
+                : 'Wine Amphorae — بازطراحی مدرن برند میراثی و وب‌سایت شاخص'
+            },
+            {
+              '@type': 'ListItem',
+              'position': 5,
+              'name': isEn
+                ? 'Zarin Real Estate Dubai — Strategic Positioning & High-Intent Investment Growth System'
+                : 'املاک زرین دبی — جایگاه‌یابی استراتژیک و سیستم جذب سرمایه‌گذاری ملکی'
             }
           ]
         },
@@ -195,12 +209,61 @@ function getJsonLd(route, meta, lang) {
       '@context': 'https://schema.org',
       '@graph': [
         {
-          '@type': 'ItemList',
+          '@type': 'Service',
           '@id': canonicalUrl,
           'inLanguage': isEn ? 'en' : 'fa-IR',
           'name': isEn ? 'Magicency Integrated Marketing Capabilities' : 'توانمندی‌های یکپارچه بازاریابی رشد مجیکنسـی',
           'description': isEn ? meta.descEn : meta.descFa,
-          'url': canonicalUrl
+          'url': canonicalUrl,
+          'provider': {
+            '@type': 'Organization',
+            'name': 'Magicency',
+            'url': `${BASE_URL}/`
+          },
+          'hasOfferCatalog': {
+            '@type': 'OfferCatalog',
+            'name': isEn
+              ? 'Strategic Marketing Capabilities & Offerings'
+              : 'کاتالوگ توانمندی‌ها و خدمات استراتژیک بازاریابی',
+            'itemListElement': [
+              {
+                '@type': 'Offer',
+                'itemOffered': {
+                  '@type': 'Service',
+                  'name': isEn
+                    ? 'Strategy & Commercial Architecture'
+                    : 'استراتژی و معماری تجاری رشد'
+                }
+              },
+              {
+                '@type': 'Offer',
+                'itemOffered': {
+                  '@type': 'Service',
+                  'name': isEn
+                    ? 'Brand Conviction & High-Performance Creative'
+                    : 'خلاقیت متقاعدکننده و برندینگ با عملکرد بالا'
+                }
+              },
+              {
+                '@type': 'Offer',
+                'itemOffered': {
+                  '@type': 'Service',
+                  'name': isEn
+                    ? 'Digital Platforms & Conversion Architecture'
+                    : 'پلتفرم‌های دیجیتال و معماری تبدیل'
+                }
+              },
+              {
+                '@type': 'Offer',
+                'itemOffered': {
+                  '@type': 'Service',
+                  'name': isEn
+                    ? 'Compounding Performance & AI Automation'
+                    : 'رشد تصاعدی پرفورمنس و اتوماسیون هوش مصنوعی'
+                }
+              }
+            ]
+          }
         },
         {
           '@type': 'BreadcrumbList',
@@ -604,7 +667,18 @@ async function prerender() {
       const ogImage = `${BASE_URL}${meta.ogImage || '/og-image.png'}`;
       const ogUrl = getCanonicalUrl(route, lang);
 
-      html = html.replace(/<meta\s+property=["']og:type["'][\s\S]*?content=["'][^"']*["']/i, `<meta property="og:type" content="${ogType}"`);
+      if (ogType === 'article' && meta.articleMeta) {
+        const articleMetaTags = [
+          `<meta property="og:type" content="article" />`,
+          `  <meta property="article:published_time" content="${meta.articleMeta.publishedTime}" />`,
+          `  <meta property="article:modified_time" content="${meta.articleMeta.modifiedTime}" />`,
+          `  <meta property="article:author" content="${isEn ? meta.articleMeta.authorEn : meta.articleMeta.authorFa}" />`,
+          `  <meta property="article:section" content="${isEn ? meta.articleMeta.sectionEn : meta.articleMeta.sectionFa}" />`
+        ].join('\n');
+        html = html.replace(/<meta\s+property=["']og:type["'][\s\S]*?content=["'][^"']*["']/i, articleMetaTags);
+      } else {
+        html = html.replace(/<meta\s+property=["']og:type["'][\s\S]*?content=["'][^"']*["']/i, `<meta property="og:type" content="${ogType}"`);
+      }
       html = html.replace(/<meta\s+property=["']og:title["'][\s\S]*?content=["'][^"']*["']/i, `<meta property="og:title" content="${pageTitle}"`);
       html = html.replace(/<meta\s+property=["']og:description["'][\s\S]*?content=["'][^"']*["']/i, `<meta property="og:description" content="${pageDesc}"`);
       html = html.replace(/<meta\s+property=["']og:url["'][\s\S]*?content=["'][^"']*["']/i, `<meta property="og:url" content="${ogUrl}"`);

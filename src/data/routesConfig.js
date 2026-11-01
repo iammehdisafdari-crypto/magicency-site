@@ -65,6 +65,11 @@ export const CORE_PAGES_META = {
 // Generate articles metadata directly from blogData.js single source of truth
 export const BLOG_PAGES_META = BLOG_ARTICLES.reduce((acc, article) => {
   const route = `/blog/${article.slug}`;
+  const isoDate = article.isoDate;
+  if (!isoDate || !/^\d{4}-\d{2}-\d{2}$/.test(isoDate)) {
+    throw new Error(`[routesConfig] Article "${article.slug}" has invalid or missing isoDate: "${isoDate}"`);
+  }
+
   acc[route] = {
     slug: article.slug,
     titleFa: article.titleFa,
@@ -72,13 +77,21 @@ export const BLOG_PAGES_META = BLOG_ARTICLES.reduce((acc, article) => {
     titleEn: article.titleEn,
     descEn: article.excerptEn || article.descEn,
     cover: article.coverImage || '/journal-1.jpg',
-    date: article.date || '2026-09-01',
+    date: isoDate,
     authorFa: article.authorFa || 'تحریریه مجیکنسـی',
     authorEn: article.authorEn || article.author || 'Magicency Editorial',
     ogImage: article.coverImage || '/journal-1.jpg',
     ogType: 'article',
     inSitemap: true,
-    articleData: article
+    articleData: article,
+    articleMeta: {
+      publishedTime: isoDate,
+      modifiedTime: '2026-09-08',
+      authorFa: article.authorFa || 'تحریریه مجیکنسـی',
+      authorEn: article.authorEn || article.author || 'Magicency Editorial',
+      sectionFa: article.categoryLabelFa || 'بازاریابی رشد',
+      sectionEn: article.categoryLabelEn || 'Growth Marketing'
+    }
   };
   return acc;
 }, {});
