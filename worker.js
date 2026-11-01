@@ -10,8 +10,16 @@
 export default {
   async fetch(request, env, ctx) {
     // 1. Fetch static asset from Cloudflare Static Assets binding
-    const response = await env.ASSETS.fetch(request);
-
+// HTML must never be revalidated to 304: the nonce in the header would not match the cached body
+const accept = request.headers.get('accept') || '';
+let upstream = request;
+if (accept.includes('text/html')) {
+  const h = new Headers(request.headers);
+  h.delete('If-None-Match');
+  h.delete('If-Modified-Since');
+  upstream = new Request(request, { headers: h });
+}
+const response = await env.ASSETS.fetch(upstream);
     // 2. Determine response MIME type
     const contentType = response.headers.get('content-type') || '';
     const isHtml = contentType.includes('text/html');

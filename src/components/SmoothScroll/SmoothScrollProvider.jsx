@@ -22,7 +22,7 @@ export function closeMobileMenu() {
   } else {
     // 2. Dispatch Escape key fallback to notify StaggeredMenu ONLY if no modal dialog is open
     try {
-      const isModalOpen = Boolean(document.querySelector('.discovery-overlay, .project-discovery-modal, [role="dialog"].vm-discovery-modal'));
+      const isModalOpen = Boolean(document.querySelector('.discovery-overlay, .project-discovery-modal, [role="dialog"].vm-discovery-modal, .article-reader-overlay'));
       if (!isModalOpen) {
         window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
       }
