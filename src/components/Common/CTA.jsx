@@ -148,9 +148,21 @@ export default function CTA({
 
   // If href is specified and not disabled, render as <a>
   if (href && !disabled) {
+    const isLocalizableRoute = typeof href === 'string' &&
+      href.startsWith('/') &&
+      !href.startsWith('//') &&
+      !href.startsWith('/#') &&
+      !href.startsWith('#') &&
+      !href.startsWith('http:') &&
+      !href.startsWith('https:') &&
+      !href.startsWith('mailto:') &&
+      !href.startsWith('tel:');
+
+    const resolvedHref = (isLocalizableRoute && router?.localePath) ? router.localePath(href) : href;
+
     return (
       <a
-        href={href}
+        href={resolvedHref}
         onClick={handleClick}
         className={classNames}
         aria-label={ariaLabel}

@@ -5,7 +5,7 @@ import { SERVICES_DATA } from '../../data/capabilitiesData';
 
 export default function CapabilityDetailPage({ service }) {
   const { lang, isRTL, setIsModalOpen } = useLanguage();
-  const { navigate } = useRouter();
+  const { navigate, localePath } = useRouter();
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -30,6 +30,14 @@ export default function CapabilityDetailPage({ service }) {
   const nextService = SERVICES_DATA[nextIndex];
   const nextTitle = lang === 'fa' ? nextService.nameFa : nextService.nameEn;
 
+  const backHrefRaw = '/capabilities#services';
+  const isBackLocalizable = typeof backHrefRaw === 'string' && backHrefRaw.startsWith('/') && !backHrefRaw.startsWith('//') && !backHrefRaw.startsWith('/#') && !backHrefRaw.startsWith('#') && !backHrefRaw.startsWith('http:') && !backHrefRaw.startsWith('https:') && !backHrefRaw.startsWith('mailto:') && !backHrefRaw.startsWith('tel:');
+  const backHref = isBackLocalizable && localePath ? localePath(backHrefRaw) : backHrefRaw;
+
+  const nextHrefRaw = `/capabilities/${nextService.slug || nextService.id}`;
+  const isNextLocalizable = typeof nextHrefRaw === 'string' && nextHrefRaw.startsWith('/') && !nextHrefRaw.startsWith('//') && !nextHrefRaw.startsWith('/#') && !nextHrefRaw.startsWith('#') && !nextHrefRaw.startsWith('http:') && !nextHrefRaw.startsWith('https:') && !nextHrefRaw.startsWith('mailto:') && !nextHrefRaw.startsWith('tel:');
+  const nextHref = isNextLocalizable && localePath ? localePath(nextHrefRaw) : nextHrefRaw;
+
   const handleBackToCapabilities = (e) => {
     e.preventDefault();
     navigate('/capabilities#services');
@@ -51,7 +59,7 @@ export default function CapabilityDetailPage({ service }) {
         {/* Navigation & Breadcrumb */}
         <div className="capability-detail-nav">
           <a
-            href="/capabilities#services"
+            href={backHref}
             onClick={handleBackToCapabilities}
             className="capability-back-link"
           >
@@ -164,7 +172,7 @@ export default function CapabilityDetailPage({ service }) {
               {lang === 'fa' ? 'درخواست جلسه تشخیصی' : 'Schedule Discovery'}
             </button>
             <a
-              href="/capabilities#services"
+              href={backHref}
               onClick={handleBackToCapabilities}
               className="btn-capability-secondary"
             >
@@ -179,7 +187,7 @@ export default function CapabilityDetailPage({ service }) {
             {lang === 'fa' ? 'توانمندی بعدی' : 'Next Capability'}
           </span>
           <a
-            href={`/capabilities/${nextService.slug || nextService.id}`}
+            href={nextHref}
             onClick={handleNextCapability}
             className="capability-next-link"
           >

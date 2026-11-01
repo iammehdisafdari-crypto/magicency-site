@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
+import { useRouter } from '../../context/RouterContext';
 
 const toWebp = (url) => (url ? url.replace(/\.(jpg|jpeg|png)$/, '.webp') : url);
 
 export default function EditorialStream({ articles, onSelectArticle }) {
   const { t, isRTL } = useLanguage();
+  const { localePath } = useRouter();
   const s = t.blog?.stream || {};
   const [hoveredArticleId, setHoveredArticleId] = useState(null);
 
@@ -39,6 +41,9 @@ export default function EditorialStream({ articles, onSelectArticle }) {
                 const format = isRTL ? art.formatLabelFa : art.formatLabelEn;
                 const date = isRTL ? art.dateFa : art.date;
                 const readTime = isRTL ? art.readTimeFa : art.readTime;
+                const artPath = `/blog/${art.slug}`;
+                const isArtLocalizable = typeof artPath === 'string' && artPath.startsWith('/') && !artPath.startsWith('//') && !artPath.startsWith('/#') && !artPath.startsWith('#') && !artPath.startsWith('http:') && !artPath.startsWith('https:') && !artPath.startsWith('mailto:') && !artPath.startsWith('tel:');
+                const targetArtHref = isArtLocalizable && localePath ? localePath(artPath) : artPath;
 
                 return (
                   <motion.div
@@ -74,7 +79,7 @@ export default function EditorialStream({ articles, onSelectArticle }) {
 
                       <h3 className="item-headline">
                         <a
-                          href={`/blog/${art.slug}`}
+                          href={targetArtHref}
                           className="item-headline-link"
                           onClick={(e) => {
                             e.preventDefault();

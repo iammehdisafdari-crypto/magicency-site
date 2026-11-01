@@ -1,11 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
+import { useRouter } from '../../context/RouterContext';
 import { FoldRevealSection, FoldRevealText } from '../FoldReveal';
 import { EASING } from '../motion';
 
 export default function WorkFinalCTA() {
   const { lang, setIsModalOpen } = useLanguage();
+  const { localePath } = useRouter();
 
   const content = {
     en: {
@@ -25,6 +27,9 @@ export default function WorkFinalCTA() {
   };
 
   const c = content[lang] || content.en;
+  const capHrefRaw = '/capabilities';
+  const isCapLocalizable = typeof capHrefRaw === 'string' && capHrefRaw.startsWith('/') && !capHrefRaw.startsWith('//') && !capHrefRaw.startsWith('/#') && !capHrefRaw.startsWith('#') && !capHrefRaw.startsWith('http:') && !capHrefRaw.startsWith('https:') && !capHrefRaw.startsWith('mailto:') && !capHrefRaw.startsWith('tel:');
+  const capHref = isCapLocalizable && localePath ? localePath(capHrefRaw) : capHrefRaw;
 
   return (
     <section className="work-final-cta-section shared-section" aria-label="Your Next Move">
@@ -65,7 +70,7 @@ export default function WorkFinalCTA() {
               <span className="work-arrow" aria-hidden="true">→</span>
             </button>
             <a
-              href="/capabilities"
+              href={capHref}
               className="work-button work-button--secondary work-button--lg"
             >
               <span>{c.secondaryBtn}</span>

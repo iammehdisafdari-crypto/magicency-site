@@ -6,7 +6,7 @@ import { BLOG_ARTICLES } from '../../data/blogData';
 
 export default function ArticleReaderModal({ article, onClose, onSelectArticle }) {
   const { t, isRTL } = useLanguage();
-  const { navigate } = useRouter();
+  const { navigate, localePath } = useRouter();
   const r = t.blog?.reader || {};
   const [scrollProgress, setScrollProgress] = useState(0);
 
@@ -176,10 +176,12 @@ export default function ArticleReaderModal({ article, onClose, onSelectArticle }
                 {strategicReferences.map((ref, idx) => {
                   const refLabel = isRTL ? ref.labelFa : ref.labelEn;
                   const refContext = isRTL ? ref.contextFa : ref.contextEn;
+                  const isRefLocalizable = typeof ref.url === 'string' && ref.url.startsWith('/') && !ref.url.startsWith('//') && !ref.url.startsWith('/#') && !ref.url.startsWith('#') && !ref.url.startsWith('http:') && !ref.url.startsWith('https:') && !ref.url.startsWith('mailto:') && !ref.url.startsWith('tel:');
+                  const localizedRefUrl = isRefLocalizable && localePath ? localePath(ref.url) : ref.url;
                   return (
                     <a
                       key={idx}
-                      href={ref.url}
+                      href={localizedRefUrl}
                       className="strategic-ref-card"
                       onClick={(e) => {
                         e.preventDefault();
@@ -207,10 +209,13 @@ export default function ArticleReaderModal({ article, onClose, onSelectArticle }
                 {relatedArticles.map((rel) => {
                   const relTitle = isRTL ? rel.titleFa : rel.titleEn;
                   const relCat = isRTL ? rel.categoryLabelFa : rel.categoryLabelEn;
+                  const relPath = `/blog/${rel.slug}`;
+                  const isRelLocalizable = typeof relPath === 'string' && relPath.startsWith('/') && !relPath.startsWith('//') && !relPath.startsWith('/#') && !relPath.startsWith('#') && !relPath.startsWith('http:') && !relPath.startsWith('https:') && !relPath.startsWith('mailto:') && !relPath.startsWith('tel:');
+                  const localizedRelUrl = isRelLocalizable && localePath ? localePath(relPath) : relPath;
                   return (
                     <a
                       key={rel.id}
-                      href={`/blog/${rel.slug}`}
+                      href={localizedRelUrl}
                       className="related-article-card"
                       onClick={(e) => {
                         e.preventDefault();

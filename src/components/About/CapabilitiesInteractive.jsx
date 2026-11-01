@@ -7,7 +7,7 @@ import { ArrowUpRight, ChevronDown } from 'lucide-react';
 
 export default function CapabilitiesInteractive() {
   const { lang, isRTL } = useLanguage();
-  const { navigate } = useRouter();
+  const { navigate, localePath } = useRouter();
   const data = ABOUT_DATA[lang]?.capabilities || ABOUT_DATA.en.capabilities;
   const items = data.items || [];
   
@@ -15,6 +15,9 @@ export default function CapabilitiesInteractive() {
   const [expandedMobileId, setExpandedMobileId] = useState(items[0]?.num || '01');
 
   const activeItem = items[hoveredIdx] || items[0];
+  const activeWorkHash = activeItem?.slug ? `/work#${activeItem.slug}` : undefined;
+  const isActiveWorkLocalizable = typeof activeWorkHash === 'string' && activeWorkHash.startsWith('/') && !activeWorkHash.startsWith('//') && !activeWorkHash.startsWith('/#') && !activeWorkHash.startsWith('#') && !activeWorkHash.startsWith('http:') && !activeWorkHash.startsWith('https:') && !activeWorkHash.startsWith('mailto:') && !activeWorkHash.startsWith('tel:');
+  const activeWorkHref = isActiveWorkLocalizable && localePath ? localePath(activeWorkHash) : activeWorkHash;
 
   const toggleMobileItem = (num) => {
     setExpandedMobileId((prev) => (prev === num ? null : num));
@@ -52,10 +55,13 @@ export default function CapabilitiesInteractive() {
           <div className="capabilities-editorial-list" role="list">
             {items.map((item, idx) => {
               const isHovered = hoveredIdx === idx;
+              const itemWorkHash = item?.slug ? `/work#${item.slug}` : undefined;
+              const isItemWorkLocalizable = typeof itemWorkHash === 'string' && itemWorkHash.startsWith('/') && !itemWorkHash.startsWith('//') && !itemWorkHash.startsWith('/#') && !itemWorkHash.startsWith('#') && !itemWorkHash.startsWith('http:') && !itemWorkHash.startsWith('https:') && !itemWorkHash.startsWith('mailto:') && !itemWorkHash.startsWith('tel:');
+              const itemWorkHref = isItemWorkLocalizable && localePath ? localePath(itemWorkHash) : itemWorkHash;
               return (
                 <a
                   key={item.num}
-                  href={item.slug ? `/work#${item.slug}` : undefined}
+                  href={itemWorkHref}
                   onMouseEnter={() => setHoveredIdx(idx)}
                   onFocus={() => setHoveredIdx(idx)}
                   onClick={(e) => {
@@ -100,7 +106,7 @@ export default function CapabilitiesInteractive() {
               >
                 {/* Visual Preview Image Frame */}
                 <a 
-                  href={activeItem.slug ? `/work#${activeItem.slug}` : undefined}
+                  href={activeWorkHref}
                   className="preview-image-frame"
                   onClick={(e) => {
                     if (activeItem.slug) {

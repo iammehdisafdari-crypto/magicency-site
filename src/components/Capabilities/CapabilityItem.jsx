@@ -4,11 +4,13 @@ import { useRouter } from '../../context/RouterContext';
 
 export default function CapabilityItem({ service }) {
   const { lang, isRTL } = useLanguage();
-  const { navigate } = useRouter();
+  const { navigate, localePath } = useRouter();
   const [isHovered, setIsHovered] = useState(false);
 
   const title = lang === 'fa' ? service.nameFa : service.nameEn;
-  const targetHref = `/capabilities/${service.slug || service.id}`;
+  const rawHref = `/capabilities/${service.slug || service.id}`;
+  const isLocalizable = typeof rawHref === 'string' && rawHref.startsWith('/') && !rawHref.startsWith('//') && !rawHref.startsWith('/#') && !rawHref.startsWith('#') && !rawHref.startsWith('http:') && !rawHref.startsWith('https:') && !rawHref.startsWith('mailto:') && !rawHref.startsWith('tel:');
+  const targetHref = isLocalizable && localePath ? localePath(rawHref) : rawHref;
 
   const handleClick = (e) => {
     // Preserve standard browser behaviors for cmd/ctrl/meta clicks or new tab
