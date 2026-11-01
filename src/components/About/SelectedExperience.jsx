@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import { ABOUT_DATA } from '../../data/aboutData';
+import { FoldRevealSection, FoldRevealText } from '../FoldReveal';
 import CTA from '../Common/CTA';
 
 export default function SelectedExperience() {
@@ -28,10 +29,14 @@ export default function SelectedExperience() {
           </div>
         </div>
 
-        <div className="experience-intro">
-          <h2 className="experience-headline">{exp.headline}</h2>
+        <FoldRevealSection replay={true} stagger={0.12} className="experience-intro">
+          <FoldRevealText
+            as="h2"
+            className="experience-headline"
+            text={exp.headline}
+          />
           <p className="experience-lead">{exp.lead}</p>
-        </div>
+        </FoldRevealSection>
 
         {/* Selected Project Showcase (High Visual Presence: 50-70% Media) */}
         <div className="selected-projects-grid" role="list">

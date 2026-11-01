@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import { ABOUT_DATA } from '../../data/aboutData';
+import { FoldRevealSection, FoldRevealText } from '../FoldReveal';
 import CTA from '../Common/CTA';
 
 export default function CollaborationSection() {
@@ -28,10 +29,14 @@ export default function CollaborationSection() {
           </div>
         </div>
 
-        <div className="collaboration-intro">
-          <h2 className="collaboration-headline">{collab.headline}</h2>
+        <FoldRevealSection replay={true} stagger={0.12} className="collaboration-intro">
+          <FoldRevealText
+            as="h2"
+            className="collaboration-headline"
+            text={collab.headline}
+          />
           <p className="collaboration-lead">{collab.lead}</p>
-        </div>
+        </FoldRevealSection>
 
         {/* 4 Specialist Collaboration Categories (No Fake Job Listings) */}
         <div className="collaboration-areas-grid" role="list">

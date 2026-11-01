@@ -306,29 +306,6 @@ export default function SmoothScrollProvider({ children }) {
       )
     );
 
-    // Create exactly ONE global Lenis instance
-    // Official GSAP + Lenis pattern:
-    // - autoRaf: false (drives exclusively via GSAP ticker to eliminate frame competition)
-    // - smoothTouch: false (strictly disabled on mobile to prevent touch input lag)
-    // - syncTouch: false (strictly disabled on mobile)
-    const lenis = new Lenis({
-      duration: isTouchOrMobile ? 0 : 1.15,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
-      smoothWheel: !prefersReducedMotion && !isTouchOrMobile,
-      smoothTouch: false, // Explicitly false: preserves 100% native touch momentum on mobile
-      syncTouch: false,   // Explicitly false: eliminates touch lag
-      touchMultiplier: 1,
-      infinite: false,
-      autoRaf: false
-    });
-
-    lenisRef.current = lenis;
-    window.__lenis = lenis;
-    lenis.scrollToAnchor = scrollToAnchor;
-    window.__scrollToAnchor = scrollToAnchor;
-
     // Intercept smooth scrollIntoView to apply unified scrollToAnchor with proper header compensation
     const originalScrollIntoView = Element.prototype.scrollIntoView;
     Element.prototype.scrollIntoView = function (options) {
@@ -339,18 +316,62 @@ export default function SmoothScrollProvider({ children }) {
       return originalScrollIntoView.apply(this, arguments);
     };
 
-    // Initial lean RAF loop for Lenis before GSAP loads
+    // On touch/mobile or reduced motion: bypass Lenis RAF loops completely for 100% native performance
+    if (isTouchOrMobile || prefersReducedMotion) {
+      return () => {
+        Element.prototype.scrollIntoView = originalScrollIntoView;
+      };
+    }
+
+    // Create exactly ONE global Lenis instance for desktop
+    const lenis = new Lenis({
+      duration: 1.15,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      smoothTouch: false,
+      syncTouch: false,
+      touchMultiplier: 1,
+      infinite: false,
+      autoRaf: false
+    });
+
+    lenisRef.current = lenis;
+    window.__lenis = lenis;
+    lenis.scrollToAnchor = scrollToAnchor;
+    window.__scrollToAnchor = scrollToAnchor;
+
+    // Lean RAF loop for Lenis before GSAP loads - activated on first user interaction
     let standaloneRafId = null;
     let tickerAdded = false;
     let updateTicker = null;
     let gsapInstance = null;
     let scrollTriggerInstance = null;
+    let isRafRunning = false;
 
-    const runRaf = (time) => {
-      lenis.raf(time);
+    const startStandaloneRaf = () => {
+      if (isRafRunning || tickerAdded) return;
+      isRafRunning = true;
+      const runRaf = (time) => {
+        if (!tickerAdded && lenisRef.current) {
+          lenis.raf(time);
+          standaloneRafId = requestAnimationFrame(runRaf);
+        }
+      };
       standaloneRafId = requestAnimationFrame(runRaf);
     };
-    standaloneRafId = requestAnimationFrame(runRaf);
+
+    const initialInteractionEvents = ['wheel', 'scroll', 'keydown', 'pointerdown'];
+    const handleInitialInteraction = () => {
+      startStandaloneRaf();
+      initialInteractionEvents.forEach((evt) => {
+        window.removeEventListener(evt, handleInitialInteraction);
+      });
+    };
+    initialInteractionEvents.forEach((evt) => {
+      window.addEventListener(evt, handleInitialInteraction, { passive: true, once: true });
+    });
 
     // Lazy load GSAP & ScrollTrigger only after the page becomes interactive and idle
     const cancelIdle = runAfterLoadAndIdle(() => {
@@ -365,6 +386,7 @@ export default function SmoothScrollProvider({ children }) {
           cancelAnimationFrame(standaloneRafId);
           standaloneRafId = null;
         }
+        isRafRunning = false;
 
         // Official GSAP + Lenis integration pattern:
         // Convert GSAP ticker seconds to milliseconds for Lenis

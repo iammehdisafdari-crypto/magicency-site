@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 import { SYSTEM_PILLARS } from '../../data/growthArchitecture';
+import { FoldRevealSection, FoldRevealText } from '../FoldReveal';
 
 export default function SystemNotSilos() {
   const { t, lang } = useLanguage();
@@ -19,15 +20,13 @@ export default function SystemNotSilos() {
             <span className="approach-pill-text">{pillarsMeta.eyebrow}</span>
           </div>
 
-          <motion.h2
-            className="section-editorial-title"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          >
-            {pillarsMeta.headline}
-          </motion.h2>
+          <FoldRevealSection replay={true} stagger={0.12}>
+            <FoldRevealText
+              as="h2"
+              className="section-editorial-title"
+              text={pillarsMeta.headline}
+            />
+          </FoldRevealSection>
 
           <motion.p
             className="section-editorial-lead"

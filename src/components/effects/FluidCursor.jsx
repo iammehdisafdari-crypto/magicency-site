@@ -462,7 +462,7 @@ export default function FluidCursor({
       prevX: 0,
       prevY: 0,
       isInside: false,
-      lastActiveTime: performance.now()
+      lastActiveTime: 0
     };
 
     // IntersectionObserver & Visibility to pause simulation when offscreen or tab hidden
@@ -563,7 +563,7 @@ export default function FluidCursor({
       const timeSinceActive = currentTime - mouse.lastActiveTime;
 
       // Only compute simulation when active or recently active to ensure 100% efficiency
-      if (timeSinceActive < 3500 || mouse.isInside) {
+      if (mouse.lastActiveTime > 0 && (timeSinceActive < 3500 || mouse.isInside)) {
         gl.disable(gl.BLEND);
 
         // 1. Curl

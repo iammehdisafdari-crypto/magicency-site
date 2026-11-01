@@ -1,8 +1,48 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { getGsapWithScrollTrigger, runAfterLoadAndIdle } from '../../utils/gsapLoader';
 import { useLanguage } from '../../context/LanguageContext';
-import Reveal from '../motion/Reveal';
 import './BuiltForCompoundingGrowth.css';
+
+function CompoundingReveal({ as: Component = 'div', className = '', children }) {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+    if (prefersReducedMotion) {
+      setIsVisible(true);
+      return;
+    }
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.15 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <Component
+      ref={ref}
+      className={`motion-reveal ${isVisible ? 'is-revealed' : 'reveal-initial'} ${className}`}
+      style={{
+        transition: 'opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1)',
+        opacity: isVisible ? 1 : 0.15,
+        transform: isVisible ? 'translateY(0)' : 'translateY(24px)'
+      }}
+    >
+      {children}
+    </Component>
+  );
+}
 
 export default function BuiltForCompoundingGrowth() {
   const { t, isRTL } = useLanguage();
@@ -177,7 +217,7 @@ export default function BuiltForCompoundingGrowth() {
             Main Title: COMPOUNDING GROWTH
             Supporting Statement: Growth gets stronger when everything works together.
             ========================================================= */}
-        <Reveal as="header" className="cg-header">
+        <CompoundingReveal as="header" className="cg-header">
           <div className="cg-eyebrow-wrapper">
             <span className="cg-eyebrow-accent-bullet" aria-hidden="true" />
             <span className="cg-eyebrow">{data.eyebrow}</span>
@@ -199,7 +239,7 @@ export default function BuiltForCompoundingGrowth() {
             <span className="cg-status-divider">//</span>
             <span className="cg-status-tag">CONTINUOUS CYCLE</span>
           </div>
-        </Reveal>
+        </CompoundingReveal>
 
         {/* =========================================================
             02. LARGE VERTICAL SVG COMPOSITION & STAGE LABELS
@@ -311,14 +351,14 @@ export default function BuiltForCompoundingGrowth() {
         </div>
 
         {/* Section Footer Metric / Outcome Statement */}
-        <Reveal className="cg-footer-statement">
+        <CompoundingReveal className="cg-footer-statement">
           <div className="cg-footer-card">
             <span className="cg-footer-tag">THE COMPOUNDING EFFECT</span>
             <p className="cg-footer-text">
               Strategy informs execution. Execution creates signals. Signals refine decisions. Optimization powers compounding growth.
             </p>
           </div>
-        </Reveal>
+        </CompoundingReveal>
 
       </div>
     </section>

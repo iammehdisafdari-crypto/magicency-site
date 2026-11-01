@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
+import { FoldRevealSection, FoldRevealText } from '../FoldReveal';
 import { CASE_STUDY_FILTERS, WORK_CASES } from '../../data/workCases';
 import { EASING } from '../motion';
 
@@ -58,9 +59,14 @@ export default function CaseStudiesSection({ onSelectCase }) {
               <span className="work-kicker-dot" />
               <span>{c.eyebrow}</span>
             </span>
-            <h2 id="work-cases-heading" className="work-cases-heading">
-              {c.heading || c.headline}
-            </h2>
+            <FoldRevealSection replay={true} stagger={0.12}>
+              <FoldRevealText
+                as="h2"
+                id="work-cases-heading"
+                className="work-cases-heading"
+                text={c.heading || c.headline}
+              />
+            </FoldRevealSection>
             <p className="work-cases-lead">
               {c.lead}
             </p>

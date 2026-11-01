@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLanguage } from '../../context/LanguageContext';
+import { FoldRevealSection, FoldRevealText } from '../FoldReveal';
 import { SERVICES_DATA } from '../../data/capabilitiesData';
 import CapabilityItem from './CapabilityItem';
 
@@ -21,9 +22,13 @@ export default function CapabilitiesServices() {
             {lang === 'fa' ? 'آنچه انجام می‌دهیم' : 'What we do'}
           </span>
           <div className="services-title-wrap">
-            <h2 className="services-title">
-              {lang === 'fa' ? 'توانمندی‌ها.' : 'Services.'}
-            </h2>
+            <FoldRevealSection replay={true} stagger={0.12}>
+              <FoldRevealText
+                as="h2"
+                className="services-title"
+                text={lang === 'fa' ? 'توانمندی‌ها.' : 'Services.'}
+              />
+            </FoldRevealSection>
           </div>
         </div>
 

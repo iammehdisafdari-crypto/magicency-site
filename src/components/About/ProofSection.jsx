@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import { ABOUT_DATA } from '../../data/aboutData';
+import { FoldRevealSection, FoldRevealText } from '../FoldReveal';
 import CTA from '../Common/CTA';
 
 export default function ProofSection() {
@@ -29,10 +30,10 @@ export default function ProofSection() {
           </div>
         </div>
 
-        <div className="proof-intro-block">
-          <h2 className="proof-headline">{proof.title}</h2>
-          <p className="proof-lead">{proof.lead}</p>
-        </div>
+        <FoldRevealSection replay={true} stagger={0.12} className="proof-intro-block">
+          <FoldRevealText as="h2" className="proof-headline" text={proof.title} />
+          <FoldRevealText as="p" className="proof-lead" text={proof.lead} />
+        </FoldRevealSection>
 
         {/* 4 Audited Metric Blocks (100% Verified from Real Projects) */}
         <div className="proof-metrics-grid">

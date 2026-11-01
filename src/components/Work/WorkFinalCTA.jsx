@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
+import { FoldRevealSection, FoldRevealText } from '../FoldReveal';
 import { EASING } from '../motion';
 
 export default function WorkFinalCTA() {
@@ -42,9 +43,13 @@ export default function WorkFinalCTA() {
               <span className="work-kicker-dot" />
               <span>{c.eyebrow}</span>
             </span>
-            <h2 className="work-final-cta-heading">
-              {c.heading}
-            </h2>
+            <FoldRevealSection replay={true} stagger={0.12}>
+              <FoldRevealText
+                as="h2"
+                className="work-final-cta-heading"
+                text={c.heading}
+              />
+            </FoldRevealSection>
             <p className="work-final-cta-lead">
               {c.supporting}
             </p>

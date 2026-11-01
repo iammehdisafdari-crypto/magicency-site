@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 import { ARCHITECTURE_BOARD_NODES } from '../../data/growthArchitecture';
+import { FoldRevealSection, FoldRevealText } from '../FoldReveal';
 
 export default function ApproachHero() {
   const { t, lang, isRTL } = useLanguage();
@@ -33,33 +34,18 @@ export default function ApproachHero() {
 
         {/* Primary Headline */}
         <div className="approach-hero-headline-wrap">
-          <h1 className="approach-hero-title">
-            <motion.span
-              className="approach-hero-title-line"
-              initial={{ opacity: 0, y: 22 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            >
-              {hero.headlineLine1}
-            </motion.span>
-            <motion.span
-              className="approach-hero-title-line highlight-accent"
-              initial={{ opacity: 0, y: 22 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            >
-              {hero.headlineLine2}
-            </motion.span>
-          </h1>
-
-          <motion.p
-            className="approach-hero-supporting"
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          >
-            {hero.supporting}
-          </motion.p>
+          <FoldRevealSection replay={true} stagger={0.12}>
+            <FoldRevealText
+              as="h1"
+              className="approach-hero-title"
+              text={`${hero.headlineLine1}\n${hero.headlineLine2}`}
+            />
+            <FoldRevealText
+              as="p"
+              className="approach-hero-supporting"
+              text={hero.supporting}
+            />
+          </FoldRevealSection>
         </div>
 
         {/* DOMINANT CINEMATIC HERO VISUAL STAGE */}

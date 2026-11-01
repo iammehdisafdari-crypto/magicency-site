@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 import { APPROACH_FAQS } from '../../data/growthArchitecture';
+import { FoldRevealSection, FoldRevealText } from '../FoldReveal';
 
 export default function ApproachFAQ() {
   const { t, lang } = useLanguage();
@@ -23,15 +24,13 @@ export default function ApproachFAQ() {
             <span className="approach-pill-text">{faqMeta.eyebrow}</span>
           </div>
 
-          <motion.h2
-            className="section-editorial-title"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          >
-            {faqMeta.headline}
-          </motion.h2>
+          <FoldRevealSection replay={true} stagger={0.12}>
+            <FoldRevealText
+              as="h2"
+              className="section-editorial-title"
+              text={faqMeta.headline}
+            />
+          </FoldRevealSection>
         </div>
 
         {/* FAQ Accordion List */}

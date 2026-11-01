@@ -247,14 +247,12 @@ export const translations = {
       ctaLine2: "Let's build what moves it forward.",
       startProject: 'Start a Project',
       locations: [
-        { city: 'Manager', email: 'itsmehdisafdari@gmail.com' }
+        { city: "Let's Talk", email: 'itsmehdisafdari@gmail.com' }
       ],
       socials: [
-        { name: 'X', url: 'https://x.com' },
         { name: 'Instagram', url: 'https://instagram.com' },
         { name: 'LinkedIn', url: 'https://linkedin.com' },
-        { name: 'Dribbble', url: 'https://dribbble.com' },
-        { name: 'Behance', url: 'https://behance.net' }
+        { name: 'Threads', url: 'https://threads.net' }
       ],
       nav: [
         { label: 'WORK', href: '/work' },
@@ -746,14 +744,12 @@ export const translations = {
       ctaLine2: 'بیایید آنچه را که کسب‌وکارتان را به جلو می‌برد بسازیم.',
       startProject: 'شروع پروژه',
       locations: [
-        { city: 'واحد مدیریت', email: 'itsmehdisafdari@gmail.com' }
+        { city: 'شروع گفتگو', email: 'itsmehdisafdari@gmail.com' }
       ],
       socials: [
-        { name: 'X', url: 'https://x.com' },
         { name: 'Instagram', url: 'https://instagram.com' },
         { name: 'LinkedIn', url: 'https://linkedin.com' },
-        { name: 'Dribbble', url: 'https://dribbble.com' },
-        { name: 'Behance', url: 'https://behance.net' }
+        { name: 'Threads', url: 'https://threads.net' }
       ],
       nav: [
         { label: 'پروژه‌ها', href: '/work' },

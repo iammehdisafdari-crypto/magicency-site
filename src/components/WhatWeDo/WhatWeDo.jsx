@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
+import { FoldRevealSection, FoldRevealText } from '../FoldReveal';
 import './WhatWeDo.css';
 
 const toWebp = (url) => (url ? url.replace(/\.(jpg|jpeg|png)$/, '.webp') : url);
@@ -117,14 +118,18 @@ export default function WhatWeDo() {
               {data.eyebrow || 'WHAT WE DO'}
             </span>
           </div>
-          <div className="wwd-intro-description">
-            <h2 className="wwd-headline">
-              {data.headline || data.heading || 'We turn marketing into a growth system.'}
-            </h2>
-            <p className="wwd-supporting-line">
-              {data.supportingLine || data.introStatement}
-            </p>
-          </div>
+          <FoldRevealSection replay={true} stagger={0.12} className="wwd-intro-description">
+            <FoldRevealText
+              as="h2"
+              className="wwd-headline"
+              text={data.headline || data.heading || 'We turn marketing into a growth system.'}
+            />
+            <FoldRevealText
+              as="p"
+              className="wwd-supporting-line"
+              text={data.supportingLine || data.introStatement}
+            />
+          </FoldRevealSection>
         </div>
 
         {/* =========================================================

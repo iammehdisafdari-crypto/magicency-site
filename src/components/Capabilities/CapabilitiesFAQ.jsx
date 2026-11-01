@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 import { CAPABILITIES_FAQS } from '../../data/capabilitiesData';
+import { FoldRevealSection, FoldRevealText } from '../FoldReveal';
 
 export default function CapabilitiesFAQ() {
   const { lang } = useLanguage();
@@ -11,6 +12,11 @@ export default function CapabilitiesFAQ() {
     setActiveIdx((prev) => (prev === idx ? null : idx));
   };
 
+  const faqHeading =
+    lang === 'fa'
+      ? 'پرسش‌های متداول\nدرباره توانمندی‌ها.'
+      : 'Frequently Asked\nQuestions.';
+
   return (
     <section className="faq-block" id="faq" aria-label="Frequently asked questions">
       <div className="faq-inner">
@@ -19,19 +25,13 @@ export default function CapabilitiesFAQ() {
           <span className="about-intro-label faq-label">
             <span className="clients-label-icon">+</span> FAQ
           </span>
-          <h2 className="faq-block-heading">
-            {lang === 'fa' ? (
-              <>
-                پرسش‌های متداول<br />
-                <span>درباره توانمندی‌ها.</span>
-              </>
-            ) : (
-              <>
-                Frequently Asked<br />
-                <span>Questions.</span>
-              </>
-            )}
-          </h2>
+          <FoldRevealSection replay={true} stagger={0.12}>
+            <FoldRevealText
+              as="h2"
+              className="faq-block-heading"
+              text={faqHeading}
+            />
+          </FoldRevealSection>
         </div>
 
         {/* Right Column: Accordion List (CR38 .faq-list) */}

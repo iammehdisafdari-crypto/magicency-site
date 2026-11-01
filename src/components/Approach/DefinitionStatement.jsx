@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
+import { FoldRevealSection, FoldRevealText } from '../FoldReveal';
 
 export default function DefinitionStatement() {
   const { t, isRTL } = useLanguage();
@@ -45,15 +46,13 @@ export default function DefinitionStatement() {
               <span className="approach-pill-text">{statement.eyebrow}</span>
             </div>
 
-            <motion.h2 
-              className="definition-large-statement"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            >
-              {statement.headline}
-            </motion.h2>
+            <FoldRevealSection replay={true} stagger={0.12}>
+              <FoldRevealText
+                as="h2"
+                className="definition-large-statement"
+                text={statement.headline}
+              />
+            </FoldRevealSection>
 
             <motion.div
               className="definition-concise-body"

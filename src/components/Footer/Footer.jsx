@@ -3,6 +3,7 @@ import { useLanguage } from '../../context/LanguageContext';
 import { useRouter } from '../../context/RouterContext';
 import ScrambleText from '../Header/ScrambleText';
 import { trackContactClick, trackOutboundClick } from '../../utils/analytics';
+import { SocialIcon } from '../Common/SocialIcons';
 import './Footer.css';
 
 const FluidCursor = React.lazy(() => import('../effects/FluidCursor'));
@@ -42,14 +43,12 @@ export default function Footer() {
     ctaLine2: "Let's build what moves it forward.",
     startProject: 'Start a Project',
     locations: [
-      { city: 'Manager', email: 'itsmehdisafdari@gmail.com' }
+      { city: "Let's Talk", email: 'itsmehdisafdari@gmail.com' }
     ],
     socials: [
-      { name: 'X', url: 'https://x.com' },
       { name: 'Instagram', url: 'https://instagram.com' },
       { name: 'LinkedIn', url: 'https://linkedin.com' },
-      { name: 'Dribbble', url: 'https://dribbble.com' },
-      { name: 'Behance', url: 'https://behance.net' }
+      { name: 'Threads', url: 'https://threads.net' }
     ],
     nav: [
       { label: 'WORK', href: '/work' },
@@ -151,8 +150,8 @@ export default function Footer() {
             03. USEFUL NAVIGATION & SOCIALS (footer-useful grid)
             ========================================================= */}
         <div className="footer-useful grid">
-          {/* Social Links with Scramble Effect */}
-          <div className="footer-useful-social">
+          {/* Social Links with Icon Logos */}
+          <div className="footer-useful-social" role="list" aria-label="Social media channels">
             {f.socials.map((soc) => (
               <a
                 key={soc.name}
@@ -160,10 +159,12 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`Visit Magicency on ${soc.name}`}
-                onClick={() => trackOutboundClick(soc.url, soc.name)}
-                className="footer-useful-social-link"
+                title={soc.name}
+                onClick={() => trackOutboundClick(soc.url, soc.name.toLowerCase())}
+                className="footer-useful-social-link footer-social-icon-btn"
               >
-                <ScrambleText text={soc.name} />
+                <SocialIcon name={soc.name} size={19} className="footer-social-svg" />
+                <span className="footer-social-sr-only">{soc.name}</span>
               </a>
             ))}
           </div>

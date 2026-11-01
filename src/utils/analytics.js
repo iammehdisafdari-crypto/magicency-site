@@ -98,9 +98,9 @@ export const initGA = () => {
   };
 
   if ('requestIdleCallback' in window) {
-    window.requestIdleCallback(loadScript, { timeout: 3000 });
+    window.requestIdleCallback(loadScript, { timeout: 5000 });
   } else {
-    setTimeout(loadScript, 2000);
+    setTimeout(loadScript, 4500);
   }
 };
 

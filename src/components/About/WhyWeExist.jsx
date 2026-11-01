@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 import { ABOUT_DATA } from '../../data/aboutData';
+import { FoldRevealSection, FoldRevealText } from '../FoldReveal';
 import { Compass, Sparkles, Activity, Cpu, Database } from 'lucide-react';
 
 const ICON_MAP = {
@@ -47,16 +48,22 @@ export default function WhyWeExist() {
         </div>
 
         {/* Narrative Intro & Central Problem Statement */}
-        <div className="dna-headline-wrap">
-          <h2 className="dna-statement-title">
-            <span className="statement-line block">{dna.headlinePart1}</span>
-            <span className="statement-line block highlight-pink">{dna.headlinePart2}</span>
-          </h2>
+        <FoldRevealSection replay={true} stagger={0.12} className="dna-headline-wrap">
+          <FoldRevealText
+            as="h2"
+            className="dna-statement-title"
+            text={`${dna.headlinePart1}\n${dna.headlinePart2}`}
+            highlightWords={[dna.headlinePart2]}
+          />
           <div className="dna-lead-row">
-            <p className="dna-lead-text">{dna.lead}</p>
+            <FoldRevealText
+              as="p"
+              className="dna-lead-text"
+              text={dna.lead}
+            />
             <p className="dna-thesis-text">{dna.thesis}</p>
           </div>
-        </div>
+        </FoldRevealSection>
 
         {/* Editorial Visual Composition: Studio Reality & Authentic Grounding */}
         {dna.workspace && (

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 import { ABOUT_DATA } from '../../data/aboutData';
+import { FoldRevealSection, FoldRevealText } from '../FoldReveal';
 import { Target, Eye, ShieldCheck } from 'lucide-react';
 
 export default function MissionVisionValues() {
@@ -29,9 +30,13 @@ export default function MissionVisionValues() {
           </div>
         </div>
 
-        <div className="mvv-intro-block">
-          <h2 className="mvv-headline">{mvv.headline}</h2>
-        </div>
+        <FoldRevealSection replay={true} stagger={0.12} className="mvv-intro-block">
+          <FoldRevealText
+            as="h2"
+            className="mvv-headline"
+            text={mvv.headline}
+          />
+        </FoldRevealSection>
 
         {/* 3 Interactive Architectural Tabs (Modeled on Reference's 3 Distinct Areas) */}
         <div className="mvv-tab-triggers" role="tablist" aria-label="Mission, Vision, and Values">

@@ -64,9 +64,8 @@ export default function ProblemInsightVisual({ stepIndex, currentProgress, isRTL
           className="pi-3d-object-img"
           width="400"
           height="400"
-          loading="eager"
+          loading="lazy"
           decoding="async"
-          fetchpriority={stepIndex === 0 ? 'high' : 'auto'}
         />
       </picture>
     </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
+import { FoldRevealSection, FoldRevealText } from '../FoldReveal';
 import { EASING } from '../motion';
 
 export default function WorkHero() {
@@ -59,14 +60,13 @@ export default function WorkHero() {
             </span>
           </motion.div>
 
-          <motion.h1 
-            className="work-hero-title"
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1, ease: EASING.CINEMATIC }}
-          >
-            {c.headline}
-          </motion.h1>
+          <FoldRevealSection replay={true} stagger={0.12}>
+            <FoldRevealText
+              as="h1"
+              className="work-hero-title"
+              text={c.headline}
+            />
+          </FoldRevealSection>
 
           <motion.p 
             className="work-hero-lead"

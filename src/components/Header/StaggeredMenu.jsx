@@ -79,54 +79,7 @@ export const StaggeredMenu = ({
     }
   }, [open]);
 
-  // Lazy GSAP setup deferred to idle time and batched via requestAnimationFrame
-  useEffect(() => {
-    let rafId = null;
-    let ctx = null;
-    let isMounted = true;
-
-    const cancelIdle = runOnIdle(() => {
-      ensureGsap().then((gsap) => {
-        if (!isMounted || !gsap) return;
-        rafId = requestAnimationFrame(() => {
-          if (!isMounted) return;
-          ctx = gsap.context(() => {
-            const panel = panelRef.current;
-            const preContainer = preLayersRef.current;
-            const plusH = plusHRef.current;
-            const plusV = plusVRef.current;
-            const icon = iconRef.current;
-            const textInner = textInnerRef.current;
-            if (!panel || !plusH || !plusV || !icon || !textInner) return;
-
-            let preLayers = [];
-            if (preContainer) {
-              preLayers = Array.from(preContainer.querySelectorAll('.sm-prelayer'));
-            }
-            preLayerElsRef.current = preLayers;
-
-            const offscreen = position === 'left' ? -100 : 100;
-            gsap.set([panel, ...preLayers], { xPercent: offscreen, x: 0, opacity: 1 });
-            if (preContainer) {
-              gsap.set(preContainer, { xPercent: 0, x: 0, opacity: 1 });
-            }
-            gsap.set(plusH, { transformOrigin: '50% 50%', rotate: 0 });
-            gsap.set(plusV, { transformOrigin: '50% 50%', rotate: 90 });
-            gsap.set(icon, { rotate: 0, transformOrigin: '50% 50%' });
-            gsap.set(textInner, { yPercent: 0 });
-            if (toggleBtnRef.current) gsap.set(toggleBtnRef.current, { color: menuButtonColor });
-          });
-        });
-      });
-    }, 2500);
-
-    return () => {
-      isMounted = false;
-      cancelIdle();
-      if (rafId) cancelAnimationFrame(rafId);
-      ctx?.revert();
-    };
-  }, [ensureGsap, menuButtonColor, position]);
+  // Note: GSAP initialization is deferred strictly until user hovers/focuses/clicks the menu button (ensureGsap)
 
   const buildOpenTimeline = useCallback((gsapInstance) => {
     const gsap = gsapInstance || gsapRef.current;
@@ -643,13 +596,16 @@ export const StaggeredMenu = ({
                       href={s.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="sm-socials-link"
+                      className="sm-socials-link sm-socials-icon-btn"
+                      aria-label={s.label}
+                      title={s.label}
                       onClick={(e) => {
                         e.stopPropagation();
                         if (s.onClick) s.onClick(e);
                       }}
                     >
-                      {s.label}
+                      {s.icon ? s.icon : s.label}
+                      <span className="sm-social-sr-only">{s.label}</span>
                     </a>
                   </li>
                 ))}

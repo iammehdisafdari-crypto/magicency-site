@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
+import { FoldRevealSection, FoldRevealText } from '../FoldReveal';
 import { PORTFOLIO_ITEMS } from '../../data/portfolioItems';
 import { EASING } from '../motion';
 
@@ -43,9 +44,14 @@ export default function CuratedPortfolioSection({ onSelectItem }) {
             <span className="work-kicker-dot" />
             <span>{c.eyebrow}</span>
           </span>
-          <h2 id="work-curated-heading" className="work-curated-heading">
-            {c.heading}
-          </h2>
+          <FoldRevealSection replay={true} stagger={0.12}>
+            <FoldRevealText
+              as="h2"
+              id="work-curated-heading"
+              className="work-curated-heading"
+              text={c.heading}
+            />
+          </FoldRevealSection>
           <p className="work-curated-lead">
             {c.lead}
           </p>

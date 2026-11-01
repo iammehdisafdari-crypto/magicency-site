@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLanguage } from '../../context/LanguageContext';
+import { FoldRevealSection, FoldRevealText } from '../FoldReveal';
 
 export default function CapabilitiesCTA() {
   const { lang, isRTL, setIsModalOpen } = useLanguage();
@@ -9,6 +10,16 @@ export default function CapabilitiesCTA() {
     setIsModalOpen(true);
   };
 
+  const ctaHeadline =
+    lang === 'fa'
+      ? 'چالش رشدی دارید که\nارزش حل کردن داشته باشد؟'
+      : 'Have a growth problem\nworth solving?';
+
+  const ctaSub =
+    lang === 'fa'
+      ? 'بیایید آن را به یک سیستم قابل اتکا و سودآور تبدیل کنیم.'
+      : "Let's turn it into a system.";
+
   return (
     <section className="cap-cta-block" id="contact" aria-label="Let's talk">
       <div className="cap-cta-inner">
@@ -17,24 +28,22 @@ export default function CapabilitiesCTA() {
             <span className="clients-label-icon">+</span>{' '}
             {lang === 'fa' ? 'شروع همکاری' : "Let's talk"}
           </span>
-          <h2 className="cap-cta-heading">
-            {lang === 'fa' ? (
-              <>
-                چالش رشدی دارید که<br />
-                <span>ارزش حل کردن داشته باشد؟</span>
-              </>
-            ) : (
-              <>
-                Have a growth problem<br />
-                <span>worth solving?</span>
-              </>
-            )}
-          </h2>
-          <p className="cap-cta-sub">
-            {lang === 'fa'
-              ? 'بیایید آن را به یک سیستم قابل اتکا و سودآور تبدیل کنیم.'
-              : "Let's turn it into a system."}
-          </p>
+          <FoldRevealSection
+            replay={true}
+            stagger={0.12}
+            className="cap-cta-fold-group"
+          >
+            <FoldRevealText
+              as="h2"
+              className="cap-cta-heading"
+              text={ctaHeadline}
+            />
+            <FoldRevealText
+              as="p"
+              className="cap-cta-sub"
+              text={ctaSub}
+            />
+          </FoldRevealSection>
           <div className="cap-cta-actions">
             <button
               type="button"

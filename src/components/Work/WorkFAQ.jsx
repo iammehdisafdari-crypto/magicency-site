@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
+import { FoldRevealSection, FoldRevealText } from '../FoldReveal';
 import { EASING } from '../motion';
 
 export default function WorkFAQ() {
@@ -80,9 +81,14 @@ export default function WorkFAQ() {
             <span className="work-kicker-dot" />
             <span>{c.eyebrow}</span>
           </span>
-          <h2 id="work-faq-heading" className="work-faq-heading">
-            {c.heading}
-          </h2>
+          <FoldRevealSection replay={true} stagger={0.12}>
+            <FoldRevealText
+              as="h2"
+              id="work-faq-heading"
+              className="work-faq-heading"
+              text={c.heading}
+            />
+          </FoldRevealSection>
           <p className="work-faq-lead">
             {c.lead}
           </p>

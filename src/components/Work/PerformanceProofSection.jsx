@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
+import { FoldRevealSection, FoldRevealText } from '../FoldReveal';
 import { PERFORMANCE_METRICS, PERFORMANCE_EVIDENCE } from '../../data/performanceProof';
 import { EASING } from '../motion';
 
@@ -36,9 +37,14 @@ export default function PerformanceProofSection() {
             <span className="work-kicker-dot" />
             <span>{c.eyebrow}</span>
           </span>
-          <h2 id="work-proof-heading" className="work-proof-heading">
-            {c.heading}
-          </h2>
+          <FoldRevealSection replay={true} stagger={0.12}>
+            <FoldRevealText
+              as="h2"
+              id="work-proof-heading"
+              className="work-proof-heading"
+              text={c.heading}
+            />
+          </FoldRevealSection>
           <p className="work-proof-lead">
             {c.description}
           </p>

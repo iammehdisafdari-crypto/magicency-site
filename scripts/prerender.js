@@ -570,6 +570,7 @@ async function prerender() {
     'src/components/Header/Header.css',
     'src/components/Header/StaggeredMenu.css',
     'src/components/Hero/Hero.css',
+    'src/components/FoldText.css',
     'src/components/Common/CTA.css',
     'src/components/Common/LazyVimeoPlayer.css'
   ];
@@ -591,6 +592,7 @@ async function prerender() {
       { raw: fs.readFileSync(path.resolve(rootDir, 'src/components/About/ScrollProgress.jsx'), 'utf8'), extension: 'jsx' },
       { raw: fs.readFileSync(path.resolve(rootDir, 'src/components/Header/Header.jsx'), 'utf8'), extension: 'jsx' },
       { raw: fs.readFileSync(path.resolve(rootDir, 'src/components/Hero/Hero.jsx'), 'utf8'), extension: 'jsx' },
+      { raw: fs.readFileSync(path.resolve(rootDir, 'src/components/FoldText.jsx'), 'utf8'), extension: 'jsx' },
       { raw: fs.readFileSync(path.resolve(rootDir, 'src/components/Header/StaggeredMenu.jsx'), 'utf8'), extension: 'jsx' }
     ],
     css: [{ raw: rawCritical }],
@@ -608,6 +610,7 @@ async function prerender() {
         /^sm-/,
         /^staggered-menu/,
         /^app-/,
+        /^fold-/,
         'html',
         'body',
         '#root',

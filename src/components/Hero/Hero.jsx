@@ -3,6 +3,7 @@ import { useLanguage } from '../../context/LanguageContext';
 import { trackCtaClick } from '../../utils/analytics';
 import LazyVimeoPlayer from '../Common/LazyVimeoPlayer';
 import CTA from '../Common/CTA';
+import FoldText from '../FoldText';
 import './Hero.css';
 
 const FluidCursor = React.lazy(() => import('../effects/FluidCursor'));
@@ -26,33 +27,19 @@ export default function Hero({ isLoaded = true }) {
 
     if (isReducedMotion || isTouchOrMobile) return;
 
-    // 2. Desktop: Defer initialization until after initial Hero render / isLoaded or idle or first pointer movement
-    let idleId = null;
-    const activate = () => {
+    // 2. Desktop: Defer initialization strictly to first user pointer interaction
+    const activate = (e) => {
+      if (e && e.pointerType === 'touch') return;
       setShouldLoadFluid(true);
       window.removeEventListener('pointermove', activate);
-      if (idleId && 'cancelIdleCallback' in window) {
-        window.cancelIdleCallback(idleId);
-      }
     };
 
-    if (isLoaded) {
-      if ('requestIdleCallback' in window) {
-        idleId = window.requestIdleCallback(activate, { timeout: 2000 });
-      } else {
-        activate();
-      }
-    } else {
-      window.addEventListener('pointermove', activate, { once: true, passive: true });
-    }
+    window.addEventListener('pointermove', activate, { passive: true });
 
     return () => {
       window.removeEventListener('pointermove', activate);
-      if (idleId && 'cancelIdleCallback' in window) {
-        window.cancelIdleCallback(idleId);
-      }
     };
-  }, [isLoaded]);
+  }, []);
 
   const clients = t.hero.clients || [
     'tamir online',
@@ -90,22 +77,21 @@ export default function Hero({ isLoaded = true }) {
 
         <div className="vm-hero-headline-container">
           <h1 className="vm-hero-giant-title">
-            {/* Row 1 Masked Reveal */}
-            <span className="title-row row-1 motion-line-mask">
-              <span className="hero-line-inner row-1">
-                {t.hero.titleLine1}
-                <em className="italic-serif-word">{t.hero.italicWord1}</em>
-              </span>
-            </span>
-
-            {/* Row 2 Masked Reveal */}
-            <span className="title-row row-2 motion-line-mask">
-              <span className="hero-line-inner row-2">
-                {t.hero.titleLine2}
-                <em className="italic-serif-word">{t.hero.italicWord2}</em>
-                {t.hero.titleLine2Suffix}
-              </span>
-            </span>
+            <FoldText
+              text={`${t.hero.titleLine1}${t.hero.italicWord1}\n${t.hero.titleLine2}${t.hero.italicWord2}${t.hero.titleLine2Suffix || ''}`}
+              italicWords={[t.hero.italicWord1, t.hero.italicWord2]}
+              splitBy="word"
+              hinge="top"
+              trigger="mount"
+              duration={0.7}
+              stagger={0.035}
+              ease="power3.out"
+              perspective={900}
+              creaseShading={0.25}
+              fontSize="inherit"
+              fontWeight="inherit"
+              color="inherit"
+            />
           </h1>
 
           {/* Growth System CTA Group (Primary + Secondary) */}

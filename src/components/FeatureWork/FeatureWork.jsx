@@ -46,6 +46,9 @@ export default function FeatureWork() {
       if (rafId) return;
       rafId = requestAnimationFrame(() => {
         rafId = null;
+        if (metrics.containerHeight === 0) {
+          measureLayout();
+        }
         const scrollableHeight = metrics.containerHeight - window.innerHeight;
         if (scrollableHeight <= 0) return;
 
@@ -63,8 +66,12 @@ export default function FeatureWork() {
       });
     };
 
-    measureLayout();
-    handleScroll();
+    // Defer initial layout read to idle or on first scroll to avoid forced reflow during hydration
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(measureLayout, { timeout: 1500 });
+    } else {
+      setTimeout(measureLayout, 150);
+    }
 
     const handleResize = () => {
       measureLayout();

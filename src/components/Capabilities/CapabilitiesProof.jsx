@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLanguage } from '../../context/LanguageContext';
+import { FoldRevealSection, FoldRevealText } from '../FoldReveal';
 import { PROOF_STATS } from '../../data/capabilitiesData';
 
 export default function CapabilitiesProof() {
@@ -34,9 +35,13 @@ export default function CapabilitiesProof() {
               </div>
             </div>
             <div className="results-case-bottom">
-              <span className="results-case-brand">
-                {lang === 'fa' ? 'املاک لوکس دبی' : 'High-Ticket Real Estate'}
-              </span>
+              <FoldRevealSection replay={true} stagger={0.12}>
+                <FoldRevealText
+                  as="h3"
+                  className="results-case-brand"
+                  text={lang === 'fa' ? 'املاک لوکس دبی' : 'High-Ticket Real Estate'}
+                />
+              </FoldRevealSection>
               <p className="results-case-desc">
                 {lang === 'fa'
                   ? 'یکپارچه‌سازی گوگل ادز، لندینگ‌پیج‌های پرسرعت و سیستم جذب سرمایه‌گذاران بین‌المللی.'
@@ -68,11 +73,15 @@ export default function CapabilitiesProof() {
               </p>
             </div>
             <div className="results-review">
-              <p className="results-review-quote">
-                {lang === 'fa'
-                  ? '«توانمندی‌های مجیکنسـی به صورت جزیره‌ای کار نمی‌کنند؛ آن‌ها یک سیستم پیوسته می‌سازند.»'
-                  : '"Capabilities operate not as isolated silos, but as a compounding growth engine."'}
-              </p>
+              <FoldRevealSection replay={true} stagger={0.12}>
+                <FoldRevealText
+                  as="p"
+                  className="results-review-quote"
+                  text={lang === 'fa'
+                    ? '«توانمندی‌های مجیکنسـی به صورت جزیره‌ای کار نمی‌کنند؛ آن‌ها یک سیستم پیوسته می‌سازند.»'
+                    : '"Capabilities operate not as isolated silos, but as a compounding growth engine."'}
+                />
+              </FoldRevealSection>
               <div className="results-review-author">
                 <span className="results-review-name">
                   {lang === 'fa' ? 'معماری رشد اختصاصی' : 'System Telemetry Principle'}

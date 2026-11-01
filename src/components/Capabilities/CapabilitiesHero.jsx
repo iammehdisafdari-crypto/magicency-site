@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLanguage } from '../../context/LanguageContext';
+import { FoldRevealSection, FoldRevealText } from '../FoldReveal';
 
 export default function CapabilitiesHero() {
   const { lang, isRTL } = useLanguage();
@@ -28,16 +29,22 @@ export default function CapabilitiesHero() {
           </div>
 
           {/* Large Editorial Headline */}
-          <h1 className="cap-hero-headline">
-            {lang === 'fa' ? 'سیستم‌هایی برای خلق رشد.' : 'Systems built to move growth.'}
-          </h1>
+          <FoldRevealSection replay={true} stagger={0.12} className="cap-hero-header-group">
+            <FoldRevealText
+              as="h1"
+              className="cap-hero-headline"
+              text={lang === 'fa' ? 'سیستم‌هایی برای خلق رشد.' : 'Systems built to move growth.'}
+            />
 
-          {/* Minimal Supporting Line */}
-          <p className="cap-hero-sub">
-            {lang === 'fa'
-              ? 'توانمندی‌هایی هماهنگ برای حرکت در قالب یک سیستم واحد رشد.'
-              : 'Capabilities designed to work as one growth system.'}
-          </p>
+            {/* Minimal Supporting Line */}
+            <FoldRevealText
+              as="p"
+              className="cap-hero-sub"
+              text={lang === 'fa'
+                ? 'توانمندی‌هایی هماهنگ برای حرکت در قالب یک سیستم واحد رشد.'
+                : 'Capabilities designed to work as one growth system.'}
+            />
+          </FoldRevealSection>
 
           {/* Fast Transition Cue to Services */}
           <div className="cap-hero-action">

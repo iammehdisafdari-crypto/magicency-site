@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import { ABOUT_DATA } from '../../data/aboutData';
+import { FoldRevealSection, FoldRevealText } from '../FoldReveal';
 
 export default function PeopleBehindSystem() {
   const { lang, isRTL } = useLanguage();
@@ -28,10 +29,14 @@ export default function PeopleBehindSystem() {
           </div>
         </div>
 
-        <div className="people-intro-block">
-          <h2 className="people-headline">{people.headline}</h2>
+        <FoldRevealSection replay={true} stagger={0.12} className="people-intro-block">
+          <FoldRevealText
+            as="h2"
+            className="people-headline"
+            text={people.headline}
+          />
           <p className="people-lead">{people.lead}</p>
-        </div>
+        </FoldRevealSection>
 
         {/* Operating Model Grid (Strategy-Led, Specialist-Driven, Tech-Enabled, Collaborative) */}
         <div className="people-model-grid" role="list">

@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
+import { FoldRevealSection, FoldRevealText } from '../FoldReveal';
 import CTA from '../Common/CTA';
 
 export default function ApproachClosingCTA() {
@@ -40,12 +41,18 @@ export default function ApproachClosingCTA() {
 
           {/* Headline */}
           <div className="closing-statement-wrap">
-            <h2 className="closing-cinematic-headline">
-              {closing.headline}
-            </h2>
-            <p className="closing-cinematic-subhead">
-              {closing.subhead}
-            </p>
+            <FoldRevealSection replay={true} stagger={0.12}>
+              <FoldRevealText
+                as="h2"
+                className="closing-cinematic-headline"
+                text={closing.headline}
+              />
+              <FoldRevealText
+                as="p"
+                className="closing-cinematic-subhead"
+                text={closing.subhead}
+              />
+            </FoldRevealSection>
           </div>
 
           {/* Action Button */}

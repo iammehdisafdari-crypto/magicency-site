@@ -47,32 +47,14 @@ export default function ScrollProgress() {
 
       const unsubscribe = activeLenis.on('scroll', handleLenisScroll);
 
-      // Handle window resize & dynamic layout shifts
+      // Handle viewport changes. Lenis owns its layout measurements; this listener
+      // only updates the visual progress bar from its already-computed progress.
       const handleResize = () => {
-        if (typeof activeLenis.resize === 'function') {
-          activeLenis.resize();
-        }
         setScale(activeLenis.progress);
       };
 
       window.addEventListener('resize', handleResize, { passive: true });
       window.addEventListener('orientationchange', handleResize, { passive: true });
-
-      // Observe dynamic DOM / image load height adjustments with RAF batching
-      let resizeObserver = null;
-      let roRafId = null;
-      if (typeof ResizeObserver !== 'undefined' && document.body) {
-        resizeObserver = new ResizeObserver(() => {
-          if (roRafId) cancelAnimationFrame(roRafId);
-          roRafId = requestAnimationFrame(() => {
-            if (typeof activeLenis.resize === 'function') {
-              activeLenis.resize();
-            }
-            setScale(activeLenis.progress);
-          });
-        });
-        resizeObserver.observe(document.body);
-      }
 
       return () => {
         if (typeof unsubscribe === 'function') {
@@ -82,8 +64,6 @@ export default function ScrollProgress() {
         }
         window.removeEventListener('resize', handleResize);
         window.removeEventListener('orientationchange', handleResize);
-        if (roRafId) cancelAnimationFrame(roRafId);
-        if (resizeObserver) resizeObserver.disconnect();
       };
     }
 
@@ -92,34 +72,25 @@ export default function ScrollProgress() {
     // ==========================================================
     const calculateNativeProgress = () => {
       const scrollTop = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+      if (scrollTop <= 0) return 0;
       const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight || 0;
       const clientHeight = window.innerHeight || document.documentElement.clientHeight || 0;
       const scrollableHeight = scrollHeight - clientHeight;
       return scrollableHeight > 0 ? Math.min(Math.max(scrollTop / scrollableHeight, 0), 1) : 0;
     };
 
-    let rafPending = false;
+    let rafId = null;
     const handleNativeScroll = () => {
-      if (!rafPending) {
-        rafPending = true;
-        requestAnimationFrame(() => {
-          setScale(calculateNativeProgress());
-          rafPending = false;
-        });
-      }
+      if (rafId !== null) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
+        setScale(calculateNativeProgress());
+      });
     };
 
     window.addEventListener('scroll', handleNativeScroll, { passive: true });
     window.addEventListener('resize', handleNativeScroll, { passive: true });
     window.addEventListener('orientationchange', handleNativeScroll, { passive: true });
-
-    let resizeObserver = null;
-    if (typeof ResizeObserver !== 'undefined' && document.body) {
-      resizeObserver = new ResizeObserver(() => {
-        handleNativeScroll();
-      });
-      resizeObserver.observe(document.body);
-    }
 
     // Initial apply for native scroll
     setScale(calculateNativeProgress());
@@ -128,7 +99,7 @@ export default function ScrollProgress() {
       window.removeEventListener('scroll', handleNativeScroll);
       window.removeEventListener('resize', handleNativeScroll);
       window.removeEventListener('orientationchange', handleNativeScroll);
-      if (resizeObserver) resizeObserver.disconnect();
+      if (rafId !== null) cancelAnimationFrame(rafId);
     };
   }, [currentPath, lenis]);
 
@@ -147,7 +118,6 @@ export default function ScrollProgress() {
     // 2. Re-calculate once new route content is rendered into the DOM
     const rafId = requestAnimationFrame(() => {
       if (activeLenis) {
-        if (typeof activeLenis.resize === 'function') activeLenis.resize();
         setScale(activeLenis.progress);
       } else {
         const scrollTop = window.scrollY || window.pageYOffset || 0;

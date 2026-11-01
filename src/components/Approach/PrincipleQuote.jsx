@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
+import { FoldRevealSection, FoldRevealText } from '../FoldReveal';
 
 export default function PrincipleQuote() {
   const { t } = useLanguage();
@@ -35,9 +36,13 @@ export default function PrincipleQuote() {
           </div>
 
           {/* Monumental Manifesto Statement */}
-          <blockquote className="manifesto-monumental-quote">
-            {principle.quote}
-          </blockquote>
+          <FoldRevealSection replay={true} stagger={0.12}>
+            <FoldRevealText
+              as="blockquote"
+              className="manifesto-monumental-quote"
+              text={principle.quote}
+            />
+          </FoldRevealSection>
 
           {/* Minimal Supporting Note */}
           <p className="manifesto-conviction-note">

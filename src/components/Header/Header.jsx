@@ -4,6 +4,7 @@ import { useRouter } from '../../context/RouterContext';
 import ScrambleText from './ScrambleText';
 import StaggeredMenu from './StaggeredMenu';
 import { trackCtaClick, trackLanguageSwitch, trackContactClick, trackOutboundClick } from '../../utils/analytics';
+import { SocialIcon } from '../Common/SocialIcons';
 import './Header.css';
 
 // Asterisk Icon matching Desktop Reference Image 1: "✱ START A PROJECT"
@@ -128,10 +129,24 @@ export default function Header() {
   ];
 
   const mobileSocialItems = [
-    { label: 'Twitter / X', link: 'https://x.com', onClick: () => trackOutboundClick('https://x.com', 'x') },
-    { label: 'Instagram', link: 'https://instagram.com', onClick: () => trackOutboundClick('https://instagram.com', 'instagram') },
-    { label: 'LinkedIn', link: 'https://linkedin.com', onClick: () => trackOutboundClick('https://linkedin.com', 'linkedin') },
-    { label: 'Dribbble', link: 'https://dribbble.com', onClick: () => trackOutboundClick('https://dribbble.com', 'dribbble') }
+    { 
+      label: 'Instagram', 
+      link: 'https://instagram.com', 
+      icon: <SocialIcon name="Instagram" size={18} />,
+      onClick: () => trackOutboundClick('https://instagram.com', 'instagram') 
+    },
+    { 
+      label: 'LinkedIn', 
+      link: 'https://linkedin.com', 
+      icon: <SocialIcon name="LinkedIn" size={18} />,
+      onClick: () => trackOutboundClick('https://linkedin.com', 'linkedin') 
+    },
+    { 
+      label: 'Threads', 
+      link: 'https://threads.net', 
+      icon: <SocialIcon name="Threads" size={18} />,
+      onClick: () => trackOutboundClick('https://threads.net', 'threads') 
+    }
   ];
 
   const renderExtraContent = React.useCallback(({ closeMenu }) => (

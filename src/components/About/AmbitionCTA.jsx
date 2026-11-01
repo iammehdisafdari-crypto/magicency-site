@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import { ABOUT_DATA } from '../../data/aboutData';
+import { FoldRevealSection, FoldRevealText } from '../FoldReveal';
 import CTA from '../Common/CTA';
 
 export default function AmbitionCTA() {
@@ -31,13 +32,19 @@ export default function AmbitionCTA() {
         </div>
 
         {/* Narrative Conclusion Oversized Typography */}
-        <div className="final-cta-monument-wrap">
-          <h2 className="final-cta-monument-title">
-            <span className="title-row block">{ctaData.headlinePart1}</span>
-            <span className="title-row block highlight-pink">{ctaData.headlinePart2}</span>
-          </h2>
+        <FoldRevealSection replay={true} stagger={0.12} className="final-cta-monument-wrap">
+          <FoldRevealText
+            as="h2"
+            className="final-cta-monument-title"
+            text={`${ctaData.headlinePart1}\n${ctaData.headlinePart2}`}
+            highlightWords={[ctaData.headlinePart2]}
+          />
 
-          <p className="final-cta-lead">{ctaData.lead}</p>
+          <FoldRevealText
+            as="p"
+            className="final-cta-lead"
+            text={ctaData.lead}
+          />
 
           {/* Action Hub */}
           <div className="final-cta-actions-row">
@@ -68,7 +75,7 @@ export default function AmbitionCTA() {
             <span className="direct-text">{ctaData.directContact}</span>
           </div>
 
-        </div>
+        </FoldRevealSection>
 
       </div>
     </section>

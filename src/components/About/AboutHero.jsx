@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 import { ABOUT_DATA } from '../../data/aboutData';
+import { FoldRevealSection, FoldRevealText } from '../FoldReveal';
 
 export default function AboutHero() {
   const { lang, isRTL } = useLanguage();
@@ -61,7 +62,10 @@ export default function AboutHero() {
         </div>
 
         {/* Large Statement-Driven Kinetic Typography Stack */}
-        <motion.div 
+        <FoldRevealSection 
+          as={motion.div}
+          replay={true}
+          stagger={0.12}
           style={{ opacity: heroOpacity }}
           className="hero-statement-composition"
         >
@@ -70,21 +74,24 @@ export default function AboutHero() {
             <span>{hero.eyebrow}</span>
           </div>
 
-          <motion.h1 
+          <FoldRevealText
+            as={motion.h1}
             style={{ y: titleParallax }}
             className="hero-statement-title"
-          >
-            <span className="title-row block">{hero.headlinePart1}</span>
-            <span className="title-row block">{hero.headlinePart2}</span>
-            <span className="title-row block highlight-pink">{hero.headlinePart3}</span>
-          </motion.h1>
+            text={`${hero.headlinePart1}\n${hero.headlinePart2}\n${hero.headlinePart3}`}
+            highlightWords={[hero.headlinePart3]}
+          />
 
           <div className="hero-editorial-rule" />
 
           {/* Asymmetric Narrative & Conviction Columns */}
           <div className="hero-editorial-columns">
             <div className="hero-col-narrative">
-              <p className="hero-subline-text">{hero.subline}</p>
+              <FoldRevealText
+                as="p"
+                className="hero-subline-text"
+                text={hero.subline}
+              />
             </div>
 
             <div className="hero-col-conviction">
@@ -98,7 +105,7 @@ export default function AboutHero() {
               </div>
             </div>
           </div>
-        </motion.div>
+        </FoldRevealSection>
 
         {/* 3 Strategic Category Pillars (Modelled on Reference's 3 Core Focus Areas) */}
         <div className="hero-pillars-grid" role="list">

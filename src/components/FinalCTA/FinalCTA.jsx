@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLanguage } from '../../context/LanguageContext';
+import { FoldRevealSection, FoldRevealText } from '../FoldReveal';
 import CTA from '../Common/CTA';
 import './FinalCTA.css';
 
@@ -24,20 +25,40 @@ export default function FinalCTA() {
       dir={isRTL ? 'rtl' : 'ltr'}
     >
       <div className="container final-cta-container">
-        <div className="final-cta-header">
+        <FoldRevealSection
+          replay={true}
+          stagger={0.12}
+          start="top 85%"
+          end="bottom top"
+          className="final-cta-header"
+        >
           <p className="final-cta-eyebrow">
             <span className="final-cta-eyebrow-dash" aria-hidden="true">—</span>
             <span>{content.eyebrow}</span>
           </p>
-          <h2 className="final-cta-headline">
-            {content.headline}
-          </h2>
-          <p className="final-cta-supporting">
-            {content.supportingLine1}
-            <br className="final-cta-break" />
-            {content.supportingLine2}
-          </p>
-        </div>
+          <FoldRevealText
+            as="h2"
+            className="final-cta-headline"
+            text={content.headline}
+            splitBy="word"
+            hinge="top"
+            duration={0.7}
+            stagger={0.035}
+            perspective={900}
+            creaseShading={0.25}
+          />
+          <FoldRevealText
+            as="p"
+            className="final-cta-supporting"
+            text={`${content.supportingLine1}\n${content.supportingLine2}`}
+            splitBy="word"
+            hinge="top"
+            duration={0.65}
+            stagger={0.025}
+            perspective={900}
+            creaseShading={0.2}
+          />
+        </FoldRevealSection>
 
         <div className="final-cta-action">
           <CTA

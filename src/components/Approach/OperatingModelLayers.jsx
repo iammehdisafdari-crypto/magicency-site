@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 import { OPERATING_MODEL_LAYERS } from '../../data/growthArchitecture';
+import { FoldRevealSection, FoldRevealText } from '../FoldReveal';
 
 const STAGE_VISUAL_ASSETS = [
   { img: '/assets/capabilities/strategy.webp', telemetry: 'INPUT // UNIT ECONOMICS & CONSTRAINTS' },
@@ -31,15 +32,13 @@ export default function OperatingModelLayers() {
             <span className="approach-pill-text">{model.eyebrow}</span>
           </div>
 
-          <motion.h2
-            className="section-editorial-title"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          >
-            {model.headline}
-          </motion.h2>
+          <FoldRevealSection replay={true} stagger={0.12}>
+            <FoldRevealText
+              as="h2"
+              className="section-editorial-title"
+              text={model.headline}
+            />
+          </FoldRevealSection>
 
           <motion.p
             className="section-editorial-lead"

@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
+import { FoldRevealSection, FoldRevealText } from '../FoldReveal';
 
 export default function AgencyComparison() {
   const { t, isRTL } = useLanguage();
@@ -17,15 +18,13 @@ export default function AgencyComparison() {
             <span className="approach-pill-text">{comparison.eyebrow}</span>
           </div>
 
-          <motion.h2
-            className="section-editorial-title"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          >
-            {comparison.headline}
-          </motion.h2>
+          <FoldRevealSection replay={true} stagger={0.12}>
+            <FoldRevealText
+              as="h2"
+              className="section-editorial-title"
+              text={comparison.headline}
+            />
+          </FoldRevealSection>
 
           <motion.p
             className="section-editorial-lead"

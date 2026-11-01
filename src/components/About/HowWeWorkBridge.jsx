@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import { ABOUT_DATA } from '../../data/aboutData';
+import { FoldRevealSection, FoldRevealText } from '../FoldReveal';
 import CTA from '../Common/CTA';
 
 export default function HowWeWorkBridge() {
@@ -29,10 +30,14 @@ export default function HowWeWorkBridge() {
           </div>
         </div>
 
-        <div className="how-we-work-intro">
-          <h2 className="how-we-work-headline">{data.headline}</h2>
+        <FoldRevealSection replay={true} stagger={0.12} className="how-we-work-intro">
+          <FoldRevealText
+            as="h2"
+            className="how-we-work-headline"
+            text={data.headline}
+          />
           <p className="how-we-work-lead">{data.lead}</p>
-        </div>
+        </FoldRevealSection>
 
         {/* Continuous Visual Editorial Flow (No Generic Card Grid) */}
         <div className="continuous-workflow-sequence" role="list">

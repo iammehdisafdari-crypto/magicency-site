@@ -58,6 +58,27 @@ html[dir="rtl"] * {
   letter-spacing: 0 !important;
 }
 
+/* Accessibility & FoldText Layout Baseline */
+.sr-only,
+.fold-text-sr-only,
+.sm-social-sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.fold-text,
+.fold-text-visual,
+.fold-text-line {
+  display: block;
+}
+
 body {
   background-color: var(--bg-void);
   color: var(--text-primary);

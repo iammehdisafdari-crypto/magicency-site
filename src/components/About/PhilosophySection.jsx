@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import { ABOUT_DATA } from '../../data/aboutData';
+import { FoldRevealSection, FoldRevealText } from '../FoldReveal';
 
 export default function PhilosophySection() {
   const { lang, isRTL } = useLanguage();
@@ -28,12 +29,18 @@ export default function PhilosophySection() {
         </div>
 
         {/* Large Monument Core Statement */}
-        <div className="philosophy-monument-wrap">
-          <blockquote className="philosophy-monument-title">
-            “{phil.monumentQuote}”
-          </blockquote>
-          <p className="philosophy-monument-lead">{phil.lead}</p>
-        </div>
+        <FoldRevealSection replay={true} stagger={0.12} className="philosophy-monument-wrap">
+          <FoldRevealText
+            as="blockquote"
+            className="philosophy-monument-title"
+            text={`“${phil.monumentQuote}”`}
+          />
+          <FoldRevealText
+            as="p"
+            className="philosophy-monument-lead"
+            text={phil.lead}
+          />
+        </FoldRevealSection>
 
         {/* 5 Architectural Belief Columns */}
         <div className="philosophy-pillars-grid" role="list">

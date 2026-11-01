@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import { ABOUT_DATA } from '../../data/aboutData';
+import { FoldRevealSection, FoldRevealText } from '../FoldReveal';
 import CTA from '../Common/CTA';
 
 export default function JournalInsights() {
@@ -28,10 +29,14 @@ export default function JournalInsights() {
           </div>
         </div>
 
-        <div className="journal-intro">
-          <h2 className="journal-headline">{journal.headline}</h2>
+        <FoldRevealSection replay={true} stagger={0.12} className="journal-intro">
+          <FoldRevealText
+            as="h2"
+            className="journal-headline"
+            text={journal.headline}
+          />
           <p className="journal-lead">{journal.lead}</p>
-        </div>
+        </FoldRevealSection>
 
         {/* Large Editorial Article Showcase (Not a generic card grid) */}
         <div className="journal-editorial-showcase" role="list">
