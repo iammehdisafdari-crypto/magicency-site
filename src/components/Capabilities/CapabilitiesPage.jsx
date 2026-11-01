@@ -12,11 +12,11 @@ import './Capabilities.css';
 
 export default function CapabilitiesPage() {
   const { lang, isRTL } = useLanguage();
-  const { currentPath } = useRouter();
+  const { currentPath, basePath } = useRouter();
 
   // Route sub-path detection for dedicated capability pages (/capabilities/:slug)
-  const isSubRoute = currentPath.startsWith('/capabilities/') && currentPath !== '/capabilities';
-  const slug = isSubRoute ? currentPath.replace(/^\/capabilities\//, '').replace(/\/$/, '') : null;
+  const isSubRoute = basePath.startsWith('/capabilities/') && basePath !== '/capabilities';
+  const slug = isSubRoute ? basePath.replace(/^\/capabilities\//, '').replace(/\/$/, '') : null;
   const currentCapability = slug
     ? SERVICES_DATA.find((s) => s.slug === slug || s.id === slug)
     : null;
@@ -43,7 +43,7 @@ export default function CapabilitiesPage() {
           ? 'توانمندی‌ها و خدمات // معماری سیستم‌های رشد // مجیکنسـی (MAGICENCY®)'
           : 'Capabilities & Services // Engineering Growth Systems // MAGICENCY®';
     }
-  }, [lang, isSubRoute, currentPath]);
+  }, [lang, isSubRoute, basePath]);
 
   // If sub-route is requested and valid capability exists, render dedicated capability page
   if (isSubRoute && currentCapability) {
