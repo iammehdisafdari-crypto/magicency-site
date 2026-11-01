@@ -3,530 +3,360 @@ import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { build } from 'vite';
 import { PurgeCSS } from 'purgecss';
+import {
+  BASE_URL,
+  ALL_ROUTES_META,
+  SITEMAP_ROUTES,
+  getCanonicalUrl,
+  getHreflangUrls
+} from '../src/data/routesConfig.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, '..');
 const distDir = path.resolve(rootDir, 'dist');
 const ssrOutDir = path.resolve(rootDir, 'dist-ssr');
 
-// Known blog articles metadata
-const BLOG_METADATA = {
-  'more-marketing-not-more-growth': {
-    title: 'More Marketing vs More Growth: Diminishing Returns in Marketing | Magicency',
-    desc: 'Why increasing ad spend and publishing volume fails when conversion architecture is broken, and how identifying growth bottlenecks engineers durable scale.',
-    cover: '/journal-1.jpg',
-    date: '2026-09-01',
-    author: 'Magicency Editorial',
-    readTime: '8 MIN READ'
-  },
-  'more-content-is-not-fixing-problem': {
-    title: 'Content Strategy vs Brand Narrative: Escaping the Volume Trap | Magicency',
-    desc: 'Why publishing more content without category conviction creates noise rather than authority, and how an authentic brand narrative commands market power.',
-    cover: '/journal-2.jpg',
-    date: '2026-08-15',
-    author: 'Magicency Editorial',
-    readTime: '6 MIN READ'
-  },
-  'website-has-conviction-problem': {
-    title: 'Website Positioning vs Web Design: Why Redesigns Fail to Convert | Magicency',
-    desc: 'Why aesthetic redesigns fail when strategic positioning is unclear, and how digital interfaces must act as architectural instruments of commercial proof.',
-    cover: '/journal-3.jpg',
-    date: '2026-07-20',
-    author: 'Magicency Editorial',
-    readTime: '5 MIN READ'
-  },
-  'why-campaigns-reset-growth': {
-    title: 'Campaign Dependency & Retention: How to Stop Resetting Growth to Zero | Magicency',
-    desc: 'Why campaign-dependent businesses face financial volatility when media budgets pause, and how engineering compounding retention flywheels builds durable growth.',
-    cover: '/project-1.jpg',
-    date: '2026-06-10',
-    author: 'Magicency Editorial',
-    readTime: '7 MIN READ'
-  },
-  'ai-creative-volume-fallacy': {
-    title: 'AI Creative Volume vs Creative Effectiveness: Why Taste Is The Moat | Magicency',
-    desc: 'Why zero-marginal-cost generative AI makes creative volume a commodity, and why strategic discernment, human taste, and positioning remain the only true moats.',
-    cover: '/project-2.jpg',
-    date: '2026-05-04',
-    author: 'Magicency Editorial',
-    readTime: '5 MIN READ'
-  },
-  'seo-traffic-vs-commercial-growth': {
-    title: 'SEO Traffic vs Commercial Growth: The Commercial Intent Discipline | Magicency',
-    desc: 'Why ranking for generic definitions fails to generate enterprise EBITDA, and how high-conviction decision frameworks build profitable inbound pipeline.',
-    cover: '/project-3.jpg',
-    date: '2026-04-18',
-    author: 'Magicency Editorial',
-    readTime: '6 MIN READ'
-  }
-};
+const ROUTES = Object.keys(ALL_ROUTES_META);
 
-// Known capability sub-routes metadata
-const CAPABILITY_METADATA = {
-  'performance-marketing': {
-    title: 'Performance Marketing // Acquisition & Growth Systems | Magicency',
-    desc: 'Performance marketing engineered around measurable customer acquisition, capital allocation efficiency, conversion quality, and compounding business growth.',
-    num: '(001)',
-    name: 'Performance Marketing',
-    image: '/assets/capabilities/performance.webp'
-  },
-  'ppc-campaigns': {
-    title: 'PPC Campaigns // Google Ads & High-Intent Acquisition | Magicency',
-    desc: 'High-intent search campaigns, Google Ads, and Performance Max architectures built to intercept active commercial interest and maximize return on ad spend.',
-    num: '(002)',
-    name: 'PPC Campaigns',
-    image: '/assets/work/atrash_secondary.png'
-  },
-  'seo': {
-    title: 'Technical SEO // Search Engine Architecture & Crawl Engineering | Magicency',
-    desc: 'Search engine optimization from technical crawl architectures to search-intent modeling, turning organic search into an enduring, compounding commercial asset.',
-    num: '(003)',
-    name: 'SEO',
-    image: '/assets/work/velox_secondary.webp'
-  },
-  'social-media-marketing': {
-    title: 'Social Media Marketing // Attention to Owned Audience Velocity | Magicency',
-    desc: 'Transforming social media attention into audience ownership and pipeline velocity through organic editorial distribution and conversion-oriented paid campaigns.',
-    num: '(004)',
-    name: 'Social Media Marketing',
-    image: '/whatwedo-2.webp'
-  },
-  'content-marketing': {
-    title: 'Content Marketing // Category Authority & Narrative Systems | Magicency',
-    desc: 'Strategic narrative architectures engineered to answer high-value commercial questions, educate your category, and position your brand as the definitive authority.',
-    num: '(005)',
-    name: 'Content Marketing',
-    image: '/assets/capabilities/creative.webp'
-  },
-  'digital-experience': {
-    title: 'Digital Experience // High-Conversion Web & UX Architecture | Magicency',
-    desc: 'Conversion-focused web platforms, UX architectures, and high-velocity landing experiences engineered to turn traffic into pipeline momentum.',
-    num: '(006)',
-    name: 'Digital Experience',
-    image: '/project-4.webp'
-  },
-  'retention-marketing': {
-    title: 'Retention Marketing // Lifecycle Automation & LTV Compounding | Magicency',
-    desc: 'Lifecycle marketing automation, CRM architecture, and behavioral re-engagement loops engineered to compound customer lifetime value and eliminate churn.',
-    num: '(007)',
-    name: 'Retention Marketing',
-    image: '/assets/capabilities/growth_systems.webp'
-  },
-  'event-marketing': {
-    title: 'Event Marketing // Product Launches & Demand Spikes | Magicency',
-    desc: 'Multi-channel launch campaigns and experiential activations engineered to concentrate market momentum, generate demand spikes, and acquire qualified audiences.',
-    num: '(008)',
-    name: 'Event Marketing',
-    image: '/whatwedo-1.webp'
-  }
-};
-
-const ROUTES = [
-  '/',
-  '/work',
-  '/capabilities',
-  ...Object.keys(CAPABILITY_METADATA).map((slug) => `/capabilities/${slug}`),
-  '/approach',
-  '/about',
-  '/blog',
-  ...Object.keys(BLOG_METADATA).map((slug) => `/blog/${slug}`),
-  '/404'
-];
-
-function getRouteMetadata(route) {
-  const baseCanonical = 'https://magicency.ir';
+function getJsonLd(route, meta, lang) {
+  const isEn = lang === 'en';
+  const canonicalUrl = getCanonicalUrl(route, lang);
+  const homeUrl = getCanonicalUrl('/', lang);
 
   if (route.startsWith('/blog/')) {
-    const slug = route.replace('/blog/', '');
-    const meta = BLOG_METADATA[slug];
-    if (meta) {
-      return {
-        title: meta.title,
-        desc: meta.desc,
-        canonical: `${baseCanonical}/blog/${slug}`,
-        ogType: 'article',
-        ogImage: `${baseCanonical}${meta.cover}`,
-        ogImageAlt: meta.title,
-        articleMeta: {
-          publishedTime: meta.date,
-          modifiedTime: '2026-09-08',
-          author: 'Magicency Editorial',
-          section: 'Growth Marketing'
+    const title = isEn ? meta.titleEn : meta.titleFa;
+    const desc = isEn ? meta.descEn : meta.descFa;
+    const author = isEn ? meta.authorEn : meta.authorFa;
+    const blogUrl = getCanonicalUrl('/blog', lang);
+
+    return {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'BlogPosting',
+          '@id': canonicalUrl,
+          'inLanguage': isEn ? 'en' : 'fa-IR',
+          'mainEntityOfPage': {
+            '@type': 'WebPage',
+            '@id': canonicalUrl
+          },
+          'headline': title,
+          'description': desc,
+          'image': `${BASE_URL}${meta.cover}`,
+          'datePublished': meta.date,
+          'dateModified': '2026-09-08',
+          'author': {
+            '@type': 'Organization',
+            'name': author,
+            'url': BASE_URL
+          },
+          'publisher': {
+            '@type': 'Organization',
+            'name': 'Magicency',
+            'logo': {
+              '@type': 'ImageObject',
+              'url': `${BASE_URL}/apple-touch-icon.png`
+            }
+          }
         },
-        jsonLd: {
-          '@context': 'https://schema.org',
-          '@graph': [
+        {
+          '@type': 'BreadcrumbList',
+          'itemListElement': [
             {
-              '@type': 'BlogPosting',
-              'mainEntityOfPage': {
-                '@type': 'WebPage',
-                '@id': `${baseCanonical}/blog/${slug}`
-              },
-              'headline': meta.title,
-              'description': meta.desc,
-              'image': `${baseCanonical}${meta.cover}`,
-              'datePublished': meta.date,
-              'dateModified': '2026-09-08',
-              'author': {
-                '@type': 'Organization',
-                'name': 'Magicency Editorial',
-                'url': 'https://magicency.ir'
-              },
-              'publisher': {
-                '@type': 'Organization',
-                'name': 'Magicency',
-                'logo': {
-                  '@type': 'ImageObject',
-                  'url': 'https://magicency.ir/apple-touch-icon.png'
-                }
-              }
+              '@type': 'ListItem',
+              'position': 1,
+              'name': isEn ? 'Home' : 'خانه',
+              'item': homeUrl
             },
             {
-              '@type': 'BreadcrumbList',
-              'itemListElement': [
-                {
-                  '@type': 'ListItem',
-                  'position': 1,
-                  'name': 'Home',
-                  'item': 'https://magicency.ir/'
-                },
-                {
-                  '@type': 'ListItem',
-                  'position': 2,
-                  'name': 'Blog',
-                  'item': 'https://magicency.ir/blog'
-                },
-                {
-                  '@type': 'ListItem',
-                  'position': 3,
-                  'name': meta.title,
-                  'item': `${baseCanonical}/blog/${slug}`
-                }
-              ]
+              '@type': 'ListItem',
+              'position': 2,
+              'name': isEn ? 'Blog' : 'بلاگ',
+              'item': blogUrl
+            },
+            {
+              '@type': 'ListItem',
+              'position': 3,
+              'name': title,
+              'item': canonicalUrl
             }
           ]
         }
-      };
-    }
+      ]
+    };
   }
 
   if (route.startsWith('/capabilities/') && route !== '/capabilities') {
-    const slug = route.replace('/capabilities/', '');
-    const meta = CAPABILITY_METADATA[slug];
-    if (meta) {
-      return {
-        title: meta.title,
-        desc: meta.desc,
-        canonical: `${baseCanonical}/capabilities/${slug}`,
-        ogType: 'website',
-        ogImage: `${baseCanonical}${meta.image}`,
-        ogImageAlt: meta.title,
-        jsonLd: {
-          '@context': 'https://schema.org',
-          '@graph': [
+    const name = isEn ? meta.nameEn : meta.nameFa;
+    const desc = isEn ? meta.descEn : meta.descFa;
+    const capUrl = getCanonicalUrl('/capabilities', lang);
+
+    return {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'Service',
+          '@id': canonicalUrl,
+          'inLanguage': isEn ? 'en' : 'fa-IR',
+          'name': isEn ? `${name} — Magicency Growth Capability` : `${name} — خدمات معماری رشد مجیکنسـی`,
+          'description': desc,
+          'url': canonicalUrl,
+          'provider': {
+            '@type': 'Organization',
+            'name': 'Magicency',
+            'url': `${BASE_URL}/`
+          }
+        },
+        {
+          '@type': 'BreadcrumbList',
+          'itemListElement': [
             {
-              '@type': 'Service',
-              'name': `${meta.name} — Magicency Growth Capability`,
-              'description': meta.desc,
-              'provider': {
-                '@type': 'Organization',
-                'name': 'Magicency',
-                'url': 'https://magicency.ir/'
-              }
+              '@type': 'ListItem',
+              'position': 1,
+              'name': isEn ? 'Home' : 'خانه',
+              'item': homeUrl
             },
             {
-              '@type': 'BreadcrumbList',
-              'itemListElement': [
-                {
-                  '@type': 'ListItem',
-                  'position': 1,
-                  'name': 'Home',
-                  'item': 'https://magicency.ir/'
-                },
-                {
-                  '@type': 'ListItem',
-                  'position': 2,
-                  'name': 'Capabilities',
-                  'item': 'https://magicency.ir/capabilities'
-                },
-                {
-                  '@type': 'ListItem',
-                  'position': 3,
-                  'name': meta.name,
-                  'item': `${baseCanonical}/capabilities/${slug}`
-                }
-              ]
+              '@type': 'ListItem',
+              'position': 2,
+              'name': isEn ? 'Capabilities' : 'توانمندی‌ها',
+              'item': capUrl
+            },
+            {
+              '@type': 'ListItem',
+              'position': 3,
+              'name': name,
+              'item': canonicalUrl
             }
           ]
         }
-      };
-    }
+      ]
+    };
   }
 
-  switch (route) {
-    case '/work':
-      return {
-        title: 'نمونه‌آثار و پرونده‌های رشد // شواهد مستند و پورتفولیو // مجیکنسـی (MAGICENCY®)',
-        desc: 'کاوش در پرونده‌های رشد، نتایج تجاری مشتریان، معماری تبدیل و سیستم‌های خلاقانه استودیو رشد مجیکنسـی.',
-        canonical: `${baseCanonical}/work`,
-        ogType: 'website',
-        ogImage: `${baseCanonical}/og-image.png`,
-        ogImageAlt: 'پرونده‌های رشد و نتایج مشتریان مجیکنسـی',
-        jsonLd: {
-          '@context': 'https://schema.org',
-          '@graph': [
+  if (route === '/work') {
+    return {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'ItemList',
+          '@id': canonicalUrl,
+          'inLanguage': isEn ? 'en' : 'fa-IR',
+          'name': isEn ? 'Magicency Growth Case Studies & Client Results' : 'نمونه‌آثار و پرونده‌های رشد مجیکنسـی',
+          'description': isEn ? meta.descEn : meta.descFa,
+          'url': canonicalUrl,
+          'itemListElement': [
             {
-              '@type': 'ItemList',
-              'name': 'Magicency Growth Case Studies & Client Results',
-              'description': 'Curated portfolio of growth case studies, client results, and technical digital platforms.',
-              'itemListElement': [
-                {
-                  '@type': 'ListItem',
-                  'position': 1,
-                  'name': 'Enterprise Search Engine — 84.1K Organic Clicks & 5.18M Impressions Architecture'
-                },
-                {
-                  '@type': 'ListItem',
-                  'position': 2,
-                  'name': 'Atrash Store — Google Ads Performance Max Engine & ROAS 11 Scalable Acquisition'
-                },
-                {
-                  '@type': 'ListItem',
-                  'position': 3,
-                  'name': 'Tamir Online — Google Ads Lead Gen Engine & 23.42% CTR Peak Acquisition'
-                },
-                {
-                  '@type': 'ListItem',
-                  'position': 4,
-                  'name': 'Wine Amphorae — Heritage Brand Modernization & Digital Flagship Website Design'
-                },
-                {
-                  '@type': 'ListItem',
-                  'position': 5,
-                  'name': 'Zarin Real Estate Dubai — Strategic Positioning & High-Intent Investment Growth System'
-                }
-              ]
+              '@type': 'ListItem',
+              'position': 1,
+              'name': isEn
+                ? 'Enterprise Search Engine — 84.1K Organic Clicks Architecture'
+                : 'Enterprise Search Engine — معماری سئو سازمانی با ۸۴.۱ هزار کلیک ارگانیک'
             },
             {
-              '@type': 'BreadcrumbList',
-              'itemListElement': [
-                {
-                  '@type': 'ListItem',
-                  'position': 1,
-                  'name': 'Home',
-                  'item': 'https://magicency.ir/'
-                },
-                {
-                  '@type': 'ListItem',
-                  'position': 2,
-                  'name': 'Work',
-                  'item': 'https://magicency.ir/work'
-                }
-              ]
+              '@type': 'ListItem',
+              'position': 2,
+              'name': isEn
+                ? 'Atrash Store — Google Ads Performance Max Engine'
+                : 'فروشگاه آتراش — موتور بازاریابی عملکردی با روآس ۱۱'
+            },
+            {
+              '@type': 'ListItem',
+              'position': 3,
+              'name': isEn
+                ? 'Tamir Online — Google Ads Lead Gen Engine'
+                : 'تعمیر آنلاین — موتور جذب لید و مشتری در گوگل ادز'
+            }
+          ]
+        },
+        {
+          '@type': 'BreadcrumbList',
+          'itemListElement': [
+            {
+              '@type': 'ListItem',
+              'position': 1,
+              'name': isEn ? 'Home' : 'خانه',
+              'item': homeUrl
+            },
+            {
+              '@type': 'ListItem',
+              'position': 2,
+              'name': isEn ? 'Work' : 'نمونه‌کارها',
+              'item': canonicalUrl
             }
           ]
         }
-      };
-
-    case '/capabilities':
-      return {
-        title: 'توانمندی‌های یکپارچه بازاریابی // آنچه می‌سازیم // مجیکنسـی (MAGICENCY®)',
-        desc: 'کالبدشکافی توانمندی‌های یکپارچه بازاریابی: استراتژی تجاری، خلاقیت متقاعدکننده، پلتفرم‌های دیجیتال و معماری تبدیل.',
-        canonical: `${baseCanonical}/capabilities`,
-        ogType: 'website',
-        ogImage: `${baseCanonical}/og-image.png`,
-        ogImageAlt: 'توانمندی‌های یکپارچه بازاریابی مجیکنسـی',
-        jsonLd: {
-          '@context': 'https://schema.org',
-          '@graph': [
-            {
-              '@type': 'Service',
-              'name': 'Magicency Integrated Marketing Capabilities',
-              'provider': {
-                '@type': 'Organization',
-                'name': 'Magicency',
-                'url': 'https://magicency.ir/'
-              },
-              'hasOfferCatalog': {
-                '@type': 'OfferCatalog',
-                'name': 'Strategic Marketing Capabilities & Offerings',
-                'itemListElement': [
-                  { '@type': 'Offer', 'itemOffered': { '@type': 'Service', 'name': 'Strategy & Commercial Architecture' } },
-                  { '@type': 'Offer', 'itemOffered': { '@type': 'Service', 'name': 'Brand Conviction & High-Performance Creative' } },
-                  { '@type': 'Offer', 'itemOffered': { '@type': 'Service', 'name': 'Digital Platforms & Conversion Architecture' } },
-                  { '@type': 'Offer', 'itemOffered': { '@type': 'Service', 'name': 'Compounding Performance & AI Automation' } }
-                ]
-              }
-            },
-            {
-              '@type': 'BreadcrumbList',
-              'itemListElement': [
-                {
-                  '@type': 'ListItem',
-                  'position': 1,
-                  'name': 'Home',
-                  'item': 'https://magicency.ir/'
-                },
-                {
-                  '@type': 'ListItem',
-                  'position': 2,
-                  'name': 'Capabilities',
-                  'item': 'https://magicency.ir/capabilities'
-                }
-              ]
-            }
-          ]
-        }
-      };
-
-    case '/approach':
-      return {
-        title: 'معماری رشد و سیستم‌عامل کسب‌وکار // رویکرد ما // مجیکنسـی (MAGICENCY®)',
-        desc: 'رشد یک کانال تبلیغاتی نیست؛ یک سیستم‌عامل است. نحوه نگرش و عملکرد آژانس پرفورمنس مارکتینگ و معماری رشد مجیکنسـی.',
-        canonical: `${baseCanonical}/approach`,
-        ogType: 'website',
-        ogImage: `${baseCanonical}/og-image.png`,
-        ogImageAlt: 'معماری رشد و سیستم‌عامل کسب‌وکار مجیکنسـی',
-        jsonLd: {
-          '@context': 'https://schema.org',
-          '@graph': [
-            {
-              '@type': 'WebPage',
-              'name': 'The Magicency Growth Operating System & Methodology',
-              'description': 'Why linear marketing resets growth and how our growth operating system and diagnostic methodology create permanent commercial velocity.',
-              'url': `${baseCanonical}/approach`
-            },
-            {
-              '@type': 'BreadcrumbList',
-              'itemListElement': [
-                {
-                  '@type': 'ListItem',
-                  'position': 1,
-                  'name': 'Home',
-                  'item': 'https://magicency.ir/'
-                },
-                {
-                  '@type': 'ListItem',
-                  'position': 2,
-                  'name': 'Approach',
-                  'item': 'https://magicency.ir/approach'
-                }
-              ]
-            }
-          ]
-        }
-      };
-
-    case '/about':
-      return {
-        title: 'درباره استودیو مجیکنسـی // همگام‌سازی استراتژی، فناوری و پرفورمنس // مجیکنسـی (MAGICENCY®)',
-        desc: 'آشنایی با استودیو رشد مجیکنسـی: فلسفه استودیو و بنیان‌گذار مهدی صفدری در همگام‌سازی مهندسی دقیق و جسارت خلاقانه.',
-        canonical: `${baseCanonical}/about`,
-        ogType: 'website',
-        ogImage: `${baseCanonical}/og-image.png`,
-        ogImageAlt: 'درباره استودیو مجیکنسـی و رهبری',
-        jsonLd: {
-          '@context': 'https://schema.org',
-          '@graph': [
-            {
-              '@type': 'AboutPage',
-              'name': 'About Magicency',
-              'description': 'Learn about Magicency: who we are, our studio philosophy, and founder Mehdi Safdari uniting disciplined engineering and creative conviction.',
-              'url': `${baseCanonical}/about`,
-              'mainEntity': {
-                '@type': 'Organization',
-                'name': 'Magicency',
-                'url': 'https://magicency.ir/',
-                'founder': {
-                  '@type': 'Person',
-                  'name': 'Mehdi Safdari',
-                  'jobTitle': 'Founder & Strategic Lead'
-                }
-              }
-            },
-            {
-              '@type': 'BreadcrumbList',
-              'itemListElement': [
-                {
-                  '@type': 'ListItem',
-                  'position': 1,
-                  'name': 'Home',
-                  'item': 'https://magicency.ir/'
-                },
-                {
-                  '@type': 'ListItem',
-                  'position': 2,
-                  'name': 'About',
-                  'item': 'https://magicency.ir/about'
-                }
-              ]
-            }
-          ]
-        }
-      };
-
-    case '/blog':
-      return {
-        title: 'بینش‌های بازاریابی رشد // نشریه تحلیلی // مجیکنسـی (MAGICENCY®)',
-        desc: 'جستارهای تحلیلی، بینش‌های بازاریابی رشد، معماری تبدیل، فلای‌ویل‌های حفظ مشتری و بازاریابی عصر هوش مصنوعی.',
-        canonical: `${baseCanonical}/blog`,
-        ogType: 'website',
-        ogImage: `${baseCanonical}/og-image.png`,
-        ogImageAlt: 'نشریه بینش‌های بازاریابی رشد مجیکنسـی',
-        jsonLd: {
-          '@context': 'https://schema.org',
-          '@graph': [
-            {
-              '@type': 'CollectionPage',
-              'name': 'Magicency Growth Marketing Insights',
-              'description': 'Strategic essays and empirical frameworks on commercial growth and performance architecture.',
-              'url': `${baseCanonical}/blog`
-            },
-            {
-              '@type': 'BreadcrumbList',
-              'itemListElement': [
-                {
-                  '@type': 'ListItem',
-                  'position': 1,
-                  'name': 'Home',
-                  'item': 'https://magicency.ir/'
-                },
-                {
-                  '@type': 'ListItem',
-                  'position': 2,
-                  'name': 'Blog',
-                  'item': 'https://magicency.ir/blog'
-                }
-              ]
-            }
-          ]
-        }
-      };
-
-    case '/404':
-      return {
-        title: 'صفحه پیدا نشد (۴۰۴) // مجیکنسـی (MAGICENCY®)',
-        desc: 'صفحه مورد نظر یافت نشد. برای بازگشت به صفحه اصلی و مشاهده سیستم‌های متصل رشد به وبسایت مجیکنسـی مراجعه کنید.',
-        canonical: null,
-        robots: 'noindex, follow',
-        ogType: 'website',
-        ogImage: `${baseCanonical}/og-image.png`,
-        ogImageAlt: 'مجیکنسـی ۴۰۴',
-        jsonLd: null
-      };
-
-    case '/':
-    default:
-      return {
-        title: 'مجیکنسـی — سیستم‌های متصل رشد و آژانس پرفورمنس مارکتینگ',
-        desc: 'ما با همگام‌سازی استراتژی، طراحی، فناوری و پرفورمنس، تجربیات دیجیتال و سیستم‌های مقیاس‌پذیر رشد را برای برندهای پیشرو مهندسی می‌کنیم.',
-        canonical: `${baseCanonical}/`,
-        ogType: 'website',
-        ogImage: `${baseCanonical}/og-image.png`,
-        ogImageAlt: 'مجیکنسـی — سیستم‌های متصل رشد و آژانس پرفورمنس مارکتینگ',
-        jsonLd: null // already in base template
-      };
+      ]
+    };
   }
+
+  if (route === '/capabilities') {
+    return {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'ItemList',
+          '@id': canonicalUrl,
+          'inLanguage': isEn ? 'en' : 'fa-IR',
+          'name': isEn ? 'Magicency Integrated Marketing Capabilities' : 'توانمندی‌های یکپارچه بازاریابی رشد مجیکنسـی',
+          'description': isEn ? meta.descEn : meta.descFa,
+          'url': canonicalUrl
+        },
+        {
+          '@type': 'BreadcrumbList',
+          'itemListElement': [
+            {
+              '@type': 'ListItem',
+              'position': 1,
+              'name': isEn ? 'Home' : 'خانه',
+              'item': homeUrl
+            },
+            {
+              '@type': 'ListItem',
+              'position': 2,
+              'name': isEn ? 'Capabilities' : 'توانمندی‌ها',
+              'item': canonicalUrl
+            }
+          ]
+        }
+      ]
+    };
+  }
+
+  if (route === '/approach') {
+    return {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'WebPage',
+          '@id': canonicalUrl,
+          'inLanguage': isEn ? 'en' : 'fa-IR',
+          'name': isEn ? 'Approach & Growth Architecture' : 'معماری رشد و رویکرد ما',
+          'description': isEn ? meta.descEn : meta.descFa,
+          'url': canonicalUrl
+        },
+        {
+          '@type': 'BreadcrumbList',
+          'itemListElement': [
+            {
+              '@type': 'ListItem',
+              'position': 1,
+              'name': isEn ? 'Home' : 'خانه',
+              'item': homeUrl
+            },
+            {
+              '@type': 'ListItem',
+              'position': 2,
+              'name': isEn ? 'Approach' : 'متدولوژی ما',
+              'item': canonicalUrl
+            }
+          ]
+        }
+      ]
+    };
+  }
+
+  if (route === '/about') {
+    return {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'AboutPage',
+          '@id': canonicalUrl,
+          'inLanguage': isEn ? 'en' : 'fa-IR',
+          'name': isEn ? 'About Magicency' : 'درباره مجیکنسـی',
+          'description': isEn ? meta.descEn : meta.descFa,
+          'url': canonicalUrl
+        },
+        {
+          '@type': 'BreadcrumbList',
+          'itemListElement': [
+            {
+              '@type': 'ListItem',
+              'position': 1,
+              'name': isEn ? 'Home' : 'خانه',
+              'item': homeUrl
+            },
+            {
+              '@type': 'ListItem',
+              'position': 2,
+              'name': isEn ? 'About' : 'درباره ما',
+              'item': canonicalUrl
+            }
+          ]
+        }
+      ]
+    };
+  }
+
+  if (route === '/blog') {
+    return {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'CollectionPage',
+          '@id': canonicalUrl,
+          'inLanguage': isEn ? 'en' : 'fa-IR',
+          'name': isEn ? 'Magicency Growth Marketing Insights' : 'نشریه بینش‌های بازاریابی رشد مجیکنسـی',
+          'description': isEn ? meta.descEn : meta.descFa,
+          'url': canonicalUrl
+        },
+        {
+          '@type': 'BreadcrumbList',
+          'itemListElement': [
+            {
+              '@type': 'ListItem',
+              'position': 1,
+              'name': isEn ? 'Home' : 'خانه',
+              'item': homeUrl
+            },
+            {
+              '@type': 'ListItem',
+              'position': 2,
+              'name': isEn ? 'Blog' : 'بلاگ',
+              'item': canonicalUrl
+            }
+          ]
+        }
+      ]
+    };
+  }
+
+  return null;
+}
+
+function generateSitemapXml() {
+  let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
+  xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n';
+  xml += '        xmlns:xhtml="http://www.w3.org/1999/xhtml">\n';
+
+  for (const item of SITEMAP_ROUTES) {
+    const route = item.route;
+    const faUrl = getCanonicalUrl(route, 'fa');
+    const enUrl = getCanonicalUrl(route, 'en');
+    const xDefaultUrl = faUrl;
+
+    // 1. Persian entry
+    xml += '  <url>\n';
+    xml += `    <loc>${faUrl}</loc>\n`;
+    xml += `    <lastmod>${item.lastmodFa}</lastmod>\n`;
+    xml += `    <xhtml:link rel="alternate" hreflang="fa" href="${faUrl}"/>\n`;
+    xml += `    <xhtml:link rel="alternate" hreflang="en" href="${enUrl}"/>\n`;
+    xml += `    <xhtml:link rel="alternate" hreflang="x-default" href="${xDefaultUrl}"/>\n`;
+    xml += '  </url>\n';
+
+    // 2. English entry
+    xml += '  <url>\n';
+    xml += `    <loc>${enUrl}</loc>\n`;
+    xml += `    <lastmod>${item.lastmodEn}</lastmod>\n`;
+    xml += `    <xhtml:link rel="alternate" hreflang="fa" href="${faUrl}"/>\n`;
+    xml += `    <xhtml:link rel="alternate" hreflang="en" href="${enUrl}"/>\n`;
+    xml += `    <xhtml:link rel="alternate" hreflang="x-default" href="${xDefaultUrl}"/>\n`;
+    xml += '  </url>\n';
+  }
+
+  xml += '</urlset>\n';
+  return xml;
 }
 
 async function prerender() {
@@ -677,7 +507,7 @@ async function prerender() {
     fs.writeFileSync(mainCssPath, purgedMainCss, 'utf8');
     console.log(`  ✓ Main CSS: ${(rawMainCss.length / 1024).toFixed(1)} KB -> ${(purgedMainCss.length / 1024).toFixed(1)} KB`);
 
-    // 3. Make main stylesheet load asynchronously (preload + media="print" onload trick + noscript fallback)
+    // 3. Make main stylesheet load asynchronously
     const linkRegex = new RegExp(`<link[^>]*rel=["']stylesheet["'][^>]*href=["'][^"']*assets/${mainCssFile}["'][^>]*>`, 'i');
     const asyncMainCssTags = [
       `    <!-- Inlined Above-the-Fold Critical CSS -->`,
@@ -695,8 +525,6 @@ async function prerender() {
     }
   }
 
-  console.log(`🚀 [Prerender] Pre-rendering ${ROUTES.length} routes with custom SEO metadata...`);
-
   const pageCssMap = {
     '/work': assetFiles.find((f) => f.startsWith('WorkPage-') && f.endsWith('.css')),
     '/about': assetFiles.find((f) => f.startsWith('AboutPage-') && f.endsWith('.css')),
@@ -706,115 +534,159 @@ async function prerender() {
     '/404': assetFiles.find((f) => f.startsWith('NotFoundPage-') && f.endsWith('.css'))
   };
 
-  for (const route of ROUTES) {
-    const { appHtml } = render(route, 'fa');
-    const meta = getRouteMetadata(route);
+  const languages = ['fa', 'en'];
 
-    let html = baseTemplate;
+  for (const lang of languages) {
+    const isEn = lang === 'en';
+    console.log(`🚀 [Prerender] Pre-rendering ${ROUTES.length} routes for [${lang.toUpperCase()}]...`);
 
-    // Ensure <html> tag has lang="fa" and dir="rtl"
-    html = html.replace(/<html[^>]*>/i, '<html lang="fa" dir="rtl">');
+    for (const route of ROUTES) {
+      const meta = ALL_ROUTES_META[route] || {};
+      const renderPath = isEn ? (route === '/' ? '/en' : `/en${route}`) : route;
+      const { appHtml } = render(renderPath, lang);
 
-    // Inject route-specific CSS if applicable (asynchronously)
-    let matchedCss = null;
-    if (route === '/work') matchedCss = pageCssMap['/work'];
-    else if (route === '/about') matchedCss = pageCssMap['/about'];
-    else if (route === '/capabilities') matchedCss = pageCssMap['/capabilities'];
-    else if (route === '/approach') matchedCss = pageCssMap['/approach'];
-    else if (route.startsWith('/blog')) matchedCss = pageCssMap['/blog'];
-    else if (route === '/404') matchedCss = pageCssMap['/404'];
+      let html = baseTemplate;
 
-    if (matchedCss) {
-      const asyncRouteCss = [
-        `    <link rel="preload" as="style" href="/assets/${matchedCss}" />`,
-        `    <link rel="stylesheet" href="/assets/${matchedCss}" media="print" onload="this.media='all'" />`,
-        `    <noscript><link rel="stylesheet" href="/assets/${matchedCss}" /></noscript>`,
-        `  </head>`
-      ].join('\n');
-      html = html.replace('</head>', asyncRouteCss);
+      // 1. HTML lang & dir attributes
+      const htmlTag = isEn ? '<html lang="en" dir="ltr">' : '<html lang="fa" dir="rtl">';
+      html = html.replace(/<html[^>]*>/i, htmlTag);
+
+      // 2. Inject route-specific CSS if applicable
+      let matchedCss = null;
+      if (route === '/work') matchedCss = pageCssMap['/work'];
+      else if (route === '/about') matchedCss = pageCssMap['/about'];
+      else if (route === '/capabilities') matchedCss = pageCssMap['/capabilities'];
+      else if (route === '/approach') matchedCss = pageCssMap['/approach'];
+      else if (route.startsWith('/blog')) matchedCss = pageCssMap['/blog'];
+      else if (route === '/404') matchedCss = pageCssMap['/404'];
+
+      if (matchedCss) {
+        const asyncRouteCss = [
+          `    <link rel="preload" as="style" href="/assets/${matchedCss}" />`,
+          `    <link rel="stylesheet" href="/assets/${matchedCss}" media="print" onload="this.media='all'" />`,
+          `    <noscript><link rel="stylesheet" href="/assets/${matchedCss}" /></noscript>`,
+          `  </head>`
+        ].join('\n');
+        html = html.replace('</head>', asyncRouteCss);
+      }
+
+      // 3. Title & Description
+      const pageTitle = isEn ? meta.titleEn : meta.titleFa;
+      const pageDesc = isEn ? meta.descEn : meta.descFa;
+
+      html = html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${pageTitle}</title>`);
+      html = html.replace(/<meta\s+name=["']description["'][\s\S]*?content=["'][^"']*["']/i, `<meta name="description" content="${pageDesc}"`);
+
+      // 4. Robots, Canonical & Hreflang
+      if (meta.robots) {
+        html = html.replace(/<meta\s+name=["']robots["'][\s\S]*?content=["'][^"']*["']/i, `<meta name="robots" content="${meta.robots}"`);
+      } else {
+        html = html.replace(/<meta\s+name=["']robots["'][\s\S]*?content=["'][^"']*["']/i, `<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"`);
+      }
+
+      if (route === '/404') {
+        html = html.replace(/\s*<link\s+rel=["']canonical["'][^>]*\/?>/i, '');
+      } else {
+        const canonicalUrl = getCanonicalUrl(route, lang);
+        const hreflangs = getHreflangUrls(route);
+        const hreflangBlock = [
+          `<link rel="canonical" href="${canonicalUrl}" />`,
+          `  <link rel="alternate" hreflang="fa" href="${hreflangs.fa}" />`,
+          `  <link rel="alternate" hreflang="en" href="${hreflangs.en}" />`,
+          `  <link rel="alternate" hreflang="x-default" href="${hreflangs.xDefault}" />`
+        ].join('\n  ');
+
+        html = html.replace(/<link\s+rel=["']canonical["'][\s\S]*?href=["'][^"']*["'][^>]*\/?>/i, hreflangBlock);
+      }
+
+      // 5. Open Graph & Twitter Cards
+      const ogType = meta.ogType || 'website';
+      const ogImage = `${BASE_URL}${meta.ogImage || '/og-image.png'}`;
+      const ogUrl = getCanonicalUrl(route, lang);
+
+      html = html.replace(/<meta\s+property=["']og:type["'][\s\S]*?content=["'][^"']*["']/i, `<meta property="og:type" content="${ogType}"`);
+      html = html.replace(/<meta\s+property=["']og:title["'][\s\S]*?content=["'][^"']*["']/i, `<meta property="og:title" content="${pageTitle}"`);
+      html = html.replace(/<meta\s+property=["']og:description["'][\s\S]*?content=["'][^"']*["']/i, `<meta property="og:description" content="${pageDesc}"`);
+      html = html.replace(/<meta\s+property=["']og:url["'][\s\S]*?content=["'][^"']*["']/i, `<meta property="og:url" content="${ogUrl}"`);
+      html = html.replace(/<meta\s+property=["']og:locale["'][\s\S]*?content=["'][^"']*["']/i, `<meta property="og:locale" content="${isEn ? 'en_US' : 'fa_IR'}"`);
+      html = html.replace(/<meta\s+property=["']og:locale:alternate["'][\s\S]*?content=["'][^"']*["']/i, `<meta property="og:locale:alternate" content="${isEn ? 'fa_IR' : 'en_US'}"`);
+      html = html.replace(/<meta\s+property=["']og:image["'][\s\S]*?content=["'][^"']*["']/i, `<meta property="og:image" content="${ogImage}"`);
+      html = html.replace(/<meta\s+property=["']og:image:secure_url["'][\s\S]*?content=["'][^"']*["']/i, `<meta property="og:image:secure_url" content="${ogImage}"`);
+      html = html.replace(/<meta\s+property=["']og:image:alt["'][\s\S]*?content=["'][^"']*["']/i, `<meta property="og:image:alt" content="${pageTitle}"`);
+
+      html = html.replace(/<meta\s+name=["']twitter:title["'][\s\S]*?content=["'][^"']*["']/i, `<meta name="twitter:title" content="${pageTitle}"`);
+      html = html.replace(/<meta\s+name=["']twitter:description["'][\s\S]*?content=["'][^"']*["']/i, `<meta name="twitter:description" content="${pageDesc}"`);
+      html = html.replace(/<meta\s+name=["']twitter:image["'][\s\S]*?content=["'][^"']*["']/i, `<meta name="twitter:image" content="${ogImage}"`);
+      html = html.replace(/<meta\s+name=["']twitter:image:alt["'][\s\S]*?content=["'][^"']*["']/i, `<meta name="twitter:image:alt" content="${pageTitle}"`);
+
+      // 6. JSON-LD Schema
+      const jsonLd = getJsonLd(route, meta, lang);
+      if (jsonLd) {
+        const jsonLdTag = `\n    <script type="application/ld+json">\n    ${JSON.stringify(jsonLd, null, 2).replace(/\n/g, '\n    ')}\n    </script>`;
+        html = html.replace('</head>', `${jsonLdTag}\n  </head>`);
+      }
+
+      // 7. Inject App Markup into <div id="root">
+      html = html.replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`);
+
+      // 8. Write Output Files
+      if (!isEn) {
+        // Persian outputs
+        if (route === '/') {
+          fs.writeFileSync(path.resolve(distDir, 'index.html'), html, 'utf-8');
+        } else if (route === '/404') {
+          fs.writeFileSync(path.resolve(distDir, '404.html'), html, 'utf-8');
+        } else {
+          const routeClean = route.replace(/^\//, '');
+          const dirOutputPath = path.resolve(distDir, routeClean, 'index.html');
+          const cleanHtmlOutputPath = path.resolve(distDir, `${routeClean}.html`);
+
+          fs.mkdirSync(path.dirname(dirOutputPath), { recursive: true });
+          fs.writeFileSync(dirOutputPath, html, 'utf-8');
+
+          fs.mkdirSync(path.dirname(cleanHtmlOutputPath), { recursive: true });
+          fs.writeFileSync(cleanHtmlOutputPath, html, 'utf-8');
+        }
+      } else {
+        // English outputs under dist/en/...
+        if (route === '/') {
+          const enDirIndex = path.resolve(distDir, 'en', 'index.html');
+          const enCleanFile = path.resolve(distDir, 'en.html');
+
+          fs.mkdirSync(path.dirname(enDirIndex), { recursive: true });
+          fs.writeFileSync(enDirIndex, html, 'utf-8');
+          fs.writeFileSync(enCleanFile, html, 'utf-8');
+        } else if (route === '/404') {
+          const en404File = path.resolve(distDir, 'en', '404.html');
+          fs.mkdirSync(path.dirname(en404File), { recursive: true });
+          fs.writeFileSync(en404File, html, 'utf-8');
+        } else {
+          const routeClean = route.replace(/^\//, '');
+          const enDirIndex = path.resolve(distDir, 'en', routeClean, 'index.html');
+          const enCleanFile = path.resolve(distDir, 'en', `${routeClean}.html`);
+
+          fs.mkdirSync(path.dirname(enDirIndex), { recursive: true });
+          fs.writeFileSync(enDirIndex, html, 'utf-8');
+
+          fs.mkdirSync(path.dirname(enCleanFile), { recursive: true });
+          fs.writeFileSync(enCleanFile, html, 'utf-8');
+        }
+      }
+
+      // Count words and H1 tags for verification
+      const wordCount = (appHtml.replace(/<[^>]*>/g, ' ').match(/\S+/g) || []).length;
+      const h1Match = appHtml.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i);
+      const h1Text = h1Match ? h1Match[1].replace(/<[^>]*>/g, '').trim() : 'NONE';
+      console.log(`  ✓ [${lang}] ${route.padEnd(42)} -> [${wordCount} words] H1: "${h1Text.substring(0, 35)}..." [desc: ${pageDesc.length}ch]`);
     }
-
-    // 1. Update Title
-    html = html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${meta.title}</title>`);
-
-    // 2. Update Meta Description
-    html = html.replace(/<meta\s+name=["']description["'][\s\S]*?content=["'][^"']*["']/i, `<meta name="description" content="${meta.desc}"`);
-
-    // 3. Update Robots & Canonical Link
-    if (meta.robots) {
-      html = html.replace(/<meta\s+name=["']robots["'][\s\S]*?content=["'][^"']*["']/i, `<meta name="robots" content="${meta.robots}"`);
-    } else {
-      html = html.replace(/<meta\s+name=["']robots["'][\s\S]*?content=["'][^"']*["']/i, `<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"`);
-    }
-
-    if (meta.canonical) {
-      html = html.replace(/<link\s+rel=["']canonical["'][\s\S]*?href=["'][^"']*["']/i, `<link rel="canonical" href="${meta.canonical}"`);
-    } else {
-      html = html.replace(/\s*<link\s+rel=["']canonical["'][^>]*\/?>/i, '');
-    }
-
-    // 4. Update Open Graph tags
-    html = html.replace(/<meta\s+property=["']og:type["'][\s\S]*?content=["'][^"']*["']/i, `<meta property="og:type" content="${meta.ogType}"`);
-    if (meta.ogType === 'article' && meta.articleMeta) {
-      const articleMetaTags = [
-        `    <meta property="article:published_time" content="${meta.articleMeta.publishedTime}" />`,
-        `    <meta property="article:modified_time" content="${meta.articleMeta.modifiedTime}" />`,
-        `    <meta property="article:author" content="${meta.articleMeta.author}" />`,
-        `    <meta property="article:section" content="${meta.articleMeta.section}" />`
-      ].join('\n');
-      html = html.replace(new RegExp(`<meta property="og:type" content="${meta.ogType}"[^>]*>`, 'i'), `<meta property="og:type" content="${meta.ogType}" />\n${articleMetaTags}`);
-    }
-    html = html.replace(/<meta\s+property=["']og:title["'][\s\S]*?content=["'][^"']*["']/i, `<meta property="og:title" content="${meta.title}"`);
-    html = html.replace(/<meta\s+property=["']og:description["'][\s\S]*?content=["'][^"']*["']/i, `<meta property="og:description" content="${meta.desc}"`);
-    html = html.replace(/<meta\s+property=["']og:url["'][\s\S]*?content=["'][^"']*["']/i, `<meta property="og:url" content="${meta.canonical || 'https://magicency.ir/404'}"`);
-    html = html.replace(/<meta\s+property=["']og:locale["'][\s\S]*?content=["'][^"']*["']/i, '<meta property="og:locale" content="fa_IR"');
-    html = html.replace(/<meta\s+property=["']og:locale:alternate["'][\s\S]*?content=["'][^"']*["']/i, '<meta property="og:locale:alternate" content="en_US"');
-    html = html.replace(/<meta\s+property=["']og:image["'][\s\S]*?content=["'][^"']*["']/i, `<meta property="og:image" content="${meta.ogImage}"`);
-    html = html.replace(/<meta\s+property=["']og:image:secure_url["'][\s\S]*?content=["'][^"']*["']/i, `<meta property="og:image:secure_url" content="${meta.ogImage}"`);
-    html = html.replace(/<meta\s+property=["']og:image:alt["'][\s\S]*?content=["'][^"']*["']/i, `<meta property="og:image:alt" content="${meta.ogImageAlt}"`);
-
-    // 5. Update Twitter Card tags
-    html = html.replace(/<meta\s+name=["']twitter:title["'][\s\S]*?content=["'][^"']*["']/i, `<meta name="twitter:title" content="${meta.title}"`);
-    html = html.replace(/<meta\s+name=["']twitter:description["'][\s\S]*?content=["'][^"']*["']/i, `<meta name="twitter:description" content="${meta.desc}"`);
-    html = html.replace(/<meta\s+name=["']twitter:image["'][\s\S]*?content=["'][^"']*["']/i, `<meta name="twitter:image" content="${meta.ogImage}"`);
-    html = html.replace(/<meta\s+name=["']twitter:image:alt["'][\s\S]*?content=["'][^"']*["']/i, `<meta name="twitter:image:alt" content="${meta.ogImageAlt}"`);
-
-    // 6. Inject Route-Specific JSON-LD Schema
-    if (meta.jsonLd) {
-      const jsonLdTag = `\n    <script type="application/ld+json">\n    ${JSON.stringify(meta.jsonLd, null, 2).replace(/\n/g, '\n    ')}\n    </script>`;
-      html = html.replace('</head>', `${jsonLdTag}\n  </head>`);
-    }
-
-    // 7. Inject Pre-rendered App Markup into <div id="root">
-    html = html.replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`);
-
-    // 8. Determine Output Path
-    if (route === '/') {
-      const outputPath = path.resolve(distDir, 'index.html');
-      fs.writeFileSync(outputPath, html, 'utf-8');
-    } else if (route === '/404') {
-      const outputPath = path.resolve(distDir, '404.html');
-      fs.writeFileSync(outputPath, html, 'utf-8');
-    } else {
-      const routeClean = route.replace(/^\//, '');
-      const dirOutputPath = path.resolve(distDir, routeClean, 'index.html');
-      const cleanHtmlOutputPath = path.resolve(distDir, `${routeClean}.html`);
-
-      // Write directory index (for /route/ requests)
-      fs.mkdirSync(path.dirname(dirOutputPath), { recursive: true });
-      fs.writeFileSync(dirOutputPath, html, 'utf-8');
-
-      // Also write clean .html file (for /route requests without trailing slash - serves direct 200 OK without 307 redirect)
-      fs.mkdirSync(path.dirname(cleanHtmlOutputPath), { recursive: true });
-      fs.writeFileSync(cleanHtmlOutputPath, html, 'utf-8');
-    }
-
-    // Count words and H1 tags for verification
-    const wordCount = (appHtml.replace(/<[^>]*>/g, ' ').match(/\S+/g) || []).length;
-    const h1Match = appHtml.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i);
-    const h1Text = h1Match ? h1Match[1].replace(/<[^>]*>/g, '').trim() : 'NONE';
-    console.log(`  ✓ ${route.padEnd(42)} -> [${wordCount} words] H1: "${h1Text.substring(0, 35)}..." [desc: ${meta.desc.length}ch]`);
   }
+
+  // Generate sitemap.xml dynamically
+  console.log('🗺️ [Sitemap] Generating multi-language sitemap.xml...');
+  const sitemapXml = generateSitemapXml();
+  const sitemapDistPath = path.resolve(distDir, 'sitemap.xml');
+  fs.writeFileSync(sitemapDistPath, sitemapXml, 'utf-8');
+  console.log(`  ✓ sitemap.xml written with ${SITEMAP_ROUTES.length * 2} URL entries (${SITEMAP_ROUTES.length} FA + ${SITEMAP_ROUTES.length} EN).`);
 
   // Cleanup temporary SSR build directory
   try {
@@ -825,7 +697,7 @@ async function prerender() {
     // On Windows, dynamically imported ESM modules may remain locked until process termination
   }
 
-  console.log('✨ [Prerender] Complete! All routes pre-rendered with custom SEO metadata.');
+  console.log('✨ [Prerender] Complete! All routes pre-rendered for both languages with custom SEO metadata.');
 }
 
 prerender().catch((err) => {

@@ -29,7 +29,7 @@ function handleFooterNav(href, pageActiveMap, navigate) {
 
 export default function Footer() {
   const { t } = useLanguage();
-  const { navigate, isWorkPage, isCapabilitiesPage, isApproachPage, isAboutPage, isBlogPage } = useRouter();
+  const { navigate, isWorkPage, isCapabilitiesPage, isApproachPage, isAboutPage, isBlogPage, localePath } = useRouter();
 
   const pageActiveMap = {
     '/work': isWorkPage,
@@ -171,19 +171,22 @@ export default function Footer() {
 
           {/* Primary Navigation Links with Scramble Effect */}
           <div className="footer-useful-legal">
-            {f.nav.map((item) => (
-              <a
-                key={item.href || item.label}
-                href={item.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleFooterNav(item.href, pageActiveMap, navigate);
-                }}
-                className="footer-useful-social-link footer-nav-item"
-              >
-                <ScrambleText text={item.label} />
-              </a>
-            ))}
+            {f.nav.map((item) => {
+              const localizedHref = localePath ? localePath(item.href) : item.href;
+              return (
+                <a
+                  key={item.href || item.label}
+                  href={localizedHref}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleFooterNav(localizedHref, pageActiveMap, navigate);
+                  }}
+                  className="footer-useful-social-link footer-nav-item"
+                >
+                  <ScrambleText text={item.label} />
+                </a>
+              );
+            })}
           </div>
 
           {/* Copyright Information */}

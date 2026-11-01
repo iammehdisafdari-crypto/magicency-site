@@ -9,7 +9,7 @@ const toWebp = (url) => (url ? url.replace(/\.(jpg|jpeg|png)$/, '.webp') : url);
 
 export default function Journal() {
   const { t, isRTL } = useLanguage();
-  const { navigate } = useRouter();
+  const { navigate, localePath } = useRouter();
   const [activeFilter, setActiveFilter] = useState('ALL');
   const [hoveredArticle, setHoveredArticle] = useState(null);
   const [expandedMobileArticle, setExpandedMobileArticle] = useState(null);
@@ -148,22 +148,24 @@ export default function Journal() {
           </div>
 
           <div className="journal-featured-grid">
-            {articles.map((art) => (
-              <a 
-                key={art.id} 
-                href={`/blog/${art.slug || 'more-marketing-not-more-growth'}`}
-                className="journal-featured-card"
-                onMouseEnter={() => !isTouchDevice && setHoveredArticle(art)}
-                onMouseLeave={() => !isTouchDevice && setHoveredArticle(null)}
-                onClick={(e) => {
-                  if (isTouchDevice) {
-                    handleRowClick(art.id);
-                  } else {
-                    e.preventDefault();
-                    if (navigate) navigate(`/blog/${art.slug || 'more-marketing-not-more-growth'}`);
-                  }
-                }}
-              >
+            {articles.map((art) => {
+              const articleHref = localePath ? localePath(`/blog/${art.slug || 'more-marketing-not-more-growth'}`) : `/blog/${art.slug || 'more-marketing-not-more-growth'}`;
+              return (
+                <a 
+                  key={art.id} 
+                  href={articleHref}
+                  className="journal-featured-card"
+                  onMouseEnter={() => !isTouchDevice && setHoveredArticle(art)}
+                  onMouseLeave={() => !isTouchDevice && setHoveredArticle(null)}
+                  onClick={(e) => {
+                    if (isTouchDevice) {
+                      handleRowClick(art.id);
+                    } else {
+                      e.preventDefault();
+                      if (navigate) navigate(articleHref);
+                    }
+                  }}
+                >
                 <div className="journal-featured-card-media">
                   <picture>
                     <source srcSet={toWebp(art.image)} type="image/webp" />
@@ -196,7 +198,8 @@ export default function Journal() {
                   </div>
                 </div>
               </a>
-            ))}
+            );
+          })}
           </div>
         </div>
 
@@ -227,10 +230,11 @@ export default function Journal() {
               const isHovered = hoveredArticle?.id === art.id;
               const isExpandedMobile = expandedMobileArticle === art.id;
 
+              const articleHref = localePath ? localePath(`/blog/${art.slug || 'more-marketing-not-more-growth'}`) : `/blog/${art.slug || 'more-marketing-not-more-growth'}`;
               return (
                 <a
                   key={art.id}
-                  href={`/blog/${art.slug || 'more-marketing-not-more-growth'}`}
+                  href={articleHref}
                   className={`journal-list-item ${isHovered ? 'is-hovered' : ''} ${isExpandedMobile ? 'is-expanded-mobile' : ''}`}
                   onMouseEnter={() => !isTouchDevice && setHoveredArticle(art)}
                   onMouseLeave={() => !isTouchDevice && setHoveredArticle(null)}
@@ -240,7 +244,7 @@ export default function Journal() {
                       handleRowClick(art.id);
                     } else {
                       e.preventDefault();
-                      if (navigate) navigate(`/blog/${art.slug || 'more-marketing-not-more-growth'}`);
+                      if (navigate) navigate(articleHref);
                     }
                   }}
                   tabIndex={0}
@@ -248,7 +252,7 @@ export default function Journal() {
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
                       e.preventDefault();
-                      if (navigate) navigate(`/blog/${art.slug || 'more-marketing-not-more-growth'}`);
+                      if (navigate) navigate(articleHref);
                     }
                   }}
                 >
@@ -286,7 +290,7 @@ export default function Journal() {
         <div className="journal-footer-action">
           <CTA
             variant="secondary"
-            href="/blog"
+            href={localePath ? localePath('/blog') : '/blog'}
             trackingName="explore_all_insights"
             trackingLocation="journal_section"
             ariaLabel={isRTL ? 'مشاهده همه دیدگاه‌ها و مقالات' : 'EXPLORE ALL INSIGHTS'}

@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, useLayoutEffect, useCallback } from 'react';
+import { useRouter } from './RouterContext';
 
 const LanguageContext = createContext();
 
@@ -969,48 +970,43 @@ export const translations = {
 const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
 export const LanguageProvider = ({ children, initialLang }) => {
-  const [lang, setLang] = useState(initialLang || 'fa');
+  let router = null;
+  try {
+    router = useRouter();
+  } catch (_) {}
+
+  const currentLang = router?.lang || initialLang || 'fa';
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeNode, setActiveNode] = useState(null);
 
-
   useIsomorphicLayoutEffect(() => {
     if (typeof document === 'undefined') return;
-    document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
-    document.documentElement.lang = lang;
-  }, [lang]);
+    document.documentElement.dir = currentLang === 'fa' ? 'rtl' : 'ltr';
+    document.documentElement.lang = currentLang;
+  }, [currentLang]);
 
   const toggleLanguage = useCallback(() => {
-    setLang((prev) => {
-      const next = prev === 'en' ? 'fa' : 'en';
-      try {
-        localStorage.setItem('magicency_lang', next);
-      } catch (_) {}
-      return next;
-    });
-  }, []);
+    if (router && router.switchLangPath) {
+      router.navigate(router.switchLangPath);
+    }
+  }, [router]);
 
   const handleSetLang = useCallback((newLangOrFn) => {
-    setLang((prev) => {
-      const next = typeof newLangOrFn === 'function' ? newLangOrFn(prev) : newLangOrFn;
-      if (next === 'fa' || next === 'en') {
-        try {
-          localStorage.setItem('magicency_lang', next);
-        } catch (_) {}
-      }
-      return next;
-    });
-  }, []);
+    const next = typeof newLangOrFn === 'function' ? newLangOrFn(currentLang) : newLangOrFn;
+    if (router && next !== currentLang && router.switchLangPath) {
+      router.navigate(router.switchLangPath);
+    }
+  }, [router, currentLang]);
 
-  const t = translations[lang] || translations.fa;
+  const t = translations[currentLang] || translations.fa;
 
   return (
     <LanguageContext.Provider
       value={{
-        lang,
+        lang: currentLang,
         setLang: handleSetLang,
         toggleLanguage,
-        isRTL: lang === 'fa',
+        isRTL: currentLang === 'fa',
         t,
         isModalOpen,
         setIsModalOpen,

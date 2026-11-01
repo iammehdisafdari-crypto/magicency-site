@@ -110,12 +110,12 @@ function MainApp() {
 
 export default function App({ initialPath, initialLang } = {}) {
   return (
-    <LanguageProvider initialLang={initialLang}>
-      <RouterProvider initialPath={initialPath}>
+    <RouterProvider initialPath={initialPath}>
+      <LanguageProvider initialLang={initialLang}>
         <SmoothScrollProvider>
           <MainApp />
         </SmoothScrollProvider>
-      </RouterProvider>
-    </LanguageProvider>
+      </LanguageProvider>
+    </RouterProvider>
   );
 }

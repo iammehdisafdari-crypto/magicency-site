@@ -43,7 +43,7 @@ function MobileMenuExtra({ closeMenu, startProjectLabel, onStartProject }) {
 export default function Header() {
   const { t, lang, toggleLanguage, setIsModalOpen, isRTL } = useLanguage();
   const router = useRouter();
-  const { navigate, currentPath, isHomePage, isWorkPage, isApproachPage, isCapabilitiesPage, isBlogPage, isAboutPage } = router;
+  const { navigate, currentPath, isHomePage, isWorkPage, isApproachPage, isCapabilitiesPage, isBlogPage, isAboutPage, localePath, switchLangPath } = router;
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -64,7 +64,8 @@ export default function Header() {
 
   const handleNavClick = (e, targetHref) => {
     e?.preventDefault?.();
-    if (targetHref === currentPath || (targetHref === '/' && isHomePage)) {
+    const homeHref = localePath('/');
+    if (targetHref === currentPath || (targetHref === homeHref && isHomePage)) {
       if (window.__lenis) {
         try { window.__lenis.scrollTo(0, { immediate: false }); } catch (_) {}
       }
@@ -75,11 +76,11 @@ export default function Header() {
   };
 
   const navItems = [
-    { id: 'work', label: t.nav.work, href: '/work', number: '01', isActive: isWorkPage },
-    { id: 'capabilities', label: t.nav.capabilities, href: '/capabilities', number: '02', isActive: isCapabilitiesPage },
-    { id: 'approach', label: t.nav.approach, href: '/approach', number: '03', isActive: isApproachPage },
-    { id: 'about', label: t.nav.about, href: '/about', number: '04', isActive: isAboutPage },
-    { id: 'journal', label: t.journal?.badge || (lang === 'fa' ? 'ژورنال' : 'Blog'), href: '/blog', number: '05', isActive: isBlogPage }
+    { id: 'work', label: t.nav.work, href: localePath('/work'), number: '01', isActive: isWorkPage },
+    { id: 'capabilities', label: t.nav.capabilities, href: localePath('/capabilities'), number: '02', isActive: isCapabilitiesPage },
+    { id: 'approach', label: t.nav.approach, href: localePath('/approach'), number: '03', isActive: isApproachPage },
+    { id: 'about', label: t.nav.about, href: localePath('/about'), number: '04', isActive: isAboutPage },
+    { id: 'journal', label: t.journal?.badge || (lang === 'fa' ? 'ژورنال' : 'Blog'), href: localePath('/blog'), number: '05', isActive: isBlogPage }
   ];
 
   // Mobile staggered menu items targeting full page routes
@@ -87,42 +88,42 @@ export default function Header() {
     {
       label: lang === 'fa' ? 'صفحه اصلی' : 'Home',
       ariaLabel: 'Go to home page',
-      link: '/',
+      link: localePath('/'),
       id: 'home',
       isActive: isHomePage
     },
     {
       label: t.nav.work,
       ariaLabel: 'View our work',
-      link: '/work',
+      link: localePath('/work'),
       id: 'work',
       isActive: isWorkPage
     },
     {
       label: t.nav.capabilities,
       ariaLabel: 'View our capabilities and services',
-      link: '/capabilities',
+      link: localePath('/capabilities'),
       id: 'capabilities',
       isActive: isCapabilitiesPage
     },
     {
       label: t.nav.approach,
       ariaLabel: 'Learn about our approach',
-      link: '/approach',
+      link: localePath('/approach'),
       id: 'approach',
       isActive: isApproachPage
     },
     {
       label: t.nav.about,
       ariaLabel: 'Learn about us',
-      link: '/about',
+      link: localePath('/about'),
       id: 'about',
       isActive: isAboutPage
     },
     {
       label: t.journal?.badge || (lang === 'fa' ? 'ژورنال' : 'Blog'),
       ariaLabel: 'Read our blog and journal',
-      link: '/blog',
+      link: localePath('/blog'),
       id: 'blog',
       isActive: isBlogPage
     }
@@ -168,13 +169,14 @@ export default function Header() {
           
           {/* Brand Wordmark */}
           <a 
-            href="/" 
+            href={localePath('/')} 
             className="vm-brand" 
             aria-label="Magicency Home"
             onClick={(e) => {
               e.preventDefault();
+              const homeUrl = localePath('/');
               if (isWorkPage || isApproachPage || isCapabilitiesPage || isBlogPage || isAboutPage) {
-                navigate('/');
+                navigate(homeUrl);
               } else {
                 if (window.__lenis) {
                   try { window.__lenis.scrollTo(0, { immediate: false }); } catch (_) {}
@@ -204,18 +206,19 @@ export default function Header() {
             </nav>
 
             {/* Desktop Language Switcher */}
-            <button 
-              type="button"
-              onClick={() => {
+            <a 
+              href={switchLangPath}
+              onClick={(e) => {
+                e.preventDefault();
                 trackLanguageSwitch(lang === 'en' ? 'fa' : 'en');
-                toggleLanguage();
+                navigate(switchLangPath);
               }} 
               className="vm-desktop-lang-pill"
               aria-label={lang === 'en' ? 'Switch to Persian' : 'Switch to English'}
               title={lang === 'en' ? 'تغییر به فارسی' : 'Switch to English'}
             >
               <span className="vm-desktop-lang-code">{lang === 'en' ? 'FA' : 'EN'}</span>
-            </button>
+            </a>
 
             {/* Desktop Primary Pill Button (* START A PROJECT) */}
             <button
@@ -263,13 +266,14 @@ export default function Header() {
           closeLabel={lang === 'fa' ? 'بستن' : 'CLOSE'}
           logoContent={
             <a
-              href="/"
+              href={localePath('/')}
               className="vm-brand"
               aria-label="Magicency Home"
               onClick={(e) => {
                 e.preventDefault();
+                const homeUrl = localePath('/');
                 if (isWorkPage || isApproachPage || isCapabilitiesPage || isBlogPage || isAboutPage) {
-                  navigate('/');
+                  navigate(homeUrl);
                 } else {
                   if (window.__lenis) {
                     try { window.__lenis.scrollTo(0, { immediate: false }); } catch (_) {}
@@ -283,18 +287,19 @@ export default function Header() {
             </a>
           }
           headerExtra={
-            <button
-              type="button"
-              onClick={() => {
+            <a
+              href={switchLangPath}
+              onClick={(e) => {
+                e.preventDefault();
                 trackLanguageSwitch(lang === 'en' ? 'fa' : 'en');
-                toggleLanguage();
+                navigate(switchLangPath);
               }}
               className="vm-mobile-lang-btn"
               aria-label={lang === 'en' ? 'Switch to Persian' : 'Switch to English'}
               title={lang === 'en' ? 'تغییر به فارسی' : 'Switch to English'}
             >
               <span className="vm-mobile-lang-text">{lang === 'en' ? 'FA' : 'EN'}</span>
-            </button>
+            </a>
           }
           extraContent={renderExtraContent}
           onMenuOpen={() => {
